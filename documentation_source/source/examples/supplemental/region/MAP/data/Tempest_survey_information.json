@@ -1,0 +1,102 @@
+{
+    "dataset_attrs" :   {
+        "title": "Example Tempest Airborne Electromagnetic (AEM) Dataset",
+        "institution": "USGS Geology, Geophysics, & Geochemistry Science Center",
+        "source":  "Contractor provided ASEG-formatted data",
+        "history": "<date and time when the data were produced and/or modified>",
+        "references": "<data release reference>",
+        "comment": "<additional details or ancillary information>",
+        "content": "<summary list of file contents, e.g. raw data (/survey/tabular/0), processed data (/survey/tabular/1)>",
+        "conventions": "CF-1.8, GS-0.0",
+        "created_by": "gspy==0.0.1"
+    },
+    
+    "coordinate_information" : {
+        "datum" : "WGS84",
+        "projection" : "USA Contiguous Albers Equal Area Conic",
+        "utm_zone" : "43.5",
+        "wkid": "None", 
+        "authority": "None",
+        "vertical_crs": "NAVD88",
+        "proj_string": "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23.0 +lon_0=-96.0 +x_0=0.0 +y_0=0.0 +ellps=GRS80 +datum=WGS84 +units=m +no_defs",
+        "crs_wkt": "PROJCRS['Albers Conic Equal Area', BASEGEOGCRS['WGS 84', DATUM['World Geodetic System 1984', ELLIPSOID['WGS 84', 6378137, 298.257223563, LENGTHUNIT['metre', 1]]], PRIMEM['Greenwich', 0, ANGLEUNIT['degree', 0.0174532925199433]], ID['EPSG', 4326]], CONVERSION['unnamed', METHOD['Albers Equal Area', ID['EPSG', 9822]], PARAMETER['Latitude of false origin', 23, ANGLEUNIT['degree', 0.0174532925199433], ID['EPSG', 8821]], PARAMETER['Longitude of false origin', -96, ANGLEUNIT['degree', 0.0174532925199433], ID['EPSG', 8822]], PARAMETER['Latitude of 1st standard parallel', 29.5, ANGLEUNIT['degree',0.0174532925199433], ID['EPSG', 8823]], PARAMETER['Latitude of 2nd standard parallel', 45.5, ANGLEUNIT['degree', 0.0174532925199433], ID['EPSG', 8824]], PARAMETER['Easting at false origin', 0, LENGTHUNIT['metre', 1], ID['EPSG', 8826]], PARAMETER['Northing at false origin', 0, LENGTHUNIT['metre', 1], ID['EPSG', 8827]]], CS[Cartesian,2], AXIS['easting', east, ORDER[1], LENGTHUNIT['metre', 1, ID['EPSG',9001]]], AXIS['northing', north, ORDER[2], LENGTHUNIT['metre', 1, ID['EPSG', 9001]]]]"
+    },
+
+    "survey_information" : {
+        "contractor_project_number" : "603756FWA",
+        "contractor" : "CGG Canada Services Ltd.",
+        "client" : "U.S. Geological Survey",
+        "survey_type" : "EM/Mag/Rad",
+        "survey_area_name" : "Mississippi Alluvial Plain (MAP)",
+        "state" : "MO,AR,TN,MS,LA,IL,KY",
+        "country" : "USA",
+        "acquisition_start" : "20191120",
+        "acquisition_end" : "20200307",
+        "dataset_created" : "20200420",
+        "survey_attributes_units" : "SI"
+    },
+
+    "system_information" : { 
+        "electromagnetic_system": {
+            "instrument_type" : "tempest",
+            "data_normalized" : "True",
+            "sample_rate" : "0.2 s",
+            "number_of_turns" : 1,
+            "tranmitter_area_m.s.s" : 155,
+            "trans_waveform_type" : "square",
+            "transmitter_waveform_time" : [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02],
+            "transmitter_wave_current" : [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0],
+            "factor" : 0.5,
+            "transmitter_peak_current" : 560,
+            "transmitter_frequency_Hz" : 30,
+            "transmitter_orient" : "z",
+            "recv_cutoff_frequency" : 60000,
+            "recv_area" : "??",
+            "recv_orient" : "x or z",
+            "recv_sampling_frequency" : "10kHz",
+            "nominal_txrx_dx_separation" : 108.0,
+            "nominal_txrx_dz_separation" : 50.0,
+            "output_data_type" : "B or dBdt"
+        },
+        "magnetic_system": {
+            "sample_rate" : "0.1 s",
+            "resolution" : "0.001 nT",
+            "orientation" : "?"
+        },
+        "radiometric_system": {
+            "sample_rate" : "1.0 s"
+        }
+    },
+
+    "flightline_information" : {
+        "traverse_line_spacing" : "6000 m",
+        "traverse_line_direction" : "various",
+        "tie_line_spacing" : "400??",
+        "tie_line_direction" : "EW ??",
+        "nominal_terrain_clearance" : "120 m",
+        "final_line_kilometers" : "24868 km",
+        "TRAVERSE LINE NUMBERS" : "[192401 - 265021, 400801 - 401401, 500101, 604501 - 608101, 700201 - 700206, 710101 - 710401]",
+        "REPEAT LINE NUMBERS" : "9100071 - 9180772",
+        "PRE ZERO LINE NUMBERS" : "90200702 - 90207701",
+        "POST ZERO LINE NUMBERS" : "90500702 - 90507701"
+    },
+
+    "survey_equipment" : {
+        "aircraft" : "Cessna C208B, VH-FHY",
+        "magnetometer" : "Scintrex Cs-2 Cesium Vapour",
+        "magnetometer_installation" : "Stinger mounted",
+        "electromagnetic_system" : "30Hz TEMPEST",
+        "electromagnetic_installation" : "Transmitter loop mounted on the aircraft, Reciver coils in a towed bird",
+        "electromagnetic_coil_orientations" : "X,Z",
+        "spectrometer_system" : "Radiation Solutions RS-500",
+        "spectrometer_installation" : "Mounted in the aircraft",
+        "radar_altimeter_system" : "Collins Alt-50",
+        "radar_altimeter_sample_rate" : "0.1 s",
+        "laser_altimeter_system" : "Riegl LD90-3",
+        "laser_altimeter_sample_rate" : "0.1 s",
+        "navigation_system" : "Real-time differential GPS",
+        "navigation_sample_rate" : "1.0 s",
+        "acquisition_system" : "FASDAS"
+    }
+}
+

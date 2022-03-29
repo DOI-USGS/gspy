@@ -1,0 +1,43 @@
+{
+    "dataset_attrs" : {
+        "comment": "<additional details or ancillary information>",
+        "content": "interpolated resistivity models"
+    },
+    
+	"key_mapping" : {
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers",
+        "z" : "DTM"
+	},
+	
+    "raster_files" : {
+        "resistivity": ["example_log10res_0_5m.tif", "example_log10res_5_10m.tif", "example_log10res_10_15m.tif", "example_log10res_15_20m.tif", "example_log10res_20_25m.tif"]
+    },
+
+    "variable_metadata": {
+        "resistivity": {
+            "standard_name": "log10_resistivity",
+            "long_name": "Electrical Resistivity on Logarithmic Scale",
+            "units": "log10_ohm_m",
+            "null_value": -9999.99
+        },
+        "DTM": {
+            "standard_name": "dtm",
+            "long_name": "Digital terrain model",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "Easting_Albers": {
+            "standard_name": "easting_albers",
+            "long_name": "Easting",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "Northing_Albers": {
+            "standard_name": "northing_albers",
+            "long_name": "Northing",
+            "units": "meter",
+            "null_value": "not_defined"
+        }
+    }
+}

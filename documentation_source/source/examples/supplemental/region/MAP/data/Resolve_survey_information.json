@@ -1,0 +1,69 @@
+{
+    "dataset_attrs" : {
+        "title": "Example Resolve Airborne Electromagnetic (AEM) Raw Data",
+        "institution": "USGS Geology, Geophysics, & Geochemistry Science Center",
+        "source":  "Comma-separated text file exported from Geosoft",
+        "history": "<date and time when the data were produced and/or modified>",
+        "references": "<data release reference>",
+        "comment": "<additional details or ancillary information>",
+        "content": "<summary list of file contents, e.g. raw data (/survey/tabular/0), processed data (/survey/tabular/1)>",
+        "conventions": "CF-1.8, GS-0.0.1",
+        "created_by": "gspy==0.0.1"
+    },
+
+    "survey_information" : {
+        "contractor_project_number" : "603756RWA",
+        "contractor" : "CGG Canada Services Ltd.",
+        "client" : "U.S. Geological Survey",
+        "survey_type" : "EM/Mag/Rad",
+        "survey_area_name" : "Mississippi Alluvial Plain (MAP) Shellmound",
+        "state" : "MS",
+        "country" : "USA",
+        "acquisition_start" : "20180220",
+        "acquisition_end" : "20180304",
+        "dataset_created" : "20180517"
+    },
+
+   "coordinate_information" : {
+        "datum" : "NAD88",
+        "projection" : "WGS84 GRS80 UTM Zone 15N",
+        "utm_zone" : "15",
+        "wkid" : "5071",
+        "authority" : "EPSG"
+    },
+
+    "flightline_information" : {
+        "traverse_line_spacing" : ["993 m","248 m"],
+        "traverse_line_direction" : ["092 degrees","272 degrees"],
+        "tie_line_spacing" : "23883",
+        "tie_line_direction" : ["002 degrees","182 degrees"],
+        "nominal_terrain_clearance" : "120 m",
+        "final_line_kilometers" : "2358 km",
+        "TRAVERSE LINE NUMBERS" : "10010 - 11060",
+        "TIE LINE NUMBERS": "19010,19020",
+        "REPEAT LINE NUMBERS" : "",
+        "PRE ZERO LINE NUMBERS" : "",
+        "POST ZERO LINE NUMBERS" : ""
+    },
+
+    "survey_equipment" : {
+        "aircraft" : "AS350 B2 Helicopter",
+        "magnetometer" : "Scintrex Cs-3 Cesium Vapour",
+        "magnetometer_installation" : "mounted in the EM bird",
+        "magnetometer_resolution" : "0.001 nT",
+        "magnetometer_sample_rate" : "0.1 s",
+        "spectrometer_system" : "Radiation Solutions RS-500",
+        "spectrometer_installation" : "on board the helicopter",
+        "spectrometer_sample_rate" : "1.0 s",
+        "radar_altimeter_system" : "Honeywell Sperry Altimeter System",
+        "radar_altimeter_sample_rate" : "0.1 s",
+        "laser_altimeter_system" : "Optech ADMGPA100",
+        "laser_altimeter_sample_rate" : "0.1 s",
+        "navigation_system" : "NovAtel OEM4 Card with an Aero antenna mounted on the tail of the helicopter",
+        "navigation_sample_rate" : "0.5 s",
+        "acquisition_system" : "CGG HeliDAS",
+        "electromagnetic_system" : "RESOLVE, symmetric dipole configuration",
+        "electromagnetic_installation" : "9 metre bird containing the EM transmitter and receiver coil pairs (five coplanar and one coaxial), one or two magnetometers, a laser altimeter and a GPS antenna for flight path recovery, is towed by helicopter using a 30 m cable.",
+        "electromagnetic_sample_rate" : "0.1 s"
+    }
+}

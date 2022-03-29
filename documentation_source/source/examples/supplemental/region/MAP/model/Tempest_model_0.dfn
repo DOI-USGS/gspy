@@ -1,0 +1,49 @@
+DEFN   ST=RECD,RT=COMM;RT:A4;COMMENTS:A76
+DEFN 1 ST=RECD,RT=; uniqueid : I12 : Inversion sequence number
+DEFN 2 ST=RECD,RT=; survey : I12 : Survey number
+DEFN 3 ST=RECD,RT=; date : I12 : Date number
+DEFN 4 ST=RECD,RT=; flight : I12 : Flight number, IntrepidFlightNumber
+DEFN 5 ST=RECD,RT=; line : I12 : Line number, IntrepidLineNumber
+DEFN 6 ST=RECD,RT=; fiducial : F12.2 : Fiducial number, IntrepidFiducial
+DEFN 7 ST=RECD,RT=; easting : F10.1 : UNITS = m , IntrepidX
+DEFN 8 ST=RECD,RT=; northing : F10.1 : UNITS = m , IntrepidY
+DEFN 9 ST=RECD,RT=; elevation : F10.2 : UNITS = m , Ground elevation relative to sea-level
+DEFN 10 ST=RECD,RT=; tx_height : F9.2 : UNITS = m , Input Tx height above ground level
+DEFN 11 ST=RECD,RT=; tx_roll : F9.2 : UNITS = degrees , Input Tx roll - left side up + ve
+DEFN 12 ST=RECD,RT=; tx_pitch : F9.2 : UNITS = degrees , Input Tx pitch - nose down + ve
+DEFN 13 ST=RECD,RT=; tx_yaw : F9.2 : UNITS = degrees , Input Tx yaw - turn left + ve
+DEFN 14 ST=RECD,RT=; txrx_dx : F9.2 : UNITS = m , Input Tx - Rx horizonatl inline separation
+DEFN 15 ST=RECD,RT=; txrx_dy : F9.2 : UNITS = m , Input Tx - Rx horizonatl transverse separation
+DEFN 16 ST=RECD,RT=; txrx_dz : F9.2 : UNITS = m , Input Tx - Rx vertical separation
+DEFN 17 ST=RECD,RT=; rx_roll : F9.2 : UNITS = degrees , Input Rx roll - left side up + ve
+DEFN 18 ST=RECD,RT=; rx_pitch : F9.2 : UNITS = degrees , Input Rx pitch - nose down + ve
+DEFN 19 ST=RECD,RT=; rx_yaw : F9.2 : UNITS = degrees , Input Rx yaw - turn left + ve
+DEFN 20 ST=RECD,RT=; inverted_txrx_dx : F9.2 : UNITS = m , Inverted Tx - Rx horizonatl inline separation
+DEFN 21 ST=RECD,RT=; inverted_txrx_dz : F9.2 : UNITS = m , Inverted Tx - Rx vertical separation
+DEFN 22 ST=RECD,RT=; inverted_rx_pitch : F9.2 : UNITS = degrees , Inverted Rx pitch - nose down + ve
+DEFN 23 ST=RECD,RT=; nlayers : I4 : Number of layers
+DEFN 24 ST=RECD,RT=; conductivity : 30E15.6 : UNITS = S/m , Layer conductivity
+DEFN 25 ST=RECD,RT=; thickness : 30F9.2 : UNITS = m , Layer thickness
+DEFN 26 ST=RECD,RT=; observed_EMSystem_1_XP : E15.6 : Observed EMSystem 1 X-component primary field
+DEFN 27 ST=RECD,RT=; observed_EMSystem_1_XS : 15E15.6 : Observed EMSystem 1 X-component secondary field windows
+DEFN 28 ST=RECD,RT=; observed_EMSystem_1_ZP : E15.6 : Observed EMSystem 1 Z-component primary field
+DEFN 29 ST=RECD,RT=; observed_EMSystem_1_ZS : 15E15.6 : Observed EMSystem 1 Z-component secondary field windows
+DEFN 30 ST=RECD,RT=; noise_EMSystem_1_XS : 15E15.6 : Estimated noise EMSystem 1 X-component secondary field windows
+DEFN 31 ST=RECD,RT=; noise_EMSystem_1_ZS : 15E15.6 : Estimated noise EMSystem 1 Z-component secondary field windows
+DEFN 32 ST=RECD,RT=; predicted_EMSystem_1_XP : E15.6 : Predicted EMSystem 1 X-component primary field
+DEFN 33 ST=RECD,RT=; predicted_EMSystem_1_XS : 15E15.6 : Predicted EMSystem 1 X-component secondary field windows
+DEFN 34 ST=RECD,RT=; predicted_EMSystem_1_ZP : E15.6 : Predicted EMSystem 1 Z-component primary field
+DEFN 35 ST=RECD,RT=; predicted_EMSystem_1_ZS : 15E15.6 : Predicted EMSystem 1 Z-component secondary field windows
+DEFN 36 ST=RECD,RT=; AlphaC : E15.6 : AlphaC inversion parameter
+DEFN 37 ST=RECD,RT=; AlphaT : E15.6 : AlphaT inversion parameter
+DEFN 38 ST=RECD,RT=; AlphaG : E15.6 : AlphaG inversion parameter
+DEFN 39 ST=RECD,RT=; AlphaS : E15.6 : AlphaS inversion parameter
+DEFN 40 ST=RECD,RT=; PhiD : E15.6 : Normalised data misfit
+DEFN 41 ST=RECD,RT=; PhiM : E15.6 : Combined model norm
+DEFN 42 ST=RECD,RT=; PhiC : E15.6 : Conductivity model norm
+DEFN 43 ST=RECD,RT=; PhiT : E15.6 : Thickness model norm
+DEFN 44 ST=RECD,RT=; PhiG : E15.6 : Geometry model norm
+DEFN 45 ST=RECD,RT=; PhiS : E15.6 : Smoothness model norm
+DEFN 46 ST=RECD,RT=; Lambda : E15.6 : Lambda regularization parameter
+DEFN 47 ST=RECD,RT=; Iterations : I4 : Number of iterations
+DEFN 48 ST=RECD,RT=;END DEFN

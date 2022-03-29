@@ -1,0 +1,19 @@
+{
+"model_information_0" : {
+        "model_file" : "Tempest_models_0.dat",
+        "inversion_software" : "GALEISBSTDEM 1D timedomain deterministic inversion software",
+        "software_version" : "Version 1.0, R.C. Brodie 2015, Geoscience Australia",
+        "date" : "20200501",
+	"comment": "smoothing 1, damping 10",
+        "data_file" : "603756FWA_Final_EM_testlines_1s.dat"
+    },
+
+"model_information_1" : {
+        "model_file" : "Tempest_models_1.dat",
+        "inversion_software" : "GALEISBSTDEM 1D timedomain deterministic inversion software",
+        "software_version" : "Version 1.0, R.C. Brodie 2015, Geoscience Australia",
+        "date" : "20200515",
+	"comment": "smoothing 0.1, damping 0.1",
+        "data_file" : "603756FWA_Final_EM_testlines_1s.dat"
+    }
+}

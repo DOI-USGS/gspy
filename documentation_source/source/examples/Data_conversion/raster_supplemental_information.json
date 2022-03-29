@@ -1,0 +1,62 @@
+{
+    "dataset_attrs": {
+        "content": "<summary statement of what the dataset contains>",
+        "comment": "<additional details or ancillary information>"
+    },
+    "key_mapping": {
+        "x": "lat",
+        "y": "lon",
+        "z": "elev"
+    },
+    "raster_files": {
+        "variable_1": [
+            "file_name"
+        ],
+        "variable_2": [
+            "file_name"
+        ],
+        "variable_3": [
+            "file_name_1",
+            "file_name_2",
+            "file_name_3"
+        ]
+    },
+    "variable_metadata": {
+        "variable_1": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        },
+        "variable_2": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        },
+        "variable_3": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        },
+        "lat": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        },
+        "lon": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        },
+        "elev": {
+            "standard_name": "",
+            "long_name": "",
+            "units": "",
+            "null_value": ""
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "dataset_attrs" : {
+    	"content": "raw data",
+        "comment": "This dataset includes minimally processed (raw) AEM data"
+    },
+
+    "key_mapping" : {
+        "fiducial" : "Fiducial",
+        "line_number" : "Line",
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers",
+        "height" : "Laser",
+        "z" : "DTM"
+    },
+
+    "dimensions" : {
+        "tmpdim": {"standard_name": "example_dimensions",
+            "long_name": "Example Dimension for Raw Column Combination",
+            "units": "not_defined",
+            "null_value": "not_defined",
+            "centers": [10,20,30,40]
+        },
+        "gate_times": {
+            "standard_name": "gate_times",
+            "long_name": "receiver gate times",
+            "units": "seconds",
+            "null_value": "not_defined",
+            "bounds" : [[5.430000e-06, 1.628000e-05],
+            [2.713000e-05, 3.798000e-05],
+            [4.883000e-05, 5.968000e-05],
+            [7.053000e-05, 1.030800e-04],
+            [1.139400e-04, 1.681900e-04],
+            [1.790400e-04, 2.767000e-04],
+            [2.875500e-04, 4.503200e-04],
+            [4.611700e-04, 7.107400e-04],
+            [7.215900e-04, 1.101380e-03],
+            [1.112230e-03, 1.709030e-03],
+            [1.719880e-03, 2.663920e-03],
+            [2.674770e-03, 4.161360e-03],
+            [4.172210e-03, 6.505170e-03],
+            [6.516030e-03, 1.008600e-02],
+            [1.009686e-02, 1.666171e-02]],
+            "centers" : [1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05,
+                1.410600e-04, 2.278700e-04, 3.689300e-04, 5.859500e-04,
+                9.114800e-04, 1.410630e-03, 2.191900e-03, 3.418070e-03,
+                5.338690e-03, 8.301020e-03, 1.337928e-02]
+        }
+    },
+
+    "variable_metadata": {
+        "Line": {"testkey": "testval"
+        },
+        "EMX_NonHPRG": {
+            "dimensions": ["gate_times", "index"]
+        },
+        "EMX_HPRG": {
+            "dimensions": ["gate_times", "index"]
+        },
+        "EMZ_NonHPRG": {
+            "dimensions": ["gate_times", "index"]
+        },
+        "EMZ_HPRG": {
+            "dimensions": ["gate_times", "index"]
+        },
+        "X_VLF" : {
+            "raw_data_columns": ["X_VLF1","X_VLF2","X_VLF3","X_VLF4"],
+            "dimensions": ["tmpdim", "index"]
+        }
+    }
+}

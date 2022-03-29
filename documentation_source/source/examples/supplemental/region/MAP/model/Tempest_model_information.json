@@ -1,0 +1,121 @@
+{
+    "dataset_attrs" : {
+    	"content": "inverted resistivity models",
+        "comment": "This dataset includes inverted resistivity models derived from processed AEM data produced by USGS"
+    },
+
+    "key_mapping" : {
+        "fiducial" : "fiducial",
+        "line_number" : "line",
+        "x" : "easting ",
+        "y" : "northing ",
+        "height" : "tx_height",
+        "z" : "elevation",
+        "thickness" : "thickness"
+    },
+
+    "inversion" : {
+        "model_file" : "Tempest_models_0.dat",
+        "inversion_software" : "GALEISBSTDEM 1D timedomain deterministic inversion software",
+        "software_version" : "Version 1.0, R.C. Brodie 2015, Geoscience Australia",
+        "date" : "20200501",
+	    "comment": "smoothing 1, damping 10",
+        "data_file" : "603756FWA_Final_EM_testlines_1s.dat"
+    }, 
+
+    "dimensions" : {
+        "layer_depth" : {
+            "standard_name": "layer_depth",
+            "long_name": "inverted model layer depth",
+            "units": "m",
+            "null_value": "not_defined",
+            "bounds" : [[  0.0  ,   3.0  ],
+            [  3.0  ,   6.3 ],
+            [  6.3 ,   9.93],
+            [  9.93,  13.92],
+            [ 13.92,  18.31],
+            [ 18.31,  23.14],
+            [ 23.14,  28.45],
+            [ 28.45,  34.3 ],
+            [ 34.3 ,  40.73],
+            [ 40.73,  47.8 ],
+            [ 47.8 ,  55.58],
+            [ 55.58,  64.14],
+            [ 64.14,  73.56],
+            [ 73.56,  83.92],
+            [ 83.92,  95.31],
+            [ 95.31, 107.84],
+            [107.84, 121.62],
+            [121.62, 136.78],
+            [136.78, 153.46],
+            [153.46, 171.8 ],
+            [171.8 , 191.98],
+            [191.98, 214.18],
+            [214.18, 238.6 ],
+            [238.6 , 265.46],
+            [265.46, 295.01],
+            [295.01, 327.51],
+            [327.51, 363.26],
+            [363.26, 402.59],
+            [402.59, 445.85],
+            [445.85, 489.11]],
+            "centers" : [  1.5  ,   4.65 ,   8.115,  11.925,  16.115,  20.725,  25.795,
+                31.375,  37.515,  44.265,  51.69 ,  59.86 ,  68.85 ,  78.74 ,
+                89.615, 101.575, 114.73 , 129.2  , 145.12 , 162.63 , 181.89 ,
+            203.08 , 226.39 , 252.03 , 280.235, 311.26 , 345.385, 382.925,
+            424.22 , 467.48 ]
+        },
+        "gate_times": {
+            "standard_name": "gate_times",
+            "long_name": "receiver gate times",
+            "units": "seconds",
+            "null_value": "not_defined",
+            "bounds" : [[5.430000e-06, 1.628000e-05],
+            [2.713000e-05, 3.798000e-05],
+            [4.883000e-05, 5.968000e-05],
+            [7.053000e-05, 1.030800e-04],
+            [1.139400e-04, 1.681900e-04],
+            [1.790400e-04, 2.767000e-04],
+            [2.875500e-04, 4.503200e-04],
+            [4.611700e-04, 7.107400e-04],
+            [7.215900e-04, 1.101380e-03],
+            [1.112230e-03, 1.709030e-03],
+            [1.719880e-03, 2.663920e-03],
+            [2.674770e-03, 4.161360e-03],
+            [4.172210e-03, 6.505170e-03],
+            [6.516030e-03, 1.008600e-02],
+            [1.009686e-02, 1.666171e-02]],
+            "centers" : [1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05,
+                1.410600e-04, 2.278700e-04, 3.689300e-04, 5.859500e-04,
+                9.114800e-04, 1.410630e-03, 2.191900e-03, 3.418070e-03,
+                5.338690e-03, 8.301020e-03, 1.337928e-02]
+            }
+    },
+
+    "variable_metadata" : {
+        "conductivity " : {
+            "dimensions": ["layer_depth", "index"]
+        },
+        "thickness " : {
+            "dimensions": ["layer_depth", "index"]
+        },
+        "observed_EMSystem_1_XS " : {
+            "dimensions": ["gate_times", "index"]
+        },
+        "observed_EMSystem_1_ZS " : {
+            "dimensions": ["gate_times", "index"]
+        },
+        "noise_EMSystem_1_XS " : {
+            "dimensions": ["gate_times", "index"]
+        },
+        "noise_EMSystem_1_ZS " : {
+            "dimensions": ["gate_times", "index"]
+        },
+        "predicted_EMSystem_1_XS " : {
+            "dimensions": ["gate_times", "index"]
+        },
+        "predicted_EMSystem_1_ZS " : {
+            "dimensions": ["gate_times", "index"]
+        }
+    }
+}
