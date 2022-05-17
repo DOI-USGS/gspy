@@ -5,3 +5,4 @@ egg-info
 *checkpoint*
 *.h5
 *.nc
+git_push.sh
