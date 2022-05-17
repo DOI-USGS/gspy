@@ -2,7 +2,14 @@
 Welcome to GSpy: Geophysical Data Standard in Python
 ####################################################
 
-This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both time and frequency domain electromagnetic data, raw and processed, 1-D inverted models along flight lines, and 2-D/3-D gridded layers.
+This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. 
+The current implementation supports both time and frequency domain electromagnetic data, 
+raw and processed, 1-D inverted models along flight lines, and 2-D/3-D gridded layers.
+
+Documentation
+~~~~~~~~~~~~~
+
+https://usgs.github.io/gspy/
 
 Goals
 ~~~~~
@@ -25,5 +32,7 @@ Datasets are read from a variety of original formats (CSV, ASEG-GDF, TIF) and re
 Installation
 ~~~~~~~~~~~~
 Clone the GSPy repository
+
 Change directory to the GSPy repository folder
+
 pip install .
