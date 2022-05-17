@@ -19,11 +19,11 @@ class Survey(object):
     
     Users are allowed to add as much or little information to data variables as they choose. However, following the CF 
     convention, a set of global dataset attributes are required:
-        title
-        institution
-        source
-        history
-        references
+    * title
+    * institution
+    * source
+    * history
+    * references
         
     A “coordinate_information” variable is also required within Survey and should contain all relevant information about the 
     coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.

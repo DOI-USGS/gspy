@@ -6,7 +6,7 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
-BUILDDIR      = build
+BUILDDIR      = ./build
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -18,3 +18,17 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	cp -r $(BUILDDIR)/$@/* ../docs
+
+clean:
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	find ./source/examples -name "*.md5" -type f -delete
+	find ./source/examples -name "*.pickle" -type f -delete
+	find ./source/examples -name "*.ipynb" -type f -delete
+	find ./source/examples -name "plot_*.rst" -type f -delete
+	find ./source/examples -name "*.h5" -type f -delete
+	find ./source/examples -name "*.vtk" -type f -delete
+	find ./source/examples -name "*.png" -type f -delete
+
+cleanGallery:
+	find ./source/examples -name "*.md5" -type f -delete
