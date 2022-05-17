@@ -21,3 +21,9 @@ Datasets are read from a variety of original formats (CSV, ASEG-GDF, TIF) and re
 2. Contains supporting information on the airborne survey, data collection, and modeling parameters.
 3. Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).
 4. Inputs with different CRSs are reprojected to be consistent for a given survey.
+
+Installation
+~~~~~~~~~~~~
+Clone the GSPy repository
+Change directory to the GSPy repository folder
+pip install .
