@@ -12,8 +12,8 @@ from os.path import join
 from gspy import Survey
 
 #%%
-# Convert the TIF data to netcdf
-# ++++++++++++++++++++++++++++++
+# Convert the TIFs data to netcdf
+# +++++++++++++++++++++++++++++++
 
 # Path to example files
 data_path = '..//supplemental//'
@@ -43,8 +43,7 @@ d_out = data_path + 'region//MAP//data//tifs.nc'
 survey.write_netcdf(d_out)
 
 #%%
-# Reading in the netcdf files
-# +++++++++++++++++++++++++++
+# Read in the netcdf files
 new_survey = Survey.read_netcdf(d_out)
 
 #%%

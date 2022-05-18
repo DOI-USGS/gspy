@@ -90,12 +90,11 @@ Convert the CSV data folder to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-46
+.. GENERATED FROM PYTHON SOURCE LINES 44-45
 
-Reading in the netcdf files
-+++++++++++++++++++++++++++
+Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 45-47
 
 .. code-block:: default
 
@@ -108,11 +107,11 @@ Reading in the netcdf files
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-50
+.. GENERATED FROM PYTHON SOURCE LINES 48-49
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-57
+.. GENERATED FROM PYTHON SOURCE LINES 49-56
 
 .. code-block:: default
 
@@ -131,15 +130,17 @@ Plotting
 
     *
 
-      .. image:: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_001.png
-          :alt: spatial_ref = 0.0
-          :class: sphx-glr-multi-img
+      .. image-sg:: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_001.png
+         :alt: spatial_ref = 0.0
+         :srcset: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_001.png
+         :class: sphx-glr-multi-img
 
     *
 
-      .. image:: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_002.png
-          :alt: spatial_ref = 0.0
-          :class: sphx-glr-multi-img
+      .. image-sg:: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_002.png
+         :alt: spatial_ref = 0.0
+         :srcset: /examples/Data_conversion/images/sphx_glr_plot_csv_to_netcdf_002.png
+         :class: sphx-glr-multi-img
 
 
 
@@ -148,7 +149,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.568 seconds)
+   **Total running time of the script:** ( 0 minutes  3.047 seconds)
 
 
 .. _sphx_glr_download_examples_Data_conversion_plot_csv_to_netcdf.py:

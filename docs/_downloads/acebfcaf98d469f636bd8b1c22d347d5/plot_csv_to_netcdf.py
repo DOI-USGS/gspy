@@ -41,8 +41,7 @@ d_out = data_path + 'region//MAP//model//Resolve.nc'
 survey.write_netcdf(d_out)
 
 #%%
-# Reading in the netcdf files
-# +++++++++++++++++++++++++++
+# Read in the netcdf files
 new_survey = Survey().read_netcdf(d_out)
 
 #%%

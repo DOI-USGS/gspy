@@ -49,11 +49,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#data-conversion">Data Conversion</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ASEG to NetCDF conversion</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-aseg-data-to-netcdf">Convert the ASEG data to netcdf</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reading-in-the-netcdf-files">Reading in the netcdf files</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_to_netcdf.html">CSV to NetCDF conversion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">TIF to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
 </ul>
 </li>
@@ -131,9 +130,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="reading-in-the-netcdf-files">
-<h2>Reading in the netcdf files<a class="headerlink" href="#reading-in-the-netcdf-files" title="Permalink to this headline"></a></h2>
+<p>Read in the netcdf files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -148,12 +145,10 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><img alt="spatial_ref = 0.0" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" />
-</li>
-<li><img alt="spatial_ref = 0.0" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_aseg_to_netcdf_002.png" />
-</li>
+<li><img src="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_aseg_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_aseg_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 1 minutes  15.927 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.662 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-data-conversion-plot-aseg-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/d8a5e6094756f6668c6a9ece5bc1a246/plot_aseg_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_aseg_to_netcdf.py</span></code></a></p>

@@ -83,12 +83,11 @@ Convert the TIF data to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
 
-Reading in the netcdf files
-+++++++++++++++++++++++++++
+Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-50
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 .. code-block:: default
 
@@ -101,11 +100,11 @@ Reading in the netcdf files
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-52
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-54
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 .. code-block:: default
 
@@ -114,9 +113,10 @@ Plotting
     plt.show()
 
 
-.. image:: /examples/Data_conversion/images/sphx_glr_plot_tif_to_netcdf_001.png
-    :alt: plot tif to netcdf
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/Data_conversion/images/sphx_glr_plot_tif_to_netcdf_001.png
+   :alt: plot tif to netcdf
+   :srcset: /examples/Data_conversion/images/sphx_glr_plot_tif_to_netcdf_001.png
+   :class: sphx-glr-single-img
 
 
 
@@ -125,7 +125,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.730 seconds)
+   **Total running time of the script:** ( 0 minutes  0.715 seconds)
 
 
 .. _sphx_glr_download_examples_Data_conversion_plot_tif_to_netcdf.py:

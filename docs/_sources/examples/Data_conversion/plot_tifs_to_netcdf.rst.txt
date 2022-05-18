@@ -41,8 +41,8 @@ James, S.R., and Minsley, B.J., 2021, Combined results and derivative products o
 
 .. GENERATED FROM PYTHON SOURCE LINES 15-17
 
-Convert the TIF data to netcdf
-++++++++++++++++++++++++++++++
+Convert the TIFs data to netcdf
++++++++++++++++++++++++++++++++
 
 .. GENERATED FROM PYTHON SOURCE LINES 17-45
 
@@ -83,12 +83,11 @@ Convert the TIF data to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
 
-Reading in the netcdf files
-+++++++++++++++++++++++++++
+Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-50
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 .. code-block:: default
 
@@ -101,11 +100,11 @@ Reading in the netcdf files
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-52
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-54
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 .. code-block:: default
 
@@ -126,7 +125,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.747 seconds)
+   **Total running time of the script:** ( 0 minutes  0.668 seconds)
 
 
 .. _sphx_glr_download_examples_Data_conversion_plot_tifs_to_netcdf.py:

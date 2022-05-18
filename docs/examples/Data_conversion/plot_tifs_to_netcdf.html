@@ -50,8 +50,7 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_to_netcdf.html">CSV to NetCDF conversion</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Multiple TIFs to NetCDF conversion</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convert-the-tif-data-to-netcdf">Convert the TIF data to netcdf</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reading-in-the-netcdf-files">Reading in the netcdf files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert-the-tifs-data-to-netcdf">Convert the TIFs data to netcdf</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
@@ -102,8 +101,8 @@ James, S.R., and Minsley, B.J., 2021, Combined results and derivative products o
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
 </div>
-<section id="convert-the-tif-data-to-netcdf">
-<h2>Convert the TIF data to netcdf<a class="headerlink" href="#convert-the-tif-data-to-netcdf" title="Permalink to this headline"></a></h2>
+<section id="convert-the-tifs-data-to-netcdf">
+<h2>Convert the TIFs data to netcdf<a class="headerlink" href="#convert-the-tifs-data-to-netcdf" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
 
@@ -132,9 +131,7 @@ James, S.R., and Minsley, B.J., 2021, Combined results and derivative products o
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="reading-in-the-netcdf-files">
-<h2>Reading in the netcdf files<a class="headerlink" href="#reading-in-the-netcdf-files" title="Permalink to this headline"></a></h2>
+<p>Read in the netcdf files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -144,7 +141,7 @@ James, S.R., and Minsley, B.J., 2021, Combined results and derivative products o
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_tifs_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tifs_to_netcdf_001.png" alt="stack = 0 [not_defined], spatial_ref = 0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.747 seconds)</p>
+<img src="../../_images/sphx_glr_plot_tifs_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tifs_to_netcdf_001.png" alt="stack = 0 [not_defined], spatial_ref = 0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.668 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-data-conversion-plot-tifs-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/5b6c68f5c6999001fa37a66d3496972a/plot_tifs_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tifs_to_netcdf.py</span></code></a></p>

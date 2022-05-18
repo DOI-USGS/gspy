@@ -23,7 +23,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="TIF to NetCDF conversion" href="plot_tifs_to_netcdf.html" />
+    <link rel="next" title="Multiple TIFs to NetCDF conversion" href="plot_tifs_to_netcdf.html" />
     <link rel="prev" title="ASEG to NetCDF conversion" href="plot_aseg_to_netcdf.html" /> 
 </head>
 
@@ -50,10 +50,9 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">CSV to NetCDF conversion</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-csv-data-folder-to-netcdf">Convert the CSV data folder to netcdf</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reading-in-the-netcdf-files">Reading in the netcdf files</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">TIF to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
 </ul>
 </li>
@@ -135,9 +134,7 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 THK passed dimensions do not align with data, skipping
 </pre></div>
 </div>
-</section>
-<section id="reading-in-the-netcdf-files">
-<h2>Reading in the netcdf files<a class="headerlink" href="#reading-in-the-netcdf-files" title="Permalink to this headline"></a></h2>
+<p>Read in the netcdf files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -153,12 +150,10 @@ THK passed dimensions do not align with data, skipping
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><img alt="spatial_ref = 0.0" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" />
-</li>
-<li><img alt="spatial_ref = 0.0" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" />
-</li>
+<li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.568 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.047 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-data-conversion-plot-csv-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/acebfcaf98d469f636bd8b1c22d347d5/plot_csv_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_to_netcdf.py</span></code></a></p>
@@ -176,7 +171,7 @@ THK passed dimensions do not align with data, skipping
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="plot_aseg_to_netcdf.html" class="btn btn-neutral float-left" title="ASEG to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-right" title="TIF to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-right" title="Multiple TIFs to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

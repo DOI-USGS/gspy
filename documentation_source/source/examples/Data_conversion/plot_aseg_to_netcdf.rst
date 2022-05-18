@@ -82,12 +82,11 @@ Convert the ASEG data to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
 
-Reading in the netcdf files
-+++++++++++++++++++++++++++
+Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-50
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 .. code-block:: default
 
@@ -100,11 +99,11 @@ Reading in the netcdf files
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-52
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-58
+.. GENERATED FROM PYTHON SOURCE LINES 51-57
 
 .. code-block:: default
 
@@ -122,15 +121,17 @@ Plotting
 
     *
 
-      .. image:: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_001.png
-          :alt: spatial_ref = 0.0
-          :class: sphx-glr-multi-img
+      .. image-sg:: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_001.png
+         :alt: spatial_ref = 0.0
+         :srcset: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_001.png
+         :class: sphx-glr-multi-img
 
     *
 
-      .. image:: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_002.png
-          :alt: spatial_ref = 0.0
-          :class: sphx-glr-multi-img
+      .. image-sg:: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_002.png
+         :alt: spatial_ref = 0.0
+         :srcset: /examples/Data_conversion/images/sphx_glr_plot_aseg_to_netcdf_002.png
+         :class: sphx-glr-multi-img
 
 
 
@@ -139,7 +140,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 1 minutes  15.927 seconds)
+   **Total running time of the script:** ( 0 minutes  3.662 seconds)
 
 
 .. _sphx_glr_download_examples_Data_conversion_plot_aseg_to_netcdf.py:

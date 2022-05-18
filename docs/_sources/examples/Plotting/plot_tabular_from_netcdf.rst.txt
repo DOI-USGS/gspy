@@ -69,9 +69,10 @@ Read in Data & Plot
 
 
 
-.. image:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_001.png
-    :alt: spatial_ref = 0.0
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_001.png
+   :alt: spatial_ref = 0.0
+   :srcset: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -81,7 +82,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7f9c1ab92d10>)
+    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fa772784340>)
 
 
 
@@ -101,9 +102,10 @@ Read in Data & Plot
 
 
 
-.. image:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_002.png
-    :alt: spatial_ref = 0.0
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_002.png
+   :alt: spatial_ref = 0.0
+   :srcset: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -113,7 +115,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7f9c0939f410>)
+    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fa78094a100>)
 
 
 
@@ -148,9 +150,10 @@ Plotting
     plt.show()
 
 
-.. image:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_003.png
-    :alt: plot tabular from netcdf
-    :class: sphx-glr-single-img
+.. image-sg:: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_003.png
+   :alt: plot tabular from netcdf
+   :srcset: /examples/Plotting/images/sphx_glr_plot_tabular_from_netcdf_003.png
+   :class: sphx-glr-single-img
 
 
 
@@ -159,7 +162,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.553 seconds)
+   **Total running time of the script:** ( 0 minutes  1.383 seconds)
 
 
 .. _sphx_glr_download_examples_Plotting_plot_tabular_from_netcdf.py:
