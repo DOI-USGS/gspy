@@ -9,7 +9,7 @@ raw and processed, 1-D inverted models along flight lines, and 2-D/3-D gridded l
 Documentation
 ~~~~~~~~~~~~~
 
-https://usgs.github.io/gspy/
+`Documentation is here! <https://usgs.github.io/gspy/>`_
 
 Goals
 ~~~~~
