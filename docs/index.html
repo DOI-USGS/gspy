@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; GSpy  documentation</title>
+  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -31,8 +31,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> GSpy
+            <a href="#" class="icon icon-home"> gspy
           </a>
+              <div class="version">
+                0.1.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -53,7 +56,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">GSpy</a>
+          <a href="#">gspy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -76,24 +79,24 @@
 <p>This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both tabular (unstructured or scattered) and raster (structured or gridded) datasets.</p>
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline"></a></h2>
-<ol class="arabic simple">
-<li><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p></li>
-<li><p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p></li>
-<li><p>Document critical metadata pertinent to geophysical analysis and archival.</p></li>
-<li><p>Develop tools for processing data and preparing data for inversion.</p></li>
-<li><p>Develop exploratory and visualization tools to interrogate data.</p></li>
-</ol>
+<blockquote>
+<div><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p>
+<p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p>
+<p>Document critical metadata pertinent to geophysical analysis and archival.</p>
+<p>Develop tools for processing data and preparing data for inversion.</p>
+<p>Develop exploratory and visualization tools to interrogate data.</p>
+</div></blockquote>
 </section>
 <section id="netcdf-data-standard">
 <h2>NetCDF Data Standard<a class="headerlink" href="#netcdf-data-standard" title="Permalink to this headline"></a></h2>
 <p>Datasets are read from a variety of original formats (CSV, ASEG-GDF, GEOTIF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:</p>
-<ol class="arabic simple">
-<li><p>All variables have detailed attributes (names, units, null values, value ranges).</p></li>
-<li><p>Contains supporting information on the survey, data collection, and modeling parameters.</p></li>
-<li><p>Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).</p></li>
-<li><p>Inputs with different CRSs are reprojected to be consistent for a given survey.</p></li>
-<li><p>NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.</p></li>
-</ol>
+<blockquote>
+<div><p>All variables have detailed attributes (names, units, null values, value ranges).</p>
+<p>Contains supporting information on the survey, data collection, and modeling parameters.</p>
+<p>Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).</p>
+<p>Inputs with different CRSs are reprojected to be consistent for a given survey.</p>
+<p>NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.</p>
+</div></blockquote>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a><ul>
@@ -124,7 +127,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, Leon Foks, Stephanie James, Burke Minsley.</p>
+    <p>&#169; Copyright None.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
