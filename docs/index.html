@@ -80,22 +80,26 @@
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline"></a></h2>
 <blockquote>
-<div><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p>
-<p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p>
-<p>Document critical metadata pertinent to geophysical analysis and archival.</p>
-<p>Develop tools for processing data and preparing data for inversion.</p>
-<p>Develop exploratory and visualization tools to interrogate data.</p>
+<div><ol class="arabic simple">
+<li><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p></li>
+<li><p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p></li>
+<li><p>Document critical metadata pertinent to geophysical analysis and archival.</p></li>
+<li><p>Develop tools for processing data and preparing data for inversion.</p></li>
+<li><p>Develop exploratory and visualization tools to interrogate data.</p></li>
+</ol>
 </div></blockquote>
 </section>
 <section id="netcdf-data-standard">
 <h2>NetCDF Data Standard<a class="headerlink" href="#netcdf-data-standard" title="Permalink to this headline"></a></h2>
 <p>Datasets are read from a variety of original formats (CSV, ASEG-GDF, GEOTIF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:</p>
 <blockquote>
-<div><p>All variables have detailed attributes (names, units, null values, value ranges).</p>
-<p>Contains supporting information on the survey, data collection, and modeling parameters.</p>
-<p>Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).</p>
-<p>Inputs with different CRSs are reprojected to be consistent for a given survey.</p>
-<p>NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.</p>
+<div><ol class="arabic simple">
+<li><p>All variables have detailed attributes (names, units, null values, value ranges).</p></li>
+<li><p>Contains supporting information on the survey, data collection, and modeling parameters.</p></li>
+<li><p>Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).</p></li>
+<li><p>Inputs with different CRSs are reprojected to be consistent for a given survey.</p></li>
+<li><p>NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.</p></li>
+</ol>
 </div></blockquote>
 <div class="toctree-wrapper compound">
 <ul>
