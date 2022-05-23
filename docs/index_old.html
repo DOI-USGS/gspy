@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to GSpy: Geophysical Data Standard in Python &#8212; gspy 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-gspy-geophysical-data-standard-in-python">
+<h1>Welcome to GSpy: Geophysical Data Standard in Python<a class="headerlink" href="#welcome-to-gspy-geophysical-data-standard-in-python" title="Permalink to this headline">¶</a></h1>
+<p>This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both tabular (unstructured or scattered) and raster (structured or gridded) datasets.</p>
+<section id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p></li>
+<li><p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p></li>
+<li><p>Document critical metadata pertinent to geophysical analysis and archival.</p></li>
+<li><p>Develop tools for processing data and preparing data for inversion.</p></li>
+<li><p>Develop exploratory and visualization tools to interrogate data.</p></li>
+</ol>
+</section>
+<section id="netcdf-data-standard">
+<h2>NetCDF Data Standard<a class="headerlink" href="#netcdf-data-standard" title="Permalink to this headline">¶</a></h2>
+<p>Datasets are read from a variety of original formats (CSV, ASEG-GDF, GEOTIF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:</p>
+<ol class="arabic simple">
+<li><p>All variables have detailed attributes (names, units, null values, value ranges).</p></li>
+<li><p>Contains supporting information on the survey, data collection, and modeling parameters.</p></li>
+<li><p>Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).</p></li>
+<li><p>Inputs with different CRSs are reprojected to be consistent for a given survey.</p></li>
+<li><p>NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.</p></li>
+</ol>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/getting_started/installation.html">Installing GSpy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/api/classes/classes.html">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#data-conversion">Data Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#plotting">Plotting</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">gspy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Leon Foks, Stephanie James, Burke Minsley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index_old.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
