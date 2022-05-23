@@ -82,7 +82,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fa772784340>)
+    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fb238b4a970>)
 
 
 
@@ -115,7 +115,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fa78094a100>)
+    (<AxesSubplot:title={'center':'spatial_ref = 0.0'}, xlabel='Easting_Albers:PROJECTION=WGS8\n4/Albers [m]', ylabel='Northing_Albers:PROJECTION=WGS\n84/Albers [m]'>, <matplotlib.collections.PathCollection object at 0x7fb248ac0f70>)
 
 
 
@@ -162,7 +162,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.383 seconds)
+   **Total running time of the script:** ( 0 minutes  1.305 seconds)
 
 
 .. _sphx_glr_download_examples_Plotting_plot_tabular_from_netcdf.py:

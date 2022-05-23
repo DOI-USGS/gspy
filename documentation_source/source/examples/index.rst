@@ -23,6 +23,48 @@ Data Conversion
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="TIF to NetCDF conversion">
+
+.. only:: html
+
+ .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tif_to_netcdf_thumb.png
+     :alt: TIF to NetCDF conversion
+
+     :ref:`sphx_glr_examples_Data_conversion_plot_tif_to_netcdf.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Data_conversion/plot_tif_to_netcdf
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
+
+.. only:: html
+
+ .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+     :alt: Multiple TIFs to NetCDF conversion
+
+     :ref:`sphx_glr_examples_Data_conversion_plot_tifs_to_netcdf.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Data_conversion/plot_tifs_to_netcdf
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="ASEG to NetCDF conversion">
 
 .. only:: html
@@ -62,48 +104,6 @@ Data Conversion
    :hidden:
 
    /examples/Data_conversion/plot_csv_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
-
-.. only:: html
-
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-     :alt: Multiple TIFs to NetCDF conversion
-
-     :ref:`sphx_glr_examples_Data_conversion_plot_tifs_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_tifs_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="TIF to NetCDF conversion">
-
-.. only:: html
-
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tif_to_netcdf_thumb.png
-     :alt: TIF to NetCDF conversion
-
-     :ref:`sphx_glr_examples_Data_conversion_plot_tif_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_tif_to_netcdf
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

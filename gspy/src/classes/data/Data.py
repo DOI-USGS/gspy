@@ -174,7 +174,7 @@ class Data(object):
         group : str
             Group name in Netcdf file to generate NCML output for.
         index : str
-            
+            todo
         """
 
         infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
