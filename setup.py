@@ -10,17 +10,13 @@ from setuptools import find_packages, setup
 from distutils.command.sdist import sdist
 cmdclass={'sdist': sdist}
 
-# def readme():
-#     with open('README.rst', encoding='utf-8', mode='r') as f:
-#         return f.read()
-
 setup(name='gspy',
     packages=find_packages(),
     scripts=[],
-    version="0.0.0",
+    version="0.1.0",
     description='Data handling',
-    long_description='', # readme(),
-    url = '',
+    long_description='gspy converts commonly used data formats into a netcdf file honoring our GS convention.',
+    url = 'https://github.com/usgs.gov',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved',
@@ -28,7 +24,7 @@ setup(name='gspy',
         'Programming Language :: Python :: 3',
         'Topic :: Scientific/Engineering',
     ],
-    author='Leon Foks',
+    author='Leon Foks, Stephanie James, Burke Minsley',
     author_email='nfoks@contractor.usgs.gov',
     install_requires=[
         'numpy',
@@ -43,11 +39,5 @@ setup(name='gspy',
         'pyproj',
         'aseg-gdf2'
     ],
-    # entry_points = {
-    #     'console_scripts':[
-    #         'geobipy=geobipy:geobipy',
-    #         'geobipy_mpi=geobipy:geobipy_mpi',
-    #     ],
-    # }
 )
 
