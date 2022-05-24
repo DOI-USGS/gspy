@@ -6,3 +6,6 @@ egg-info
 *.h5
 *.nc
 git_push.sh
+build/
+documentation_source/build/
+dist/

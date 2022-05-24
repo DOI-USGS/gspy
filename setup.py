@@ -10,13 +10,16 @@ from setuptools import find_packages, setup
 from distutils.command.sdist import sdist
 cmdclass={'sdist': sdist}
 
+exec(open('version.py').read())
+
 setup(name='gspy',
     packages=find_packages(),
     scripts=[],
-    version="0.1.0",
+    version=__version__,
     description='Data handling',
     long_description='gspy converts commonly used data formats into a netcdf file honoring our GS convention.',
     url = 'https://github.com/usgs.gov',
+    download_url=f"https://github.com/usgs/gspy/archive/v{__version__}.tar.gz",
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved',
