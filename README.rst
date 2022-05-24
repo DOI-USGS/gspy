@@ -31,8 +31,4 @@ Datasets are read from a variety of original formats (CSV, ASEG-GDF, TIF) and re
 
 Installation
 ~~~~~~~~~~~~
-Clone the GSPy repository
-
-Change directory to the GSPy repository folder
-
-pip install .
+pip install gspy
