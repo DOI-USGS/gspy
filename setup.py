@@ -19,7 +19,7 @@ setup(name='gspy',
     description='Data handling',
     long_description='gspy converts commonly used data formats into a netcdf file honoring our GS convention.',
     url = 'https://github.com/usgs.gov',
-    download_url=f"https://github.com/usgs/gspy/archive/v{__version__}.tar.gz",
+    download_url=f"https://github.com/usgs/gspy/releases/v{__version__}.tar.gz",
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved',
