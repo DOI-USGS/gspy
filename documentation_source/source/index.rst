@@ -29,3 +29,4 @@ Datasets are read from a variety of original formats (CSV, ASEG-GDF, GEOTIF) and
    content/getting_started/getting_started
    content/api/api
    examples/index
+   gspy_convention_requirements
