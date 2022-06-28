@@ -1,11 +1,11 @@
 
 class variable_metadata(dict):
     """ Handler class to user defined parameters. Allows us to check a users input parameters in the backend """
-    
+
     def __init__(self, **kwargs):
-        
+
         for col in kwargs.keys():
-            
+
             missing = [x for x in self.required_keys if not x in kwargs[col]]
             if len(missing) > 0:
                 raise ValueError("Missing {} from {} in {} dict".format(missing, col, self.key))
@@ -13,9 +13,9 @@ class variable_metadata(dict):
         for key, value in kwargs.items():
             if key != "dimensions":
                 self[key] = value
-    
+
     @staticmethod
-    def key(self):
+    def key():
         return 'units_and_nulls'
 
     @property

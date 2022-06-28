@@ -1,32 +1,31 @@
 import os
 from copy import deepcopy
-import numpy as np
-from .Tabular import Tabular
-import pandas as pd
-import xarray as xr
 import json
-from .Variable_Metadata import variable_metadata
-from .Key_mapping import key_mapping
 
-import warnings
+import numpy as np
+import xarray as xr
+import pandas as pd
+
+from .Tabular import Tabular
+from .Variable_Metadata import variable_metadata
 
 class Tabular_csv(Tabular):
     """Class to handle tabular csv files.
-    
+
     ``Tabular('csv', data_filename, metadata_file, spatial_ref, **kwargs)``
 
     See Also
     --------
     gspy.Tabular_csv.read : Class method for reading file into class
-    gspy.Tabular : Parent and generic interface.    
-    
-    """    
+    gspy.Tabular : Parent and generic interface.
+
+    """
 
     @property
     def column_names(self):
         tmp_cols = list(self.file.columns)
-        tmp_cols.sort()   
-        return tmp_cols  
+        tmp_cols.sort()
+        return tmp_cols
 
     @property
     def cols(self):
@@ -37,9 +36,10 @@ class Tabular_csv(Tabular):
             if '[0]' in self.column_names[i]:
                 j = 1
                 label = self.column_names[i].split('[')[0]
-                while (label == self.column_names[i+j].split('[')[0]):
+                while label == self.column_names[i+j].split('[')[0]:
                     j += 1
-                    if (i+j == n_cols): break
+                    if i+j == n_cols:
+                        break
                 out[label] = j
                 i += j
             elif not '[' in self.column_names[i]:
@@ -70,7 +70,7 @@ class Tabular_csv(Tabular):
             dictionary of attributes for current variable
 
         """
-        
+
         # Set up Defaults
         # out = {'standard_name' : variable,
         #     'format' : self.file._metadata[variable],
@@ -99,14 +99,14 @@ class Tabular_csv(Tabular):
             else:
                 vtype2 = 'f'
             pad = 1 if np.nanmin(tmpvals) >= 0.0 else 2
-            
+
             vformat = '{}{}.{}'.format(vtype2, len(maxval)+pad, len(maxval.split('.')[1]))
         else:
             vformat = 'not_defined'
 
         if len(self.xarray[variable].shape) == 2:
             vformat = '{}{}'.format(self.xarray[variable].shape[0], vformat)
-        
+
         # default
         out = {'standard_name' : variable,
             'format' : vformat,
@@ -160,10 +160,10 @@ class Tabular_csv(Tabular):
 
         # Convert to xarray format
         self.read_metadata(metadata_file)
-        
+
         if not 'variable_metadata' in self.json_metadata.keys():
             self.create_variable_metadata_template(filename)
-        
+
         self._combine_pandas_json_to_xarray()
 
         #self.xarray = xr.Dataset.from_dataframe(self.file)
@@ -183,7 +183,7 @@ class Tabular_csv(Tabular):
         self.xarray.attrs.update(self.json_metadata['dataset_attrs'])
 
         # add global attrs to tabular, skip variable_metadata and dimensions
-        self._add_general_metadata_to_xarray({key: values for key, values in self.json_metadata.items() if key not in ['dataset_attrs','dimensions', 'variable_metadata']})  
+        self._add_general_metadata_to_xarray({key: values for key, values in self.json_metadata.items() if key not in ['dataset_attrs','dimensions', 'variable_metadata']})
 
         return self
 
@@ -196,48 +196,48 @@ class Tabular_csv(Tabular):
 
         # start with dimension variables
         for dim, dim_meta in self.json_metadata['dimensions'].items():
-            
+
             # if dimension has bounds
             if "bounds" in dim_meta.keys():
 
                 #assert len(dim_meta["bounds"])-len(dim_meta["centers"]) == 1, ValueError('size of dimension bounds must be +1 size of centers')
-                
+
                 cntkey = '{}_centers'.format(dim)
                 bndkey = '{}_bnds'.format(dim)
-                
+
                 # if already correct size/dimensions
                 if np.array(dim_meta["bounds"]).shape == (len(dim_meta["centers"]), 2):
                     bounds = np.array(dim_meta["bounds"])
-                
+
                 # if 1D with +1 element, reshape
                 elif np.array(dim_meta["bounds"]).shape == (len(dim_meta["centers"])+1,):
                     bounds = np.array((dim_meta["bounds"][:-1], dim_meta["bounds"][1:])).transpose()
-                
+
                 # otherwise, needs correcting
                 else:
                     assert bounds.shape == (len(dim_meta["centers"]),2), ValueError('size of dimension bounds must be 2D array size of centers, or +1 list size of centers that can be reshaped')
-                
-                self.xarray[bndkey] = xr.DataArray(bounds, 
-                        dims=[cntkey, 'nv'], 
+
+                self.xarray[bndkey] = xr.DataArray(bounds,
+                        dims=[cntkey, 'nv'],
                         coords={cntkey: dim_meta["centers"], 'nv': np.array([0, 1])},
                         attrs={'standard_name' : '{}_bnds'.format(dim_meta["standard_name"].lower()),
                                     'long_name' : '{} bounds'.format(dim_meta["long_name"]),
                                     'units' : dim_meta["units"],
                                     'null_value' : dim_meta["null_value"]})
 
-                self.xarray[cntkey] = xr.DataArray(dim_meta["centers"], 
-                        dims=[cntkey], 
+                self.xarray[cntkey] = xr.DataArray(dim_meta["centers"],
+                        dims=[cntkey],
                         coords={cntkey: dim_meta["centers"]},
                         attrs={'standard_name' : '{}_centers'.format(dim_meta["standard_name"].lower()),
                                     'long_name' : '{} centers'.format(dim_meta["long_name"]),
                                     'units' : dim_meta["units"],
                                     'null_value' : dim_meta["null_value"],
                                     'bounds' : bndkey})
-            
+
             # if discrete dimension
             else:
 
-                self.xarray[dim] = xr.DataArray(dim_meta["centers"], 
+                self.xarray[dim] = xr.DataArray(dim_meta["centers"],
                         dims=[dim],
                         attrs={'standard_name' : '{}'.format(dim_meta["standard_name"].lower()),
                                     'long_name' : '{}'.format(dim_meta["long_name"]),
@@ -266,13 +266,13 @@ class Tabular_csv(Tabular):
                             dims=["index"],
                             coords=coords,
                             attrs=self.json_metadata['variable_metadata'][coord_keys[1]])
-        
+
         if '_CoordinateTransformType' in self.spatial_ref.keys():
             self.xarray['x'].attrs['standard_name'] = 'projection_x_coordinate'
             self.xarray['x'].attrs['_CoordinateAxisType'] = 'GeoX'
             self.xarray['y'].attrs['standard_name'] = 'projection_y_coordinate'
             self.xarray['y'].attrs['_CoordinateAxisType'] = 'GeoY'
-        
+
         # if units are abbreviated need to spell it out otherwise isn't recognized by Arc
         if self.xarray['x'].attrs['units'] == 'm':
             self.xarray['x'].attrs['units'] = 'meters'
@@ -281,12 +281,12 @@ class Tabular_csv(Tabular):
 
         # finish with regular data variables
         for var, var_meta in self.json_metadata['variable_metadata'].items():
-            
+
             # if not coordinate variables
             if not var in coord_keys:
 
                 # if json variable matches csv column name
-                if var in self.column_names: 
+                if var in self.column_names:
                     array = deepcopy(self.file[var].values)
 
                     if var_meta['null_value'] != 'not_defined':
@@ -298,7 +298,7 @@ class Tabular_csv(Tabular):
                                     attrs=var_meta)
 
                 # else if json variable not in csv
-                else: 
+                else:
                     # check for raw_data_columns to combine
                     if 'raw_data_columns' in var_meta.keys():
                         vals = self.file[var_meta['raw_data_columns']].values
@@ -306,10 +306,10 @@ class Tabular_csv(Tabular):
                     # if variable has multiple columns with [i] increment, to be combined
                     elif var in self.cols.keys() and self.cols[var] > 1:
                         vals = self.file[["{}[{}]".format(var, i) for i in range(self.cols[var])]].values
-                    
-                    else: 
+
+                    else:
                         vals = None
-        
+
                     assert vals is not None, ValueError('{} not in data file, double check, raw_data_columns field required in variable_metadata if needing to combine unique columns to new variable without an [i] increment'.format(var))
 
                     # get variable dimensions from json, renaming with "centers" tag if bounds are passed
@@ -332,12 +332,12 @@ class Tabular_csv(Tabular):
                             check_flag = True
                     else:
                         check_flag = True
-                    
+
                     #assert check_flag, ValueError('{} variable dimensions do not align with data'.format(var))
                     if check_flag:
                         # store dim attrs, to replace after they get dropped when adding variable
                         vdim_attrs = {vdim: self.xarray[vdim].attrs for vdim in vdims}
-                
+
                         tmp = deepcopy(vals)
                         if var_meta['null_value'] != 'not_defined':
                             tmp = tmp[tmp != var_meta['null_value']]
@@ -346,26 +346,26 @@ class Tabular_csv(Tabular):
                         self.xarray[var] = xr.DataArray(vals,
                                 dims=vdims,
                                 attrs=var_meta)
-                        
+
                         # add dim attrs back in
                         for vdim in vdims:
                             self.xarray[vdim].attrs.update(vdim_attrs[vdim])
                     else:
                         #warnings.warn("{} passed dimensions do not align with data, skipping".format(var))
                         print("{} passed dimensions do not align with data, skipping".format(var))
-                        
+
         if 'nv' in self.xarray.dims:
             self.xarray['nv'].attrs = {'standard_name': 'number_of_vertices',
               'long_name' : 'Number of vertices for bounding variables',
               'units' : 'not_defined',
-              'null_value' : 'not_defined'} 
-        
+              'null_value' : 'not_defined'}
+
         if 'index' in self.xarray.dims:
             self.xarray['index'] = self.xarray['index'].assign_coords(coords)
             self.xarray['index'].attrs = {'standard_name': 'index',
               'long_name' : 'Index of individual data points',
               'units' : 'not_defined',
-              'null_value' : 'not_defined'} 
+              'null_value' : 'not_defined'}
 
     def create_variable_metadata_template(self, filename):
         """Generates a template metadata file.
@@ -411,7 +411,7 @@ class Tabular_csv(Tabular):
         """
         units = variable_metadata(**value)
         for var in self.xarray.variables:
-            
+
             if '[' in var:
                 var = var.split('[')[0]
 

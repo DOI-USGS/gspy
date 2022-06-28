@@ -1,31 +1,33 @@
-import h5py
+import os
+import json
+from copy import deepcopy
+
+import xarray as xr
 from netCDF4 import Dataset
+import h5py
+
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
 from .Spatial_ref import Spatial_ref
-from ...utilities import flatten, unflatten
-import json
-import xarray as xr
-import os
-from copy import deepcopy
+from ...utilities import flatten
 
 class Survey(object):
     """Class defining a survey or dataset collection
 
-    The Survey group contains general metadata about the survey or data colleciton as a whole. 
-    Information about where the data was collected, acquisition start and end dates, who collected the data, 
-    any clients or contractors involved, system specifications, equipment details, and so on are documented 
+    The Survey group contains general metadata about the survey or data colleciton as a whole.
+    Information about where the data was collected, acquisition start and end dates, who collected the data,
+    any clients or contractors involved, system specifications, equipment details, and so on are documented
     within the Survey as data variables and attributes.
-    
-    Users are allowed to add as much or little information to data variables as they choose. However, following the CF 
+
+    Users are allowed to add as much or little information to data variables as they choose. However, following the CF
     convention, a set of global dataset attributes are required:
     * title
     * institution
     * source
     * history
     * references
-        
-    A “coordinate_information” variable is also required within Survey and should contain all relevant information about the 
+
+    A “coordinate_information” variable is also required within Survey and should contain all relevant information about the
     coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.
 
     Survey(metadata_file)
@@ -72,11 +74,11 @@ class Survey(object):
     def attrs(self, value):
         assert isinstance(value, dict), TypeError('attrs must have type dict')
         self._attrs = value
-    
+
     @property
     def xarray(self):
         return self._xarray
-        
+
     @xarray.setter
     def xarray(self, value):
         assert isinstance(value, xr.Dataset), TypeError("xarray must have type xarray.Dataset")
@@ -104,7 +106,7 @@ class Survey(object):
             self._spatial_ref = value
         else:
             self._spatial_ref = Spatial_ref(**value)
-    
+
     @property
     def json_metadata(self):
         return self._json_metadata
@@ -151,7 +153,7 @@ class Survey(object):
         if filename is None:
             self.write_metadata_template()
             raise Exception("Please re-run and specify supplemental information when instantiating Survey()")
-        
+
         # reading the data from the file
         with open(filename) as f:
             s = f.read()
@@ -170,7 +172,7 @@ class Survey(object):
         kwargs : dict
             metadata dictionary containing "dataset_attrs"
         """
-        self.xarray.attrs.update(kwargs['dataset_attrs'])  
+        self.xarray.attrs.update(kwargs['dataset_attrs'])
 
     def _make_survey_xarray(self):
         """ Create Survey xarray
@@ -179,38 +181,38 @@ class Survey(object):
         and assign global attributes for the survey
         """
         self.xarray = xr.Dataset()
-        
+
         dic = deepcopy(self.json_metadata)
         ds_attrs = {}
         ds_attrs["dataset_attrs"] = dic.pop("dataset_attrs", None)
-        
+
         self._add_general_metadata_to_xarray(ds_attrs)
-        
+
         for key in dic:
             tmpdict2 = {k: v for k, v in dic[key].items() if v}
             tmpdict2 = flatten(tmpdict2, '', {})
 
             for k,v in tmpdict2.items():
                 if isinstance(v,list):
-                    
+
                     if isinstance(v[0],list):
                         tmpdict2[k] = str(v)
             #tmpdict[key] = xr.DataArray(attrs=tmpdict2)
             self.xarray[key] = xr.DataArray(attrs=tmpdict2)
-        
+
         #assert not ds_attrs is None, Exception("Supplemental information must contain 'dataset_attrs' entry")
 
         #ds = xr.Dataset(tmpdict, attrs=ds_attrs)
 
     def write_metadata_template(self):
-        """Creates a metadata template for a Survey 
+        """Creates a metadata template for a Survey
 
-        If a Survey metadata file is not found or passed, an empty template file is generated and 
-        an Exception is raised. 
+        If a Survey metadata file is not found or passed, an empty template file is generated and
+        an Exception is raised.
 
         Raises
         ------
-        Exception 
+        Exception
             "Please re-run and specify supplemental information when instantiating Survey()"
         """
 
@@ -300,7 +302,7 @@ class Survey(object):
 
         with h5py.File(filename, 'r') as f:
             groups = list(f['survey'].keys())
-        
+
         if 'tabular' in groups:
             rootgrp = Dataset(filename)
             for i in rootgrp.groups['survey'].groups['tabular'].groups:
@@ -316,7 +318,7 @@ class Survey(object):
         return self
 
     def reproject():
-        """ Reprojects Survey 
+        """ Reprojects Survey
 
         The Survey and all dependent datasets are reprojected into a new CRS
 
@@ -368,7 +370,7 @@ class Survey(object):
         f.write('<group name="/survey">\n\n')
 
         ### Survey Dimensions:
-        for dim in self.xarray.dims: 
+        for dim in self.xarray.dims:
             f.write('  <dimension name="%s" length="%s"/>\n' % (dim, self.xarray.dims[dim]))
         if len(self.xarray.dims) > 0:
             f.write('\n')
@@ -384,7 +386,7 @@ class Survey(object):
         ### Survey Variables:
         for var in self.xarray.variables:
             tmpvar = self.xarray.variables[var]
-            dtype = str(tmpvar.dtype).title()[:-2]  
+            dtype = str(tmpvar.dtype).title()[:-2]
             if var == 'crs' or dtype == 'object':
                 f.write('  <variable name="%s" shape="%s" type="String">\n' % (var, " ".join(tmpvar.dims)))
             else:
@@ -424,26 +426,9 @@ class Survey(object):
             if i == len(self._raster)-1:
                 f.write('  </group>\n\n')
             f.close()
-        
-        
+
+
         f = open(infile, 'a')
         f.write('</group>\n\n')
         f.write('</netcdf>')
         f.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

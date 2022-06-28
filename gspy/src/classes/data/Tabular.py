@@ -1,19 +1,15 @@
 import os
-
-from gspy.src.classes.survey.Spatial_ref import Spatial_ref
-
-from .Key_mapping import key_mapping
-from ...utilities import flatten
-from .Data import Data
+import json
 import matplotlib.pyplot as plt
+
 import xarray as xr
 import numpy as np
-from pyproj import Proj, transform
-import json
+
+from .Data import Data
 
 class Tabular(Data):
     """Class to handle tabular data.
-    
+
     ``Tabular(type, data_filename, metadata_file, spatial_ref, **kwargs)``
 
     Parameters
@@ -36,7 +32,7 @@ class Tabular(Data):
     --------
     gspy.Spatial_ref : For Spatial reference instantiation.
 
-    """  
+    """
 
     def __init__(self, type, data_filename, metadata_file=None, spatial_ref=None, **kwargs):
         self._type = None
@@ -84,10 +80,6 @@ class Tabular(Data):
         self._type = value
 
     @property
-    def system(self):
-        return self._system
-
-    @property
     def variables(self):
         return list(self.xarray.data_vars.keys())
 
@@ -128,7 +120,7 @@ class Tabular(Data):
                 self.xarray[variable.strip()].attrs[key] = dic[key]
 
     @classmethod
-    def read(self, type, data_filename, metadata_file, spatial_ref=None, **kwargs):
+    def read(cls, type, data_filename, metadata_file, spatial_ref=None, **kwargs):
         """Read different types of data files
 
         Calls on appropriate read function based on data file type
@@ -152,13 +144,15 @@ class Tabular(Data):
         # from . import tabular_netcdf
 
         if type == 'aseg':
-            return tabular_aseg.Tabular_aseg.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
+            out = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
 
         elif type == 'csv':
-            return tabular_csv.Tabular_csv.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
+            out = tabular_csv.Tabular_csv.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
 
         elif type == 'netcdf':
-            return Tabular.read_netcdf(data_filename, spatial_ref=spatial_ref, **kwargs)
+            out = Tabular.read_netcdf(data_filename, spatial_ref=spatial_ref, **kwargs)
+
+        return out
 
     def create_variable_metadata_template(self, filename):
         """Generates a template metadata file.
@@ -186,41 +180,41 @@ class Tabular(Data):
 
         assert 'variable_metadata' in self.json_metadata, ValueError(s)
 
-    def __reconcile_xarray(self):
-        """Clean up xarray variables
+    # def __reconcile_xarray(self):
+    #     """Clean up xarray variables
 
-        Combine multi-channel variables into single variables
-        and add spatial reference variable.
+    #     Combine multi-channel variables into single variables
+    #     and add spatial reference variable.
 
-        """
-        if self.is_netcdf:
-            return
+    #     """
+    #     if self.is_netcdf:
+    #         return
 
-        for key, value in self.cols.items():
+    #     for key, value in self.cols.items():
 
-            if value > 1:
+    #         if value > 1:
 
-                # if not 'channel' in self.xarray:
-                #     self.xarray =
-                channel = 'channel_{}'.format(value)
+    #             # if not 'channel' in self.xarray:
+    #             #     self.xarray =
+    #             channel = 'channel_{}'.format(value)
 
-                # create new
-                #print(key, value)
-                check = [self.xarray.get("{}[{}]".format(key, i)) for i in range(value)]
-                #print(check)
-                self.xarray[key] = xr.DataArray(xr.concat(check, dim=channel),
-                                                dims = [channel, 'index'])
-                                                #coords = {channel:np.arange(value),
-                                                #		'index':self.xarray.index})
-                                                # attrs = self.xarray[key+'[0]'].attrs)
+    #             # create new
+    #             #print(key, value)
+    #             check = [self.xarray.get("{}[{}]".format(key, i)) for i in range(value)]
+    #             #print(check)
+    #             self.xarray[key] = xr.DataArray(xr.concat(check, dim=channel),
+    #                                             dims = [channel, 'index'])
+    #                                             #coords = {channel:np.arange(value),
+    #                                             #		'index':self.xarray.index})
+    #                                             # attrs = self.xarray[key+'[0]'].attrs)
 
-                # Delete
-                self._xarray = self.xarray.drop_vars([key+'[%i]' % i for i in range(value)])
+    #             # Delete
+    #             self._xarray = self.xarray.drop_vars([key+'[%i]' % i for i in range(value)])
 
-        #strip out whitespace in variable names
-        oldnames=[str(var) for var in self.xarray.variables]
-        newnames=[name.strip().replace(' ', '_') for name in oldnames]
-        self._xarray = self.xarray.rename({oldnames[i]: newnames[i] for i in range(len(newnames))})
+    #     #strip out whitespace in variable names
+    #     oldnames=[str(var) for var in self.xarray.variables]
+    #     newnames=[name.strip().replace(' ', '_') for name in oldnames]
+    #     self._xarray = self.xarray.rename({oldnames[i]: newnames[i] for i in range(len(newnames))})
 
     def update_dimensions(self, variable_metadata):
         """Update the dimensions in the xarray object.
@@ -231,19 +225,19 @@ class Tabular(Data):
             Dictionary of variable metadata
 
         """
-        
+
         dimensions = [variable_metadata[var]["dimensions"] for var in variable_metadata if "dimensions" in variable_metadata[var]]
         dimensions = np.unique([dimdim for dim in dimensions for dimdim in dim if dimdim != "index" ])
 
         for dim in dimensions:
-            
+
             vars = [var for var in variable_metadata if "dimensions" in variable_metadata[var] and dim in variable_metadata[var]["dimensions"]]
             for var in vars:
-                
+
                 if "bounds" in variable_metadata[dim].keys():
 
                     assert len(variable_metadata[dim]["bounds"])-len(variable_metadata[dim]["centers"]) == 1, ValueError('size of dimension bounds must be +1 size of centers')
-                    
+
                     cntkey = '{}_centers'.format(dim)
                     bndkey = '{}_bnds'.format(dim)
                     bnds_attrs = {'standard_name' : '{}_bnds'.format(variable_metadata[dim]["standard_name"].lower()),
@@ -259,18 +253,18 @@ class Tabular(Data):
                     if not cntkey in self.xarray.variables:
 
                         bounds = np.array((variable_metadata[dim]["bounds"][:-1], variable_metadata[dim]["bounds"][1:])).transpose()
-                        
-                        self.xarray[bndkey] = xr.DataArray(bounds, 
-                                dims=[cntkey, 'nv'], 
+
+                        self.xarray[bndkey] = xr.DataArray(bounds,
+                                dims=[cntkey, 'nv'],
                                 #coords={cntkey: dimensions[dim]["centers"], 'nv': np.array([0,1])},
                                 attrs=bnds_attrs)
 
-                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"], 
-                                dims=[cntkey], 
+                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
+                                dims=[cntkey],
                                 #coords={cntkey: dimensions[dim]["centers"]},
                                 attrs=cntr_attrs)
                 else:
-                    
+
                     cntkey = '{}'.format(dim)
                     cntr_attrs = {'standard_name' : '{}'.format(variable_metadata[dim]["standard_name"].lower()),
                                         'long_name' : '{}'.format(variable_metadata[dim]["long_name"]),
@@ -278,29 +272,29 @@ class Tabular(Data):
                                         'null_value' : variable_metadata[dim]["null_value"]}
 
                     if not cntkey in self.xarray.variables:
-                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"], 
+                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
                                 dims=[cntkey],
                                 attrs=cntr_attrs)
 
                 self.xarray[var] = self.xarray[var].swap_dims({
                     [dm for dm in self.xarray[var].dims if 'channel' in dm][0]: cntkey})
-                
+
                 # replace attrs which get erased when swap dims, needs a better fix!!!!!
                 self.xarray[cntkey].attrs.update(cntr_attrs)
                 if "bounds" in variable_metadata[dim].keys():
                     self.xarray[bndkey].attrs.update(bnds_attrs)
-        
+
         if 'nv' in self.xarray.dims:
             self.xarray['nv'].attrs = {'standard_name': 'number_of_vertices',
               'long_name' : 'Number of vertices for bounding variables',
               'units' : 'not_defined',
-              'null_value' : 'not_defined'} 
-        
+              'null_value' : 'not_defined'}
+
         if 'index' in self.xarray.dims:
             self.xarray['index'].attrs = {'standard_name': 'index',
               'long_name' : 'Index of individual data points',
               'units' : 'not_defined',
-              'null_value' : 'not_defined'} 
+              'null_value' : 'not_defined'}
 
         return
 

@@ -1,14 +1,15 @@
 import os
 from pathlib import Path
+import json
+from copy import deepcopy
+
+import numpy as np
+import xarray as xr
+import rioxarray
 
 from .Key_mapping import key_mapping
 from .Variable_Metadata import variable_metadata
 from .Data import Data
-import numpy as np
-import xarray as xr
-import rioxarray
-import json
-from copy import deepcopy
 
 class Raster(Data):
     """Class defining a set of gridded data (2D or 3D).
@@ -16,7 +17,7 @@ class Raster(Data):
     Examples of raster data include radiometric or magnetic grids, interpolated resistivity models, etc.
 
     ``Raster(metadata_file, spatial_ref, **kwargs)``
-    
+
     Parameters
     ----------
     metadata_file : str
@@ -34,7 +35,7 @@ class Raster(Data):
     gspy.Spatial_ref : For co-ordinate reference instantiation requirements
 
     """
-    def __init__(self, metadata_file, spatial_ref, **kwargs):       
+    def __init__(self, metadata_file, spatial_ref, **kwargs):
         self._type = None
         self._key_mapping = None
 
@@ -59,9 +60,9 @@ class Raster(Data):
     def read(self, metadata_file, spatial_ref=None, netcdf_file=None, **kwargs):
         """Read the metadata and data files and to Raster class
 
-        Parses the json metadata file and adds them to the appropriate locations. 
+        Parses the json metadata file and adds them to the appropriate locations.
         An xarray Dataset is created and the 'raster_files' dictionary in the metadata file
-        is used to read raster data files into named variables. 
+        is used to read raster data files into named variables.
 
         Parameters
         ----------
@@ -100,7 +101,7 @@ class Raster(Data):
 
         # Check for conforming spatial refs???
 
-        # # add global attrs to linedata 
+        # # add global attrs to linedata
         # self._add_general_metadata_to_xarray({x: dic[x] for x in dic if x not in ['units_and_nulls','variable_files']})
 
     def read_metadata(self, filename):
@@ -210,7 +211,7 @@ class Raster(Data):
         """
         if isinstance(filename, list):
             filename = filename[0]
-        
+
         extension = (filename.split(os.sep)[-1].split('.')[-1]).lower()
 
         if extension == 'tif':
@@ -226,13 +227,13 @@ class Raster(Data):
             else:
                 target_crs = self.spatial_ref['crs_wkt']
             print('Reprojecting ...')
-            
+
             # get fill value from file, if present
             if '_FillValue' in ds.attrs:
                 nodata = ds.attrs['_FillValue']
             else:
                 nodata=None
-            
+
             # supersede fill value from file with variable metadata value, if present
             if 'null_value' in var_meta[key].keys():
                 if var_meta[key]['null_value'] != 'not_defined':
@@ -247,7 +248,7 @@ class Raster(Data):
             # update x and y attributes based on JSON metadata
             ds.x.attrs = var_meta[self.key_mapping['x']]
             ds.y.attrs = var_meta[self.key_mapping['y']]
-        
+
         # update attributes based on JSON metadata for variable
         ds.attrs = var_meta[key]
 
@@ -284,15 +285,15 @@ class Raster(Data):
         if '_FillValue' in ds.attrs:
             ds.values[ds.values == ds.attrs['_FillValue']] = np.nan
             #ds.attrs['null_value'] = ds.attrs['_FillValue']
-        
+
         return ds
 
     def read_rasters(self, filenames, key, var_meta): # stacking_dimension
         """Read multiple raster files and stack into single variable
 
-        Combines multiple 2D raster files into a 3D variable along a stacking dimension. 
+        Combines multiple 2D raster files into a 3D variable along a stacking dimension.
         Currently the stacking dimension defaults to "stack" and increments starting at 0. In future
-        releases this dimension will be customizable and passed through the JSON metadata file. 
+        releases this dimension will be customizable and passed through the JSON metadata file.
 
         Parameters
         ----------
@@ -325,18 +326,18 @@ class Raster(Data):
         stacking_dimension = np.arange(len(filenames))
         ds = xr.DataArray(values,
                             dims={'stack':stacking_dimension, 'y':ds.x.values, 'x':ds.x.values},
-                            coords={'stack':xr.DataArray(stacking_dimension, dims={'stack':stacking_dimension}), 
-                                    'y':ds.y, 
-                                    'x':ds.x, 
+                            coords={'stack':xr.DataArray(stacking_dimension, dims={'stack':stacking_dimension}),
+                                    'y':ds.y,
+                                    'x':ds.x,
                                     'spatial_ref':ds.spatial_ref},
                             attrs=ds.attrs)
-        
-        # default stack dimension, will be changed in future versions 
-        ds['stack'].attrs = {'standard_name' : 'stack_dim', 
+
+        # default stack dimension, will be changed in future versions
+        ds['stack'].attrs = {'standard_name' : 'stack_dim',
                             'long_name' : 'Dimension along which rasters were stacked',
                             'units' : 'not_defined',
                             'null_value' : 'not_defined'}
-        
+
         # Reproject if input CRS does not match Survey
         if ds.spatial_ref.attrs['grid_mapping_name'] != self.spatial_ref['grid_mapping_name']:
             print('Grid CRS [{}] does not match Survey CRS [{}], reprojecting to Survey CRS'.format(ds.spatial_ref.attrs['grid_mapping_name'], self.spatial_ref['grid_mapping_name']))
@@ -345,13 +346,13 @@ class Raster(Data):
             else:
                 target_crs = self.spatial_ref['crs_wkt']
             print('Reprojecting ...')
-            
+
             # get fill value from file, if present
             if '_FillValue' in ds.attrs:
                 nodata = ds.attrs['_FillValue']
             else:
                 nodata=None
-            
+
             # supersede fill value from file with variable metadata value, if present
             if 'null_value' in var_meta[key].keys():
                 if var_meta[key]['null_value'] != 'not_defined':
@@ -408,7 +409,7 @@ class Raster(Data):
     #             self._reproject_xarray()
     #         else:
     #             print('congrats! CRS matches')
-            
+
     #     else:
     #         print('no grid_mapping_name found in input grid CRS, setting as survey CRS')
     #         # raise NotImplementedError('no grid_mapping_name found in input grid CRS')
@@ -452,10 +453,10 @@ class Raster(Data):
 
         If the xarray object's coordinate reference system does not match that of the survey,
         it is reprojected using rioxarray's reproject function. A WKID or CRS_WKT must be present
-        within the survey's spatial_ref to define the target coordinate system. 
+        within the survey's spatial_ref to define the target coordinate system.
 
-        If bound keys are present, they are are dropped before the reprojection. New bound keys are 
-        then added after reprojection using the new coordinates. 
+        If bound keys are present, they are are dropped before the reprojection. New bound keys are
+        then added after reprojection using the new coordinates.
 
         Returns
         -------
@@ -494,14 +495,14 @@ class Raster(Data):
 
         """
         super().write_netcdf(filename, group)
-    
+
     def write_metadata_template(self):
         """Write JSON metadata template
 
-        Outputs a template JSON metadata file needed for adding Raster data. All required 
+        Outputs a template JSON metadata file needed for adding Raster data. All required
         dictionaries are printed (dataset_attrs, key_mapping, raster_files, variable_metadata).
-        Additional dictionaries can be optionally added to document more information or 
-        ancillary metadata relevant to the specific Raster data. 
+        Additional dictionaries can be optionally added to document more information or
+        ancillary metadata relevant to the specific Raster data.
 
         Raises
         ------
@@ -571,17 +572,17 @@ class Raster(Data):
 
         with open("raster_supplemental_information.json", "w") as f:
             json.dump(out, f, indent=4)
-    
+
     def to_tif(self):
         """ Export GeoTIFF files from xarray
 
-        2D variables are exported directly to GeoTIFF files, one for each variable, following 
+        2D variables are exported directly to GeoTIFF files, one for each variable, following
         the naming convention "{variable}.tif"
 
         3D variables are sliced along the stacking direction and exported to incremented GeoTIFF
-        files following the naming convention "{variable}_{i}.tif". In the current version the 
-        stacking dimension is defaulted to "stack", future versions will allow for more customized 
-        dimension names. 
+        files following the naming convention "{variable}_{i}.tif". In the current version the
+        stacking dimension is defaulted to "stack", future versions will allow for more customized
+        dimension names.
         """
 
         for var in self.xarray.data_vars:
@@ -592,7 +593,7 @@ class Raster(Data):
                 # remove grid_mapping
                 if 'grid_mapping' in ds.attrs.keys():
                     del ds.attrs['grid_mapping']
-                
+
                 # set _FillValue
                 ds.attrs['_FillValue'] = ds.attrs['null_value']
 

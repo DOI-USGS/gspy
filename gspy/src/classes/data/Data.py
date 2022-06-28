@@ -1,11 +1,12 @@
 import os
+import json
+import matplotlib.pyplot as plt
+
+import xarray as xr
 
 from .Key_mapping import key_mapping
 from ...utilities import flatten, unflatten
 from ..survey.Spatial_ref import Spatial_ref
-import matplotlib.pyplot as plt
-import xarray as xr
-import json
 
 class Data(object):
     """Abstract Base Class """
@@ -91,7 +92,7 @@ class Data(object):
 
         self.key_mapping = key_mapping(dic.pop('key_mapping'))
 
-        self.json_metadata = dic 
+        self.json_metadata = dic
 
     @classmethod
     def read_netcdf(cls, filename, group, spatial_ref=None, **kwargs):
@@ -138,7 +139,7 @@ class Data(object):
             Plotting handle
 
         """
-    
+
         ax = kwargs.pop('ax', plt.gca())
 
         return ax, self.xarray.plot.scatter(x=self.key_mapping['x'].strip(), y=self.key_mapping['y'].strip(), hue=variable, **kwargs)
@@ -163,7 +164,7 @@ class Data(object):
                     del self.xarray[var].attrs['grid_mapping']
                 #self.xarray[var].attrs['grid_mapping'] = self.xarray.spatial_ref.attrs['grid_mapping_name']
         self.xarray.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
-    
+
     def write_ncml(self, filename, group, index):
         """Write and NCML file
 
@@ -194,7 +195,7 @@ class Data(object):
 
         f = open(infile, 'a')
         ### Dimensions:
-        for dim in self.xarray.dims: 
+        for dim in self.xarray.dims:
             f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self.xarray.dims[dim]))
         f.write('\n')
 
@@ -209,7 +210,7 @@ class Data(object):
         ### Variables:
         for var in self.xarray.variables:
             tmpvar = self.xarray.variables[var]
-            dtype = str(tmpvar.dtype).title()[:-2]  
+            dtype = str(tmpvar.dtype).title()[:-2]
             if var == 'crs' or dtype == 'object':
                 f.write('%s<variable name="%s" shape="%s" type="String">\n' % (sp2, var, " ".join(tmpvar.dims)))
             else:
@@ -220,7 +221,7 @@ class Data(object):
                     att_val = att_val.replace('"',"'")
                 f.write('%s%s<attribute name="%s" type="String" value="%s"/>\n' % (sp1, sp2, attr, att_val))
             f.write('%s</variable>\n\n' % sp2)
-        
+
         if singleflag:
             f.write('{}</group>\n\n'.format(sp2))
             f.write('{}</group>\n\n'.format(sp1))

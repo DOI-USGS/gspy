@@ -1,5 +1,6 @@
-import pyproj
 import warnings
+
+import pyproj
 import xarray as xr
 
 class Spatial_ref(dict):
@@ -18,7 +19,7 @@ class Spatial_ref(dict):
     crs_wkt : str
 
     proj_string : str
-    
+
 
     Returns
     -------
@@ -84,7 +85,7 @@ class Spatial_ref(dict):
         # for key,item in self.items():
         #     self.attrs['coordinate_information'][key] = item
 
-    
+
     def reconcile_with_xarray(self, xarray, key_mapping):
         """Reconciles a spatial reference with an existing xarray DataArray
 
@@ -125,4 +126,3 @@ class Spatial_ref(dict):
                 da = da.assign_coords(coords)
                 da.attrs['grid_mapping'] = self['grid_mapping_name']
             xarray[var] = da
-    
