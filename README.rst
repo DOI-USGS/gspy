@@ -9,9 +9,11 @@ raw and processed, 1-D inverted models along flight lines, and 2-D/3-D gridded l
 Suggested Citations
 ~~~~~~~~~~~~~~~~~~~
 If you use this software to generate gspy conformant data we suggest citing the software itself.
+
 Foks, N.L., James, S. R., and Minsely, B. J. 2022. GSPy: Geophysical Data Standard in Python. U.S. Geological Survey software release. doi:10.5066/P9XNQVGQ
 
 The manuscript accompanying this software release defining the standard itself you can also cite the following.
+
 James, S. R., Foks, N.L., and Minsely, B. J. 2022. GSPy: A new toolbox and data standard for Geophysical Datasets. Frontiers in Earth Science. 10. doi:10.3389/feart.2022.907614
 
 Documentation
