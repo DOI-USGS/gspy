@@ -281,9 +281,14 @@ class Tabular_aseg(Tabular):
             self.xarray['x'].attrs['units'] = 'meters'
 
         # finish with regular data variables
-        #for var, var_meta in self.json_metadata['variable_metadata'].items():
+        additional_metadata = self.json_metadata['variable_metadata']
+        
         for var in self.cols.keys():
             var_meta = self.get_attrs(var)
+            add_meta = additional_metadata.get(var, None)
+            if add_meta is not None:
+                for key in add_meta.keys():
+                    var_meta[key] = add_meta[key]
 
             # if not coordinate variables
             if not var in coord_keys:
@@ -291,11 +296,17 @@ class Tabular_aseg(Tabular):
                 # if variable matches aseg column exactly
                 if var in self.column_names:
                     array = deepcopy(df[var].values)
+             
+                    if 'dtype' in var_meta:
+                        array1 = array.astype(var_meta['dtype'])
+                    else:
+                        array1 = df[var].values
+               
                     if var_meta['null_value'] != 'not_defined':
                         array = array[array != var_meta['null_value']]
                     var_meta['valid_range'] = [np.nanmin(array), np.nanmax(array)]
 
-                    self.xarray[var.strip()] = xr.DataArray(df[var].values,
+                    self.xarray[var.strip()] = xr.DataArray(array1,
                                     dims=["index"],
                                     attrs=var_meta)
                 else:
@@ -307,6 +318,9 @@ class Tabular_aseg(Tabular):
                     # if variable has multiple columns with [i] increment, to be combined
 
                     vals = df[["{}[{}]".format(var, i) for i in range(self.cols[var])]].values
+
+                    if 'dtype' in var_meta:
+                        vals = vals.astype(var_meta['dtype'])
 
                     assert vals is not None, ValueError('{} not in data file, double check, raw_data_columns field required in variable_metadata if needing to combine unique columns to new variable without an [i] increment'.format(var))
 
@@ -388,8 +402,14 @@ class Tabular_aseg(Tabular):
                 if vdim != 'unnamed':
                     vdim_attrs = {vdim: self.xarray[vdim].attrs for vdim in vdims}
 
-                self.xarray[var.strip()] = xr.DataArray(xr.concat([self.xarray[val] for val in var_meta['raw_data_columns']],
-                                                dim=vdim),
+                if 'dtype' in var_meta:
+                    array = xr.concat([self.xarray[val].astype(var_meta['dtype']) for val in var_meta['raw_data_columns']],
+                                                                  dim=vdim)
+                else:
+                    array = xr.concat([self.xarray[val] for val in var_meta['raw_data_columns']],
+                                                                  dim=vdim)
+
+                self.xarray[var.strip()] = xr.DataArray(array,
                                                 dims=vdims)
 
                 # drop

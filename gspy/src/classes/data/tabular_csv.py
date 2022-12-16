@@ -289,11 +289,16 @@ class Tabular_csv(Tabular):
                 if var in self.column_names:
                     array = deepcopy(self.file[var].values)
 
+                    if 'dtype' in var_meta:
+                        array1 = array.astype(var_meta['dtype'])
+                    else:
+                        array1 = self.file[var].values
+
                     if var_meta['null_value'] != 'not_defined':
                         array = array[array != var_meta['null_value']]
                     var_meta['valid_range'] = [np.nanmin(array), np.nanmax(array)]
 
-                    self.xarray[var] = xr.DataArray(self.file[var].values,
+                    self.xarray[var] = xr.DataArray(array1,
                                     dims=["index"],
                                     attrs=var_meta)
 
