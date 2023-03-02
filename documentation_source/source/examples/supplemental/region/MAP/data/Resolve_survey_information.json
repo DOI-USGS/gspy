@@ -24,7 +24,7 @@
         "dataset_created" : "20180517"
     },
 
-   "coordinate_information" : {
+   "spatial_ref" : {
         "datum" : "NAD88",
         "projection" : "WGS84 GRS80 UTM Zone 15N",
         "utm_zone" : "15",

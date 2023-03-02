@@ -107,7 +107,8 @@
                 "standard_name": "line",
                 "long_name": "Line Number",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "dtype": "int32"
             },
             "date": {
                 "standard_name": "not_defined",

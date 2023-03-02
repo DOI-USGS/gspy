@@ -27,7 +27,7 @@ class Survey(object):
     * history
     * references
 
-    A “coordinate_information” variable is also required within Survey and should contain all relevant information about the
+    A “spatial_ref” variable is also required within Survey and should contain all relevant information about the
     coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.
 
     Survey(metadata_file)
@@ -162,7 +162,7 @@ class Survey(object):
 
         self.json_metadata = dic
 
-        self.spatial_ref = self.json_metadata['coordinate_information']
+        self.spatial_ref = self.json_metadata['spatial_ref']
 
     def _add_general_metadata_to_xarray(self, kwargs):
         """ Attaches "dataset_attrs" values as general attributes in xarray DataSets
@@ -189,16 +189,19 @@ class Survey(object):
         self._add_general_metadata_to_xarray(ds_attrs)
 
         for key in dic:
-            tmpdict2 = {k: v for k, v in dic[key].items() if v}
-            tmpdict2 = flatten(tmpdict2, '', {})
+            if key != 'spatial_ref':
+                tmpdict2 = {k: v for k, v in dic[key].items() if v}
+                tmpdict2 = flatten(tmpdict2, '', {})
 
-            for k,v in tmpdict2.items():
-                if isinstance(v,list):
+                for k,v in tmpdict2.items():
+                    if isinstance(v,list):
 
-                    if isinstance(v[0],list):
-                        tmpdict2[k] = str(v)
-            #tmpdict[key] = xr.DataArray(attrs=tmpdict2)
-            self.xarray[key] = xr.DataArray(attrs=tmpdict2)
+                        if isinstance(v[0],list):
+                            tmpdict2[k] = str(v)
+                #tmpdict[key] = xr.DataArray(attrs=tmpdict2)
+                self.xarray[key] = xr.DataArray(attrs=tmpdict2)
+
+        self.xarray['spatial_ref'] = xr.DataArray(attrs=self.spatial_ref)
 
         #assert not ds_attrs is None, Exception("Supplemental information must contain 'dataset_attrs' entry")
 
@@ -241,7 +244,7 @@ class Survey(object):
             "dataset_created" : "yyyymmdd"
             }
 
-        out["coordinate_information"] = {
+        out["spatial_ref"] = {
             "datum" : "",
             "projection" : "",
             "utm_zone" : "",
@@ -298,7 +301,7 @@ class Survey(object):
         self.xarray = xr.load_dataset(filename, group='survey')
         si = self.xarray.to_dict()
         self.json_metadata = {key:value['attrs'] for key, value in si['data_vars'].items()}
-        self.spatial_ref = self.json_metadata['coordinate_information']
+        self.spatial_ref = self.json_metadata['spatial_ref']
 
         with h5py.File(filename, 'r') as f:
             groups = list(f['survey'].keys())

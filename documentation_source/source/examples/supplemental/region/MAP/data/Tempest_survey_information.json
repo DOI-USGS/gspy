@@ -11,7 +11,7 @@
         "created_by": "gspy==0.0.1"
     },
     
-    "coordinate_information" : {
+    "spatial_ref" : {
         "datum" : "WGS84",
         "projection" : "USA Contiguous Albers Equal Area Conic",
         "utm_zone" : "43.5",

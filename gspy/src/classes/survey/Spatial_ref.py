@@ -51,39 +51,43 @@ class Spatial_ref(dict):
             print('WARNING! No coordinate information imported, DEFAULTING to EPSG:4326')
             crs = pyproj.CRS.from_epsg('4326')
 
+        cf = crs.to_cf()
+        for key, value in cf.items():
+            self[key] = value
+
         self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
-        self['crs_wkt'] = crs.to_wkt()
-        with warnings.catch_warnings():
-            warnings.simplefilter('ignore')
-            self['proj_string'] = crs.to_proj4()
-        self['geographic_crs_name'] = crs.geodetic_crs.name
+        # self['crs_wkt'] = crs.to_wkt()
+        # with warnings.catch_warnings():
+        #     warnings.simplefilter('ignore')
+        #     self['proj_string'] = crs.to_proj4()
+        # self['geographic_crs_name'] = crs.geodetic_crs.name
 
-        gname = crs.name.replace(' ','_').replace('-','_').replace('/','_').replace('___','_').replace('__','_').lower()
-        if 'conic' in gname.split('_'):
-            gname = gname.replace('conic','conical')
-        self['grid_mapping_name'] = gname
+        # gname = crs.name.replace(' ','_').replace('-','_').replace('/','_').replace('___','_').replace('__','_').lower()
+        # if 'conic' in gname.split('_'):
+        #     gname = gname.replace('conic','conical')
+        # self['grid_mapping_name'] = gname
 
-        if crs.is_projected:
-            self['_CoordinateTransformType'] = 'Projection'
-            self['_CoordinateAxisTypes'] = 'GeoX GeoY'
+        # if crs.is_projected:
+        #     self['_CoordinateTransformType'] = 'Projection'
+        #     self['_CoordinateAxisTypes'] = 'GeoX GeoY'
 
-        if not crs.ellipsoid is None:
-            self['reference_ellipsoid_name'] = crs.ellipsoid.name
-            self['inverse_flattening'] = crs.ellipsoid.inverse_flattening
-            self['semi_major_axis'] = crs.ellipsoid.semi_major_metre
-            self['semi_minor_axis'] = crs.ellipsoid.semi_minor_metre
+        # if not crs.ellipsoid is None:
+        #     self['reference_ellipsoid_name'] = crs.ellipsoid.name
+        #     self['inverse_flattening'] = crs.ellipsoid.inverse_flattening
+        #     self['semi_major_axis'] = crs.ellipsoid.semi_major_metre
+        #     self['semi_minor_axis'] = crs.ellipsoid.semi_minor_metre
 
-        if not crs.prime_meridian is None:
-            self['prime_meridian_name'] = crs.prime_meridian.name
-            self['longitude_of_prime_meridian'] = crs.prime_meridian.longitude
+        # if not crs.prime_meridian is None:
+        #     self['prime_meridian_name'] = crs.prime_meridian.name
+        #     self['longitude_of_prime_meridian'] = crs.prime_meridian.longitude
 
-        if not crs.coordinate_operation is None:
-            for param in crs.coordinate_operation.params:
-                self[param.name.replace(' ','_').lower()] = param.value
+        # if not crs.coordinate_operation is None:
+        #     for param in crs.coordinate_operation.params:
+        #         self[param.name.replace(' ','_').lower()] = param.value
 
-        # self._spatial_ref = self
-        # for key,item in self.items():
-        #     self.attrs['coordinate_information'][key] = item
+        #self._spatial_ref = self
+        #for key,item in self.items():
+        #    self.attrs['coordinate_information'][key] = item
 
 
     def reconcile_with_xarray(self, xarray, key_mapping):
