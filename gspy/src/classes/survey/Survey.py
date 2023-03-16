@@ -202,6 +202,7 @@ class Survey(object):
                 self.xarray[key] = xr.DataArray(attrs=tmpdict2)
 
         self.xarray['spatial_ref'] = xr.DataArray(attrs=self.spatial_ref)
+        self.xarray = self.xarray.set_coords('spatial_ref')
 
         #assert not ds_attrs is None, Exception("Supplemental information must contain 'dataset_attrs' entry")
 
