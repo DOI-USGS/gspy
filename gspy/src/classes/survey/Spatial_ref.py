@@ -55,7 +55,10 @@ class Spatial_ref(dict):
         for key, value in cf.items():
             self[key] = value
 
-        self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
+        #self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
+        if crs.to_authority():
+            self['wkid'] = crs.to_authority()[1]
+            self['authority'] = crs.to_authority()[0]
         # self['crs_wkt'] = crs.to_wkt()
         # with warnings.catch_warnings():
         #     warnings.simplefilter('ignore')
@@ -87,7 +90,7 @@ class Spatial_ref(dict):
 
         #self._spatial_ref = self
         #for key,item in self.items():
-        #    self.attrs['coordinate_information'][key] = item
+        #    self.attrs['spatial_ref'][key] = item
 
 
     def reconcile_with_xarray(self, xarray, key_mapping):

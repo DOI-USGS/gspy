@@ -267,11 +267,14 @@ class Tabular_csv(Tabular):
                             coords=coords,
                             attrs=self.json_metadata['variable_metadata'][coord_keys[1]])
 
-        if '_CoordinateTransformType' in self.spatial_ref.keys():
+        # if '_CoordinateTransformType' in self.spatial_ref.keys():
+        #     self.xarray['x'].attrs['standard_name'] = 'projection_x_coordinate'
+        #     self.xarray['x'].attrs['_CoordinateAxisType'] = 'GeoX'
+        #     self.xarray['y'].attrs['standard_name'] = 'projection_y_coordinate'
+        #     self.xarray['y'].attrs['_CoordinateAxisType'] = 'GeoY'
+        if self.xarray['spatial_ref'].attrs['grid_mapping_name'] != 'latitude_longitude':
             self.xarray['x'].attrs['standard_name'] = 'projection_x_coordinate'
-            self.xarray['x'].attrs['_CoordinateAxisType'] = 'GeoX'
             self.xarray['y'].attrs['standard_name'] = 'projection_y_coordinate'
-            self.xarray['y'].attrs['_CoordinateAxisType'] = 'GeoY'
 
         # if units are abbreviated need to spell it out otherwise isn't recognized by Arc
         if self.xarray['x'].attrs['units'] == 'm':
