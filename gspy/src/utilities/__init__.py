@@ -1,4 +1,6 @@
 def flatten(current, key, result):
+    """Unpacks a dictionary of dictionaries into a single dict with different keys
+    """
     if isinstance(current, dict):
         for k in current:
             new_key = "{0}.{1}".format(key.replace(' ','_'), k.replace(' ','_')) if len(key) > 0 else k

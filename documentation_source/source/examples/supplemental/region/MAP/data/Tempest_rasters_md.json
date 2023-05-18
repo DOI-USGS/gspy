@@ -1,0 +1,65 @@
+{
+    "dataset_attrs" : {
+        "comment": "<additional details or ancillary information>",
+        "content": "interpolated resistivity models"
+    },
+
+    "coordinates": {
+        "comment" : "Coordinates physically map variables to space xyzt",
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers",
+        "z" : "depth"
+    },
+
+    "dimensions" : {
+        "comment":"Define the actual values along each axis or dimension of the variables. If these are defined inside the data file, its a string. Otherwise, an explicit definition is needed here.",
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers",
+        "depth": {
+            "comment": "depth is defined by US inside our json file in order to stack tifs. This is not contained in any of the individual tifs.",
+            "standard_name": "depth",
+            "long_name": "Depth below earth's surface DTM",
+            "units": "m",
+            "null_value": "not_defined",
+            "length" : 5,
+            "increment" : 5.0,
+            "origin" : 0.0
+        }
+    },
+
+    "variable_metadata": {
+        "Easting_Albers": {
+            "standard_name": "easting_albers",
+            "long_name": "Easting",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "Northing_Albers": {
+            "standard_name": "northing_albers",
+            "long_name": "Northing",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "resistivity": {
+            "dimensions": ["x", "y", "z"],
+            "standard_name": "log10_resistivity",
+            "long_name": "Electrical Resistivity on Logarithmic Scale",
+            "units": "log10_ohm_m",
+            "null_value": -9999.99,
+            "files": ["../supplemental/region/MAP/data/example_log10res_0_5m.tif",
+                      "../supplemental/region/MAP/data/example_log10res_5_10m.tif",
+                      "../supplemental/region/MAP/data/example_log10res_10_15m.tif",
+                      "../supplemental/region/MAP/data/example_log10res_15_20m.tif",
+                      "../supplemental/region/MAP/data/example_log10res_20_25m.tif"],
+            "stack_axis" : "z"
+        },
+        "single_file": {
+            "dimensions": ["x", "y"],
+            "standard_name": "log10_resistivity",
+            "long_name": "Electrical Resistivity on Logarithmic Scale",
+            "units": "log10_ohm_m",
+            "null_value": -9999.99,
+            "files": ["../supplemental/region/MAP/data/example_log10res_0_5m.tif"]
+        }
+    }
+}

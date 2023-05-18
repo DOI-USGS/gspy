@@ -1,14 +1,14 @@
 import os
 import json
 from copy import deepcopy
-
+from pprint import pprint
 import xarray as xr
 from netCDF4 import Dataset
 import h5py
 
+from ..data.xarray_gs.Dataset_gs import Dataset_gs
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
-from .Spatial_ref import Spatial_ref
 from ...utilities import flatten
 
 class Survey(object):
@@ -52,8 +52,6 @@ class Survey(object):
 
         self._tabular = []
         self._raster = []
-        self._attrs = {}
-        self._spatial_ref = {}
 
         if metadata_file is not None:
             # read survey metadata file
@@ -65,15 +63,6 @@ class Survey(object):
         #elif netcdf_file is not None:
         #    # read netcdf file (assumes GS format)
         #    self.read_netcdf(netcdf_file)
-
-    @property
-    def attrs(self):
-        return self._attrs
-
-    @attrs.setter
-    def attrs(self, value):
-        assert isinstance(value, dict), TypeError('attrs must have type dict')
-        self._attrs = value
 
     @property
     def xarray(self):
@@ -98,14 +87,11 @@ class Survey(object):
 
     @property
     def spatial_ref(self):
-        return self._spatial_ref
+        return self.xarray.spatial_ref
 
     @spatial_ref.setter
-    def spatial_ref(self, value):
-        if isinstance(value, Spatial_ref):
-            self._spatial_ref = value
-        else:
-            self._spatial_ref = Spatial_ref(**value)
+    def spatial_ref(self, kwargs):
+        self.xarray.spatial_ref = kwargs
 
     @property
     def json_metadata(self):
@@ -124,7 +110,7 @@ class Survey(object):
         gspy.Raster : For instantiation/reading requirements
 
         """
-        self._raster.append(Raster(*args, spatial_ref=self.spatial_ref, **kwargs))
+        self._raster.append(Raster.read(*args, spatial_ref=self.spatial_ref, **kwargs))
 
     def add_tabular(self, *args, **kwargs):
         """Add Tabular data to the survey
@@ -158,21 +144,8 @@ class Survey(object):
         with open(filename) as f:
             s = f.read()
 
-        dic = json.loads(s)
+        self.json_metadata = json.loads(s)
 
-        self.json_metadata = dic
-
-        self.spatial_ref = self.json_metadata['spatial_ref']
-
-    def _add_general_metadata_to_xarray(self, kwargs):
-        """ Attaches "dataset_attrs" values as general attributes in xarray DataSets
-
-        Parameters
-        ----------
-        kwargs : dict
-            metadata dictionary containing "dataset_attrs"
-        """
-        self.xarray.attrs.update(kwargs['dataset_attrs'])
 
     def _make_survey_xarray(self):
         """ Create Survey xarray
@@ -180,16 +153,13 @@ class Survey(object):
         Generate an xarray DataSet, attach Survey metadata as variables,
         and assign global attributes for the survey
         """
-        self.xarray = xr.Dataset()
+        self.xarray = Dataset_gs()
 
-        dic = deepcopy(self.json_metadata)
-        ds_attrs = {}
-        ds_attrs["dataset_attrs"] = dic.pop("dataset_attrs", None)
-
-        self._add_general_metadata_to_xarray(ds_attrs)
+        dic = self.json_metadata
+        self.xarray.update_attrs(**dic["dataset_attrs"])
 
         for key in dic:
-            if key != 'spatial_ref':
+            if key not in ('spatial_ref', 'dataset_attrs'):
                 tmpdict2 = {k: v for k, v in dic[key].items() if v}
                 tmpdict2 = flatten(tmpdict2, '', {})
 
@@ -198,15 +168,9 @@ class Survey(object):
 
                         if isinstance(v[0],list):
                             tmpdict2[k] = str(v)
-                #tmpdict[key] = xr.DataArray(attrs=tmpdict2)
                 self.xarray[key] = xr.DataArray(attrs=tmpdict2)
 
-        self.xarray['spatial_ref'] = xr.DataArray(attrs=self.spatial_ref)
-        self.xarray = self.xarray.set_coords('spatial_ref')
-
-        #assert not ds_attrs is None, Exception("Supplemental information must contain 'dataset_attrs' entry")
-
-        #ds = xr.Dataset(tmpdict, attrs=ds_attrs)
+        self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
 
     def write_metadata_template(self):
         """Creates a metadata template for a Survey
@@ -299,10 +263,7 @@ class Survey(object):
 
         self = cls()
 
-        self.xarray = xr.load_dataset(filename, group='survey')
-        si = self.xarray.to_dict()
-        self.json_metadata = {key:value['attrs'] for key, value in si['data_vars'].items()}
-        self.spatial_ref = self.json_metadata['spatial_ref']
+        self.xarray = Dataset_gs.load_dataset(filename, group='survey')
 
         with h5py.File(filename, 'r') as f:
             groups = list(f['survey'].keys())

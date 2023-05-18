@@ -9,6 +9,7 @@ from aseg_gdf2 import read as read_aseg_gdf2
 from .Tabular import Tabular
 
 class Tabular_aseg(Tabular):
+    __slots__ = ()
     """Class to handle ASEG files.
 
     ``Tabular('aseg', data_filename, metadata_file, spatial_ref, **kwargs)``
@@ -285,7 +286,7 @@ class Tabular_aseg(Tabular):
 
         # finish with regular data variables
         additional_metadata = self.json_metadata['variable_metadata']
-        
+
         for var in self.cols.keys():
             var_meta = self.get_attrs(var)
             add_meta = additional_metadata.get(var, None)
@@ -299,12 +300,12 @@ class Tabular_aseg(Tabular):
                 # if variable matches aseg column exactly
                 if var in self.column_names:
                     array = deepcopy(df[var].values)
-             
+
                     if 'dtype' in var_meta:
                         array1 = array.astype(var_meta['dtype'])
                     else:
                         array1 = df[var].values
-               
+
                     if var_meta['null_value'] != 'not_defined':
                         array = array[array != var_meta['null_value']]
                     var_meta['valid_range'] = [np.nanmin(array), np.nanmax(array)]

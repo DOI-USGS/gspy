@@ -14,6 +14,8 @@ from gspy import Survey
 # Convert the CSV data folder to netcdf
 # ++++++++++++++++++++++++++++++++++++++
 
+# raise Exception("Get the resolve model 0 working. json files need changing etc.")
+
 # Path to example files
 data_path = '..//supplemental//'
 
@@ -30,7 +32,7 @@ d_supp = data_path + 'region//MAP//data//Resolve_data_information.json'
 survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
 
 # Define input CSV-format model file and associated variable mapping file
-m_data = data_path + 'region//MAP//model//Resolve_model_0.csv'
+m_data = data_path + 'region//MAP//model//Resolve_model_0_reformatted.csv'
 m_supp = data_path + 'region//MAP//model//Resolve_model_information.json'
 
 # Read model data and format as Linemodel class object
@@ -53,4 +55,4 @@ plt.ylim([1175000, 1210000])
 
 plt.figure()
 new_survey.tabular[1].scatter('DEM')
-plt.show()
+# plt.show()

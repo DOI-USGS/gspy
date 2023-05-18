@@ -1,52 +1,46 @@
 import os
+from pathlib import Path
 import json
 import matplotlib.pyplot as plt
 
+from pprint import pprint
+
 import xarray as xr
 
+from .xarray_gs.Dataset_gs import Dataset_gs
 from .Key_mapping import key_mapping
 from ...utilities import flatten, unflatten
 from ..survey.Spatial_ref import Spatial_ref
 
-class Data(object):
+class Data(Dataset_gs):
     """Abstract Base Class """
+    __slots__ = ()
 
-    def __init__(self):
-        raise NotImplementedError("Cannot instantiate ABC Data class")
+    # def __init__(self):
+    #     raise NotImplementedError("Cannot instantiate ABC Data class")
 
-    @property
-    def attrs(self):
-        return self.xarray.attrs
+    # @property
+    # def attrs(self):
+    #     return self.xarray.attrs
 
-    @property
-    def key_mapping(self):
-        return self._key_mapping
+    # @property
+    # def key_mapping(self):
+    #     return self._key_mapping
 
-    @key_mapping.setter
-    def key_mapping(self, value):
-        if value is None:
+    # @key_mapping.setter
+    # def key_mapping(self, value):
+    #     if value is None:
 
-            print("\nGenerating an empty mapping file for {}.\n".format(self.data_filename))
+    #         print("\nGenerating an empty mapping file for {}.\n".format(self.data_filename))
 
-            tmp = self.required_mapping
-            with open('{}_key_mapping.txt'.format(self.data_filename), 'w') as f:
-                json.dump(tmp, f, indent=4)
+    #         tmp = self.required_mapping
+    #         with open('{}_key_mapping.txt'.format(self.data_filename), 'w') as f:
+    #             json.dump(tmp, f, indent=4)
 
-            # raise Exception("Must specify a mapping file.")
+    #         # raise Exception("Must specify a mapping file.")
 
-        else:
-            self._key_mapping = key_mapping(value)
-
-    @property
-    def spatial_ref(self):
-        return self._spatial_ref
-
-    @spatial_ref.setter
-    def spatial_ref(self, value):
-        if isinstance(value, Spatial_ref):
-            self._spatial_ref = value
-        elif isinstance(value, dict):
-            self._spatial_ref = Spatial_ref(**value)
+    #     else:
+    #         self._key_mapping = key_mapping(value)
 
     @property
     def json_metadata(self):
@@ -57,42 +51,59 @@ class Data(object):
         assert isinstance(value, dict), TypeError('json_metadata must have type dict')
         self._json_metadata = value
 
-    @property
-    def xarray(self):
-        return self._xarray
-
-    def _add_general_metadata_to_xarray(self, kwargs):
-        kwargs = flatten(kwargs, '', {})
-        self.xarray.attrs.update(kwargs)
+    # @property
+    # def xarray(self):
+    #     return self._xarray
 
     def pcolor(self, variable, stack=None, **kwargs):
-        if not stack is None:
-            self.xarray[variable].sel(stack=stack).plot(**kwargs)
-        else:
-            self.xarray[variable].plot(**kwargs)
+
+        # print(self.xarray)
+
+        # if not stack is None:
+        #     self.xarray[variable].sel(stack=stack).plot(**kwargs)
+        # else:
+        self[variable].plot(**kwargs)
 
     def read_metadata(self, filename):
-        """Read a json metadata file.
+        """Read metadata file
 
-        Parses the dictionaries from the metadata and adds them to the appropriate classes.
+        Loads the metadata file and adds key_mapping values to property. If required dictionaries
+        'raster_files' and/or 'variable_metadata' are missing, then a metadata template file is written
+        and an error is triggered.
 
         Parameters
         ----------
         filename : str
-            Json file.
+            Json file
+
+        Returns
+        -------
+        dic : dict
+            Dictionary of JSON metadata
 
         """
+        if filename == 'None':
+            return
+
+        if filename is None:
+            self.write_metadata_template()
+            raise Exception("Please re-run and specify supplemental information when instantiating Raster")
+
         # reading the data from the file
         with open(filename) as f:
             s = f.read()
 
         dic = json.loads(s)
 
-        assert 'key_mapping' in dic, ValueError('Need to define key_mapping for required keys {} in supplemental'.format(key_mapping.required_keys))
+        #assert 'key_mapping' in dic, ValueError('Need to define key_mapping for required keys {} in supplemental'.format(key_mapping.required_keys))
+        # if "key_mapping" in dic.keys():
+        #     self.key_mapping = key_mapping(dic.get('key_mapping'))
 
-        self.key_mapping = key_mapping(dic.pop('key_mapping'))
+        # if not 'raster_files' in dic or not 'variable_metadata' in dic:
+        #     self.write_metadata_template()
+        #     raise Exception("Please re-run and specify supplemental information when instantiating Raster")
 
-        self.json_metadata = dic
+        return dic, Path(filename).parent.absolute()
 
     @classmethod
     def read_netcdf(cls, filename, group, spatial_ref=None, **kwargs):
@@ -110,18 +121,7 @@ class Data(object):
         out : gspy.Data
 
         """
-        self = cls(None, None)
-
-        self.type = 'netcdf'
-        self.filename = filename
-
-        self.xarray = xr.load_dataset(filename, group=group.lower())
-
-        self.key_mapping = unflatten(self.xarray.attrs)['key_mapping']
-
-        self.spatial_ref = spatial_ref
-
-        return self
+        return super(Data, cls).load_dataset(filename, group=group.lower())
 
     def scatter(self, variable, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
@@ -139,10 +139,8 @@ class Data(object):
             Plotting handle
 
         """
-
         ax = kwargs.pop('ax', plt.gca())
-
-        return ax, self.xarray.plot.scatter(x=self.key_mapping['x'].strip(), y=self.key_mapping['y'].strip(), hue=variable, **kwargs)
+        return ax, plt.scatter(self['x'].values, self['y'].values, c=self[variable].values, **kwargs)
 
     def write_netcdf(self, filename, group):
         """Write to netcdf file
@@ -157,13 +155,13 @@ class Data(object):
         """
         mode = 'a' if os.path.isfile(filename) else 'w'
         if 'raster' in group:
-            for var in self.xarray.data_vars:
-                if self.xarray[var].attrs['null_value'] != 'not_defined':
-                    self.xarray[var].attrs['_FillValue'] = self.xarray[var].attrs['null_value']
-                if 'grid_mapping' in self.xarray[var].attrs:
-                    del self.xarray[var].attrs['grid_mapping']
+            for var in self.data_vars:
+                if self[var].attrs['null_value'] != 'not_defined':
+                    self[var].attrs['_FillValue'] = self[var].attrs['null_value']
+                if 'grid_mapping' in self[var].attrs:
+                    del self[var].attrs['grid_mapping']
                 #self.xarray[var].attrs['grid_mapping'] = self.xarray.spatial_ref.attrs['grid_mapping_name']
-        self.xarray.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
+        self.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
 
     def write_ncml(self, filename, group, index):
         """Write and NCML file

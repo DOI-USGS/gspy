@@ -1,6 +1,7 @@
 import os
 import json
 import matplotlib.pyplot as plt
+from pprint import pprint
 
 import xarray as xr
 import numpy as np
@@ -34,14 +35,16 @@ class Tabular(Data):
 
     """
 
-    def __init__(self, type, data_filename, metadata_file=None, spatial_ref=None, **kwargs):
-        self._type = None
-        self._key_mapping = None
-        if type is None:
-            return
+    __slots__ = ()
 
-        if data_filename is not None:
-            self.read(type, data_filename, metadata_file=metadata_file, spatial_ref=spatial_ref, **kwargs)
+    # def __init__(self, type, data_filename, metadata_file=None, spatial_ref=None, **kwargs):
+    #     # self._type = None
+    #     # self._key_mapping = None
+    #     if type is None:
+    #         return
+
+    #     if data_filename is not None:
+    #         self.read(type, data_filename, metadata_file=metadata_file, spatial_ref=spatial_ref, **kwargs)
 
     @property
     def _allowed_file_types(self):
@@ -79,14 +82,14 @@ class Tabular(Data):
         assert value in self._allowed_file_types, ValueError('type must be in {}'.format(self._allowed_file_types))
         self._type = value
 
-    @property
-    def variables(self):
-        return list(self.xarray.data_vars.keys())
+    # @property
+    # def variables(self):
+    #     return list(self.data_vars.keys())
 
-    @Data.xarray.setter
-    def xarray(self, value):
-        assert isinstance(value, xr.Dataset), TypeError("xarray must have type xarray.Dataset")
-        self._xarray = value
+    # @Data.xarray.setter
+    # def xarray(self, value):
+    #     assert isinstance(value, xr.Dataset), TypeError("xarray must have type xarray.Dataset")
+    #     self._xarray = value
 
         # Combine multi-columns into single 2D xarray
         #self.__reconcile_xarray()
@@ -98,7 +101,7 @@ class Tabular(Data):
     # Methods
     #def _add_general_metadata_to_xarray(self, kwargs):
     #    kwargs = flatten(kwargs, '', {})
-    #    self.xarray.attrs.update(kwargs)
+    #    self.attrs.update(kwargs)
 
     def assign_variable_attrs(self, variable):
         """Assign attributes for given variable name
@@ -117,7 +120,7 @@ class Tabular(Data):
 
         if not dic is None:
             for key in dic.keys():
-                self.xarray[variable.strip()].attrs[key] = dic[key]
+                self[variable.strip()].attrs[key] = dic[key]
 
     @classmethod
     def read(cls, type, data_filename, metadata_file, spatial_ref=None, **kwargs):
@@ -167,7 +170,7 @@ class Tabular(Data):
         """
         tmp_dic = {'variable_metadata':{}}
 
-        for var in self.xarray.variables:
+        for var in self.variables:
             tmp_dic['variable_metadata'][var] = {"standard_name": "not_defined", "long_name": "not_defined", "units": "not_defined", "null_value": "not_defined"}
 
         out_filename = "variable_metadata_template__{}.json".format(filename.split(os.sep)[-1].split('.')[0])
@@ -194,27 +197,27 @@ class Tabular(Data):
 
     #         if value > 1:
 
-    #             # if not 'channel' in self.xarray:
-    #             #     self.xarray =
+    #             # if not 'channel' in self:
+    #             #     self =
     #             channel = 'channel_{}'.format(value)
 
     #             # create new
     #             #print(key, value)
-    #             check = [self.xarray.get("{}[{}]".format(key, i)) for i in range(value)]
+    #             check = [self.get("{}[{}]".format(key, i)) for i in range(value)]
     #             #print(check)
-    #             self.xarray[key] = xr.DataArray(xr.concat(check, dim=channel),
+    #             self[key] = xr.DataArray(xr.concat(check, dim=channel),
     #                                             dims = [channel, 'index'])
     #                                             #coords = {channel:np.arange(value),
-    #                                             #		'index':self.xarray.index})
-    #                                             # attrs = self.xarray[key+'[0]'].attrs)
+    #                                             #		'index':self.index})
+    #                                             # attrs = self[key+'[0]'].attrs)
 
     #             # Delete
-    #             self._xarray = self.xarray.drop_vars([key+'[%i]' % i for i in range(value)])
+    #             self._xarray = self.drop_vars([key+'[%i]' % i for i in range(value)])
 
     #     #strip out whitespace in variable names
-    #     oldnames=[str(var) for var in self.xarray.variables]
+    #     oldnames=[str(var) for var in self.variables]
     #     newnames=[name.strip().replace(' ', '_') for name in oldnames]
-    #     self._xarray = self.xarray.rename({oldnames[i]: newnames[i] for i in range(len(newnames))})
+    #     self._xarray = self.rename({oldnames[i]: newnames[i] for i in range(len(newnames))})
 
     def update_dimensions(self, variable_metadata):
         """Update the dimensions in the xarray object.
@@ -250,16 +253,16 @@ class Tabular(Data):
                                         'null_value' : variable_metadata[dim]["null_value"],
                                         'bounds' : bndkey}
 
-                    if not cntkey in self.xarray.variables:
+                    if not cntkey in self.variables:
 
                         bounds = np.array((variable_metadata[dim]["bounds"][:-1], variable_metadata[dim]["bounds"][1:])).transpose()
 
-                        self.xarray[bndkey] = xr.DataArray(bounds,
+                        self[bndkey] = xr.DataArray(bounds,
                                 dims=[cntkey, 'nv'],
                                 #coords={cntkey: dimensions[dim]["centers"], 'nv': np.array([0,1])},
                                 attrs=bnds_attrs)
 
-                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
+                        self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
                                 dims=[cntkey],
                                 #coords={cntkey: dimensions[dim]["centers"]},
                                 attrs=cntr_attrs)
@@ -271,27 +274,27 @@ class Tabular(Data):
                                         'units' : variable_metadata[dim]["units"],
                                         'null_value' : variable_metadata[dim]["null_value"]}
 
-                    if not cntkey in self.xarray.variables:
-                        self.xarray[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
+                    if not cntkey in self.variables:
+                        self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
                                 dims=[cntkey],
                                 attrs=cntr_attrs)
 
-                self.xarray[var] = self.xarray[var].swap_dims({
-                    [dm for dm in self.xarray[var].dims if 'channel' in dm][0]: cntkey})
+                self[var] = self[var].swap_dims({
+                    [dm for dm in self[var].dims if 'channel' in dm][0]: cntkey})
 
                 # replace attrs which get erased when swap dims, needs a better fix!!!!!
-                self.xarray[cntkey].attrs.update(cntr_attrs)
+                self[cntkey].attrs.update(cntr_attrs)
                 if "bounds" in variable_metadata[dim].keys():
-                    self.xarray[bndkey].attrs.update(bnds_attrs)
+                    self[bndkey].attrs.update(bnds_attrs)
 
-        if 'nv' in self.xarray.dims:
-            self.xarray['nv'].attrs = {'standard_name': 'number_of_vertices',
+        if 'nv' in self.dims:
+            self['nv'].attrs = {'standard_name': 'number_of_vertices',
               'long_name' : 'Number of vertices for bounding variables',
               'units' : 'not_defined',
               'null_value' : 'not_defined'}
 
-        if 'index' in self.xarray.dims:
-            self.xarray['index'].attrs = {'standard_name': 'index',
+        if 'index' in self.dims:
+            self['index'].attrs = {'standard_name': 'index',
               'long_name' : 'Index of individual data points',
               'units' : 'not_defined',
               'null_value' : 'not_defined'}
@@ -301,8 +304,8 @@ class Tabular(Data):
     # def set_spatial_ref(self):
     #     s = [self.key_mapping['easting'], self.key_mapping['northing']]
 
-    #     x = self.xarray[self.key_mapping['easting']]
-    #     y = self.xarray[self.key_mapping['northing']]
+    #     x = self[self.key_mapping['easting']]
+    #     y = self[self.key_mapping['northing']]
     #     if '_CoordinateTransformType' in self.spatial_ref:
     #         x.attrs['standard_name'] = 'projection_x_coordinate'
     #         x.attrs['_CoordinateAxisType'] = 'GeoX'
@@ -319,12 +322,12 @@ class Tabular(Data):
 
     #     coords = {'y': y, 'x': x, 'spatial_ref': xy}
 
-    #     for var in self.xarray.data_vars:
-    #         da = self.xarray[var]
+    #     for var in self.data_vars:
+    #         da = self[var]
     #         if not var in s:
     #             da = da.assign_coords(coords)
     #             da.attrs['grid_mapping'] = self.spatial_ref['grid_mapping_name']
-    #         self.xarray[var] = da
+    #         self[var] = da
 
     def subset(self, key, value):
         """Subset xarray where xarray[key] == value
@@ -343,7 +346,7 @@ class Tabular(Data):
         """
         out = type(self)(type=None, data_filename=None, metadata_file=None,  spatial_ref=self.spatial_ref)
 
-        out._xarray = self.xarray.where(self.xarray[key] == value)
+        out._xarray = self.where(self[key] == value)
         out._spatial_ref = self.spatial_ref
         out._key_mapping = self.key_mapping
 
@@ -376,36 +379,36 @@ class Tabular(Data):
 
     # Plotting
 
-    def plot(self, variable, x='x', **kwargs):
-        """Plot Tabular data against co-ordinate variables
+    # def plot(self, variable, x='x', **kwargs):
+    #     """Plot Tabular data against co-ordinate variables
 
-        Parameters
-        ----------
-        variable : str
-            key in xarray Dataset to plot
-        x : str, optional
-            x axis to plot key against, by default 'easting'
+    #     Parameters
+    #     ----------
+    #     variable : str
+    #         key in xarray Dataset to plot
+    #     x : str, optional
+    #         x axis to plot key against, by default 'easting'
 
-        Returns
-        -------
-        ax : matplotlib.Axes
-            plotting axis
-        pt : matplotlib.pyplot.plot.
-            Handle from plotting
+    #     Returns
+    #     -------
+    #     ax : matplotlib.Axes
+    #         plotting axis
+    #     pt : matplotlib.pyplot.plot.
+    #         Handle from plotting
 
-        """
-        # assert x in self.key_mapping, ValueError('x must be in required mapping {}'.format(list(key_mapping.required_keys())))
+    #     """
+    #     # assert x in self.key_mapping, ValueError('x must be in required mapping {}'.format(list(key_mapping.required_keys())))
 
-        ax = kwargs.pop('ax', plt.gca())
+    #     ax = kwargs.pop('ax', plt.gca())
 
-        x = self.xarray[self.key_mapping[x]]
-        y = self.xarray[variable]
+    #     x = self[self[x]]
+    #     y = self[variable]
 
-        pt = plt.plot(x, y, **kwargs)
-        plt.xlabel(x.attrs['long_name'])
-        ylab = y.attrs['long_name']
-        if len(ylab) > 10:
-            ylab = ylab.replace(' ', '\n')
-        plt.ylabel(ylab)
+    #     pt = plt.plot(x, y, **kwargs)
+    #     plt.xlabel(x.attrs['long_name'])
+    #     ylab = y.attrs['long_name']
+    #     if len(ylab) > 10:
+    #         ylab = ylab.replace(' ', '\n')
+    #     plt.ylabel(ylab)
 
-        return ax, pt
+    #     return ax, pt

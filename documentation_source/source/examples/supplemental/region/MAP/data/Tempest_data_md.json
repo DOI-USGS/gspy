@@ -4,17 +4,15 @@
         "comment": "This dataset includes minimally processed (raw) AEM data"
     },
 
-    "key_mapping" : {
-        "fiducial" : "Fiducial",
-        "line_number" : "Line",
-        "x" : "Easting_Albers",
-        "y" : "Northing_Albers",
-        "height" : "Laser",
-        "z" : "DTM"
+    "coordinates" : {
+        "x": "Easting_Albers",
+        "y": "Northing_Albers",
+        "z": "DTM"
+        // "time": "date"
     },
 
     "dimensions" : {
-        "gate_times": {
+        "TX_0_RX_0": {
             "standard_name": "gate_times",
             "long_name": "receiver gate times",
             "units": "seconds",
@@ -43,16 +41,16 @@
 
     "variable_metadata": {
         "EMX_NonHPRG": {
-            "dimensions": ["gate_times", "index"]
+            "dimensions": ["index", "gate_times"]
         },
         "EMX_HPRG": {
-            "dimensions": ["gate_times", "index"]
+            "dimensions": ["index", "gate_times"]
         },
         "EMZ_NonHPRG": {
-            "dimensions": ["gate_times", "index"]
+            "dimensions": ["index", "gate_times"]
         },
         "EMZ_HPRG": {
-            "dimensions": ["gate_times", "index"]
+            "dimensions": ["index", "gate_times"]
         }
     }
 }

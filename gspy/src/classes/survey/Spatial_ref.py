@@ -1,12 +1,13 @@
 import warnings
 
-import pyproj
-import xarray as xr
+from .CRS import CRS
+from xarray import DataArray
 
-class Spatial_ref(dict):
+class Spatial_ref(DataArray):
     """Class to handle spatial reference formats
 
     Allows instantiation by any of the following; wkid, EPSG, well known text or proj4 strings.
+    Handles non standard and custom spatial references that may not be defined by a single EPSG.
 
     Spatial_ref(**kwargs)
 
@@ -26,9 +27,10 @@ class Spatial_ref(dict):
     out : gspy.Spatial_ref
         Spatial reference handler.
     """
+    __slots__ = ()
 
-    def __init__(self, **kwargs):
-
+    @classmethod
+    def from_dict(cls, kwargs):
         if ("wkid" in kwargs) and (kwargs.get("wkid", "None") != "None" and (kwargs.get("wkid", "None")) != ""):
             val = kwargs["wkid"]
             if 'EPSG' in val:
@@ -40,25 +42,29 @@ class Spatial_ref(dict):
                 print('WARNING! No authority passed for WKID, DEFAULTING to EPSG')
 
             if auth == 'EPSG':
-                crs = pyproj.CRS.from_epsg(val)
+                crs = CRS.from_epsg(val)
 
         elif ("crs_wkt" in kwargs.keys()) and (kwargs.get("crs_wkt", "None") != "None"):
-            crs = pyproj.CRS.from_wkt(kwargs["crs_wkt"].replace("'",'"'))
+            crs = CRS.from_wkt(kwargs["crs_wkt"].replace("'",'"'))
 
         elif("proj_string" in kwargs.keys()) and (kwargs.get("proj_string", "None") != "None"):
-            crs = pyproj.CRS.from_proj4(kwargs["proj_string"])
+            crs = CRS.from_proj4(kwargs["proj_string"])
         else:
             print('WARNING! No coordinate information imported, DEFAULTING to EPSG:4326')
-            crs = pyproj.CRS.from_epsg('4326')
-
-        cf = crs.to_cf()
-        for key, value in cf.items():
-            self[key] = value
+            crs = CRS.from_epsg('4326')
 
         #self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
+        # self = cls(0.0, attrs=tmp)
+
+        self = DataArray(0.0)
+
+        self.attrs = crs.to_cf()
+
         if crs.to_authority():
-            self['wkid'] = crs.to_authority()[1]
-            self['authority'] = crs.to_authority()[0]
+            self.attrs['authority'] = crs.to_authority()[0]
+            self.attrs['wkid'] = crs.to_authority()[1]
+
+        return self
         # self['crs_wkt'] = crs.to_wkt()
         # with warnings.catch_warnings():
         #     warnings.simplefilter('ignore')
@@ -123,7 +129,7 @@ class Spatial_ref(dict):
         if y.attrs['units'] == 'm':
             y.attrs['units'] = 'meters'
 
-        xy = xr.DataArray(0.0, attrs=self)
+        xy = DataArray(0.0, attrs=self)
 
         coords = {'y': y, 'x': x, 'spatial_ref': xy}
 

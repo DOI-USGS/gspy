@@ -1,31 +1,35 @@
 {
     "dataset_attrs" : {
         "comment": "<additional details or ancillary information>",
-        "content": "interpolated resistivity models"
+        "content": "gridded magnetic and resistivity maps"
     },
-    
-	"key_mapping" : {
+
+    "coordinates": { // Coordinates physically map variables to space "xyzt"
         "x" : "Easting_Albers",
-        "y" : "Northing_Albers",
-        "z" : "DTM"
-	},
-	
-    "raster_files" : {
-        "resistivity": ["example_log10res_0_5m.tif", "example_log10res_5_10m.tif", "example_log10res_10_15m.tif", "example_log10res_15_20m.tif", "example_log10res_20_25m.tif"]
+        "y" : "Northing_Albers"
+    },
+
+    "dimensions" : {
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers"
     },
 
     "variable_metadata": {
-        "resistivity": {
-            "standard_name": "log10_resistivity",
-            "long_name": "Electrical Resistivity on Logarithmic Scale",
-            "units": "log10_ohm_m",
-            "null_value": -9999.99
+        "magnetic_tmi": {
+            "dimensions": ["x", "y"],
+            "standard_name": "total_magnetic_intensity",
+            "long_name": "Total magnetic intensity, diurnally corrected and filtered",
+            "units": "nanoTesla",
+            "null_value": -9999.99,
+            "files": ["2D_grid_mag.tif"]
         },
         "DTM": {
+            "dimensions": ["x", "y"],
             "standard_name": "dtm",
             "long_name": "Digital terrain model",
             "units": "meter",
-            "null_value": "not_defined"
+            "null_value": "not_defined",
+            "files": ["dtm.tif"]
         },
         "Easting_Albers": {
             "standard_name": "easting_albers",

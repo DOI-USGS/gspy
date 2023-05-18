@@ -18,21 +18,21 @@ from gspy import Survey
 data_path = '..//supplemental//'
 
 # Define supplemental information file
-supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
+supplemental = data_path + "region//MAP//data//Tempest_survey_md.json"
 
 # Read in TIF data file
 survey = Survey(supplemental)
 
 # Define input ASEG-format data file and associated variable mapping file
 d_data = data_path + 'region//MAP//data//Tempest.dat'
-d_supp = data_path + 'region//MAP//data//Tempest_data_information.json'
+d_supp = data_path + 'region//MAP//data//Tempest_data_md.json'
 
 # Read data and format as Linedata class object
 # survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
 # Define input TIF-format data file and associated variable mapping file
 d_grid_path = data_path + 'region//MAP//data//'
-d_grid_supp = data_path + 'region//MAP//data//Tempest_raster_Attributes.json'
+d_grid_supp = data_path + 'region//MAP//data//Tempest_raster_md.json'
 
 # Read data and format as Griddata class object
 survey.add_raster(metadata_file=d_grid_supp)
