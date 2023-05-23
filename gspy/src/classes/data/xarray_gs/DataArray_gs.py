@@ -6,75 +6,6 @@ class DataArray_gs(DataArray):
     __slots__ = ()
 
     @classmethod
-    def coordinate_from_dict(cls, name, discrete=False, is_projected=False, **kwargs):
-        """Attach a coordinate/dimension to a Dataset from a dictionary.
-
-        If 'bounds' are not defined inside the dict, the coordinate is discrete.
-        Otherwise, bounds are attached also in order to satisfy ???
-
-        Parameters
-        ----------
-        name : str
-            The name of the coordinate to attach
-
-        Other Parameters
-        ----------------
-        standard_name : str
-            CF convention standard name
-        long_name : str
-            CF convention long name
-        units : str
-            units of the coordinate
-        null_value : int or float
-            what are null values represented by
-        centers : array_like
-            Has shape (size of dimension, ) defining the center values of each "cell"
-        bounds : array_like, optional
-            Has shape (size of dimension, 2) defining the bounds of each "cell" in the coordinate
-
-        Example
-        -------
-        depth_dict = {
-                    "standard_name": "depth",
-                    "long_name": "Depth below earth's surface DTM",
-                    "units": "m",
-                    "null_value": "not_defined",
-                    # "bounds" : [[0, 5],
-                    #             [5, 10]],
-                    # "centers" : [2.5, 7.5, 20.0]}
-        Dataset_gs.coordinate_from_dict('depth', **depth_dict)
-
-        """
-        if 'centers' in kwargs:
-            centers = kwargs.pop('centers')
-
-        else:
-            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError("Explicit dimension definition {} must have 'origin', 'increment', 'length".format(name))
-            x0, dx, nx = kwargs.pop('origin'), kwargs.pop('increment'), kwargs.pop('length')
-            centers = (arange(nx) * dx) + x0
-
-        coords = None if discrete else {name: centers}
-
-        if is_projected:
-            if name in ('x', 'y'):
-                kwargs['standard_name'] = "projection_{}_coordinate".format(name)
-
-        # Add a check for units to conform to ARC reading
-        if 'units' in kwargs:
-            if kwargs['units'] == 'm':
-                kwargs['units'] = 'meters'
-
-        kwargs['valid_range'] = cls.valid_range(centers, **kwargs)
-
-        self = cls(
-                   centers,
-                   dims=[name],
-                   coords=coords,
-                   attrs=kwargs)
-
-        return self
-
-    @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
         """For an existing coordinate, compute its bounds and attach.
 
@@ -113,7 +44,6 @@ class DataArray_gs(DataArray):
                    coords=coords,
                    attrs=attrs)
 
-        #self.attrs['bounds'] = name + '_bnds'
         return self
 
     @classmethod
@@ -125,12 +55,17 @@ class DataArray_gs(DataArray):
         kwargs['valid_range'] = cls.valid_range(values, **kwargs)
 
         dims = kwargs.pop('dimensions')
-        coords = kwargs.pop('coords', None)
 
-        out = cls(values,
-                   dims=dims,
-                   coords=coords,
-                   attrs=kwargs)
+        if 'coords' in kwargs:
+        # coords = kwargs.pop('coords', None)
+            out = cls(values,
+                    dims=dims,
+                    coords=kwargs.pop('coords'),
+                    attrs=kwargs)
+        else:
+            out = cls(values,
+                    dims=dims,
+                    attrs=kwargs)
 
         return out
 

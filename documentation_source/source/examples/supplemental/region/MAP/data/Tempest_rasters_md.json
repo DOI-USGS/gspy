@@ -23,7 +23,10 @@
             "null_value": "not_defined",
             "length" : 5,
             "increment" : 5.0,
-            "origin" : 0.0
+            "origin" : 0.0,
+            "axis" : "Z",
+            "positive" : "down",
+            "vertical_datum" : "ground surface"
         }
     },
 
@@ -32,13 +35,15 @@
             "standard_name": "easting_albers",
             "long_name": "Easting",
             "units": "meter",
-            "null_value": "not_defined"
+            "null_value": "not_defined",
+            "axis" : "X"
         },
         "Northing_Albers": {
             "standard_name": "northing_albers",
             "long_name": "Northing",
             "units": "meter",
-            "null_value": "not_defined"
+            "null_value": "not_defined",
+            "axis" : "Y"
         },
         "resistivity": {
             "dimensions": ["x", "y", "z"],

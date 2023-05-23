@@ -20,8 +20,8 @@
     },
 
 "dimensions": {
-        "layer_depth" : {
-            "standard_name": "layer_depth",
+        "depth" : {
+            "standard_name": "depth",
             "long_name": "Depth to model layer",
             "units": "meters",
             "null_value": "not_defined",
@@ -85,13 +85,15 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "X"
             },
             "Y_WGS84_Albers": {
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "Y"
             },
             "RECORD": {
                 "standard_name": "not_defined",
@@ -103,7 +105,10 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "Z",
+                "positive" : "up",
+                "vertical_datum" : "FIX ME ??"
             },
             "ALT": {
                 "standard_name": "not_defined",
@@ -158,14 +163,14 @@
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "dimensions": ["index", "layer_depth"]
+                "dimensions": ["index", "depth"]
             },
             "RHO_I_STD": {
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "dimensions": ["index", "layer_depth"]
+                "dimensions": ["index", "depth"]
             }
         }
     }

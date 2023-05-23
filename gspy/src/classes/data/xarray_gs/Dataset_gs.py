@@ -3,6 +3,7 @@ from pprint import pprint
 from numpy import all, arange, asarray, diff, median, r_, zeros
 from xarray import DataArray, Dataset, load_dataset
 from .DataArray_gs import DataArray_gs
+from .Coordinate_gs import Coordinate_gs
 
 from ....utilities import flatten, unflatten
 from ...survey.Spatial_ref import Spatial_ref
@@ -65,9 +66,10 @@ class Dataset_gs(Dataset):
         Dataset_gs.coordinate_from_dict('depth', **depth_dict)
 
         """
+
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
         # Add the actual coordinate values
-        self[name] = DataArray_gs.coordinate_from_dict(name, discrete, self.is_projected, **kwargs)
+        self[name] = Coordinate_gs.from_dict(name, discrete, self.is_projected, **kwargs)
 
         # Add the bounds of the coordinate
         if not discrete or bounding_dict['bounds'] is not None:
@@ -75,15 +77,11 @@ class Dataset_gs(Dataset):
 
         return self
 
-    def add_coordinate_from_values(self, name, values, is_projected=False, discrete=False, **kwargs):
-
-        if is_projected:
-            if name in ('x', 'y'):
-                kwargs['standard_name'] = "projection_{}_coordinate".format(name)
+    def add_coordinate_from_values(self, name, values, discrete=False, **kwargs):
 
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
-        self[name] = DataArray_gs.from_values(name, values, **kwargs)
+        self[name] = Coordinate_gs.from_values(name, values, discrete, **kwargs)
         self = self.assign_coords({name : self[name]})
 
         # Add the bounds of the coordinate
@@ -126,18 +124,6 @@ class Dataset_gs(Dataset):
                                                           null_value = 'not_defined'))
         return self
 
-
-    # @classmethod
-    # def from_dict(cls, kwargs):
-    #     from pprint import pprint
-    #     pprint(kwargs)
-    #     crs = kwargs.pop('spatial_ref', None)
-
-    #     input('fdfdsfds')
-    #     self = super(Dataset_gs, cls).from_dict(kwargs)
-    #     self.spatial_ref = crs
-    #     return self
-
     @property
     def is_projected(self):
         return self['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
@@ -162,12 +148,3 @@ class Dataset_gs(Dataset):
     def update_attrs(self, **kwargs):
         kwargs = flatten(kwargs, '', {})
         self.attrs.update(kwargs)
-
-    # def _add_general_metadata_to_xarray(self, kwargs):
-    #     kwargs = flatten(kwargs, '', {})
-    #     self.attrs.update(kwargs)
-
-
-        # if self.xarray['spatial_ref'].attrs['grid_mapping_name'] != 'latitude_longitude':
-        #     self.xarray['x'].attrs['standard_name'] = 'projection_x_coordinate'
-        #     self.xarray['y'].attrs['standard_name'] = 'projection_y_coordinate'

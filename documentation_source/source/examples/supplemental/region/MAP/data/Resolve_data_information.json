@@ -29,7 +29,10 @@
             "null_value": "not_defined",
             "length" : 31,
             "increment" : 5.0,
-            "origin" : 2.5
+            "origin" : 2.5,
+            "axis" : "Z",
+            "positive" : "down",
+            "vertical_datum" : "ground surface"
         },
         "frequency": {
             "standard_name": "frequency",
@@ -99,13 +102,15 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "X"
             },
             "y_WGS84_Albers": {
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "X"
             },
             "x_WGS84_UTMZ15N": {
                 "standard_name": "not_defined",
@@ -177,7 +182,10 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": "not_defined",
+                "axis" : "Z",
+                "positive" : "up",
+                "vertical_datum" : "FIX ME ??"
             },
             "bird_pitch": {
                 "standard_name": "not_defined",
