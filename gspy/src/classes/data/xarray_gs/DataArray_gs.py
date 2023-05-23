@@ -63,14 +63,8 @@ class DataArray_gs(DataArray):
         if 'units' in kwargs:
             if kwargs['units'] == 'm':
                 kwargs['units'] = 'meters'
-        
-        # valid range
-        if kwargs['null_value'] != 'not_defined':
-            maskvalues = deepcopy(centers)
-            maskvalues[maskvalues == kwargs['null_value']] = nan
-            kwargs['valid_range'] = [nanmin(maskvalues), nanmax(maskvalues)]
-        else:
-            kwargs['valid_range'] = [nanmin(centers), nanmax(centers)]
+
+        kwargs['valid_range'] = cls.valid_range(centers, **kwargs)
 
         self = cls(
                    centers,
@@ -109,18 +103,16 @@ class DataArray_gs(DataArray):
         attrs = coordinate.attrs.copy()
         attrs['standard_name'] = coordinate.attrs['standard_name'] + '_bounds'
         attrs['long_name'] = coordinate.attrs['long_name'] + ' cell boundaries'
-        if attrs['null_value'] != 'not_defined':
-            maskvalues = deepcopy(bounds)
-            maskvalues[maskvalues == kwargs['null_value']] = nan
-            attrs['valid_range'] = [nanmin(maskvalues), nanmax(maskvalues)]
-        else:
-            attrs['valid_range'] = [nanmin(bounds), nanmax(bounds)]
-        
-        self = DataArray(bounds,
-                         dims=[name, 'nv'],
-                         coords={name: coordinate, 'nv': r_[0, 1]},
-                         attrs=attrs)
-        
+        attrs['valid_range'] = cls.valid_range(bounds, **kwargs)
+
+        dims = kwargs.pop('dims')
+        coords = kwargs.pop('coords')
+
+        self = cls(bounds,
+                   dims=dims,
+                   coords=coords,
+                   attrs=attrs)
+
         #self.attrs['bounds'] = name + '_bnds'
         return self
 
@@ -134,19 +126,22 @@ class DataArray_gs(DataArray):
 
         dims = kwargs.pop('dimensions')
         coords = kwargs.pop('coords', None)
-        
+
         out = cls(values,
                    dims=dims,
                    coords=coords,
                    attrs=kwargs)
 
         return out
-    
+
     @staticmethod
     def valid_range(values, **kwargs):
 
-        if kwargs['null_value'] == 'not_defined':
+        nv = kwargs.get('null_value', 'not_defined')
+
+        if nv == 'not_defined':
             return r_[nanmin(values), nanmax(values)]
         else:
-            mask = values != kwargs['null_value']
-            return r_[nanmin(values, where=mask), nanmax(values, where=mask)] 
+            tmp = values.copy()
+            tmp[tmp == nv] = nan
+            return r_[nanmin(tmp), nanmax(tmp)]

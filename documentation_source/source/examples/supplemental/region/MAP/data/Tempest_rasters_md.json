@@ -1,7 +1,7 @@
 {
     "dataset_attrs" : {
         "comment": "<additional details or ancillary information>",
-        "content": {"TEST": ["interpolated resistivity models","THIS IS A TEST"]}
+        "content": "interpolated resistivity models"
     },
 
     "coordinates": {

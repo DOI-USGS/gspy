@@ -76,7 +76,7 @@ class Dataset_gs(Dataset):
         return self
 
     def add_coordinate_from_values(self, name, values, is_projected=False, discrete=False, **kwargs):
-        
+
         if is_projected:
             if name in ('x', 'y'):
                 kwargs['standard_name'] = "projection_{}_coordinate".format(name)
@@ -90,37 +90,26 @@ class Dataset_gs(Dataset):
         if not discrete:
             self = self.add_bounds_to_coordinate(name, **bounding_dict)
 
-        
         return self
 
     def add_variable_from_values(self, name, values, **kwargs):
         assert all(values.shape == tuple([self[vdim].size for vdim in kwargs['dimensions']])), ValueError("Shape {} of variable {} does not match specified dimensions with shape {}".format(values.shape, name, kwargs['dimensions']))
-        
-        # store coordinate attributes
-        dim_attrs = {dim: self[dim].attrs for dim in kwargs['dimensions']}
 
+        kwargs['coords'] = [self.coords[dim] for dim in kwargs['dimensions']]
         self[name] = DataArray_gs.from_values(name, values, **kwargs)
-        
-        # reattach coordinate attributes
-        for dim in kwargs['dimensions']:
-            self[dim].attrs = dim_attrs[dim]
 
     def add_bounds_to_coordinate(self, name, **kwargs):
 
         # The bounds are 2xN and need their own "nv" dimension
         self = self._add_nv()
 
-        # store nv dims
-        nvdims = self['nv'].attrs
-        
         # Now add the bound
         self[name + '_bnds'] = DataArray_gs.add_bounds_to_coordinate_dimension(self[name],
                                                                                name,
+                                                                               dims = (*[dim for dim in self[name].dims], 'nv'),
+                                                                               coords=(*[self[dim] for dim in self[name].dims], self['nv']),
                                                                                **kwargs)
         self[name].attrs['bounds'] = name + '_bnds'
-
-        # add nv dims back in
-        self['nv'].attrs = nvdims
 
         return self
 
