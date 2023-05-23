@@ -154,7 +154,7 @@ class Tabular_aseg(Tabular):
         self.xarray.attrs.update(self.json_metadata['dataset_attrs'])
 
         # add global attrs to tabular, skip variable_metadata and dimensions
-        self._add_general_metadata_to_xarray({key: values for key, values in self.json_metadata.items() if key not in ['dataset_attrs','dimensions', 'variable_metadata']})
+        self.update_attrs(**{key: values for key, values in self.json_metadata.items() if key not in ['dataset_attrs','dimensions', 'variable_metadata']})
 
         return self
 

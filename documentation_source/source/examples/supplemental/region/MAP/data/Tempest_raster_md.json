@@ -1,10 +1,10 @@
 {
     "dataset_attrs" : {
         "comment": "<additional details or ancillary information>",
-        "content": "gridded magnetic and resistivity maps"
+        "content": ["gridded magnetic and resistivity maps","TESTTESTESTEST"]
     },
 
-    "coordinates": { // Coordinates physically map variables to space "xyzt"
+    "coordinates": {
         "x" : "Easting_Albers",
         "y" : "Northing_Albers"
     },
@@ -21,7 +21,7 @@
             "long_name": "Total magnetic intensity, diurnally corrected and filtered",
             "units": "nanoTesla",
             "null_value": -9999.99,
-            "files": ["2D_grid_mag.tif"]
+            "files": ["../supplemental/region/MAP/data/2D_grid_mag.tif"]
         },
         "DTM": {
             "dimensions": ["x", "y"],
@@ -29,7 +29,7 @@
             "long_name": "Digital terrain model",
             "units": "meter",
             "null_value": "not_defined",
-            "files": ["dtm.tif"]
+            "files": ["../supplemental/region/MAP/data/dtm.tif"]
         },
         "Easting_Albers": {
             "standard_name": "easting_albers",

@@ -139,7 +139,7 @@ class Tabular_csv(Tabular):
         self = self.set_spatial_ref(spatial_ref)
 
         # Convert to xarray format
-        json_md, path = self.read_metadata(metadata_file)
+        json_md = self.read_metadata(metadata_file)
 
         dimensions = json_md['dimensions']
         coordinates = json_md['coordinates']
@@ -235,7 +235,7 @@ class Tabular_csv(Tabular):
         # self.xarray.attrs.update(self.json_metadata['dataset_attrs'])
 
         # # add global attrs to tabular, skip variable_metadata and dimensions
-        # self._add_general_metadata_to_xarray({key: values for key, values in self.json_metadata.items() if key not in ['dataset_attrs','dimensions', 'variable_metadata']})
+        self.update_attrs(**json_md['dataset_attrs'])
 
         return self
 

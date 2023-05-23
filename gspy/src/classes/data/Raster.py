@@ -76,7 +76,7 @@ class Raster(Data):
             return Raster.read_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
         else:
             # read the metadata file
-            json_md, path = self.read_metadata(metadata_file)
+            json_md = self.read_metadata(metadata_file)
 
             dimensions = json_md['dimensions']
             coordinates = json_md['coordinates']
@@ -108,7 +108,8 @@ class Raster(Data):
             #     reader([os.path.join(path, x) for x in item], variable, var_meta, **json_md)
 
             # # add global attrs to tabular
-            # self._add_general_metadata_to_xarray(json_md)
+            #self._add_general_metadata_to_xarray(json_md['dataset_attrs'])
+            self.update_attrs(**json_md['dataset_attrs'])
 
         # Check for conforming spatial refs???
 
@@ -168,12 +169,20 @@ class Raster(Data):
         # If it exists, attach it to xarray
         for coord in ds.coords:
             if coord in coordinates:
-                self = self.add_coordinate_from_values(coord,
-                                                       ds[coord].values,
-                                                       is_projected=self.is_projected,
-                                                       dimensions=coord,
-                                                       **json_metadata['variable_metadata'][coordinates[coord]])
-
+                # if not already in xarray, add
+                if not coord in self.coords:
+                    self = self.add_coordinate_from_values(coord,
+                                                        ds[coord].values,
+                                                        is_projected=self.is_projected,
+                                                        dimensions=coord,
+                                                        **json_metadata['variable_metadata'][coordinates[coord]])
+                # If coord already exists, pass ...
+                # Assumes existing coord matches!!!!!
+                # Not Yet Implemented: reconciliation step for adding multiple x,y,z,t coords OR resampling / realigning 
+                # input tiffs onto existing x,y,z,t grids
+                #else:
+                #    print('coordinate already exists... ', coord)
+        
         kwargs['dimensions'] = np.asarray(kwargs['dimensions'])[::-1]
 
         # If an axis is given in the meta data, swap the axes of the temporary 3D array to stack along the user's defined axis
@@ -193,7 +202,7 @@ class Raster(Data):
 
         # Add the variable to the dataset
         self.add_variable_from_values(name, values, **kwargs)
-
+        
         # Now handle the spatial ref.  This should be done FIRST
         raster_spatial_reference = [coord for coord in ds.coords if coord not in ('x', 'y')][0]
         raster_spatial_reference_name = ds[raster_spatial_reference].attrs['grid_mapping_name']

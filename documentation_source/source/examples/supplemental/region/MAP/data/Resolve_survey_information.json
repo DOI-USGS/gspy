@@ -32,6 +32,102 @@
         "authority" : "EPSG"
     },
 
+    "system_information" : {
+        "electromagnetic_system": {
+            "instrument_type" : "resolve",
+            "number_of_transmitters" : 6,
+			"number_of_receivers" : 6,
+			"number_of_components" : 6,
+
+            "transmitter_0_name" : 0,
+            "transmitter_0_orientation" : "X",
+
+            "transmitter_1_name" : 1,
+            "transmitter_1_orientation" : "X",
+
+            "transmitter_2_name" : 2,
+            "transmitter_2_orientation" : "Z",
+
+            "transmitter_3_name" : 3,
+            "transmitter_3_orientation" : "X",
+
+            "transmitter_4_name" : 4,
+            "transmitter_4_orientation" : "X",
+
+            "transmitter_5_name" : 5,
+            "transmitter_5_orientation" : "X",
+
+            "receiver_0_name" : 0,
+            "receiver_0_orientation" : "X",
+            "receiver_0_frequency" : 400,
+
+            "receiver_1_name" : 1,
+            "receiver_1_orientation" : "X",
+            "receiver_1_frequency" : 1800,
+
+            "receiver_2_name" : 2,
+            "receiver_2_orientation" : "Z",
+            "receiver_2_frequency" : 3300,
+
+            "receiver_3_name" : 3,
+            "receiver_3_orientation" : "X",
+            "receiver_3_frequency" : 8200,
+
+            "receiver_4_name" : 4,
+            "receiver_4_orientation" : "X",
+            "receiver_4_frequency" : 40000,
+
+            "receiver_5_name" : 5,
+            "receiver_5_orientation" : "X",
+            "receiver_5_frequency" : 140000,
+
+
+            "component_0_name" : "400 Hz",
+            "component_0_transmitter" : 0,
+            "component_0_receiver" : 0,
+            "component_0_frequency" : 400,
+            "component_0_orientation" : "coplanar",
+            "component_0_coil_separation" : 7.93, 
+
+            "component_1_name" : "1.8k Hz",
+            "component_1_transmitter" : 0,
+            "component_1_receiver" : 0,
+            "component_1_frequency" : 1800,
+            "component_1_orientation" : "coplanar",
+            "component_1_coil_separation" : 7.95, 
+
+            "component_2_name" : "3.3k Hz",
+            "component_2_transmitter" : 0,
+            "component_2_receiver" : 0,
+            "component_2_frequency" : 3300,
+            "component_2_orientation" : "coaxial",
+            "component_2_coil_separation" : 9.06, 
+
+            "component_3_name" : "8.2k Hz",
+            "component_3_transmitter" : 0,
+            "component_3_receiver" : 0,
+            "component_3_frequency" : 8200,
+            "component_3_orientation" : "coplanar",
+            "component_3_coil_separation" : 7.93, 
+
+            "component_4_name" : "40k Hz",
+            "component_4_transmitter" : 0,
+            "component_4_receiver" : 0,
+            "component_4_frequency" : 40000,
+            "component_4_orientation" : "coplanar",
+            "component_4_coil_separation" : 7.92, 
+
+            "component_5_name" : "140k Hz",
+            "component_5_transmitter" : 0,
+            "component_5_receiver" : 0,
+            "component_5_frequency" : 140000,
+            "component_5_orientation" : "coplanar",
+            "component_5_coil_separation" : 7.97
+
+        
+        }
+    },
+
     "flightline_information" : {
         "traverse_line_spacing" : ["993 m","248 m"],
         "traverse_line_direction" : ["092 degrees","272 degrees"],

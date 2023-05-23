@@ -1,7 +1,7 @@
 {
     "dataset_attrs" : {
         "comment": "<additional details or ancillary information>",
-        "content": "interpolated resistivity models"
+        "content": {"TEST": ["interpolated resistivity models","THIS IS A TEST"]}
     },
 
     "coordinates": {
@@ -50,8 +50,7 @@
                       "../supplemental/region/MAP/data/example_log10res_5_10m.tif",
                       "../supplemental/region/MAP/data/example_log10res_10_15m.tif",
                       "../supplemental/region/MAP/data/example_log10res_15_20m.tif",
-                      "../supplemental/region/MAP/data/example_log10res_20_25m.tif"],
-            "stack_axis" : "z"
+                      "../supplemental/region/MAP/data/example_log10res_20_25m.tif"]
         },
         "single_file": {
             "dimensions": ["x", "y"],

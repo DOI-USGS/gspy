@@ -170,7 +170,7 @@ class Survey(object):
                             tmpdict2[k] = str(v)
                 self.xarray[key] = xr.DataArray(attrs=tmpdict2)
 
-        self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
+        self.xarray = self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
 
     def write_metadata_template(self):
         """Creates a metadata template for a Survey

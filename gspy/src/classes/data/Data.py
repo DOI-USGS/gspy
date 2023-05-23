@@ -103,7 +103,8 @@ class Data(Dataset_gs):
         #     self.write_metadata_template()
         #     raise Exception("Please re-run and specify supplemental information when instantiating Raster")
 
-        return dic, Path(filename).parent.absolute()
+        #return dic, Path(filename).parent.absolute()
+        return dic
 
     @classmethod
     def read_netcdf(cls, filename, group, spatial_ref=None, **kwargs):

@@ -22,9 +22,9 @@ class Dataset_gs(Dataset):
                    attrs=tmp.attrs)
 
     # This may not be needed
-    def _add_general_metadata(self, kwargs):
-        kwargs = flatten(kwargs, '', {})
-        self.attrs.update(kwargs)
+    # def _add_general_metadata(self, kwargs):
+    #     kwargs = flatten(kwargs, '', {})
+    #     self.attrs.update(kwargs)
 
     def add_coordinate_from_dict(self, name, discrete=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset from a dictionary.
@@ -76,7 +76,7 @@ class Dataset_gs(Dataset):
         return self
 
     def add_coordinate_from_values(self, name, values, is_projected=False, discrete=False, **kwargs):
-
+        
         if is_projected:
             if name in ('x', 'y'):
                 kwargs['standard_name'] = "projection_{}_coordinate".format(name)
@@ -90,21 +90,38 @@ class Dataset_gs(Dataset):
         if not discrete:
             self = self.add_bounds_to_coordinate(name, **bounding_dict)
 
+        
         return self
 
     def add_variable_from_values(self, name, values, **kwargs):
         assert all(values.shape == tuple([self[vdim].size for vdim in kwargs['dimensions']])), ValueError("Shape {} of variable {} does not match specified dimensions with shape {}".format(values.shape, name, kwargs['dimensions']))
+        
+        # store coordinate attributes
+        dim_attrs = {dim: self[dim].attrs for dim in kwargs['dimensions']}
+
         self[name] = DataArray_gs.from_values(name, values, **kwargs)
+        
+        # reattach coordinate attributes
+        for dim in kwargs['dimensions']:
+            self[dim].attrs = dim_attrs[dim]
 
     def add_bounds_to_coordinate(self, name, **kwargs):
 
         # The bounds are 2xN and need their own "nv" dimension
         self = self._add_nv()
 
+        # store nv dims
+        nvdims = self['nv'].attrs
+        
         # Now add the bound
         self[name + '_bnds'] = DataArray_gs.add_bounds_to_coordinate_dimension(self[name],
                                                                                name,
                                                                                **kwargs)
+        self[name].attrs['bounds'] = name + '_bnds'
+
+        # add nv dims back in
+        self['nv'].attrs = nvdims
+
         return self
 
     def _add_nv(self):
@@ -154,11 +171,12 @@ class Dataset_gs(Dataset):
         return self
 
     def update_attrs(self, **kwargs):
+        kwargs = flatten(kwargs, '', {})
         self.attrs.update(kwargs)
 
-    def _add_general_metadata_to_xarray(self, kwargs):
-        kwargs = flatten(kwargs, '', {})
-        self.xarray.attrs.update(kwargs)
+    # def _add_general_metadata_to_xarray(self, kwargs):
+    #     kwargs = flatten(kwargs, '', {})
+    #     self.attrs.update(kwargs)
 
 
         # if self.xarray['spatial_ref'].attrs['grid_mapping_name'] != 'latitude_longitude':
