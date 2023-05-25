@@ -20,8 +20,8 @@
     },
 
 "dimensions": {
-        "depth" : {
-            "standard_name": "depth",
+        "layer_depth" : {
+            "standard_name": "layer_depth",
             "long_name": "Depth to model layer",
             "units": "meters",
             "null_value": "not_defined",
@@ -163,14 +163,14 @@
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "dimensions": ["index", "depth"]
+                "dimensions": ["index", "layer_depth"]
             },
             "RHO_I_STD": {
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "dimensions": ["index", "depth"]
+                "dimensions": ["index", "layer_depth"]
             }
         }
     }

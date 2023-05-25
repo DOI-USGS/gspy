@@ -194,21 +194,21 @@ class Data(Dataset_gs):
 
         f = open(infile, 'a')
         ### Dimensions:
-        for dim in self.xarray.dims:
-            f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self.xarray.dims[dim]))
+        for dim in self.dims:
+            f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self.dims[dim]))
         f.write('\n')
 
         ### Global Attributes:
-        for attr in self.xarray.attrs:
-            att_val = self.xarray.attrs[attr]
+        for attr in self.attrs:
+            att_val = self.attrs[attr]
             if '"' in str(att_val):
                 att_val = att_val.replace('"',"'")
             f.write('%s<attribute name="%s" value="%s"/>\n' % (sp2, attr, att_val))
         f.write('\n')
 
         ### Variables:
-        for var in self.xarray.variables:
-            tmpvar = self.xarray.variables[var]
+        for var in self.variables:
+            tmpvar = self.variables[var]
             dtype = str(tmpvar.dtype).title()[:-2]
             if var == 'crs' or dtype == 'object':
                 f.write('%s<variable name="%s" shape="%s" type="String">\n' % (sp2, var, " ".join(tmpvar.dims)))

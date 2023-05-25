@@ -8,7 +8,6 @@
         "x": "Easting_Albers",
         "y": "Northing_Albers",
         "z": "DTM"
-        // "time": "date"
     },
 
     "dimensions" : {
@@ -41,15 +40,19 @@
 
     "variable_metadata": {
         "EMX_NonHPRG": {
+            "em_system_components" : 1,
             "dimensions": ["index", "gate_times"]
         },
         "EMX_HPRG": {
+            "em_system_components" : 1,
             "dimensions": ["index", "gate_times"]
         },
         "EMZ_NonHPRG": {
+            "em_system_components" : 0,
             "dimensions": ["index", "gate_times"]
         },
         "EMZ_HPRG": {
+            "em_system_components" : 0,
             "dimensions": ["index", "gate_times"]
         }
     }

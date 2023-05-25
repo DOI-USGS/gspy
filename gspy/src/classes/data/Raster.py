@@ -205,33 +205,45 @@ class Raster(Data):
 
         # Now handle the spatial ref.  This should be done FIRST
         raster_spatial_reference = [coord for coord in ds.coords if coord not in ('x', 'y')][0]
-        raster_spatial_reference_name = ds[raster_spatial_reference].attrs['grid_mapping_name']
+
+        if 'grid_mapping_name' in ds[raster_spatial_reference].attrs.keys():
+            raster_spatial_reference_name = ds[raster_spatial_reference].attrs['grid_mapping_name']
+            if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
+                raise NotImplementedError("Need to reproject input file to match survey spatial ref, for variable {}".format(name))
+        # elif 'crs_wkt' in ds[raster_spatial_reference].attrs.keys():
+        #     raster_spatial_reference_name = ds[raster_spatial_reference].attrs['crs_wkt']
+        #     if raster_spatial_reference_name != self.spatial_ref.attrs['crs_wkt']:
+        #         raise NotImplementedError("Need to reproject input file to match survey spatial ref, for variable {}".format(name))
+        else:
+            print('WARNING: cannot identify CRS for input [{}] raster, will assume the data matches the survey spatial_ref!'.format(name))
+        
+        
 
         # Reproject if input CRS does not match Survey
-        if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
-            print('Grid CRS [{}] does not match Survey CRS [{}], reprojecting to Survey CRS'.format(raster_spatial_reference_name, self.spatial_ref.attrs['grid_mapping_name']))
-            if self.spatial_ref.attrs['wkid'] != "None":
-                target_crs = self.spatial_ref.attrs['wkid']
-            else:
-                target_crs = self.spatial_ref.attrs['crs_wkt']
-            print('Reprojecting ...')
+        # if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
+        #     print('Grid CRS [{}] does not match Survey CRS [{}], reprojecting to Survey CRS'.format(raster_spatial_reference_name, self.spatial_ref.attrs['grid_mapping_name']))
+        #     if self.spatial_ref.attrs['wkid'] != "None":
+        #         target_crs = self.spatial_ref.attrs['wkid']
+        #     else:
+        #         target_crs = self.spatial_ref.attrs['crs_wkt']
+        #     print('Reprojecting ...')
 
-            # get fill value from file, if present
-            if '_FillValue' in ds.attrs:
-                nodata = ds.attrs['_FillValue']
-            else:
-                nodata = None
+        #     # get fill value from file, if present
+        #     if '_FillValue' in ds.attrs:
+        #         nodata = ds.attrs['_FillValue']
+        #     else:
+        #         nodata = None
 
-            # supersede fill value from file with variable metadata value, if present
-            if 'null_value' in json_metadata['variable_metadata'][name]:
-                if json_metadata['variable_metadata'][name]['null_value'] != 'not_defined':
-                    nodata = json_metadata['variable_metadata'][name]['null_value']
+        #     # supersede fill value from file with variable metadata value, if present
+        #     if 'null_value' in json_metadata['variable_metadata'][name]:
+        #         if json_metadata['variable_metadata'][name]['null_value'] != 'not_defined':
+        #             nodata = json_metadata['variable_metadata'][name]['null_value']
 
-            # reproject, accounting for nodata value if present
-            if nodata is None:
-                ds = ds.rio.reproject(target_crs)
-            else:
-                ds = ds.rio.reproject(target_crs, nodata=nodata)
+        #     # reproject, accounting for nodata value if present
+        #     if nodata is None:
+        #         ds = ds.rio.reproject(target_crs)
+        #     else:
+        #         ds = ds.rio.reproject(target_crs, nodata=nodata)
 
         return self
 

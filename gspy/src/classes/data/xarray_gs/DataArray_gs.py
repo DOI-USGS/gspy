@@ -52,7 +52,8 @@ class DataArray_gs(DataArray):
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        kwargs['valid_range'] = cls.valid_range(values, **kwargs)
+        if not values.dtype == 'object':
+            kwargs['valid_range'] = cls.valid_range(values, **kwargs)
 
         dims = kwargs.pop('dimensions')
 

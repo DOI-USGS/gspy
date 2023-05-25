@@ -62,7 +62,8 @@ class Coordinate_gs(DataArray_gs):
             if kwargs['units'] == 'm':
                 kwargs['units'] = 'meters'
 
-        kwargs['valid_range'] = cls.valid_range(centers, **kwargs)
+        if not 'str' in [type(val) for val in centers]:
+            kwargs['valid_range'] = cls.valid_range(centers, **kwargs)
 
         if discrete:
             self = cls(centers,
@@ -83,7 +84,7 @@ class Coordinate_gs(DataArray_gs):
         kwargs['standard_name'] = cls.check_is_projected(name, is_projected)
 
         cls.check_standard_coordinates(name, **kwargs)
-
+        
         return super(Coordinate_gs, cls).from_values(name, values, **kwargs)
 
     @staticmethod

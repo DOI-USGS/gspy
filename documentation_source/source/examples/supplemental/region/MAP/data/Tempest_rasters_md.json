@@ -57,10 +57,10 @@
                       "../supplemental/region/MAP/data/example_log10res_15_20m.tif",
                       "../supplemental/region/MAP/data/example_log10res_20_25m.tif"]
         },
-        "single_file": {
+        "res_0": {
             "dimensions": ["x", "y"],
-            "standard_name": "log10_resistivity",
-            "long_name": "Electrical Resistivity on Logarithmic Scale",
+            "standard_name": "log10_resistivity_0_5m",
+            "long_name": "Electrical Resistivity on Logarithmic Scale, 0-5 m depth slice",
             "units": "log10_ohm_m",
             "null_value": -9999.99,
             "files": ["../supplemental/region/MAP/data/example_log10res_0_5m.tif"]

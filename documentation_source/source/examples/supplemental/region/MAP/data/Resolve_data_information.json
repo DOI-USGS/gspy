@@ -4,17 +4,6 @@
         "comment": "This dataset includes minimally processed (raw) AEM data"
     },
 
-    "system_information" : {
-        "instrument_type" : "RESOLVE",
-        "number of coil pairs" : 6,
-        "dipole moment" : [359,187,150,72,49,17],
-        "orientation" : ["Coplanar","Coplanar","Coaxial","Coplanar","Coplanar","Coplanar"],
-        "nominal frequency" : ["400 Hz","1800 Hz","3300 Hz","8200 Hz","40000 Hz","140000 Hz"],
-        "actual frequency" : ["381 Hz","1829 Hz","3385 Hz","8261 Hz","40430 Hz","133400 Hz"],
-        "coil separation" : [7.93,7.94,9.06,7.95,7.93,7.95],
-        "noise envelope" : [10,10,10,20,40,50]
-    },
-
     "coordinates" : {
         "x" : "x_WGS84_Albers",
         "y" : "y_WGS84_Albers",
@@ -22,9 +11,9 @@
     },
 
     "dimensions": {
-        "depth": {
-            "standard_name": "depth",
-            "long_name": "depth below surface",
+        "layer_depth": {
+            "standard_name": "layer_depth",
+            "long_name": "layer depth below surface",
             "units": "meters",
             "null_value": "not_defined",
             "length" : 31,
@@ -179,13 +168,13 @@
                 "null_value": "not_defined"
             },
             "DTM": {
-                "standard_name": "not_defined",
-                "long_name": "not_defined",
-                "units": "not_defined",
+                "standard_name": "dtm",
+                "long_name": "Digital terrain model, ground surface elevation",
+                "units": "meters",
                 "null_value": "not_defined",
                 "axis" : "Z",
                 "positive" : "up",
-                "vertical_datum" : "FIX ME ??"
+                "vertical_datum" : "referenced to mean sea level - Earth Gravitational Model (EGM96)"
             },
             "bird_pitch": {
                 "standard_name": "not_defined",
@@ -282,7 +271,8 @@
                                      "cxi3300_filt",
                                      "cpi8200_filt",
                                      "cpi40k_filt",
-                                     "cpi140k_filt"]
+                                     "cpi140k_filt"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "qd_filtered": {
                 "standard_name": "quadrature_filtered",
@@ -295,7 +285,8 @@
                                      "cxq3300_filt",
                                      "cpq8200_filt",
                                      "cpq40k_filt",
-                                     "cpq140k_filt"]
+                                     "cpq140k_filt"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "ip_pgadj": {
                 "standard_name": "in_phase_phase_gain_adj",
@@ -308,7 +299,8 @@
                     "cxi3300_phg",
                     "cpi8200_phg",
                     "cpi40k_phg",
-                    "cpi140k_phg"]
+                    "cpi140k_phg"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "qd_pgadj": {
                 "standard_name": "quadrature_phase_gain_adj",
@@ -321,7 +313,8 @@
                     "cxq3300_phg",
                     "cpq8200_phg",
                     "cpq40k_phg",
-                    "cpq140k_phg"]
+                    "cpq140k_phg"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "ip_final": {
                 "standard_name": "in_phase_final",
@@ -329,7 +322,8 @@
                 "units": "Parts per million (ppm)",
                 "null_value": "not_defined",
                 "dimensions": ["index", "frequency"],
-                "raw_data_columns": ["cpi400", "cpi1800", "cxi3300", "cpi8200", "cpi40k", "cpi140k"]
+                "raw_data_columns": ["cpi400", "cpi1800", "cxi3300", "cpi8200", "cpi40k", "cpi140k"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "qd_final": {
                 "standard_name": "quadrature_final",
@@ -337,7 +331,8 @@
                 "units": "Parts per million (ppm)",
                 "null_value": "not_defined",
                 "dimensions": ["index", "frequency"],
-                "raw_data_columns": ["cpq400", "cpq1800", "cxq3300", "cpq8200", "cpq40k", "cpq140k"]
+                "raw_data_columns": ["cpq400", "cpq1800", "cxq3300", "cpq8200", "cpq40k", "cpq140k"],
+                "em_system_components" : [0,1,2,3,4,5]
             },
             "ddep140k": {
                 "standard_name": "not_defined",
@@ -548,7 +543,7 @@
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "dimensions": ["index", "depth"]
+                "dimensions": ["index", "layer_depth"]
             },
             "spec256_down": {
                 "standard_name": "not_defined",

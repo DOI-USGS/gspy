@@ -173,9 +173,9 @@ class Tabular_csv(Tabular):
                                                   'long_name' : 'Index of individual data points',
                                                   'units' : 'not_defined',
                                                   'null_value' : 'not_defined'})
-
+        
         for key in list(coordinates.keys()):
-            discrete = key in ('x', 'y', 'z')
+            discrete = key in ('x', 'y', 'z', 't')
             # Might need to handle already added coords from the dimensions dict.
             self = self.add_coordinate_from_values(key,
                                                    file[coordinates[key]].values,
@@ -183,7 +183,7 @@ class Tabular_csv(Tabular):
                                                    discrete = discrete,
                                                    is_projected = self.is_projected,
                                                    **json_md['variable_metadata'][coordinates[key]])
-
+        
         # Now we have all dimensions and coordinates defined.
         # Start adding the data variables
         # finish with regular data variables
@@ -236,6 +236,11 @@ class Tabular_csv(Tabular):
 
         # # add global attrs to tabular, skip variable_metadata and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
+
+        self.index.attrs = {'standard_name' : 'index',
+                                                  'long_name' : 'Index of individual data points',
+                                                  'units' : 'not_defined',
+                                                  'null_value' : 'not_defined'}
 
         return self
 
