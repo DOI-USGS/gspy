@@ -48,7 +48,7 @@
                 "standard_name": "line",
                 "long_name": "Line Number",
                 "units": "not_defined",
-                "null_value": "not_defined",
+                "null_value": -9999,
                 "dtype": "int32"
             },
             "date": {
@@ -536,7 +536,7 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined"
+                "null_value": -9999.0
             },
             "dres_150_by5m": {
                 "standard_name": "not_defined",
