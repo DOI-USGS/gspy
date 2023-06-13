@@ -19,21 +19,22 @@ from gspy import Survey
 data_path = '..//supplemental//'
 
 # Survey Metadata file
-supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
+supplemental = data_path + "region//MAP//data//Tempest_survey_md.json"
 
 # Establish survey instance
 survey = Survey(supplemental)
 
 # Define input ASEG-format data file and associated variable mapping file
 d_data = data_path + 'region//MAP//data//Tempest.dat'
-d_supp = data_path + 'region//MAP//data//Tempest_data_information.json'
+d_supp = data_path + 'region//MAP//data//Tempest_data_md.json'
 
 # Read data and format as Tabular class object
 survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
 # Define input ASEG-format model file and associated variable mapping file
 m_data = data_path + 'region//MAP//model//Tempest_model_0.dat'
-m_supp = data_path + 'region//MAP//model//Tempest_model_information.json'
+m_supp = data_path + 'region//MAP//model//Tempest_model_md.json'
+
 
 # Read model data and format as Tabular class object
 survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
@@ -53,5 +54,8 @@ new_survey.tabular[0].scatter('X_PrimaryField')
 
 plt.figure()
 new_survey.tabular[1].scatter('PhiD')
+
+print(new_survey.tabular[0])
+print(new_survey.tabular[0].x.attrs)
 
 plt.show()

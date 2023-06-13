@@ -2,23 +2,23 @@ DEFN   ST=RECD,RT=COMM;RT:A4;COMMENTS:A76
 DEFN 1 ST=RECD,RT=; uniqueid : I12 : Inversion sequence number
 DEFN 2 ST=RECD,RT=; survey : I12 : Survey number
 DEFN 3 ST=RECD,RT=; date : I12 : Date number
-DEFN 4 ST=RECD,RT=; flight : I12 : Flight number, IntrepidFlightNumber
-DEFN 5 ST=RECD,RT=; line : I12 : Line number, IntrepidLineNumber
-DEFN 6 ST=RECD,RT=; fiducial : F12.2 : Fiducial number, IntrepidFiducial
-DEFN 7 ST=RECD,RT=; easting : F10.1 : UNITS = m , IntrepidX
-DEFN 8 ST=RECD,RT=; northing : F10.1 : UNITS = m , IntrepidY
+DEFN 4 ST=RECD,RT=; flight : I12 : Flight number, FlightNumber
+DEFN 5 ST=RECD,RT=; line : I12 : Line number, LineNumber
+DEFN 6 ST=RECD,RT=; fiducial : F12.2 : Fiducial number, Fiducial
+DEFN 7 ST=RECD,RT=; easting : F10.1 : UNITS = m , X
+DEFN 8 ST=RECD,RT=; northing : F10.1 : UNITS = m , Y
 DEFN 9 ST=RECD,RT=; elevation : F10.2 : UNITS = m , Ground elevation relative to sea-level
 DEFN 10 ST=RECD,RT=; tx_height : F9.2 : UNITS = m , Input Tx height above ground level
 DEFN 11 ST=RECD,RT=; tx_roll : F9.2 : UNITS = degrees , Input Tx roll - left side up + ve
 DEFN 12 ST=RECD,RT=; tx_pitch : F9.2 : UNITS = degrees , Input Tx pitch - nose down + ve
 DEFN 13 ST=RECD,RT=; tx_yaw : F9.2 : UNITS = degrees , Input Tx yaw - turn left + ve
-DEFN 14 ST=RECD,RT=; txrx_dx : F9.2 : UNITS = m , Input Tx - Rx horizonatl inline separation
-DEFN 15 ST=RECD,RT=; txrx_dy : F9.2 : UNITS = m , Input Tx - Rx horizonatl transverse separation
+DEFN 14 ST=RECD,RT=; txrx_dx : F9.2 : UNITS = m , Input Tx - Rx horizontal inline separation
+DEFN 15 ST=RECD,RT=; txrx_dy : F9.2 : UNITS = m , Input Tx - Rx horizontal transverse separation
 DEFN 16 ST=RECD,RT=; txrx_dz : F9.2 : UNITS = m , Input Tx - Rx vertical separation
 DEFN 17 ST=RECD,RT=; rx_roll : F9.2 : UNITS = degrees , Input Rx roll - left side up + ve
 DEFN 18 ST=RECD,RT=; rx_pitch : F9.2 : UNITS = degrees , Input Rx pitch - nose down + ve
 DEFN 19 ST=RECD,RT=; rx_yaw : F9.2 : UNITS = degrees , Input Rx yaw - turn left + ve
-DEFN 20 ST=RECD,RT=; inverted_txrx_dx : F9.2 : UNITS = m , Inverted Tx - Rx horizonatl inline separation
+DEFN 20 ST=RECD,RT=; inverted_txrx_dx : F9.2 : UNITS = m , Inverted Tx - Rx horizontal inline separation
 DEFN 21 ST=RECD,RT=; inverted_txrx_dz : F9.2 : UNITS = m , Inverted Tx - Rx vertical separation
 DEFN 22 ST=RECD,RT=; inverted_rx_pitch : F9.2 : UNITS = degrees , Inverted Rx pitch - nose down + ve
 DEFN 23 ST=RECD,RT=; nlayers : I4 : Number of layers

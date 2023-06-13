@@ -95,15 +95,23 @@ class Data(Dataset_gs):
 
         dic = json.loads(s)
 
-        #assert 'key_mapping' in dic, ValueError('Need to define key_mapping for required keys {} in supplemental'.format(key_mapping.required_keys))
-        # if "key_mapping" in dic.keys():
-        #     self.key_mapping = key_mapping(dic.get('key_mapping'))
+        def check_key_whitespace(this, flag=False):
+            if not isinstance(this, dict):
+                return flag
+            for key, item in this.items():
+                if ' ' in key:
+                    print('key "{}" contains whitespace. Please remove!'.format(key))
+                    flag = True
+                flag = check_key_whitespace(item, flag)
+            return flag
 
-        # if not 'raster_files' in dic or not 'variable_metadata' in dic:
-        #     self.write_metadata_template()
-        #     raise Exception("Please re-run and specify supplemental information when instantiating Raster")
+        flag = check_key_whitespace(dic)
+        assert not flag, Exception("Metadata file {} has keys with whitespace.  Please remove spaces")
 
-        #return dic, Path(filename).parent.absolute()
+        if 'coordinates' in dic:
+            for key, value in dic['coordinates'].items():
+                dic['coordinates'][key] = value.strip()
+
         return dic
 
     @classmethod

@@ -88,7 +88,7 @@ class Raster(Data):
                 assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
                 if isinstance(dimensions[key], dict):
                     # dicts are defined explicitly in the json file.
-                    self = self.add_coordinate_from_dict(b, **dimensions[key])
+                    self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
             var_meta = variable_metadata(**json_md['variable_metadata'])
 
@@ -173,7 +173,7 @@ class Raster(Data):
                 self = self.add_coordinate_from_values(coord,
                                                        ds[coord].values,
                                                        is_projected=self.is_projected,
-                                                       dimensions=coord,
+                                                       is_dimension=True,
                                                        **json_metadata['variable_metadata'][coordinates[coord]])
                 # If coord already exists, pass ...
                 # Assumes existing coord matches!!!!!
@@ -216,8 +216,8 @@ class Raster(Data):
         #         raise NotImplementedError("Need to reproject input file to match survey spatial ref, for variable {}".format(name))
         else:
             print('WARNING: cannot identify CRS for input [{}] raster, will assume the data matches the survey spatial_ref!'.format(name))
-        
-        
+
+
 
         # Reproject if input CRS does not match Survey
         # if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:

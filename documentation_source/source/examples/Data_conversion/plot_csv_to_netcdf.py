@@ -19,21 +19,21 @@ from gspy import Survey
 # Path to example files
 data_path = '..//supplemental//'
 
-metadata = data_path + "region//MAP//data//Resolve_survey_information.json"
+metadata = data_path + "region//MAP//data//Resolve_survey_md.json"
 
 # Establish the Survey
 survey = Survey(metadata)
 
 # Define input CSV-format data file and associated variable mapping file
 d_data = data_path + 'region//MAP//data//Resolve.csv'
-d_supp = data_path + 'region//MAP//data//Resolve_data_information.json'
+d_supp = data_path + 'region//MAP//data//Resolve_data_md.json'
 
 # Read data and format as Linedata class object
 survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
 
 # Define input CSV-format model file and associated variable mapping file
 m_data = data_path + 'region//MAP//model//Resolve_model_0_reformatted.csv'
-m_supp = data_path + 'region//MAP//model//Resolve_model_information.json'
+m_supp = data_path + 'region//MAP//model//Resolve_model_md.json'
 
 # Read model data and format as Linemodel class object
 survey.add_tabular(type='csv', data_filename=m_data, metadata_file=m_supp)
@@ -55,4 +55,4 @@ plt.ylim([1175000, 1210000])
 
 plt.figure()
 new_survey.tabular[1].scatter('DEM')
-# plt.show()
+plt.show()

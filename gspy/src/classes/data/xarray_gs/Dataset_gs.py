@@ -27,7 +27,7 @@ class Dataset_gs(Dataset):
     #     kwargs = flatten(kwargs, '', {})
     #     self.attrs.update(kwargs)
 
-    def add_coordinate_from_dict(self, name, discrete=False, **kwargs):
+    def add_coordinate_from_dict(self, name, discrete=False, is_dimension=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset from a dictionary.
 
         If 'bounds' are not defined inside the dict, the coordinate is discrete.
@@ -69,7 +69,7 @@ class Dataset_gs(Dataset):
 
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
         # Add the actual coordinate values
-        self[name] = Coordinate_gs.from_dict(name, discrete, self.is_projected, **kwargs)
+        self[name] = Coordinate_gs.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
 
         # Add the bounds of the coordinate
         if not discrete or bounding_dict['bounds'] is not None:
@@ -77,11 +77,22 @@ class Dataset_gs(Dataset):
 
         return self
 
-    def add_coordinate_from_values(self, name, values, discrete=False, **kwargs):
+    def add_coordinate_from_values(self, name, values, discrete=False, is_dimension=False, **kwargs):
 
+        """IF its a dimension coordinate.  No need to specify dimensions, or coords.
+           If its a non-dimensions coordinate. Need to specify dims.
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
-        self[name] = Coordinate_gs.from_values(name, values, discrete, **kwargs)
+        if (not is_dimension) and ('dimensions' in kwargs):
+            kwargs['coords'] = kwargs.pop('coords', {key:self[key] for key in kwargs['dimensions']})
+
+        self[name] = Coordinate_gs.from_values(name, values, is_dimension=is_dimension, **kwargs)
         self = self.assign_coords({name : self[name]})
 
         # Add the bounds of the coordinate
@@ -116,7 +127,7 @@ class Dataset_gs(Dataset):
             self = self.add_coordinate_from_values('nv',
                                                    r_[0, 1],
                                                    is_projected=False,
-                                                   dimensions=['nv'],
+                                                   is_dimension=True,
                                                    discrete=True,
                                                    **dict(standard_name = 'number_of_vertices',
                                                           long_name = 'Number of vertices for bounding variables',

@@ -112,7 +112,7 @@ class Survey(object):
         """
         self._raster.append(Raster.read(*args, spatial_ref=self.spatial_ref, **kwargs))
 
-    def add_tabular(self, *args, **kwargs):
+    def add_tabular(self, type, data_filename, metadata_file=None, **kwargs):
         """Add Tabular data to the survey
 
         See Also
@@ -120,7 +120,20 @@ class Survey(object):
         gspy.Tabular : For instantiation/reading requirements
 
         """
-        self._tabular.append(Tabular.read(*args, spatial_ref=self.spatial_ref, **kwargs))
+        from ..data import tabular_aseg
+        from ..data import tabular_csv
+        # from . import tabular_netcdf
+
+        if type == 'aseg':
+            out = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
+
+        elif type == 'csv':
+            out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
+
+        elif type == 'netcdf':
+            out = Tabular.read_netcdf(data_filename, spatial_ref=self.spatial_ref, **kwargs)
+
+        self._tabular.append(out)
 
     def read_metadata(self, filename=None):
         """Read metadata for the survey
@@ -271,7 +284,7 @@ class Survey(object):
         if 'tabular' in groups:
             rootgrp = Dataset(filename)
             for i in rootgrp.groups['survey'].groups['tabular'].groups:
-                self._tabular.append(Tabular.read(type='netcdf', data_filename=filename, metadata_file=None, spatial_ref=self.spatial_ref, group='survey/tabular/{}'.format(int(i)), **kwargs))
+                self.add_tabular(type='netcdf', data_filename=filename, metadata_file=None, group='survey/tabular/{}'.format(int(i)), **kwargs)
             rootgrp.close()
 
         if 'raster' in groups:

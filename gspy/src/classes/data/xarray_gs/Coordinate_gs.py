@@ -6,7 +6,7 @@ class Coordinate_gs(DataArray_gs):
     __slots__ = ()
 
     @classmethod
-    def from_dict(cls, name, discrete=False, is_projected=False, **kwargs):
+    def from_dict(cls, name, is_projected=False, is_dimension=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset from a dictionary.
 
         If 'bounds' are not defined inside the dict, the coordinate is discrete.
@@ -46,46 +46,35 @@ class Coordinate_gs(DataArray_gs):
 
         """
         if 'centers' in kwargs:
-            centers = kwargs.pop('centers')
+            values = kwargs.pop('centers')
 
         else:
             assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError("Explicit dimension definition {} must have 'origin', 'increment', 'length".format(name))
             x0, dx, nx = kwargs.pop('origin'), kwargs.pop('increment'), kwargs.pop('length')
-            centers = (arange(nx) * dx) + x0
-
-        kwargs['standard_name'] = cls.check_is_projected(name, is_projected)
-
-        cls.check_standard_coordinates(name, **kwargs)
+            values = (arange(nx) * dx) + x0
 
         # Add a check for units to conform to ARC reading
         if 'units' in kwargs:
             if kwargs['units'] == 'm':
                 kwargs['units'] = 'meters'
 
-        if not 'str' in [type(val) for val in centers]:
-            kwargs['valid_range'] = cls.valid_range(centers, **kwargs)
-
-        if discrete:
-            self = cls(centers,
-                    dims=[name],
-                    attrs=kwargs)
-
-        else:
-            self = cls(centers,
-                    dims=[name],
-                    coords=kwargs.pop('coords', {name: centers}),
-                    attrs=kwargs)
-
-        return self
+        return cls.from_values(name, values, is_projected, is_dimension, **kwargs)
 
     @classmethod
-    def from_values(cls, name, values, discrete=False, is_projected=False, **kwargs):
+    def from_values(cls, name, values, is_projected=False, is_dimension=False, **kwargs):
 
         kwargs['standard_name'] = cls.check_is_projected(name, is_projected)
 
         cls.check_standard_coordinates(name, **kwargs)
-        
-        return super(Coordinate_gs, cls).from_values(name, values, **kwargs)
+
+        if is_dimension:
+            dims = [name]
+            coords = {name : values}
+        else:
+            dims = kwargs.pop('dimensions')
+            coords = kwargs.pop('coords')
+
+        return super(Coordinate_gs, cls).from_values(name, values, dimensions=dims, coords=coords, **kwargs)
 
     @staticmethod
     def check_is_projected(name, is_projected):
@@ -98,9 +87,9 @@ class Coordinate_gs(DataArray_gs):
     @staticmethod
     def check_standard_coordinates(name, **kwargs):
         if name in ("x", "y", "z", "t"):
-            assert "axis" in kwargs, ValueError("coordinate definition for {} requires 'axis' defined. e.g. 'axis':'X' for x".format(name))
+            assert "axis" in kwargs, ValueError('coordinate definition for {} requires "axis" defined in the variable metadata. e.g. "axis":"X" for x'.format(name))
             if name == "z":
-                assert "positive" in kwargs, ValueError("z coordinate definition requires entry 'positive' : 'up' or 'down'")
-                assert "vertical_datum" in kwargs, ValueError("z coordinate definition requires entry 'vertical_datum', e.g. 'ground surface' ")
+                assert "positive" in kwargs, ValueError('z coordinate definition requires entry "positive" : "up" or "down"')
+                assert "vertical_datum" in kwargs, ValueError('z coordinate definition requires entry "vertical_datum", e.g. "ground surface"')
             if name == "t":
-                assert "time_datum" in kwargs, ValueError("time coordinate definition requires entry for 'time_datum', e.g. 'Jan-01-1900'")
+                assert "time_datum" in kwargs, ValueError('time coordinate definition requires entry for "time_datum", e.g. "Jan-01-1900"')

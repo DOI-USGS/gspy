@@ -5,6 +5,7 @@ from pprint import pprint
 
 import xarray as xr
 import numpy as np
+from numpy import arange, int32
 
 from .Data import Data
 
@@ -50,6 +51,18 @@ class Tabular(Data):
     def _allowed_file_types(self):
         return ('aseg', 'csv', 'netcdf')
 
+    @staticmethod
+    def count_column_headers(columns):
+        out = {}
+        for col in columns:
+            if '[' in col:
+                col = col.split('[')[0]
+            if col in out:
+                out[col] += 1
+            else:
+                out[col] = 1
+        return out
+
     @property
     def is_netcdf(self):
         return self.type == 'netcdf'
@@ -82,17 +95,104 @@ class Tabular(Data):
         assert value in self._allowed_file_types, ValueError('type must be in {}'.format(self._allowed_file_types))
         self._type = value
 
-    # @property
-    # def variables(self):
-    #     return list(self.data_vars.keys())
+    @classmethod
+    def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
 
-    # @Data.xarray.setter
-    # def xarray(self, value):
-    #     assert isinstance(value, xr.Dataset), TypeError("xarray must have type xarray.Dataset")
-    #     self._xarray = value
+        self = cls()
 
-        # Combine multi-columns into single 2D xarray
-        #self.__reconcile_xarray()
+        self = self.set_spatial_ref(spatial_ref)
+
+        # Read the GSPy json file.
+        json_md = self.read_metadata(metadata_file)
+
+        file = self.file_handler.read(filename)
+
+        # Add the index coordinate
+        self = self.add_coordinate_from_values('index',
+                                               arange(file.nrecords, dtype=int32),
+                                               discrete = True,
+                                               is_dimension=True,
+                                               **{'standard_name' : 'index',
+                                                  'long_name' : 'Index of individual data points',
+                                                  'units' : 'not_defined',
+                                                  'null_value' : 'not_defined'})
+
+        # Add the user defined coordinates-dimensions from the json file
+        dimensions = json_md['dimensions']
+        coordinates = json_md['coordinates']
+        reverse_coordinates = {v:k for k,v in coordinates.items()}
+
+        for key in list(dimensions.keys()):
+            b = reverse_coordinates.get(key, key)
+            assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
+            if isinstance(dimensions[key], dict):
+                # dicts are defined explicitly in the json file.
+                self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+
+        # Write out a template json file when no variable metadata is found
+        if not 'variable_metadata' in json_md:
+            # ??? Fix Me
+            cls._create_variable_metadata_template(filename, file.df.columns)
+
+        # Add in the spatio-temporal coordinates
+        for key in list(coordinates.keys()):
+            coord = coordinates[key].strip()
+            discrete = key in ('x', 'y', 'z', 't')
+
+            dic = self.get_attrs(file, coord, **json_md['variable_metadata'].get(coord, {}))
+
+            # Might need to handle already added coords from the dimensions dict.
+            self = self.add_coordinate_from_values(key,
+                                                   file.df[coord].values,
+                                                   dimensions=["index"],
+                                                   discrete = discrete,
+                                                   is_projected = self.is_projected,
+                                                   is_dimension=False,
+                                                   **dic)
+
+        column_counts = cls.count_column_headers(file.columns)
+
+        # Now we have all dimensions and coordinates defined.
+        # Start adding the data variables
+        for var in column_counts:
+            if not var in coordinates.keys():
+                all_columns = sorted(list(file.df.columns))
+
+                var_meta = self.get_attrs(file, var, **json_md['variable_metadata'].get(var, {}))
+
+                # Use a column from the CSV file and add it as a variable
+                if var in all_columns:
+                    self.add_variable_from_values(var,
+                                                  file.df[var].values,
+                                                  dimensions = ["index"],
+                                                  **var_meta)
+
+                else: # The CSV column header is a 2D variable with [x] in the column name
+                    values = None
+                    # check for raw_data_columns to combine
+                    if 'raw_data_columns' in var_meta:
+                        values = file.df[var_meta['raw_data_columns']].values
+
+                    # if variable has multiple columns with [i] increment, to be combined
+                    elif (var in column_counts) and (column_counts[var] > 1):
+                        values = file.df[["{}[{}]".format(var, i) for i in range(column_counts[var])]].values
+
+                    assert values is not None, ValueError(('{} not in data file, double check, '
+                                                          'raw_data_columns field required in variable_metadata '
+                                                          'if needing to combine unique columns to new variable without an [i] increment').format(var))
+
+                    assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]')
+                    assert all([dim in self.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self.dims))
+
+                    self.add_variable_from_values(var, values, **var_meta)
+
+        # add global attrs to tabular, skip variable_metadata and dimensions
+        self.update_attrs(**json_md['dataset_attrs'])
+
+        return self
+
+
+
 
     @classmethod
     def read_netcdf(cls, filename, group, **kwargs):
@@ -122,40 +222,6 @@ class Tabular(Data):
             for key in dic.keys():
                 self[variable.strip()].attrs[key] = dic[key]
 
-    @classmethod
-    def read(cls, type, data_filename, metadata_file, spatial_ref=None, **kwargs):
-        """Read different types of data files
-
-        Calls on appropriate read function based on data file type
-
-        Parameters
-        ----------
-        filename : str
-            Csv filename to read from.
-        metadata_file : str, optional
-            Json file to pull variable metadata from, by default None
-        spatial_ref : gspy.Spatial_ref, optional
-            Spatial reference system, by default None
-
-        Returns
-        -------
-        self : gspy.Tabular
-
-        """
-        from . import tabular_aseg
-        from . import tabular_csv
-        # from . import tabular_netcdf
-
-        if type == 'aseg':
-            out = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
-
-        elif type == 'csv':
-            out = tabular_csv.Tabular_csv.read(data_filename, metadata_file, spatial_ref=spatial_ref, **kwargs)
-
-        elif type == 'netcdf':
-            out = Tabular.read_netcdf(data_filename, spatial_ref=spatial_ref, **kwargs)
-
-        return out
 
     def create_variable_metadata_template(self, filename):
         """Generates a template metadata file.

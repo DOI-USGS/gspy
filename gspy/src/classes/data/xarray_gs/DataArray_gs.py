@@ -1,5 +1,7 @@
 from copy import deepcopy
-from numpy import arange, asarray, diff, median, nanmax, nanmin, r_, zeros, nan
+from numpy import arange, asarray, diff, isnan, median, nanmax, nanmin, r_, zeros, nan, min,max
+from numpy import any as npany
+from numpy import dtype as npdtype
 from xarray import DataArray
 
 class DataArray_gs(DataArray):
@@ -48,36 +50,45 @@ class DataArray_gs(DataArray):
 
     @classmethod
     def from_values(cls, name, values, **kwargs):
+        values = cls.catch_nan(values, name=name, **kwargs)
+
+        if not isinstance(values[0], str):
+            kwargs['valid_range'] = cls.valid_range(values, **kwargs)
+
+        kwargs['grid_mapping'] = kwargs.pop('grid_mapping', 'spatial_ref')
 
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        if not values.dtype == 'object':
-            kwargs['valid_range'] = cls.valid_range(values, **kwargs)
-
-        dims = kwargs.pop('dimensions')
-
-        if 'coords' in kwargs:
-        # coords = kwargs.pop('coords', None)
-            out = cls(values,
-                    dims=dims,
-                    coords=kwargs.pop('coords'),
-                    attrs=kwargs)
-        else:
-            out = cls(values,
-                    dims=dims,
-                    attrs=kwargs)
+        out = cls(values,
+                dims=kwargs.pop('dimensions'),
+                coords=kwargs.pop('coords'),
+                attrs=kwargs)
 
         return out
 
     @staticmethod
-    def valid_range(values, **kwargs):
+    def catch_nan(values, name, **kwargs):
+
+        if isinstance(values[0], str):
+            return values
 
         nv = kwargs.get('null_value', 'not_defined')
 
         if nv == 'not_defined':
-            return r_[nanmin(values), nanmax(values)]
+            assert not npany(isnan(values)), ValueError(("\nThere are NaNs or Empty values in data column {} and no defined null value in the json metadata file.\n"
+                                                         "Define the 'null_value' for {} in the json file").format(name, name))
         else:
-            tmp = values.copy()
-            tmp[tmp == nv] = nan
-            return r_[nanmin(tmp), nanmax(tmp)]
+            values[isnan(values)] = nv
+        return values
+
+    @staticmethod
+    def valid_range(values, **kwargs):
+        nv = kwargs.get('null_value', 'not_defined')
+
+        if nv == 'not_defined':
+            return asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
+        else:
+            assert not isinstance(nv, str), ValueError("Numerical null_value defined as a string in json file for variable {}.  Please make it a number".format(kwargs['standard_name']))
+            tmp = values[values != nv]
+            return asarray([min(tmp), max(tmp)], dtype=kwargs.get('dtype', None))
