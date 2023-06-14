@@ -1,5 +1,5 @@
 from copy import deepcopy
-from numpy import arange, asarray, diff, isnan, median, nanmax, nanmin, r_, zeros, nan, min,max
+from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, r_, std, zeros, nan, min,max
 from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray
@@ -36,7 +36,7 @@ class DataArray_gs(DataArray):
         attrs = coordinate.attrs.copy()
         attrs['standard_name'] = coordinate.attrs['standard_name'] + '_bounds'
         attrs['long_name'] = coordinate.attrs['long_name'] + ' cell boundaries'
-        attrs['valid_range'] = cls.valid_range(bounds, **kwargs)
+        attrs['valid_range'] = cls.valid_range(bounds, name, **kwargs)
 
         dims = kwargs.pop('dims')
         coords = kwargs.pop('coords')
@@ -53,7 +53,7 @@ class DataArray_gs(DataArray):
         values = cls.catch_nan(values, name=name, **kwargs)
 
         if not isinstance(values[0], str):
-            kwargs['valid_range'] = cls.valid_range(values, **kwargs)
+            kwargs['valid_range'] = cls.valid_range(values, name=name, **kwargs)
 
         kwargs['grid_mapping'] = kwargs.pop('grid_mapping', 'spatial_ref')
 
@@ -83,12 +83,24 @@ class DataArray_gs(DataArray):
         return values
 
     @staticmethod
-    def valid_range(values, **kwargs):
+    def valid_range(values, name, **kwargs):
+
+        # kwargs.pop('coords')
         nv = kwargs.get('null_value', 'not_defined')
 
         if nv == 'not_defined':
-            return asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
+            valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
             assert not isinstance(nv, str), ValueError("Numerical null_value defined as a string in json file for variable {}.  Please make it a number".format(kwargs['standard_name']))
             tmp = values[values != nv]
-            return asarray([min(tmp), max(tmp)], dtype=kwargs.get('dtype', None))
+            valid_range = asarray([min(tmp), max(tmp)], dtype=kwargs.get('dtype', None))
+
+        # from scipy.stats import trimboth
+        # b = trimboth(values, 0.05, axis=None)
+        # m = mean(b)
+        # s = std(b)
+        # low, high = m - 20*s, m + 100*s
+
+        # assert valid_range[0] >= low, ValueError('variable {} has no defined null value, but detected limits {} with possible null values'.format(name, valid_range))
+
+        return valid_range

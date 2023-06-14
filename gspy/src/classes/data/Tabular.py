@@ -152,13 +152,26 @@ class Tabular(Data):
 
         column_counts = cls.count_column_headers(file.columns)
 
+        # Combine the column headers in the file with keys from the json metadata
+        # If there is a variable with raw columns specified, we need to remove those individual columns
+        # Otherwise they are duplicated.
+        for key, item in json_md['variable_metadata'].items():
+            if key not in column_counts:
+                if 'raw_data_columns' in item:
+                    for raw_key in item['raw_data_columns']:
+                        del column_counts[raw_key]
+                column_counts[key] = 'None'
+
         # Now we have all dimensions and coordinates defined.
         # Start adding the data variables
         for var in column_counts:
+
+            var_meta = self.get_attrs(file, var, **json_md['variable_metadata'].get(var, {}))
+
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
 
-                var_meta = self.get_attrs(file, var, **json_md['variable_metadata'].get(var, {}))
+
 
                 # Use a column from the CSV file and add it as a variable
                 if var in all_columns:
@@ -221,6 +234,17 @@ class Tabular(Data):
         if not dic is None:
             for key in dic.keys():
                 self[variable.strip()].attrs[key] = dic[key]
+
+    def check_valid_range(self):
+
+        import numpy as np
+        lows = np.zeros(len(self.keys()))
+        highs = np.zeros(len(self.keys()))
+        for i, key in enumerate(self.keys()):
+            lows[i], highs[i] = self[key].attrs['valid_range']
+
+        return np.min(lows), np.max(highs)
+
 
 
     def create_variable_metadata_template(self, filename):
@@ -285,87 +309,87 @@ class Tabular(Data):
     #     newnames=[name.strip().replace(' ', '_') for name in oldnames]
     #     self._xarray = self.rename({oldnames[i]: newnames[i] for i in range(len(newnames))})
 
-    def update_dimensions(self, variable_metadata):
-        """Update the dimensions in the xarray object.
+    # def update_dimensions(self, variable_metadata):
+    #     """Update the dimensions in the xarray object.
 
-        Parameters
-        ----------
-        variable_metadata : dict
-            Dictionary of variable metadata
+    #     Parameters
+    #     ----------
+    #     variable_metadata : dict
+    #         Dictionary of variable metadata
 
-        """
+    #     """
 
-        dimensions = [variable_metadata[var]["dimensions"] for var in variable_metadata if "dimensions" in variable_metadata[var]]
-        dimensions = np.unique([dimdim for dim in dimensions for dimdim in dim if dimdim != "index" ])
+    #     dimensions = [variable_metadata[var]["dimensions"] for var in variable_metadata if "dimensions" in variable_metadata[var]]
+    #     dimensions = np.unique([dimdim for dim in dimensions for dimdim in dim if dimdim != "index" ])
 
-        for dim in dimensions:
+    #     for dim in dimensions:
 
-            vars = [var for var in variable_metadata if "dimensions" in variable_metadata[var] and dim in variable_metadata[var]["dimensions"]]
-            for var in vars:
+    #         vars = [var for var in variable_metadata if "dimensions" in variable_metadata[var] and dim in variable_metadata[var]["dimensions"]]
+    #         for var in vars:
 
-                if "bounds" in variable_metadata[dim].keys():
+    #             if "bounds" in variable_metadata[dim].keys():
 
-                    assert len(variable_metadata[dim]["bounds"])-len(variable_metadata[dim]["centers"]) == 1, ValueError('size of dimension bounds must be +1 size of centers')
+    #                 assert len(variable_metadata[dim]["bounds"])-len(variable_metadata[dim]["centers"]) == 1, ValueError('size of dimension bounds must be +1 size of centers')
 
-                    cntkey = '{}_centers'.format(dim)
-                    bndkey = '{}_bnds'.format(dim)
-                    bnds_attrs = {'standard_name' : '{}_bnds'.format(variable_metadata[dim]["standard_name"].lower()),
-                                        'long_name' : '{} bounds'.format(variable_metadata[dim]["long_name"]),
-                                        'units' : variable_metadata[dim]["units"],
-                                        'null_value' : variable_metadata[dim]["null_value"]}
-                    cntr_attrs = {'standard_name' : '{}_centers'.format(variable_metadata[dim]["standard_name"].lower()),
-                                        'long_name' : '{} centers'.format(variable_metadata[dim]["long_name"]),
-                                        'units' : variable_metadata[dim]["units"],
-                                        'null_value' : variable_metadata[dim]["null_value"],
-                                        'bounds' : bndkey}
+    #                 cntkey = '{}_centers'.format(dim)
+    #                 bndkey = '{}_bnds'.format(dim)
+    #                 bnds_attrs = {'standard_name' : '{}_bnds'.format(variable_metadata[dim]["standard_name"].lower()),
+    #                                     'long_name' : '{} bounds'.format(variable_metadata[dim]["long_name"]),
+    #                                     'units' : variable_metadata[dim]["units"],
+    #                                     'null_value' : variable_metadata[dim]["null_value"]}
+    #                 cntr_attrs = {'standard_name' : '{}_centers'.format(variable_metadata[dim]["standard_name"].lower()),
+    #                                     'long_name' : '{} centers'.format(variable_metadata[dim]["long_name"]),
+    #                                     'units' : variable_metadata[dim]["units"],
+    #                                     'null_value' : variable_metadata[dim]["null_value"],
+    #                                     'bounds' : bndkey}
 
-                    if not cntkey in self.variables:
+    #                 if not cntkey in self.variables:
 
-                        bounds = np.array((variable_metadata[dim]["bounds"][:-1], variable_metadata[dim]["bounds"][1:])).transpose()
+    #                     bounds = np.array((variable_metadata[dim]["bounds"][:-1], variable_metadata[dim]["bounds"][1:])).transpose()
 
-                        self[bndkey] = xr.DataArray(bounds,
-                                dims=[cntkey, 'nv'],
-                                #coords={cntkey: dimensions[dim]["centers"], 'nv': np.array([0,1])},
-                                attrs=bnds_attrs)
+    #                     self[bndkey] = xr.DataArray(bounds,
+    #                             dims=[cntkey, 'nv'],
+    #                             #coords={cntkey: dimensions[dim]["centers"], 'nv': np.array([0,1])},
+    #                             attrs=bnds_attrs)
 
-                        self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
-                                dims=[cntkey],
-                                #coords={cntkey: dimensions[dim]["centers"]},
-                                attrs=cntr_attrs)
-                else:
+    #                     self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
+    #                             dims=[cntkey],
+    #                             #coords={cntkey: dimensions[dim]["centers"]},
+    #                             attrs=cntr_attrs)
+    #             else:
 
-                    cntkey = '{}'.format(dim)
-                    cntr_attrs = {'standard_name' : '{}'.format(variable_metadata[dim]["standard_name"].lower()),
-                                        'long_name' : '{}'.format(variable_metadata[dim]["long_name"]),
-                                        'units' : variable_metadata[dim]["units"],
-                                        'null_value' : variable_metadata[dim]["null_value"]}
+    #                 cntkey = '{}'.format(dim)
+    #                 cntr_attrs = {'standard_name' : '{}'.format(variable_metadata[dim]["standard_name"].lower()),
+    #                                     'long_name' : '{}'.format(variable_metadata[dim]["long_name"]),
+    #                                     'units' : variable_metadata[dim]["units"],
+    #                                     'null_value' : variable_metadata[dim]["null_value"]}
 
-                    if not cntkey in self.variables:
-                        self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
-                                dims=[cntkey],
-                                attrs=cntr_attrs)
+    #                 if not cntkey in self.variables:
+    #                     self[cntkey] = xr.DataArray(variable_metadata[dim]["centers"],
+    #                             dims=[cntkey],
+    #                             attrs=cntr_attrs)
 
-                self[var] = self[var].swap_dims({
-                    [dm for dm in self[var].dims if 'channel' in dm][0]: cntkey})
+    #             self[var] = self[var].swap_dims({
+    #                 [dm for dm in self[var].dims if 'channel' in dm][0]: cntkey})
 
-                # replace attrs which get erased when swap dims, needs a better fix!!!!!
-                self[cntkey].attrs.update(cntr_attrs)
-                if "bounds" in variable_metadata[dim].keys():
-                    self[bndkey].attrs.update(bnds_attrs)
+    #             # replace attrs which get erased when swap dims, needs a better fix!!!!!
+    #             self[cntkey].attrs.update(cntr_attrs)
+    #             if "bounds" in variable_metadata[dim].keys():
+    #                 self[bndkey].attrs.update(bnds_attrs)
 
-        if 'nv' in self.dims:
-            self['nv'].attrs = {'standard_name': 'number_of_vertices',
-              'long_name' : 'Number of vertices for bounding variables',
-              'units' : 'not_defined',
-              'null_value' : 'not_defined'}
+    #     if 'nv' in self.dims:
+    #         self['nv'].attrs = {'standard_name': 'number_of_vertices',
+    #           'long_name' : 'Number of vertices for bounding variables',
+    #           'units' : 'not_defined',
+    #           'null_value' : 'not_defined'}
 
-        if 'index' in self.dims:
-            self['index'].attrs = {'standard_name': 'index',
-              'long_name' : 'Index of individual data points',
-              'units' : 'not_defined',
-              'null_value' : 'not_defined'}
+    #     if 'index' in self.dims:
+    #         self['index'].attrs = {'standard_name': 'index',
+    #           'long_name' : 'Index of individual data points',
+    #           'units' : 'not_defined',
+    #           'null_value' : 'not_defined'}
 
-        return
+    #     return
 
     # def set_spatial_ref(self):
     #     s = [self.key_mapping['easting'], self.key_mapping['northing']]

@@ -320,7 +320,7 @@
                 "standard_name": "in_phase_final",
                 "long_name": "In-phase frequency data, final levelled",
                 "units": "Parts per million (ppm)",
-                "null_value": "not_defined",
+                "null_value": -9999.0,
                 "dimensions": ["index", "frequency"],
                 "raw_data_columns": ["cpi400", "cpi1800", "cxi3300", "cpi8200", "cpi40k", "cpi140k"],
                 "em_system_components" : [0,1,2,3,4,5]
@@ -329,7 +329,7 @@
                 "standard_name": "quadrature_final",
                 "long_name": "Quadrature frequency data, final levelled",
                 "units": "Parts per million (ppm)",
-                "null_value": "not_defined",
+                "null_value": -9999.0,
                 "dimensions": ["index", "frequency"],
                 "raw_data_columns": ["cpq400", "cpq1800", "cxq3300", "cpq8200", "cpq40k", "cpq140k"],
                 "em_system_components" : [0,1,2,3,4,5]
@@ -549,7 +549,7 @@
                 "standard_name": "not_defined",
                 "long_name": "not_defined",
                 "units": "not_defined",
-                "null_value": "not_defined",
+                "null_value": -9999.0,
                 "dimensions": ["index", "spec_sample"]
 
             },

@@ -56,6 +56,7 @@ plt.figure()
 new_survey.tabular[1].scatter('PhiD')
 
 print(new_survey.tabular[0])
-print(new_survey.tabular[0].x.attrs)
+print(new_survey.tabular[0]['x'].attrs)
+print(new_survey.tabular[0]['EMX_HPRG'])
 
 plt.show()

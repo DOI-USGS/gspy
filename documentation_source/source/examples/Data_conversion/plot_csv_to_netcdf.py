@@ -55,4 +55,8 @@ plt.ylim([1175000, 1210000])
 
 plt.figure()
 new_survey.tabular[1].scatter('DEM')
+
+print(new_survey.tabular[0]['qd_final'])
+print(new_survey.tabular[1]['RHO_I'])
+
 plt.show()
