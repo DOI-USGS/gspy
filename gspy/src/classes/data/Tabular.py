@@ -131,7 +131,7 @@ class Tabular(Data):
 
         # Write out a template json file when no variable metadata is found
         if not 'variable_metadata' in json_md:
-            # ??? Fix Me
+            # ??? Fix Me for ASEG
             cls._create_variable_metadata_template(filename, file.df.columns)
 
         # Add in the spatio-temporal coordinates
@@ -434,7 +434,7 @@ class Tabular(Data):
         out : gspy.Tabular
 
         """
-        out = type(self)(type=None, data_filename=None, metadata_file=None,  spatial_ref=self.spatial_ref)
+        out = type(self)()
 
         out._xarray = self.where(self[key] == value)
         out._spatial_ref = self.spatial_ref

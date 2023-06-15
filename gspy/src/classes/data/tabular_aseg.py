@@ -7,7 +7,6 @@ import fortranformat as ff
 from numpy import arange, int32
 import numpy as np
 import xarray as xr
-# import aseg_gdf2
 # from aseg_gdf2 import read as read_aseg_gdf2
 from ...utilities.aseg_gdf_handler import aseg_gdf2_gs
 

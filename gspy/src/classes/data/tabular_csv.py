@@ -165,7 +165,6 @@ class Tabular_csv(Tabular):
         ValueError : When the csv metadata file does not contain entries for each csv column.
 
         """
-
         tmp_dic = {'variable_metadata':{}}
 
         columns = sorted(list(columns))
@@ -173,7 +172,7 @@ class Tabular_csv(Tabular):
         for var in columns:
             tmp_dic['variable_metadata'][var] = {"standard_name": "not_defined", "long_name": "not_defined", "units": "not_defined", "null_value": "not_defined"}
 
-        out_filename = "variable_metadata_template__{}.json".format(filename.split(os.sep)[-1].split('.')[0])
+        out_filename = "variable_metadata_template_{}.json".format(filename.split(os.sep)[-1].split('.')[0])
         with open(out_filename, "w") as f:
             json.dump(tmp_dic, f, indent=4)
 
