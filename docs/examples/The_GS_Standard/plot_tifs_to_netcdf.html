@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiple TIFs to NetCDF conversion &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TIF to NetCDF conversion" href="plot_tif_to_netcdf.html" />
+    <link rel="prev" title="Converting CSV to GSpy Raster formats without metadata" href="help_I_have_no_variable_metadata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#the-gs-standard">The GS Standard</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">The GS Standard</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Converting CSV to GSpy Raster formats without metadata</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Multiple TIFs to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_csv_to_netcdf.html">CSV to NetCDF conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Plotting/index.html">Plotting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">The GS Standard</a></li>
+      <li class="breadcrumb-item active">Multiple TIFs to NetCDF conversion</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/The_GS_Standard/plot_tifs_to_netcdf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-the-gs-standard-plot-tifs-to-netcdf-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="multiple-tifs-to-netcdf-conversion">
+<span id="sphx-glr-examples-the-gs-standard-plot-tifs-to-netcdf-py"></span><h1>Multiple TIFs to NetCDF conversion<a class="headerlink" href="#multiple-tifs-to-netcdf-conversion" title="Permalink to this heading"></a></h1>
+<p>Dataset References:
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.
+James, S.R., and Minsley, B.J., 2021, Combined results and derivative products of hydrogeologic structure and properties from airborne electromagnetic surveys in the Mississippi Alluvial Plain: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9382RCI">https://doi.org/10.5066/P9382RCI</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</pre></div>
+</div>
+<section id="convert-the-tifs-data-to-netcdf">
+<h2>Convert the TIFs data to netcdf<a class="headerlink" href="#convert-the-tifs-data-to-netcdf" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;../supplemental/region/MAP/data/&quot;</span>
+
+<span class="c1"># Define supplemental information file</span>
+<span class="n">supplemental</span> <span class="o">=</span> <span class="n">data_folder</span> <span class="o">+</span> <span class="s2">&quot;Tempest_survey_md.json&quot;</span>
+
+<span class="c1"># Add supplemental information to the survey</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">supplemental</span><span class="p">)</span>
+
+<span class="c1"># Define input TIF-format data file and associated variable mapping file</span>
+<span class="n">d_grid_supp</span> <span class="o">=</span> <span class="n">data_folder</span> <span class="o">+</span> <span class="s1">&#39;Tempest_rasters_md.json&#39;</span>
+
+<span class="c1"># Read data and format as Griddata class object</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span><span class="o">=</span><span class="n">d_grid_supp</span><span class="p">)</span>
+
+<span class="c1"># Write NetCDF</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="s1">&#39;../supplemental/region/MAP/data/tifs.nc&#39;</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read in the netcdf files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="p">)</span>
+
+<span class="c1"># print(new_survey.raster.z_bnds.attrs)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Raster&gt;
+Dimensions:      (z: 5, nv: 2, x: 363, y: 770)
+Coordinates:
+    spatial_ref  float64 0.0
+  * z            (z) float64 0.0 5.0 10.0 15.0 20.0
+  * nv           (nv) int64 0 1
+  * x            (x) float64 2.915e+05 2.925e+05 ... 6.525e+05 6.535e+05
+  * y            (y) float64 8.788e+05 8.798e+05 ... 1.647e+06 1.648e+06
+Data variables:
+    z_bnds       (z, nv) float64 -2.5 2.5 2.5 7.5 7.5 12.5 12.5 17.5 17.5 22.5
+    x_bnds       (x, nv) float64 2.91e+05 2.92e+05 ... 6.53e+05 6.54e+05
+    y_bnds       (y, nv) float64 8.783e+05 8.793e+05 ... 1.647e+06 1.648e+06
+    resistivity  (z, y, x) float64 nan nan nan nan nan ... nan nan nan nan nan
+Attributes:
+    comment:  &lt;additional details or ancillary information&gt;
+    content:  interpolated resistivity models
+</pre></div>
+</div>
+<p># Plotting
+plt.figure()
+new_survey.raster.pcolor(‘resistivity’, stack=0, vmin=0, vmax=3, cmap=’jet’)
+plt.show()</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.285 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-tifs-to-netcdf-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/39dd04bdbe0b552690421d7e5a726358/plot_tifs_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tifs_to_netcdf.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/d62a2eed4def18a87b07c1c2b06aeea7/plot_tifs_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tifs_to_netcdf.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="help_I_have_no_variable_metadata.html" class="btn btn-neutral float-left" title="Converting CSV to GSpy Raster formats without metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_tif_to_netcdf.html" class="btn btn-neutral float-right" title="TIF to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

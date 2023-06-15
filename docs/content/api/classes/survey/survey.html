@@ -19,7 +19,9 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -75,11 +77,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../api.html">API</a> &raquo;</li>
-          <li><a href="../classes.html">Classes</a> &raquo;</li>
-          <li><a href="index.html">Survey class</a> &raquo;</li>
-      <li>Survey</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Survey class</a></li>
+      <li class="breadcrumb-item active">Survey</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/content/api/classes/survey/survey.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,13 +92,13 @@
            <div itemprop="articleBody">
              
   <section id="survey">
-<h1>Survey<a class="headerlink" href="#survey" title="Permalink to this headline"></a></h1>
+<h1>Survey<a class="headerlink" href="#survey" title="Permalink to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-8561f14af250cb67754566df8e4241d5b69d622a.png" alt="Inheritance diagram of gspy.src.classes.survey.Survey" usemap="#inheritancecd333d4876" class="inheritance graphviz" /></div>
 <map id="inheritancecd333d4876" name="inheritancecd333d4876">
 <area shape="rect" id="node1" href="#gspy.src.classes.survey.Survey.Survey" target="_top" title="Class defining a survey or dataset collection" alt="" coords="5,5,77,31"/>
 </map><span class="target" id="module-gspy.src.classes.survey.Survey"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.survey.Survey.</span></span><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netcdf_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.survey.Survey.</span></span><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netcdf_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey" title="Permalink to this definition"></a></dt>
 <dd><p>Class defining a survey or dataset collection</p>
 <p>The Survey group contains general metadata about the survey or data colleciton as a whole.
 Information about where the data was collected, acquisition start and end dates, who collected the data,
@@ -109,7 +111,7 @@ convention, a set of global dataset attributes are required:
 * source
 * history
 * references</p>
-<p>A “coordinate_information” variable is also required within Survey and should contain all relevant information about the
+<p>A “spatial_ref” variable is also required within Survey and should contain all relevant information about the
 coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.</p>
 <p>Survey(metadata_file)</p>
 <dl class="field-list simple">
@@ -145,7 +147,7 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.add_tabular">
-<span class="sig-name descname"><span class="pre">add_tabular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.add_tabular" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_tabular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.add_tabular" title="Permalink to this definition"></a></dt>
 <dd><p>Add Tabular data to the survey</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -157,18 +159,13 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.attrs">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">attrs</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.attrs" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.json_metadata">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.json_metadata" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.json_metadata" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.raster">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">raster</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.raster" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raster</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.raster" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -185,7 +182,7 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.read_netcdf">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_netcdf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Read a survey from a netcdf file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,12 +211,12 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.spatial_ref">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.spatial_ref" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.spatial_ref" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.tabular">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tabular</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.tabular" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tabular</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.tabular" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -260,7 +257,7 @@ an Exception is raised.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.xarray">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">xarray</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.xarray" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xarray</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.xarray" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

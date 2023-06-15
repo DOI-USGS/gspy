@@ -19,12 +19,14 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="GS Convention Requirements" href="../../gspy_convention_requirements.html" />
-    <link rel="prev" title="CSV to NetCDF conversion" href="../Data_conversion/plot_csv_to_netcdf.html" /> 
+    <link rel="prev" title="Plotting" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,10 +51,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../index.html#data-conversion">Data Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#the-gs-standard">The GS Standard</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Plot Tabular Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#read-in-data-plot">Read in Data &amp; Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../The_GS_Standard/index.html">The GS Standard</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Plotting</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Plot Tabular Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -75,9 +78,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Examples</a> &raquo;</li>
-      <li>Plot Tabular Examples</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Plotting</a></li>
+      <li class="breadcrumb-item active">Plot Tabular Examples</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/Plotting/plot_tabular_from_netcdf.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,12 +97,11 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="plot-tabular-examples">
-<span id="sphx-glr-examples-plotting-plot-tabular-from-netcdf-py"></span><h1>Plot Tabular Examples<a class="headerlink" href="#plot-tabular-examples" title="Permalink to this headline"></a></h1>
+<span id="sphx-glr-examples-plotting-plot-tabular-from-netcdf-py"></span><h1>Plot Tabular Examples<a class="headerlink" href="#plot-tabular-examples" title="Permalink to this heading"></a></h1>
 <p>Dataset Reference:
 Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
-<span class="kn">from</span> <span class="nn">aseg_gdf2</span> <span class="kn">import</span> <span class="n">GDF2</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
@@ -107,7 +110,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 </pre></div>
 </div>
 <section id="read-in-data-plot">
-<h2>Read in Data &amp; Plot<a class="headerlink" href="#read-in-data-plot" title="Permalink to this headline"></a></h2>
+<h2>Read in Data &amp; Plot<a class="headerlink" href="#read-in-data-plot" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
 
@@ -122,48 +125,43 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;GPS_Elevation&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(&lt;AxesSubplot:title={&#39;center&#39;:&#39;spatial_ref = 0.0&#39;}, xlabel=&#39;Easting_Albers:PROJECTION=WGS8\n4/Albers [m]&#39;, ylabel=&#39;Northing_Albers:PROJECTION=WGS\n84/Albers [m]&#39;&gt;, &lt;matplotlib.collections.PathCollection object at 0x7fb238b4a970&gt;)
+<img src="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" alt="plot tabular from netcdf" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: &gt;, &lt;matplotlib.collections.PathCollection object at 0x7f99c87dca60&gt;)
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subset by line number</span>
-<span class="n">newld</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">&#39;Line&#39;</span><span class="p">,</span> <span class="mi">225401</span><span class="p">)</span>
-<span class="c1"># Plot the single line in map view</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">gs</span><span class="o">=</span><span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">gs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;GPS_Elevation&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
-</pre></div>
-</div>
-<img src="../../_images/sphx_glr_plot_tabular_from_netcdf_002.png" srcset="../../_images/sphx_glr_plot_tabular_from_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(&lt;AxesSubplot:title={&#39;center&#39;:&#39;spatial_ref = 0.0&#39;}, xlabel=&#39;Easting_Albers:PROJECTION=WGS8\n4/Albers [m]&#39;, ylabel=&#39;Northing_Albers:PROJECTION=WGS\n84/Albers [m]&#39;&gt;, &lt;matplotlib.collections.PathCollection object at 0x7fb248ac0f70&gt;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Subset by line number</span>
+<span class="c1"># newld = survey.tabular[0].subset(&#39;Line&#39;, 225401)</span>
+<span class="c1"># # Plot the single line in map view</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># gs=gridspec.GridSpec(1,1)</span>
+<span class="c1"># gs.update(bottom=0.12, top=0.98, left=0.2, right=0.98)</span>
+<span class="c1"># newld.scatter(&#39;GPS_Elevation&#39;, ax=plt.subplot(gs[0,0]))</span>
 </pre></div>
 </div>
 <p>Plotting</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data channels</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">gs</span><span class="o">=</span><span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">gs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax0</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;X_Powerline&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Z_Powerline&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Powerline&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Plot data channels</span>
+<span class="c1"># fig = plt.figure(figsize=(8,6))</span>
+<span class="c1"># gs=gridspec.GridSpec(4,1)</span>
+<span class="c1"># gs.update(bottom=0.12, top=0.98, left=0.15, right=0.98, hspace=0.5)</span>
+<span class="c1"># ax0=plt.subplot(gs[0,0])</span>
+<span class="c1"># newld.plot(&#39;X_Powerline&#39;, color=&#39;b&#39;, label=&#39;X&#39;)</span>
+<span class="c1"># newld.plot(&#39;Z_Powerline&#39;, color=&#39;r&#39;, label=&#39;Z&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Powerline&#39;)</span>
+<span class="c1"># plt.legend(loc=2, ncol=2)</span>
 
-<span class="n">ax1</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;RMI&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">)</span>
+<span class="c1"># ax1=plt.subplot(gs[1,0])</span>
+<span class="c1"># newld.plot(&#39;RMI&#39;, color=&#39;limegreen&#39;)</span>
 
-<span class="n">ax2</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;EMX_HPRG&#39;</span><span class="p">)</span>
+<span class="c1"># ax2=plt.subplot(gs[2,0])</span>
+<span class="c1"># newld.plot(&#39;EMX_HPRG&#39;)</span>
 
-<span class="n">ax3</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">newld</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;EMZ_HPRG&#39;</span><span class="p">);</span>
+<span class="c1"># ax3=plt.subplot(gs[3,0])</span>
+<span class="c1"># newld.plot(&#39;EMZ_HPRG&#39;);</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_tabular_from_netcdf_003.png" srcset="../../_images/sphx_glr_plot_tabular_from_netcdf_003.png" alt="plot tabular from netcdf" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.305 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plotting-plot-tabular-from-netcdf-py">
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.552 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plotting-plot-tabular-from-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/579abc0663acd5b1410424e3c346d4da/plot_tabular_from_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tabular_from_netcdf.py</span></code></a></p>
 </div>
@@ -179,7 +177,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../Data_conversion/plot_csv_to_netcdf.html" class="btn btn-neutral float-left" title="CSV to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Plotting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

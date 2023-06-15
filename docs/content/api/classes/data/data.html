@@ -19,7 +19,9 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -79,11 +81,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../api.html">API</a> &raquo;</li>
-          <li><a href="../classes.html">Classes</a> &raquo;</li>
-          <li><a href="index.html">Data classes</a> &raquo;</li>
-      <li>Data</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
+      <li class="breadcrumb-item active">Data</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/content/api/classes/data/data.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,27 +96,17 @@
            <div itemprop="articleBody">
              
   <section id="data">
-<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline"></a></h1>
-<div class="graphviz"><img src="../../../../_images/inheritance-9e7a75c34698f8d3a1a3334e8c75e36555365cbe.png" alt="Inheritance diagram of gspy.src.classes.data.Data" usemap="#inheritance076717bf1b" class="inheritance graphviz" /></div>
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../_images/inheritance-8ce2b2e90936e56df5a2c8f407442ca5a34b5738.png" alt="Inheritance diagram of gspy.src.classes.data.Data" usemap="#inheritance076717bf1b" class="inheritance graphviz" /></div>
 <map id="inheritance076717bf1b" name="inheritance076717bf1b">
-<area shape="rect" id="node1" href="#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="5,5,77,31"/>
+<area shape="rect" id="node6" href="#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="701,90,763,112"/>
 </map><span class="target" id="module-gspy.src.classes.data.Data"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Data.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Data.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Data.Data" title="Permalink to this definition"></a></dt>
 <dd><p>Abstract Base Class</p>
 <dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.attrs">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">attrs</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.attrs" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.json_metadata">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.json_metadata" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.key_mapping">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">key_mapping</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.key_mapping" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.json_metadata" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -125,18 +117,26 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.read_metadata">
 <span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.read_metadata" title="Permalink to this definition"></a></dt>
-<dd><p>Read a json metadata file.</p>
-<p>Parses the dictionaries from the metadata and adds them to the appropriate classes.</p>
+<dd><p>Read metadata file</p>
+<p>Loads the metadata file and adds key_mapping values to property. If required dictionaries
+‘raster_files’ and/or ‘variable_metadata’ are missing, then a metadata template file is written
+and an error is triggered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dic</strong> – Dictionary of JSON metadata</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.read_netcdf">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.read_netcdf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.read_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Read Data from a netcdf file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -172,11 +172,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.spatial_ref">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.spatial_ref" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.write_ncml">
 <span class="sig-name descname"><span class="pre">write_ncml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.write_ncml" title="Permalink to this definition"></a></dt>
@@ -205,11 +200,6 @@
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Data.Data.xarray">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">xarray</span></span><a class="headerlink" href="#gspy.src.classes.data.Data.Data.xarray" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 

@@ -1,8 +1,0 @@
-{
-    "fiducial" : "RECORD",
-    "line_number" : "LINE",
-    "easting" : "X_WGS84_Albers",
-    "northing" : "Y_WGS84_Albers",
-    "height": "ALT",
-    "elevation" : "DEM"
-}

@@ -51,19 +51,11 @@
             "long_name": "Electrical Resistivity on Logarithmic Scale",
             "units": "log10_ohm_m",
             "null_value": -9999.99,
-            "files": ["../supplemental/region/MAP/data/example_log10res_0_5m.tif",
-                      "../supplemental/region/MAP/data/example_log10res_5_10m.tif",
-                      "../supplemental/region/MAP/data/example_log10res_10_15m.tif",
-                      "../supplemental/region/MAP/data/example_log10res_15_20m.tif",
-                      "../supplemental/region/MAP/data/example_log10res_20_25m.tif"]
-        },
-        "res_0": {
-            "dimensions": ["x", "y"],
-            "standard_name": "log10_resistivity_0_5m",
-            "long_name": "Electrical Resistivity on Logarithmic Scale, 0-5 m depth slice",
-            "units": "log10_ohm_m",
-            "null_value": -9999.99,
-            "files": ["../supplemental/region/MAP/data/example_log10res_0_5m.tif"]
+            "files": ["../supplemental/region/MAP/data/resistivity_0_5m.tif",
+                      "../supplemental/region/MAP/data/resistivity_5_10m.tif",
+                      "../supplemental/region/MAP/data/resistivity_10_15m.tif",
+                      "../supplemental/region/MAP/data/resistivity_15_20m.tif",
+                      "../supplemental/region/MAP/data/resistivity_20_25m.tif"]
         }
     }
 }

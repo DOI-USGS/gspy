@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV to NetCDF conversion &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Plotting" href="../Plotting/index.html" />
+    <link rel="prev" title="ASEG to NetCDF conversion" href="plot_aseg_to_netcdf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#the-gs-standard">The GS Standard</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">The GS Standard</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Converting CSV to GSpy Raster formats without metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">CSV to NetCDF conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Plotting/index.html">Plotting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">The GS Standard</a></li>
+      <li class="breadcrumb-item active">CSV to NetCDF conversion</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/The_GS_Standard/plot_csv_to_netcdf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-the-gs-standard-plot-csv-to-netcdf-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="csv-to-netcdf-conversion">
+<span id="sphx-glr-examples-the-gs-standard-plot-csv-to-netcdf-py"></span><h1>CSV to NetCDF conversion<a class="headerlink" href="#csv-to-netcdf-conversion" title="Permalink to this heading"></a></h1>
+<p>Dataset Reference:
+Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2018 - February 2019: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9XBBBUU">https://doi.org/10.5066/P9XBBBUU</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+</pre></div>
+</div>
+<section id="convert-the-csv-data-folder-to-netcdf">
+<h2>Convert the CSV data folder to netcdf<a class="headerlink" href="#convert-the-csv-data-folder-to-netcdf" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># raise Exception(&quot;Get the resolve model 0 working. json files need changing etc.&quot;)</span>
+
+<span class="c1"># Path to example files</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
+
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Resolve_survey_md.json&quot;</span>
+
+<span class="c1"># Establish the Survey</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># Define input CSV-format data file and associated variable mapping file</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Resolve.csv&#39;</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Resolve_data_md.json&#39;</span>
+
+<span class="c1"># Read data and format</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+
+<span class="c1"># Define input CSV-format model file and associated variable mapping file</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve_model.csv&#39;</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve_model_md.json&#39;</span>
+
+<span class="c1"># Read model data and format</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
+
+<span class="c1"># Save NetCDF file</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve.nc&#39;</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read in the netcdf files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plotting</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DTM&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">500000</span><span class="p">,</span> <span class="mi">540000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">1175000</span><span class="p">,</span> <span class="mi">1210000</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DEM&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;qd_final&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;RHO_I&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" alt="plot csv to netcdf" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" alt="plot csv to netcdf" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;qd_final&#39; (index: 2334, frequency: 6)&gt;
+array([[ 169.33839417,  423.81204224,  236.45677185,  878.84869385,
+         751.53479004,  471.71188354],
+       [  80.98508453,  201.68551636,   97.78876495,  283.44436646,
+         176.55760193,  137.57797241],
+       [  56.02865219,  131.59169006,   74.9103775 ,  338.50891113,
+         466.52639771,  369.52008057],
+       ...,
+       [ 184.81713867,  458.01174927,  252.12159729,  992.12182617,
+        1252.0111084 ,  716.16259766],
+       [ 110.68795013,  313.09295654,  188.6153717 ,  809.74560547,
+         863.19592285,  500.93768311],
+       [ 102.43125153,  223.28833008,  129.80227661,  563.83129883,
+         839.41766357,  696.33276367]])
+Coordinates:
+    spatial_ref  float64 0.0
+  * index        (index) int32 0 1 2 3 4 5 6 ... 2328 2329 2330 2331 2332 2333
+    x            (index) float64 5.351e+05 5.341e+05 ... 5.315e+05 5.315e+05
+    y            (index) float64 1.205e+06 1.205e+06 ... 1.204e+06 1.205e+06
+    z            (index) float64 42.82 43.96 42.74 45.32 ... 41.39 42.73 43.3
+  * frequency    (frequency) int64 400 1800 3300 8200 40000 140000
+Attributes:
+    em_system_components:  [0 1 2 3 4 5]
+    standard_name:         quadrature_final
+    null_value:            -9999.0
+    units:                 Parts per million (ppm)
+    grid_mapping:          spatial_ref
+    raw_data_columns:      [&#39;cpq400&#39;, &#39;cpq1800&#39;, &#39;cxq3300&#39;, &#39;cpq8200&#39;, &#39;cpq40...
+    valid_range:           [ -13.78479671 3058.26318359]
+    long_name:             Quadrature frequency data, final levelled
+&lt;xarray.DataArray &#39;RHO_I&#39; (index: 9999, layer_depth: 30)&gt;
+array([[ 9.74, 14.9 , 17.1 , ..., 14.  , 16.  , 16.8 ],
+       [11.2 , 16.6 , 18.  , ..., 14.1 , 16.1 , 16.9 ],
+       [12.5 , 17.8 , 18.7 , ..., 14.1 , 16.1 , 17.  ],
+       ...,
+       [20.  , 22.1 , 24.6 , ..., 14.1 , 15.9 , 16.8 ],
+       [19.9 , 21.4 , 23.6 , ..., 14.1 , 15.9 , 16.8 ],
+       [19.6 , 20.8 , 23.1 , ..., 14.  , 15.9 , 16.6 ]])
+Coordinates:
+    spatial_ref  float64 0.0
+  * layer_depth  (layer_depth) float64 0.5 1.55 2.7 3.95 ... 109.2 119.7 132.5
+  * index        (index) int32 0 1 2 3 4 5 6 ... 9993 9994 9995 9996 9997 9998
+    x            (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
+    y            (index) float64 1.205e+06 1.205e+06 ... 1.197e+06 1.197e+06
+    z            (index) float64 41.1 41.1 41.1 41.1 ... 41.6 41.7 41.7 41.5
+Attributes:
+    standard_name:  not_defined
+    null_value:     not_defined
+    units:          not_defined
+    grid_mapping:   spatial_ref
+    valid_range:    [  1.03 263.  ]
+    long_name:      not_defined
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.729 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-csv-to-netcdf-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/8667ed9ff318ccd5f783036bac5b93fe/plot_csv_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_to_netcdf.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/d38786b89810f215766914e2582eba31/plot_csv_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_to_netcdf.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plot_aseg_to_netcdf.html" class="btn btn-neutral float-left" title="ASEG to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Plotting/index.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

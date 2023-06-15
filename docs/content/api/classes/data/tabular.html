@@ -19,7 +19,9 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -79,11 +81,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../api.html">API</a> &raquo;</li>
-          <li><a href="../classes.html">Classes</a> &raquo;</li>
-          <li><a href="index.html">Data classes</a> &raquo;</li>
-      <li>Tabular</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
+      <li class="breadcrumb-item active">Tabular</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/content/api/classes/data/tabular.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,14 +96,14 @@
            <div itemprop="articleBody">
              
   <section id="tabular">
-<h1>Tabular<a class="headerlink" href="#tabular" title="Permalink to this headline"></a></h1>
-<div class="graphviz"><img src="../../../../_images/inheritance-695817385573256b5991fa6ea99bbf26d2369a59.png" alt="Inheritance diagram of gspy.src.classes.data.Tabular" usemap="#inheritance4035a07049" class="inheritance graphviz" /></div>
+<h1>Tabular<a class="headerlink" href="#tabular" title="Permalink to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../_images/inheritance-b229236fffca8bac5808bd0fa54d59470cf43302.png" alt="Inheritance diagram of gspy.src.classes.data.Tabular" usemap="#inheritance4035a07049" class="inheritance graphviz" /></div>
 <map id="inheritance4035a07049" name="inheritance4035a07049">
-<area shape="rect" id="node1" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node2" href="#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node6" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="618,79,673,99"/>
+<area shape="rect" id="node17" href="#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="709,79,764,99"/>
 </map><span class="target" id="module-gspy.src.classes.data.Tabular"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Tabular.</span></span><span class="sig-name descname"><span class="pre">Tabular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Tabular.</span></span><span class="sig-name descname"><span class="pre">Tabular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular" title="Permalink to this definition"></a></dt>
 <dd><p>Class to handle tabular data.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Tabular(type,</span> <span class="pre">data_filename,</span> <span class="pre">metadata_file,</span> <span class="pre">spatial_ref,</span> <span class="pre">**kwargs)</span></code></p>
 <dl class="field-list simple">
@@ -140,6 +142,16 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.check_valid_range">
+<span class="sig-name descname"><span class="pre">check_valid_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.check_valid_range" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.count_column_headers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count_column_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.count_column_headers" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.create_variable_metadata_template">
 <span class="sig-name descname"><span class="pre">create_variable_metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.create_variable_metadata_template" title="Permalink to this definition"></a></dt>
 <dd><p>Generates a template metadata file.</p>
@@ -153,56 +165,33 @@
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.is_netcdf">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">is_netcdf</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.is_netcdf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_netcdf</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.is_netcdf" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.plot" title="Permalink to this definition"></a></dt>
-<dd><p>Plot Tabular data against co-ordinate variables</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>variable</strong> (<em>str</em>) – key in xarray Dataset to plot</p></li>
-<li><p><strong>x</strong> (<em>str</em><em>, </em><em>optional</em>) – x axis to plot key against, by default ‘easting’</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>ax</strong> (<em>matplotlib.Axes</em>) – plotting axis</p></li>
-<li><p><strong>pt</strong> (<em>matplotlib.pyplot.plot.</em>) – Handle from plotting</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.read">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.read" title="Permalink to this definition"></a></dt>
-<dd><p>Read different types of data files</p>
-<p>Calls on appropriate read function based on data file type</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – Csv filename to read from.</p></li>
-<li><p><strong>metadata_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Json file to pull variable metadata from, by default None</p></li>
-<li><p><strong>spatial_ref</strong> (<em>gspy.Spatial_ref</em><em>, </em><em>optional</em>) – Spatial reference system, by default None</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>self</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>gspy.Tabular</p>
-</dd>
-</dl>
-</dd></dl>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.read" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.read_netcdf">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.read_netcdf" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.read_netcdf" title="Permalink to this definition"></a></dt>
+<dd><p>Read Data from a netcdf file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the netcdf file</p></li>
+<li><p><strong>group</strong> (<em>str</em>) – Netcdf group name containing data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>gspy.Data</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.subset">
@@ -226,23 +215,7 @@
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.type">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.type" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.update_dimensions">
-<span class="sig-name descname"><span class="pre">update_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_metadata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.update_dimensions" title="Permalink to this definition"></a></dt>
-<dd><p>Update the dimensions in the xarray object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>variable_metadata</strong> (<em>dict</em>) – Dictionary of variable metadata</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.variables">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.variables" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.type" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -258,11 +231,6 @@
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Tabular.Tabular.xarray">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">xarray</span></span><a class="headerlink" href="#gspy.src.classes.data.Tabular.Tabular.xarray" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 

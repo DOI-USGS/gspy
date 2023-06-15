@@ -1,0 +1,11 @@
+<map id="inheritance9545d01de6" name="inheritance9545d01de6">
+<area shape="rect" id="node1" title="Mixin class that allows getting keys with attribute access" alt="" coords="109,4,189,21"/>
+<area shape="rect" id="node8" title="Shared base class for Dataset and DataArray." alt="" coords="250,4,330,21"/>
+<area shape="rect" id="node12" title="A Mapping is a generic container for associating key/value" alt="" coords="266,103,314,120"/>
+<area shape="rect" id="node6" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="542,70,590,87"/>
+<area shape="rect" id="node17" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="623,70,671,87"/>
+<area shape="rect" id="node9" title="A multi&#45;dimensional, in memory, array database." alt="" coords="370,70,418,87"/>
+<area shape="rect" id="node13" title="Abstract base class for generic types." alt="" coords="266,136,314,153"/>
+<area shape="rect" id="node15" title="Base class for xarray types that support arithmetic." alt="" coords="104,70,194,87"/>
+<area shape="rect" id="node18" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Tabular_csv" alt="" coords="703,70,764,87"/>
+</map>

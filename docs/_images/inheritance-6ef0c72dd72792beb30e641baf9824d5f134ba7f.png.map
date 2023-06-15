@@ -1,0 +1,10 @@
+<map id="inheritance766a57a1c1" name="inheritance766a57a1c1">
+<area shape="rect" id="node1" title="Mixin class that allows getting keys with attribute access" alt="" coords="124,4,215,23"/>
+<area shape="rect" id="node8" title="Shared base class for Dataset and DataArray." alt="" coords="285,4,375,23"/>
+<area shape="rect" id="node12" title="A Mapping is a generic container for associating key/value" alt="" coords="303,117,358,136"/>
+<area shape="rect" id="node6" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="618,79,673,99"/>
+<area shape="rect" id="node17" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="709,79,764,99"/>
+<area shape="rect" id="node9" title="A multi&#45;dimensional, in memory, array database." alt="" coords="422,79,476,99"/>
+<area shape="rect" id="node13" title="Abstract base class for generic types." alt="" coords="303,154,358,174"/>
+<area shape="rect" id="node15" title="Base class for xarray types that support arithmetic." alt="" coords="119,79,220,99"/>
+</map>

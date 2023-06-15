@@ -19,7 +19,9 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -79,11 +81,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../api.html">API</a> &raquo;</li>
-          <li><a href="../classes.html">Classes</a> &raquo;</li>
-          <li><a href="index.html">Data classes</a> &raquo;</li>
-      <li>Tabular_csv</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
+      <li class="breadcrumb-item active">Tabular_csv</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/content/api/classes/data/tabular_csv.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,98 +96,24 @@
            <div itemprop="articleBody">
              
   <section id="tabular-csv">
-<h1>Tabular_csv<a class="headerlink" href="#tabular-csv" title="Permalink to this headline"></a></h1>
-<div class="graphviz"><img src="../../../../_images/inheritance-8e1a1c3d0b7081342cbfecc09bcae05723ecb15a.png" alt="Inheritance diagram of gspy.src.classes.data.tabular_csv" usemap="#inheritance9545d01de6" class="inheritance graphviz" /></div>
+<h1>Tabular_csv<a class="headerlink" href="#tabular-csv" title="Permalink to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../_images/inheritance-53ba8b833e9209513826e4d4f7983550c73bce23.png" alt="Inheritance diagram of gspy.src.classes.data.tabular_csv" usemap="#inheritance9545d01de6" class="inheritance graphviz" /></div>
 <map id="inheritance9545d01de6" name="inheritance9545d01de6">
-<area shape="rect" id="node1" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node2" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node3" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Class to handle tabular csv files." alt="" coords="245,5,337,31"/>
+<area shape="rect" id="node6" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="542,70,590,87"/>
+<area shape="rect" id="node17" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="623,70,671,87"/>
+<area shape="rect" id="node18" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Tabular_csv" alt="" coords="703,70,764,87"/>
 </map><span class="target" id="module-gspy.src.classes.data.tabular_csv"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.tabular_csv.</span></span><span class="sig-name descname"><span class="pre">Tabular_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" title="Permalink to this definition"></a></dt>
-<dd><p>Class to handle tabular csv files.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Tabular('csv',</span> <span class="pre">data_filename,</span> <span class="pre">metadata_file,</span> <span class="pre">spatial_ref,</span> <span class="pre">**kwargs)</span></code></p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gspy.Tabular_csv.read</span></code></dt><dd><p>Class method for reading file into class</p>
-</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gspy.Tabular</span></code></dt><dd><p>Parent and generic interface.</p>
-</dd>
-</dl>
-</div>
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.cols">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">cols</span></span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.cols" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.column_names">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">column_names</span></span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.column_names" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.create_variable_metadata_template">
-<span class="sig-name descname"><span class="pre">create_variable_metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.create_variable_metadata_template" title="Permalink to this definition"></a></dt>
-<dd><p>Generates a template metadata file.</p>
-<p>The generated file contains gspy required entries in a metadata files; standard_name, long_name, units, null_value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Generate a template for this csv file.</p>
-</dd>
-</dl>
-<p>:raises ValueError : When the csv metadata file does not contain entries for each csv column.:</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.file">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.tabular_csv.</span></span><span class="sig-name descname"><span class="pre">Tabular_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" title="Permalink to this definition"></a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.file_handler">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_handler</span></span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.file_handler" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.get_attrs">
-<span class="sig-name descname"><span class="pre">get_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.get_attrs" title="Permalink to this definition"></a></dt>
-<dd><p>Create attribute information for data from a CSV file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>variable</strong> (<em>str</em>) – Name of variable</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong> – dictionary of attributes for current variable</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.read">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.read" title="Permalink to this definition"></a></dt>
-<dd><p>Read a csv file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – Csv filename to read from.</p></li>
-<li><p><strong>metadata_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Json file to pull variable metadata from, by default None</p></li>
-<li><p><strong>spatial_ref</strong> (<em>gspy.Spatial_ref</em><em>, </em><em>optional</em>) – Spatial reference system, by default None</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong> – Tabular class with csv data.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>gspy.Tabular</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gspy.Spatial_ref</span></code></dt><dd><p>For Spatial reference instantiation.</p>
-</dd>
-</dl>
-</div>
-</dd></dl>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.get_attrs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv.write_csv">

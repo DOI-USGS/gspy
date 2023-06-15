@@ -19,7 +19,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,8 +70,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>GS Convention Requirements</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">GS Convention Requirements</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/gspy_convention_requirements.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -80,20 +82,20 @@
            <div itemprop="articleBody">
              
   <section id="gs-convention-requirements">
-<h1>GS Convention Requirements<a class="headerlink" href="#gs-convention-requirements" title="Permalink to this headline"></a></h1>
+<h1>GS Convention Requirements<a class="headerlink" href="#gs-convention-requirements" title="Permalink to this heading"></a></h1>
 <section id="group-structure">
-<h2>Group structure<a class="headerlink" href="#group-structure" title="Permalink to this headline"></a></h2>
+<h2>Group structure<a class="headerlink" href="#group-structure" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="_images/gs_convention.png"><img alt="some image" src="_images/gs_convention.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">GS data convention. (A) Datasets are structured into three fundamental group types based on content and data geometry. The Survey group contains general metadata about the dataset. Unstructured datasets, such as from CSV or TXT files, form Tabular groups, whereas structured (gridded) datasets are categorized under the Raster group. Metadata is attached to all groups, with various required attributes (green text) that expands on the CF-1.8 convention. (B) Groups follow a strict hierarchy in the NetCDF file, with a single Survey group at the top to which all data groups are attached. Datasets are indexed within their respective group type. (C) Tabular and Raster data groups must contain clearly defined dimensions, such as index or x, y, z, as well as coordinate variables. Raster groups are distinct in that dimensions are also coordinates, whereas Tabular datasets are assigned spatial coordinates that align with the index dimension. Lastly, the coordinate variable “spatial_ref” is required for all data groups, which expands on the “coordinate_information” variable required in the Survey metadata.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">GS data convention. (A) Datasets are structured into three fundamental group types based on content and data geometry. The Survey group contains general metadata about the dataset. Unstructured datasets, such as from CSV or TXT files, form Tabular groups, whereas structured (gridded) datasets are categorized under the Raster group. Metadata is attached to all groups, with various required attributes (green text) that expands on the CF-1.8 convention. (B) Groups follow a strict hierarchy in the NetCDF file, with a single Survey group at the top to which all data groups are attached. Datasets are indexed within their respective group type. (C) Tabular and Raster data groups must contain clearly defined dimensions, such as index or x, y, z, as well as coordinate variables. Raster groups are distinct in that dimensions are also coordinates, whereas Tabular datasets are assigned spatial coordinates that align with the index dimension. Lastly, the coordinate variable “spatial_ref” is required for all data groups, which expands on the “spatial_ref” variable required in the Survey metadata.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
 </section>
 <section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h2>
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 14%" />

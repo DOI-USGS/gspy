@@ -99,7 +99,7 @@
                 "long_name": "not_defined",
                 "units": "not_defined",
                 "null_value": "not_defined",
-                "axis" : "X"
+                "axis" : "Y"
             },
             "x_WGS84_UTMZ15N": {
                 "standard_name": "not_defined",

@@ -19,7 +19,9 @@
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -79,11 +81,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../api.html">API</a> &raquo;</li>
-          <li><a href="../classes.html">Classes</a> &raquo;</li>
-          <li><a href="index.html">Data classes</a> &raquo;</li>
-      <li>Raster</li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
+      <li class="breadcrumb-item active">Raster</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/content/api/classes/data/raster.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,14 +96,14 @@
            <div itemprop="articleBody">
              
   <section id="raster">
-<h1>Raster<a class="headerlink" href="#raster" title="Permalink to this headline"></a></h1>
-<div class="graphviz"><img src="../../../../_images/inheritance-4f1d64610c06384a2a003abf6c448d0b023cd85f.png" alt="Inheritance diagram of gspy.src.classes.data.Raster" usemap="#inheritance766a57a1c1" class="inheritance graphviz" /></div>
+<h1>Raster<a class="headerlink" href="#raster" title="Permalink to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../_images/inheritance-6ef0c72dd72792beb30e641baf9824d5f134ba7f.png" alt="Inheritance diagram of gspy.src.classes.data.Raster" usemap="#inheritance766a57a1c1" class="inheritance graphviz" /></div>
 <map id="inheritance766a57a1c1" name="inheritance766a57a1c1">
-<area shape="rect" id="node1" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node2" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node6" href="data.html#gspy.src.classes.data.Data.Data" target="_top" title="Abstract Base Class" alt="" coords="618,79,673,99"/>
+<area shape="rect" id="node17" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="709,79,764,99"/>
 </map><span class="target" id="module-gspy.src.classes.data.Raster"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster" title="Permalink to this definition"></a></dt>
 <dd><p>Class defining a set of gridded data (2D or 3D).</p>
 <p>Examples of raster data include radiometric or magnetic grids, interpolated resistivity models, etc.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Raster(metadata_file,</span> <span class="pre">spatial_ref,</span> <span class="pre">**kwargs)</span></code></p>
@@ -128,17 +130,17 @@
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.bounds">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.bounds" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.bounds" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.is_tif">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">is_tif</span></span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.is_tif" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_tif</span></span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.is_tif" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netcdf_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netcdf_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read" title="Permalink to this definition"></a></dt>
 <dd><p>Read the metadata and data files and to Raster class</p>
 <p>Parses the json metadata file and adds them to the appropriate locations.
 An xarray Dataset is created and the ‘raster_files’ dictionary in the metadata file
@@ -154,28 +156,8 @@ is used to read raster data files into named variables.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read_metadata">
-<span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_metadata" title="Permalink to this definition"></a></dt>
-<dd><p>Read metadata file</p>
-<p>Loads the metadata file and adds key_mapping values to property. If required dictionaries
-‘raster_files’ and/or ‘variable_metadata’ are missing, then a metadata template file is written
-and an error is triggered.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>dic</strong> – Dictionary of JSON metadata</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read_netcdf">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_netcdf" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Read a netcdf file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -188,30 +170,8 @@ and an error is triggered.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read_raster">
-<span class="sig-name descname"><span class="pre">read_raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_meta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_raster" title="Permalink to this definition"></a></dt>
-<dd><p>Read raster file</p>
-<p>Adds a 2D raster file directly to the xarray as a single variable</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – Name of file to read</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – Name in xarray to assign</p></li>
-<li><p><strong>var_meta</strong> (<em>dict</em>) – Dictionary of variable metadata</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong> – Raster class</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>gspy.Raster</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read_rasters">
-<span class="sig-name descname"><span class="pre">read_rasters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_meta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_rasters" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.read_raster_using_metadata">
+<span class="sig-name descname"><span class="pre">read_raster_using_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_metadata</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_raster_using_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Read multiple raster files and stack into single variable</p>
 <p>Combines multiple 2D raster files into a 3D variable along a stacking dimension.
 Currently the stacking dimension defaults to “stack” and increments starting at 0. In future
@@ -219,7 +179,7 @@ releases this dimension will be customizable and passed through the JSON metadat
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filenames</strong> (<em>list of str</em>) – List of raster files to read and stack, in order of stacking dimension</p></li>
+<li><p><strong>filenames</strong> (<em>list</em><em> of </em><em>str</em>) – List of raster files to read and stack, in order of stacking dimension</p></li>
 <li><p><strong>key</strong> (<em>str</em>) – Name of variable assigned to xarray</p></li>
 <li><p><strong>var_meta</strong> (<em>dict</em>) – Dictionary of variable metadata</p></li>
 </ul>
@@ -309,11 +269,6 @@ ancillary metadata relevant to the specific Raster data.</p>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.xarray">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">xarray</span></span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.xarray" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 

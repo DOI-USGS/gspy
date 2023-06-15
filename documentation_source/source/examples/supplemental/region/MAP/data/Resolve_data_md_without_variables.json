@@ -1,0 +1,45 @@
+{
+    "dataset_attrs" : {
+    	"content": "raw data",
+        "comment": "This dataset includes minimally processed (raw) AEM data"
+    },
+
+    "coordinates" : {
+        "x" : "x_WGS84_Albers",
+        "y" : "y_WGS84_Albers",
+        "z" : "DTM"
+    },
+
+    "dimensions": {
+        "depth": {
+            "standard_name": "depth",
+            "long_name": "depth below surface",
+            "units": "meters",
+            "null_value": "not_defined",
+            "length" : 31,
+            "increment" : 5.0,
+            "origin" : 2.5,
+            "axis" : "Z",
+            "positive" : "down",
+            "vertical_datum" : "ground surface"
+        },
+        "frequency": {
+            "standard_name": "frequency",
+            "long_name": "nominal measurement frequency",
+            "units": "Hz",
+            "null_value": "not_defined",
+            "centers" : [400,1800,3300,8200,40000,140000],
+            "discrete" : "True"
+        },
+        "spec_sample": {
+            "standard_name": "spec_sample",
+            "long_name": "radiometric sample",
+            "units": "not_defined",
+            "null_value": "not_defined",
+            "length" : 256,
+            "increment" : 1,
+            "origin" : 0,
+            "discrete" : "True"
+        }
+    }
+}

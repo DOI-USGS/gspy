@@ -1,24 +1,61 @@
 :orphan:
 
-
-
-.. _sphx_glr_examples:
-
 ########
 Examples
 ########
 
 
+
 .. raw:: html
 
-    <div class="sphx-glr-clear"></div>
+    <div class="sphx-glr-thumbnails">
 
 
+.. raw:: html
 
-.. _sphx_glr_examples_Data_conversion:
+    </div>
 
-Data Conversion
+The GS Standard
 ===============
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Converting CSV to GSpy Raster formats without metadata">
+
+.. only:: html
+
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
+    :alt: Converting CSV to GSpy Raster formats without metadata
+
+  :ref:`sphx_glr_examples_The_GS_Standard_help_I_have_no_variable_metadata.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Converting CSV to GSpy Raster formats without metadata</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
+
+.. only:: html
+
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+    :alt: Multiple TIFs to NetCDF conversion
+
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Multiple TIFs to NetCDF conversion</div>
+    </div>
 
 
 .. raw:: html
@@ -27,41 +64,16 @@ Data Conversion
 
 .. only:: html
 
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tif_to_netcdf_thumb.png
-     :alt: TIF to NetCDF conversion
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tif_to_netcdf_thumb.png
+    :alt: TIF to NetCDF conversion
 
-     :ref:`sphx_glr_examples_Data_conversion_plot_tif_to_netcdf.py`
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_tif_to_netcdf.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">TIF to NetCDF conversion</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_tif_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
-
-.. only:: html
-
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-     :alt: Multiple TIFs to NetCDF conversion
-
-     :ref:`sphx_glr_examples_Data_conversion_plot_tifs_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_tifs_to_netcdf
 
 .. raw:: html
 
@@ -69,20 +81,16 @@ Data Conversion
 
 .. only:: html
 
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_aseg_to_netcdf_thumb.png
-     :alt: ASEG to NetCDF conversion
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_aseg_to_netcdf_thumb.png
+    :alt: ASEG to NetCDF conversion
 
-     :ref:`sphx_glr_examples_Data_conversion_plot_aseg_to_netcdf.py`
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF conversion</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_aseg_to_netcdf
 
 .. raw:: html
 
@@ -90,30 +98,28 @@ Data Conversion
 
 .. only:: html
 
- .. figure:: /examples/Data_conversion/images/thumb/sphx_glr_plot_csv_to_netcdf_thumb.png
-     :alt: CSV to NetCDF conversion
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_csv_to_netcdf_thumb.png
+    :alt: CSV to NetCDF conversion
 
-     :ref:`sphx_glr_examples_Data_conversion_plot_csv_to_netcdf.py`
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_csv_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">CSV to NetCDF conversion</div>
+    </div>
+
 
 .. raw:: html
 
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /examples/Data_conversion/plot_csv_to_netcdf
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_examples_Plotting:
-
 Plotting
 ========
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
 
 
 .. raw:: html
@@ -122,10 +128,16 @@ Plotting
 
 .. only:: html
 
- .. figure:: /examples/Plotting/images/thumb/sphx_glr_plot_tabular_from_netcdf_thumb.png
-     :alt: Plot Tabular Examples
+  .. image:: /examples/Plotting/images/thumb/sphx_glr_plot_tabular_from_netcdf_thumb.png
+    :alt: Plot Tabular Examples
 
-     :ref:`sphx_glr_examples_Plotting_plot_tabular_from_netcdf.py`
+  :ref:`sphx_glr_examples_Plotting_plot_tabular_from_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plot Tabular Examples</div>
+    </div>
+
 
 .. raw:: html
 
@@ -134,29 +146,23 @@ Plotting
 
 .. toctree::
    :hidden:
+   :includehidden:
 
-   /examples/Plotting/plot_tabular_from_netcdf
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
+   /examples/The_GS_Standard/index.rst
+   /examples/Plotting/index.rst
 
 
-.. only :: html
+.. only:: html
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-gallery
+  .. container:: sphx-glr-footer sphx-glr-footer-gallery
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
 
-    :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-    :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
+      :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
 
 
 .. only:: html
