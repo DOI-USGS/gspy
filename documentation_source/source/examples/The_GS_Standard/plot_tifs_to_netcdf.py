@@ -16,22 +16,22 @@ from pprint import pprint
 # Convert the TIFs data to netcdf
 # +++++++++++++++++++++++++++++++
 
-data_folder = "../supplemental/region/MAP/data/"
+data_path = "..//supplemental//region//MAP"
 
 # Define supplemental information file
-supplemental = data_folder + "Tempest_survey_md.json"
+supplemental = join(data_path, "data//Tempest_survey_md.json")
 
 # Add supplemental information to the survey
 survey = Survey(supplemental)
 
 # Define input TIF-format data file and associated variable mapping file
-d_grid_supp = data_folder + 'Tempest_rasters_md.json'
+d_grid_supp = join(data_path, 'data//Tempest_rasters_md.json')
 
 # Read data and format as Griddata class object
 survey.add_raster(metadata_file=d_grid_supp)
 
 # Write NetCDF
-d_out = '../supplemental/region/MAP/data/tifs.nc'
+d_out = join(data_path, 'data//tifs.nc')
 survey.write_netcdf(d_out)
 
 #%%

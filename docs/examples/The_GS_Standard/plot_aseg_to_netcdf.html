@@ -112,30 +112,30 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <section id="convert-the-aseg-data-to-netcdf">
 <h2>Convert the ASEG data to netcdf<a class="headerlink" href="#convert-the-aseg-data-to-netcdf" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//region//MAP&#39;</span>
 
 <span class="c1"># Survey Metadata file</span>
-<span class="n">supplemental</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Tempest_survey_md.json&quot;</span>
+<span class="n">supplemental</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.json&quot;</span><span class="p">)</span>
 
 <span class="c1"># Establish survey instance</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">supplemental</span><span class="p">)</span>
 
 <span class="c1"># Define input ASEG-format data file and associated variable mapping file</span>
-<span class="n">d_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest.dat&#39;</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest_data_md.json&#39;</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read data and format as Tabular class object</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 
 <span class="c1"># Define input ASEG-format model file and associated variable mapping file</span>
-<span class="n">m_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Tempest_model.dat&#39;</span>
-<span class="n">m_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Tempest_model_md.json&#39;</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read model data and format as Tabular class object</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
 
 <span class="c1"># Save NetCDF file</span>
-<span class="n">d_out</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest.nc&#39;</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.nc&#39;</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -221,7 +221,7 @@ Attributes:
     long_name:             HPRG Corrected EMX Windows
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.193 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.803 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-aseg-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/6c60111adcc824063e78c613ae5d09bb/plot_aseg_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_aseg_to_netcdf.py</span></code></a></p>

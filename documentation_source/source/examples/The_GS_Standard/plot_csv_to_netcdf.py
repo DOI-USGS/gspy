@@ -17,29 +17,29 @@ from gspy import Survey
 # raise Exception("Get the resolve model 0 working. json files need changing etc.")
 
 # Path to example files
-data_path = '..//supplemental//'
+data_path = '..//supplemental//region//MAP'
 
-metadata = data_path + "region//MAP//data//Resolve_survey_md.json"
+metadata = join(data_path, "data//Resolve_survey_md.json")
 
 # Establish the Survey
 survey = Survey(metadata)
 
 # Define input CSV-format data file and associated variable mapping file
-d_data = data_path + 'region//MAP//data//Resolve.csv'
-d_supp = data_path + 'region//MAP//data//Resolve_data_md.json'
+d_data = join(data_path, 'data//Resolve.csv')
+d_supp = join(data_path, 'data//Resolve_data_md.json')
 
 # Read data and format
 survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
 
 # Define input CSV-format model file and associated variable mapping file
-m_data = data_path + 'region//MAP//model//Resolve_model.csv'
-m_supp = data_path + 'region//MAP//model//Resolve_model_md.json'
+m_data = join(data_path, 'model//Resolve_model.csv')
+m_supp = join(data_path, 'model//Resolve_model_md.json')
 
 # Read model data and format
 survey.add_tabular(type='csv', data_filename=m_data, metadata_file=m_supp)
 
 # Save NetCDF file
-d_out = data_path + 'region//MAP//model//Resolve.nc'
+d_out = join(data_path, 'model//Resolve.nc')
 survey.write_netcdf(d_out)
 
 #%%

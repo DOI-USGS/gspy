@@ -16,30 +16,30 @@ from gspy import Survey
 # +++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//'
+data_path = '..//supplemental//region//MAP'
 
 # Survey Metadata file
-supplemental = data_path + "region//MAP//data//Tempest_survey_md.json"
+supplemental = join(data_path, "data//Tempest_survey_md.json")
 
 # Establish survey instance
 survey = Survey(supplemental)
 
 # Define input ASEG-format data file and associated variable mapping file
-d_data = data_path + 'region//MAP//data//Tempest.dat'
-d_supp = data_path + 'region//MAP//data//Tempest_data_md.json'
+d_data = join(data_path, 'data//Tempest.dat')
+d_supp = join(data_path, 'data//Tempest_data_md.json')
 
 # Read data and format as Tabular class object
 survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
 # Define input ASEG-format model file and associated variable mapping file
-m_data = data_path + 'region//MAP//model//Tempest_model.dat'
-m_supp = data_path + 'region//MAP//model//Tempest_model_md.json'
+m_data = join(data_path, 'model//Tempest_model.dat')
+m_supp = join(data_path, 'model//Tempest_model_md.json')
 
 # Read model data and format as Tabular class object
 survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
 
 # Save NetCDF file
-d_out = data_path + 'region//MAP//data//Tempest.nc'
+d_out = join(data_path, 'data//Tempest.nc')
 survey.write_netcdf(d_out)
 
 #%%

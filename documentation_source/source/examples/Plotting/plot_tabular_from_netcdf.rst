@@ -79,7 +79,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<Axes: >, <matplotlib.collections.PathCollection object at 0x7f99c87dca60>)
+    (<Axes: >, <matplotlib.collections.PathCollection object at 0x7fcf313feec0>)
 
 
 
@@ -141,7 +141,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.552 seconds)
+   **Total running time of the script:** ( 0 minutes  0.679 seconds)
 
 
 .. _sphx_glr_download_examples_Plotting_plot_tabular_from_netcdf.py:

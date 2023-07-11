@@ -5,7 +5,6 @@ Converting CSV to GSpy Raster formats without metadata
 
 """
 #%%
-import matplotlib.pyplot as plt
 from os.path import join
 from gspy import Survey
 

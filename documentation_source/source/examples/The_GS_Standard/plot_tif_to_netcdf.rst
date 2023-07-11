@@ -43,33 +43,28 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 Convert the TIF data to netcdf
 ++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-42
+.. GENERATED FROM PYTHON SOURCE LINES 16-37
 
 .. code-block:: default
 
 
     # Path to example files
-    data_path = '..//supplemental//'
+    data_path = '..//supplemental//region//MAP'
 
     # Define supplemental information file
-    supplemental = data_path + "region//MAP//data//Tempest_survey_md.json"
+    supplemental = join(data_path, "data//Tempest_survey_md.json")
 
     # Read in TIF data file
     survey = Survey(supplemental)
 
-    # Define input ASEG-format data file and associated variable mapping file
-    d_data = data_path + 'region//MAP//data//Tempest.dat'
-    d_supp = data_path + 'region//MAP//data//Tempest_data_md.json'
-
     # Define input TIF-format data file and associated variable mapping file
-    d_grid_path = data_path + 'region//MAP//data//'
-    d_grid_supp = data_path + 'region//MAP//data//Tempest_raster_md.json'
+    d_grid_supp = join(data_path, 'data//Tempest_raster_md.json')
 
     # Read data and format as Griddata class object
-    survey.add_raster(metadata_file=d_grid_supp)
+    survey.add_raster(metadata_file = d_grid_supp)
 
     # Write NetCDF
-    d_out = data_path + 'region//MAP//data//tif.nc'
+    d_out = join(data_path, 'data//tif.nc')
 
     survey.write_netcdf(d_out)
 
@@ -80,11 +75,11 @@ Convert the TIF data to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
 
 Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-46
+.. GENERATED FROM PYTHON SOURCE LINES 39-41
 
 .. code-block:: default
 
@@ -97,11 +92,11 @@ Read in the netcdf files
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-48
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-50
+.. GENERATED FROM PYTHON SOURCE LINES 43-45
 
 .. code-block:: default
 
@@ -122,7 +117,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.652 seconds)
+   **Total running time of the script:** ( 0 minutes  0.939 seconds)
 
 
 .. _sphx_glr_download_examples_The_GS_Standard_plot_tif_to_netcdf.py:

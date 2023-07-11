@@ -21,11 +21,10 @@
 Converting CSV to GSpy Raster formats without metadata
 ------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-23
+.. GENERATED FROM PYTHON SOURCE LINES 8-22
 
 .. code-block:: default
 
-    import matplotlib.pyplot as plt
     from os.path import join
     from gspy import Survey
 

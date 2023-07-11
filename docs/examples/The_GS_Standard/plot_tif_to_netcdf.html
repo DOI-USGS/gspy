@@ -112,27 +112,22 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <section id="convert-the-tif-data-to-netcdf">
 <h2>Convert the TIF data to netcdf<a class="headerlink" href="#convert-the-tif-data-to-netcdf" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//region//MAP&#39;</span>
 
 <span class="c1"># Define supplemental information file</span>
-<span class="n">supplemental</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Tempest_survey_md.json&quot;</span>
+<span class="n">supplemental</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.json&quot;</span><span class="p">)</span>
 
 <span class="c1"># Read in TIF data file</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">supplemental</span><span class="p">)</span>
 
-<span class="c1"># Define input ASEG-format data file and associated variable mapping file</span>
-<span class="n">d_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest.dat&#39;</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest_data_md.json&#39;</span>
-
 <span class="c1"># Define input TIF-format data file and associated variable mapping file</span>
-<span class="n">d_grid_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//&#39;</span>
-<span class="n">d_grid_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest_raster_md.json&#39;</span>
+<span class="n">d_grid_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read data and format as Griddata class object</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span><span class="o">=</span><span class="n">d_grid_supp</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span> <span class="o">=</span> <span class="n">d_grid_supp</span><span class="p">)</span>
 
 <span class="c1"># Write NetCDF</span>
-<span class="n">d_out</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//tif.nc&#39;</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//tif.nc&#39;</span><span class="p">)</span>
 
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
@@ -147,7 +142,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_tif_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tif_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.652 seconds)</p>
+<img src="../../_images/sphx_glr_plot_tif_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tif_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.939 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-tif-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/324588fd244ba08a954b7989cdff1150/plot_tif_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tif_to_netcdf.py</span></code></a></p>

@@ -15,27 +15,22 @@ from gspy import Survey
 # ++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//'
+data_path = '..//supplemental//region//MAP'
 
 # Define supplemental information file
-supplemental = data_path + "region//MAP//data//Tempest_survey_md.json"
+supplemental = join(data_path, "data//Tempest_survey_md.json")
 
 # Read in TIF data file
 survey = Survey(supplemental)
 
-# Define input ASEG-format data file and associated variable mapping file
-d_data = data_path + 'region//MAP//data//Tempest.dat'
-d_supp = data_path + 'region//MAP//data//Tempest_data_md.json'
-
 # Define input TIF-format data file and associated variable mapping file
-d_grid_path = data_path + 'region//MAP//data//'
-d_grid_supp = data_path + 'region//MAP//data//Tempest_raster_md.json'
+d_grid_supp = join(data_path, 'data//Tempest_raster_md.json')
 
 # Read data and format as Griddata class object
-survey.add_raster(metadata_file=d_grid_supp)
+survey.add_raster(metadata_file = d_grid_supp)
 
 # Write NetCDF
-d_out = data_path + 'region//MAP//data//tif.nc'
+d_out = join(data_path, 'data//tif.nc')
 
 survey.write_netcdf(d_out)
 

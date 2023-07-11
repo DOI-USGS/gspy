@@ -114,29 +114,29 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># raise Exception(&quot;Get the resolve model 0 working. json files need changing etc.&quot;)</span>
 
 <span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//region//MAP&#39;</span>
 
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Resolve_survey_md.json&quot;</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Resolve_survey_md.json&quot;</span><span class="p">)</span>
 
 <span class="c1"># Establish the Survey</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 
 <span class="c1"># Define input CSV-format data file and associated variable mapping file</span>
-<span class="n">d_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Resolve.csv&#39;</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Resolve_data_md.json&#39;</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve_data_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read data and format</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 
 <span class="c1"># Define input CSV-format model file and associated variable mapping file</span>
-<span class="n">m_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve_model.csv&#39;</span>
-<span class="n">m_supp</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve_model_md.json&#39;</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model.csv&#39;</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Read model data and format</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
 
 <span class="c1"># Save NetCDF file</span>
-<span class="n">d_out</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//model//Resolve.nc&#39;</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve.nc&#39;</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -217,7 +217,7 @@ Attributes:
     long_name:      not_defined
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.729 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.001 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-csv-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/8667ed9ff318ccd5f783036bac5b93fe/plot_csv_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_to_netcdf.py</span></code></a></p>

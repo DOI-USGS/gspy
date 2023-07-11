@@ -50,11 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">GS Convention Requirements</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#group-structure">Group structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GS Convention Requirements</a></li>
 </ul>
 
         </div>
@@ -83,116 +79,7 @@
              
   <section id="gs-convention-requirements">
 <h1>GS Convention Requirements<a class="headerlink" href="#gs-convention-requirements" title="Permalink to this heading"></a></h1>
-<section id="group-structure">
-<h2>Group structure<a class="headerlink" href="#group-structure" title="Permalink to this heading"></a></h2>
-<blockquote>
-<div><figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="_images/gs_convention.png"><img alt="some image" src="_images/gs_convention.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">GS data convention. (A) Datasets are structured into three fundamental group types based on content and data geometry. The Survey group contains general metadata about the dataset. Unstructured datasets, such as from CSV or TXT files, form Tabular groups, whereas structured (gridded) datasets are categorized under the Raster group. Metadata is attached to all groups, with various required attributes (green text) that expands on the CF-1.8 convention. (B) Groups follow a strict hierarchy in the NetCDF file, with a single Survey group at the top to which all data groups are attached. Datasets are indexed within their respective group type. (C) Tabular and Raster data groups must contain clearly defined dimensions, such as index or x, y, z, as well as coordinate variables. Raster groups are distinct in that dimensions are also coordinates, whereas Tabular datasets are assigned spatial coordinates that align with the index dimension. Lastly, the coordinate variable “spatial_ref” is required for all data groups, which expands on the “spatial_ref” variable required in the Survey metadata.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
-</figcaption>
-</figure>
-</div></blockquote>
-</section>
-<section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h2>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 14%" />
-<col style="width: 30%" />
-<col style="width: 56%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head" colspan="3"><p>Dataset Attributes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>attribute name</strong></p></td>
-<td><p><strong>description</strong></p></td>
-<td><p><strong>example</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>title*</p></td>
-<td><p>label for the data</p></td>
-<td><p>Example Resolve Airborne Electromagnetic (AEM) Raw Data</p></td>
-</tr>
-<tr class="row-even"><td><p>institution*</p></td>
-<td><p>who generated the data</p></td>
-<td><p>USGS Geology, Geophysics, &amp; Geochemistry Science Center</p></td>
-</tr>
-<tr class="row-odd"><td><p>source*</p></td>
-<td><p>where the original data came from</p></td>
-<td><p>Comma-separated text file</p></td>
-</tr>
-<tr class="row-even"><td><p>history*</p></td>
-<td><p>steps taken to generate release</p></td>
-<td><p>processed on 01-01-2022</p></td>
-</tr>
-<tr class="row-odd"><td><p>references*</p></td>
-<td><p>Citation to data release</p></td>
-<td><p>Minsley, et al. (2022). doi:https://doi.org/10.5066/P93SY9LI</p></td>
-</tr>
-<tr class="row-even"><td><p>content*</p></td>
-<td><p>what is in the netcdf file</p></td>
-<td><p>raw data (/survey/tabular/0), processed data (/survey/tabular/1)</p></td>
-</tr>
-<tr class="row-odd"><td><p>comment</p></td>
-<td><p>additional details or ancillary information</p></td>
-<td><p>raw contractor provided data</p></td>
-</tr>
-<tr class="row-even"><td><p>summary</p></td>
-<td><p>simple summary of the data</p></td>
-<td><p>Airborne electromagnetic (AEM) and magnetic survey data were collected during …</p></td>
-</tr>
-<tr class="row-odd"><td><p>created_by</p></td>
-<td><p>software version used</p></td>
-<td><p>gspy==0.1.0</p></td>
-</tr>
-<tr class="row-even"><td><p>conventions</p></td>
-<td><p>conventions of the data</p></td>
-<td><p>CF-1.8, GS-0.1.0</p></td>
-</tr>
-</tbody>
-</table>
-<p>* required entry</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 41%" />
-<col style="width: 48%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head" colspan="3"><p>Variable Attributes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>attribute name</strong></p></td>
-<td><p><strong>description</strong></p></td>
-<td><p><strong>example</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>standard_name*</p></td>
-<td><p>name used to identify variable. contains no whitespace, case sensitive</p></td>
-<td><p>projection_x_coordinate</p></td>
-</tr>
-<tr class="row-even"><td><p>long_name*</p></td>
-<td><p>Longer descrition of the variable. Can contain white space.</p></td>
-<td><p>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</p></td>
-</tr>
-<tr class="row-odd"><td><p>units*</p></td>
-<td><p>units of the variable</p></td>
-<td><p>meter</p></td>
-</tr>
-<tr class="row-even"><td><p>null_value*</p></td>
-<td><p>value used for missing data</p></td>
-<td><p>-9999</p></td>
-</tr>
-<tr class="row-odd"><td><p>valid_range*</p></td>
-<td><p>upper and lower bounds this attribute can take</p></td>
-<td><p>[655026.626343047, 732295.562636796]</p></td>
-</tr>
-</tbody>
-</table>
-<p>* required entry</p>
-</section>
+<p>Please see <a class="reference download internal" download="" href="_downloads/878cbfc8ef71416cbf236ddb485db31e/GS_DataStandardDefinition_v1.0.0.pdf"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">PDF</span></code></a> for a compehensive description of the GS standard and its requirements.</p>
 </section>
 
 

@@ -2,7 +2,13 @@
 Welcome to GSpy: Geophysical Data Standard in Python
 ####################################################
 
-This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both tabular (unstructured or scattered) and raster (structured or gridded) datasets. 
+.. image:: GSpy_logo.png
+   :width: 600px
+   :height: 516px
+   :scale: 50 %
+   :align: center
+
+This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both tabular (unstructured or scattered) and raster (structured or gridded) datasets.
 
 Goals
 ~~~~~
