@@ -12,10 +12,10 @@ from .Key_mapping import key_mapping
 from ...utilities import flatten, unflatten
 from ..survey.Spatial_ref import Spatial_ref
 
+import xarray as xr
+@xr.register_dataset_accessor("data")
 class Data(Dataset_gs):
     """Abstract Base Class """
-    __slots__ = ()
-
     # def __init__(self):
     #     raise NotImplementedError("Cannot instantiate ABC Data class")
 
@@ -42,6 +42,9 @@ class Data(Dataset_gs):
     #     else:
     #         self._key_mapping = key_mapping(value)
 
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
+
     @property
     def json_metadata(self):
         return self._json_metadata
@@ -62,7 +65,7 @@ class Data(Dataset_gs):
         # if not stack is None:
         #     self.xarray[variable].sel(stack=stack).plot(**kwargs)
         # else:
-        self[variable].plot(**kwargs)
+        self._obj[variable].plot(**kwargs)
 
     def read_metadata(self, filename):
         """Read metadata file
@@ -130,7 +133,7 @@ class Data(Dataset_gs):
         out : gspy.Data
 
         """
-        return super(Data, cls).load_dataset(filename, group=group.lower())
+        return super(Data, cls).open_dataset(filename, group=group.lower())
 
     def scatter(self, variable, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
@@ -149,7 +152,7 @@ class Data(Dataset_gs):
 
         """
         ax = kwargs.pop('ax', plt.gca())
-        return ax, plt.scatter(self['x'].values, self['y'].values, c=self[variable].values, **kwargs)
+        return ax, plt.scatter(self._obj['x'].values, self._obj['y'].values, c=self._obj[variable].values, **kwargs)
 
     def write_netcdf(self, filename, group):
         """Write to netcdf file
@@ -164,13 +167,13 @@ class Data(Dataset_gs):
         """
         mode = 'a' if os.path.isfile(filename) else 'w'
         if 'raster' in group:
-            for var in self.data_vars:
-                if self[var].attrs['null_value'] != 'not_defined':
-                    self[var].attrs['_FillValue'] = self[var].attrs['null_value']
-                if 'grid_mapping' in self[var].attrs:
-                    del self[var].attrs['grid_mapping']
+            for var in self._obj.data_vars:
+                if self._obj[var].attrs['null_value'] != 'not_defined':
+                    self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
+                if 'grid_mapping' in self._obj[var].attrs:
+                    del self._obj[var].attrs['grid_mapping']
                 #self.xarray[var].attrs['grid_mapping'] = self.xarray.spatial_ref.attrs['grid_mapping_name']
-        self.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
+        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
 
     def write_ncml(self, filename, group, index):
         """Write and NCML file
@@ -202,21 +205,21 @@ class Data(Dataset_gs):
 
         f = open(infile, 'a')
         ### Dimensions:
-        for dim in self.dims:
-            f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self.dims[dim]))
+        for dim in self._obj.dims:
+            f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self._obj.dims[dim]))
         f.write('\n')
 
         ### Global Attributes:
-        for attr in self.attrs:
-            att_val = self.attrs[attr]
+        for attr in self._obj.attrs:
+            att_val = self._obj.attrs[attr]
             if '"' in str(att_val):
                 att_val = att_val.replace('"',"'")
             f.write('%s<attribute name="%s" value="%s"/>\n' % (sp2, attr, att_val))
         f.write('\n')
 
         ### Variables:
-        for var in self.variables:
-            tmpvar = self.variables[var]
+        for var in self._obj.variables:
+            tmpvar = self._obj.variables[var]
             dtype = str(tmpvar.dtype).title()[:-2]
             if var == 'crs' or dtype == 'object':
                 f.write('%s<variable name="%s" shape="%s" type="String">\n' % (sp2, var, " ".join(tmpvar.dims)))

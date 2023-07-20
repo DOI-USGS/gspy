@@ -31,6 +31,11 @@ d_supp = join(data_path, 'data//Tempest_data_md.json')
 # Read data and format as Tabular class object
 survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
+# Define input TIF-format data file and associated variable mapping file
+d_grid_supp = join(data_path, 'data//Tempest_raster_md.json')
+# Read data and format as Griddata class object
+survey.add_raster(metadata_file = d_grid_supp)
+
 # Define input ASEG-format model file and associated variable mapping file
 m_data = join(data_path, 'model//Tempest_model.dat')
 m_supp = join(data_path, 'model//Tempest_model_md.json')
@@ -46,16 +51,22 @@ survey.write_netcdf(d_out)
 # Read in the netcdf files
 new_survey = Survey().read_netcdf(d_out)
 
+print(new_survey.raster.magnetic_tmi)
+
+
 #%%
 # Plotting
-plt.figure()
-new_survey.tabular[0].scatter('X_PrimaryField')
+# plt.figure()
+# new_survey.tabular[0].gs_tabular.scatter('X_PrimaryField')
 
-plt.figure()
-new_survey.tabular[1].scatter('PhiD')
+# plt.figure()
+# new_survey.raster.gs_raster.pcolor('magnetic_tmi', vmin=-1000, vmax=1000, cmap='jet')
 
-print(new_survey.tabular[0])
-print(new_survey.tabular[0]['x'].attrs)
-print(new_survey.tabular[0]['EMX_HPRG'])
+# plt.figure()
+# new_survey.tabular[1].gs_tabular.scatter('PhiD')
 
-plt.show()
+# print(new_survey.tabular[0])
+# print(new_survey.tabular[0]['x'].attrs)
+# print(new_survey.tabular[0]['EMX_HPRG'])
+
+# plt.show()

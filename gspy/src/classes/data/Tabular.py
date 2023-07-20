@@ -9,6 +9,8 @@ from numpy import arange, int32
 
 from .Data import Data
 
+import xarray as xr
+@xr.register_dataset_accessor("gs_tabular")
 class Tabular(Data):
     """Class to handle tabular data.
 
@@ -35,8 +37,8 @@ class Tabular(Data):
     gspy.Spatial_ref : For Spatial reference instantiation.
 
     """
-
-    __slots__ = ()
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
 
     # def __init__(self, type, data_filename, metadata_file=None, spatial_ref=None, **kwargs):
     #     # self._type = None
@@ -46,6 +48,9 @@ class Tabular(Data):
 
     #     if data_filename is not None:
     #         self.read(type, data_filename, metadata_file=metadata_file, spatial_ref=spatial_ref, **kwargs)
+
+    def print_something(self):
+        print('I am a Tabular')
 
     @property
     def _allowed_file_types(self):
@@ -98,7 +103,8 @@ class Tabular(Data):
     @classmethod
     def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
 
-        self = cls()
+        tmp = xr.Dataset(attrs={})
+        self = cls(tmp)
 
         self = self.set_spatial_ref(spatial_ref)
 
@@ -108,14 +114,14 @@ class Tabular(Data):
         file = self.file_handler.read(filename)
 
         # Add the index coordinate
-        self = self.add_coordinate_from_values('index',
-                                               arange(file.nrecords, dtype=int32),
-                                               discrete = True,
-                                               is_dimension=True,
-                                               **{'standard_name' : 'index',
-                                                  'long_name' : 'Index of individual data points',
-                                                  'units' : 'not_defined',
-                                                  'null_value' : 'not_defined'})
+        self.add_coordinate_from_values('index',
+                                         arange(file.nrecords, dtype=int32),
+                                         discrete = True,
+                                         is_dimension=True,
+                                         **{'standard_name' : 'index',
+                                            'long_name'     : 'Index of individual data points',
+                                            'units'         : 'not_defined',
+                                            'null_value'    : 'not_defined'})
 
         # Add the user defined coordinates-dimensions from the json file
         dimensions = json_md['dimensions']
@@ -142,13 +148,13 @@ class Tabular(Data):
             dic = self.get_attrs(file, coord, **json_md['variable_metadata'].get(coord, {}))
 
             # Might need to handle already added coords from the dimensions dict.
-            self = self.add_coordinate_from_values(key,
-                                                   file.df[coord].values,
-                                                   dimensions=["index"],
-                                                   discrete = discrete,
-                                                   is_projected = self.is_projected,
-                                                   is_dimension=False,
-                                                   **dic)
+            self.add_coordinate_from_values(key,
+                                            file.df[coord].values,
+                                            dimensions=["index"],
+                                            discrete = discrete,
+                                            is_projected = self.is_projected,
+                                            is_dimension=False,
+                                            **dic)
 
         column_counts = cls.count_column_headers(file.columns)
 
@@ -175,7 +181,7 @@ class Tabular(Data):
 
                 # Use a column from the CSV file and add it as a variable
                 if var in all_columns:
-                    self.add_variable_from_values(var,
+                    self = self.add_variable_from_values(var,
                                                   file.df[var].values,
                                                   dimensions = ["index"],
                                                   **var_meta)
@@ -195,17 +201,14 @@ class Tabular(Data):
                                                           'if needing to combine unique columns to new variable without an [i] increment').format(var))
 
                     assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]')
-                    assert all([dim in self.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self.dims))
+                    assert all([dim in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
 
                     self.add_variable_from_values(var, values, **var_meta)
 
         # add global attrs to tabular, skip variable_metadata and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
 
-        return self
-
-
-
+        return self._obj
 
     @classmethod
     def read_netcdf(cls, filename, group, **kwargs):

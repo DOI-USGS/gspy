@@ -3,9 +3,10 @@ from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, r_
 from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray
+import xarray as xr
 
-class DataArray_gs(DataArray):
-    __slots__ = ()
+@xr.register_dataarray_accessor("dataarray")
+class DataArray_gs:
 
     @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
@@ -41,7 +42,7 @@ class DataArray_gs(DataArray):
         dims = kwargs.pop('dims')
         coords = kwargs.pop('coords')
 
-        self = cls(bounds,
+        self = DataArray(bounds,
                    dims=dims,
                    coords=coords,
                    attrs=attrs)
@@ -60,7 +61,7 @@ class DataArray_gs(DataArray):
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        out = cls(values,
+        out = DataArray(values,
                 dims=kwargs.pop('dimensions'),
                 coords=kwargs.pop('coords'),
                 attrs=kwargs)

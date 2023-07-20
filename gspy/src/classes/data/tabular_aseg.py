@@ -9,11 +9,11 @@ import numpy as np
 import xarray as xr
 # from aseg_gdf2 import read as read_aseg_gdf2
 from ...utilities.aseg_gdf_handler import aseg_gdf2_gs
-
 from .Tabular import Tabular
 
+@xr.register_dataset_accessor("tabular_aseg")
+
 class Tabular_aseg(Tabular):
-    __slots__ = ()
     """Class to handle ASEG files.
 
     ``Tabular('aseg', data_filename, metadata_file, spatial_ref, **kwargs)``

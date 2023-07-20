@@ -12,8 +12,9 @@ from .xarray_gs.DataArray_gs import DataArray_gs
 from .Tabular import Tabular
 from .Variable_Metadata import variable_metadata
 
+import xarray as xr
+@xr.register_dataset_accessor("tabular_csv")
 class Tabular_csv(Tabular):
-    __slots__ = ()
     """Class to handle tabular csv files.
 
     ``Tabular('csv', data_filename, metadata_file, spatial_ref, **kwargs)``
@@ -24,6 +25,8 @@ class Tabular_csv(Tabular):
     gspy.Tabular : Parent and generic interface.
 
     """
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
 
     @property
     def file_handler(self):

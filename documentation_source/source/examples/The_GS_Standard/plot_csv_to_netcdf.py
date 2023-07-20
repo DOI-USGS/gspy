@@ -46,17 +46,20 @@ survey.write_netcdf(d_out)
 # Read in the netcdf files
 new_survey = Survey().read_netcdf(d_out)
 
+print(type(new_survey))
+print(type(new_survey.tabular[0]))
+
 #%%
 # Plotting
 plt.figure()
-new_survey.tabular[0].scatter('DTM', vmin=30, vmax=50)
+new_survey.tabular[0].gs.scatter('DTM', vmin=30, vmax=50)
 plt.xlim([500000, 540000])
 plt.ylim([1175000, 1210000])
 
 plt.figure()
-new_survey.tabular[1].scatter('DEM')
+new_survey.tabular[1].gs.scatter('DEM')
 
-print(new_survey.tabular[0]['qd_final'])
-print(new_survey.tabular[1]['RHO_I'])
+# print(new_survey.tabular[0]['qd_final'])
+print(new_survey.tabular[1])
 
 plt.show()

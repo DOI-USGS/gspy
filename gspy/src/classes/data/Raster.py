@@ -13,6 +13,8 @@ from .xarray_gs.DataArray_gs import DataArray_gs
 from .Data import Data
 # from .json_handler import attach_coordinate_to_xarray_from_dict
 
+import xarray as xr
+@xr.register_dataset_accessor("gs_raster")
 class Raster(Data):
     """Class defining a set of gridded data (2D or 3D).
 
@@ -37,13 +39,16 @@ class Raster(Data):
     gspy.Spatial_ref : For co-ordinate reference instantiation requirements
 
     """
-    __slots__ = ()
     # def __init__(self, metadata_file, spatial_ref, **kwargs):
 
     #     if metadata_file is None and spatial_ref is None:
     #         return
 
     #     super().__init__()
+
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
+        # self._spatial_ref = None
 
     @property
     def bounds(self):
@@ -52,6 +57,9 @@ class Raster(Data):
     @property
     def is_tif(self):
         return self.type == 'tif'
+
+    def print_something(self):
+        print('I am a Raster')
 
     @classmethod
     def read(cls, metadata_file, spatial_ref=None, netcdf_file=None, **kwargs):
@@ -69,7 +77,8 @@ class Raster(Data):
             Coordinate reference system
 
         """
-        self = cls()
+        tmp = xr.Dataset(attrs={})
+        self = cls(tmp)
         self = self.set_spatial_ref(spatial_ref)
 
         if netcdf_file is not None:
@@ -82,7 +91,7 @@ class Raster(Data):
             coordinates = json_md['coordinates']
             reverse_coordinates = {v:k for k,v in coordinates.items()}
 
-            #
+            # Add the user defined coordinates-dimensions from the json file
             for key in list(dimensions.keys()):
                 b = reverse_coordinates.get(key, key)
                 assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
@@ -96,26 +105,10 @@ class Raster(Data):
                 if 'files' in var_meta[var]:
                     self = self.read_raster_using_metadata(var, json_md, **var_meta[var])
 
-            # path = Path(metadata_file).parent.absolute()
-            # rfiles = json_md.pop('raster_files')
-            # for variable, item in rfiles.items():
-            #     if len(item) == 1:
-            #         reader = self.read_raster
-            #     else:
-            #         reader = self.read_rasters
+        # add global attrs to tabular, skip variable_metadata and dimensions
+        self.update_attrs(**json_md['dataset_attrs'])
 
-            #     # SOMETHING NEEDS TO HAPPEN HERE TO ADD DIMENSION TO THE XARRAY
-            #     reader([os.path.join(path, x) for x in item], variable, var_meta, **json_md)
-
-            # # add global attrs to tabular
-            #self._add_general_metadata_to_xarray(json_md['dataset_attrs'])
-            self.update_attrs(**json_md['dataset_attrs'])
-
-        # Check for conforming spatial refs???
-
-        # # add global attrs to linedata
-        # self._add_general_metadata_to_xarray({x: dic[x] for x in dic if x not in ['units_and_nulls','variable_files']})
-        return self
+        return self._obj
 
     def read_raster_using_metadata(self, name, json_metadata, **kwargs):
         """Read multiple raster files and stack into single variable
@@ -160,28 +153,27 @@ class Raster(Data):
             if n_files > 1:
                 values[i, :, :] = ds.values
 
-
         # Add GS metadata to each matching coordinate in the file.
         coordinates = json_metadata['coordinates']
 
         # For each coordinate defined in the Raster FILE.
         # Match that coordinate with our metadata.
         # If it exists, attach it to xarray
+
         for coord in ds.coords:
-            if (coord in coordinates) & (not coord in self.coords):
+            if (coord in coordinates) & (not coord in self._obj.coords):
                 # if not already in xarray, add
                 self = self.add_coordinate_from_values(coord,
-                                                       ds[coord].values,
-                                                       is_projected=self.is_projected,
-                                                       is_dimension=True,
-                                                       **json_metadata['variable_metadata'][coordinates[coord]])
+                                                ds[coord].values,
+                                                is_projected=self.is_projected,
+                                                is_dimension=True,
+                                                **json_metadata['variable_metadata'][coordinates[coord]])
                 # If coord already exists, pass ...
                 # Assumes existing coord matches!!!!!
                 # Not Yet Implemented: reconciliation step for adding multiple x,y,z,t coords OR resampling / realigning
                 # input tiffs onto existing x,y,z,t grids
                 #else:
                 #    print('coordinate already exists... ', coord)
-
 
         kwargs['dimensions'] = np.asarray(kwargs['dimensions'])[::-1]
 
@@ -569,7 +561,7 @@ class Raster(Data):
         self = self.rio.reproject(target_crs)
         self._compute_bounds()
 
-        return self
+        return self._obj
 
     def write_netcdf(self, filename, group='raster'):
         """Write to netcdf file

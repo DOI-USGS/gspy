@@ -1,26 +1,32 @@
 from copy import deepcopy
 from pprint import pprint
 from numpy import all, arange, asarray, diff, median, r_, zeros
-from xarray import DataArray, Dataset, load_dataset
+from xarray import DataArray, Dataset, open_dataset
 from .DataArray_gs import DataArray_gs
 from .Coordinate_gs import Coordinate_gs
 
 from ....utilities import flatten, unflatten
 from ...survey.Spatial_ref import Spatial_ref
 
-class Dataset_gs(Dataset):
-    __slots__ = ()
+import xarray as xr
+
+@xr.register_dataset_accessor('dataset_gs')
+class Dataset_gs:
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
+        # self._spatial_ref = None
 
     @classmethod
-    def load_dataset(cls, *args, **kwargs):
+    def open_dataset(cls, *args, **kwargs):
         """Loads a netcdf dataset using Xarray, but recasts it as our Dataset_gs class
         """
-        tmp = load_dataset(*args, **kwargs)
+        return open_dataset(*args, **kwargs)
 
         # We need to copy the contents into a new class instiation of OUR type, since xr.load_dataset returns the parent of ourself.
-        return cls(data_vars=tmp.data_vars,
-                   coords=tmp.coords,
-                   attrs=tmp.attrs)
+        # return cls(
+        #            #data_vars=tmp.data_vars,
+        #            coords=tmp.coords,
+        #            attrs=tmp.attrs)
 
     # This may not be needed
     # def _add_general_metadata(self, kwargs):
@@ -68,8 +74,10 @@ class Dataset_gs(Dataset):
         """
 
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
+
+        tmp = Coordinate_gs.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
         # Add the actual coordinate values
-        self[name] = Coordinate_gs.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
+        self._obj[name] = tmp
 
         # Add the bounds of the coordinate
         if not discrete or bounding_dict['bounds'] is not None:
@@ -90,10 +98,10 @@ class Dataset_gs(Dataset):
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
         if (not is_dimension) and ('dimensions' in kwargs):
-            kwargs['coords'] = kwargs.pop('coords', {key:self[key] for key in kwargs['dimensions']})
+            kwargs['coords'] = kwargs.pop('coords', {key:self._obj[key] for key in kwargs['dimensions']})
 
-        self[name] = Coordinate_gs.from_values(name, values, is_dimension=is_dimension, **kwargs)
-        self = self.assign_coords({name : self[name]})
+        self._obj[name] = Coordinate_gs.from_values(name, values, is_dimension=is_dimension, **kwargs)
+        self._obj = self._obj.assign_coords({name : self._obj[name]})
 
         # Add the bounds of the coordinate
         if not discrete:
@@ -102,28 +110,30 @@ class Dataset_gs(Dataset):
         return self
 
     def add_variable_from_values(self, name, values, **kwargs):
-        assert all(values.shape == tuple([self[vdim].size for vdim in kwargs['dimensions']])), ValueError("Shape {} of variable {} does not match specified dimensions with shape {}".format(values.shape, name, kwargs['dimensions']))
+        assert all(values.shape == tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])), ValueError("Shape {} of variable {} does not match specified dimensions with shape {}".format(values.shape, name, kwargs['dimensions']))
 
-        kwargs['coords'] = [self.coords[dim] for dim in kwargs['dimensions']]
-        self[name] = DataArray_gs.from_values(name, values, **kwargs)
+        kwargs['coords'] = [self._obj.coords[dim] for dim in kwargs['dimensions']]
+        self._obj[name] = DataArray_gs.from_values(name, values, **kwargs)
+
+        return self
 
     def add_bounds_to_coordinate(self, name, **kwargs):
 
         # The bounds are 2xN and need their own "nv" dimension
-        self = self._add_nv()
+        self._obj = self._add_nv()
 
         # Now add the bound
-        self[name + '_bnds'] = DataArray_gs.add_bounds_to_coordinate_dimension(self[name],
+        self._obj[name + '_bnds'] = DataArray_gs.add_bounds_to_coordinate_dimension(self._obj[name],
                                                                                name,
-                                                                               dims = (*[dim for dim in self[name].dims], 'nv'),
-                                                                               coords=(*[self[dim] for dim in self[name].dims], self['nv']),
+                                                                               dims = (*[dim for dim in self._obj[name].dims], 'nv'),
+                                                                               coords=(*[self._obj[dim] for dim in self._obj[name].dims], self._obj['nv']),
                                                                                **kwargs)
-        self[name].attrs['bounds'] = name + '_bnds'
+        self._obj[name].attrs['bounds'] = name + '_bnds'
 
         return self
 
     def _add_nv(self):
-        if not 'nv' in self:
+        if not 'nv' in self._obj:
             self = self.add_coordinate_from_values('nv',
                                                    r_[0, 1],
                                                    is_projected=False,
@@ -133,29 +143,29 @@ class Dataset_gs(Dataset):
                                                           long_name = 'Number of vertices for bounding variables',
                                                           units = 'not_defined',
                                                           null_value = 'not_defined'))
-        return self
+        return self._obj
 
     @property
     def is_projected(self):
-        return self['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
+        return self._obj['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
 
     @property
     def spatial_ref(self):
-        return self['spatial_ref']
+        return self._obj['spatial_ref']
 
     def set_spatial_ref(self, kwargs):
-        if not ('spatial_ref' in self):
+        if not ('spatial_ref' in self._obj):
             assert isinstance(kwargs, (dict, Spatial_ref, DataArray)), TypeError("spatial_ref must have type (dict, gspy.Spatial_ref)")
             if isinstance(kwargs, dict):
                 crs = Spatial_ref.from_dict(kwargs)
             else:
                 crs = kwargs # This is a pre-existing Spatial_ref/DataArray
 
-            self['spatial_ref'] = crs
-            self = self.assign_coords({'spatial_ref' : crs})
+            self._obj['spatial_ref'] = crs
+            self._obj = self._obj.assign_coords({'spatial_ref' : crs})
 
         return self
 
     def update_attrs(self, **kwargs):
         kwargs = flatten(kwargs, '', {})
-        self.attrs.update(kwargs)
+        self._obj.attrs.update(kwargs)

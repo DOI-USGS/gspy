@@ -11,6 +11,9 @@ from ..data.Tabular import Tabular
 from ..data.Raster import Raster
 from ...utilities import flatten
 
+import xarray as xr
+
+# @xr.register_dataset_accessor('survey')
 class Survey(object):
     """Class defining a survey or dataset collection
 
@@ -64,14 +67,13 @@ class Survey(object):
         #    # read netcdf file (assumes GS format)
         #    self.read_netcdf(netcdf_file)
 
-    @property
-    def xarray(self):
-        return self._xarray
+    # @property
+    # def xarray(self):
+    #     return self._xarray
 
-    @xarray.setter
-    def xarray(self, value):
-        assert isinstance(value, xr.Dataset), TypeError("xarray must have type xarray.Dataset")
-        self._xarray = value
+    # @xarray.setter
+    # def xarray(self, value):
+    #     self._xarray = value
 
     @property
     def tabular(self):
@@ -166,7 +168,8 @@ class Survey(object):
         Generate an xarray DataSet, attach Survey metadata as variables,
         and assign global attributes for the survey
         """
-        self.xarray = Dataset_gs()
+        obj = xr.Dataset(attrs = {})
+        self.xarray = Dataset_gs(obj)
 
         dic = self.json_metadata
         self.xarray.update_attrs(**dic["dataset_attrs"])
@@ -181,7 +184,7 @@ class Survey(object):
 
                         if isinstance(v[0],list):
                             tmpdict2[k] = str(v)
-                self.xarray[key] = xr.DataArray(attrs=tmpdict2)
+                self.xarray._obj[key] = xr.DataArray(attrs=tmpdict2)
 
         self.xarray = self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
 
@@ -276,7 +279,7 @@ class Survey(object):
 
         self = cls()
 
-        self.xarray = Dataset_gs.load_dataset(filename, group='survey')
+        self.xarray = Dataset_gs.open_dataset(filename, group='survey')
 
         with h5py.File(filename, 'r') as f:
             groups = list(f['survey'].keys())
@@ -319,15 +322,15 @@ class Survey(object):
         """
 
         # Survey
-        self.xarray.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
+        self.xarray._obj.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
 
         # Tabular
         for i, m in enumerate(self._tabular):
-            m.write_netcdf(filename, group="survey/tabular/{}".format(i))
+            Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
 
         # Raster
         for i, m in enumerate(self._raster):
-            m.write_netcdf(filename, group='survey/raster/{}'.format(i))
+            Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
 
     def write_ncml(self, filename):
         """ Write a NcML (NetCDF XML) metadata file
