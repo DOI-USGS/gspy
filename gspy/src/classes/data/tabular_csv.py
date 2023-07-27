@@ -8,7 +8,6 @@ import xarray as xr
 
 
 from ...utilities.csv_handler import csv_gs
-from .xarray_gs.DataArray_gs import DataArray_gs
 from .Tabular import Tabular
 from .Variable_Metadata import variable_metadata
 

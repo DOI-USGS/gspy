@@ -2,11 +2,11 @@ from copy import deepcopy
 from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, r_, std, zeros, nan, min,max
 from numpy import any as npany
 from numpy import dtype as npdtype
-from xarray import DataArray
+from xarray import DataArray as xr_DataArray
 import xarray as xr
 
-@xr.register_dataarray_accessor("dataarray")
-class DataArray_gs:
+@xr.register_dataarray_accessor("gs_dataarray")
+class DataArray:
 
     @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
@@ -42,7 +42,7 @@ class DataArray_gs:
         dims = kwargs.pop('dims')
         coords = kwargs.pop('coords')
 
-        self = DataArray(bounds,
+        self = xr_DataArray(bounds,
                    dims=dims,
                    coords=coords,
                    attrs=attrs)
@@ -61,7 +61,7 @@ class DataArray_gs:
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        out = DataArray(values,
+        out = xr_DataArray(values,
                 dims=kwargs.pop('dimensions'),
                 coords=kwargs.pop('coords'),
                 attrs=kwargs)

@@ -3,10 +3,10 @@ import json
 from copy import deepcopy
 from pprint import pprint
 import xarray as xr
-from netCDF4 import Dataset
+from netCDF4 import Dataset as ncdf4_Dataset
 import h5py
 
-from ..data.xarray_gs.Dataset_gs import Dataset_gs
+from ..data.xarray_gs.Dataset import Dataset
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
 from ...utilities import flatten
@@ -169,7 +169,7 @@ class Survey(object):
         and assign global attributes for the survey
         """
         obj = xr.Dataset(attrs = {})
-        self.xarray = Dataset_gs(obj)
+        self.xarray = Dataset(obj)
 
         dic = self.json_metadata
         self.xarray.update_attrs(**dic["dataset_attrs"])
@@ -279,22 +279,22 @@ class Survey(object):
 
         self = cls()
 
-        self.xarray = Dataset_gs.open_dataset(filename, group='survey')
+        self.xarray = Dataset.open_dataset(filename, group='survey')
 
         with h5py.File(filename, 'r') as f:
             groups = list(f['survey'].keys())
 
+        rootgrp = ncdf4_Dataset(filename)
+
         if 'tabular' in groups:
-            rootgrp = Dataset(filename)
             for i in rootgrp.groups['survey'].groups['tabular'].groups:
                 self.add_tabular(type='netcdf', data_filename=filename, metadata_file=None, group='survey/tabular/{}'.format(int(i)), **kwargs)
-            rootgrp.close()
 
         if 'raster' in groups:
-            rootgrp = Dataset(filename)
             for i in rootgrp.groups['survey'].groups['raster'].groups:
                 self._raster.append(Raster.read_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
-            rootgrp.close()
+
+        rootgrp.close()
 
         return self
 

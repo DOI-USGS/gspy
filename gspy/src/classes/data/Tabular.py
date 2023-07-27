@@ -7,11 +7,11 @@ import xarray as xr
 import numpy as np
 from numpy import arange, int32
 
-from .Data import Data
+from .xarray_gs.Dataset import Dataset
 
 import xarray as xr
 @xr.register_dataset_accessor("gs_tabular")
-class Tabular(Data):
+class Tabular(Dataset):
     """Class to handle tabular data.
 
     ``Tabular(type, data_filename, metadata_file, spatial_ref, **kwargs)``
@@ -211,7 +211,7 @@ class Tabular(Data):
         return self._obj
 
     @classmethod
-    def read_netcdf(cls, filename, group, **kwargs):
+    def read_netcdf(cls, filename, group='tabular', **kwargs):
         return super(Tabular, cls).read_netcdf(filename, group, **kwargs)
 
     # Methods

@@ -1,10 +1,10 @@
 from numpy import arange
-from .DataArray_gs import DataArray_gs
+from .DataArray import DataArray
 
 import xarray as xr
 
-@xr.register_dataarray_accessor("cordinate")
-class Coordinate_gs(DataArray_gs):
+@xr.register_dataarray_accessor("gs_coordinate")
+class Coordinate(DataArray):
 
     @classmethod
     def from_dict(cls, name, is_projected=False, is_dimension=False, **kwargs):
@@ -59,7 +59,7 @@ class Coordinate_gs(DataArray_gs):
             if kwargs['units'] == 'm':
                 kwargs['units'] = 'meters'
 
-        return Coordinate_gs.from_values(name, values, is_projected, is_dimension, **kwargs)
+        return Coordinate.from_values(name, values, is_projected, is_dimension, **kwargs)
 
     @classmethod
     def from_values(cls, name, values, is_projected=False, is_dimension=False, **kwargs):

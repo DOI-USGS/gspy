@@ -9,13 +9,12 @@ import rioxarray
 from pprint import pprint
 
 from .Variable_Metadata import variable_metadata
-from .xarray_gs.DataArray_gs import DataArray_gs
-from .Data import Data
+from .xarray_gs.Dataset import Dataset
 # from .json_handler import attach_coordinate_to_xarray_from_dict
 
 import xarray as xr
 @xr.register_dataset_accessor("gs_raster")
-class Raster(Data):
+class Raster(Dataset):
     """Class defining a set of gridded data (2D or 3D).
 
     Examples of raster data include radiometric or magnetic grids, interpolated resistivity models, etc.
@@ -250,19 +249,19 @@ class Raster(Data):
     #     elif type == 'netcdf':
     #         return self.read_var_netcdf(data_filename, key, units, **kwargs)
 
-    @classmethod
-    def read_netcdf(cls, filename, group='raster', spatial_ref=None, **kwargs):
-        """Read a netcdf file
+    # @classmethod
+    # def read_netcdf(cls, filename, group='raster', spatial_ref=None, **kwargs):
+    #     """Read a netcdf file
 
-        Parameters
-        ----------
-        filename : str
-            Path to the netcdf file
-        group : str, optional. Defaults to 'raster'
-            Netcdf group name to read
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         Path to the netcdf file
+    #     group : str, optional. Defaults to 'raster'
+    #         Netcdf group name to read
 
-        """
-        return super(Raster, cls).read_netcdf(filename, group, spatial_ref=spatial_ref, **kwargs)
+    #     """
+    #     return super(Raster, cls).read_netcdf(filename, group, spatial_ref=spatial_ref, **kwargs)
 
     # def read_raster(self, filename, key, var_meta):
     #     """Read raster file

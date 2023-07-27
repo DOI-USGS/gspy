@@ -12,7 +12,6 @@ from ...utilities.aseg_gdf_handler import aseg_gdf2_gs
 from .Tabular import Tabular
 
 @xr.register_dataset_accessor("tabular_aseg")
-
 class Tabular_aseg(Tabular):
     """Class to handle ASEG files.
 
