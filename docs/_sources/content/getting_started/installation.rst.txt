@@ -2,4 +2,4 @@
 Installing GSpy
 ***************
 
-pip install .
+pip install gspy

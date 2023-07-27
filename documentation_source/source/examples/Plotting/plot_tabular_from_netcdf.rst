@@ -63,7 +63,7 @@ Read in Data & Plot
     plt.figure()
     gs=gridspec.GridSpec(1,1)
     gs.update(bottom=0.12, top=0.98, left=0.2, right=0.98)
-    survey.tabular[0].scatter('GPS_Elevation', ax=plt.subplot(gs[0,0]))
+    survey.tabular[0].gs_tabular.scatter('GPS_Elevation', ax=plt.subplot(gs[0,0]))
 
 
 
@@ -79,7 +79,7 @@ Read in Data & Plot
  .. code-block:: none
 
 
-    (<Axes: >, <matplotlib.collections.PathCollection object at 0x7fcf313feec0>)
+    (<Axes: >, <matplotlib.collections.PathCollection object at 0x7f82d0df8340>)
 
 
 
@@ -141,7 +141,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.679 seconds)
+   **Total running time of the script:** ( 0 minutes  0.558 seconds)
 
 
 .. _sphx_glr_download_examples_Plotting_plot_tabular_from_netcdf.py:

@@ -43,7 +43,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 Convert the ASEG data to netcdf
 +++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-45
+.. GENERATED FROM PYTHON SOURCE LINES 17-50
 
 .. code-block:: default
 
@@ -64,6 +64,11 @@ Convert the ASEG data to netcdf
     # Read data and format as Tabular class object
     survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
+    # Define input TIF-format data file and associated variable mapping file
+    d_grid_supp = join(data_path, 'data//Tempest_raster_md.json')
+    # Read data and format as Griddata class object
+    survey.add_raster(metadata_file = d_grid_supp)
+
     # Define input ASEG-format model file and associated variable mapping file
     m_data = join(data_path, 'model//Tempest_model.dat')
     m_supp = join(data_path, 'model//Tempest_model_md.json')
@@ -82,124 +87,72 @@ Convert the ASEG data to netcdf
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-47
+.. GENERATED FROM PYTHON SOURCE LINES 51-52
 
 Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-49
+.. GENERATED FROM PYTHON SOURCE LINES 52-57
 
 .. code-block:: default
 
     new_survey = Survey().read_netcdf(d_out)
 
+    print(new_survey.raster.magnetic_tmi)
+
+    # Once the survey is read in, we can access variables like a standard xarray dataset.
 
 
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 50-51
-
-Plotting
-
-.. GENERATED FROM PYTHON SOURCE LINES 51-61
-
-.. code-block:: default
-
-    plt.figure()
-    new_survey.tabular[0].scatter('X_PrimaryField')
-
-    plt.figure()
-    new_survey.tabular[1].scatter('PhiD')
-
-    print(new_survey.tabular[0])
-    print(new_survey.tabular[0]['x'].attrs)
-    print(new_survey.tabular[0]['EMX_HPRG'])
-
-    plt.show()
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image-sg:: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_001.png
-         :alt: plot aseg to netcdf
-         :srcset: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_001.png
-         :class: sphx-glr-multi-img
-
-    *
-
-      .. image-sg:: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_002.png
-         :alt: plot aseg to netcdf
-         :srcset: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_002.png
-         :class: sphx-glr-multi-img
 
 
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
 
-    <xarray.Tabular>
-    Dimensions:          (gate_times: 15, nv: 2, index: 20701)
+    <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)>
+    [725988 values with dtype=float64]
     Coordinates:
-        spatial_ref      float64 0.0
-      * gate_times       (gate_times) timedelta64[ns] 00:00:00.000010850 ... 00:0...
-      * nv               (nv) int64 0 1
-      * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-        x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
-    Data variables: (12/62)
-        gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
-        Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
-        Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-        Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
-        Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
-        Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
-        ...               ...
-        Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
-        Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
-        Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
-        Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
-        Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
-        Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+        spatial_ref  float64 ...
+      * x            (x) float64 2.928e+05 2.934e+05 2.94e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
-        content:  raw data
-        comment:  This dataset includes minimally processed (raw) AEM data
-    {'axis': 'X', 'standard_name': 'projection_x_coordinate', 'null_value': -99999.99, 'units': 'm', 'format': 'f13.2', 'grid_mapping': 'spatial_ref', 'valid_range': array([314693.4, 637683.6], dtype=float32), 'long_name': 'Easting_Albers'}
-    <xarray.DataArray 'EMX_HPRG' (index: 20701, gate_times: 15)>
-    array([[8.332362e+00, 7.280147e+00, 6.473992e+00, ..., 6.004300e-02,
-            1.536800e-02, 3.555000e-03],
-           [8.243627e+00, 7.149599e+00, 6.380865e+00, ..., 6.239400e-02,
-            1.621100e-02, 3.524000e-03],
-           [8.175116e+00, 7.172604e+00, 6.367391e+00, ..., 6.274400e-02,
-            1.748400e-02, 3.237000e-03],
-           ...,
-           [3.610122e+00, 1.749984e+00, 9.285520e-01, ..., 1.661000e-03,
-            4.280000e-03, 9.956000e-03],
-           [3.340961e+00, 1.569131e+00, 8.276930e-01, ..., 2.557000e-03,
-            5.719000e-03, 1.101400e-02],
-           [3.302240e+00, 1.456013e+00, 7.967810e-01, ..., 3.049000e-03,
-            6.414000e-03, 1.042900e-02]])
-    Coordinates:
-        spatial_ref  float64 0.0
-      * gate_times   (gate_times) timedelta64[ns] 00:00:00.000010850 ... 00:00:00...
-      * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-        x            (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y            (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z            (index) float32 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
-    Attributes:
-        em_system_components:  1
-        standard_name:         emx_hprg
-        null_value:            -999.999999
-        units:                 fT
-        format:                15f12.6
-        grid_mapping:          spatial_ref
-        valid_range:           [-2.606593 27.079742]
-        long_name:             HPRG Corrected EMX Windows
+        standard_name:  total_magnetic_intensity
+        null_value:     -9999.99
+        units:          nT
+        valid_range:    [-17504.6640625   11490.32324219]
+        long_name:      Total magnetic intensity, diurnally corrected and filtered
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-59
+
+Plotting
+
+.. GENERATED FROM PYTHON SOURCE LINES 59-72
+
+.. code-block:: default
+
+    plt.figure()
+    new_survey.tabular[0].gs_tabular.scatter('X_PrimaryField', cmap='jet')
+
+    # plt.figure()
+    # new_survey.raster.gs_raster.pcolor('magnetic_tmi', vmin=-1000, vmax=1000, cmap='jet')
+
+    # plt.figure()
+    # new_survey.tabular[1].gs_tabular.scatter('PhiD')
+
+    # print(new_survey.tabular[0])
+    # print(new_survey.tabular[0]['x'].attrs)
+    # print(new_survey.tabular[0]['EMX_HPRG'])
+
+    plt.show()
+
+
+.. image-sg:: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_001.png
+   :alt: plot aseg to netcdf
+   :srcset: /examples/The_GS_Standard/images/sphx_glr_plot_aseg_to_netcdf_001.png
+   :class: sphx-glr-single-img
+
 
 
 
@@ -207,7 +160,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.803 seconds)
+   **Total running time of the script:** ( 0 minutes  1.950 seconds)
 
 
 .. _sphx_glr_download_examples_The_GS_Standard_plot_aseg_to_netcdf.py:

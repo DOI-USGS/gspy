@@ -25,8 +25,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CSV to NetCDF conversion" href="plot_csv_to_netcdf.html" />
-    <link rel="prev" title="TIF to NetCDF conversion" href="plot_tif_to_netcdf.html" /> 
+    <link rel="next" title="Plotting" href="../Plotting/index.html" />
+    <link rel="prev" title="CSV to NetCDF conversion" href="plot_csv_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,11 +54,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#the-gs-standard">The GS Standard</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">The GS Standard</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Converting CSV to GSpy Raster formats without metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ASEG to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_csv_to_netcdf.html">CSV to NetCDF conversion</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ASEG to NetCDF conversion</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../Plotting/index.html">Plotting</a></li>
@@ -127,6 +127,11 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="c1"># Read data and format as Tabular class object</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 
+<span class="c1"># Define input TIF-format data file and associated variable mapping file</span>
+<span class="n">d_grid_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.json&#39;</span><span class="p">)</span>
+<span class="c1"># Read data and format as Griddata class object</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span> <span class="o">=</span> <span class="n">d_grid_supp</span><span class="p">)</span>
+
 <span class="c1"># Define input ASEG-format model file and associated variable mapping file</span>
 <span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
 <span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.json&#39;</span><span class="p">)</span>
@@ -141,87 +146,44 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 </div>
 <p>Read in the netcdf files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
+
+<span class="c1"># Once the survey is read in, we can access variables like a standard xarray dataset.</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt;
+[725988 values with dtype=float64]
+Coordinates:
+    spatial_ref  float64 ...
+  * x            (x) float64 2.928e+05 2.934e+05 2.94e+05 ... 6.51e+05 6.516e+05
+  * y            (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+Attributes:
+    standard_name:  total_magnetic_intensity
+    null_value:     -9999.99
+    units:          nT
+    valid_range:    [-17504.6640625   11490.32324219]
+    long_name:      Total magnetic intensity, diurnally corrected and filtered
 </pre></div>
 </div>
 <p>Plotting</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;X_PrimaryField&#39;</span><span class="p">)</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;X_PrimaryField&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;PhiD&#39;</span><span class="p">)</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># new_survey.raster.gs_raster.pcolor(&#39;magnetic_tmi&#39;, vmin=-1000, vmax=1000, cmap=&#39;jet&#39;)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;EMX_HPRG&#39;</span><span class="p">])</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># new_survey.tabular[1].gs_tabular.scatter(&#39;PhiD&#39;)</span>
+
+<span class="c1"># print(new_survey.tabular[0])</span>
+<span class="c1"># print(new_survey.tabular[0][&#39;x&#39;].attrs)</span>
+<span class="c1"># print(new_survey.tabular[0][&#39;EMX_HPRG&#39;])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img src="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" alt="plot aseg to netcdf" class = "sphx-glr-multi-img"/></li>
-<li><img src="../../_images/sphx_glr_plot_aseg_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_aseg_to_netcdf_002.png" alt="plot aseg to netcdf" class = "sphx-glr-multi-img"/></li>
-</ul>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Tabular&gt;
-Dimensions:          (gate_times: 15, nv: 2, index: 20701)
-Coordinates:
-    spatial_ref      float64 0.0
-  * gate_times       (gate_times) timedelta64[ns] 00:00:00.000010850 ... 00:0...
-  * nv               (nv) int64 0 1
-  * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-    x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-    y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-    z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
-Data variables: (12/62)
-    gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
-    Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
-    Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-    Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
-    Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
-    Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
-    ...               ...
-    Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
-    Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
-    Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
-    Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
-    Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
-    Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
-Attributes:
-    content:  raw data
-    comment:  This dataset includes minimally processed (raw) AEM data
-{&#39;axis&#39;: &#39;X&#39;, &#39;standard_name&#39;: &#39;projection_x_coordinate&#39;, &#39;null_value&#39;: -99999.99, &#39;units&#39;: &#39;m&#39;, &#39;format&#39;: &#39;f13.2&#39;, &#39;grid_mapping&#39;: &#39;spatial_ref&#39;, &#39;valid_range&#39;: array([314693.4, 637683.6], dtype=float32), &#39;long_name&#39;: &#39;Easting_Albers&#39;}
-&lt;xarray.DataArray &#39;EMX_HPRG&#39; (index: 20701, gate_times: 15)&gt;
-array([[8.332362e+00, 7.280147e+00, 6.473992e+00, ..., 6.004300e-02,
-        1.536800e-02, 3.555000e-03],
-       [8.243627e+00, 7.149599e+00, 6.380865e+00, ..., 6.239400e-02,
-        1.621100e-02, 3.524000e-03],
-       [8.175116e+00, 7.172604e+00, 6.367391e+00, ..., 6.274400e-02,
-        1.748400e-02, 3.237000e-03],
-       ...,
-       [3.610122e+00, 1.749984e+00, 9.285520e-01, ..., 1.661000e-03,
-        4.280000e-03, 9.956000e-03],
-       [3.340961e+00, 1.569131e+00, 8.276930e-01, ..., 2.557000e-03,
-        5.719000e-03, 1.101400e-02],
-       [3.302240e+00, 1.456013e+00, 7.967810e-01, ..., 3.049000e-03,
-        6.414000e-03, 1.042900e-02]])
-Coordinates:
-    spatial_ref  float64 0.0
-  * gate_times   (gate_times) timedelta64[ns] 00:00:00.000010850 ... 00:00:00...
-  * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-    x            (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-    y            (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-    z            (index) float32 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
-Attributes:
-    em_system_components:  1
-    standard_name:         emx_hprg
-    null_value:            -999.999999
-    units:                 fT
-    format:                15f12.6
-    grid_mapping:          spatial_ref
-    valid_range:           [-2.606593 27.079742]
-    long_name:             HPRG Corrected EMX Windows
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.803 seconds)</p>
+<img src="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_to_netcdf_001.png" alt="plot aseg to netcdf" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.950 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-aseg-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/6c60111adcc824063e78c613ae5d09bb/plot_aseg_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_aseg_to_netcdf.py</span></code></a></p>
@@ -238,8 +200,8 @@ Attributes:
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_tif_to_netcdf.html" class="btn btn-neutral float-left" title="TIF to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_csv_to_netcdf.html" class="btn btn-neutral float-right" title="CSV to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_csv_to_netcdf.html" class="btn btn-neutral float-left" title="CSV to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Plotting/index.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,7 +1,7 @@
 
 """
-Converting CSV to GSpy Raster formats without metadata
-------------------------------------------------------
+Help! I have no variable metadata
+---------------------------------
 
 """
 #%%

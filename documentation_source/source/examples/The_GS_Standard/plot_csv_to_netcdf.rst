@@ -87,37 +87,47 @@ Convert the CSV data folder to netcdf
 
 Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-49
+.. GENERATED FROM PYTHON SOURCE LINES 47-52
 
 .. code-block:: default
 
     new_survey = Survey().read_netcdf(d_out)
 
+    print(type(new_survey))
+    print(type(new_survey.tabular[0]))
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    <class 'gspy.src.classes.survey.Survey.Survey'>
+    <class 'xarray.core.dataset.Dataset'>
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-51
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 53-54
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-62
+.. GENERATED FROM PYTHON SOURCE LINES 54-65
 
 .. code-block:: default
 
     plt.figure()
-    new_survey.tabular[0].scatter('DTM', vmin=30, vmax=50)
+    new_survey.tabular[0].gs_tabular.scatter('DTM', vmin=30, vmax=50)
     plt.xlim([500000, 540000])
     plt.ylim([1175000, 1210000])
 
     plt.figure()
-    new_survey.tabular[1].scatter('DEM')
+    new_survey.tabular[1].gs_tabular.scatter('DEM')
 
-    print(new_survey.tabular[0]['qd_final'])
-    print(new_survey.tabular[1]['RHO_I'])
+    # print(new_survey.tabular[0]['qd_final'])
+    print(new_survey.tabular[1])
 
     plt.show()
 
@@ -144,58 +154,33 @@ Plotting
 
  .. code-block:: none
 
-    <xarray.DataArray 'qd_final' (index: 2334, frequency: 6)>
-    array([[ 169.33839417,  423.81204224,  236.45677185,  878.84869385,
-             751.53479004,  471.71188354],
-           [  80.98508453,  201.68551636,   97.78876495,  283.44436646,
-             176.55760193,  137.57797241],
-           [  56.02865219,  131.59169006,   74.9103775 ,  338.50891113,
-             466.52639771,  369.52008057],
-           ...,
-           [ 184.81713867,  458.01174927,  252.12159729,  992.12182617,
-            1252.0111084 ,  716.16259766],
-           [ 110.68795013,  313.09295654,  188.6153717 ,  809.74560547,
-             863.19592285,  500.93768311],
-           [ 102.43125153,  223.28833008,  129.80227661,  563.83129883,
-             839.41766357,  696.33276367]])
+    <xarray.Dataset>
+    Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
     Coordinates:
-        spatial_ref  float64 0.0
-      * index        (index) int32 0 1 2 3 4 5 6 ... 2328 2329 2330 2331 2332 2333
-        x            (index) float64 5.351e+05 5.341e+05 ... 5.315e+05 5.315e+05
-        y            (index) float64 1.205e+06 1.205e+06 ... 1.204e+06 1.205e+06
-        z            (index) float64 42.82 43.96 42.74 45.32 ... 41.39 42.73 43.3
-      * frequency    (frequency) int64 400 1800 3300 8200 40000 140000
+        spatial_ref       float64 ...
+      * index             (index) int32 0 1 2 3 4 5 ... 9994 9995 9996 9997 9998
+      * layer_depth       (layer_depth) float64 0.5 1.55 2.7 ... 109.2 119.7 132.5
+      * nv                (nv) int64 0 1
+        x                 (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
+        y                 (index) float64 1.205e+06 1.205e+06 ... 1.197e+06
+        z                 (index) float64 ...
+    Data variables: (12/18)
+        layer_depth_bnds  (layer_depth, nv) float64 ...
+        LINE              (index) int64 ...
+        LAT_WGS84_dd      (index) float64 ...
+        LON_WGS84_dd      (index) float64 ...
+        X_WGS84_Albers    (index) float64 ...
+        Y_WGS84_Albers    (index) float64 ...
+        ...                ...
+        RESDATA           (index) float64 ...
+        RESTOTAL          (index) float64 ...
+        RHO_I             (index, layer_depth) float64 ...
+        RHO_I_STD         (index, layer_depth) float64 ...
+        DOI_CONSERVATIVE  (index) float64 ...
+        DOI_STANDARD      (index) float64 ...
     Attributes:
-        em_system_components:  [0 1 2 3 4 5]
-        standard_name:         quadrature_final
-        null_value:            -9999.0
-        units:                 Parts per million (ppm)
-        grid_mapping:          spatial_ref
-        raw_data_columns:      ['cpq400', 'cpq1800', 'cxq3300', 'cpq8200', 'cpq40...
-        valid_range:           [ -13.78479671 3058.26318359]
-        long_name:             Quadrature frequency data, final levelled
-    <xarray.DataArray 'RHO_I' (index: 9999, layer_depth: 30)>
-    array([[ 9.74, 14.9 , 17.1 , ..., 14.  , 16.  , 16.8 ],
-           [11.2 , 16.6 , 18.  , ..., 14.1 , 16.1 , 16.9 ],
-           [12.5 , 17.8 , 18.7 , ..., 14.1 , 16.1 , 17.  ],
-           ...,
-           [20.  , 22.1 , 24.6 , ..., 14.1 , 15.9 , 16.8 ],
-           [19.9 , 21.4 , 23.6 , ..., 14.1 , 15.9 , 16.8 ],
-           [19.6 , 20.8 , 23.1 , ..., 14.  , 15.9 , 16.6 ]])
-    Coordinates:
-        spatial_ref  float64 0.0
-      * layer_depth  (layer_depth) float64 0.5 1.55 2.7 3.95 ... 109.2 119.7 132.5
-      * index        (index) int32 0 1 2 3 4 5 6 ... 9993 9994 9995 9996 9997 9998
-        x            (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
-        y            (index) float64 1.205e+06 1.205e+06 ... 1.197e+06 1.197e+06
-        z            (index) float64 41.1 41.1 41.1 41.1 ... 41.6 41.7 41.7 41.5
-    Attributes:
-        standard_name:  not_defined
-        null_value:     not_defined
-        units:          not_defined
-        grid_mapping:   spatial_ref
-        valid_range:    [  1.03 263.  ]
-        long_name:      not_defined
+        content:  inverted resistivity models
+        comment:  This dataset includes inverted resistivity models derived from ...
 
 
 
@@ -203,7 +188,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.001 seconds)
+   **Total running time of the script:** ( 0 minutes  1.642 seconds)
 
 
 .. _sphx_glr_download_examples_The_GS_Standard_plot_csv_to_netcdf.py:

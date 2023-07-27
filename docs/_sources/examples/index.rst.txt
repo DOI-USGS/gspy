@@ -26,35 +26,18 @@ The GS Standard
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Converting CSV to GSpy Raster formats without metadata">
+    <div class="sphx-glr-thumbcontainer" tooltip="Help! I have no variable metadata">
 
 .. only:: html
 
   .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
-    :alt: Converting CSV to GSpy Raster formats without metadata
+    :alt: Help! I have no variable metadata
 
   :ref:`sphx_glr_examples_The_GS_Standard_help_I_have_no_variable_metadata.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Converting CSV to GSpy Raster formats without metadata</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
-
-.. only:: html
-
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-    :alt: Multiple TIFs to NetCDF conversion
-
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Multiple TIFs to NetCDF conversion</div>
+      <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
     </div>
 
 
@@ -77,18 +60,18 @@ The GS Standard
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="ASEG to NetCDF conversion">
+    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
 
 .. only:: html
 
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_aseg_to_netcdf_thumb.png
-    :alt: ASEG to NetCDF conversion
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+    :alt: Multiple TIFs to NetCDF conversion
 
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py`
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF conversion</div>
+      <div class="sphx-glr-thumbnail-title">Multiple TIFs to NetCDF conversion</div>
     </div>
 
 
@@ -106,6 +89,23 @@ The GS Standard
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">CSV to NetCDF conversion</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="ASEG to NetCDF conversion">
+
+.. only:: html
+
+  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_aseg_to_netcdf_thumb.png
+    :alt: ASEG to NetCDF conversion
+
+  :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF conversion</div>
     </div>
 
 

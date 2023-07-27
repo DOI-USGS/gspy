@@ -101,7 +101,7 @@ Plotting
 .. code-block:: default
 
     plt.figure()
-    new_survey.raster.pcolor('magnetic_tmi', vmin=-1000, vmax=1000, cmap='jet')
+    new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
     plt.show()
 
 
@@ -117,7 +117,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.939 seconds)
+   **Total running time of the script:** ( 0 minutes  0.690 seconds)
 
 
 .. _sphx_glr_download_examples_The_GS_Standard_plot_tif_to_netcdf.py:

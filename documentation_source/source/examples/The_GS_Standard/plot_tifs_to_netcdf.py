@@ -38,11 +38,7 @@ survey.write_netcdf(d_out)
 # Read in the netcdf files
 new_survey = Survey.read_netcdf(d_out)
 
-print(new_survey.raster)
-
-# print(new_survey.raster.z_bnds.attrs)
 #%%
-# # Plotting
-# plt.figure()
-# new_survey.raster.pcolor('resistivity', stack=0, vmin=0, vmax=3, cmap='jet')
-# plt.show()
+# Plotting
+new_survey.raster['resistivity'].plot(col='z', vmax=3, cmap='jet')
+plt.show()

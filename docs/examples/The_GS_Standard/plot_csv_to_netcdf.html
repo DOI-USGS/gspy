@@ -25,8 +25,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plotting" href="../Plotting/index.html" />
-    <link rel="prev" title="ASEG to NetCDF conversion" href="plot_aseg_to_netcdf.html" /> 
+    <link rel="next" title="ASEG to NetCDF conversion" href="plot_aseg_to_netcdf.html" />
+    <link rel="prev" title="Multiple TIFs to NetCDF conversion" href="plot_tifs_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,11 +54,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#the-gs-standard">The GS Standard</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">The GS Standard</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Converting CSV to GSpy Raster formats without metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_tif_to_netcdf.html">TIF to NetCDF conversion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_tifs_to_netcdf.html">Multiple TIFs to NetCDF conversion</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">CSV to NetCDF conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_aseg_to_netcdf.html">ASEG to NetCDF conversion</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../Plotting/index.html">Plotting</a></li>
@@ -142,19 +142,26 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 </div>
 <p>Read in the netcdf files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">new_survey</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;gspy.src.classes.survey.Survey.Survey&#39;&gt;
+&lt;class &#39;xarray.core.dataset.Dataset&#39;&gt;
 </pre></div>
 </div>
 <p>Plotting</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DTM&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DTM&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">500000</span><span class="p">,</span> <span class="mi">540000</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">1175000</span><span class="p">,</span> <span class="mi">1210000</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DEM&#39;</span><span class="p">)</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DEM&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;qd_final&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;RHO_I&#39;</span><span class="p">])</span>
+<span class="c1"># print(new_survey.tabular[0][&#39;qd_final&#39;])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -163,61 +170,36 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 <li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_001.png" alt="plot csv to netcdf" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_to_netcdf_002.png" alt="plot csv to netcdf" class = "sphx-glr-multi-img"/></li>
 </ul>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;qd_final&#39; (index: 2334, frequency: 6)&gt;
-array([[ 169.33839417,  423.81204224,  236.45677185,  878.84869385,
-         751.53479004,  471.71188354],
-       [  80.98508453,  201.68551636,   97.78876495,  283.44436646,
-         176.55760193,  137.57797241],
-       [  56.02865219,  131.59169006,   74.9103775 ,  338.50891113,
-         466.52639771,  369.52008057],
-       ...,
-       [ 184.81713867,  458.01174927,  252.12159729,  992.12182617,
-        1252.0111084 ,  716.16259766],
-       [ 110.68795013,  313.09295654,  188.6153717 ,  809.74560547,
-         863.19592285,  500.93768311],
-       [ 102.43125153,  223.28833008,  129.80227661,  563.83129883,
-         839.41766357,  696.33276367]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
+Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
 Coordinates:
-    spatial_ref  float64 0.0
-  * index        (index) int32 0 1 2 3 4 5 6 ... 2328 2329 2330 2331 2332 2333
-    x            (index) float64 5.351e+05 5.341e+05 ... 5.315e+05 5.315e+05
-    y            (index) float64 1.205e+06 1.205e+06 ... 1.204e+06 1.205e+06
-    z            (index) float64 42.82 43.96 42.74 45.32 ... 41.39 42.73 43.3
-  * frequency    (frequency) int64 400 1800 3300 8200 40000 140000
+    spatial_ref       float64 ...
+  * index             (index) int32 0 1 2 3 4 5 ... 9994 9995 9996 9997 9998
+  * layer_depth       (layer_depth) float64 0.5 1.55 2.7 ... 109.2 119.7 132.5
+  * nv                (nv) int64 0 1
+    x                 (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
+    y                 (index) float64 1.205e+06 1.205e+06 ... 1.197e+06
+    z                 (index) float64 ...
+Data variables: (12/18)
+    layer_depth_bnds  (layer_depth, nv) float64 ...
+    LINE              (index) int64 ...
+    LAT_WGS84_dd      (index) float64 ...
+    LON_WGS84_dd      (index) float64 ...
+    X_WGS84_Albers    (index) float64 ...
+    Y_WGS84_Albers    (index) float64 ...
+    ...                ...
+    RESDATA           (index) float64 ...
+    RESTOTAL          (index) float64 ...
+    RHO_I             (index, layer_depth) float64 ...
+    RHO_I_STD         (index, layer_depth) float64 ...
+    DOI_CONSERVATIVE  (index) float64 ...
+    DOI_STANDARD      (index) float64 ...
 Attributes:
-    em_system_components:  [0 1 2 3 4 5]
-    standard_name:         quadrature_final
-    null_value:            -9999.0
-    units:                 Parts per million (ppm)
-    grid_mapping:          spatial_ref
-    raw_data_columns:      [&#39;cpq400&#39;, &#39;cpq1800&#39;, &#39;cxq3300&#39;, &#39;cpq8200&#39;, &#39;cpq40...
-    valid_range:           [ -13.78479671 3058.26318359]
-    long_name:             Quadrature frequency data, final levelled
-&lt;xarray.DataArray &#39;RHO_I&#39; (index: 9999, layer_depth: 30)&gt;
-array([[ 9.74, 14.9 , 17.1 , ..., 14.  , 16.  , 16.8 ],
-       [11.2 , 16.6 , 18.  , ..., 14.1 , 16.1 , 16.9 ],
-       [12.5 , 17.8 , 18.7 , ..., 14.1 , 16.1 , 17.  ],
-       ...,
-       [20.  , 22.1 , 24.6 , ..., 14.1 , 15.9 , 16.8 ],
-       [19.9 , 21.4 , 23.6 , ..., 14.1 , 15.9 , 16.8 ],
-       [19.6 , 20.8 , 23.1 , ..., 14.  , 15.9 , 16.6 ]])
-Coordinates:
-    spatial_ref  float64 0.0
-  * layer_depth  (layer_depth) float64 0.5 1.55 2.7 3.95 ... 109.2 119.7 132.5
-  * index        (index) int32 0 1 2 3 4 5 6 ... 9993 9994 9995 9996 9997 9998
-    x            (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
-    y            (index) float64 1.205e+06 1.205e+06 ... 1.197e+06 1.197e+06
-    z            (index) float64 41.1 41.1 41.1 41.1 ... 41.6 41.7 41.7 41.5
-Attributes:
-    standard_name:  not_defined
-    null_value:     not_defined
-    units:          not_defined
-    grid_mapping:   spatial_ref
-    valid_range:    [  1.03 263.  ]
-    long_name:      not_defined
+    content:  inverted resistivity models
+    comment:  This dataset includes inverted resistivity models derived from ...
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.001 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.642 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-the-gs-standard-plot-csv-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/8667ed9ff318ccd5f783036bac5b93fe/plot_csv_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_to_netcdf.py</span></code></a></p>
@@ -234,8 +216,8 @@ Attributes:
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_aseg_to_netcdf.html" class="btn btn-neutral float-left" title="ASEG to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Plotting/index.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-left" title="Multiple TIFs to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_aseg_to_netcdf.html" class="btn btn-neutral float-right" title="ASEG to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

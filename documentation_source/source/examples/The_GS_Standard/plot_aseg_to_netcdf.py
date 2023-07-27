@@ -53,11 +53,11 @@ new_survey = Survey().read_netcdf(d_out)
 
 print(new_survey.raster.magnetic_tmi)
 
-
-#%%
+# Once the survey is read in, we can access variables like a standard xarray dataset.
+# %%
 # Plotting
-# plt.figure()
-# new_survey.tabular[0].gs_tabular.scatter('X_PrimaryField')
+plt.figure()
+new_survey.tabular[0].gs_tabular.scatter('X_PrimaryField', cmap='jet')
 
 # plt.figure()
 # new_survey.raster.gs_raster.pcolor('magnetic_tmi', vmin=-1000, vmax=1000, cmap='jet')
@@ -69,4 +69,4 @@ print(new_survey.raster.magnetic_tmi)
 # print(new_survey.tabular[0]['x'].attrs)
 # print(new_survey.tabular[0]['EMX_HPRG'])
 
-# plt.show()
+plt.show()

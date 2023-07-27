@@ -79,54 +79,44 @@ Convert the TIFs data to netcdf
 
 Read in the netcdf files
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-44
+.. GENERATED FROM PYTHON SOURCE LINES 39-41
 
 .. code-block:: default
 
     new_survey = Survey.read_netcdf(d_out)
 
-    print(new_survey.raster)
-
-    # print(new_survey.raster.z_bnds.attrs)
 
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    <xarray.Raster>
-    Dimensions:      (z: 5, nv: 2, x: 363, y: 770)
-    Coordinates:
-        spatial_ref  float64 0.0
-      * z            (z) float64 0.0 5.0 10.0 15.0 20.0
-      * nv           (nv) int64 0 1
-      * x            (x) float64 2.915e+05 2.925e+05 ... 6.525e+05 6.535e+05
-      * y            (y) float64 8.788e+05 8.798e+05 ... 1.647e+06 1.648e+06
-    Data variables:
-        z_bnds       (z, nv) float64 -2.5 2.5 2.5 7.5 7.5 12.5 12.5 17.5 17.5 22.5
-        x_bnds       (x, nv) float64 2.91e+05 2.92e+05 ... 6.53e+05 6.54e+05
-        y_bnds       (y, nv) float64 8.783e+05 8.793e+05 ... 1.647e+06 1.648e+06
-        resistivity  (z, y, x) float64 nan nan nan nan nan ... nan nan nan nan nan
-    Attributes:
-        comment:  <additional details or ancillary information>
-        content:  interpolated resistivity models
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-48
+Plotting
 
-# Plotting
-plt.figure()
-new_survey.raster.pcolor('resistivity', stack=0, vmin=0, vmax=3, cmap='jet')
-plt.show()
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
+
+.. code-block:: default
+
+    new_survey.raster['resistivity'].plot(col='z', vmax=3, cmap='jet')
+    plt.show()
+
+
+.. image-sg:: /examples/The_GS_Standard/images/sphx_glr_plot_tifs_to_netcdf_001.png
+   :alt: z = 0.0, z = 5.0, z = 10.0, z = 15.0, z = 20.0
+   :srcset: /examples/The_GS_Standard/images/sphx_glr_plot_tifs_to_netcdf_001.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.583 seconds)
+   **Total running time of the script:** ( 0 minutes  1.212 seconds)
 
 
 .. _sphx_glr_download_examples_The_GS_Standard_plot_tifs_to_netcdf.py:

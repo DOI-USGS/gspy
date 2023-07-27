@@ -41,5 +41,5 @@ new_survey = Survey.read_netcdf(d_out)
 #%%
 # Plotting
 plt.figure()
-new_survey.raster.pcolor('magnetic_tmi', vmin=-1000, vmax=1000, cmap='jet')
+new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
 plt.show()

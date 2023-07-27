@@ -18,8 +18,8 @@
 .. _sphx_glr_examples_The_GS_Standard_help_I_have_no_variable_metadata.py:
 
 
-Converting CSV to GSpy Raster formats without metadata
-------------------------------------------------------
+Help! I have no variable metadata
+---------------------------------
 
 .. GENERATED FROM PYTHON SOURCE LINES 8-22
 

@@ -5,16 +5,16 @@
 
 Computation times
 =================
-**00:06.327** total execution time for **examples_The_GS_Standard** files:
+**00:05.495** total execution time for **examples_The_GS_Standard** files:
 
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py` (``plot_aseg_to_netcdf.py``)                           | 00:02.803 | 0.0 MB |
+| :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py` (``plot_aseg_to_netcdf.py``)                           | 00:01.950 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_The_GS_Standard_plot_csv_to_netcdf.py` (``plot_csv_to_netcdf.py``)                             | 00:02.001 | 0.0 MB |
+| :ref:`sphx_glr_examples_The_GS_Standard_plot_csv_to_netcdf.py` (``plot_csv_to_netcdf.py``)                             | 00:01.642 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_The_GS_Standard_plot_tif_to_netcdf.py` (``plot_tif_to_netcdf.py``)                             | 00:00.939 | 0.0 MB |
+| :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py` (``plot_tifs_to_netcdf.py``)                           | 00:01.212 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py` (``plot_tifs_to_netcdf.py``)                           | 00:00.583 | 0.0 MB |
+| :ref:`sphx_glr_examples_The_GS_Standard_plot_tif_to_netcdf.py` (``plot_tif_to_netcdf.py``)                             | 00:00.690 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_examples_The_GS_Standard_help_I_have_no_variable_metadata.py` (``help_I_have_no_variable_metadata.py``) | 00:00.000 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------+-----------+--------+

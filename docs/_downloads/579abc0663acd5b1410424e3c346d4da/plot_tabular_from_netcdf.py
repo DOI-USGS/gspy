@@ -29,7 +29,7 @@ survey = Survey().read_netcdf(data_file)
 plt.figure()
 gs=gridspec.GridSpec(1,1)
 gs.update(bottom=0.12, top=0.98, left=0.2, right=0.98)
-survey.tabular[0].scatter('GPS_Elevation', ax=plt.subplot(gs[0,0]))
+survey.tabular[0].gs_tabular.scatter('GPS_Elevation', ax=plt.subplot(gs[0,0]))
 
 #%%
 
