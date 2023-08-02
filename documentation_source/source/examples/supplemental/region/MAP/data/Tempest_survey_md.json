@@ -11,7 +11,7 @@
         "created_by": "gspy==0.0.1"
     },
 
-    "spatial_ref" : {
+    "spatial_ref" : { 
         "datum" : "WGS84",
         "projection" : "USA Contiguous Albers Equal Area Conic",
         "utm_zone" : "43.5",
@@ -26,61 +26,78 @@
         "contractor_project_number" : "603756FWA",
         "contractor" : "CGG Canada Services Ltd.",
         "client" : "U.S. Geological Survey",
-        "survey_type" : "EM/Mag/Rad",
+        "survey_type" : ["electromagnetic","magnetic","radiometric"],
         "survey_area_name" : "Mississippi Alluvial Plain (MAP)",
-        "state" : "MO,AR,TN,MS,LA,IL,KY",
+        "state" : ["MO","AR","TN","MS","LA","IL","KY"],
         "country" : "USA",
         "acquisition_start" : "20191120",
         "acquisition_end" : "20200307",
         "dataset_created" : "20200420",
-        "survey_attributes_units" : "SI"
     },
 
+    "survey_units" : {
+	"time" : "seconds [s]",
+	"area" : "square meters [m^2]",
+	"current" : "Amperes [A]",
+	"frequency" : "Hertz [Hz]",
+	"electromagnetic_moment" : "Ampere square meters [Am^2]",
+	"magnetometer_b_field" : "nano Tesla [nT]",
+	"electromagnetic_b_field" : "femto tesla [fT]"
+    },
+	
     "system_information" : {
         "electromagnetic_system": {
             "instrument_type" : "tempest",
             "data_normalized" : "True",
-            "number_of_turns" : 1,
             "number_of_transmitters" : 1,
-			"number_of_receivers" : 2,
-			"number_of_components" : 2,
+	    "number_of_receivers" : 2,
+	    "number_of_components" : 2,
             "reference_frame" : "right-handed positive up",
-            "sample_rate" : "0.2 s",
+            "sample_rate" : "0.2",
 
-            "transmitter_0_name" : 0,
-            "tranmitter_0_area" : "155 m^2",
+            "transmitter_0_name" : "Z",
+            "tranmitter_0_area" : 155,
             "transmitter_0_waveform_type" : "square",
             "transmitter_0_waveform_time" : [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02],
             "transmitter_0_wave_current" : [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0],
             "transmitter_0_scale_factor" : 0.5,
-            "transmitter_0_peak_current" : "560 A",
-            "transmitter_0_peak_moment" : "86800 Am^2",
-            "transmitter_0_base_frequency" : "30 Hz",
+            "transmitter_0_peak_current" : 560,
+            "transmitter_0_peak_moment" : 86800,
+            "transmitter_0_base_frequency" : 30,
             "transmitter_0_orientation" : "Z",
+	    "transmitter_0_number_of_turns" : 1,
+	    "transmitter_0_on_time" : 0.00833,
+	    "transmitter_0_off_time" : 0.00833,
 
             "receiver_0_name" : "Z",
             "receiver_0_orientation" : "Z",
-            "receiver_0_coil_low_pass_filter" : "?",
-            "receiver_0_instrument_low_pass_filter" : "?",
-            "receiver_0_area" : "?",
             
             "receiver_1_name" : "X",
             "receiver_1_orientation" : "X",
-            "receiver_1_coil_low_pass_filter" : "?",
-            "receiver_1_instrument_low_pass_filter" : "?",
-            "receiver_1_area" : "?",
             
             "component_0_name" : "Z",
+	    "component_0_transmitter_index" : 0,
+	    "component_0_receiver_index" : 0,
+	    "component_0_number_of_gates" : 15,
+	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
+	    "component_0_gate_width" : []
+	    "component_0_txrx_dx" : -120,
+	    "component_0_txrx_dy" : 0,
+	    "component_0_txrx_dz" : -52,
 
             "component_1_name" : "X",
+	    "component_0_transmitter_index" : 0,
+	    "component_0_receiver_index" : 0,
+	    "component_0_number_of_gates" : 15,
+	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
+	    "component_0_gate_width" : []
+	    "component_0_txrx_dx" : -120,
+	    "component_0_txrx_dy" : 0,
+	    "component_0_txrx_dz" : -52,
 
             "recv_cutoff_frequency" : 60000,
-            "recv_area" : "??",
-            "recv_orient" : "x or z",
-            "recv_sampling_frequency" : "10kHz",
-            "nominal_txrx_dx_separation" : 108.0,
-            "nominal_txrx_dz_separation" : 50.0,
-            "output_data_type" : "B or dBdt"
+            "recv_sampling_frequency" : 92160,
+            "output_data_type" : "B"
         },
         "magnetic_system": {
             "sample_rate" : "0.1 s",
