@@ -80,17 +80,18 @@
 	    "component_0_receiver_index" : 0,
 	    "component_0_number_of_gates" : 15,
 	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
-	    "component_0_gate_width" : []
+	    "component_0_gate_width" : [0.00001085, 0.00001085, 0.00001085, 0.00003255, 0.00005425, 0.00009766, 0.00016277, 0.00024957, 0.00037979, 0.0005968, 0.00094404, 0.00148659, 0.00233296, 0.00356997, 0.00656485],
 	    "component_0_txrx_dx" : -120,
 	    "component_0_txrx_dy" : 0,
 	    "component_0_txrx_dz" : -52,
+
 
             "component_1_name" : "X",
 	    "component_0_transmitter_index" : 0,
 	    "component_0_receiver_index" : 0,
 	    "component_0_number_of_gates" : 15,
 	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
-	    "component_0_gate_width" : []
+	    "component_0_gate_width" : [0.00001085, 0.00001085, 0.00001085, 0.00003255, 0.00005425, 0.00009766, 0.00016277, 0.00024957, 0.00037979, 0.0005968, 0.00094404, 0.00148659, 0.00233296, 0.00356997, 0.00656485],
 	    "component_0_txrx_dx" : -120,
 	    "component_0_txrx_dy" : 0,
 	    "component_0_txrx_dz" : -52,
@@ -100,22 +101,22 @@
             "output_data_type" : "B"
         },
         "magnetic_system": {
-            "sample_rate" : "0.1 s",
-            "resolution" : "0.001 nT",
-            "orientation" : "?"
-        },
+            "sample_rate" : "0.1",
+            "resolution" : "0.001",
+
+	},
         "radiometric_system": {
-            "sample_rate" : "1.0 s"
+            "sample_rate" : "1.0"
         }
     },
 
     "flightline_information" : {
-        "traverse_line_spacing" : "6000 m",
+        "traverse_line_spacing" : "6000",
         "traverse_line_direction" : "various",
-        "tie_line_spacing" : "400??",
-        "tie_line_direction" : "EW ??",
-        "nominal_terrain_clearance" : "120 m",
-        "final_line_kilometers" : "24868 km",
+        "tie_line_spacing" : "",
+        "tie_line_direction" : "",
+        "nominal_terrain_clearance" : "120",
+        "final_line_kilometers" : "24868",
         "TRAVERSE LINE NUMBERS" : "[192401 - 265021, 400801 - 401401, 500101, 604501 - 608101, 700201 - 700206, 710101 - 710401]",
         "REPEAT LINE NUMBERS" : "9100071 - 9180772",
         "PRE ZERO LINE NUMBERS" : "90200702 - 90207701",
