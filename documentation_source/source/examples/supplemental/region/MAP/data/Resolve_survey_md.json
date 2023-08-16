@@ -15,7 +15,7 @@
         "contractor_project_number" : "603756RWA",
         "contractor" : "CGG Canada Services Ltd.",
         "client" : "U.S. Geological Survey",
-        "survey_type" : "EM/Mag/Rad",
+        "survey_type" : ["electromagnetic","magnetic","radiometric"],
         "survey_area_name" : "Mississippi Alluvial Plain (MAP) Shellmound",
         "state" : "MS",
         "country" : "USA",
