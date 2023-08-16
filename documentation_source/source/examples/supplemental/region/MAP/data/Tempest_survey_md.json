@@ -49,6 +49,7 @@
         "electromagnetic_system": {
             "instrument_type" : "tempest",
             "data_normalized" : "True",
+	    "output_data_type" : "B"
             "number_of_transmitters" : 1,
 	    "number_of_receivers" : 2,
 	    "number_of_components" : 2,
@@ -96,10 +97,6 @@
 	    "component_0_txrx_dx" : -120,
 	    "component_0_txrx_dy" : 0,
 	    "component_0_txrx_dz" : -52,
-
-            "recv_cutoff_frequency" : 60000,
-            "recv_sampling_frequency" : 92160,
-            "output_data_type" : "B"
         },
         "magnetic_system": {
             "sample_frequency" : 1.0,
