@@ -191,9 +191,9 @@
 
     "flightline_information" : {
         "traverse_line_spacing" : [993,248],
-        "traverse_line_direction" : [092,272],
+        "traverse_line_direction" : [92,272],
         "tie_line_spacing" : 23883,
-        "tie_line_direction" : [002,182 degrees],
+        "tie_line_direction" : [2,182],
         "nominal_terrain_clearance" : 30,
         "final_line_kilometers" : 2358,
         "traverse_line_numbers" : "10010 - 11060",
