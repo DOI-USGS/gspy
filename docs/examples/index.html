@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Examples &mdash; gspy 0.1.0 documentation</title>
@@ -16,16 +16,15 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The GS Standard" href="The_GS_Standard/index.html" />
+    <link rel="next" title="ASEG to NetCDF conversion [AEM - Tempest]" href="Creating_GS_Files/plot_aseg_tempest_to_netcdf.html" />
     <link rel="prev" title="Survey" href="../content/api/classes/survey/survey.html" /> 
 </head>
 
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,10 +54,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../content/getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-gs-standard">The GS Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#plotting">Plotting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="The_GS_Standard/index.html">The GS Standard</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Plotting/index.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-gs-files">Creating GS Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF conversion [AEM - Tempest]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem_to_netcdf.html">CSV to NetCDF conversion AEM to SkyTEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve_to_netcdf.html">CSV to NetCDF conversion [AEM - Resolve]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interacting-with-gs-files">Interacting With GS Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html">Basic Class Structure and Xarray Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -75,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Examples</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/index.rst.txt" rel="nofollow"> View page source</a>
@@ -87,33 +96,61 @@
            <div itemprop="articleBody">
              
   <section id="examples">
-<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
-<div class="sphx-glr-thumbnails"></div><section id="the-gs-standard">
-<h2>The GS Standard<a class="headerlink" href="#the-gs-standard" title="Permalink to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Help! I have no variable metadata"><img alt="Help! I have no variable metadata" src="../_images/sphx_glr_help_I_have_no_variable_metadata_thumb.png" />
-<p><a class="reference internal" href="The_GS_Standard/help_I_have_no_variable_metadata.html#sphx-glr-examples-the-gs-standard-help-i-have-no-variable-metadata-py"><span class="std std-ref">Help! I have no variable metadata</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="TIF to NetCDF conversion"><img alt="TIF to NetCDF conversion" src="../_images/sphx_glr_plot_tif_to_netcdf_thumb.png" />
-<p><a class="reference internal" href="The_GS_Standard/plot_tif_to_netcdf.html#sphx-glr-examples-the-gs-standard-plot-tif-to-netcdf-py"><span class="std std-ref">TIF to NetCDF conversion</span></a></p>
-  <div class="sphx-glr-thumbnail-title">TIF to NetCDF conversion</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion"><img alt="Multiple TIFs to NetCDF conversion" src="../_images/sphx_glr_plot_tifs_to_netcdf_thumb.png" />
-<p><a class="reference internal" href="The_GS_Standard/plot_tifs_to_netcdf.html#sphx-glr-examples-the-gs-standard-plot-tifs-to-netcdf-py"><span class="std std-ref">Multiple TIFs to NetCDF conversion</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Multiple TIFs to NetCDF conversion</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="CSV to NetCDF conversion"><img alt="CSV to NetCDF conversion" src="../_images/sphx_glr_plot_csv_to_netcdf_thumb.png" />
-<p><a class="reference internal" href="The_GS_Standard/plot_csv_to_netcdf.html#sphx-glr-examples-the-gs-standard-plot-csv-to-netcdf-py"><span class="std std-ref">CSV to NetCDF conversion</span></a></p>
-  <div class="sphx-glr-thumbnail-title">CSV to NetCDF conversion</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="ASEG to NetCDF conversion"><img alt="ASEG to NetCDF conversion" src="../_images/sphx_glr_plot_aseg_to_netcdf_thumb.png" />
-<p><a class="reference internal" href="The_GS_Standard/plot_aseg_to_netcdf.html#sphx-glr-examples-the-gs-standard-plot-aseg-to-netcdf-py"><span class="std std-ref">ASEG to NetCDF conversion</span></a></p>
-  <div class="sphx-glr-thumbnail-title">ASEG to NetCDF conversion</div>
-</div></div></section>
-<section id="plotting">
-<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Plot Tabular Examples"><img alt="Plot Tabular Examples" src="../_images/sphx_glr_plot_tabular_from_netcdf_thumb.png" />
-<p><a class="reference internal" href="Plotting/plot_tabular_from_netcdf.html#sphx-glr-examples-plotting-plot-tabular-from-netcdf-py"><span class="std std-ref">Plot Tabular Examples</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Plot Tabular Examples</div>
-</div></div><div class="toctree-wrapper compound">
+<span id="sphx-glr-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
+<div class="sphx-glr-clear"></div><section id="creating-gs-files">
+<span id="sphx-glr-examples-creating-gs-files"></span><h2>Creating GS Files<a class="headerlink" href="#creating-gs-files" title="Permalink to this heading"></a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the `ASEG &lt;https://www.aseg...."><figure class="align-default" id="id1">
+<img alt="ASEG to NetCDF conversion [AEM - Tempest]" src="../_images/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"><span class="std std-ref">ASEG to NetCDF conversion [AEM - Tempest]</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-footer sphx-glr-footer-gallery docutils container">
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ..."><figure class="align-default" id="id2">
+<img alt="CSV to NetCDF conversion AEM to SkyTEM" src="../_images/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"><span class="std std-ref">CSV to NetCDF conversion AEM to SkyTEM</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for..."><figure class="align-default" id="id3">
+<img alt="CSV to NetCDF conversion [AEM - Resolve]" src="../_images/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"><span class="std std-ref">CSV to NetCDF conversion [AEM - Resolve]</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti..."><figure class="align-default" id="id4">
+<img alt="GeoTIFFs to NetCDF conversion" src="../_images/sphx_glr_plot_tifs_to_netcdf_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Creating_GS_Files/plot_tifs_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"><span class="std std-ref">GeoTIFFs to NetCDF conversion</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious..."><figure class="align-default" id="id5">
+<img alt="Help! I have no variable metadata" src="../_images/sphx_glr_help_I_have_no_variable_metadata_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Creating_GS_Files/help_I_have_no_variable_metadata.html#sphx-glr-examples-creating-gs-files-help-i-have-no-variable-metadata-py"><span class="std std-ref">Help! I have no variable metadata</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="interacting-with-gs-files">
+<span id="sphx-glr-examples-interacting-with-gs-files"></span><h2>Interacting With GS Files<a class="headerlink" href="#interacting-with-gs-files" title="Permalink to this heading"></a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within `X..."><figure class="align-default" id="id6">
+<img alt="Basic Class Structure and Xarray Methods" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html#sphx-glr-examples-interacting-with-gs-files-plot-xarray-methods-py"><span class="std std-ref">Basic Class Structure and Xarray Methods</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div><div class="sphx-glr-footer class sphx-glr-footer-gallery docutils container">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/bc82bea3a5dd7bdba60b65220891d9e5/examples_python.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">examples_python.zip</span></code></a></p>
 </div>
@@ -130,7 +167,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../content/api/classes/survey/survey.html" class="btn btn-neutral float-left" title="Survey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="The_GS_Standard/index.html" class="btn btn-neutral float-right" title="The GS Standard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Creating_GS_Files/plot_aseg_tempest_to_netcdf.html" class="btn btn-neutral float-right" title="ASEG to NetCDF conversion [AEM - Tempest]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

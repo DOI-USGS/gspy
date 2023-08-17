@@ -49,13 +49,13 @@ Convert the ASEG data to netcdf
 
 
     # Path to example files
-    data_path = '..//supplemental//'
+    data_path = '..//..//supplemental//'
 
     # Survey Metadata file
-    supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
+    ..//supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
 
     # Establish survey instance
-    survey = Survey(supplemental)
+    survey = Survey(..//supplemental)
 
     # Define input ASEG-format data file and associated variable mapping file
     d_data = data_path + 'region//MAP//data//Tempest.dat'

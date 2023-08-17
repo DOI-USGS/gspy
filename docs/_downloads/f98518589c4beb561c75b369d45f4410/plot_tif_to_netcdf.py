@@ -15,13 +15,13 @@ from gspy import Survey
 # ++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//'
+data_path = '..//..//supplemental//'
 
-# Define supplemental information file
-supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
+# Define ..//supplemental information file
+..//supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
 
 # Read in TIF data file
-survey = Survey(supplemental)
+survey = Survey(..//supplemental)
 
 # Define input ASEG-format data file and associated variable mapping file
 d_data = data_path + 'region//MAP//data//Tempest.dat'

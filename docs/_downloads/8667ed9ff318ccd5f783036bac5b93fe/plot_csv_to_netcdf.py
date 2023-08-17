@@ -17,7 +17,7 @@ from gspy import Survey
 # raise Exception("Get the resolve model 0 working. json files need changing etc.")
 
 # Path to example files
-data_path = '..//supplemental//region//MAP'
+data_path = '..//..//supplemental//region//MAP'
 
 metadata = join(data_path, "data//Resolve_survey_md.json")
 

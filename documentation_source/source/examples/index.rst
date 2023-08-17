@@ -1,143 +1,35 @@
 :orphan:
 
+
+
+.. _sphx_glr_examples:
+
 ########
 Examples
 ########
 
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_examples_Creating_GS_Files:
+
+Creating GS Files
+=================
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    </div>
-
-The GS Standard
-===============
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Help! I have no variable metadata">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the `ASEG &lt;https://www.aseg....">
 
 .. only:: html
 
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
-    :alt: Help! I have no variable metadata
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png
+     :alt: ASEG to NetCDF conversion [AEM - Tempest]
 
-  :ref:`sphx_glr_examples_The_GS_Standard_help_I_have_no_variable_metadata.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="TIF to NetCDF conversion">
-
-.. only:: html
-
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tif_to_netcdf_thumb.png
-    :alt: TIF to NetCDF conversion
-
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_tif_to_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">TIF to NetCDF conversion</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Multiple TIFs to NetCDF conversion">
-
-.. only:: html
-
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-    :alt: Multiple TIFs to NetCDF conversion
-
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_tifs_to_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Multiple TIFs to NetCDF conversion</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="CSV to NetCDF conversion">
-
-.. only:: html
-
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_csv_to_netcdf_thumb.png
-    :alt: CSV to NetCDF conversion
-
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_csv_to_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">CSV to NetCDF conversion</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="ASEG to NetCDF conversion">
-
-.. only:: html
-
-  .. image:: /examples/The_GS_Standard/images/thumb/sphx_glr_plot_aseg_to_netcdf_thumb.png
-    :alt: ASEG to NetCDF conversion
-
-  :ref:`sphx_glr_examples_The_GS_Standard_plot_aseg_to_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF conversion</div>
-    </div>
-
-
-.. raw:: html
-
-    </div>
-
-Plotting
-========
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Plot Tabular Examples">
-
-.. only:: html
-
-  .. image:: /examples/Plotting/images/thumb/sphx_glr_plot_tabular_from_netcdf_thumb.png
-    :alt: Plot Tabular Examples
-
-  :ref:`sphx_glr_examples_Plotting_plot_tabular_from_netcdf.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Plot Tabular Examples</div>
-    </div>
-
+     :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py`
 
 .. raw:: html
 
@@ -146,23 +38,145 @@ Plotting
 
 .. toctree::
    :hidden:
-   :includehidden:
 
-   /examples/The_GS_Standard/index.rst
-   /examples/Plotting/index.rst
+   /examples/Creating_GS_Files/plot_aseg_tempest_to_netcdf
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
 
 .. only:: html
 
-  .. container:: sphx-glr-footer sphx-glr-footer-gallery
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
+     :alt: CSV to NetCDF conversion AEM to SkyTEM
 
-    .. container:: sphx-glr-download sphx-glr-download-python
+     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
 
-      :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
+.. raw:: html
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    </div>
 
-      :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
+
+.. toctree::
+   :hidden:
+
+   /examples/Creating_GS_Files/plot_csv_skytem_to_netcdf
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
+
+.. only:: html
+
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png
+     :alt: CSV to NetCDF conversion [AEM - Resolve]
+
+     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Creating_GS_Files/plot_csv_resolve_to_netcdf
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti...">
+
+.. only:: html
+
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+     :alt: GeoTIFFs to NetCDF conversion
+
+     :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Creating_GS_Files/plot_tifs_to_netcdf
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious...">
+
+.. only:: html
+
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
+     :alt: Help! I have no variable metadata
+
+     :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Creating_GS_Files/help_I_have_no_variable_metadata
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_examples_Interacting_With_GS_Files:
+
+Interacting With GS Files
+=========================
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within `X...">
+
+.. only:: html
+
+ .. figure:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
+     :alt: Basic Class Structure and Xarray Methods
+
+     :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Interacting_With_GS_Files/plot_xarray_methods
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. only :: html
+
+ .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-gallery
+
+
+  .. container:: sphx-glr-download sphx-glr-download-python
+
+    :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
+
+
+
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+    :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
 
 
 .. only:: html

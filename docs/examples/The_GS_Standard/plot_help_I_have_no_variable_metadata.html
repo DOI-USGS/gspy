@@ -93,9 +93,9 @@ to download the full example code</p>
   File <span class="nb">&quot;gspy/src/classes/data/tabular_csv.py&quot;</span>, line <span class="m">183</span>, in <span class="n">_create_variable_metadata_template</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="gr">Exception</span>:
-<span class="x">Variable metadata values are not defined in the supplemental information file.</span>
+<span class="x">Variable metadata values are not defined in the ..//supplemental information file.</span>
 <span class="x">Creating a template with filename variable_metadata_template_Resolve.json</span>
-<span class="x">Please fill out and add the dictionary to the supplemental information file.</span>
+<span class="x">Please fill out and add the dictionary to the ..//supplemental information file.</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -106,12 +106,12 @@ to download the full example code</p>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 
 <span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental&#39;</span>
 
-<span class="c1"># Define supplemental information file</span>
-<span class="n">supplemental</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;region//MAP//data//Resolve_survey_md.json&quot;</span><span class="p">)</span>
+<span class="c1"># Define ..//supplemental information file</span>
+<span class="n">..//supplemental</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;region//MAP//data//Resolve_survey_md.json&quot;</span><span class="p">)</span>
 
-<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">supplemental</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">..//supplemental</span><span class="p">)</span>
 
 <span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;region//MAP//data//Resolve.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;region//MAP//data//Resolve_data_md_without_variables.json&#39;</span><span class="p">)</span>

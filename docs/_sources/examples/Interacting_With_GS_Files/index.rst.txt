@@ -1,0 +1,40 @@
+
+
+.. _sphx_glr_examples_Interacting_With_GS_Files:
+
+Interacting With GS Files
+=========================
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xa...">
+
+.. only:: html
+
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Basic Class Structure and Xarray Methods</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Interacting_With_GS_Files/plot_xarray_methods
+

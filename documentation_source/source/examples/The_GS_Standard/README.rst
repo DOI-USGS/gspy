@@ -1,2 +1,0 @@
-The GS Standard
-===============

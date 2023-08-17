@@ -107,13 +107,13 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <section id="convert-the-tif-data-to-netcdf">
 <h2>Convert the TIF data to netcdf<a class="headerlink" href="#convert-the-tif-data-to-netcdf" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//supplemental//&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//&#39;</span>
 
-<span class="c1"># Define supplemental information file</span>
-<span class="n">supplemental</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Tempest_survey_information.json&quot;</span>
+<span class="c1"># Define ..//supplemental information file</span>
+<span class="n">..//supplemental</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s2">&quot;region//MAP//data//Tempest_survey_information.json&quot;</span>
 
 <span class="c1"># Read in TIF data file</span>
-<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">supplemental</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">..//supplemental</span><span class="p">)</span>
 
 <span class="c1"># Define input ASEG-format data file and associated variable mapping file</span>
 <span class="n">d_data</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest.dat&#39;</span>

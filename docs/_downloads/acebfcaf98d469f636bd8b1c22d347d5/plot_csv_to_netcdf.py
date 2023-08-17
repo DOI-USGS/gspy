@@ -15,7 +15,7 @@ from gspy import Survey
 # ++++++++++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//'
+data_path = '..//..//supplemental//'
 
 metadata = data_path + "region//MAP//data//Resolve_survey_information.json"
 

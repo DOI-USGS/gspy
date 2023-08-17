@@ -16,13 +16,13 @@ from pprint import pprint
 # Convert the TIFs data to netcdf
 # +++++++++++++++++++++++++++++++
 
-data_path = "..//supplemental//region//MAP"
+data_path = "..//..//supplemental//region//MAP"
 
-# Define supplemental information file
-supplemental = join(data_path, "data//Tempest_survey_md.json")
+# Define ..//supplemental information file
+..//supplemental = join(data_path, "data//Tempest_survey_md.json")
 
-# Add supplemental information to the survey
-survey = Survey(supplemental)
+# Add ..//supplemental information to the survey
+survey = Survey(..//supplemental)
 
 # Define input TIF-format data file and associated variable mapping file
 d_grid_supp = join(data_path, 'data//Tempest_rasters_md.json')
