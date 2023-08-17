@@ -32,7 +32,7 @@
         "country" : "USA",
         "acquisition_start" : "20191120",
         "acquisition_end" : "20200307",
-        "dataset_created" : "20200420",
+        "dataset_created" : "20200420"
     },
 
     "survey_units" : {
@@ -49,7 +49,7 @@
         "electromagnetic_system": {
             "instrument_type" : "tempest",
             "data_normalized" : "True",
-	    "output_data_type" : "B"
+	    "output_data_type" : "B",
             "number_of_transmitters" : 1,
 	    "number_of_receivers" : 2,
 	    "number_of_components" : 2,
@@ -98,9 +98,10 @@
 	    "component_0_txrx_dy" : 0,
 	    "component_0_txrx_dz" : -52,
         },
+	    
         "magnetic_system": {
             "sample_frequency" : 1.0,
-            "resolution" : 0.001,
+            "resolution" : 0.001
 
 	},
         "radiometric_system": {
