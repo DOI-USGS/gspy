@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Class Structure and Xarray Methods &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Interacting_With_GS_Files" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating_GS_Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting_With_GS_Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Creating_GS_Files/index.html">Creating_GS_Files</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Interacting_With_GS_Files</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Basic Class Structure and Xarray Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Interacting_With_GS_Files</a></li>
+      <li class="breadcrumb-item active">Basic Class Structure and Xarray Methods</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Interacting_With_GS_Files/xarray_methods.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-interacting-with-gs-files-xarray-methods-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="basic-class-structure-and-xarray-methods">
+<span id="sphx-glr-examples-interacting-with-gs-files-xarray-methods-py"></span><h1>Basic Class Structure and Xarray Methods<a class="headerlink" href="#basic-class-structure-and-xarray-methods" title="Permalink to this heading"></a></h1>
+<p>The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a> Datasets. This example demonstrates how to access the xarray object for each class, and methods for exploring the data and metadata.</p>
+<p>This example uses ASEG-formatted raw AEM data from the Tempest system, and a 2-D GeoTiFF of magnetic data.</p>
+<p>Dataset Reference:
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+</pre></div>
+</div>
+<p>First Create the Survey &amp; Data Objects</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Survey</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.json&quot;</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># Add Tabular and Raster Datasets</span>
+<span class="n">t_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
+<span class="n">t_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">t_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">t_supp</span><span class="p">)</span>
+<span class="n">r_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span> <span class="o">=</span> <span class="n">r_supp</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="accessing-the-xarray-object">
+<h2>Accessing the Xarray object<a class="headerlink" href="#accessing-the-xarray-object" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Survey</span>
+<span class="c1"># The Survey&#39;s metadata is accessed through the xarray property</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">)</span>
+
+<span class="c1"># To look just at the attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+
+<span class="c1"># Or expand a specific variable</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">[</span><span class="s1">&#39;survey_information&#39;</span><span class="p">])</span>
+
+<span class="c1"># Tabular &amp; Raster</span>
+<span class="c1"># Datasets are attached to the Survey as lists, however if only one Dataset of a given</span>
+<span class="c1"># type is present then the xarray object is returned simply by the name of the group</span>
+
+<span class="c1"># tabular</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">)</span>
+
+<span class="c1"># raster</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">raster</span><span class="p">)</span>
+
+<span class="c1"># If more than one Dataset is present under the group, then the list begins indexing</span>
+<span class="c1"># For example, let&#39;s add a second Tabular Dataset</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
+
+<span class="c1"># Now the first dataset is accessed at index 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># and the second is located at index 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="coordinates-dimensions-and-attributes">
+<h2>Coordinates, Dimensions, and Attributes<a class="headerlink" href="#coordinates-dimensions-and-attributes" title="Permalink to this heading"></a></h2>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-xarray-methods-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/be03fbaee85c6c2ba3a104dc79d7e0d7/xarray_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">xarray_methods.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/232e9cc565407f5b42bed3dbfa6a4de9/xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">xarray_methods.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Interacting_With_GS_Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

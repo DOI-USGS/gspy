@@ -16,13 +16,13 @@ from gspy import Survey
 # +++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//region//MAP'
+data_path = '..//..//supplemental//region//MAP'
 
 # Survey Metadata file
-supplemental = join(data_path, "data//Tempest_survey_md.json")
+..//supplemental = join(data_path, "data//Tempest_survey_md.json")
 
 # Establish survey instance
-survey = Survey(supplemental)
+survey = Survey(..//supplemental)
 
 # Define input ASEG-format data file and associated variable mapping file
 d_data = join(data_path, 'data//Tempest.dat')

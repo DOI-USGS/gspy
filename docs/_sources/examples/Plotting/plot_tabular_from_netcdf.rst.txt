@@ -53,7 +53,7 @@ Read in Data & Plot
 
 
     # Path to example files
-    data_path = '..//supplemental//'
+    data_path = '..//..//supplemental//'
 
     # Read in ASEG data file
     data_file = data_path + 'region//MAP//data//Tempest.nc'

@@ -1,0 +1,224 @@
+{
+    "dataset_attrs" : {
+    	"content": "inverted resistivity models",
+        "comment": "This dataset includes inverted resistivity models derived from processed AEM data produced by USGS"
+    },
+    
+    "inversion" : {
+        "model_file" : "WI_SkyTEM_2021_InvertedModels.csv",
+        "inversion_software" : "Aarhus Workbench",
+        "software_version" : "v 6.0.1.0",
+        "date" : "03/2021 - 06/2021",
+	    "comment": "Processed data were inverted in Aarhus Workbench software (v 6.0.1.0) using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models were exported to netCDF 11/2021.",
+        "data_file" : "WI_SkyTEM_2021_ProcessedData.csv"
+    },
+    
+	"coordinates" : {
+   		"x" : "E_N83WTM",
+    	"y" : "N_N83WTM",
+    	"z" : "ELEVATION",
+    	"t" : "TIMESTAMP"
+	},
+
+	"dimensions": {
+        "layer_depth" : {
+            "standard_name": "layer_depth",
+            "long_name": "Depth to model layer",
+            "units": "meters",
+            "null_value": "not_defined",
+            "centers": [0.375,   1.16 ,   2.02 ,   
+            			2.965,   4.005,   5.145,   
+            			6.39 , 7.755,   9.255,  
+            			10.9  ,  12.7  ,  14.675,  
+            			16.845,  19.22 , 21.825,  
+            			24.685,  27.815,  31.25 ,  
+            			35.02 ,  39.15 ,  43.68 , 
+            			48.65 ,  54.095,  60.065,  
+            			66.615,  73.795,  81.67 ,  
+            			90.31 , 99.78 , 110.16 , 
+            			121.545, 134.03 , 147.72 , 
+            			162.73 , 179.19 , 197.24 , 
+            			217.035, 238.745, 262.55 , 343.75],
+            "bounds": [[  0.0  ,   0.75],
+					   [  0.75,   1.57],
+					   [  1.57,   2.47],
+					   [  2.47,   3.46],
+					   [  3.46,   4.55],
+					   [  4.55,   5.74],
+					   [  5.74,   7.04],
+					   [  7.04,   8.47],
+					   [  8.47,  10.04],
+					   [ 10.04,  11.76],
+					   [ 11.76,  13.64],
+					   [ 13.64,  15.71],
+					   [ 15.71,  17.98],
+					   [ 17.98,  20.46],
+					   [ 20.46,  23.19],
+					   [ 23.19,  26.18],
+					   [ 26.18,  29.45],
+					   [ 29.45,  33.05],
+					   [ 33.05,  36.99],
+					   [ 36.99,  41.31],
+					   [ 41.31,  46.05],
+					   [ 46.05,  51.25],
+					   [ 51.25,  56.94],
+					   [ 56.94,  63.19],
+					   [ 63.19,  70.04],
+					   [ 70.04,  77.55],
+					   [ 77.55,  85.79],
+					   [ 85.79,  94.83],
+					   [ 94.83, 104.73],
+					   [104.73, 115.59],
+					   [115.59, 127.5 ],
+					   [127.5 , 140.56],
+					   [140.56, 154.88],
+					   [154.88, 170.58],
+					   [170.58, 187.8 ],
+					   [187.8 , 206.68],
+					   [206.68, 227.39],
+					   [227.39, 250.1 ],
+					   [250.1 , 275.0  ],
+					   [275.0  , 412.5 ]]
+        }
+    },
+    
+    "variable_metadata": {
+        "pINDEX": {
+            "standard_name": "processing_index",
+            "long_name": "Unique index number for processing",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "sLINE_NO": {
+            "standard_name": "master_line",
+            "long_name": "Master line number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "E_N83WTM": {
+            "standard_name": "easting_nad83",
+            "long_name": "Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "X"
+        },
+        "N_N83WTM": {
+            "standard_name": "northing_nad83",
+            "long_name": "Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "Y"
+        },
+        "TIMESTAMP": {
+            "standard_name": "timestamp",
+            "long_name": "Time, decimal days since January 1, 1900",
+            "units": "day",
+            "null_value": "not_defined",
+            "axis" : "T",
+            "time_datum" : "January 1, 1900"
+        },
+        "RECORD": {
+            "standard_name": "record",
+            "long_name": "Workbench record number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "ELEVATION": {
+            "standard_name": "elevation",
+            "long_name": "Digital elevation model",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "Z",
+            "positive" : "up",
+            "vertical_datum" : "North American Vertical Datum of 1988 (NAVD88)"
+        },
+        "ALT": {
+            "standard_name": "altitude",
+            "long_name": "DGPS instrument altitude",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "INVALT": {
+            "standard_name": "inverted_altitude",
+            "long_name": "Inverted instrument altitude",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "INVALTSTD": {
+            "standard_name": "inverted_altitude_uncertainty",
+            "long_name": "Standard deviation of inverted instrument altitude",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "DELTAALT": {
+            "standard_name": "inverted_altitude_difference",
+            "long_name": "Measured minus inverted altitude",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "NUMDATA": {
+            "standard_name": "number_of_data",
+            "long_name": "Number of active time gates",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "RESDATA": {
+            "standard_name": "data_residual",
+            "long_name": "Error-weighted inversion data misfit (target = 1.0)",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "RESTOTAL": {
+            "standard_name": "total_residual",
+            "long_name": "Total inversion residual (data and model regularization)",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "RHO_I": {
+            "standard_name": "layer_resistivity",
+            "long_name": "Inverted layer resistivity",
+            "units": "Ohm*meter",
+            "null_value": "not_defined",
+            "dimensions": ["index", "layer_depth"]
+        },
+        "RHO_I_STD": {
+            "standard_name": "layer_resistivity_uncertainty",
+            "long_name": "Uncertainty in inverted layer resistivity",
+            "units": "not_defined",
+            "null_value": "not_defined",
+            "dimensions": ["index", "layer_depth"]
+        },
+        "DOI_CONSERVATIVE": {
+            "standard_name": "depth_of_investigation_conservative",
+            "long_name": "Conservative estimate of depth of investigation (DOI)",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "DOI_STANDARD": {
+            "standard_name": "depth_of_investigation_standard",
+            "long_name": "Standard estimate of depth of investigation (DOI)",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "DEP_TOP": {
+            "standard_name": "depth_top",
+            "long_name": "Top of model layers",
+            "units": "meter",
+            "null_value": "not_defined",
+            "dimensions": ["index", "layer_depth"]
+        },        
+        "DEP_BOT": {
+            "standard_name": "depth_bottom",
+            "long_name": "Bottom of model layers",
+            "units": "meter",
+            "null_value": "not_defined",
+            "dimensions": ["index", "layer_depth"]
+        }, 
+        "LINE_NO": {
+            "standard_name": "line_number",
+            "long_name": "Line number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        }
+    }
+}

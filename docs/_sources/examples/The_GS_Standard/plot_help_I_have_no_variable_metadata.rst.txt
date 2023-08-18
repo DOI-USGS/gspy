@@ -38,9 +38,9 @@ Converting CSV to GSpy Raster formats without metadata
       File "gspy/src/classes/data/tabular_csv.py", line 183, in _create_variable_metadata_template
         raise Exception(s)
     Exception: 
-    Variable metadata values are not defined in the supplemental information file.
+    Variable metadata values are not defined in the ..//supplemental information file.
     Creating a template with filename variable_metadata_template_Resolve.json
-    Please fill out and add the dictionary to the supplemental information file.
+    Please fill out and add the dictionary to the ..//supplemental information file.
 
 
 
@@ -57,12 +57,12 @@ Converting CSV to GSpy Raster formats without metadata
     from gspy import Survey
 
     # Path to example files
-    data_path = '..//supplemental'
+    data_path = '..//..//supplemental'
 
-    # Define supplemental information file
-    supplemental = join(data_path, "region//MAP//data//Resolve_survey_md.json")
+    # Define ..//supplemental information file
+    ..//supplemental = join(data_path, "region//MAP//data//Resolve_survey_md.json")
 
-    survey = Survey(supplemental)
+    survey = Survey(..//supplemental)
 
     d_data = join(data_path, 'region//MAP//data//Resolve.csv')
     d_supp = join(data_path, 'region//MAP//data//Resolve_data_md_without_variables.json')

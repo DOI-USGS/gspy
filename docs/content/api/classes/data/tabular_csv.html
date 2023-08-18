@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tabular_csv &mdash; gspy 0.1.0 documentation</title>
@@ -16,10 +16,9 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -52,7 +55,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">Data classes</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xarray_gs.html">xarray_gs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabular.html">Tabular</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Tabular_csv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabular_aseg.html">Tabular_aseg</a></li>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
           <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
@@ -99,8 +102,8 @@
 <h1>Tabular_csv<a class="headerlink" href="#tabular-csv" title="Permalink to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-45208bd1ca926b95ea7a4142d3ae7f535666da84.png" alt="Inheritance diagram of gspy.src.classes.data.tabular_csv" usemap="#inheritance9545d01de6" class="inheritance graphviz" /></div>
 <map id="inheritance9545d01de6" name="inheritance9545d01de6">
-<area shape="rect" id="node2" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="125,5,197,31"/>
-<area shape="rect" id="node3" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Class to handle tabular csv files." alt="" coords="245,5,337,31"/>
+<area shape="rect" id="node2" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Class to handle tabular data." alt="" coords="125,5,197,32"/>
+<area shape="rect" id="node3" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Class to handle tabular csv files." alt="" coords="245,5,337,32"/>
 </map><span class="target" id="module-gspy.src.classes.data.tabular_csv"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.tabular_csv.</span></span><span class="sig-name descname"><span class="pre">Tabular_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" title="Permalink to this definition"></a></dt>
@@ -130,7 +133,7 @@
 <span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv.write_csv" title="Permalink to this definition"></a></dt>
 <dd><p>Export tabular_csv to CSV file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to output csv file</p>
 </dd>
 </dl>

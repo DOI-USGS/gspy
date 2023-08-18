@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plot Tabular Examples &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GS Convention Requirements" href="../../gspy_convention_requirements.html" />
+    <link rel="prev" title="Interacting_With_GS_Files" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating_GS_Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting_With_GS_Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Creating_GS_Files/index.html">Creating_GS_Files</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Interacting_With_GS_Files</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Plot Tabular Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Interacting_With_GS_Files</a></li>
+      <li class="breadcrumb-item active">Plot Tabular Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Interacting_With_GS_Files/plot_tabular_from_netcdf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-interacting-with-gs-files-plot-tabular-from-netcdf-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="plot-tabular-examples">
+<span id="sphx-glr-examples-interacting-with-gs-files-plot-tabular-from-netcdf-py"></span><h1>Plot Tabular Examples<a class="headerlink" href="#plot-tabular-examples" title="Permalink to this heading"></a></h1>
+<p>Dataset Reference:
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">pyproj</span>
+</pre></div>
+</div>
+<section id="read-in-data-plot">
+<h2>Read in Data &amp; Plot<a class="headerlink" href="#read-in-data-plot" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//&#39;</span>
+
+<span class="c1"># Read in ASEG data file</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">+</span> <span class="s1">&#39;region//MAP//data//Tempest.nc&#39;</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+
+<span class="c1"># Plot a map of the scattered data points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span><span class="o">=</span><span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;GPS_Elevation&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" srcset="../../_images/sphx_glr_plot_tabular_from_netcdf_001.png" alt="plot tabular from netcdf" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>gspy/src/classes/data/xarray_gs/Dataset.py:259: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+
+(&lt;Axes: xlabel=&#39;x\nEasting_Albers [m]&#39;, ylabel=&#39;y\nNorthing_Albers [m]&#39;&gt;, &lt;matplotlib.collections.PathCollection object at 0x1290332b0&gt;)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Subset by line number</span>
+<span class="c1"># newld = survey.tabular[0].subset(&#39;Line&#39;, 225401)</span>
+<span class="c1"># # Plot the single line in map view</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># gs=gridspec.GridSpec(1,1)</span>
+<span class="c1"># gs.update(bottom=0.12, top=0.98, left=0.2, right=0.98)</span>
+<span class="c1"># newld.scatter(&#39;GPS_Elevation&#39;, ax=plt.subplot(gs[0,0]))</span>
+</pre></div>
+</div>
+<p>Plotting</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Plot data channels</span>
+<span class="c1"># fig = plt.figure(figsize=(8,6))</span>
+<span class="c1"># gs=gridspec.GridSpec(4,1)</span>
+<span class="c1"># gs.update(bottom=0.12, top=0.98, left=0.15, right=0.98, hspace=0.5)</span>
+<span class="c1"># ax0=plt.subplot(gs[0,0])</span>
+<span class="c1"># newld.plot(&#39;X_Powerline&#39;, color=&#39;b&#39;, label=&#39;X&#39;)</span>
+<span class="c1"># newld.plot(&#39;Z_Powerline&#39;, color=&#39;r&#39;, label=&#39;Z&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Powerline&#39;)</span>
+<span class="c1"># plt.legend(loc=2, ncol=2)</span>
+
+<span class="c1"># ax1=plt.subplot(gs[1,0])</span>
+<span class="c1"># newld.plot(&#39;RMI&#39;, color=&#39;limegreen&#39;)</span>
+
+<span class="c1"># ax2=plt.subplot(gs[2,0])</span>
+<span class="c1"># newld.plot(&#39;EMX_HPRG&#39;)</span>
+
+<span class="c1"># ax3=plt.subplot(gs[3,0])</span>
+<span class="c1"># newld.plot(&#39;EMZ_HPRG&#39;);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.641 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-tabular-from-netcdf-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/74085a1d3a38ea1cacf7c9357a4ddb3f/plot_tabular_from_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tabular_from_netcdf.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/dd98bb1ec9b841c9b2c8c4d74f8e99dd/plot_tabular_from_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tabular_from_netcdf.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Interacting_With_GS_Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

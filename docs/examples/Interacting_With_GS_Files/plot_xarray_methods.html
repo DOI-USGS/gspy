@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Class Structure and Xarray Methods &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GS Convention Requirements" href="../../gspy_convention_requirements.html" />
+    <link rel="prev" title="Help! I have no variable metadata" href="../Creating_GS_Files/help_I_have_no_variable_metadata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Basic Class Structure and Xarray Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-the-xarray-object">Accessing the Xarray object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coordinates-dimensions-and-attributes">Coordinates, Dimensions, and Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Basic Class Structure and Xarray Methods</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Interacting_With_GS_Files/plot_xarray_methods.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="basic-class-structure-and-xarray-methods">
+<span id="sphx-glr-examples-interacting-with-gs-files-plot-xarray-methods-py"></span><h1>Basic Class Structure and Xarray Methods<a class="headerlink" href="#basic-class-structure-and-xarray-methods" title="Permalink to this heading"></a></h1>
+<p>The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a> Datasets. This example demonstrates how to access the xarray object for each class, and methods for exploring the data and metadata.</p>
+<p>This example uses ASEG-formatted raw AEM data from the Tempest system, and a 2-D GeoTiFF of magnetic data.</p>
+<p>Dataset Reference:
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+</pre></div>
+</div>
+<p>First Create the Survey &amp; Data Objects</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Survey</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.json&quot;</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># Add Tabular and Raster Datasets</span>
+<span class="n">t_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
+<span class="n">t_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">t_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">t_supp</span><span class="p">)</span>
+<span class="n">r_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span> <span class="o">=</span> <span class="n">r_supp</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="accessing-the-xarray-object">
+<h2>Accessing the Xarray object<a class="headerlink" href="#accessing-the-xarray-object" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Survey</span>
+<span class="c1"># The Survey&#39;s metadata is accessed through the xarray property</span>
+<span class="c1"># print(survey.xarray)</span>
+
+<span class="c1"># # To look just at the attributes</span>
+<span class="c1"># print(survey.xarray.attrs)</span>
+
+<span class="c1"># # Or expand a specific variable</span>
+<span class="c1"># print(survey.xarray[&#39;survey_information&#39;])</span>
+
+<span class="c1"># Tabular &amp; Raster</span>
+<span class="c1"># Datasets are attached to the Survey as lists, however if only one Dataset of a given</span>
+<span class="c1"># type is present then the xarray object is returned simply by the name of the group</span>
+
+<span class="c1"># tabular</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">)</span>
+
+<span class="c1"># raster</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">raster</span><span class="p">)</span>
+
+<span class="c1"># If more than one Dataset is present under the group, then the list begins indexing</span>
+<span class="c1"># For example, let&#39;s add a second Tabular Dataset</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
+
+<span class="c1"># Now the first dataset is accessed at index 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># and the second is located at index 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
+Dimensions:          (index: 20701, gate_times: 15, nv: 2)
+Coordinates:
+    spatial_ref      float64 0.0
+  * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
+  * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
+  * nv               (nv) int64 0 1
+    x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+    y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+    z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
+Data variables: (12/62)
+    gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
+    Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
+    Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
+    Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
+    Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
+    Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
+    ...               ...
+    Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
+    Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
+    Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
+    Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
+    Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
+    Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+Attributes:
+    content:  raw data
+    comment:  This dataset includes minimally processed (raw) AEM data
+&lt;xarray.Dataset&gt;
+Dimensions:       (x: 599, nv: 2, y: 1212)
+Coordinates:
+    spatial_ref   float64 0.0
+  * x             (x) float64 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * nv            (nv) int64 0 1
+  * y             (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+Data variables:
+    x_bnds        (x, nv) float64 2.925e+05 2.931e+05 ... 6.513e+05 6.519e+05
+    y_bnds        (y, nv) float64 1.607e+06 1.606e+06 ... 8.805e+05 8.799e+05
+    magnetic_tmi  (y, x) float64 1.701e+38 1.701e+38 ... 1.701e+38 1.701e+38
+Attributes:
+    comment:  &lt;additional details or ancillary information&gt;
+    content:  gridded magnetic map
+&lt;xarray.Dataset&gt;
+Dimensions:          (index: 20701, gate_times: 15, nv: 2)
+Coordinates:
+    spatial_ref      float64 0.0
+  * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
+  * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
+  * nv               (nv) int64 0 1
+    x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+    y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+    z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
+Data variables: (12/62)
+    gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
+    Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
+    Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
+    Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
+    Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
+    Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
+    ...               ...
+    Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
+    Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
+    Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
+    Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
+    Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
+    Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+Attributes:
+    content:  raw data
+    comment:  This dataset includes minimally processed (raw) AEM data
+&lt;xarray.Dataset&gt;
+Dimensions:                  (index: 20701, layer_depth: 30, nv: 2,
+                              gate_times: 15)
+Coordinates:
+    spatial_ref              float64 0.0
+  * index                    (index) int32 0 1 2 3 4 ... 20697 20698 20699 20700
+  * layer_depth              (layer_depth) float64 1.5 4.65 ... 424.2 467.5
+  * nv                       (nv) int64 0 1
+  * gate_times               (gate_times) float64 1.085e-05 ... 0.01338
+    x                        (index) float32 3.579e+05 3.579e+05 ... 4.906e+05
+    y                        (index) float32 1.211e+06 1.211e+06 ... 1.577e+06
+    z                        (index) float32 45.83 46.61 46.95 ... 179.4 177.2
+Data variables: (12/49)
+    layer_depth_bnds         (layer_depth, nv) float64 0.0 3.0 ... 445.9 489.1
+    gate_times_bnds          (gate_times, nv) float64 5.43e-06 ... 0.01666
+    uniqueid                 (index) int32 0 1 2 3 4 ... 20697 20698 20699 20700
+    survey                   (index) int32 9999 9999 9999 ... 9999 9999 9999
+    date                     (index) int32 20191128 20191128 ... 20200227
+    flight                   (index) int32 10 10 10 10 10 10 ... 70 70 70 70 70
+    ...                       ...
+    PhiC                     (index) float64 0.4491 0.4759 0.129 ... 1.61 1.289
+    PhiT                     (index) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
+    PhiG                     (index) float64 0.9652 0.6608 ... 0.7603 1.457
+    PhiS                     (index) float64 0.1158 0.1392 ... 0.2877 0.1705
+    Lambda                   (index) float64 0.5968 0.5487 ... 0.3808 1.771
+    Iterations               (index) int32 20 19 25 25 25 18 ... 28 30 30 27 29
+Attributes:
+    content:  inverted resistivity models
+    comment:  This dataset includes inverted resistivity models derived from ...
+</pre></div>
+</div>
+</section>
+<section id="coordinates-dimensions-and-attributes">
+<h2>Coordinates, Dimensions, and Attributes<a class="headerlink" href="#coordinates-dimensions-and-attributes" title="Permalink to this heading"></a></h2>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.156 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b95ad0555250a202737d3010d7a98ee8/plot_xarray_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_xarray_methods.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Creating_GS_Files/help_I_have_no_variable_metadata.html" class="btn btn-neutral float-left" title="Help! I have no variable metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

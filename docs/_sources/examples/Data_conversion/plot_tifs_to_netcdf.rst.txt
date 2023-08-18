@@ -50,13 +50,13 @@ Convert the TIFs data to netcdf
 
 
     # Path to example files
-    data_path = '..//supplemental//'
+    data_path = '..//..//supplemental//'
 
-    # Define supplemental information file
-    supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
+    # Define ..//supplemental information file
+    ..//supplemental = data_path + "region//MAP//data//Tempest_survey_information.json"
 
-    # Add supplemental information to the survey
-    survey = Survey(supplemental)
+    # Add ..//supplemental information to the survey
+    survey = Survey(..//supplemental)
 
     # Define input ASEG-format data file and associated variable mapping file
     d_data = data_path + 'region//MAP//data//Tempest.dat'

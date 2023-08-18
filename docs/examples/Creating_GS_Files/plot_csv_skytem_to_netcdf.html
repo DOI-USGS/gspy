@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV to NetCDF conversion AEM to SkyTEM &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CSV to NetCDF conversion [AEM - Resolve]" href="plot_csv_resolve_to_netcdf.html" />
+    <link rel="prev" title="ASEG to NetCDF conversion [AEM - Tempest]" href="plot_aseg_tempest_to_netcdf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF conversion [AEM - Tempest]</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CSV to NetCDF conversion AEM to SkyTEM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#convert-the-csv-data-to-netcdf">Convert the CSV data to NetCDF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF conversion [AEM - Resolve]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">CSV to NetCDF conversion AEM to SkyTEM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Creating_GS_Files/plot_csv_skytem_to_netcdf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="csv-to-netcdf-conversion-aem-to-skytem">
+<span id="sphx-glr-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"></span><h1>CSV to NetCDF conversion AEM to SkyTEM<a class="headerlink" href="#csv-to-netcdf-conversion-aem-to-skytem" title="Permalink to this heading"></a></h1>
+<p>This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains ALL related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:</p>
+<ol class="arabic simple">
+<li><p>Minimally processed (raw) AEM data and raw/processed magnetic data provided by SkyTEM</p></li>
+<li><p>Fully processed AEM data used as input to inversion</p></li>
+<li><p>Laterally constrained inverted resistivity models</p></li>
+<li><p>Point-data estimates of bedrock depth derived from the AEM models</p></li>
+<li><p>Interpolated magnetic and bedrock depth grids</p></li>
+</ol>
+<p>Note:
+To make the size of this example more managable, some of the input datasets have been downsampled relative to the source files in the data release referenced below.</p>
+<p>Dataset Reference:
+Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P93SY9LI">https://doi.org/10.5066/P93SY9LI</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+</pre></div>
+</div>
+<section id="convert-the-csv-data-to-netcdf">
+<h2>Convert the CSV data to NetCDF<a class="headerlink" href="#convert-the-csv-data-to-netcdf" title="Permalink to this heading"></a></h2>
+<p>Initialize the Survey</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
+
+<span class="c1"># Survey metadata file</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//WI_SkyTEM_survey_md.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Establish the Survey</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>1 - Raw Data
+Import raw AEM data from CSV-format
+Define input data file and associated metadata file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
+<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the raw AEM data as a tabular dataset</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>2 - Processed Data
+Import processed AEM data from CSV-format
+Define input data file and associated metadata file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ProcessedData.csv&#39;</span><span class="p">)</span>
+<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_processed_data_md.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the processed AEM data as a tabular dataset</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>3 - Inverted Models
+Import inverted AEM models from CSV-format
+Define input data file and associated metadata file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
+<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_inverted_models_md.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the inverted AEM models as a tabular dataset</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>4 - Bedrock Picks
+Import AEM-based estimated of depth to bedrock from CSV-format
+Define input data file and associated metadata file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//topDolomite_Blocky_LidarDEM.csv&#39;</span><span class="p">)</span>
+<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_bedrock_picks_md.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>5 - Derivative Maps
+Import interpolated bedrock and magnetic maps from TIF-format
+Define input metadata file (which contains the TIF filenames linked to variable names)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the interpolated maps as a raster dataset</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Save to NetCDF file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WISkyTEM.nc&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+
+<span class="c1"># print a summary of the survey contents</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">contents</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tabular:
+[0] raw data
+[1] processed data
+[2] inverted resistivity models
+[3] bedrock elevation points
+
+raster:
+[0] gridded magnetic and bedrock maps
+</pre></div>
+</div>
+<p>Reading back in</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plotting</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="p">[</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.145 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/f3e493e44e38f967de3a7f8f6377576b/plot_csv_skytem_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_skytem_to_netcdf.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/126324517196134368a58612b6143418/plot_csv_skytem_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem_to_netcdf.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plot_aseg_tempest_to_netcdf.html" class="btn btn-neutral float-left" title="ASEG to NetCDF conversion [AEM - Tempest]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_csv_resolve_to_netcdf.html" class="btn btn-neutral float-right" title="CSV to NetCDF conversion [AEM - Resolve]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

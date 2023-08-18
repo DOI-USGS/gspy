@@ -1,0 +1,41 @@
+{
+    "dataset_attrs" : {
+        "comment": "<additional details or ancillary information>",
+        "content": "gridded magnetic map"
+    },
+
+    "coordinates": {
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers"
+    },
+
+    "dimensions" : {
+        "x" : "Easting_Albers",
+        "y" : "Northing_Albers"
+    },
+
+    "variable_metadata": {
+        "magnetic_tmi": {
+            "dimensions": ["x", "y"],
+            "standard_name": "total_magnetic_intensity",
+            "long_name": "Total magnetic intensity, diurnally corrected and filtered",
+            "units": "nT",
+            "null_value": 1.70141e38,
+            "files": ["../../supplemental/region/MAP/data/mag.tif"]
+        },
+        "Easting_Albers": {
+            "standard_name": "easting_albers",
+            "long_name": "Easting",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "X"
+        },
+        "Northing_Albers": {
+            "standard_name": "northing_albers",
+            "long_name": "Northing",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "Y"
+        }
+    }
+}

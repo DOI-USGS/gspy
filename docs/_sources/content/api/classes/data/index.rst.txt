@@ -4,7 +4,7 @@ Data classes
 .. toctree::
    :maxdepth: 1
 
-   data
+   xarray_gs
    tabular
    tabular_csv
    tabular_aseg

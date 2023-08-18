@@ -1,0 +1,319 @@
+{
+    "dataset_attrs" : {
+    	"content": "raw data",
+        "comment": "This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM"
+    },
+	
+	"coordinates" : {
+   		"x" : "E_Nad83",
+    	"y" : "N_Nad83",
+    	"z" : "DEM",
+    	"t" : "DateTime"
+	},
+	
+    "dimensions" : {
+    	"LM_gate_times": {
+            "standard_name": "lm_gate_times",
+            "long_name": "low moment gate times",
+            "units": "seconds",
+            "null_value": "not_defined",
+            "bounds" : [[-1.420000e-06, -8.500000e-07],
+						[-4.200000e-07,  1.150000e-06],
+						[ 1.580000e-06,  3.150000e-06],
+						[ 3.580000e-06,  5.150000e-06],
+						[ 5.580000e-06,  7.150000e-06],
+						[ 7.580000e-06,  9.150000e-06],
+						[ 9.580000e-06,  1.115000e-05],
+						[ 1.158000e-05,  1.415000e-05],
+						[ 1.458000e-05,  1.815000e-05],
+						[ 1.858000e-05,  2.315000e-05],
+						[ 2.358000e-05,  2.915000e-05],
+						[ 2.958000e-05,  3.715000e-05],
+						[ 3.758000e-05,  4.715000e-05],
+						[ 4.758000e-05,  6.015000e-05],
+						[ 6.056500e-05,  7.616500e-05],
+						[ 7.656500e-05,  9.616500e-05],
+						[ 9.656500e-05,  1.211650e-04],
+						[ 1.215650e-04,  1.521650e-04],
+						[ 1.525650e-04,  1.921650e-04],
+						[ 1.925650e-04,  2.431650e-04],
+						[ 2.435650e-04,  3.061650e-04],
+						[ 3.065650e-04,  3.871650e-04],
+						[ 3.875650e-04,  4.881650e-04],
+						[ 4.885650e-04,  6.151650e-04],
+						[ 6.155650e-04,  7.761650e-04],
+						[ 7.765650e-04,  9.781650e-04],
+						[ 9.785650e-04,  1.233165e-03],
+						[ 1.233565e-03,  1.555165e-03]],
+            "centers" : [-1.135000E-06,  3.650000E-07,  2.365000E-06,  4.365000E-06, 6.365000E-06,  8.365000E-06,  1.036500E-05,  1.286500E-05, 1.636500E-05,  2.086500E-05,  2.636500E-05,  3.336500E-05, 4.236500E-05,  5.386500E-05,  6.836500E-05,  8.636500E-05, 1.088650E-04,  1.368650E-04,  1.723650E-04,  2.178650E-04, 2.748650E-04,  3.468650E-04,  4.378650E-04,  5.518650E-04, 6.958650E-04,  8.773650E-04,  1.105865E-03,  1.394365E-03]
+        },
+        "HM_gate_times": {
+            "standard_name": "hm_gate_times",
+            "long_name": "high moment gate times",
+            "units": "seconds",
+            "null_value": "not_defined",
+            "bounds" : [[2.85800e-05, 2.91500e-05],
+					   [2.95800e-05, 3.11500e-05],
+					   [3.15800e-05, 3.31500e-05],
+					   [3.35800e-05, 3.51500e-05],
+					   [3.55800e-05, 3.71500e-05],
+					   [3.75800e-05, 3.91500e-05],
+					   [3.95800e-05, 4.11500e-05],
+					   [4.15800e-05, 4.41500e-05],
+					   [4.45800e-05, 4.81500e-05],
+					   [4.85800e-05, 5.31500e-05],
+					   [5.35800e-05, 5.91500e-05],
+					   [5.95800e-05, 6.71500e-05],
+					   [6.75800e-05, 7.71500e-05],
+					   [7.75800e-05, 9.01500e-05],
+					   [9.05800e-05, 1.06150e-04],
+					   [1.06580e-04, 1.26150e-04],
+					   [1.26580e-04, 1.51150e-04],
+					   [1.51580e-04, 1.82150e-04],
+					   [1.82580e-04, 2.22150e-04],
+					   [2.22580e-04, 2.73150e-04],
+					   [2.73580e-04, 3.36150e-04],
+					   [3.36580e-04, 4.17150e-04],
+					   [4.17580e-04, 5.18150e-04],
+					   [5.18580e-04, 6.45150e-04],
+					   [6.45580e-04, 8.06150e-04],
+					   [8.06580e-04, 1.00815e-03],
+					   [1.00858e-03, 1.26315e-03],
+					   [1.26358e-03, 1.58515e-03],
+					   [1.58558e-03, 1.99115e-03],
+					   [1.99158e-03, 2.50215e-03],
+					   [2.50258e-03, 3.14815e-03],
+					   [3.14858e-03, 3.94015e-03]],
+            "centers" : [2.886500E-05, 3.036500E-05, 3.236500E-05, 3.436500E-05, 3.636500E-05, 3.836500E-05, 4.036500E-05, 4.286500E-05, 4.636500E-05, 5.086500E-05, 5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
+        }
+    },
+
+    "variable_metadata": {
+        "Line": {
+            "standard_name": "line",
+            "long_name": "Line number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "E_Nad83": {
+            "standard_name": "easting_nad83",
+            "long_name": "Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "X"
+        },
+        "N_Nad83": {
+            "standard_name": "northing_nad83",
+            "long_name": "Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "Y"
+        },
+        "LM_X": {
+            "standard_name": "em_data_lmx",
+            "long_name": "EM data, low moment x-component",
+            "units": "picoVolt per Ampere per meter^4",
+            "null_value": -9999.99,
+            "em_system_components" : 1,
+            "dimensions": ["index", "LM_gate_times"]
+        },
+        "LM_Z": {
+            "standard_name": "em_data_lmz",
+            "long_name": "EM data, low moment z-component",
+            "units": "picoVolt per Ampere per meter^4",
+            "null_value": -9999.99,
+            "em_system_components" : 0,
+            "dimensions": ["index", "LM_gate_times"]
+        },
+        "HM_X": {
+            "standard_name": "em_data_hmx",
+            "long_name": "EM data, high moment x-component",
+            "units": "picoVolt per Ampere per meter^4",
+            "null_value": -9999.99,
+            "em_system_components" : 3,
+            "dimensions": ["index", "HM_gate_times"]
+        },
+        "HM_Z": {
+            "standard_name": "em_data_hmz",
+            "long_name": "EM data, high moment z-component",
+            "units": "picoVolt per Ampere per meter^4",
+            "null_value": -9999.99,
+            "em_system_components" : 2,
+            "dimensions": ["index", "HM_gate_times"]
+        },
+        "_60Hz_Intensity": {
+            "standard_name": "60hz_intensity",
+            "long_name": "Amplitude spectral density of power line noise at 60 Hz",
+            "units": "not_defined",
+            "null_value": -9999.99
+        },
+        "Alt": {
+            "standard_name": "altitude",
+            "long_name": "DGPS instrument altitude",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "AngleX": {
+            "standard_name": "angle_x",
+            "long_name": "Instrument tilt angle in flight direction (positive up)",
+            "units": "degrees",
+            "null_value": "not_defined"
+        },
+        "AngleY": {
+            "standard_name": "angle_y",
+            "long_name": "Instrument tilt angle perpindicular to flight direction (positive when left side of frame is up)",
+            "units": "degrees",
+            "null_value": "not_defined"
+        },
+        "Base_Mag": {
+            "standard_name": "base_magnetometer",
+            "long_name": "Raw magnetic base station data",
+            "units": "nanoTesla",
+            "null_value": -9999.99
+        },
+        "Curr_HM": {
+            "standard_name": "current_high_moment",
+            "long_name": "Transmitter current, high moment",
+            "units": "Ampere",
+            "null_value": "not_defined"
+        },
+        "Curr_LM": {
+            "standard_name": "current_low_moment",
+            "long_name": "Transimtter current, low moment",
+            "units": "Ampere",
+            "null_value": "not_defined"
+        },
+        "Date": {
+            "standard_name": "date",
+            "long_name": "Date, yyyy/mm/dd",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "DateTime": {
+            "standard_name": "time",
+            "long_name": "Time, decimal days",
+            "units": "day",
+            "null_value": "not_defined",
+            "axis" : "T",
+            "time_datum" : "January 1, 1900"
+        },
+        "dec": {
+            "standard_name": "decliniation",
+            "long_name": "IGRF declination",
+            "units": "degree",
+            "null_value": "not_defined"
+        },
+        "DEM": {
+            "standard_name": "dem",
+            "long_name": "Digital elevation model",
+            "units": "meter",
+            "null_value": "not_defined",
+            "axis" : "Z",
+            "positive" : "up",
+            "vertical_datum" : "North American Vertical Datum of 1988 (NAVD88)"
+        },
+        "Diurnal": {
+            "standard_name": "magnetic_diurnal",
+            "long_name": "Magnetic base station diurnal variation",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        },
+        "E_WGS84": {
+            "standard_name": "easting_wgs84",
+            "long_name": "Easting, Universal Transverse Mercator (UTM) Zone 16, World Geodetic System of 1984 (WGS84)",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "Fid": {
+            "standard_name": "fiducial",
+            "long_name": "Unique fiducial number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "Flight": {
+            "standard_name": "flight_number",
+            "long_name": "Flight name, yyyymmdd.ff",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "GdSpeed": {
+            "standard_name": "ground_speed",
+            "long_name": "Ground speed",
+            "units": "kilometer per hour",
+            "null_value": "not_defined"
+        },
+        "Height": {
+            "standard_name": "instrument_height",
+            "long_name": "Instrument height above ground",
+            "units": "meter",
+            "null_value": "not_defined"
+        },
+        "igrf": {
+            "standard_name": "magnetic_igrf_model",
+            "long_name": "Magnetic IGRF value from 2015 model",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        },
+        "inc": {
+            "standard_name": "inclination",
+            "long_name": "IGRF inclination",
+            "units": "degree",
+            "null_value": "not_defined"
+        },
+        "Lat": {
+            "standard_name": "latitude",
+            "long_name": "Latitude, World Geodetic System of 1984 (WGS84)",
+            "units": "degree",
+            "null_value": "not_defined"
+        },
+        "Line": {
+            "standard_name": "line",
+            "long_name": "Line number",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "Lon": {
+            "standard_name": "longitude",
+            "long_name": "Longitude, World Geodetic System of 1984 (WGS84)",
+            "units": "degree",
+            "null_value": "not_defined"
+        },
+        "Mag_Filt": {
+            "standard_name": "total_magnetic_intensity_filtered",
+            "long_name": "Filtered total magnetic intensity data",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        },
+        "Mag_Raw": {
+            "standard_name": "total_magnetic_intensity_raw",
+            "long_name": "Raw total magnetic intensity data",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        },
+        "N_WGS84": {
+            "standard_name": "northing_wgs84",
+            "long_name": "Northing, Universal Transverse Mercator (UTM) Zone 16, World Geodetic System of 1984 (WGS84)",
+            "units": "meter",
+            "null_value": "not_defined"
+            
+        },
+        "RMF": {
+            "standard_name": "residual_magnetic_field",
+            "long_name": "Residual magnetic field, IGRF corrected based on 2015 model",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        },
+        "Time": {
+            "standard_name": "time_utc",
+            "long_name": "Universal coordinated time (UTC), hh:mm:ss",
+            "units": "not_defined",
+            "null_value": "not_defined"
+        },
+        "TMI": {
+            "standard_name": "total_magnetic_intensity",
+            "long_name": "Diurnally corrected filtered total magnetic intensity",
+            "units": "nanoTesla",
+            "null_value": "not_defined"
+        }
+    }
+}

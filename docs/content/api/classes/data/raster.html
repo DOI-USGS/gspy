@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Raster &mdash; gspy 0.1.0 documentation</title>
@@ -16,10 +16,9 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -52,7 +55,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">Data classes</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xarray_gs.html">xarray_gs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabular.html">Tabular</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabular_csv.html">Tabular_csv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabular_aseg.html">Tabular_aseg</a></li>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
           <li class="breadcrumb-item"><a href="index.html">Data classes</a></li>
@@ -99,7 +102,7 @@
 <h1>Raster<a class="headerlink" href="#raster" title="Permalink to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-82f0b5f08339df9d4195daa7f617119388f69fb3.png" alt="Inheritance diagram of gspy.src.classes.data.Raster" usemap="#inheritance766a57a1c1" class="inheritance graphviz" /></div>
 <map id="inheritance766a57a1c1" name="inheritance766a57a1c1">
-<area shape="rect" id="node2" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node2" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,32"/>
 </map><span class="target" id="module-gspy.src.classes.data.Raster"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster" title="Permalink to this definition"></a></dt>
@@ -107,16 +110,16 @@
 <p>Examples of raster data include radiometric or magnetic grids, interpolated resistivity models, etc.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Raster(metadata_file,</span> <span class="pre">spatial_ref,</span> <span class="pre">**kwargs)</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>metadata_file</strong> (<em>str</em>) – Path to the JSON metadata file</p></li>
 <li><p><strong>spatial_ref</strong> (<em>gspy.Spatial_ref</em>) – Coordinate reference system</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>out</strong> – Raster Class</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>gspy.Raster</p>
 </dd>
 </dl>
@@ -150,7 +153,7 @@
 An xarray Dataset is created and the ‘raster_files’ dictionary in the metadata file
 is used to read raster data files into named variables.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>metadata_file</strong> (<em>str</em>) – JSON metadata file</p></li>
 <li><p><strong>spatial_ref</strong> (<em>gspy.Spatial_ref</em>) – Coordinate reference system</p></li>
@@ -167,17 +170,17 @@ is used to read raster data files into named variables.</p>
 Currently the stacking dimension defaults to “stack” and increments starting at 0. In future
 releases this dimension will be customizable and passed through the JSON metadata file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filenames</strong> (<em>list</em><em> of </em><em>str</em>) – List of raster files to read and stack, in order of stacking dimension</p></li>
 <li><p><strong>key</strong> (<em>str</em>) – Name of variable assigned to xarray</p></li>
 <li><p><strong>var_meta</strong> (<em>dict</em>) – Dictionary of variable metadata</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>out</strong> – Raster class</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>gspy.Raster</p>
 </dd>
 </dl>
@@ -189,13 +192,13 @@ releases this dimension will be customizable and passed through the JSON metadat
 <dd><p>Reads GeoTIFF file</p>
 <p>Uses rioxarray to read GeoTIFF file as an xarray Dataset</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Name of GeoTIFF file</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ds</strong> – Dataset containing the GeoTIFF variable</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>xarray.Dataset</p>
 </dd>
 </dl>
@@ -206,14 +209,14 @@ releases this dimension will be customizable and passed through the JSON metadat
 <span class="sig-name descname"><span class="pre">read_var_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_meta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.read_var_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Reads variable from NetCDF file and adds to Raster xarray</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – Name of NetCDF file to read</p></li>
 <li><p><strong>key</strong> (<em>str</em>) – Variable name</p></li>
 <li><p><strong>var_meta</strong> (<em>dict</em>) – Variable attributes</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>NotImplementedError</strong> – Function is planned but not yet implemented</p>
 </dd>
 </dl>
@@ -240,8 +243,8 @@ dictionaries are printed (dataset_attrs, key_mapping, raster_files, variable_met
 Additional dictionaries can be optionally added to document more information or
 ancillary metadata relevant to the specific Raster data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>Exception</strong> – Tells user to specify supplemental information when instantiating Raster data</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – Tells user to specify metadata file when instantiating Raster data</p>
 </dd>
 </dl>
 </dd></dl>
@@ -251,7 +254,7 @@ ancillary metadata relevant to the specific Raster data.</p>
 <span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.write_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Write to netcdf file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – Path to the file</p></li>
 <li><p><strong>group</strong> (<em>str</em>) – Name of group within netcdf file</p></li>

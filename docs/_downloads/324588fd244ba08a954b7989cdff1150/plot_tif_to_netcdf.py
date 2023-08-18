@@ -15,13 +15,13 @@ from gspy import Survey
 # ++++++++++++++++++++++++++++++
 
 # Path to example files
-data_path = '..//supplemental//region//MAP'
+data_path = '..//..//supplemental//region//MAP'
 
-# Define supplemental information file
-supplemental = join(data_path, "data//Tempest_survey_md.json")
+# Define ..//supplemental information file
+..//supplemental = join(data_path, "data//Tempest_survey_md.json")
 
 # Read in TIF data file
-survey = Survey(supplemental)
+survey = Survey(..//supplemental)
 
 # Define input TIF-format data file and associated variable mapping file
 d_grid_supp = join(data_path, 'data//Tempest_raster_md.json')
