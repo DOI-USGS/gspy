@@ -200,7 +200,7 @@ class Tabular(Dataset):
                                                           'raw_data_columns field required in variable_metadata '
                                                           'if needing to combine unique columns to new variable without an [i] increment').format(var))
 
-                    assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]')
+                    assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]'.format(var))
                     assert all([dim in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
 
                     self.add_variable_from_values(var, values, **var_meta)
@@ -270,9 +270,9 @@ class Tabular(Dataset):
         with open(out_filename, "w") as f:
             json.dump(tmp_dic, f, indent=4)
 
-        s = ("\nVariable metadata values are not defined in the supplemental information file.\n"
+        s = ("\nVariable metadata values are not defined in the the metadata file.\n"
                 "Creating a template with filename {}\n"
-                "Please fill out and add the dictionary to the supplemental information file.\n").format(out_filename)
+                "Please fill out and add the dictionary to the metadata file.\n").format(out_filename)
 
         assert 'variable_metadata' in self.json_metadata, ValueError(s)
 

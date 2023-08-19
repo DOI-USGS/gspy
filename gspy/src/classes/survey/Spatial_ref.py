@@ -33,7 +33,7 @@ class Spatial_ref(DataArray):
     def from_dict(cls, kwargs):
         if ("wkid" in kwargs) and (kwargs.get("wkid", "None") != "None" and (kwargs.get("wkid", "None")) != ""):
             val = kwargs["wkid"]
-            if 'EPSG' in val:
+            if 'EPSG' in str(val):
                 val = val.split(':')[1]
                 auth = 'EPSG'
             elif ("authority" in kwargs) and (kwargs.get("authority", "None") != "None" and (kwargs.get("authority", "None")) != ""):
