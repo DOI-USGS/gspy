@@ -29,7 +29,9 @@ By doing a first-pass through GSPy with a data json file that is *missing* the `
    :scale: 50 %
    :align: center
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-19
+This image shows a snippet of what the output template json file contains. Each variable is given a dictionary of attributes with the default values of "not_defined" which the user can then go through and update.
+
+.. GENERATED FROM PYTHON SOURCE LINES 17-21
 
 .. code-block:: default
 
@@ -38,12 +40,12 @@ By doing a first-pass through GSPy with a data json file that is *missing* the `
     from gspy import Survey
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-23
+.. GENERATED FROM PYTHON SOURCE LINES 23-25
 
 Generate the Variable Metadata Template for My Dataset
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-33
+.. GENERATED FROM PYTHON SOURCE LINES 25-35
 
 .. code-block:: default
 
@@ -58,7 +60,7 @@ Generate the Variable Metadata Template for My Dataset
     survey = Survey(metadata)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-43
+.. GENERATED FROM PYTHON SOURCE LINES 36-45
 
 .. code-block:: default
 

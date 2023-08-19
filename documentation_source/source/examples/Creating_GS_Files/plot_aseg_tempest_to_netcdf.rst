@@ -18,8 +18,8 @@
 .. _sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:
 
 
-ASEG to NetCDF conversion [AEM - Tempest]
------------------------------------------
+ASEG to NetCDF 
+--------------
 
 This example demonstrates the workflow for creating a GS file from the `ASEG <https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf>`_ file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:
 
@@ -77,8 +77,8 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-41
 
-1. Raw Data
-Import raw AEM data from ASEG-format
+1. Raw Data - 
+Import raw AEM data from ASEG-format.
 Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 41-47
@@ -100,8 +100,8 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 48-51
 
-2. Inverted Models
-Import inverted AEM models from ASEG-format
+2. Inverted Models - 
+Import inverted AEM models from ASEG-format.
 Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-57
@@ -123,8 +123,8 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 58-61
 
-3. Magnetic Intensity Map
-Import the magnetic data from TIF-format
+3. Magnetic Intensity Map - 
+Import the magnetic data from TIF-format.
 Define input metadata file (which contains the TIF filenames linked with desired variable names)
 
 .. GENERATED FROM PYTHON SOURCE LINES 61-70
@@ -230,7 +230,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.410 seconds)
+   **Total running time of the script:** ( 0 minutes  7.185 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:

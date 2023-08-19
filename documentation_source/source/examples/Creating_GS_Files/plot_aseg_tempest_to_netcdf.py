@@ -1,6 +1,6 @@
 """
-ASEG to NetCDF conversion [AEM - Tempest]
------------------------------------------
+ASEG to NetCDF 
+--------------
 
 This example demonstrates the workflow for creating a GS file from the `ASEG <https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf>`_ file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:
 
@@ -35,8 +35,8 @@ metadata = join(data_path, "data//Tempest_survey_md.json")
 survey = Survey(metadata)
 
 #%%
-# 1. Raw Data
-# Import raw AEM data from ASEG-format
+# 1. Raw Data - 
+# Import raw AEM data from ASEG-format.
 # Define input data file and associated metadata file
 d_data = join(data_path, 'data//Tempest.dat')
 d_supp = join(data_path, 'data//Tempest_data_md.json')
@@ -45,8 +45,8 @@ d_supp = join(data_path, 'data//Tempest_data_md.json')
 survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
 
 #%%
-# 2. Inverted Models
-# Import inverted AEM models from ASEG-format
+# 2. Inverted Models - 
+# Import inverted AEM models from ASEG-format.
 # Define input data file and associated metadata file
 m_data = join(data_path, 'model//Tempest_model.dat')
 m_supp = join(data_path, 'model//Tempest_model_md.json')
@@ -55,8 +55,8 @@ m_supp = join(data_path, 'model//Tempest_model_md.json')
 survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
 
 #%%
-# 3. Magnetic Intensity Map
-# Import the magnetic data from TIF-format
+# 3. Magnetic Intensity Map - 
+# Import the magnetic data from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked with desired variable names)
 r_supp = join(data_path, 'data//Tempest_raster_md.json')
 

@@ -27,7 +27,7 @@ Creating GS Files
 .. only:: html
 
  .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png
-     :alt: ASEG to NetCDF conversion [AEM - Tempest]
+     :alt: ASEG to NetCDF
 
      :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py`
 
@@ -43,33 +43,12 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
-
-.. only:: html
-
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
-     :alt: CSV to NetCDF conversion AEM to SkyTEM
-
-     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/Creating_GS_Files/plot_csv_skytem_to_netcdf
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
 
 .. only:: html
 
  .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png
-     :alt: CSV to NetCDF conversion [AEM - Resolve]
+     :alt: CSV to NetCDF
 
      :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py`
 
@@ -90,7 +69,7 @@ Creating GS Files
 .. only:: html
 
  .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-     :alt: GeoTIFFs to NetCDF conversion
+     :alt: GeoTIFFs to NetCDF
 
      :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py`
 
@@ -124,6 +103,27 @@ Creating GS Files
    :hidden:
 
    /examples/Creating_GS_Files/help_I_have_no_variable_metadata
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
+
+.. only:: html
+
+ .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
+     :alt: Multi-dataset Survey
+
+     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Creating_GS_Files/plot_csv_skytem_to_netcdf
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
@@ -143,7 +143,7 @@ Interacting With GS Files
 .. only:: html
 
  .. figure:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
-     :alt: Basic Class Structure and Xarray Methods
+     :alt: Basic Class Structure
 
      :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
 
@@ -156,6 +156,27 @@ Interacting With GS Files
    :hidden:
 
    /examples/Interacting_With_GS_Files/plot_xarray_methods
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ...">
+
+.. only:: html
+
+ .. figure:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_coordinate_reference_systems_thumb.png
+     :alt: Coordinate Reference Systems
+
+     :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
