@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coordinate Reference Systems &mdash; gspy 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GS Convention Requirements" href="../../gspy_convention_requirements.html" />
+    <link rel="prev" title="Basic Class Structure" href="plot_xarray_methods.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_xarray_methods.html">Basic Class Structure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Coordinate Reference Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#grid-mapping">Grid Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-a-new-spatial-ref">Making a new Spatial Ref</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Coordinate Reference Systems</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="coordinate-reference-systems">
+<span id="sphx-glr-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py"></span><h1>Coordinate Reference Systems<a class="headerlink" href="#coordinate-reference-systems" title="Permalink to this heading"></a></h1>
+<p>Every Survey must have a coordinate reference system (CRS) defined and all datasets within the Survey adhere to the same CRS.</p>
+<p>This example explores the CRS variable and shows how it is linked to data variables.</p>
+<p>Dataset Reference:
+Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P93SY9LI">https://doi.org/10.5066/P93SY9LI</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</pre></div>
+</div>
+<p>Set up the Survey</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//WI_SkyTEM_survey_md.json&quot;</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.json&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The CRS variable is called <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> and gets initialized in the Survey.
+The <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> is a dataless coordinate variable, meaning there are no data values,
+all information is contained within attributes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">spatial_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;spatial_ref&#39; ()&gt;
+array(0.)
+Coordinates:
+    spatial_ref  float64 0.0
+Attributes: (12/18)
+    crs_wkt:                           PROJCRS[&quot;NAD83(HARN) / Wisconsin Trans...
+    semi_major_axis:                   6378137.0
+    semi_minor_axis:                   6356752.314140356
+    inverse_flattening:                298.257222101
+    reference_ellipsoid_name:          GRS 1980
+    longitude_of_prime_meridian:       0.0
+    ...                                ...
+    longitude_of_central_meridian:     -90.0
+    false_easting:                     520000.0
+    false_northing:                    -4480000.0
+    scale_factor_at_central_meridian:  0.9996
+    authority:                         EPSG
+    wkid:                              3071
+</pre></div>
+</div>
+<p>The Survey also has a spatial_ref property which returns the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">spatial_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;spatial_ref&#39; ()&gt;
+array(0.)
+Coordinates:
+    spatial_ref  float64 0.0
+Attributes: (12/18)
+    crs_wkt:                           PROJCRS[&quot;NAD83(HARN) / Wisconsin Trans...
+    semi_major_axis:                   6378137.0
+    semi_minor_axis:                   6356752.314140356
+    inverse_flattening:                298.257222101
+    reference_ellipsoid_name:          GRS 1980
+    longitude_of_prime_meridian:       0.0
+    ...                                ...
+    longitude_of_central_meridian:     -90.0
+    false_easting:                     520000.0
+    false_northing:                    -4480000.0
+    scale_factor_at_central_meridian:  0.9996
+    authority:                         EPSG
+    wkid:                              3071
+</pre></div>
+</div>
+<section id="grid-mapping">
+<h2>Grid Mapping<a class="headerlink" href="#grid-mapping" title="Permalink to this heading"></a></h2>
+<p>Following the <a class="reference external" href="http://cfconventions.org/Data/cf-conventions/cf-conventions-1.10/cf-conventions.html#appendix-grid-mappings">CF conventions on Grid Mappings</a>,
+the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> variable should contain key information defining the coordinate
+reference system. The attribute <code class="docutils literal notranslate"><span class="pre">grid_mapping_name</span></code> is required. Other key
+attributes include <code class="docutils literal notranslate"><span class="pre">wkid</span></code> and <code class="docutils literal notranslate"><span class="pre">crs_wkt</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grid_mapping_name: &#39;</span><span class="o">+</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">spatial_ref</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;grid_mapping_name&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wkid: &#39;</span><span class="o">+</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">spatial_ref</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;wkid&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;crs_wkt: &#39;</span><span class="o">+</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">spatial_ref</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;crs_wkt&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>grid_mapping_name: transverse_mercator
+wkid: 3071
+crs_wkt: PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]
+</pre></div>
+</div>
+<p>Then, each data variable should have an attribute <code class="docutils literal notranslate"><span class="pre">grid_mapping</span></code> that references
+the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> coordinate variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="s1">&#39;DEM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;axis&#39;: &#39;Z&#39;,
+ &#39;grid_mapping&#39;: &#39;spatial_ref&#39;,
+ &#39;long_name&#39;: &#39;Digital elevation model&#39;,
+ &#39;null_value&#39;: &#39;not_defined&#39;,
+ &#39;positive&#39;: &#39;up&#39;,
+ &#39;standard_name&#39;: &#39;dem&#39;,
+ &#39;units&#39;: &#39;meter&#39;,
+ &#39;valid_range&#39;: array([172.52357302, 354.1462611 ]),
+ &#39;vertical_datum&#39;: &#39;North American Vertical Datum of 1988 (NAVD88)&#39;}
+</pre></div>
+</div>
+</section>
+<section id="making-a-new-spatial-ref">
+<h2>Making a new Spatial Ref<a class="headerlink" href="#making-a-new-spatial-ref" title="Permalink to this heading"></a></h2>
+<p>If you need to make a new <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> variable, this can
+be done with GSPy’s Spatial_ref class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gspy.src.classes.survey.Spatial_ref</span> <span class="kn">import</span> <span class="n">Spatial_ref</span>
+</pre></div>
+</div>
+<p>The Spatial_ref class takes a dictionary of values and looks for a
+<code class="docutils literal notranslate"><span class="pre">wkid</span></code>, <code class="docutils literal notranslate"><span class="pre">crs_wkt</span></code>, or a <code class="docutils literal notranslate"><span class="pre">proj_string</span></code> in that order. Note, a <code class="docutils literal notranslate"><span class="pre">wkid</span></code>
+should have an <code class="docutils literal notranslate"><span class="pre">authority</span></code> key passed with it either as a separate <code class="docutils literal notranslate"><span class="pre">authority</span></code>
+field, or as a colon separated string, e.g., ‘EPSG:4326’. If none is provided
+EPSG will be used by default.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_crs</span> <span class="o">=</span> <span class="n">Spatial_ref</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s1">&#39;wkid&#39;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">,</span> <span class="s1">&#39;authority&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG&#39;</span><span class="p">})</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_crs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray ()&gt;
+array(0.)
+Attributes:
+    crs_wkt:                      GEOGCRS[&quot;WGS 84&quot;,ENSEMBLE[&quot;World Geodetic S...
+    semi_major_axis:              6378137.0
+    semi_minor_axis:              6356752.314245179
+    inverse_flattening:           298.257223563
+    reference_ellipsoid_name:     WGS 84
+    longitude_of_prime_meridian:  0.0
+    prime_meridian_name:          Greenwich
+    geographic_crs_name:          WGS 84
+    horizontal_datum_name:        World Geodetic System 1984 ensemble
+    grid_mapping_name:            latitude_longitude
+    authority:                    EPSG
+    wkid:                         4326
+</pre></div>
+</div>
+<p>Note: If you are resetting the CRS variable in a Survey, be sure that all data
+groups are also updated to match and all coordinate variables (particularly
+<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code>) need to be updated. In other words, if you change from a
+projected coordinate system with easting and northing coordinates to a geographic
+coordinate system, then the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinate variables need to be
+changed to longitude and latitude.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.524 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/96c6bcec37ff25ac0eae38ee92745a30/plot_coordinate_reference_systems.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_coordinate_reference_systems.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/331b093053e93b2a1bdc64c996d05bde/plot_coordinate_reference_systems.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_coordinate_reference_systems.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plot_xarray_methods.html" class="btn btn-neutral float-left" title="Basic Class Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

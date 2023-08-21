@@ -24,8 +24,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Basic Class Structure and Xarray Methods" href="../Interacting_With_GS_Files/plot_xarray_methods.html" />
-    <link rel="prev" title="GeoTIFFs to NetCDF conversion" href="plot_tifs_to_netcdf.html" /> 
+    <link rel="next" title="Multi-dataset Survey" href="plot_csv_skytem_to_netcdf.html" />
+    <link rel="prev" title="GeoTIFFs to NetCDF" href="plot_tifs_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,14 +55,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF conversion [AEM - Tempest]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">CSV to NetCDF conversion AEM to SkyTEM</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF conversion [AEM - Resolve]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Help! I have no variable metadata</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#generate-the-variable-metadata-template-for-my-dataset">Generate the Variable Metadata Template for My Dataset</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">Multi-dataset Survey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
@@ -106,6 +106,7 @@ to download the full example code</p>
 <p>This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata.</p>
 <p>By doing a first-pass through GSPy with a data json file that is <em>missing</em> the <code class="docutils literal notranslate"><span class="pre">variable_metadata</span></code> dictionary, the code will break, but will generate a template file containing placeholder metadata dictionaries for all variables from the data file (in this case the column headers of the CSV data file). The user can then fill in this template and then add it to the data json file.</p>
 <a class="reference internal image-reference" href="../../_images/variable_metadata_template_snippet.png"><img alt="../../_images/variable_metadata_template_snippet.png" class="align-center" src="../../_images/variable_metadata_template_snippet.png" style="width: 387.0px; height: 421.0px;" /></a>
+<p>This image shows a snippet of what the output template json file contains. Each variable is given a dictionary of attributes with the default values of “not_defined” which the user can then go through and update.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
@@ -150,8 +151,8 @@ to download the full example code</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-left" title="GeoTIFFs to NetCDF conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Interacting_With_GS_Files/plot_xarray_methods.html" class="btn btn-neutral float-right" title="Basic Class Structure and Xarray Methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-left" title="GeoTIFFs to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_csv_skytem_to_netcdf.html" class="btn btn-neutral float-right" title="Multi-dataset Survey" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -88,9 +88,9 @@
 <h2>Goals<a class="headerlink" href="#goals" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Standardize a geophysical data format based on the CF convention and NetCDF.</p></li>
-<li><p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for release.</p></li>
-<li><p>Document critical metadata pertinent to geophysical analysis and archival.</p></li>
+<li><p>Standardize a geophysical data format based on the <a class="reference external" href="http://cfconventions.org/">Climate and Forecast (CF) metadata conventions</a> and <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">NetCDF</a> format.</p></li>
+<li><p>Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for sharing and archiving.</p></li>
+<li><p>Document critical metadata pertinent to geophysical analysis and transferability.</p></li>
 <li><p>Develop tools for processing data and preparing data for inversion.</p></li>
 <li><p>Develop exploratory and visualization tools to interrogate data.</p></li>
 </ol>
@@ -98,7 +98,7 @@
 </section>
 <section id="netcdf-data-standard">
 <h2>NetCDF Data Standard<a class="headerlink" href="#netcdf-data-standard" title="Permalink to this heading"></a></h2>
-<p>Datasets are read from a variety of original formats (CSV, ASEG-GDF, GEOTIF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:</p>
+<p>Datasets are read from a variety of original formats (CSV, <a class="reference external" href="https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf">ASEG-GDF</a>, GeoTIFF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>All variables have detailed attributes (names, units, null values, value ranges).</p></li>
@@ -110,9 +110,19 @@
 </div></blockquote>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/getting_started/installation.html">Installing GSpy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/api/classes/classes.html">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#creating-gs-files">Creating GS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="gspy_convention_requirements.html">GS Convention Requirements</a></li>
 </ul>
 </div>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV to NetCDF conversion [AEM - Resolve] &mdash; gspy 0.1.0 documentation</title>
+  <title>CSV to NetCDF &mdash; gspy 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="GeoTIFFs to NetCDF conversion" href="plot_tifs_to_netcdf.html" />
-    <link rel="prev" title="CSV to NetCDF conversion AEM to SkyTEM" href="plot_csv_skytem_to_netcdf.html" /> 
+    <link rel="next" title="GeoTIFFs to NetCDF" href="plot_tifs_to_netcdf.html" />
+    <link rel="prev" title="ASEG to NetCDF" href="plot_aseg_tempest_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,14 +55,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF conversion [AEM - Tempest]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">CSV to NetCDF conversion AEM to SkyTEM</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">CSV to NetCDF conversion [AEM - Resolve]</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CSV to NetCDF</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-csv-data-to-netcdf">Convert the CSV data to NetCDF</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">Multi-dataset Survey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
@@ -86,7 +86,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
-      <li class="breadcrumb-item active">CSV to NetCDF conversion [AEM - Resolve]</li>
+      <li class="breadcrumb-item active">CSV to NetCDF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/Creating_GS_Files/plot_csv_resolve_to_netcdf.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,8 +101,8 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<section class="sphx-glr-example-title" id="csv-to-netcdf-conversion-aem-resolve">
-<span id="sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"></span><h1>CSV to NetCDF conversion [AEM - Resolve]<a class="headerlink" href="#csv-to-netcdf-conversion-aem-resolve" title="Permalink to this heading"></a></h1>
+<section class="sphx-glr-example-title" id="csv-to-netcdf">
+<span id="sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"></span><h1>CSV to NetCDF<a class="headerlink" href="#csv-to-netcdf" title="Permalink to this heading"></a></h1>
 <p>This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:</p>
 <ol class="arabic simple">
 <li><p>Raw AEM data, from the Resolve system</p></li>
@@ -128,7 +128,7 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Import raw AEM data from CSV-format
+<p>Import raw AEM data from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve_data_md.json&#39;</span><span class="p">)</span>
@@ -137,7 +137,7 @@ Define input data file and associated metadata file</p>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Import inverted AEM models from CSV-format
+<p>Import inverted AEM models from CSV-format.
 Define input model file and associated metadata file</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model.csv&#39;</span><span class="p">)</span>
 <span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model_md.json&#39;</span><span class="p">)</span>
@@ -230,7 +230,7 @@ Attributes:
     comment:  This dataset includes inverted resistivity models derived from ...
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.997 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.782 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/ca9c324f898727403a18484f42dc3020/plot_csv_resolve_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_resolve_to_netcdf.py</span></code></a></p>
@@ -247,8 +247,8 @@ Attributes:
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_csv_skytem_to_netcdf.html" class="btn btn-neutral float-left" title="CSV to NetCDF conversion AEM to SkyTEM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-right" title="GeoTIFFs to NetCDF conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_aseg_tempest_to_netcdf.html" class="btn btn-neutral float-left" title="ASEG to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_tifs_to_netcdf.html" class="btn btn-neutral float-right" title="GeoTIFFs to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -18,8 +18,8 @@
 .. _sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:
 
 
-CSV to NetCDF conversion [AEM - Resolve]
-----------------------------------------
+CSV to NetCDF
+-------------
 
 This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:
 
@@ -76,7 +76,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 36-38
 
-Import raw AEM data from CSV-format
+Import raw AEM data from CSV-format.
 Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-44
@@ -98,7 +98,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 45-47
 
-Import inverted AEM models from CSV-format
+Import inverted AEM models from CSV-format.
 Define input model file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 47-53
@@ -264,7 +264,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.929 seconds)
+   **Total running time of the script:** ( 0 minutes  1.782 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:

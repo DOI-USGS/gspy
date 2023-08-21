@@ -178,9 +178,9 @@ class Tabular_csv(Tabular):
         with open(out_filename, "w") as f:
             json.dump(tmp_dic, f, indent=4)
 
-        s = ("\nVariable metadata values are not defined in the supplemental information file.\n"
+        s = ("\nVariable metadata values are not defined in the metadata file.\n"
                 "Creating a template with filename {}\n"
-                "Please fill out and add the dictionary to the supplemental information file.\n").format(out_filename)
+                "Please fill out and add the dictionary to the metadata file.\n").format(out_filename)
 
         raise Exception(s)
 

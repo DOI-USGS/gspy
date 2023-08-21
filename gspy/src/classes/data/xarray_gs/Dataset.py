@@ -130,7 +130,8 @@ class Dataset:
         return self
 
     def add_variable_from_values(self, name, values, **kwargs):
-        assert all(values.shape == tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])), ValueError("Shape {} of variable {} does not match specified dimensions with shape {}".format(values.shape, name, kwargs['dimensions']))
+        tmp = tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])
+        assert all(values.shape == tmp), ValueError("Shape {} of variable {} does not match specified dimensions {} with shape {}".format(values.shape, name, kwargs['dimensions'], tmp))
 
         kwargs['coords'] = [self._obj.coords[dim] for dim in kwargs['dimensions']]
         self._obj[name] = DataArray.from_values(name, values, **kwargs)
@@ -188,7 +189,7 @@ class Dataset:
 
         if filename is None:
             self.write_metadata_template()
-            raise Exception("Please re-run and specify supplemental information when instantiating Raster")
+            raise Exception("Please re-run and specify metadata when instantiating Raster")
 
         # reading the data from the file
         with open(filename) as f:
@@ -250,7 +251,13 @@ class Dataset:
 
         """
         ax = kwargs.pop('ax', plt.gca())
-        return ax, plt.scatter(self._obj['x'].values, self._obj['y'].values, c=self._obj[variable].values, **kwargs)
+        splot = plt.scatter(self._obj['x'].values, self._obj['y'].values, c=self._obj[variable].values, **kwargs)
+        plt.ylabel('y\n{} [{}]'.format(self._obj['y'].attrs['long_name'], self._obj['y'].attrs['units']))
+        plt.xlabel('x\n{} [{}]'.format(self._obj['x'].attrs['long_name'], self._obj['x'].attrs['units']))
+        cb=plt.colorbar()
+        cb.set_label('{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
+        plt.tight_layout()
+        return ax, splot
 
     def set_spatial_ref(self, kwargs):
         if not ('spatial_ref' in self._obj):

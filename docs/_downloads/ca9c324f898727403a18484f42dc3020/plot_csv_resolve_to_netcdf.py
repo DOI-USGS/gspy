@@ -1,6 +1,6 @@
 """
-CSV to NetCDF conversion [AEM - Resolve]
-----------------------------------------
+CSV to NetCDF
+-------------
 
 This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:
 
@@ -33,7 +33,7 @@ metadata = join(data_path, "data//Resolve_survey_md.json")
 survey = Survey(metadata)
 
 #%%
-# Import raw AEM data from CSV-format
+# Import raw AEM data from CSV-format.
 # Define input data file and associated metadata file
 d_data = join(data_path, 'data//Resolve.csv')
 d_supp = join(data_path, 'data//Resolve_data_md.json')
@@ -42,7 +42,7 @@ d_supp = join(data_path, 'data//Resolve_data_md.json')
 survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
 
 #%%
-# Import inverted AEM models from CSV-format
+# Import inverted AEM models from CSV-format.
 # Define input model file and associated metadata file
 m_data = join(data_path, 'model//Resolve_model.csv')
 m_supp = join(data_path, 'model//Resolve_model_md.json')

@@ -153,7 +153,7 @@ class Survey(object):
 
         if filename is None:
             self.write_metadata_template()
-            raise Exception("Please re-run and specify supplemental information when instantiating Survey()")
+            raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
 
         # reading the data from the file
         with open(filename) as f:
@@ -188,6 +188,8 @@ class Survey(object):
 
         self.xarray = self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
 
+        self.xarray = self.xarray._obj
+
     def write_metadata_template(self):
         """Creates a metadata template for a Survey
 
@@ -197,10 +199,10 @@ class Survey(object):
         Raises
         ------
         Exception
-            "Please re-run and specify supplemental information when instantiating Survey()"
+            "Please re-run and specify metadata when instantiating Survey()"
         """
 
-        print("\nGenerating an empty supplemental information file for the survey.\n")
+        print("\nGenerating an empty metadata file for the survey.\n")
 
         out = {}
         out["dataset_attrs"] = {
@@ -259,7 +261,7 @@ class Survey(object):
             "instrument_type" : ""
             }
 
-        with open("survey_supplemental_information.json", "w") as f:
+        with open("survey_md.json", "w") as f:
             json.dump(out, f, indent=4)
 
     @classmethod
@@ -322,7 +324,7 @@ class Survey(object):
         """
 
         # Survey
-        self.xarray._obj.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
+        self.xarray.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
 
         # Tabular
         for i, m in enumerate(self._tabular):
@@ -413,3 +415,26 @@ class Survey(object):
         f.write('</group>\n\n')
         f.write('</netcdf>')
         f.close()
+
+    
+    def contents(self):
+        """print out the contents of the survey"""
+
+        # tabular
+        if len(self.tabular) > 0:
+            print('\ntabular:')
+            if isinstance(self.tabular, list):
+                for t,tab in enumerate(self.tabular):
+                    print('[%i] %s' % (t, tab.attrs['content']))
+            else:
+                print('[0] %s' % (self.tabular.attrs['content']))
+
+        # raster
+        if len(self.raster) > 0:
+            print('\nraster:')
+            if isinstance(self.raster, list):
+                for r,rast in enumerate(self.raster):
+                    print('[%i] %s' % (r, rast.attrs['content']))
+            else:
+                print('[0] %s' % (self.raster.attrs['content']))
+        print('')

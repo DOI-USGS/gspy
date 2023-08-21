@@ -586,11 +586,11 @@ class Raster(Dataset):
         Raises
         ------
         Exception
-             Tells user to specify supplemental information when instantiating Raster data
+             Tells user to specify metadata file when instantiating Raster data
 
         """
 
-        print("\nGenerating an empty supplemental information file template for the Raster data.\n")
+        print("\nGenerating an empty metadata file template for the Raster data.\n")
 
         out = {}
         out["dataset_attrs"] = {
@@ -649,7 +649,7 @@ class Raster(Dataset):
             }
             }
 
-        with open("raster_supplemental_information.json", "w") as f:
+        with open("raster_md.json", "w") as f:
             json.dump(out, f, indent=4)
 
     def to_tif(self):

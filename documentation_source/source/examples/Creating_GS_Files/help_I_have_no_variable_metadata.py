@@ -10,6 +10,7 @@ By doing a first-pass through GSPy with a data json file that is *missing* the `
    :scale: 50 %
    :align: center
 
+This image shows a snippet of what the output template json file contains. Each variable is given a dictionary of attributes with the default values of "not_defined" which the user can then go through and update.
 
 """
 #%%

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GeoTIFFs to NetCDF conversion &mdash; gspy 0.1.0 documentation</title>
+  <title>GeoTIFFs to NetCDF &mdash; gspy 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Help! I have no variable metadata" href="help_I_have_no_variable_metadata.html" />
-    <link rel="prev" title="CSV to NetCDF conversion [AEM - Resolve]" href="plot_csv_resolve_to_netcdf.html" /> 
+    <link rel="prev" title="CSV to NetCDF" href="plot_csv_resolve_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,14 +55,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF conversion [AEM - Tempest]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">CSV to NetCDF conversion AEM to SkyTEM</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF conversion [AEM - Resolve]</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">GeoTIFFs to NetCDF conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GeoTIFFs to NetCDF</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-data-from-geotiff-to-netcdf">Convert data from GeoTIFF to NetCDF</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem_to_netcdf.html">Multi-dataset Survey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
@@ -86,7 +86,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
-      <li class="breadcrumb-item active">GeoTIFFs to NetCDF conversion</li>
+      <li class="breadcrumb-item active">GeoTIFFs to NetCDF</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/Creating_GS_Files/plot_tifs_to_netcdf.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,25 +101,25 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-tifs-to-netcdf-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<section class="sphx-glr-example-title" id="geotiffs-to-netcdf-conversion">
-<span id="sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"></span><h1>GeoTIFFs to NetCDF conversion<a class="headerlink" href="#geotiffs-to-netcdf-conversion" title="Permalink to this heading"></a></h1>
+<section class="sphx-glr-example-title" id="geotiffs-to-netcdf">
+<span id="sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"></span><h1>GeoTIFFs to NetCDF<a class="headerlink" href="#geotiffs-to-netcdf" title="Permalink to this heading"></a></h1>
 <p>In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension.</p>
 <p>Additionally, this example shows how to handle Raster data that have differing x-y grids. Specifically, this example creates the following Raster datasets:</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><dl class="simple">
 <dt>Raster Dataset #1</dt><dd><p>1a. 2-D magnetic grid, original x-y discretization (600 m cell size)</p>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>Raster Dataset #2</dt><dd><p>2a. 2-D magnetic grid, aligned to match the x-y dimensions of the resistivity layers (1000 m cell size)
-2b. 3-D resistivity grid</p>
+<li><dl>
+<dt>Raster Dataset #2</dt><dd><p>2a. 2-D magnetic grid, aligned to match the x-y dimensions of the resistivity layers (1000 m cell size)</p>
+<p>2b. 3-D resistivity grid</p>
 </dd>
 </dl>
 </li>
 </ol>
-<p>Dataset References:
-Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<p>Dataset References:</p>
+<p>Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
 <p>James, S.R., and Minsley, B.J., 2021, Combined results and derivative products of hydrogeologic structure and properties from airborne electromagnetic surveys in the Mississippi Alluvial Plain: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9382RCI">https://doi.org/10.5066/P9382RCI</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
@@ -203,7 +203,7 @@ Attributes:
     long_name:      Total magnetic intensity, diurnally corrected and filtered
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.952 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.773 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-tifs-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97c13cc53ee6da501749a9492cfc4d38/plot_tifs_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tifs_to_netcdf.py</span></code></a></p>
@@ -220,7 +220,7 @@ Attributes:
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_csv_resolve_to_netcdf.html" class="btn btn-neutral float-left" title="CSV to NetCDF conversion [AEM - Resolve]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_csv_resolve_to_netcdf.html" class="btn btn-neutral float-left" title="CSV to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="help_I_have_no_variable_metadata.html" class="btn btn-neutral float-right" title="Help! I have no variable metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
