@@ -2,9 +2,9 @@ Data classes
 ============
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   xarray_gs
+   xarray_gs/index
    tabular
    tabular_csv
    tabular_aseg

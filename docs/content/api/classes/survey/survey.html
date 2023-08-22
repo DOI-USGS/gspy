@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Survey &mdash; gspy 0.1.0 documentation</title>
+  <title>Survey &mdash; gspy 1.0.0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
@@ -16,9 +16,10 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -33,18 +34,14 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../../../index.html" class="icon icon-home">
-            gspy
+            <a href="../../../../index.html" class="icon icon-home"> gspy
           </a>
               <div class="version">
-                0.1.0
+                1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -53,7 +50,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../classes.html">Classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Classes</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data classes</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="index.html">Survey class</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Survey</a></li>
@@ -80,9 +77,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../../api.html">API</a></li>
-          <li class="breadcrumb-item"><a href="../classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Classes</a></li>
           <li class="breadcrumb-item"><a href="index.html">Survey class</a></li>
       <li class="breadcrumb-item active">Survey</li>
       <li class="wy-breadcrumbs-aside">
@@ -98,7 +95,7 @@
 <h1>Survey<a class="headerlink" href="#survey" title="Permalink to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-8561f14af250cb67754566df8e4241d5b69d622a.png" alt="Inheritance diagram of gspy.src.classes.survey.Survey" usemap="#inheritancecd333d4876" class="inheritance graphviz" /></div>
 <map id="inheritancecd333d4876" name="inheritancecd333d4876">
-<area shape="rect" id="node1" href="#gspy.src.classes.survey.Survey.Survey" target="_top" title="Class defining a survey or dataset collection" alt="" coords="5,5,77,32"/>
+<area shape="rect" id="node1" href="#gspy.src.classes.survey.Survey.Survey" target="_top" title="Class defining a survey or dataset collection" alt="" coords="5,5,77,31"/>
 </map><span class="target" id="module-gspy.src.classes.survey.Survey"></span><dl class="py class">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.survey.Survey.</span></span><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netcdf_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey" title="Permalink to this definition"></a></dt>
@@ -118,13 +115,13 @@ convention, a set of global dataset attributes are required:
 coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.</p>
 <p>Survey(metadata_file)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>metadata_file</strong> (<em>str</em>) – Json file containing survey metadata.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>out</strong> – Survey class.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>gspy.Survey</p>
 </dd>
 </dl>
@@ -182,7 +179,7 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 <span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Read metadata for the survey</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file.</p>
 </dd>
 </dl>
@@ -194,13 +191,13 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Read a survey from a netcdf file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Netcdf file name</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>out</strong></p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>gspy.Survey</p>
 </dd>
 </dl>
@@ -212,7 +209,7 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 <dd><p>Reprojects Survey</p>
 <p>The Survey and all dependent datasets are reprojected into a new CRS</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Raises</dt>
 <dd class="field-odd"><p><strong>NotImplementedError</strong> – Function planned but not currently implemented</p>
 </dd>
 </dl>
@@ -235,7 +232,7 @@ coordinate reference system. This is used to instantiate a gspy.Spatial_ref clas
 <p>If a Survey metadata file is not found or passed, an empty template file is generated and
 an Exception is raised.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Raises</dt>
 <dd class="field-odd"><p><strong>Exception</strong> – “Please re-run and specify metadata when instantiating Survey()”</p>
 </dd>
 </dl>
@@ -247,7 +244,7 @@ an Exception is raised.</p>
 <dd><p>Write a NcML (NetCDF XML) metadata file</p>
 <p>Exports a NcML</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Name of the NetCDF file to generate NcML for</p>
 </dd>
 </dl>
@@ -258,7 +255,7 @@ an Exception is raised.</p>
 <span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.write_netcdf" title="Permalink to this definition"></a></dt>
 <dd><p>Write a survey to a netcdf file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Netcdf file name</p>
 </dd>
 </dl>

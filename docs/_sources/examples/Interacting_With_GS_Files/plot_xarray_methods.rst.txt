@@ -733,7 +733,7 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.996 seconds)
+   **Total running time of the script:** ( 0 minutes  1.146 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py:

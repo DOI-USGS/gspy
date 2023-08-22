@@ -277,7 +277,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.842 seconds)
+   **Total running time of the script:** ( 0 minutes  2.894 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py:

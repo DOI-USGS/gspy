@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gs_DataArray &mdash; gspy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="gs_Coordinate" href="Coordinate_gs.html" />
+    <link rel="prev" title="GS xarray accessor classes" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> gspy
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Classes</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Data classes</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">GS xarray accessor classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tabular.html">Tabular</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tabular_csv.html">Tabular_csv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tabular_aseg.html">Tabular_aseg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../raster.html">Raster</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../survey/index.html">Survey class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Data classes</a></li>
+          <li class="breadcrumb-item"><a href="index.html">GS xarray accessor classes</a></li>
+      <li class="breadcrumb-item active">gs_DataArray</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/content/api/classes/data/xarray_gs/DataArray_gs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gs-dataarray">
+<h1>gs_DataArray<a class="headerlink" href="#gs-dataarray" title="Permalink to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../../_images/inheritance-6ded8cd137c060f86e72cec9100dfafc57da28b1.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.DataArray" usemap="#inheritanceb06ac77178" class="inheritance graphviz" /></div>
+<map id="inheritanceb06ac77178" name="inheritanceb06ac77178">
+<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray" target="_top" title="DataArray" alt="" coords="5,5,87,31"/>
+</map><span class="target" id="module-gspy.src.classes.data.xarray_gs.DataArray"></span><dl class="py class">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.DataArray.DataArray">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.DataArray.</span></span><span class="sig-name descname"><span class="pre">DataArray</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.DataArray.DataArray.add_bounds_to_coordinate_dimension">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bounds_to_coordinate_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray.add_bounds_to_coordinate_dimension" title="Permalink to this definition"></a></dt>
+<dd><p>For an existing coordinate, compute its bounds and attach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bounds</strong> (<em>array_like</em><em>, </em><em>optional</em>) – if not present, bounds are computed. Otherwise assign them.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.DataArray.DataArray.catch_nan">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">catch_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray.catch_nan" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.DataArray.DataArray.valid_range">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valid_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.DataArray.DataArray.valid_range" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="GS xarray accessor classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Coordinate_gs.html" class="btn btn-neutral float-right" title="gs_Coordinate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

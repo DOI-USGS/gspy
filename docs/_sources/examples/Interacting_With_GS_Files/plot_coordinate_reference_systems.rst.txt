@@ -284,7 +284,6 @@ EPSG will be used by default.
         longitude_of_prime_meridian:  0.0
         prime_meridian_name:          Greenwich
         geographic_crs_name:          WGS 84
-        horizontal_datum_name:        World Geodetic System 1984 ensemble
         grid_mapping_name:            latitude_longitude
         authority:                    EPSG
         wkid:                         4326
@@ -304,7 +303,7 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.524 seconds)
+   **Total running time of the script:** ( 0 minutes  0.655 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:
