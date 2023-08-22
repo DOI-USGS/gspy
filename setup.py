@@ -10,7 +10,7 @@ from setuptools import find_packages, setup
 from distutils.command.sdist import sdist
 cmdclass={'sdist': sdist}
 
-exec(open('version.py').read())
+__version__ = '1.0.0'
 
 setup(name='gspy',
     packages=find_packages(),
@@ -43,4 +43,3 @@ setup(name='gspy',
         'aseg-gdf2'
     ],
 )
-
