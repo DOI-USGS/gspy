@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:01.800** total execution time for **examples_Interacting_With_GS_Files** files:
+**00:01.408** total execution time for **examples_Interacting_With_GS_Files** files:
 
 +------------------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``plot_xarray_methods.py``)                             | 00:01.146 | 0.0 MB |
+| :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``plot_xarray_methods.py``)                             | 00:00.894 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``plot_coordinate_reference_systems.py``) | 00:00.655 | 0.0 MB |
+| :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``plot_coordinate_reference_systems.py``) | 00:00.514 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------------------------+-----------+--------+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gs_Coordinate &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-        <script src="../../../../../_static/jquery.js"></script>
-        <script src="../../../../../_static/underscore.js"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../../../_static/doctools.js"></script>
-        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Classes</a></li>
           <li class="breadcrumb-item"><a href="../index.html">Data classes</a></li>
@@ -97,61 +100,142 @@
            <div itemprop="articleBody">
              
   <section id="gs-coordinate">
-<h1>gs_Coordinate<a class="headerlink" href="#gs-coordinate" title="Permalink to this heading"></a></h1>
-<div class="graphviz"><img src="../../../../../_images/inheritance-3ceed1cb28ddd6ac2a1516e45121c0bb7c001ba1.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Coordinate" usemap="#inheritance05014de90f" class="inheritance graphviz" /></div>
+<h1>gs_Coordinate<a class="headerlink" href="#gs-coordinate" title="Link to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../../_images/inheritance-a53f52039ee00eb5ed4cce41af916bed0109ccd0.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Coordinate" usemap="#inheritance05014de90f" class="inheritance graphviz" /></div>
 <map id="inheritance05014de90f" name="inheritance05014de90f">
-<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" target="_top" title="Coordinate" alt="" coords="135,5,220,31"/>
-<area shape="rect" id="node2" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray" target="_top" title="DataArray" alt="" coords="5,5,87,31"/>
-</map><span class="target" id="module-gspy.src.classes.data.xarray_gs.Coordinate"></span><dl class="py class">
+<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" target="_top" title="Accessor to xarray.DataArray to define a Coordinate." alt="" coords="135,5,220,31"/>
+<area shape="rect" id="node2" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray" target="_top" title="Accessor for xarray.DataArray." alt="" coords="5,5,87,31"/>
+</map><dl class="py class" id="module-gspy.src.classes.data.xarray_gs.Coordinate">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Coordinate.</span></span><span class="sig-name descname"><span class="pre">Coordinate</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Coordinate.</span></span><span class="sig-name descname"><span class="pre">Coordinate</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" title="Link to this definition"></a></dt>
+<dd><p>Accessor to xarray.DataArray to define a Coordinate.</p>
+<p>Checks necessary metadata to satisfy the CF convention, and allows use with GIS software.
+Handles both arbitrary coordinates and standard coordinates defined as x, y, z, or t used within NetCDF files.
+Standard coordinates have extra checks on the metadata.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.from_dict</span></code></a></dt><dd><p>For instantiation</p>
+</dd>
+<dt><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.from_values</span></code></a></dt><dd><p>For instantiation</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_is_projected">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_is_projected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_is_projected" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_is_projected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_is_projected" title="Link to this definition"></a></dt>
+<dd><p>Checks for a projected standard coordinate x or y</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the coordinate</p></li>
+<li><p><strong>is_projected</strong> (<em>bool</em>) – Is the coordinate projected or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>out</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_standard_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict" title="Permalink to this definition"></a></dt>
-<dd><p>Attach a coordinate/dimension to a Dataset from a dictionary.</p>
-<p>If ‘bounds’ are not defined inside the dict, the coordinate is discrete.
-Otherwise, bounds are attached also in order to satisfy ???</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_standard_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates" title="Link to this definition"></a></dt>
+<dd><p>If this is a standard coordinate do some extra checks on metadata.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the coordinate to attach</p></li>
-<li><p><strong>standard_name</strong> (<em>str</em>) – CF convention standard name</p></li>
-<li><p><strong>long_name</strong> (<em>str</em>) – CF convention long name</p></li>
-<li><p><strong>units</strong> (<em>str</em>) – units of the coordinate</p></li>
-<li><p><strong>null_value</strong> (<em>int</em><em> or </em><em>float</em>) – what are null values represented by</p></li>
-<li><p><strong>centers</strong> (<em>array_like</em>) – Has shape (size of dimension, ) defining the center values of each “cell”</p></li>
-<li><p><strong>bounds</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Has shape (size of dimension, 2) defining the bounds of each “cell” in the coordinate</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis this Coordinate belongs to .</p></li>
+<li><p><strong>positive</strong> (<em>str</em><em>, </em><em>optional</em>) – “up” or “down”. Only used if name == ‘z’.</p></li>
+<li><p><strong>time_datum</strong> (<em>str</em><em>, </em><em>optional</em>) – Time datum. Only used if name == ‘t’.</p></li>
+<li><p><strong>vertical_datum</strong> (<em>str</em><em>, </em><em>optional</em>) – Vertical datum name. Only used if name == ‘z’.</p></li>
 </ul>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<dl class="simple">
-<dt>depth_dict = {</dt><dd><p>“standard_name”: “depth”,
-“long_name”: “Depth below earth’s surface DTM”,
-“units”: “m”,
-“null_value”: “not_defined”,
-# “bounds” : [[0, 5],
-#             [5, 10]],
-# “centers” : [2.5, 7.5, 20.0]}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Specifically generates a coordinate/dimension from a dict.</p>
+<p>Automatically checks/generates required Coordinate metadata and bounds. If the coordinate is a “standard coordinate” i.e. (‘x’, ‘y’, ‘z’, ‘t’), extra checks on metadata are performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the coordinate to attach</p></li>
+<li><p><strong>is_projected</strong> (<em>bool</em>) – If the coordinate is projected, the standard_name metadata entry needs to change</p></li>
+<li><p><strong>is_dimension</strong> (<em>bool</em>) – If the coordinate is a coordinate-dimension defines its dims as itself</p></li>
+<li><p><strong>centers</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Explicit definition of Coordinate center values. Used for non-uniformly distanced center values.</p></li>
+<li><p>Has shape (size of dimension, ) defining the center values of each “cell”</p></li>
+</ul>
+</p></li>
+<li><p><strong>increment</strong> (<em>scalar</em><em>, </em><em>optional</em>) – Increment of the Coordinate centers. Only used if centers is None.</p></li>
+<li><p><strong>length</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the Coordinate centers. Only used if centers is None.</p></li>
+<li><p><strong>origin</strong> (<em>scalar</em><em>, </em><em>optional</em>) – Lower limit of the Coordinate centers. Only used if centers is None.</p></li>
+</ul>
 </dd>
 </dl>
-<p>Dataset_gs.coordinate_from_dict(‘depth’, <a href="#id1"><span class="problematic" id="id2">**</span></a>depth_dict)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values" title="gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataArray.DataArray.from_values</span></code></a></dt><dd><p>For GS standard metadata keywords</p>
+</dd>
+<dt><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.check_standard_coordinates</span></code></a></dt><dd><p>For extra keywords when name in (‘x’, ‘y’, ‘z’, ‘t’)</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Depth below earth&#39;s surface DTM&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;null_value&quot;</span><span class="p">:</span> <span class="s2">&quot;not_defined&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;centers&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_projected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values" title="Link to this definition"></a></dt>
+<dd><p>Generate a Coordinate from an array of values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the coordinate to attach</p></li>
+<li><p><strong>is_projected</strong> (<em>bool</em>) – If the coordinate is projected, the standard_name metadata entry needs to change</p></li>
+<li><p><strong>is_dimension</strong> (<em>bool</em>) – If the coordinate is a coordinate-dimension defines its dims as itself.</p></li>
+<li><p><strong>centers</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Explicit definition of Coordinate center values. Used for non-uniformly distanced center values.
+Has shape (size of dimension, ) defining the center values of each “cell”</p></li>
+<li><p><strong>increment</strong> (<em>scalar</em><em>, </em><em>optional</em>) – Increment of the Coordinate centers. Only used if centers is None.</p></li>
+<li><p><strong>length</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the Coordinate centers. Only used if centers is None.</p></li>
+<li><p><strong>origin</strong> (<em>scalar</em><em>, </em><em>optional</em>) – Lower limit of the Coordinate centers. Only used if centers is None.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values" title="gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataArray.DataArray.from_values</span></code></a></dt><dd><p>For GS convention metadata keywords</p>
+</dd>
+<dt><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.check_standard_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.check_standard_coordinates</span></code></a></dt><dd><p>For extra keywords when creating a standard coordinate</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Depth below earth&#39;s surface DTM&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;null_value&quot;</span><span class="p">:</span> <span class="s2">&quot;not_defined&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;centers&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </dd></dl>
 

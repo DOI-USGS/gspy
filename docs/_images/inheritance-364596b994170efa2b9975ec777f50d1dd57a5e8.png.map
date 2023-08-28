@@ -1,0 +1,5 @@
+<map id="inheritance6cb51639ad" name="inheritance6cb51639ad">
+<area shape="rect" id="node1" href="xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,31"/>
+<area shape="rect" id="node2" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Accessor to xarray.Dataset that handles Tabular data" alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node3" href="#gspy.src.classes.data.tabular_aseg.Tabular_aseg" target="_top" title="Accessor to xarray.Dataset that handles ASEG Tabular data" alt="" coords="245,5,344,31"/>
+</map>

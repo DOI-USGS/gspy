@@ -22,8 +22,8 @@ from os.path import join
 from gspy import Survey
 
 #%%
-# Convert the CSV data to NetCDF
-# ++++++++++++++++++++++++++++++++++++++
+# Convert the Skytem csv data to NetCDF
+# +++++++++++++++++++++++++++++++++++++
 
 #%%
 # Initialize the Survey
@@ -38,7 +38,7 @@ metadata = join(data_path, "data//WI_SkyTEM_survey_md.json")
 survey = Survey(metadata)
 
 #%%
-# 1 - Raw Data - 
+# 1 - Raw Data -
 # Import raw AEM data from CSV-format.
 # Define input data file and associated metadata file
 d_data1 = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
@@ -48,7 +48,7 @@ d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.json')
 survey.add_tabular(type='csv', data_filename=d_data1, metadata_file=d_supp1)
 
 #%%
-# 2 - Processed Data - 
+# 2 - Processed Data -
 # Import processed AEM data from CSV-format.
 # Define input data file and associated metadata file
 d_data2 = join(data_path, 'data//WI_SkyTEM_2021_ProcessedData.csv')
@@ -58,7 +58,7 @@ d_supp2 = join(data_path, 'data//WI_SkyTEM_processed_data_md.json')
 survey.add_tabular(type='csv', data_filename=d_data2, metadata_file=d_supp2)
 
 #%%
-# 3 - Inverted Models - 
+# 3 - Inverted Models -
 # Import inverted AEM models from CSV-format.
 # Define input data file and associated metadata file
 m_data3 = join(data_path, 'model//WI_SkyTEM_2021_InvertedModels.csv')
@@ -68,7 +68,7 @@ m_supp3 = join(data_path, 'model//WI_SkyTEM_inverted_models_md.json')
 survey.add_tabular(type='csv', data_filename=m_data3, metadata_file=m_supp3)
 
 #%%
-# 4 - Bedrock Picks - 
+# 4 - Bedrock Picks -
 # Import AEM-based estimated of depth to bedrock from CSV-format.
 # Define input data file and associated metadata file
 d_data4 = join(data_path, 'data//topDolomite_Blocky_LidarDEM.csv')
@@ -78,7 +78,7 @@ d_supp4 = join(data_path, 'data//WI_SkyTEM_bedrock_picks_md.json')
 survey.add_tabular(type='csv', data_filename=d_data4, metadata_file=d_supp4)
 
 #%%
-# 5 - Derivative Maps - 
+# 5 - Derivative Maps -
 # Import interpolated bedrock and magnetic maps from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked to variable names)
 m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.json')
@@ -92,11 +92,16 @@ d_out = join(data_path, 'model//WISkyTEM.nc')
 survey.write_netcdf(d_out)
 
 # print a summary of the survey contents
-survey.contents()
+print(survey.contents)
 
 #%%
 # Reading back in
 new_survey = Survey().read_netcdf(d_out)
+
+print(new_survey.spatial_ref.attrs)
+
+print(new_survey.tabular[0]['LM_gate_times'])
+print(new_survey.tabular[0]['LM_gate_times'].values[0])
 
 #%%
 # Plotting

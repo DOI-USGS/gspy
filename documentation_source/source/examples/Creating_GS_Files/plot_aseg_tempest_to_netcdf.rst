@@ -18,14 +18,14 @@
 .. _sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:
 
 
-ASEG to NetCDF 
+ASEG to NetCDF
 --------------
 
 This example demonstrates the workflow for creating a GS file from the `ASEG <https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf>`_ file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:
 
 1. Raw AEM data, from the Tempest system
 2. Inverted resistivity models
-3. An interpolated map of total magnetic intensity 
+3. An interpolated map of total magnetic intensity
 
 Dataset Reference:
 Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
@@ -77,7 +77,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-41
 
-1. Raw Data - 
+1. Raw Data -
 Import raw AEM data from ASEG-format.
 Define input data file and associated metadata file
 
@@ -100,7 +100,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 48-51
 
-2. Inverted Models - 
+2. Inverted Models -
 Import inverted AEM models from ASEG-format.
 Define input data file and associated metadata file
 
@@ -123,7 +123,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 58-61
 
-3. Magnetic Intensity Map - 
+3. Magnetic Intensity Map -
 Import the magnetic data from TIF-format.
 Define input metadata file (which contains the TIF filenames linked with desired variable names)
 
@@ -190,17 +190,16 @@ Read back in the NetCDF file
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-88
+.. GENERATED FROM PYTHON SOURCE LINES 79-87
 
 .. code-block:: default
 
 
-    # Make a scatter plot of a specific tabular variable, using GSPy's plotter 
+    # Make a scatter plot of a specific tabular variable, using GSPy's plotter
     plt.figure()
     new_survey.tabular[0].gs_tabular.scatter('Tx_Height', cmap='jet')
-    plt.show()
 
-    # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter 
+    # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
     plt.figure()
     new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
     plt.show()
@@ -230,7 +229,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.554 seconds)
+   **Total running time of the script:** ( 0 minutes  3.086 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:

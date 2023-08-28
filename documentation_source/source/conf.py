@@ -36,14 +36,15 @@ extensions = [
     # 'sphinx.ext.doctest',
     'sphinx.ext.todo',
     # 'sphinx.ext.coverage',
-    # 'sphinx.ext.mathjax',
+    'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
     # 'sphinx.ext.graphviz',
     'sphinx.ext.inheritance_diagram',
     # 'sphinx_automodapi.automodapi',
     'sphinx_gallery.gen_gallery',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.autosummary'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -140,7 +141,7 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {'globaltoc_maxdepth': None,}
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []

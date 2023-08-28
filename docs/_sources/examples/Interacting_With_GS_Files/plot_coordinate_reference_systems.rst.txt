@@ -303,7 +303,7 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.655 seconds)
+   **Total running time of the script:** ( 0 minutes  0.514 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:

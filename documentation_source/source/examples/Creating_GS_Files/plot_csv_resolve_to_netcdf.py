@@ -17,8 +17,8 @@ from os.path import join
 from gspy import Survey
 
 #%%
-# Convert the CSV data to NetCDF
-# ++++++++++++++++++++++++++++++
+# Convert the resolve csv data to NetCDF
+# ++++++++++++++++++++++++++++++++++++++
 
 #%%
 # Initialize the Survey
@@ -65,12 +65,11 @@ print(new_survey.xarray)
 #%%
 # Plotting
 
-# Make a scatter plot of a specific data variable, using GSPy's plotter 
+# Make a scatter plot of a specific data variable, using GSPy's plotter
 plt.figure()
 new_survey.tabular[0].gs_tabular.scatter('DTM', vmin=30, vmax=50)
-plt.show()
 
-# Make a scatter plot of a specific model variable, using GSPy's plotter 
+# Make a scatter plot of a specific model variable, using GSPy's plotter
 plt.figure()
 new_survey.tabular[1].gs_tabular.scatter('DOI_STANDARD')
 plt.show()

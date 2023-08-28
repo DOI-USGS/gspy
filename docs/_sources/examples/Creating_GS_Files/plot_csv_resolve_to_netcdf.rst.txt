@@ -46,8 +46,8 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 
 .. GENERATED FROM PYTHON SOURCE LINES 20-22
 
-Convert the CSV data to NetCDF
-++++++++++++++++++++++++++++++
+Convert the resolve csv data to NetCDF
+++++++++++++++++++++++++++++++++++++++
 
 .. GENERATED FROM PYTHON SOURCE LINES 24-25
 
@@ -187,17 +187,16 @@ Reading back in the GS NetCDF file
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-79
+.. GENERATED FROM PYTHON SOURCE LINES 67-78
 
 .. code-block:: default
 
 
-    # Make a scatter plot of a specific data variable, using GSPy's plotter 
+    # Make a scatter plot of a specific data variable, using GSPy's plotter
     plt.figure()
     new_survey.tabular[0].gs_tabular.scatter('DTM', vmin=30, vmax=50)
-    plt.show()
 
-    # Make a scatter plot of a specific model variable, using GSPy's plotter 
+    # Make a scatter plot of a specific model variable, using GSPy's plotter
     plt.figure()
     new_survey.tabular[1].gs_tabular.scatter('DOI_STANDARD')
     plt.show()
@@ -264,7 +263,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.784 seconds)
+   **Total running time of the script:** ( 0 minutes  1.644 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:

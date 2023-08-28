@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gs_Dataset &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-        <script src="../../../../../_static/jquery.js"></script>
-        <script src="../../../../../_static/underscore.js"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../../../_static/doctools.js"></script>
-        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../api.html">API</a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Classes</a></li>
           <li class="breadcrumb-item"><a href="../index.html">Data classes</a></li>
@@ -97,104 +100,202 @@
            <div itemprop="articleBody">
              
   <section id="gs-dataset">
-<h1>gs_Dataset<a class="headerlink" href="#gs-dataset" title="Permalink to this heading"></a></h1>
-<div class="graphviz"><img src="../../../../../_images/inheritance-e4e5f8ff3a3b6f9617b91bb2a2ba424c23e06f44.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Dataset" usemap="#inheritancef543939383" class="inheritance graphviz" /></div>
+<h1>gs_Dataset<a class="headerlink" href="#gs-dataset" title="Link to this heading"></a></h1>
+<div class="graphviz"><img src="../../../../../_images/inheritance-3fc84a0d3c7eee00a5d4e636bfac07a23ec71446.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Dataset" usemap="#inheritancef543939383" class="inheritance graphviz" /></div>
 <map id="inheritancef543939383" name="inheritancef543939383">
-<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Dataset" alt="" coords="5,5,77,31"/>
-</map><span class="target" id="module-gspy.src.classes.data.xarray_gs.Dataset"></span><dl class="py class">
+<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,31"/>
+</map><dl class="py class" id="module-gspy.src.classes.data.xarray_gs.Dataset">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="Permalink to this definition"></a></dt>
-<dd><dl class="py method">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="Link to this definition"></a></dt>
+<dd><p>Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.</p>
+<p>Checks necessary metadata to satisfy the CF convention, and allows use with GIS software.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.Dataset</p>
+</dd>
+</dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_bounds_to_coordinate">
-<span class="sig-name descname"><span class="pre">add_bounds_to_coordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_bounds_to_coordinate" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">add_bounds_to_coordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_bounds_to_coordinate" title="Link to this definition"></a></dt>
+<dd><p>Adds bounds to a coordinate.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure you call this method into a return variable</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.add_coordinate_from_dict</span></code></p>
+</div></blockquote>
+<p>Otherwise, the bounds will not be added correctly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of the variable to add bounds to.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset with added bounds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_dict">
-<span class="sig-name descname"><span class="pre">add_coordinate_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_coordinate_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_dict" title="Link to this definition"></a></dt>
 <dd><p>Attach a coordinate/dimension to a Dataset from a dictionary.</p>
-<p>If ‘bounds’ are not defined inside the dict, the coordinate is discrete.
-Otherwise, bounds are attached also in order to satisfy ???</p>
+<p>The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
+coordinate is not discrete.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure you call this method into a return variable</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.add_coordinate_from_dict</span></code></p>
+</div></blockquote>
+<p>Otherwise, the coordinate will not be added correctly.</p>
+</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the coordinate to attach</p></li>
-<li><p><strong>standard_name</strong> (<em>str</em>) – CF convention standard name</p></li>
-<li><p><strong>long_name</strong> (<em>str</em>) – CF convention long name</p></li>
-<li><p><strong>units</strong> (<em>str</em>) – units of the coordinate</p></li>
-<li><p><strong>null_value</strong> (<em>int</em><em> or </em><em>float</em>) – what are null values represented by</p></li>
-<li><p><strong>centers</strong> (<em>array_like</em>) – Has shape (size of dimension, ) defining the center values of each “cell”</p></li>
-<li><p><strong>bounds</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Has shape (size of dimension, 2) defining the bounds of each “cell” in the coordinate</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the coordinate</p></li>
+<li><p><strong>discrete</strong> (<em>bool</em><em>, </em><em>optional</em>) – Is this coordinate discrete? by default False</p></li>
+<li><p><strong>is_dimension</strong> (<em>bool</em><em>, </em><em>optional</em>) – Is this a coordinate-dimension? by default False</p></li>
 </ul>
 </dd>
-</dl>
-<p class="rubric">Example</p>
-<dl class="simple">
-<dt>depth_dict = {</dt><dd><p>“standard_name”: “depth”,
-“long_name”: “Depth below earth’s surface DTM”,
-“units”: “m”,
-“null_value”: “not_defined”,
-# “bounds” : [[0, 5],
-#             [5, 10]],
-# “centers” : [2.5, 7.5, 20.0]}</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset with added coordinate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
 </dd>
 </dl>
-<p>Dataset_gs.coordinate_from_dict(‘depth’, <a href="#id1"><span class="problematic" id="id2">**</span></a>depth_dict)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="Coordinate_gs.html#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.Coordinate.from_dict</span></code></a></dt><dd><p>for pertinent Coordinate keywords and metadata</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values">
-<span class="sig-name descname"><span class="pre">add_coordinate_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>IF its a dimension coordinate.  No need to specify dimensions, or coords.</dt><dd><p>If its a non-dimensions coordinate. Need to specify dims.</p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">add_coordinate_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values" title="Link to this definition"></a></dt>
+<dd><p>Attach a coordinate/dimension to a Dataset using an array of values defining center values.</p>
+<p>The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
+coordinate is not discrete.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure you call this method into a return variable</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.add_coordinate_from_dict</span></code></p>
+</div></blockquote>
+<p>Otherwise, the coordinate will not be added correctly.</p>
+</div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>_description_</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the coordinate</p></li>
+<li><p><strong>discrete</strong> (<em>bool</em><em>, </em><em>optional</em>) – Is this coordinate discrete? by default False</p></li>
+<li><p><strong>is_dimension</strong> (<em>bool</em><em>, </em><em>optional</em>) – Is this a coordinate-dimension? by default False</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>_type_</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset with added coordinate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="Coordinate_gs.html#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values" title="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate.from_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coordinate.Coordinate.from_values</span></code></a></dt><dd><p>for pertinent Coordinate keywords and metadata</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values">
-<span class="sig-name descname"><span class="pre">add_variable_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">add_variable_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values" title="Link to this definition"></a></dt>
+<dd><p>Add a variable to the Dataset</p>
+<p>Automatically maintains coords on the variable given its dims.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure you call this method into a return variable</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.add_coordinate_from_dict</span></code></p>
+</div></blockquote>
+<p>Otherwise, the variable will not be added correctly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the variable</p></li>
+<li><p><strong>values</strong> (<em>array_like</em>) – Values of the variable</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset with variable added.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the shape of the values does not match the specified dimensions.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.is_projected">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.is_projected" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.is_projected" title="Link to this definition"></a></dt>
+<dd><p>Does the dataset have a projected spatial reference</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.json_metadata">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.json_metadata" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.json_metadata" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset" title="Permalink to this definition"></a></dt>
-<dd><p>Loads a netcdf dataset using Xarray, but recasts it as our Dataset_gs class</p>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset" title="Link to this definition"></a></dt>
+<dd><p>Open (lazy loading) a netcdf.</p>
+<p>Wraps around the xarray open_dataset but forces xarray to honour gate times and the CF convention.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Native xrray Dataset</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.Dataset</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_metadata">
-<span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_metadata" title="Permalink to this definition"></a></dt>
-<dd><p>Read metadata file</p>
-<p>Loads the metadata file and adds key_mapping values to property. If required dictionaries
-‘raster_files’ and/or ‘variable_metadata’ are missing, then a metadata template file is written
-and an error is triggered.</p>
+<span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_metadata" title="Link to this definition"></a></dt>
+<dd><p>Read json metadata file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>dic</strong> – Dictionary of JSON metadata</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
@@ -202,33 +303,30 @@ and an error is triggered.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_netcdf">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_netcdf" title="Permalink to this definition"></a></dt>
-<dd><p>Read Data from a netcdf file</p>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_netcdf" title="Link to this definition"></a></dt>
+<dd><p>Read Data from a netcdf file using xrray’s lazy open_dataset</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – Path to the netcdf file</p></li>
-<li><p><strong>group</strong> (<em>str</em>) – Netcdf group name containing data.</p></li>
+<li><p><strong>group</strong> (<em>str</em>) – Netcdf group name containing Dataset</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>gspy.Data</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.scatter">
-<span class="sig-name descname"><span class="pre">scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.scatter" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.scatter" title="Link to this definition"></a></dt>
 <dd><p>Scatter plot of variable against x, y co-ordinates</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>variable</strong> (<em>str</em>) – Xarray Dataset variable name</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>ax</strong> (<em>matplotlib.Axes</em>) – Figure handle</p></li>
 <li><p><strong>sc</strong> (<em>xarray.plot.scatter</em>) – Plotting handle</p></li>
@@ -240,25 +338,58 @@ and an error is triggered.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.set_spatial_ref">
-<span class="sig-name descname"><span class="pre">set_spatial_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.set_spatial_ref" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">set_spatial_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.set_spatial_ref" title="Link to this definition"></a></dt>
+<dd><p>Set the spatial ref of the Dataset.</p>
+<p>Specifically adds an xarray coordinate called ‘spatial_ref’ which is required for GIS software and the CF convention.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Make sure you call this method into a return variable</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">ds.add_coordinate_from_dict</span></code></p>
+</div></blockquote>
+<p>Otherwise, the spatial_ref will not be added correctly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>gspy.Spatial_ref</em><em>, or </em><em>xarray.DataArray</em>) – <ul class="simple">
+<li><p>If dict: creates a Spatial_ref from a dict of metadata.</p></li>
+<li><p>If an existing spatial ref, assign by reference</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataset with spatial_ref added.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="gspy.src.classes.data.xarray_gs.Dataset.Dataset">Dataset</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Survey.Spatial_ref</span></code></dt><dd><p>for more details of creating a Spatial_ref</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.spatial_ref">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.spatial_ref" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.spatial_ref" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs">
-<span class="sig-name descname"><span class="pre">update_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">update_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs" title="Link to this definition"></a></dt>
+<dd><p>Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_ncml">
-<span class="sig-name descname"><span class="pre">write_ncml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_ncml" title="Permalink to this definition"></a></dt>
-<dd><p>Write and NCML file</p>
+<span class="sig-name descname"><span class="pre">write_ncml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_ncml" title="Link to this definition"></a></dt>
+<dd><p>Write an NCML file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – NCML filename</p></li>
 <li><p><strong>group</strong> (<em>str</em>) – Group name in Netcdf file to generate NCML output for.</p></li>
@@ -270,10 +401,10 @@ and an error is triggered.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_netcdf">
-<span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_netcdf" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_netcdf" title="Link to this definition"></a></dt>
 <dd><p>Write to netcdf file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – Path to the file</p></li>
 <li><p><strong>group</strong> (<em>str</em>) – Netcdf group name to write to</p></li>

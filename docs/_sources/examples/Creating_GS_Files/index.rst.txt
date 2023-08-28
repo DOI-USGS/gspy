@@ -2,6 +2,8 @@
 
 .. _sphx_glr_examples_Creating_GS_Files:
 
+:orphan:
+
 Creating GS Files
 =================
 
@@ -13,18 +15,86 @@ Creating GS Files
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the `ASEG &lt;https://www.aseg....">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png
+    :alt: ASEG to NetCDF
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
 
 .. only:: html
 
   .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png
-    :alt:
+    :alt: CSV to NetCDF
 
   :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">CSV to NetCDF conversion [AEM - Resolve]</div>
+      <div class="sphx-glr-thumbnail-title">CSV to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+    :alt: GeoTIFFs to NetCDF
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
+    :alt: Help! I have no variable metadata
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
+    :alt: Multi-dataset Survey
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Multi-dataset Survey</div>
     </div>
 
 
@@ -36,5 +106,9 @@ Creating GS Files
 .. toctree::
    :hidden:
 
+   /examples/Creating_GS_Files/plot_aseg_tempest_to_netcdf
    /examples/Creating_GS_Files/plot_csv_resolve_to_netcdf
+   /examples/Creating_GS_Files/plot_tifs_to_netcdf
+   /examples/Creating_GS_Files/help_I_have_no_variable_metadata
+   /examples/Creating_GS_Files/plot_csv_skytem_to_netcdf
 

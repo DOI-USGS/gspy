@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CSV to NetCDF &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,7 +57,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">CSV to NetCDF</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convert-the-csv-data-to-netcdf">Convert the CSV data to NetCDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert-the-resolve-csv-data-to-netcdf">Convert the resolve csv data to NetCDF</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF</a></li>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
       <li class="breadcrumb-item active">CSV to NetCDF</li>
       <li class="wy-breadcrumbs-aside">
@@ -99,7 +102,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="csv-to-netcdf">
-<span id="sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"></span><h1>CSV to NetCDF<a class="headerlink" href="#csv-to-netcdf" title="Permalink to this heading"></a></h1>
+<span id="sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"></span><h1>CSV to NetCDF<a class="headerlink" href="#csv-to-netcdf" title="Link to this heading"></a></h1>
 <p>This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:</p>
 <ol class="arabic simple">
 <li><p>Raw AEM data, from the Resolve system</p></li>
@@ -112,8 +115,8 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
 </div>
-<section id="convert-the-csv-data-to-netcdf">
-<h2>Convert the CSV data to NetCDF<a class="headerlink" href="#convert-the-csv-data-to-netcdf" title="Permalink to this heading"></a></h2>
+<section id="convert-the-resolve-csv-data-to-netcdf">
+<h2>Convert the resolve csv data to NetCDF<a class="headerlink" href="#convert-the-resolve-csv-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
@@ -182,7 +185,6 @@ Attributes:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific data variable, using GSPy&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DTM&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Make a scatter plot of a specific model variable, using GSPy&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -227,7 +229,7 @@ Attributes:
     comment:  This dataset includes inverted resistivity models derived from ...
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.784 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.644 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/ca9c324f898727403a18484f42dc3020/plot_csv_resolve_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_resolve_to_netcdf.py</span></code></a></p>

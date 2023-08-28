@@ -16,6 +16,7 @@ Examples
 
 .. _sphx_glr_examples_Creating_GS_Files:
 
+=================
 Creating GS Files
 =================
 
@@ -132,6 +133,7 @@ Creating GS Files
 
 .. _sphx_glr_examples_Interacting_With_GS_Files:
 
+=========================
 Interacting With GS Files
 =========================
 

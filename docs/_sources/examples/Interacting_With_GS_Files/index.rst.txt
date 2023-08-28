@@ -2,6 +2,8 @@
 
 .. _sphx_glr_examples_Interacting_With_GS_Files:
 
+:orphan:
+
 Interacting With GS Files
 =========================
 
@@ -13,18 +15,35 @@ Interacting With GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xa...">
+    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within `X...">
 
 .. only:: html
 
   .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
-    :alt:
+    :alt: Basic Class Structure
 
   :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Basic Class Structure and Xarray Methods</div>
+      <div class="sphx-glr-thumbnail-title">Basic Class Structure</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ...">
+
+.. only:: html
+
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_coordinate_reference_systems_thumb.png
+    :alt: Coordinate Reference Systems
+
+  :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Coordinate Reference Systems</div>
     </div>
 
 
@@ -37,4 +56,5 @@ Interacting With GS Files
    :hidden:
 
    /examples/Interacting_With_GS_Files/plot_xarray_methods
+   /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
 

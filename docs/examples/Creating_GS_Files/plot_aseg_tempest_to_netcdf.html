@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ASEG to NetCDF &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
       <li class="breadcrumb-item active">ASEG to NetCDF</li>
       <li class="wy-breadcrumbs-aside">
@@ -99,7 +102,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="aseg-to-netcdf">
-<span id="sphx-glr-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"></span><h1>ASEG to NetCDF<a class="headerlink" href="#aseg-to-netcdf" title="Permalink to this heading"></a></h1>
+<span id="sphx-glr-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"></span><h1>ASEG to NetCDF<a class="headerlink" href="#aseg-to-netcdf" title="Link to this heading"></a></h1>
 <p>This example demonstrates the workflow for creating a GS file from the <a class="reference external" href="https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf">ASEG</a> file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:</p>
 <ol class="arabic simple">
 <li><p>Raw AEM data, from the Tempest system</p></li>
@@ -114,7 +117,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 </pre></div>
 </div>
 <section id="convert-the-aseg-data-to-netcdf">
-<h2>Convert the ASEG data to NetCDF<a class="headerlink" href="#convert-the-aseg-data-to-netcdf" title="Permalink to this heading"></a></h2>
+<h2>Convert the ASEG data to NetCDF<a class="headerlink" href="#convert-the-aseg-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
@@ -185,7 +188,6 @@ Attributes:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific tabular variable, using GSPy&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;Tx_Height&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Make a 2-D map plot of a specific raster variable, using Xarrays&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -197,7 +199,7 @@ Attributes:
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" alt="plot aseg tempest to netcdf" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.554 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.086 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f757326c59593466a9918aff9f15e6e9/plot_aseg_tempest_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_aseg_tempest_to_netcdf.py</span></code></a></p>

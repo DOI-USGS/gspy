@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoTIFFs to NetCDF &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
       <li class="breadcrumb-item active">GeoTIFFs to NetCDF</li>
       <li class="wy-breadcrumbs-aside">
@@ -99,7 +102,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="geotiffs-to-netcdf">
-<span id="sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"></span><h1>GeoTIFFs to NetCDF<a class="headerlink" href="#geotiffs-to-netcdf" title="Permalink to this heading"></a></h1>
+<span id="sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"></span><h1>GeoTIFFs to NetCDF<a class="headerlink" href="#geotiffs-to-netcdf" title="Link to this heading"></a></h1>
 <p>In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension.</p>
 <p>Additionally, this example shows how to handle Raster data that have differing x-y grids. Specifically, this example creates the following Raster datasets:</p>
 <ol class="arabic">
@@ -125,7 +128,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <section id="convert-data-from-geotiff-to-netcdf">
-<h2>Convert data from GeoTIFF to NetCDF<a class="headerlink" href="#convert-data-from-geotiff-to-netcdf" title="Permalink to this heading"></a></h2>
+<h2>Convert data from GeoTIFF to NetCDF<a class="headerlink" href="#convert-data-from-geotiff-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;..//..//supplemental//region//MAP&quot;</span>
@@ -200,7 +203,7 @@ Attributes:
     long_name:      Total magnetic intensity, diurnally corrected and filtered
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.779 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.635 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-tifs-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97c13cc53ee6da501749a9492cfc4d38/plot_tifs_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tifs_to_netcdf.py</span></code></a></p>

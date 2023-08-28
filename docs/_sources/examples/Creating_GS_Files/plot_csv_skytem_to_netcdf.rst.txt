@@ -52,8 +52,8 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 
 .. GENERATED FROM PYTHON SOURCE LINES 25-27
 
-Convert the CSV data to NetCDF
-++++++++++++++++++++++++++++++++++++++
+Convert the Skytem csv data to NetCDF
++++++++++++++++++++++++++++++++++++++
 
 .. GENERATED FROM PYTHON SOURCE LINES 29-30
 
@@ -82,7 +82,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 41-44
 
-1 - Raw Data - 
+1 - Raw Data -
 Import raw AEM data from CSV-format.
 Define input data file and associated metadata file
 
@@ -105,7 +105,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-54
 
-2 - Processed Data - 
+2 - Processed Data -
 Import processed AEM data from CSV-format.
 Define input data file and associated metadata file
 
@@ -128,7 +128,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 61-64
 
-3 - Inverted Models - 
+3 - Inverted Models -
 Import inverted AEM models from CSV-format.
 Define input data file and associated metadata file
 
@@ -151,7 +151,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 71-74
 
-4 - Bedrock Picks - 
+4 - Bedrock Picks -
 Import AEM-based estimated of depth to bedrock from CSV-format.
 Define input data file and associated metadata file
 
@@ -174,7 +174,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 81-84
 
-5 - Derivative Maps - 
+5 - Derivative Maps -
 Import interpolated bedrock and magnetic maps from TIF-format.
 Define input metadata file (which contains the TIF filenames linked to variable names)
 
@@ -206,7 +206,7 @@ Save to NetCDF file
     survey.write_netcdf(d_out)
 
     # print a summary of the survey contents
-    survey.contents()
+    print(survey.contents)
 
 
 
@@ -218,15 +218,13 @@ Save to NetCDF file
 
  .. code-block:: none
 
-
     tabular:
-    [0] raw data
-    [1] processed data
-    [2] inverted resistivity models
-    [3] bedrock elevation points
-
+        [0] raw data
+        [1] processed data
+        [2] inverted resistivity models
+        [3] bedrock elevation points
     raster:
-    [0] gridded magnetic and bedrock maps
+        [0] gridded magnetic and bedrock maps
 
 
 
@@ -236,24 +234,57 @@ Save to NetCDF file
 
 Reading back in
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-101
+.. GENERATED FROM PYTHON SOURCE LINES 99-106
 
 .. code-block:: default
 
     new_survey = Survey().read_netcdf(d_out)
 
+    print(new_survey.spatial_ref.attrs)
+
+    print(new_survey.tabular[0]['LM_gate_times'])
+    print(new_survey.tabular[0]['LM_gate_times'].values[0])
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    {'crs_wkt': 'PROJCRS["NAD83(HARN) / Wisconsin Transverse Mercator",BASEGEOGCRS["NAD83(HARN)",DATUM["NAD83 (High Accuracy Reference Network)",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4152]],CONVERSION["Wisconsin Transverse Mercator 83",METHOD["Transverse Mercator",ID["EPSG",9807]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",-90,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9996,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",520000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",-4480000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["State-wide spatial data management."],AREA["United States (USA) - Wisconsin."],BBOX[42.48,-92.89,47.31,-86.25]],ID["EPSG",3071]]', 'semi_major_axis': 6378137.0, 'semi_minor_axis': 6356752.314140356, 'inverse_flattening': 298.257222101, 'reference_ellipsoid_name': 'GRS 1980', 'longitude_of_prime_meridian': 0.0, 'prime_meridian_name': 'Greenwich', 'geographic_crs_name': 'NAD83(HARN)', 'horizontal_datum_name': 'NAD83 (High Accuracy Reference Network)', 'projected_crs_name': 'NAD83(HARN) / Wisconsin Transverse Mercator', 'grid_mapping_name': 'transverse_mercator', 'latitude_of_projection_origin': 0.0, 'longitude_of_central_meridian': -90.0, 'false_easting': 520000.0, 'false_northing': -4480000.0, 'scale_factor_at_central_meridian': 0.9996, 'authority': 'EPSG', 'wkid': '3071'}
+    <xarray.DataArray 'LM_gate_times' (LM_gate_times: 28)>
+    array([-1.135000e-06,  3.650000e-07,  2.365000e-06,  4.365000e-06,
+            6.365000e-06,  8.365000e-06,  1.036500e-05,  1.286500e-05,
+            1.636500e-05,  2.086500e-05,  2.636500e-05,  3.336500e-05,
+            4.236500e-05,  5.386500e-05,  6.836500e-05,  8.636500e-05,
+            1.088650e-04,  1.368650e-04,  1.723650e-04,  2.178650e-04,
+            2.748650e-04,  3.468650e-04,  4.378650e-04,  5.518650e-04,
+            6.958650e-04,  8.773650e-04,  1.105865e-03,  1.394365e-03])
+    Coordinates:
+        spatial_ref    float64 ...
+      * LM_gate_times  (LM_gate_times) float64 -1.135e-06 3.65e-07 ... 0.001394
+    Attributes:
+        standard_name:  LM_gate_times
+        null_value:     not_defined
+        bounds:         LM_gate_times_bnds
+        units:          seconds
+        grid_mapping:   spatial_ref
+        valid_range:    [-1.135000e-06  1.394365e-03]
+        long_name:      low moment gate times
+    -1.135e-06
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-103
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 107-108
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-108
+.. GENERATED FROM PYTHON SOURCE LINES 108-113
 
 .. code-block:: default
 
@@ -277,7 +308,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.894 seconds)
+   **Total running time of the script:** ( 0 minutes  2.555 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py:

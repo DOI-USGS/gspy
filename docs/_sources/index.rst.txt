@@ -31,7 +31,7 @@ Datasets are read from a variety of original formats (CSV, `ASEG-GDF <https://ww
    5. NetCDF is immediately scalable for large datasets, it has efficient read/write and parallel capabilities.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 12
 
    content/getting_started/getting_started
    content/api/api

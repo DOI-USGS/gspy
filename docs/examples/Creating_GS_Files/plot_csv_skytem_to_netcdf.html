@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multi-dataset Survey &mdash; gspy 1.0.0 documentation</title>
@@ -16,12 +16,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> gspy
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
           </a>
               <div class="version">
                 1.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -57,7 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Multi-dataset Survey</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convert-the-csv-data-to-netcdf">Convert the CSV data to NetCDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convert-the-skytem-csv-data-to-netcdf">Convert the Skytem csv data to NetCDF</a></li>
 </ul>
 </li>
 </ul>
@@ -81,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
       <li class="breadcrumb-item active">Multi-dataset Survey</li>
       <li class="wy-breadcrumbs-aside">
@@ -99,7 +102,7 @@
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="multi-dataset-survey">
-<span id="sphx-glr-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"></span><h1>Multi-dataset Survey<a class="headerlink" href="#multi-dataset-survey" title="Permalink to this heading"></a></h1>
+<span id="sphx-glr-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"></span><h1>Multi-dataset Survey<a class="headerlink" href="#multi-dataset-survey" title="Link to this heading"></a></h1>
 <p>This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:</p>
 <ol class="arabic simple">
 <li><p>Minimally processed (raw) AEM data and raw/processed magnetic data provided by SkyTEM</p></li>
@@ -117,8 +120,8 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
 </div>
-<section id="convert-the-csv-data-to-netcdf">
-<h2>Convert the CSV data to NetCDF<a class="headerlink" href="#convert-the-csv-data-to-netcdf" title="Permalink to this heading"></a></h2>
+<section id="convert-the-skytem-csv-data-to-netcdf">
+<h2>Convert the Skytem csv data to NetCDF<a class="headerlink" href="#convert-the-skytem-csv-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
@@ -184,22 +187,50 @@ Define input metadata file (which contains the TIF filenames linked to variable 
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 
 <span class="c1"># print a summary of the survey contents</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">contents</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tabular:
-[0] raw data
-[1] processed data
-[2] inverted resistivity models
-[3] bedrock elevation points
-
+    [0] raw data
+    [1] processed data
+    [2] inverted resistivity models
+    [3] bedrock elevation points
 raster:
-[0] gridded magnetic and bedrock maps
+    [0] gridded magnetic and bedrock maps
 </pre></div>
 </div>
 <p>Reading back in</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">spatial_ref</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;LM_gate_times&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;LM_gate_times&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;crs_wkt&#39;: &#39;PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]&#39;, &#39;semi_major_axis&#39;: 6378137.0, &#39;semi_minor_axis&#39;: 6356752.314140356, &#39;inverse_flattening&#39;: 298.257222101, &#39;reference_ellipsoid_name&#39;: &#39;GRS 1980&#39;, &#39;longitude_of_prime_meridian&#39;: 0.0, &#39;prime_meridian_name&#39;: &#39;Greenwich&#39;, &#39;geographic_crs_name&#39;: &#39;NAD83(HARN)&#39;, &#39;horizontal_datum_name&#39;: &#39;NAD83 (High Accuracy Reference Network)&#39;, &#39;projected_crs_name&#39;: &#39;NAD83(HARN) / Wisconsin Transverse Mercator&#39;, &#39;grid_mapping_name&#39;: &#39;transverse_mercator&#39;, &#39;latitude_of_projection_origin&#39;: 0.0, &#39;longitude_of_central_meridian&#39;: -90.0, &#39;false_easting&#39;: 520000.0, &#39;false_northing&#39;: -4480000.0, &#39;scale_factor_at_central_meridian&#39;: 0.9996, &#39;authority&#39;: &#39;EPSG&#39;, &#39;wkid&#39;: &#39;3071&#39;}
+&lt;xarray.DataArray &#39;LM_gate_times&#39; (LM_gate_times: 28)&gt;
+array([-1.135000e-06,  3.650000e-07,  2.365000e-06,  4.365000e-06,
+        6.365000e-06,  8.365000e-06,  1.036500e-05,  1.286500e-05,
+        1.636500e-05,  2.086500e-05,  2.636500e-05,  3.336500e-05,
+        4.236500e-05,  5.386500e-05,  6.836500e-05,  8.636500e-05,
+        1.088650e-04,  1.368650e-04,  1.723650e-04,  2.178650e-04,
+        2.748650e-04,  3.468650e-04,  4.378650e-04,  5.518650e-04,
+        6.958650e-04,  8.773650e-04,  1.105865e-03,  1.394365e-03])
+Coordinates:
+    spatial_ref    float64 ...
+  * LM_gate_times  (LM_gate_times) float64 -1.135e-06 3.65e-07 ... 0.001394
+Attributes:
+    standard_name:  LM_gate_times
+    null_value:     not_defined
+    bounds:         LM_gate_times_bnds
+    units:          seconds
+    grid_mapping:   spatial_ref
+    valid_range:    [-1.135000e-06  1.394365e-03]
+    long_name:      low moment gate times
+-1.135e-06
 </pre></div>
 </div>
 <p>Plotting</p>
@@ -210,7 +241,7 @@ raster:
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.894 seconds)</p>
+<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.555 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f3e493e44e38f967de3a7f8f6377576b/plot_csv_skytem_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_skytem_to_netcdf.py</span></code></a></p>
