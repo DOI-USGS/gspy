@@ -39,7 +39,6 @@ setup(name='gspy',
         'sphinx',
         'fortranformat',
         'rioxarray',
-        'pyproj',
-        'aseg-gdf2'
+        'pyproj'
     ],
 )
