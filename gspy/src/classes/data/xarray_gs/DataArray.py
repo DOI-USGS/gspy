@@ -3,19 +3,39 @@ from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, r_
 from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray as xr_DataArray
-import xarray as xr
+from xarray import register_dataarray_accessor
 
-@xr.register_dataarray_accessor("gs_dataarray")
+default_metadata = ('long_name', 'standard_name', 'units', 'null_value')
+
+@register_dataarray_accessor("gs_dataarray")
 class DataArray:
+    """Accessor for xarray.DataArray.
+
+    See Also
+    --------
+    DataArray.from_values : for instantiation
+
+    """
 
     @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
-        """For an existing coordinate, compute its bounds and attach.
+        """For an existing DataArray, compute its bounds and attach them.
+
+        Automatically modifies any attached metadata keys.
 
         Parameters
         ----------
+        coordinate : xarray.DataArray
+            Existing DataArray inside an xarray.Dataset
+        name : str
+            Used purely for error messages.
         bounds : array_like, optional
-            if not present, bounds are computed. Otherwise assign them.
+            * Has shape (size of dimension, 2) defining the bounds of each "cell" in the coordinate
+            * if not present, bounds are computed. Otherwise assign them.
+
+        Returns
+        -------
+        xarray.DataArray
 
         """
         # Return if the coordinate already has bounds
@@ -39,8 +59,8 @@ class DataArray:
         attrs['long_name'] = coordinate.attrs['long_name'] + ' cell boundaries'
         attrs['valid_range'] = cls.valid_range(bounds, name, **kwargs)
 
-        dims = kwargs.pop('dims')
-        coords = kwargs.pop('coords')
+        dims = kwargs.pop('dims', None)
+        coords = kwargs.pop('coords', None)
 
         self = xr_DataArray(bounds,
                    dims=dims,
@@ -49,8 +69,69 @@ class DataArray:
 
         return self
 
+    @staticmethod
+    def check_metadata(name, **kwargs):
+        """Check the metadata provided and ensure GS standard compliance, i.e. at least long_name, standard_name, and units.
+
+        Parameters
+        ----------
+        name : str
+            Name of the variable
+        long_name : str, optional
+            CF convention long name
+        null_value : int or float, optional
+            Number that represents unusable data. default is 'not_defined'
+        standard_name : str, optional
+            CF convention standard name
+        units : str, optional
+            units of the coordinate
+
+        Raises
+        ------
+        Exception
+            If required metadata is missing.
+
+        """
+        assert all([x in kwargs.keys() for x in default_metadata]), ValueError("Variable {} must have metadata entries {}".format(default_metadata))
+
     @classmethod
     def from_values(cls, name, values, **kwargs):
+        """Generates an xarray.DataArray using an array of values
+
+        Wraps around the xarray.DataArray instantiator and checks for Nans and adds CF convention metadata entries like valid_range, grid_mapping.
+
+        Parameters
+        ----------
+        name : str
+            Name of the DataArray.
+        values : array_like
+            Values to assign to the DataArray.
+
+        Other Parameters
+        ----------------
+        coords : dict, optional
+            Dictionary of DataArrays along each dimension of this variable
+        dtype : dtype, optional
+            Coerce values into this dtype.
+        dimensions : list of str
+            names of this variables dimesions
+        grid_mapping : str, optional
+            Name of the grid_mapping. Default is 'spatial_ref' and refers to any attached spatial_ref class, handled by gspy
+        long_name : str, optional
+            CF convention long name
+        null_value : int or float, optional
+            Number that represents unusable data. default is 'not_defined'
+        standard_name : str, optional
+            CF convention standard name
+        units : str, optional
+            units of the coordinate
+
+        Returns
+        -------
+        xarray.DataArray
+
+        """
+        cls.check_metadata(name, **kwargs)
         values = cls.catch_nan(values, name=name, **kwargs)
 
         if not isinstance(values[0], str):
@@ -70,6 +151,29 @@ class DataArray:
 
     @staticmethod
     def catch_nan(values, name, **kwargs):
+        """Replace NaNs with the defined null_value in the metadata.
+
+        Parameters
+        ----------
+        values : array_like
+            Values to check
+        name : str
+            Name of the variable being checked
+
+        Other Parameters
+        ----------------
+        null_value : str, optional
+            Number that represents unusable data. default is 'not_defined'
+
+        Returns
+        -------
+        array_like
+
+        Raises
+        ------
+        If there are NaNs in the values, and no defined null_value in the kwargs, notify the user.
+
+        """
 
         if isinstance(values[0], str):
             return values
@@ -85,6 +189,27 @@ class DataArray:
 
     @staticmethod
     def valid_range(values, name, **kwargs):
+        """Generate a valid range for some values
+
+        Parameters
+        ----------
+        values : array_like
+            numerical array
+        name : str
+            name of the variable
+
+        Other Parameters
+        ----------------
+        null_value : scalar, optional
+            Representation of unusable data values
+        dtype : dtype, optional
+            Coerce the min, max to this dtype default is values.dtype.
+
+        Returns
+        -------
+        array_like
+            [nanmin(values), nanmax(values)]
+        """
 
         # kwargs.pop('coords')
         nv = kwargs.get('null_value', 'not_defined')
@@ -92,16 +217,9 @@ class DataArray:
         if nv == 'not_defined':
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
-            assert not isinstance(nv, str), ValueError("Numerical null_value defined as a string in json file for variable {}.  Please make it a number".format(kwargs['standard_name']))
+            assert not isinstance(nv, str), ValueError(("Numerical null_value defined as a string in json file for variable {}."
+                                                        "Please make it a number".format(kwargs['standard_name'])))
             tmp = values[values != nv]
-            valid_range = asarray([min(tmp), max(tmp)], dtype=kwargs.get('dtype', None))
-
-        # from scipy.stats import trimboth
-        # b = trimboth(values, 0.05, axis=None)
-        # m = mean(b)
-        # s = std(b)
-        # low, high = m - 20*s, m + 100*s
-
-        # assert valid_range[0] >= low, ValueError('variable {} has no defined null value, but detected limits {} with possible null values'.format(name, valid_range))
+            valid_range = asarray([nanmin(tmp), nanmax(tmp)], dtype=kwargs.get('dtype', None))
 
         return valid_range

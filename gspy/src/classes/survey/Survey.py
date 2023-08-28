@@ -13,9 +13,8 @@ from ...utilities import flatten
 
 import xarray as xr
 
-# @xr.register_dataset_accessor('survey')
 class Survey(object):
-    """Class defining a survey or dataset collection
+    """Class defining a survey or dataset
 
     The Survey group contains general metadata about the survey or data colleciton as a whole.
     Information about where the data was collected, acquisition start and end dates, who collected the data,
@@ -31,49 +30,39 @@ class Survey(object):
     * references
 
     A “spatial_ref” variable is also required within Survey and should contain all relevant information about the
-    coordinate reference system. This is used to instantiate a gspy.Spatial_ref class.
+    coordinate reference system.
 
-    Survey(metadata_file)
+    Once instantiated, tabular and raster classes can be added to the survey. Each tabular or raster dataset is a separate xarray.Dataset.
+
+    ``Survey(metadata)``
 
     Parameters
     ----------
-    metadata_file : str
-        Json file containing survey metadata.
+    metadata : str or dict
+        * If str, a json metadata file
+        * If dict, dictionary of survey metadata.
 
     Returns
     -------
-    out : gspy.Survey
-        Survey class.
+    gspy.Survey
 
     See Also
     --------
-    gspy.Spatial_ref : For co-ordinate information requirements.
+    .Spatial_ref : For information on creating a spatial ref
 
     """
 
-    def __init__(self, metadata_file=None, netcdf_file=None):
-
+    def __init__(self, metadata=None):
         self._tabular = []
         self._raster = []
 
-        if metadata_file is not None:
-            # read survey metadata file
-            self.read_metadata(metadata_file)
+        if metadata is not None:
+            if isinstance(metadata, str):
+                # read survey metadata file
+                metadata = self.read_metadata(metadata)
 
             # make xarray
-            self._make_survey_xarray()
-
-        #elif netcdf_file is not None:
-        #    # read netcdf file (assumes GS format)
-        #    self.read_netcdf(netcdf_file)
-
-    # @property
-    # def xarray(self):
-    #     return self._xarray
-
-    # @xarray.setter
-    # def xarray(self, value):
-    #     self._xarray = value
+            self.xarray = metadata
 
     @property
     def tabular(self):
@@ -96,16 +85,58 @@ class Survey(object):
         self.xarray.spatial_ref = kwargs
 
     @property
-    def json_metadata(self):
-        return self._json_metadata
+    def xarray(self):
+        return self._xarray
 
-    @json_metadata.setter
-    def json_metadata(self, value):
-        assert isinstance(value, dict), TypeError('json_metadata must have type dict')
-        self._json_metadata = value
+    @xarray.setter
+    def xarray(self, kwargs):
+        """Attach an xarray.Dataset containing GS metadata or create one from a dict
+
+        Parameters
+        ----------
+        kwargs : xarray.Dataset or dict
+            * If xarray.Dataset checks for required metadata and spatial_ref
+            * If dict, checks for required metadata and a spatial_ref definition
+
+        See Also
+        --------
+        ...Survey.Spatial_ref : for more details of creating a Spatial_ref
+
+        """
+
+        required = ("title", "institution", "source", "history", "references")
+        if isinstance(kwargs, xr.Dataset):
+            assert all([x in kwargs.attrs for x in required]), ValueError("Dataset.attrs must contain at least {}".format(required))
+            self._xarray = kwargs
+        else:
+
+            assert isinstance(kwargs, dict), TypeError('json_metadata must have type dict')
+            assert "dataset_attrs" in kwargs, ValueError("Survey metadata must contain entry 'dataset_attrs")
+            assert "spatial_ref" in kwargs, ValueError("Survey metadata must contain entry 'spatial_ref")
+            assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError("dataset_attrs must contain at least {}".format(required))
+
+            ds = Dataset(xr.Dataset(attrs = {}))
+
+            ds.update_attrs(**kwargs["dataset_attrs"])
+
+            for key in kwargs:
+                if key not in ('spatial_ref', 'dataset_attrs'):
+                    tmpdict2 = {k: v for k, v in kwargs[key].items() if v}
+                    tmpdict2 = flatten(tmpdict2, '', {})
+
+                    for k,v in tmpdict2.items():
+                        if isinstance(v,list):
+
+                            if isinstance(v[0],list):
+                                tmpdict2[k] = str(v)
+                    ds._obj[key] = xr.DataArray(attrs=tmpdict2)
+
+            ds = ds.set_spatial_ref(kwargs['spatial_ref'])
+
+            self._xarray = ds._obj
 
     def add_raster(self, *args, **kwargs):
-        """Add Raster data to the survey
+        """Add Raster data to the survey.
 
         See Also
         --------
@@ -117,6 +148,13 @@ class Survey(object):
     def add_tabular(self, type, data_filename, metadata_file=None, **kwargs):
         """Add Tabular data to the survey
 
+        Parameters
+        ----------
+        data_filename : str
+            File to read data from
+        metadata_file : str, optional
+            Metadata file for the tabular data
+
         See Also
         --------
         gspy.Tabular : For instantiation/reading requirements
@@ -124,7 +162,6 @@ class Survey(object):
         """
         from ..data import tabular_aseg
         from ..data import tabular_csv
-        # from . import tabular_netcdf
 
         if type == 'aseg':
             out = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
@@ -133,21 +170,25 @@ class Survey(object):
             out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
 
         elif type == 'netcdf':
-            out = Tabular.read_netcdf(data_filename, spatial_ref=self.spatial_ref, **kwargs)
+            out = Tabular.read_netcdf(data_filename, **kwargs)
 
         self._tabular.append(out)
 
     def read_metadata(self, filename=None):
-        """Read metadata for the survey
+        """Read json metadata for the survey
 
         Parameters
         ----------
         filename : str
             Json file.
 
-        Raises
-        ------
-        Exception : When metadata file is not provided.
+        Returns
+        -------
+        dict
+
+        See Also
+        --------
+        Survey.write_metadata_template : For more metadata data information
 
         """
 
@@ -159,38 +200,10 @@ class Survey(object):
         with open(filename) as f:
             s = f.read()
 
-        self.json_metadata = json.loads(s)
+        return json.loads(s)
 
-
-    def _make_survey_xarray(self):
-        """ Create Survey xarray
-
-        Generate an xarray DataSet, attach Survey metadata as variables,
-        and assign global attributes for the survey
-        """
-        obj = xr.Dataset(attrs = {})
-        self.xarray = Dataset(obj)
-
-        dic = self.json_metadata
-        self.xarray.update_attrs(**dic["dataset_attrs"])
-
-        for key in dic:
-            if key not in ('spatial_ref', 'dataset_attrs'):
-                tmpdict2 = {k: v for k, v in dic[key].items() if v}
-                tmpdict2 = flatten(tmpdict2, '', {})
-
-                for k,v in tmpdict2.items():
-                    if isinstance(v,list):
-
-                        if isinstance(v[0],list):
-                            tmpdict2[k] = str(v)
-                self.xarray._obj[key] = xr.DataArray(attrs=tmpdict2)
-
-        self.xarray = self.xarray.set_spatial_ref(self.json_metadata['spatial_ref'])
-
-        self.xarray = self.xarray._obj
-
-    def write_metadata_template(self):
+    @staticmethod
+    def write_metadata_template():
         """Creates a metadata template for a Survey
 
         If a Survey metadata file is not found or passed, an empty template file is generated and
@@ -204,69 +217,66 @@ class Survey(object):
 
         print("\nGenerating an empty metadata file for the survey.\n")
 
-        out = {}
-        out["dataset_attrs"] = {
-            "title": "",
-            "institution": "",
-            "source":  "",
-            "history": "",
-            "references": "",
-            "comment": "",
-            "conventions": "CF-1.8"
-            }
-        out["survey_information"] =   {
-            "contractor_project_number" : "",
-            "contractor" : "",
-            "client" : "",
-            "survey_type" : "",
-            "survey_area_name" : "",
-            "state" : "",
-            "country" : "",
-            "acquisition_start" : "yyyymmdd",
-            "acquisition_end" : "yyyymmdd",
-            "dataset_created" : "yyyymmdd"
-            }
-
-        out["spatial_ref"] = {
-            "datum" : "",
-            "projection" : "",
-            "utm_zone" : "",
-            "epsg": ""
-            }
-
-        out["flightline_information"] = {
-            "traverse_line_spacing" : "",
-            "traverse_line_direction" : "",
-            "tie_line_spacing" : "",
-            "tie_line_direction" : "",
-            "nominal_line_spacing" : "",
-            "nominal_terrain_clearance" : "",
-            "final_line_kilometers" : "",
-            "traverse_line_numbers" : "",
-            "tie_line_numbers": ""
-            }
-
-        out["survey_equipment"] = {
-            "aircraft" : "",
-            "magnetometer" : "",
-            "spectrometer_system" : "",
-            "radar_altimeter_system" : "",
-            "radar_altimeter_sample_rat" : "",
-            "laser_altimeter_system" : "",
-            "navigation_system" : "",
-            "acquisition_system" : ""
-            }
-
-        out["system_information"] = {
-            "instrument_type" : ""
-            }
+        out = {
+            "dataset_attrs" : {
+                "title": "",
+                "institution": "",
+                "source":  "",
+                "history": "",
+                "references": "",
+                "comment": "",
+                "conventions": "CF-1.8"
+                },
+            "survey_information" : {
+                "contractor_project_number" : "",
+                "contractor" : "",
+                "client" : "",
+                "survey_type" : "",
+                "survey_area_name" : "",
+                "state" : "",
+                "country" : "",
+                "acquisition_start" : "yyyymmdd",
+                "acquisition_end" : "yyyymmdd",
+                "dataset_created" : "yyyymmdd"
+                },
+            "spatial_ref" : {
+                "datum" : "",
+                "projection" : "",
+                "utm_zone" : "",
+                "epsg": ""
+                },
+            "flightline_information" : {
+                "traverse_line_spacing" : "",
+                "traverse_line_direction" : "",
+                "tie_line_spacing" : "",
+                "tie_line_direction" : "",
+                "nominal_line_spacing" : "",
+                "nominal_terrain_clearance" : "",
+                "final_line_kilometers" : "",
+                "traverse_line_numbers" : "",
+                "tie_line_numbers": ""
+                },
+            "survey_equipment" : {
+                "aircraft" : "",
+                "magnetometer" : "",
+                "spectrometer_system" : "",
+                "radar_altimeter_system" : "",
+                "radar_altimeter_sample_rat" : "",
+                "laser_altimeter_system" : "",
+                "navigation_system" : "",
+                "acquisition_system" : ""
+                },
+            "system_information" : {
+                "instrument_type" : ""
+                }
+        }
 
         with open("survey_md.json", "w") as f:
             json.dump(out, f, indent=4)
 
     @classmethod
     def read_netcdf(cls, filename, **kwargs):
-        """Read a survey from a netcdf file
+        """Read a survey from a netcdf file with lazy loading
 
         Parameters
         ----------
@@ -314,7 +324,7 @@ class Survey(object):
 
 
     def write_netcdf(self, filename):
-        """Write a survey to a netcdf file
+        """Write a survey to a netcdf file as well as any attached datasets.
 
         Parameters
         ----------
@@ -335,14 +345,15 @@ class Survey(object):
             Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
 
     def write_ncml(self, filename):
-        """ Write a NcML (NetCDF XML) metadata file
+        """ Write an NcML (NetCDF XML) metadata file
 
-        Exports a NcML
+        TODO: Re-write this.
 
         Parameters
         ----------
         filename : str
             Name of the NetCDF file to generate NcML for
+
         """
 
         infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
@@ -410,31 +421,32 @@ class Survey(object):
                 f.write('  </group>\n\n')
             f.close()
 
-
         f = open(infile, 'a')
         f.write('</group>\n\n')
         f.write('</netcdf>')
         f.close()
 
-    
+    @property
     def contents(self):
         """print out the contents of the survey"""
 
+        out = ""
         # tabular
         if len(self.tabular) > 0:
-            print('\ntabular:')
+            out += 'tabular:\n'
             if isinstance(self.tabular, list):
-                for t,tab in enumerate(self.tabular):
-                    print('[%i] %s' % (t, tab.attrs['content']))
+                for t, tab in enumerate(self.tabular):
+                    out += '    [%i] %s\n' % (t, tab.attrs['content'])
             else:
-                print('[0] %s' % (self.tabular.attrs['content']))
+                out += '    [0] %s\n' % (self.tabular.attrs['content'])
 
         # raster
         if len(self.raster) > 0:
-            print('\nraster:')
+            out += 'raster:\n'
             if isinstance(self.raster, list):
-                for r,rast in enumerate(self.raster):
-                    print('[%i] %s' % (r, rast.attrs['content']))
+                for r, rast in enumerate(self.raster):
+                    out += '    [%i] %s\n' % (r, rast.attrs['content'])
             else:
-                print('[0] %s' % (self.raster.attrs['content']))
-        print('')
+                out += '    [0] %s\n' % (self.raster.attrs['content'])
+
+        return out

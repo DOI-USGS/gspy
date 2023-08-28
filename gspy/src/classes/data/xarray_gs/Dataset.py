@@ -4,23 +4,40 @@ import matplotlib.pyplot as plt
 
 from pprint import pprint
 from numpy import all, arange, asarray, diff, median, r_, zeros
-from xarray import DataArray, open_dataset
+from xarray import DataArray as xr_DataArray
+from xarray import open_dataset
 from .DataArray import DataArray
 from .Coordinate import Coordinate
 
 from ....utilities import flatten, unflatten
 from ...survey.Spatial_ref import Spatial_ref
 
-import xarray as xr
+from xarray import register_dataset_accessor
 
-@xr.register_dataset_accessor('gs_dataset')
+@register_dataset_accessor('gs_dataset')
 class Dataset:
+    """Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.
+
+    Checks necessary metadata to satisfy the CF convention, and allows use with GIS software.
+
+    Returns
+    -------
+    out : xarray.Dataset
+
+    """
+
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
-        # self._spatial_ref = None
 
     @property
     def is_projected(self):
+        """Does the dataset have a projected spatial reference
+
+        Returns
+        -------
+        out : bool
+
+        """
         return self._obj['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
 
     @property
@@ -38,58 +55,86 @@ class Dataset:
 
     @classmethod
     def open_dataset(cls, *args, **kwargs):
-        """Loads a netcdf dataset using Xarray, but recasts it as our Dataset_gs class
+        """Open (lazy loading) a netcdf.
+
+        Wraps around the xarray open_dataset but forces xarray to honour gate times and the CF convention.
+
+        Returns
+        -------
+        xarray.Dataset
+            Native xrray Dataset
         """
+        kwargs['decode_times'] = kwargs.get('decode_times', False)
+        kwargs['decode_cf'] = kwargs.get('decode_cf', True)
         return open_dataset(*args, **kwargs)
 
-        # We need to copy the contents into a new class instiation of OUR type, since xr.load_dataset returns the parent of ourself.
-        # return cls(
-        #            #data_vars=tmp.data_vars,
-        #            coords=tmp.coords,
-        #            attrs=tmp.attrs)
+    def add_bounds_to_coordinate(self, name, **kwargs):
+        """Adds bounds to a coordinate.
 
-    # This may not be needed
-    # def _add_general_metadata(self, kwargs):
-    #     kwargs = flatten(kwargs, '', {})
-    #     self.attrs.update(kwargs)
+        Important
+        ---------
+        Make sure you call this method into a return variable
 
-    def add_coordinate_from_dict(self, name, discrete=False, is_dimension=False, **kwargs):
-        """Attach a coordinate/dimension to a Dataset from a dictionary.
+                ``ds = ds.add_coordinate_from_dict``
 
-        If 'bounds' are not defined inside the dict, the coordinate is discrete.
-        Otherwise, bounds are attached also in order to satisfy ???
+        Otherwise, the bounds will not be added correctly.
 
         Parameters
         ----------
         name : str
-            The name of the coordinate to attach
+            Name of the variable to add bounds to.
 
-        Other Parameters
-        ----------------
-        standard_name : str
-            CF convention standard name
-        long_name : str
-            CF convention long name
-        units : str
-            units of the coordinate
-        null_value : int or float
-            what are null values represented by
-        centers : array_like
-            Has shape (size of dimension, ) defining the center values of each "cell"
-        bounds : array_like, optional
-            Has shape (size of dimension, 2) defining the bounds of each "cell" in the coordinate
-
-        Example
+        Returns
         -------
-        depth_dict = {
-                    "standard_name": "depth",
-                    "long_name": "Depth below earth's surface DTM",
-                    "units": "m",
-                    "null_value": "not_defined",
-                    # "bounds" : [[0, 5],
-                    #             [5, 10]],
-                    # "centers" : [2.5, 7.5, 20.0]}
-        Dataset_gs.coordinate_from_dict('depth', **depth_dict)
+        Dataset
+            Dataset with added bounds.
+
+        """
+
+        # The bounds are 2xN and need their own "nv" dimension
+        self._obj = self._add_nv()
+
+        # Now add the bound
+        self._obj[name + '_bnds'] = DataArray.add_bounds_to_coordinate_dimension(self._obj[name],
+                                                                               name,
+                                                                               dims = (*[dim for dim in self._obj[name].dims], 'nv'),
+                                                                               coords=(*[self._obj[dim] for dim in self._obj[name].dims], self._obj['nv']),
+                                                                               **kwargs)
+        self._obj[name].attrs['bounds'] = name + '_bnds'
+
+        return self
+
+    def add_coordinate_from_dict(self, name, discrete=False, is_dimension=False, **kwargs):
+        """Attach a coordinate/dimension to a Dataset from a dictionary.
+
+        The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
+        coordinate is not discrete.
+
+        Important
+        ---------
+        Make sure you call this method into a return variable
+
+                ``ds = ds.add_coordinate_from_dict``
+
+        Otherwise, the coordinate will not be added correctly.
+
+        Parameters
+        ----------
+        name : str
+            Name of the coordinate
+        discrete : bool, optional
+            Is this coordinate discrete? by default False
+        is_dimension : bool, optional
+            Is this a coordinate-dimension? by default False
+
+        Returns
+        -------
+        Dataset
+            Dataset with added coordinate.
+
+        See Also
+        --------
+        .Coordinate.Coordinate.from_dict : for pertinent Coordinate keywords and metadata
 
         """
 
@@ -106,15 +151,39 @@ class Dataset:
         return self
 
     def add_coordinate_from_values(self, name, values, discrete=False, is_dimension=False, **kwargs):
+        """Attach a coordinate/dimension to a Dataset using an array of values defining center values.
 
-        """IF its a dimension coordinate.  No need to specify dimensions, or coords.
-           If its a non-dimensions coordinate. Need to specify dims.
+        The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
+        coordinate is not discrete.
+
+        Important
+        ---------
+        Make sure you call this method into a return variable
+
+                ``ds = ds.add_coordinate_from_dict``
+
+        Otherwise, the coordinate will not be added correctly.
+
+        Parameters
+        ----------
+        name : str
+            Name of the coordinate
+        discrete : bool, optional
+            Is this coordinate discrete? by default False
+        is_dimension : bool, optional
+            Is this a coordinate-dimension? by default False
 
         Returns
         -------
-        _type_
-            _description_
+        Dataset
+            Dataset with added coordinate.
+
+        See Also
+        --------
+        .Coordinate.Coordinate.from_values : for pertinent Coordinate keywords and metadata
+
         """
+
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
         if (not is_dimension) and ('dimensions' in kwargs):
@@ -130,6 +199,36 @@ class Dataset:
         return self
 
     def add_variable_from_values(self, name, values, **kwargs):
+        """Add a variable to the Dataset
+
+        Automatically maintains coords on the variable given its dims.
+
+        Important
+        ---------
+        Make sure you call this method into a return variable
+
+                ``ds = ds.add_coordinate_from_dict``
+
+        Otherwise, the variable will not be added correctly.
+
+        Parameters
+        ----------
+        name : str
+            Name of the variable
+        values : array_like
+            Values of the variable
+
+        Returns
+        -------
+        Dataset
+            Dataset with variable added.
+
+        Raises
+        ------
+        ValueError
+            If the shape of the values does not match the specified dimensions.
+
+        """
         tmp = tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])
         assert all(values.shape == tmp), ValueError("Shape {} of variable {} does not match specified dimensions {} with shape {}".format(values.shape, name, kwargs['dimensions'], tmp))
 
@@ -138,22 +237,14 @@ class Dataset:
 
         return self
 
-    def add_bounds_to_coordinate(self, name, **kwargs):
-
-        # The bounds are 2xN and need their own "nv" dimension
-        self._obj = self._add_nv()
-
-        # Now add the bound
-        self._obj[name + '_bnds'] = DataArray.add_bounds_to_coordinate_dimension(self._obj[name],
-                                                                               name,
-                                                                               dims = (*[dim for dim in self._obj[name].dims], 'nv'),
-                                                                               coords=(*[self._obj[dim] for dim in self._obj[name].dims], self._obj['nv']),
-                                                                               **kwargs)
-        self._obj[name].attrs['bounds'] = name + '_bnds'
-
-        return self
-
     def _add_nv(self):
+        """Adds a required dimension to the Dataset when bounds need to be specified.
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
         if not 'nv' in self._obj:
             self = self.add_coordinate_from_values('nv',
                                                    r_[0, 1],
@@ -167,11 +258,7 @@ class Dataset:
         return self._obj
 
     def read_metadata(self, filename):
-        """Read metadata file
-
-        Loads the metadata file and adds key_mapping values to property. If required dictionaries
-        'raster_files' and/or 'variable_metadata' are missing, then a metadata template file is written
-        and an error is triggered.
+        """Read json metadata file
 
         Parameters
         ----------
@@ -189,13 +276,11 @@ class Dataset:
 
         if filename is None:
             self.write_metadata_template()
-            raise Exception("Please re-run and specify metadata when instantiating Raster")
+            raise Exception("Please re-run and specify metadata when instantiating {}".format(self.__class__.__name__))
 
         # reading the data from the file
         with open(filename) as f:
-            s = f.read()
-
-        dic = json.loads(s)
+            dic = json.loads(f.read())
 
         def check_key_whitespace(this, flag=False):
             if not isinstance(this, dict):
@@ -203,6 +288,7 @@ class Dataset:
             for key, item in this.items():
                 if ' ' in key:
                     print('key "{}" contains whitespace. Please remove!'.format(key))
+                    key = key.strip()
                     flag = True
                 flag = check_key_whitespace(item, flag)
             return flag
@@ -217,22 +303,22 @@ class Dataset:
         return dic
 
     @classmethod
-    def read_netcdf(cls, filename, group, spatial_ref=None, **kwargs):
-        """Read Data from a netcdf file
+    def read_netcdf(cls, filename, group, **kwargs):
+        """Read Data from a netcdf file using xrray's lazy open_dataset
 
         Parameters
         ----------
         filename : str
             Path to the netcdf file
         group : str
-            Netcdf group name containing data.
+            Netcdf group name containing Dataset
 
         Returns
         -------
-        out : gspy.Data
+        Dataset
 
         """
-        return open_dataset(filename, group=group.lower())
+        return Dataset.open_dataset(filename, group=group.lower(), **kwargs)
 
     def scatter(self, variable, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
@@ -252,16 +338,45 @@ class Dataset:
         """
         ax = kwargs.pop('ax', plt.gca())
         splot = plt.scatter(self._obj['x'].values, self._obj['y'].values, c=self._obj[variable].values, **kwargs)
-        plt.ylabel('y\n{} [{}]'.format(self._obj['y'].attrs['long_name'], self._obj['y'].attrs['units']))
-        plt.xlabel('x\n{} [{}]'.format(self._obj['x'].attrs['long_name'], self._obj['x'].attrs['units']))
+        plt.ylabel(r'y\n{} [{}]'.format(self._obj['y'].attrs['long_name'], self._obj['y'].attrs['units']))
+        plt.xlabel(r'x\n{} [{}]'.format(self._obj['x'].attrs['long_name'], self._obj['x'].attrs['units']))
         cb=plt.colorbar()
-        cb.set_label('{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
+        cb.set_label(r'{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
         plt.tight_layout()
+
         return ax, splot
 
     def set_spatial_ref(self, kwargs):
+        """Set the spatial ref of the Dataset.
+
+        Specifically adds an xarray coordinate called 'spatial_ref' which is required for GIS software and the CF convention.
+
+        Important
+        ---------
+        Make sure you call this method into a return variable
+
+                ``ds = ds.add_coordinate_from_dict``
+
+        Otherwise, the spatial_ref will not be added correctly.
+
+        Parameters
+        ----------
+        kwargs : dict, gspy.Spatial_ref, or xarray.DataArray
+            * If dict: creates a Spatial_ref from a dict of metadata.
+            * If an existing spatial ref, assign by reference
+
+        Returns
+        -------
+        Dataset
+            Dataset with spatial_ref added.
+
+        See Also
+        --------
+        ...Survey.Spatial_ref : for more details of creating a Spatial_ref
+
+        """
         if not ('spatial_ref' in self._obj):
-            assert isinstance(kwargs, (dict, Spatial_ref, xr.DataArray)), TypeError("spatial_ref must have type (dict, gspy.Spatial_ref)")
+            assert isinstance(kwargs, (dict, Spatial_ref, xr_DataArray)), TypeError("spatial_ref must have type (dict, gspy.Spatial_ref)")
             if isinstance(kwargs, dict):
                 crs = Spatial_ref.from_dict(kwargs)
             else:
@@ -273,10 +388,12 @@ class Dataset:
         return self
 
     def update_attrs(self, **kwargs):
+        """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
+        """
         kwargs = flatten(kwargs, '', {})
         self._obj.attrs.update(kwargs)
 
-    def write_netcdf(self, filename, group):
+    def write_netcdf(self, filename, group, **kwargs):
         """Write to netcdf file
 
         Parameters
@@ -294,11 +411,11 @@ class Dataset:
                     self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
                 if 'grid_mapping' in self._obj[var].attrs:
                     del self._obj[var].attrs['grid_mapping']
-                #self.xarray[var].attrs['grid_mapping'] = self.xarray.spatial_ref.attrs['grid_mapping_name']
-        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4')
+
+        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4', **kwargs)
 
     def write_ncml(self, filename, group, index):
-        """Write and NCML file
+        """Write an NCML file
 
         Parameters
         ----------

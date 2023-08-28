@@ -1,15 +1,11 @@
-from os.path import isfile, join
 import re
 import numpy as np
 from pandas import read_csv
-from pprint import pprint
 
 
 class aseg_gdf2_gs(object):
-
-    # def __init__(self):
-    #     self._values = 2D array
-    #     self._md = field definitions
+    """Handler for aseg gdf2 files
+    """
 
     @property
     def columns(self):
@@ -65,7 +61,20 @@ class aseg_gdf2_gs(object):
 
     @classmethod
     def read(cls, data_file_name):
+        """Read the contents of an ASEG-GDF2 file.
 
+        First, we parse the definition file then use that with Pandas.
+
+        Parameters
+        ----------
+        data_file_name : str
+            Data file.
+
+        Returns
+        -------
+        gspy.aseg_gdf_handler
+
+        """
         self = cls()
 
         self._data_file_name = data_file_name
@@ -80,9 +89,18 @@ class aseg_gdf2_gs(object):
         return self
 
     def parse_dfn_file(self, dfn_file_name):
+        """Parses the ASEG GDF2 definition file but includes fixes.
 
-        assert isfile(dfn_file_name), Exception("Cannot find file {}".format(dfn_file_name))
+        Parameters
+        ----------
+        dfn_file_name : str
+            ASEG GDF2 definition file
 
+        Returns
+        -------
+        dict
+
+        """
         lines = open(dfn_file_name, 'r').readlines()
 
         dfn_md = {}
