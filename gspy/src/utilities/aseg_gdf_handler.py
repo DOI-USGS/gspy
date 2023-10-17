@@ -106,10 +106,14 @@ class aseg_gdf2_gs(object):
         dfn_md = {}
         for line in lines[1:]:
             if "END DEFN" in line:
-                break
+                line = line.replace(";END DEFN", "")
 
             info = line.split(";")[-1]
             tmp = info.split(":")
+
+            if len(tmp) == 1:
+                break
+
             standard_name, format = tmp[:2]
 
             if ' ' in standard_name:
