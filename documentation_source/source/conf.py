@@ -373,5 +373,6 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
     # 'first_notebook_cell': ("%matplotlib inline\n"),
     'abort_on_example_error': True,
-    'remove_config_comments': True
+    'remove_config_comments': True,
+    'nested_sections': False
 }
