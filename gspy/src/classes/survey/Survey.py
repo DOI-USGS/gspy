@@ -400,7 +400,7 @@ class Survey(object):
                 f.write('  <group name="/tabular">\n\n')
             f.write('    <group name="/{}">\n\n'.format(i))
             f.close()
-            m.write_ncml(filename, group="tabular", index=i)
+            m.gs_dataset.write_ncml(filename, group="tabular", index=i)
             f = open(infile, 'a')
             f.write('    </group>\n\n')
             if i == len(self._tabular)-1:
@@ -414,7 +414,7 @@ class Survey(object):
                 f.write('  <group name="/raster">\n\n')
             f.write('    <group name="/{}">\n\n'.format(i))
             f.close()
-            m.write_ncml(filename, group="raster", index=i)
+            m.gs_dataset.write_ncml(filename, group="raster", index=i)
             f = open(infile, 'a')
             f.write('    </group>\n\n')
             if i == len(self._raster)-1:
