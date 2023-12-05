@@ -344,6 +344,27 @@ class Survey(object):
         for i, m in enumerate(self._raster):
             Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
 
+    def write_zarr(self, filename):
+        """Write a survey to a netcdf file as well as any attached datasets.
+
+        Parameters
+        ----------
+        filename : str
+            Netcdf file name
+
+        """
+
+        # Survey
+        self.xarray.to_zarr(filename, mode='w', group='survey')
+
+        # Tabular
+        for i, m in enumerate(self._tabular):
+            Tabular(m).write_zarr(filename, group="survey/tabular/{}".format(i))
+
+        # Raster
+        for i, m in enumerate(self._raster):
+            Raster(m).write_zarr(filename, group='survey/raster/{}'.format(i))
+
     def write_ncml(self, filename):
         """ Write an NcML (NetCDF XML) metadata file
 

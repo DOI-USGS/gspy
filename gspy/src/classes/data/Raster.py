@@ -313,6 +313,19 @@ class Raster(Dataset):
         """
         super().write_netcdf(filename, group)
 
+    def write_zarr(self, filename, group='raster'):
+        """Write to netcdf file
+
+        Parameters
+        ----------
+        filename : str
+            Path to the file
+        group : str
+            Name of group within netcdf file
+
+        """
+        super().write_zarr(filename, group)
+
     def write_metadata_template(self):
         """Write JSON metadata template
 

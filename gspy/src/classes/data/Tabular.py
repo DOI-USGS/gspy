@@ -261,3 +261,16 @@ class Tabular(Dataset):
 
         """
         super().write_netcdf(filename, group)
+
+    def write_zarr(self, filename, group='tabular'):
+        """Write to netcdf file
+
+        Parameters
+        ----------
+        filename : str
+            Path to the file
+        group : str, optional
+            Netcdf group name to use inside netcdf file. Default is 'tabular'
+
+        """
+        super().write_zarr(filename, group)

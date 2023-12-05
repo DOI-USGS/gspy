@@ -409,10 +409,31 @@ class Dataset:
             for var in self._obj.data_vars:
                 if self._obj[var].attrs['null_value'] != 'not_defined':
                     self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
+                # if 'grid_mapping' in self._obj[var].attrs:
+                #     del self._obj[var].attrs['grid_mapping']
+
+        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4', **kwargs)
+
+    def write_zarr(self, filename, group, **kwargs):
+        """Write to netcdf file
+
+        Parameters
+        ----------
+        filename : str
+            Path to the file
+        group : str
+            Netcdf group name to write to
+
+        """
+        mode = 'a' if os.path.isfile(filename) else 'w'
+        if 'raster' in group:
+            for var in self._obj.data_vars:
+                if self._obj[var].attrs['null_value'] != 'not_defined':
+                    self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
                 if 'grid_mapping' in self._obj[var].attrs:
                     del self._obj[var].attrs['grid_mapping']
 
-        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4', **kwargs)
+        self._obj.to_zarr(filename, mode=mode, group=group, **kwargs)
 
     def write_ncml(self, filename, group, index):
         """Write an NCML file
