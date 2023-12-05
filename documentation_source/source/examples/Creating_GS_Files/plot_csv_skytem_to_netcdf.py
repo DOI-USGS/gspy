@@ -96,7 +96,7 @@ print(survey.contents)
 
 #%%
 # Reading back in
-new_survey = Survey().read_netcdf(d_out)
+new_survey = Survey.read_netcdf(d_out)
 
 #%%
 # Plotting

@@ -69,7 +69,7 @@ survey.write_netcdf(d_out)
 
 #%%
 # Read back in the NetCDF file
-new_survey = Survey().read_netcdf(d_out)
+new_survey = Survey.read_netcdf(d_out)
 
 # Once the survey is read in, we can access variables like a standard xarray dataset.
 print(new_survey.raster.magnetic_tmi)
