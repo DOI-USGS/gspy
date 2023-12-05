@@ -81,8 +81,4 @@ twine upload --skip-existing dist/*
 
 gh release create $NEW_TAG --notes-from-tag --verify-tag --title $NEW_TAG
 
-else
-  echo "Already a tag on this commit"
-fi
-
 exit 0
