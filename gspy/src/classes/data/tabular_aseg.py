@@ -3,7 +3,7 @@ import xarray as xr
 from ...utilities.aseg_gdf_handler import aseg_gdf2_gs
 from .Tabular import Tabular
 
-@xr.register_dataset_accessor("tabular_aseg")
+@xr.register_dataset_accessor("gs_tabular_aseg")
 class Tabular_aseg(Tabular):
     """Accessor to xarray.Dataset that handles ASEG Tabular data
 

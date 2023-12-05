@@ -12,7 +12,7 @@ from .Tabular import Tabular
 
 from xarray import register_dataset_accessor
 
-@register_dataset_accessor("tabular_csv")
+@register_dataset_accessor("gs_tabular_csv")
 class Tabular_csv(Tabular):
     """Class to handle tabular csv files.
 

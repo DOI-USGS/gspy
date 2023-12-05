@@ -3,7 +3,7 @@ from .DataArray import DataArray
 
 from xarray import register_dataarray_accessor
 
-# @register_dataarray_accessor("gs_coordinate")
+@register_dataarray_accessor("gs_coordinate")
 class Coordinate(DataArray):
     """Accessor to xarray.DataArray to define a Coordinate.
 

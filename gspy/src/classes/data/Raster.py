@@ -81,7 +81,7 @@ class Raster(Dataset):
         self = self.set_spatial_ref(spatial_ref)
 
         if netcdf_file is not None:
-            return Raster.read_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
+            return Raster.open_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
         else:
             # read the metadata file
             json_md = self.read_metadata(metadata_file)
@@ -312,6 +312,19 @@ class Raster(Dataset):
 
         """
         super().write_netcdf(filename, group)
+
+    def write_zarr(self, filename, group='raster'):
+        """Write to netcdf file
+
+        Parameters
+        ----------
+        filename : str
+            Path to the file
+        group : str
+            Name of group within netcdf file
+
+        """
+        super().write_zarr(filename, group)
 
     def write_metadata_template(self):
         """Write JSON metadata template

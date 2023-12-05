@@ -170,7 +170,7 @@ class Survey(object):
             out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
 
         elif type == 'netcdf':
-            out = Tabular.read_netcdf(data_filename, **kwargs)
+            out = Tabular.open_netcdf(data_filename, **kwargs)
 
         self._tabular.append(out)
 
@@ -275,7 +275,7 @@ class Survey(object):
             json.dump(out, f, indent=4)
 
     @classmethod
-    def read_netcdf(cls, filename, **kwargs):
+    def open_netcdf(cls, filename, **kwargs):
         """Read a survey from a netcdf file with lazy loading
 
         Parameters
@@ -304,7 +304,7 @@ class Survey(object):
 
         if 'raster' in groups:
             for i in rootgrp.groups['survey'].groups['raster'].groups:
-                self._raster.append(Raster.read_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
+                self._raster.append(Raster.open_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
 
         rootgrp.close()
 
@@ -343,6 +343,27 @@ class Survey(object):
         # Raster
         for i, m in enumerate(self._raster):
             Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
+
+    def write_zarr(self, filename):
+        """Write a survey to a netcdf file as well as any attached datasets.
+
+        Parameters
+        ----------
+        filename : str
+            Netcdf file name
+
+        """
+
+        # Survey
+        self.xarray.to_zarr(filename, mode='w', group='survey')
+
+        # Tabular
+        for i, m in enumerate(self._tabular):
+            Tabular(m).write_zarr(filename, group="survey/tabular/{}".format(i))
+
+        # Raster
+        for i, m in enumerate(self._raster):
+            Raster(m).write_zarr(filename, group='survey/raster/{}'.format(i))
 
     def write_ncml(self, filename):
         """ Write an NcML (NetCDF XML) metadata file
@@ -400,7 +421,7 @@ class Survey(object):
                 f.write('  <group name="/tabular">\n\n')
             f.write('    <group name="/{}">\n\n'.format(i))
             f.close()
-            m.write_ncml(filename, group="tabular", index=i)
+            m.gs_dataset.write_ncml(filename, group="tabular", index=i)
             f = open(infile, 'a')
             f.write('    </group>\n\n')
             if i == len(self._tabular)-1:
@@ -414,7 +435,7 @@ class Survey(object):
                 f.write('  <group name="/raster">\n\n')
             f.write('    <group name="/{}">\n\n'.format(i))
             f.close()
-            m.write_ncml(filename, group="raster", index=i)
+            m.gs_dataset.write_ncml(filename, group="raster", index=i)
             f = open(infile, 'a')
             f.write('    </group>\n\n')
             if i == len(self._raster)-1:
