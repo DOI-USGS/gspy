@@ -209,7 +209,7 @@ class Tabular(Dataset):
         return self._obj
 
     @classmethod
-    def read_netcdf(cls, filename, group='tabular', **kwargs):
+    def open_netcdf(cls, filename, group='tabular', **kwargs):
         """Lazy loads a netCDF file but enforces CF convention when opening
 
         Parameters
@@ -224,7 +224,7 @@ class Tabular(Dataset):
         xarray.Dataset
 
         """
-        return super(Tabular, cls).read_netcdf(filename, group, **kwargs)
+        return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
 
     # def subset(self, key, value):
     #     """Subset xarray where xarray[key] == value

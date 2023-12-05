@@ -303,7 +303,7 @@ class Dataset:
         return dic
 
     @classmethod
-    def read_netcdf(cls, filename, group, **kwargs):
+    def open_netcdf(cls, filename, group, **kwargs):
         """Read Data from a netcdf file using xrray's lazy open_dataset
 
         Parameters

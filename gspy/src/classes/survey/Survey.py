@@ -170,7 +170,7 @@ class Survey(object):
             out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
 
         elif type == 'netcdf':
-            out = Tabular.read_netcdf(data_filename, **kwargs)
+            out = Tabular.open_netcdf(data_filename, **kwargs)
 
         self._tabular.append(out)
 
@@ -275,7 +275,7 @@ class Survey(object):
             json.dump(out, f, indent=4)
 
     @classmethod
-    def read_netcdf(cls, filename, **kwargs):
+    def open_netcdf(cls, filename, **kwargs):
         """Read a survey from a netcdf file with lazy loading
 
         Parameters
@@ -304,7 +304,7 @@ class Survey(object):
 
         if 'raster' in groups:
             for i in rootgrp.groups['survey'].groups['raster'].groups:
-                self._raster.append(Raster.read_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
+                self._raster.append(Raster.open_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
 
         rootgrp.close()
 

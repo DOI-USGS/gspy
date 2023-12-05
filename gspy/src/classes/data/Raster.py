@@ -81,7 +81,7 @@ class Raster(Dataset):
         self = self.set_spatial_ref(spatial_ref)
 
         if netcdf_file is not None:
-            return Raster.read_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
+            return Raster.open_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
         else:
             # read the metadata file
             json_md = self.read_metadata(metadata_file)
