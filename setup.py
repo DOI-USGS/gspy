@@ -10,7 +10,7 @@ from setuptools import find_packages, setup
 from distutils.command.sdist import sdist
 cmdclass={'sdist': sdist}
 
-__version__ = '1.0.1'
+__version__ = '1.1.0'
 
 setup(name='gspy',
     packages=find_packages(),
@@ -36,9 +36,15 @@ setup(name='gspy',
         'h5py',
         'netcdf4',
         'matplotlib',
-        'sphinx',
         'fortranformat',
         'rioxarray',
         'pyproj'
     ],
+    extras_require={
+        'dev': [
+            'sphinx',
+            'twine',
+            'build'
+        ]
+    }
 )
