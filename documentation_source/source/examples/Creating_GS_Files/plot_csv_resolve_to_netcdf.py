@@ -57,7 +57,7 @@ survey.write_netcdf(d_out)
 
 #%%
 # Reading back in the GS NetCDF file
-new_survey = Survey.read_netcdf(d_out)
+new_survey = Survey.open_netcdf(d_out)
 
 # Check the Survey information
 print(new_survey.xarray)

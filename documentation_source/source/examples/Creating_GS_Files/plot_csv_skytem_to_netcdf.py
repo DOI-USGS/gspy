@@ -32,7 +32,7 @@ from gspy import Survey
 data_path = '..//..//supplemental//region//WI'
 
 # Survey metadata file
-metadata = join(data_path, "data//WI_SkyTEM_survey_md.json")
+metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
 
 # Establish the Survey
 survey = Survey(metadata)
@@ -96,7 +96,7 @@ print(survey.contents)
 
 #%%
 # Reading back in
-new_survey = Survey.read_netcdf(d_out)
+new_survey = Survey.open_netcdf(d_out)
 
 #%%
 # Plotting
