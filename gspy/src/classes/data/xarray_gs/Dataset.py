@@ -309,7 +309,7 @@ class Dataset:
         """
         return Dataset.open_dataset(filename, group=group.lower(), **kwargs)
 
-    def scatter(self, variable, **kwargs):
+    def plot(self, hue, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
 
         Parameters
@@ -326,12 +326,69 @@ class Dataset:
 
         """
         ax = kwargs.pop('ax', plt.gca())
-        splot = plt.scatter(self._obj['x'].values, self._obj['y'].values, c=self._obj[variable].values, **kwargs)
-        plt.ylabel(r'y\n{} [{}]'.format(self._obj['y'].attrs['long_name'], self._obj['y'].attrs['units']))
-        plt.xlabel(r'x\n{} [{}]'.format(self._obj['x'].attrs['long_name'], self._obj['x'].attrs['units']))
-        cb=plt.colorbar()
-        cb.set_label(r'{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
+
+        x = kwargs.pop('x', 'x')
+
+        if x == 'distance':
+            x, y = self._obj['x'].values, self._obj['y'].values
+            x = np.hstack([0.0, np.sqrt(np.cumsum(np.diff(x))**2.0 + np.cumsum(np.diff(y))**2.0)])
+            xlabel = "Distance ({})".format(self._obj['x'].attrs['units'])
+        else:
+            x = self._obj[x]
+            xlabel = 'x\n{}'.format(self._obj['x'].gs_dataarray.label)
+
+        splot = plt.plot(x, self._obj[hue].values, **kwargs)
+
+        plt.xlabel(xlabel)
+        plt.ylabel('y\n{}'.format(self._obj[hue].gs_dataarray.label))
+
+        # cb=plt.colorbar()
+        # cb.set_label(r'{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
         plt.tight_layout()
+
+        return ax, splot
+
+    def scatter(self, **kwargs):
+        """Scatter plot of variable against x, y co-ordinates
+
+        Parameters
+        ----------
+        variable : str
+            Xarray Dataset variable name
+
+        Returns
+        -------
+        ax : matplotlib.Axes
+            Figure handle
+        sc : xarray.plot.scatter
+            Plotting handle
+
+        """
+        ax = kwargs.pop('ax', plt.gca())
+
+        x = kwargs.pop('x', 'x')
+        y = kwargs.pop('y', 'y')
+
+        hue = kwargs.pop('hue', None)
+
+
+        if hue is None:
+            return self.plot(x=x, hue=y, **kwargs)
+
+        else:
+
+            x = self._obj[kwargs.pop('x', 'x')]
+            y = self._obj[kwargs.pop('y', 'y')]
+
+            splot = plt.scatter(x.values, y.values, c=self._obj[hue].values, **kwargs)
+
+            plt.xlabel('x\n{} [{}]'.format(x.attrs['long_name'], x.attrs['units']))
+            plt.ylabel('y\n{} [{}]'.format(y.attrs['long_name'], y.attrs['units']))
+
+            cb=plt.colorbar()
+            cb.set_label('{}\n{} [{}]'.format(hue, self._obj[hue].attrs['long_name'], self._obj[hue].attrs['units']), rotation=-90, labelpad=30)
+
+            plt.tight_layout()
 
         return ax, splot
 
