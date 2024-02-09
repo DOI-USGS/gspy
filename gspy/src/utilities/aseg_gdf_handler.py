@@ -128,7 +128,7 @@ class aseg_gdf2_gs(object):
             test = read_fwf(self.data_file_name, widths=widths)
 
             if test.values.shape[1] != len(self.columns):
-                test.columns = ['crap'] + self.columns
+                test.columns = ['-'] + self.columns
             else:
                 test.columns = self.columns
 
