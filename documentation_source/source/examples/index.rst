@@ -1,20 +1,18 @@
 :orphan:
 
-
-
-.. _sphx_glr_examples:
-
 ########
 Examples
 ########
 
+
 .. raw:: html
 
-    <div class="sphx-glr-clear"></div>
+    <div class="sphx-glr-thumbnails">
 
 
+.. raw:: html
 
-.. _sphx_glr_examples_Creating_GS_Files:
+    </div>
 
 =================
 Creating GS Files
@@ -23,14 +21,93 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the `ASEG &lt;https://www.aseg....">
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as wel...">
 
 .. only:: html
 
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png
-     :alt: ASEG to NetCDF
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png
+    :alt:
 
-     :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py`
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">ASEG to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">CSV to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Multi-dataset Survey</div>
+    </div>
+
 
 .. raw:: html
 
@@ -41,97 +118,10 @@ Creating GS Files
    :hidden:
 
    /examples/Creating_GS_Files/plot_aseg_tempest_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
-
-.. only:: html
-
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png
-     :alt: CSV to NetCDF
-
-     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /examples/Creating_GS_Files/plot_csv_resolve_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti...">
-
-.. only:: html
-
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_tifs_to_netcdf_thumb.png
-     :alt: GeoTIFFs to NetCDF
-
-     :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /examples/Creating_GS_Files/plot_tifs_to_netcdf
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious...">
-
-.. only:: html
-
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_help_I_have_no_variable_metadata_thumb.png
-     :alt: Help! I have no variable metadata
-
-     :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /examples/Creating_GS_Files/help_I_have_no_variable_metadata
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
-
-.. only:: html
-
- .. figure:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png
-     :alt: Multi-dataset Survey
-
-     :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /examples/Creating_GS_Files/plot_csv_skytem_to_netcdf
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_examples_Interacting_With_GS_Files:
 
 =========================
 Interacting With GS Files
@@ -140,14 +130,42 @@ Interacting With GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within `X...">
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xa...">
 
 .. only:: html
 
- .. figure:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
-     :alt: Basic Class Structure
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_xarray_methods_thumb.png
+    :alt:
 
-     :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
+  :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Basic Class Structure</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ...">
+
+.. only:: html
+
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_coordinate_reference_systems_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Coordinate Reference Systems</div>
+    </div>
+
 
 .. raw:: html
 
@@ -158,48 +176,20 @@ Interacting With GS Files
    :hidden:
 
    /examples/Interacting_With_GS_Files/plot_xarray_methods
+   /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
 
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ...">
 
 .. only:: html
 
- .. figure:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_coordinate_reference_systems_thumb.png
-     :alt: Coordinate Reference Systems
+  .. container:: sphx-glr-footer sphx-glr-footer-gallery
 
-     :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py`
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-.. raw:: html
+      :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
 
-    </div>
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-.. toctree::
-   :hidden:
-
-   /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-gallery
-
-
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-    :download:`Download all examples in Python source code: examples_python.zip </examples/examples_python.zip>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-    :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
+      :download:`Download all examples in Jupyter notebooks: examples_jupyter.zip </examples/examples_jupyter.zip>`
 
 
 .. only:: html

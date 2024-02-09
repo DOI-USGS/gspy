@@ -69,7 +69,7 @@ survey.write_netcdf(d_out)
 
 #%%
 # Read back in the NetCDF file
-new_survey = Survey().read_netcdf(d_out)
+new_survey = Survey.open_netcdf(d_out)
 
 # Once the survey is read in, we can access variables like a standard xarray dataset.
 print(new_survey.raster.magnetic_tmi)
@@ -79,7 +79,8 @@ print(new_survey.raster.magnetic_tmi)
 
 # Make a scatter plot of a specific tabular variable, using GSPy's plotter
 plt.figure()
-new_survey.tabular[0].gs_tabular.scatter('Tx_Height', cmap='jet')
+# new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
+new_survey.tabular[0].gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
 
 # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 plt.figure()

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raster &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>Raster &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -40,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -102,8 +104,8 @@
 <h1>Raster<a class="headerlink" href="#raster" title="Link to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-011a3fe28f78942b28872b904359b08d9c1f6bcf.png" alt="Inheritance diagram of gspy.src.classes.data.Raster" usemap="#inheritance766a57a1c1" class="inheritance graphviz" /></div>
 <map id="inheritance766a57a1c1" name="inheritance766a57a1c1">
-<area shape="rect" id="node1" href="xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,31"/>
-<area shape="rect" id="node2" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,31"/>
+<area shape="rect" id="node1" href="xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,32"/>
+<area shape="rect" id="node2" href="#gspy.src.classes.data.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,32"/>
 </map><dl class="py class" id="module-gspy.src.classes.data.Raster">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster" title="Link to this definition"></a></dt>
@@ -218,8 +220,8 @@ files following the naming convention “{variable}_{i}.tif”.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.write_metadata_template">
-<span class="sig-name descname"><span class="pre">write_metadata_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.write_metadata_template" title="Link to this definition"></a></dt>
-<dd><p>Write JSON metadata template</p>
+<span class="sig-name descname"><span class="pre">write_metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster_md.yml'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.write_metadata_template" title="Link to this definition"></a></dt>
+<dd><p>Write JSON metadata template for a raster dataset</p>
 <p>Outputs a template JSON metadata file needed for adding Raster data. All required
 dictionaries are printed (dataset_attrs, key_mapping, raster_files, variable_metadata).
 Additional dictionaries can be optionally added to document more information or
@@ -234,6 +236,20 @@ ancillary metadata relevant to the specific Raster data.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.write_netcdf">
 <span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.write_netcdf" title="Link to this definition"></a></dt>
+<dd><p>Write to netcdf file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the file</p></li>
+<li><p><strong>group</strong> (<em>str</em>) – Name of group within netcdf file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.data.Raster.Raster.write_zarr">
+<span class="sig-name descname"><span class="pre">write_zarr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.Raster.Raster.write_zarr" title="Link to this definition"></a></dt>
 <dd><p>Write to netcdf file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

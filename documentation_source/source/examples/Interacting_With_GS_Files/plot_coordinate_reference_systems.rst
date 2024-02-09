@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -31,7 +31,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 
 .. GENERATED FROM PYTHON SOURCE LINES 16-21
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
@@ -51,7 +51,7 @@ Set up the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 23-30
 
-.. code-block:: default
+.. code-block:: Python
 
     data_path = '..//..//supplemental//region//WI'
     metadata = join(data_path, "data//WI_SkyTEM_survey_md.json")
@@ -75,7 +75,7 @@ all information is contained within attributes.
 
 .. GENERATED FROM PYTHON SOURCE LINES 34-36
 
-.. code-block:: default
+.. code-block:: Python
 
     print(survey.xarray.spatial_ref)
 
@@ -84,8 +84,6 @@ all information is contained within attributes.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -117,7 +115,7 @@ The Survey also has a spatial_ref property which returns the ``spatial_ref`` var
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-40
 
-.. code-block:: default
+.. code-block:: Python
 
     print(survey.spatial_ref)
 
@@ -126,8 +124,6 @@ The Survey also has a spatial_ref property which returns the ``spatial_ref`` var
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -167,7 +163,7 @@ attributes include ``wkid`` and ``crs_wkt``.
 
 .. GENERATED FROM PYTHON SOURCE LINES 49-53
 
-.. code-block:: default
+.. code-block:: Python
 
     print('grid_mapping_name: '+survey.xarray.spatial_ref.attrs['grid_mapping_name'])
     print('wkid: '+survey.xarray.spatial_ref.attrs['wkid'])
@@ -178,8 +174,6 @@ attributes include ``wkid`` and ``crs_wkt``.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -197,7 +191,7 @@ the ``spatial_ref`` coordinate variable
 
 .. GENERATED FROM PYTHON SOURCE LINES 56-58
 
-.. code-block:: default
+.. code-block:: Python
 
     pprint(survey.tabular['DEM'].attrs)
 
@@ -207,19 +201,17 @@ the ``spatial_ref`` coordinate variable
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     {'axis': 'Z',
+     'datum': 'North American Vertical Datum of 1988 (NAVD88)',
      'grid_mapping': 'spatial_ref',
      'long_name': 'Digital elevation model',
      'null_value': 'not_defined',
      'positive': 'up',
      'standard_name': 'dem',
      'units': 'meter',
-     'valid_range': array([172.52357302, 354.1462611 ]),
-     'vertical_datum': 'North American Vertical Datum of 1988 (NAVD88)'}
+     'valid_range': array([172.52357302, 354.1462611 ])}
 
 
 
@@ -236,7 +228,7 @@ be done with GSPy's Spatial_ref class
 
 .. GENERATED FROM PYTHON SOURCE LINES 65-67
 
-.. code-block:: default
+.. code-block:: Python
 
     from gspy.src.classes.survey.Spatial_ref import Spatial_ref
 
@@ -257,7 +249,7 @@ EPSG will be used by default.
 
 .. GENERATED FROM PYTHON SOURCE LINES 73-77
 
-.. code-block:: default
+.. code-block:: Python
 
     new_crs = Spatial_ref.from_dict({'wkid': 4326, 'authority': 'EPSG'})
 
@@ -268,8 +260,6 @@ EPSG will be used by default.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -284,6 +274,7 @@ EPSG will be used by default.
         longitude_of_prime_meridian:  0.0
         prime_meridian_name:          Greenwich
         geographic_crs_name:          WGS 84
+        horizontal_datum_name:        World Geodetic System 1984 ensemble
         grid_mapping_name:            latitude_longitude
         authority:                    EPSG
         wkid:                         4326
@@ -303,28 +294,22 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.514 seconds)
+   **Total running time of the script:** (0 minutes 0.469 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_coordinate_reference_systems.ipynb <plot_coordinate_reference_systems.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_coordinate_reference_systems.py <plot_coordinate_reference_systems.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_coordinate_reference_systems.ipynb <plot_coordinate_reference_systems.ipynb>`
+      :download:`Download Python source code: plot_coordinate_reference_systems.py <plot_coordinate_reference_systems.py>`
 
 
 .. only:: html

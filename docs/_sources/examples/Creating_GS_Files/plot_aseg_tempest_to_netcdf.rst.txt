@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -32,7 +32,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 
 .. GENERATED FROM PYTHON SOURCE LINES 17-21
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
@@ -56,7 +56,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 27-37
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Path to example files
@@ -83,7 +83,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 41-47
 
-.. code-block:: default
+.. code-block:: Python
 
     d_data = join(data_path, 'data//Tempest.dat')
     d_supp = join(data_path, 'data//Tempest_data_md.json')
@@ -106,7 +106,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-57
 
-.. code-block:: default
+.. code-block:: Python
 
     m_data = join(data_path, 'model//Tempest_model.dat')
     m_supp = join(data_path, 'model//Tempest_model_md.json')
@@ -129,7 +129,7 @@ Define input metadata file (which contains the TIF filenames linked with desired
 
 .. GENERATED FROM PYTHON SOURCE LINES 61-70
 
-.. code-block:: default
+.. code-block:: Python
 
     r_supp = join(data_path, 'data//Tempest_raster_md.json')
 
@@ -153,9 +153,9 @@ Read back in the NetCDF file
 
 .. GENERATED FROM PYTHON SOURCE LINES 72-77
 
-.. code-block:: default
+.. code-block:: Python
 
-    new_survey = Survey().read_netcdf(d_out)
+    new_survey = Survey.open_netcdf(d_out)
 
     # Once the survey is read in, we can access variables like a standard xarray dataset.
     print(new_survey.raster.magnetic_tmi)
@@ -165,8 +165,6 @@ Read back in the NetCDF file
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -180,6 +178,7 @@ Read back in the NetCDF file
         standard_name:  total_magnetic_intensity
         null_value:     1.70141e+38
         units:          nT
+        grid_mapping:   spatial_ref
         valid_range:    [-17504.6640625   11490.32324219]
         long_name:      Total magnetic intensity, diurnally corrected and filtered
 
@@ -190,19 +189,21 @@ Read back in the NetCDF file
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-87
+.. GENERATED FROM PYTHON SOURCE LINES 79-89
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Make a scatter plot of a specific tabular variable, using GSPy's plotter
     plt.figure()
-    new_survey.tabular[0].gs_tabular.scatter('Tx_Height', cmap='jet')
+    # new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
+    new_survey.tabular[0].gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
 
     # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
     plt.figure()
     new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
     plt.show()
+
 
 
 .. rst-class:: sphx-glr-horizontal
@@ -229,28 +230,22 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.086 seconds)
+   **Total running time of the script:** (0 minutes 3.511 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_aseg_tempest_to_netcdf.ipynb <plot_aseg_tempest_to_netcdf.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_aseg_tempest_to_netcdf.py <plot_aseg_tempest_to_netcdf.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_aseg_tempest_to_netcdf.ipynb <plot_aseg_tempest_to_netcdf.ipynb>`
+      :download:`Download Python source code: plot_aseg_tempest_to_netcdf.py <plot_aseg_tempest_to_netcdf.py>`
 
 
 .. only:: html

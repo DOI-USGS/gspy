@@ -48,7 +48,7 @@
         "DTM" : {
             "axis" : "Z",
             "positive" : "up",
-            "vertical_datum" : "NAD88"
+            "datum" : "NAD88"
         },
         "EMX_NonHPRG": {
             "em_system_components" : 1,

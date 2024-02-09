@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/documentation_options.js?v=292eb321"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -39,7 +41,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -112,6 +114,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="content/getting_started/installation.html">Installing GSpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/getting_started/converting_aseg_gdf2_files.html">Importing aseg-gdf2 files into the GSPy Survey</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="content/getting_started/converting_aseg_gdf2_files.html#mapping-the-dfn-to-the-cf-metadata-convention">Mapping the DFN to the CF metadata convention</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a><ul>
@@ -124,6 +130,7 @@
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.catch_nan"><code class="docutils literal notranslate"><span class="pre">DataArray.catch_nan()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.check_metadata"><code class="docutils literal notranslate"><span class="pre">DataArray.check_metadata()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.from_values"><code class="docutils literal notranslate"><span class="pre">DataArray.from_values()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.label"><code class="docutils literal notranslate"><span class="pre">DataArray.label</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray.valid_range"><code class="docutils literal notranslate"><span class="pre">DataArray.valid_range()</span></code></a></li>
 </ul>
 </li>
@@ -148,14 +155,16 @@
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.is_projected"><code class="docutils literal notranslate"><span class="pre">Dataset.is_projected</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.json_metadata"><code class="docutils literal notranslate"><span class="pre">Dataset.json_metadata</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset"><code class="docutils literal notranslate"><span class="pre">Dataset.open_dataset()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_netcdf"><code class="docutils literal notranslate"><span class="pre">Dataset.open_netcdf()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.plot"><code class="docutils literal notranslate"><span class="pre">Dataset.plot()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_metadata"><code class="docutils literal notranslate"><span class="pre">Dataset.read_metadata()</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.read_netcdf"><code class="docutils literal notranslate"><span class="pre">Dataset.read_netcdf()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.scatter"><code class="docutils literal notranslate"><span class="pre">Dataset.scatter()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.set_spatial_ref"><code class="docutils literal notranslate"><span class="pre">Dataset.set_spatial_ref()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.spatial_ref"><code class="docutils literal notranslate"><span class="pre">Dataset.spatial_ref</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs"><code class="docutils literal notranslate"><span class="pre">Dataset.update_attrs()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_ncml"><code class="docutils literal notranslate"><span class="pre">Dataset.write_ncml()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_netcdf"><code class="docutils literal notranslate"><span class="pre">Dataset.write_netcdf()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset.write_zarr"><code class="docutils literal notranslate"><span class="pre">Dataset.write_zarr()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -165,11 +174,13 @@
 <li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/tabular.html">Tabular</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular"><code class="docutils literal notranslate"><span class="pre">Tabular</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.count_column_headers"><code class="docutils literal notranslate"><span class="pre">Tabular.count_column_headers()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.get_fortran_format"><code class="docutils literal notranslate"><span class="pre">Tabular.get_fortran_format()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.is_netcdf"><code class="docutils literal notranslate"><span class="pre">Tabular.is_netcdf</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.open_netcdf"><code class="docutils literal notranslate"><span class="pre">Tabular.open_netcdf()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.read"><code class="docutils literal notranslate"><span class="pre">Tabular.read()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.read_netcdf"><code class="docutils literal notranslate"><span class="pre">Tabular.read_netcdf()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.type"><code class="docutils literal notranslate"><span class="pre">Tabular.type</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.write_netcdf"><code class="docutils literal notranslate"><span class="pre">Tabular.write_netcdf()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular.html#gspy.src.classes.data.Tabular.Tabular.write_zarr"><code class="docutils literal notranslate"><span class="pre">Tabular.write_zarr()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -189,7 +200,9 @@
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.column_names"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.column_names</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.file_handler"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.file_handler</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.get_attrs"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.get_attrs()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.write_aseg"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.write_aseg()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.write"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.write()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.write_aseg_dfn_file"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.write_aseg_dfn_file()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html#gspy.src.classes.data.tabular_aseg.Tabular_aseg.write_metadata_template"><code class="docutils literal notranslate"><span class="pre">Tabular_aseg.write_metadata_template()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -205,6 +218,7 @@
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/raster.html#gspy.src.classes.data.Raster.Raster.to_tif"><code class="docutils literal notranslate"><span class="pre">Raster.to_tif()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/raster.html#gspy.src.classes.data.Raster.Raster.write_metadata_template"><code class="docutils literal notranslate"><span class="pre">Raster.write_metadata_template()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/raster.html#gspy.src.classes.data.Raster.Raster.write_netcdf"><code class="docutils literal notranslate"><span class="pre">Raster.write_netcdf()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/data/raster.html#gspy.src.classes.data.Raster.Raster.write_zarr"><code class="docutils literal notranslate"><span class="pre">Raster.write_zarr()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -217,15 +231,16 @@
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.add_raster"><code class="docutils literal notranslate"><span class="pre">Survey.add_raster()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.add_tabular"><code class="docutils literal notranslate"><span class="pre">Survey.add_tabular()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.contents"><code class="docutils literal notranslate"><span class="pre">Survey.contents</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.open_netcdf"><code class="docutils literal notranslate"><span class="pre">Survey.open_netcdf()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.raster"><code class="docutils literal notranslate"><span class="pre">Survey.raster</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.read_metadata"><code class="docutils literal notranslate"><span class="pre">Survey.read_metadata()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.read_netcdf"><code class="docutils literal notranslate"><span class="pre">Survey.read_netcdf()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.reproject"><code class="docutils literal notranslate"><span class="pre">Survey.reproject()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.spatial_ref"><code class="docutils literal notranslate"><span class="pre">Survey.spatial_ref</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.tabular"><code class="docutils literal notranslate"><span class="pre">Survey.tabular</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.write_metadata_template"><code class="docutils literal notranslate"><span class="pre">Survey.write_metadata_template()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.write_ncml"><code class="docutils literal notranslate"><span class="pre">Survey.write_ncml()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.write_netcdf"><code class="docutils literal notranslate"><span class="pre">Survey.write_netcdf()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.write_zarr"><code class="docutils literal notranslate"><span class="pre">Survey.write_zarr()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="content/api/classes/survey/survey.html#gspy.src.classes.survey.Survey.Survey.xarray"><code class="docutils literal notranslate"><span class="pre">Survey.xarray</span></code></a></li>
 </ul>
 </li>
@@ -238,12 +253,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/index.html#creating-gs-files">Creating GS Files</a><ul>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="examples/index.html#interacting-with-gs-files">Interacting With GS Files</a><ul>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#creating-gs-files">Creating GS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gspy_convention_requirements.html">GS Convention Requirements</a></li>

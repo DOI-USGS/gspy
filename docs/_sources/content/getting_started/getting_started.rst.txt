@@ -6,3 +6,4 @@ Getting Started
    :maxdepth: 1
 
    installation
+   converting_aseg_gdf2_files

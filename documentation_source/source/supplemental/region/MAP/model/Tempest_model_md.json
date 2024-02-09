@@ -98,7 +98,7 @@
         "elevation" : {
             "axis" : "Z",
             "positive" : "up",
-            "vertical_datum" : "NAD88"
+            "datum" : "NAD88"
         },
         "conductivity" : {
             "dimensions": ["index", "layer_depth"]

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gs_Coordinate &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>gs_Coordinate &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
@@ -40,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -103,11 +105,11 @@
 <h1>gs_Coordinate<a class="headerlink" href="#gs-coordinate" title="Link to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../../_images/inheritance-a53f52039ee00eb5ed4cce41af916bed0109ccd0.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Coordinate" usemap="#inheritance05014de90f" class="inheritance graphviz" /></div>
 <map id="inheritance05014de90f" name="inheritance05014de90f">
-<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" target="_top" title="Accessor to xarray.DataArray to define a Coordinate." alt="" coords="135,5,220,31"/>
-<area shape="rect" id="node2" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray" target="_top" title="Accessor for xarray.DataArray." alt="" coords="5,5,87,31"/>
+<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" target="_top" title="Accessor to xarray.DataArray to define a Coordinate." alt="" coords="134,5,218,32"/>
+<area shape="rect" id="node2" href="DataArray_gs.html#gspy.src.classes.data.xarray_gs.DataArray.DataArray" target="_top" title="Accessor for xarray.DataArray." alt="" coords="5,5,86,32"/>
 </map><dl class="py class" id="module-gspy.src.classes.data.xarray_gs.Coordinate">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Coordinate.Coordinate">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Coordinate.</span></span><span class="sig-name descname"><span class="pre">Coordinate</span></span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Coordinate.</span></span><span class="sig-name descname"><span class="pre">Coordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Coordinate.Coordinate" title="Link to this definition"></a></dt>
 <dd><p>Accessor to xarray.DataArray to define a Coordinate.</p>
 <p>Checks necessary metadata to satisfy the CF convention, and allows use with GIS software.
 Handles both arbitrary coordinates and standard coordinates defined as x, y, z, or t used within NetCDF files.
@@ -150,8 +152,7 @@ Standard coordinates have extra checks on the metadata.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis this Coordinate belongs to .</p></li>
 <li><p><strong>positive</strong> (<em>str</em><em>, </em><em>optional</em>) – “up” or “down”. Only used if name == ‘z’.</p></li>
-<li><p><strong>time_datum</strong> (<em>str</em><em>, </em><em>optional</em>) – Time datum. Only used if name == ‘t’.</p></li>
-<li><p><strong>vertical_datum</strong> (<em>str</em><em>, </em><em>optional</em>) – Vertical datum name. Only used if name == ‘z’.</p></li>
+<li><p><strong>datum</strong> (<em>str</em><em>, </em><em>optional</em>) – Datum. Only used if name == ‘z’ or ‘t’.</p></li>
 </ul>
 </dd>
 </dl>

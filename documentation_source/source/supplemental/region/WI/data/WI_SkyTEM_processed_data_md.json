@@ -3,14 +3,14 @@
     	"content": "processed data",
         "comment": "This dataset includes processed AEM data produced by USGS"
     },
-    
+
     "coordinates" : {
    		"x" : "E_N83WTM",
     	"y" : "N_N83WTM",
     	"z" : "ELEVATION",
     	"t" : "TIMESTAMP"
 	},
-	
+
     "dimensions" : {
     	"LM_gate_times": {
             "standard_name": "lm_gate_times",
@@ -110,7 +110,7 @@
             "units": "day",
             "null_value": "not_defined",
             "axis" : "T",
-            "time_datum" : "January 1, 1900"
+            "datum" : "January 1, 1900"
         },
         "RECORD": {
             "standard_name": "record",
@@ -125,7 +125,7 @@
             "null_value": "not_defined",
             "axis" : "Z",
             "positive" : "up",
-            "vertical_datum" : "North American Vertical Datum of 1988 (NAVD88)"
+            "datum" : "North American Vertical Datum of 1988 (NAVD88)"
         },
         "ALT": {
             "standard_name": "altitude",

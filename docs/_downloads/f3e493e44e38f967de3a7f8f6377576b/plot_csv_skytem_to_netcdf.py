@@ -96,12 +96,7 @@ print(survey.contents)
 
 #%%
 # Reading back in
-new_survey = Survey().read_netcdf(d_out)
-
-print(new_survey.spatial_ref.attrs)
-
-print(new_survey.tabular[0]['LM_gate_times'])
-print(new_survey.tabular[0]['LM_gate_times'].values[0])
+new_survey = Survey.open_netcdf(d_out)
 
 #%%
 # Plotting

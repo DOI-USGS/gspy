@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Survey &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>Survey &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -40,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -98,7 +100,7 @@
 <h1>Survey<a class="headerlink" href="#survey" title="Link to this heading"></a></h1>
 <div class="graphviz"><img src="../../../../_images/inheritance-6f717ccf11fdc4f3755d5d04fbc8dbc43d7f5ac9.png" alt="Inheritance diagram of gspy.src.classes.survey.Survey" usemap="#inheritancecd333d4876" class="inheritance graphviz" /></div>
 <map id="inheritancecd333d4876" name="inheritancecd333d4876">
-<area shape="rect" id="node1" href="#gspy.src.classes.survey.Survey.Survey" target="_top" title="Class defining a survey or dataset" alt="" coords="5,5,77,31"/>
+<area shape="rect" id="node1" href="#gspy.src.classes.survey.Survey.Survey" target="_top" title="Class defining a survey or dataset" alt="" coords="5,5,77,32"/>
 </map><dl class="py class" id="module-gspy.src.classes.survey.Survey">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.survey.Survey.</span></span><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey" title="Link to this definition"></a></dt>
@@ -121,7 +123,7 @@ coordinate reference system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>metadata</strong> (<em>str</em><em> or </em><em>dict</em>) – <ul class="simple">
-<li><p>If str, a json metadata file</p></li>
+<li><p>If str, a metadata file</p></li>
 <li><p>If dict, dictionary of survey metadata.</p></li>
 </ul>
 </p>
@@ -177,35 +179,9 @@ coordinate reference system.</p>
 <dd><p>print out the contents of the survey</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.raster">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raster</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.raster" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.read_metadata">
-<span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_metadata" title="Link to this definition"></a></dt>
-<dd><p>Read json metadata for the survey</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Json file.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="#gspy.src.classes.survey.Survey.Survey.write_metadata_template" title="gspy.src.classes.survey.Survey.Survey.write_metadata_template"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Survey.write_metadata_template</span></code></a></dt><dd><p>For more metadata data information</p>
-</dd>
-</dl>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.read_netcdf">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_netcdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.open_netcdf">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.open_netcdf" title="Link to this definition"></a></dt>
 <dd><p>Read a survey from a netcdf file with lazy loading</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -218,6 +194,32 @@ coordinate reference system.</p>
 <dd class="field-odd"><p>gspy.Survey</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.raster">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raster</span></span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.raster" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.read_metadata">
+<span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.read_metadata" title="Link to this definition"></a></dt>
+<dd><p>Read metadata for the survey</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Metadata file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#gspy.src.classes.survey.Survey.Survey.write_metadata_template" title="gspy.src.classes.survey.Survey.Survey.write_metadata_template"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Survey.write_metadata_template</span></code></a></dt><dd><p>For more metadata data information</p>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -244,7 +246,7 @@ coordinate reference system.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.write_metadata_template">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_metadata_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.write_metadata_template" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'survey_md.yml'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.write_metadata_template" title="Link to this definition"></a></dt>
 <dd><p>Creates a metadata template for a Survey</p>
 <p>If a Survey metadata file is not found or passed, an empty template file is generated and
 an Exception is raised.</p>
@@ -270,6 +272,17 @@ an Exception is raised.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.write_netcdf">
 <span class="sig-name descname"><span class="pre">write_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.write_netcdf" title="Link to this definition"></a></dt>
+<dd><p>Write a survey to a netcdf file as well as any attached datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Netcdf file name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.src.classes.survey.Survey.Survey.write_zarr">
+<span class="sig-name descname"><span class="pre">write_zarr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.survey.Survey.Survey.write_zarr" title="Link to this definition"></a></dt>
 <dd><p>Write a survey to a netcdf file as well as any attached datasets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

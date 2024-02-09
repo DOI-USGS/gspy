@@ -21,7 +21,7 @@
             "origin" : 2.5,
             "axis" : "Z",
             "positive" : "down",
-            "vertical_datum" : "ground surface"
+            "datum" : "ground surface"
         },
         "frequency": {
             "standard_name": "frequency",
@@ -174,7 +174,7 @@
                 "null_value": "not_defined",
                 "axis" : "Z",
                 "positive" : "up",
-                "vertical_datum" : "referenced to mean sea level - Earth Gravitational Model (EGM96)"
+                "datum" : "referenced to mean sea level - Earth Gravitational Model (EGM96)"
             },
             "bird_pitch": {
                 "standard_name": "not_defined",

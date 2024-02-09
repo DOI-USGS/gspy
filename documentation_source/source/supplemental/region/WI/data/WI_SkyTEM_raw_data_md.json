@@ -3,14 +3,14 @@
     	"content": "raw data",
         "comment": "This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM"
     },
-	
+
 	"coordinates" : {
    		"x" : "E_Nad83",
     	"y" : "N_Nad83",
     	"z" : "DEM",
     	"t" : "DateTime"
 	},
-	
+
     "dimensions" : {
     	"LM_gate_times": {
             "standard_name": "lm_gate_times",
@@ -195,7 +195,7 @@
             "units": "day",
             "null_value": "not_defined",
             "axis" : "T",
-            "time_datum" : "January 1, 1900"
+            "datum" : "January 1, 1900"
         },
         "dec": {
             "standard_name": "decliniation",
@@ -210,7 +210,7 @@
             "null_value": "not_defined",
             "axis" : "Z",
             "positive" : "up",
-            "vertical_datum" : "North American Vertical Datum of 1988 (NAVD88)"
+            "datum" : "North American Vertical Datum of 1988 (NAVD88)"
         },
         "Diurnal": {
             "standard_name": "magnetic_diurnal",
@@ -295,7 +295,7 @@
             "long_name": "Northing, Universal Transverse Mercator (UTM) Zone 16, World Geodetic System of 1984 (WGS84)",
             "units": "meter",
             "null_value": "not_defined"
-            
+
         },
         "RMF": {
             "standard_name": "residual_magnetic_field",
