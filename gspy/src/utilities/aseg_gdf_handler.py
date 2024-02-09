@@ -1,6 +1,7 @@
 import re
 import numpy as np
 from pandas import read_csv
+import chardet
 
 
 class aseg_gdf2_gs(object):
@@ -107,6 +108,8 @@ class aseg_gdf2_gs(object):
 
         dfn_md = {}
         for line in lines[1:]:
+            result = chardet.detect(line)
+            assert result['encoding'] == "ascii", ValueError("Non ascii entry on line {} (its probably the units)\n{}".format(i+1, line))
             if "END DEFN" in line:
                 line = line.replace(";END DEFN", "")
 
