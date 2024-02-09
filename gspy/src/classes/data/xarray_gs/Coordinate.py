@@ -160,15 +160,14 @@ class Coordinate(DataArray):
             Axis this Coordinate belongs to .
         positive : str, optional
             "up" or "down". Only used if name == 'z'.
-        time_datum : str, optional
-            Time datum. Only used if name == 't'.
-        vertical_datum : str, optional
-            Vertical datum name. Only used if name == 'z'.
+        datum : str, optional
+            Datum. Only used if name == 'z' or 't'.
+
         """
         if name in ("x", "y", "z", "t"):
             assert "axis" in kwargs, ValueError('coordinate definition for {} requires "axis" defined in the variable metadata. e.g. "axis":"X" for x'.format(name))
             if name == "z":
                 assert "positive" in kwargs, ValueError('z coordinate definition requires entry "positive" : "up" or "down"')
-                assert "vertical_datum" in kwargs, ValueError('z coordinate definition requires entry "vertical_datum", e.g. "ground surface"')
+                assert "datum" in kwargs, ValueError('z coordinate definition requires entry "datum", e.g. "ground surface"')
             if name == "t":
-                assert "time_datum" in kwargs, ValueError('time coordinate definition requires entry for "time_datum", e.g. "Jan-01-1900"')
+                assert "datum" in kwargs, ValueError('time coordinate definition requires entry for "datum", e.g. "Jan-01-1900"')

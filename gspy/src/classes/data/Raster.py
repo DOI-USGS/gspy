@@ -367,7 +367,7 @@ class Raster(Dataset):
                 "origin" : 0.0,
                 "axis" : "Z",
                 "positive" : "down",
-                "vertical_datum" : "ground surface"
+                "datum" : "ground surface"
                 }
         }
 
