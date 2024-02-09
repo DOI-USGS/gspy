@@ -411,8 +411,7 @@ class Raster(Dataset):
                 }
             }
 
-        with open("raster_md.json", "w") as f:
-            json.dump(out, f, indent=4)
+        dump_metadata_to_file(out, filename)
 
     def to_tif(self):
         """ Export GeoTIFF files from xarray
