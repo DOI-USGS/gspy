@@ -30,6 +30,7 @@ setup(name='gspy',
     author='Leon Foks, Stephanie James, Burke Minsley',
     author_email='nfoks@contractor.usgs.gov',
     install_requires=[
+        'chardet',
         'numpy',
         'xarray',
         'scipy',
@@ -38,7 +39,8 @@ setup(name='gspy',
         'matplotlib',
         'fortranformat',
         'rioxarray',
-        'pyproj'
+        'pyproj',
+        'pyyaml'
     ],
     extras_require={
         'dev': [
