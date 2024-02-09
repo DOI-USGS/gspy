@@ -11,7 +11,7 @@ class aseg_gdf2_gs(object):
     def columns(self):
         out = []
         for key, value in self.metadata.items():
-            test = re.split('es|e|f|i|g|d', value['format'])
+            test = re.split('es|e|f|i|g|d|a', value['format'])
             if test[0] != '':
                 for i in range(np.int32(test[0])):
                     out.append('{}[{}]'.format(key, i))
@@ -47,7 +47,7 @@ class aseg_gdf2_gs(object):
             if 'i' in fmt:
                 npfmt = np.int32
             elif 'f' in fmt:
-                npfmt = np.float32
+                npfmt = np.float64
             elif 'e'in fmt:
                 npfmt = np.float64
             elif 'es' in fmt:
@@ -56,6 +56,8 @@ class aseg_gdf2_gs(object):
                 npfmt = np.float64
             elif 'g' in fmt:
                 npfmt = np.float64
+            elif 'a' in fmt:
+                npfmt = str
             out[key] = npfmt
         return out
 
