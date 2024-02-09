@@ -141,7 +141,7 @@ class aseg_gdf2_gs(object):
 
         else:
             # Open the data file, there is no header
-            self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, delim_whitespace=True)
+            self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, sep='\s+')
 
         return self
 
@@ -160,49 +160,76 @@ class aseg_gdf2_gs(object):
         """
         lines = open(dfn_file_name, 'rb').readlines()
 
+        first_col_width, dfn_md = self._parse_first_line(lines[0])
 
-        tmp = lines[0].split(b";COMMENTS")[0]
-        first_col_width = np.int32(tmp.split(b":A")[1])
+        # assert b"COMMENTS" in lines[0], Exception(("Non standard aseg gdf2 definition file."
+        #                                          "The first line should look something like this \n\n"
+        #                                          "'DEFN   ST=RECD,RT=COMM;RT:A4;COMMENTS:A80'\n"
+        #                                          "but yours is \n{}\n"
+        #                                          "Each line after the first should correspond to each data column in the dat file.").format(lines[0]))
 
-        dfn_md = {}
         for i, line in enumerate(lines[1:]):
-
-            result = chardet.detect(line)
-            assert result['encoding'] == "ascii", ValueError("Non ascii entry on line {} (its probably the units)\n{}".format(i+1, line))
-
-            line = line.decode("utf-8")
-
-            line = line.strip()
-            if "END DEFN" in line:
-                line = line.replace(";END DEFN", "")
-
-            info = line.split(";")[-1]
-            tmp = re.split(":|,", info)
-
-            if len(tmp) < 3 and (("NAME" not in line) & ("UNIT" not in line) & ("NULL" not in line)):
-                break
-
-            standard_name, format = tmp[:2]
-            if ' ' in standard_name:
-                standard_name = standard_name.strip().replace(' ', '_')
-
-            template = {'standard_name' : standard_name.strip().lower(),
-                        'long_name' : "not_defined",
-                        'units' : "not_defined",
-                        'null_value' : "not_defined",
-                        'format' : format.strip().lower()
-                        }
-
-            for attr in tmp[2:]:
-                if 'NULL=' in attr or 'null=' in attr:
-                    template['null_value'] = re.split("=", attr)[-1]
-
-                if 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
-                    template['units'] = re.split("=", attr)[-1]
-
-                if 'NAME=' in attr or 'name=' in attr:
-                    template['long_name'] = re.split("=", attr)[-1]
-
-            dfn_md[standard_name] = template
+            records = line.strip().split(b";")[1:]
+            for record in records:
+                if b"END DEFN" in record:
+                    return first_col_width, dfn_md
+                key, md = self._parse_record(record)
+                dfn_md[key] = md
 
         return first_col_width, dfn_md
+
+    def _parse_first_line(self, line):
+
+        splits = line.strip().split(b';')
+
+        first_col_width = 4
+        dfn_md = {}
+        for x in splits:
+            if b":A" in x and b"COMMENT" not in x:
+                first_col_width = np.int32(x.split(b":A")[1])
+
+            if b"RT" not in x and b"COMMENT" not in x:
+                key, md = self._parse_record(x)
+                dfn_md[key] = md
+
+        return first_col_width, dfn_md
+
+    def _parse_record(self, line):
+
+        assert not b";" in line, ValueError("Trying to parse {} with multiple semicolons")
+
+        result = chardet.detect(line)
+        assert result['encoding'] == "ascii", ValueError("Non ascii entry(its probably the units), on line \n{}".format(line))
+
+        line = line.decode("utf-8")
+
+        info = line.split(";")[-1]
+        tmp = re.split(":|,", info)
+
+        assert len(tmp) >= 2, ValueError("Could not parse a record name and format on line {}".format(line))
+
+        standard_name, format = tmp[:2]
+        if ' ' in standard_name:
+            standard_name = standard_name.strip().replace(' ', '_')
+
+        metadata = {'standard_name' : standard_name.strip().lower(),
+                    'long_name' : "not_defined",
+                    'units' : "not_defined",
+                    'null_value' : "not_defined",
+                    'format' : format.strip().lower()
+                    }
+
+        for attr in tmp[2:]:
+            if 'NULL=' in attr or 'null=' in attr:
+                metadata['null_value'] = re.split("=", attr)[-1]
+                next
+
+            if 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
+                metadata['units'] = re.split("=", attr)[-1]
+                next
+
+            if 'NAME=' in attr or 'name=' in attr:
+                metadata['long_name'] = re.split("=", attr)[-1]
+                next
+
+        return standard_name, metadata
