@@ -3,13 +3,14 @@ import json
 import matplotlib.pyplot as plt
 
 from pprint import pprint
+import numpy as np
 from numpy import all, arange, asarray, diff, median, r_, zeros
 from xarray import DataArray as xr_DataArray
 from xarray import open_dataset
 from .DataArray import DataArray
 from .Coordinate import Coordinate
 
-from ....utilities import flatten, unflatten
+from ....utilities import flatten, unflatten, load_metadata_from_file, check_key_whitespace
 from ...survey.Spatial_ref import Spatial_ref
 
 from xarray import register_dataset_accessor
@@ -275,23 +276,11 @@ class Dataset:
             return
 
         if filename is None:
-            self.write_metadata_template()
+            self.write_metadata_template(filename)
             raise Exception("Please re-run and specify metadata when instantiating {}".format(self.__class__.__name__))
 
         # reading the data from the file
-        with open(filename) as f:
-            dic = json.loads(f.read())
-
-        def check_key_whitespace(this, flag=False):
-            if not isinstance(this, dict):
-                return flag
-            for key, item in this.items():
-                if ' ' in key:
-                    print('key "{}" contains whitespace. Please remove!'.format(key))
-                    key = key.strip()
-                    flag = True
-                flag = check_key_whitespace(item, flag)
-            return flag
+        dic = load_metadata_from_file(filename)
 
         flag = check_key_whitespace(dic)
         assert not flag, Exception("Metadata file {} has keys with whitespace.  Please remove spaces")

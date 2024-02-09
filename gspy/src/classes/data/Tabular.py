@@ -111,7 +111,8 @@ class Tabular(Dataset):
         # Read the GSPy json file.
         json_md = self.read_metadata(metadata_file)
 
-        file = self.file_handler.read(filename)
+        # Read in the data using the respective file type handler
+        file = self.file_handler.read(filename, **kwargs)
 
         # Add the index coordinate
         self.add_coordinate_from_values('index',
@@ -137,8 +138,7 @@ class Tabular(Dataset):
 
         # Write out a template json file when no variable metadata is found
         if not 'variable_metadata' in json_md:
-            # ??? Fix Me for ASEG
-            cls._create_variable_metadata_template(filename, file.df.columns)
+            cls._create_variable_metadata_template(metadata_file, file.df.columns, **json_md)
 
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
