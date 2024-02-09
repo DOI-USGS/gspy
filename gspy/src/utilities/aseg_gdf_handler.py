@@ -1,7 +1,7 @@
 import re
 import numpy as np
-from pandas import read_csv
 import chardet
+from pandas import read_csv, read_fwf, DataFrame
 
 
 class aseg_gdf2_gs(object):
@@ -31,6 +31,11 @@ class aseg_gdf2_gs(object):
     @property
     def metadata(self):
         return self._metadata
+
+    @metadata.setter
+    def metadata(self, value):
+        assert isinstance(value, dict), TypeError('metadata must have type dict')
+        self._metadata = value
 
     @property
     def dfn_file_name(self):
@@ -62,8 +67,39 @@ class aseg_gdf2_gs(object):
             out[key] = npfmt
         return out
 
+    def col_widths_from_fortran_format(self, first):
+        if first > 0:
+            out = [first]
+        else:
+            out = []
+        for key, value in self.metadata.items():
+            fmt = value['format']
+            if 'i' in fmt:
+                width = fmt.split('i')
+            elif 'f' in fmt:
+                width = fmt.split('f')
+            elif 'e'in fmt:
+                width = fmt.split('e')
+            elif 'es' in fmt:
+                width = fmt.split('es')
+            elif 'd' in fmt:
+                width = fmt.split('d')
+            elif 'g' in fmt:
+                width = fmt.split('g')
+            elif 'a' in fmt:
+                width = fmt.split('a')
+
+            if width[0] == '':
+                width = np.int32(np.float32(width[-1]))
+            else:
+                width = np.int32(width[0]) * np.int32(np.float32(width[-1]))
+
+            out.append(width)
+
+        return out
+
     @classmethod
-    def read(cls, data_file_name):
+    def read(cls, data_file_name, fixed_format=False):
         """Read the contents of an ASEG-GDF2 file.
 
         First, we parse the definition file then use that with Pandas.
@@ -84,10 +120,28 @@ class aseg_gdf2_gs(object):
         self._dfn_file_name = data_file_name.split('.dat')[0] + ".dfn"
 
         # Open the DFN and parse into a dict.
-        self._metadata = self.parse_dfn_file(self.dfn_file_name)
+        first_col_width, self.metadata = self.parse_dfn_file(self.dfn_file_name)
 
-        # Open the data file, there is no header
-        self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, delim_whitespace=True)
+        if fixed_format:
+            widths = self.col_widths_from_fortran_format(first_col_width)
+
+            test = read_fwf(self.data_file_name, widths=widths)
+
+            if test.values.shape[1] != len(self.columns):
+                test.columns = ['crap'] + self.columns
+            else:
+                test.columns = self.columns
+
+            formats = self.numpy_formats
+            tmp = DataFrame()
+            for col in self.columns:
+                tmp[col] = np.asarray(test[col], dtype=formats[col])
+
+            self._df = tmp
+
+        else:
+            # Open the data file, there is no header
+            self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, delim_whitespace=True)
 
         return self
 
@@ -104,48 +158,51 @@ class aseg_gdf2_gs(object):
         dict
 
         """
-        lines = open(dfn_file_name, 'r').readlines()
+        lines = open(dfn_file_name, 'rb').readlines()
+
+
+        tmp = lines[0].split(b";COMMENTS")[0]
+        first_col_width = np.int32(tmp.split(b":A")[1])
 
         dfn_md = {}
-        for line in lines[1:]:
+        for i, line in enumerate(lines[1:]):
+
             result = chardet.detect(line)
             assert result['encoding'] == "ascii", ValueError("Non ascii entry on line {} (its probably the units)\n{}".format(i+1, line))
+
+            line = line.decode("utf-8")
+
+            line = line.strip()
             if "END DEFN" in line:
                 line = line.replace(";END DEFN", "")
 
             info = line.split(";")[-1]
-            tmp = info.split(":")
+            tmp = re.split(":|,", info)
 
-            if len(tmp) == 1:
+            if len(tmp) < 3 and (("NAME" not in line) & ("UNIT" not in line) & ("NULL" not in line)):
                 break
 
             standard_name, format = tmp[:2]
-
             if ' ' in standard_name:
                 standard_name = standard_name.strip().replace(' ', '_')
 
-            null_value = 'not_defined'
-            if 'NULL' in info:
-                null_value = re.split(':|,',info.split('NULL')[-1])[0].split('=')[1].strip()
+            template = {'standard_name' : standard_name.strip().lower(),
+                        'long_name' : "not_defined",
+                        'units' : "not_defined",
+                        'null_value' : "not_defined",
+                        'format' : format.strip().lower()
+                        }
 
-            units = 'not_defined'
-            if 'UNIT' in info:
-                key = 'UNIT'
-                if 'UNITS' in info:
-                    key = 'UNITS'
-                units = re.split(':|,',info.split(key)[-1])[0].split('=')[1].strip()
+            for attr in tmp[2:]:
+                if 'NULL=' in attr or 'null=' in attr:
+                    template['null_value'] = re.split("=", attr)[-1]
 
-            long_name = 'not_defined'
-            if 'NAME' in info:
-                long_name = re.split(':|,',info.split('NAME')[-1])[0].split('=')[-1].strip()
-            else:
-                long_name = re.split(':|,', info)[-1].strip()
+                if 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
+                    template['units'] = re.split("=", attr)[-1]
 
-            dfn_md[standard_name] = {'standard_name' : standard_name.strip().lower(),
-                                     'long_name' : long_name,
-                                     'units' : units,
-                                     'null_value' : null_value,
-                                     'format' : format.strip().lower()
-                                     }
+                if 'NAME=' in attr or 'name=' in attr:
+                    template['long_name'] = re.split("=", attr)[-1]
 
-        return dfn_md
+            dfn_md[standard_name] = template
+
+        return first_col_width, dfn_md
