@@ -226,28 +226,30 @@ class Tabular(Dataset):
         """
         return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
 
-    # def subset(self, key, value):
-    #     """Subset xarray where xarray[key] == value
+    def get_fortran_format(self, key, default_f32='f10.3', default_f64='g16.6'):
 
-    #     Parameters
-    #     ----------
-    #     key : str
-    #         Key in xarray Dataset
-    #     value : scalar
-    #         Subset where entry equals value
+        values = self._obj.data_vars[key]
 
-    #     Returns
-    #     -------
-    #     out : gspy.Tabular
+        if 'format' in values.attrs:
+            return values.attrs['format']
 
-    #     """
-    #     out = type(self)()
+        dtype = values.dtype
+        if dtype == np.int32:
 
-    #     out._xarray = self.where(self[key] == value)
-    #     out._spatial_ref = self.spatial_ref
-    #     out._key_mapping = self.key_mapping
+            # Get the max required spaces
+            large = np.max(np.abs(values))
+            p1 = values.min() < 0.0
 
-    #     return out
+            out = "i{}".format(large%10 + p1)
+        if dtype == np.float32:
+            out = default_f32
+        if dtype == np.float64:
+            out = default_f64
+
+        if values.ndim == 2:
+            out = "{}".format(values.shape[1]) + out
+
+        return out
 
     def write_netcdf(self, filename, group='tabular'):
         """Write to netcdf file
