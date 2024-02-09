@@ -162,12 +162,6 @@ class aseg_gdf2_gs(object):
 
         first_col_width, dfn_md = self._parse_first_line(lines[0])
 
-        # assert b"COMMENTS" in lines[0], Exception(("Non standard aseg gdf2 definition file."
-        #                                          "The first line should look something like this \n\n"
-        #                                          "'DEFN   ST=RECD,RT=COMM;RT:A4;COMMENTS:A80'\n"
-        #                                          "but yours is \n{}\n"
-        #                                          "Each line after the first should correspond to each data column in the dat file.").format(lines[0]))
-
         for i, line in enumerate(lines[1:]):
             records = line.strip().split(b";")[1:]
             for record in records:
