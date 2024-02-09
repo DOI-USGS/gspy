@@ -125,16 +125,17 @@ class Tabular(Dataset):
                                             'null_value'    : 'not_defined'})
 
         # Add the user defined coordinates-dimensions from the json file
-        dimensions = json_md['dimensions']
-        coordinates = json_md['coordinates']
-        reverse_coordinates = {v:k for k,v in coordinates.items()}
+        dimensions = json_md.get('dimensions')
+        coordinates = json_md.get('coordinates')
 
-        for key in list(dimensions.keys()):
-            b = reverse_coordinates.get(key, key)
-            # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
-            if isinstance(dimensions[key], dict):
-                # dicts are defined explicitly in the json file.
-                self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+        if coordinates is not None:
+            if dimensions is not None:
+                for key in list(dimensions.keys()):
+                    b = coordinates.get(key, key)
+                    # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
+                    if isinstance(dimensions[key], dict):
+                        # dicts are defined explicitly in the json file.
+                        self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
         # Write out a template json file when no variable metadata is found
         if not 'variable_metadata' in json_md:
@@ -155,6 +156,8 @@ class Tabular(Dataset):
                                             is_projected = self.is_projected,
                                             is_dimension=False,
                                             **dic)
+
+
 
         column_counts = cls.count_column_headers(file.columns)
 

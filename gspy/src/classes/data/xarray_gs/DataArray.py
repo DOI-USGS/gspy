@@ -17,6 +17,10 @@ class DataArray:
 
     """
 
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
+
+
     @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
         """For an existing DataArray, compute its bounds and attach them.
@@ -223,3 +227,7 @@ class DataArray:
             valid_range = asarray([nanmin(tmp), nanmax(tmp)], dtype=kwargs.get('dtype', None))
 
         return valid_range
+
+    @property
+    def label(self):
+        return '{} [{}]'.format(self._obj.attrs['long_name'], self._obj.attrs['units'])
