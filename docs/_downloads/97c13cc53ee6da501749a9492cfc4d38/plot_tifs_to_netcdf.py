@@ -2,20 +2,20 @@
 GeoTIFFs to NetCDF
 ------------------
 
-In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension. 
+In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension.
 
-Additionally, this example shows how to handle Raster data that have differing x-y grids. Specifically, this example creates the following Raster datasets: 
+Additionally, this example shows how to handle Raster data that have differing x-y grids. Specifically, this example creates the following Raster datasets:
 
 1. Raster Dataset #1
     1a. 2-D magnetic grid, original x-y discretization (600 m cell size)
 2. Raster Dataset #2
     2a. 2-D magnetic grid, aligned to match the x-y dimensions of the resistivity layers (1000 m cell size)
-    
+
     2b. 3-D resistivity grid
 
 Dataset References:
 
-Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ. 
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
 
 James, S.R., and Minsley, B.J., 2021, Combined results and derivative products of hydrogeologic structure and properties from airborne electromagnetic surveys in the Mississippi Alluvial Plain: U.S. Geological Survey data release, https://doi.org/10.5066/P9382RCI.
 
@@ -69,12 +69,12 @@ survey.write_netcdf(d_out)
 
 #%%
 # Reading back in the GS NetCDF file
-new_survey = Survey.read_netcdf(d_out)
+new_survey = Survey.open_netcdf(d_out)
 
 #%%
 # Plotting
 
-# Make a map-view plot of a specific data variable, using Xarray's plotter 
+# Make a map-view plot of a specific data variable, using Xarray's plotter
 # In this case, we slice the 3-D resistivity variable along the depth dimension
 new_survey.raster[1]['resistivity'].plot(col='z', vmax=3, cmap='jet')
 

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Multi-dataset Survey &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>Multi-dataset Survey &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -40,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -98,7 +100,7 @@
              
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="multi-dataset-survey">
@@ -115,7 +117,7 @@ to download the full example code</p>
 To make the size of this example more managable, some of the input datasets have been downsampled relative to the source files in the data release referenced below.</p>
 <p>Dataset Reference:
 Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P93SY9LI">https://doi.org/10.5066/P93SY9LI</a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
@@ -123,7 +125,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <section id="convert-the-skytem-csv-data-to-netcdf">
 <h2>Convert the Skytem csv data to NetCDF<a class="headerlink" href="#convert-the-skytem-csv-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
 
 <span class="c1"># Survey metadata file</span>
@@ -136,7 +138,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <p>1 - Raw Data -
 Import raw AEM data from CSV-format.
 Define input data file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset</span>
@@ -146,7 +148,7 @@ Define input data file and associated metadata file</p>
 <p>2 - Processed Data -
 Import processed AEM data from CSV-format.
 Define input data file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ProcessedData.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ProcessedData.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_processed_data_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the processed AEM data as a tabular dataset</span>
@@ -156,7 +158,7 @@ Define input data file and associated metadata file</p>
 <p>3 - Inverted Models -
 Import inverted AEM models from CSV-format.
 Define input data file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
 <span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_inverted_models_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
@@ -166,7 +168,7 @@ Define input data file and associated metadata file</p>
 <p>4 - Bedrock Picks -
 Import AEM-based estimated of depth to bedrock from CSV-format.
 Define input data file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//topDolomite_Blocky_LidarDEM.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//topDolomite_Blocky_LidarDEM.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_bedrock_picks_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
@@ -176,21 +178,20 @@ Define input data file and associated metadata file</p>
 <p>5 - Derivative Maps -
 Import interpolated bedrock and magnetic maps from TIF-format.
 Define input metadata file (which contains the TIF filenames linked to variable names)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.json&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the interpolated maps as a raster dataset</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Save to NetCDF file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WISkyTEM.nc&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WISkyTEM.nc&#39;</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 
 <span class="c1"># print a summary of the survey contents</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tabular:
     [0] raw data
     [1] processed data
@@ -201,53 +202,24 @@ raster:
 </pre></div>
 </div>
 <p>Reading back in</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">spatial_ref</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;LM_gate_times&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;LM_gate_times&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;crs_wkt&#39;: &#39;PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]&#39;, &#39;semi_major_axis&#39;: 6378137.0, &#39;semi_minor_axis&#39;: 6356752.314140356, &#39;inverse_flattening&#39;: 298.257222101, &#39;reference_ellipsoid_name&#39;: &#39;GRS 1980&#39;, &#39;longitude_of_prime_meridian&#39;: 0.0, &#39;prime_meridian_name&#39;: &#39;Greenwich&#39;, &#39;geographic_crs_name&#39;: &#39;NAD83(HARN)&#39;, &#39;horizontal_datum_name&#39;: &#39;NAD83 (High Accuracy Reference Network)&#39;, &#39;projected_crs_name&#39;: &#39;NAD83(HARN) / Wisconsin Transverse Mercator&#39;, &#39;grid_mapping_name&#39;: &#39;transverse_mercator&#39;, &#39;latitude_of_projection_origin&#39;: 0.0, &#39;longitude_of_central_meridian&#39;: -90.0, &#39;false_easting&#39;: 520000.0, &#39;false_northing&#39;: -4480000.0, &#39;scale_factor_at_central_meridian&#39;: 0.9996, &#39;authority&#39;: &#39;EPSG&#39;, &#39;wkid&#39;: &#39;3071&#39;}
-&lt;xarray.DataArray &#39;LM_gate_times&#39; (LM_gate_times: 28)&gt;
-array([-1.135000e-06,  3.650000e-07,  2.365000e-06,  4.365000e-06,
-        6.365000e-06,  8.365000e-06,  1.036500e-05,  1.286500e-05,
-        1.636500e-05,  2.086500e-05,  2.636500e-05,  3.336500e-05,
-        4.236500e-05,  5.386500e-05,  6.836500e-05,  8.636500e-05,
-        1.088650e-04,  1.368650e-04,  1.723650e-04,  2.178650e-04,
-        2.748650e-04,  3.468650e-04,  4.378650e-04,  5.518650e-04,
-        6.958650e-04,  8.773650e-04,  1.105865e-03,  1.394365e-03])
-Coordinates:
-    spatial_ref    float64 ...
-  * LM_gate_times  (LM_gate_times) float64 -1.135e-06 3.65e-07 ... 0.001394
-Attributes:
-    standard_name:  LM_gate_times
-    null_value:     not_defined
-    bounds:         LM_gate_times_bnds
-    units:          seconds
-    grid_mapping:   spatial_ref
-    valid_range:    [-1.135000e-06  1.394365e-03]
-    long_name:      low moment gate times
--1.135e-06
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Plotting</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="p">[</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.555 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
-<div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/f3e493e44e38f967de3a7f8f6377576b/plot_csv_skytem_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_skytem_to_netcdf.py</span></code></a></p>
-</div>
+<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 2.983 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/126324517196134368a58612b6143418/plot_csv_skytem_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem_to_netcdf.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/f3e493e44e38f967de3a7f8f6377576b/plot_csv_skytem_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_skytem_to_netcdf.py</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

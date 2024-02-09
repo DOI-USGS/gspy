@@ -6,8 +6,8 @@ from pprint import pprint
 from numpy import arange, int32
 import xarray as xr
 
-
 from ...utilities.csv_handler import csv_gs
+from ...utilities import dump_metadata_to_file
 from .Tabular import Tabular
 
 from xarray import register_dataset_accessor
@@ -51,7 +51,7 @@ class Tabular_csv(Tabular):
         return kwargs
 
     @staticmethod
-    def _create_variable_metadata_template(filename, columns, template_filename=None):
+    def _create_variable_metadata_template(filename, columns, template_filename=None, **kwargs):
         """Generates a template metadata file.
 
         The generated file contains gspy required entries in a metadata file for all unique header names in the csv file.
@@ -84,8 +84,7 @@ class Tabular_csv(Tabular):
         if template_filename is None:
             template_filename = "variable_metadata_template_{}.json".format(filename.split(os.sep)[-1].split('.')[0])
 
-        with open(template_filename, "w") as f:
-            json.dump(tmp_dic, f, indent=4)
+        dump_metadata_to_file(tmp_dic, template_filename)
 
         s = ("\nVariable metadata values are not defined in the metadata file.\n"
                "Creating a template with filename {}\n"

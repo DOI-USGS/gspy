@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV to NetCDF &mdash; gspy 1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <title>CSV to NetCDF &mdash; gspy 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/documentation_options.js?v=292eb321"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -40,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.0
+                1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -98,7 +100,7 @@
              
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="csv-to-netcdf">
@@ -110,7 +112,7 @@ to download the full example code</p>
 </ol>
 <p>Dataset Reference:
 Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2018 - February 2019: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9XBBBUU">https://doi.org/10.5066/P9XBBBUU</a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
@@ -118,7 +120,7 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 <section id="convert-the-resolve-csv-data-to-netcdf">
 <h2>Convert the resolve csv data to NetCDF<a class="headerlink" href="#convert-the-resolve-csv-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
 
 <span class="c1"># Survey metadata file</span>
@@ -130,7 +132,7 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 </div>
 <p>Import raw AEM data from CSV-format.
 Define input data file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve_data_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset</span>
@@ -139,7 +141,7 @@ Define input data file and associated metadata file</p>
 </div>
 <p>Import inverted AEM models from CSV-format.
 Define input model file and associated metadata file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model.csv&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model.csv&#39;</span><span class="p">)</span>
 <span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve_model_md.json&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
@@ -147,18 +149,17 @@ Define input model file and associated metadata file</p>
 </pre></div>
 </div>
 <p>Save to NetCDF file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve.nc&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Resolve.nc&#39;</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Reading back in the GS NetCDF file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">()</span><span class="o">.</span><span class="n">read_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 
 <span class="c1"># Check the Survey information</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
 Dimensions:                 ()
 Coordinates:
@@ -182,60 +183,37 @@ Attributes:
 </pre></div>
 </div>
 <p>Plotting</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific data variable, using GSPy&#39;s plotter</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific data variable, using GSPy&#39;s plotter</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># new_survey.tabular[0].gs_tabular.scatter(hue=&#39;DTM&#39;, vmin=30, vmax=50)</span>
+
+
+<span class="c1"># Subsetting by line number, and plotting by distance along that line</span>
+<span class="c1"># new_survey.tabular[0].gs_tabular.subset(&#39;line&#39;, 10010)</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;line&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">10010</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DTM&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># plt.subplot(121)</span>
+<span class="c1"># tmp.gs_tabular.plot(hue=&#39;DTM&#39;)</span>
+<span class="c1"># plt.subplot(122)</span>
+<span class="c1"># tmp.gs_tabular.scatter(x=&#39;x&#39;, y=&#39;DTM&#39;)</span>
+<span class="n">tmp</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;DTM&#39;</span><span class="p">)</span>
+
+<span class="c1">#IF YOU SPECIFY HUE ITS A 2D COLOUR Plot</span>
+<span class="c1">#OTHERWISE ITS JUST A PLOT (LINE POINTS ETC)</span>
 
 <span class="c1"># Make a scatter plot of a specific model variable, using GSPy&#39;s plotter</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">gs_tabular</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;DOI_STANDARD&#39;</span><span class="p">)</span>
+<span class="c1"># plt.figure()</span>
+<span class="c1"># new_survey.tabular[1].gs_tabular.scatter(hue=&#39;DOI_STANDARD&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Check the model dataset</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img src="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_001.png" alt="plot csv resolve to netcdf" class = "sphx-glr-multi-img"/></li>
-<li><img src="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_002.png" alt="plot csv resolve to netcdf" class = "sphx-glr-multi-img"/></li>
-</ul>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt;
-Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
-Coordinates:
-    spatial_ref       float64 ...
-  * index             (index) int32 0 1 2 3 4 5 ... 9994 9995 9996 9997 9998
-  * layer_depth       (layer_depth) float64 0.5 1.55 2.7 ... 109.2 119.7 132.5
-  * nv                (nv) int64 0 1
-    x                 (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
-    y                 (index) float64 1.205e+06 1.205e+06 ... 1.197e+06
-    z                 (index) float64 ...
-Data variables: (12/18)
-    layer_depth_bnds  (layer_depth, nv) float64 ...
-    LINE              (index) int64 ...
-    LAT_WGS84_dd      (index) float64 ...
-    LON_WGS84_dd      (index) float64 ...
-    X_WGS84_Albers    (index) float64 ...
-    Y_WGS84_Albers    (index) float64 ...
-    ...                ...
-    RESDATA           (index) float64 ...
-    RESTOTAL          (index) float64 ...
-    RHO_I             (index, layer_depth) float64 ...
-    RHO_I_STD         (index, layer_depth) float64 ...
-    DOI_CONSERVATIVE  (index) float64 ...
-    DOI_STANDARD      (index) float64 66.2 78.2 78.2 78.6 ... 87.6 87.9 88.0
-Attributes:
-    content:  inverted resistivity models
-    comment:  This dataset includes inverted resistivity models derived from ...
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.644 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py">
-<div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/ca9c324f898727403a18484f42dc3020/plot_csv_resolve_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_resolve_to_netcdf.py</span></code></a></p>
-</div>
+<img src="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_resolve_to_netcdf_001.png" alt="plot csv resolve to netcdf" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.497 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/8c74c090dc8f02c5545f332bf2007ead/plot_csv_resolve_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_resolve_to_netcdf.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/ca9c324f898727403a18484f42dc3020/plot_csv_resolve_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_csv_resolve_to_netcdf.py</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

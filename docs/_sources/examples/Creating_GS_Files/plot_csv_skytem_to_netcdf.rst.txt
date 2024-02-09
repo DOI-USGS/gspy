@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -37,7 +37,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 
 .. GENERATED FROM PYTHON SOURCE LINES 20-24
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
@@ -61,7 +61,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 30-40
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Path to example files
@@ -88,7 +88,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 44-50
 
-.. code-block:: default
+.. code-block:: Python
 
     d_data1 = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
     d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.json')
@@ -111,7 +111,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 54-60
 
-.. code-block:: default
+.. code-block:: Python
 
     d_data2 = join(data_path, 'data//WI_SkyTEM_2021_ProcessedData.csv')
     d_supp2 = join(data_path, 'data//WI_SkyTEM_processed_data_md.json')
@@ -134,7 +134,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 64-70
 
-.. code-block:: default
+.. code-block:: Python
 
     m_data3 = join(data_path, 'model//WI_SkyTEM_2021_InvertedModels.csv')
     m_supp3 = join(data_path, 'model//WI_SkyTEM_inverted_models_md.json')
@@ -157,7 +157,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 74-80
 
-.. code-block:: default
+.. code-block:: Python
 
     d_data4 = join(data_path, 'data//topDolomite_Blocky_LidarDEM.csv')
     d_supp4 = join(data_path, 'data//WI_SkyTEM_bedrock_picks_md.json')
@@ -180,7 +180,7 @@ Define input metadata file (which contains the TIF filenames linked to variable 
 
 .. GENERATED FROM PYTHON SOURCE LINES 84-89
 
-.. code-block:: default
+.. code-block:: Python
 
     m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.json')
 
@@ -200,7 +200,7 @@ Save to NetCDF file
 
 .. GENERATED FROM PYTHON SOURCE LINES 91-97
 
-.. code-block:: default
+.. code-block:: Python
 
     d_out = join(data_path, 'model//WISkyTEM.nc')
     survey.write_netcdf(d_out)
@@ -213,8 +213,6 @@ Save to NetCDF file
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -234,59 +232,26 @@ Save to NetCDF file
 
 Reading back in
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-106
+.. GENERATED FROM PYTHON SOURCE LINES 99-101
 
-.. code-block:: default
+.. code-block:: Python
 
-    new_survey = Survey().read_netcdf(d_out)
-
-    print(new_survey.spatial_ref.attrs)
-
-    print(new_survey.tabular[0]['LM_gate_times'])
-    print(new_survey.tabular[0]['LM_gate_times'].values[0])
+    new_survey = Survey.open_netcdf(d_out)
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    {'crs_wkt': 'PROJCRS["NAD83(HARN) / Wisconsin Transverse Mercator",BASEGEOGCRS["NAD83(HARN)",DATUM["NAD83 (High Accuracy Reference Network)",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4152]],CONVERSION["Wisconsin Transverse Mercator 83",METHOD["Transverse Mercator",ID["EPSG",9807]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",-90,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9996,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",520000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",-4480000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["State-wide spatial data management."],AREA["United States (USA) - Wisconsin."],BBOX[42.48,-92.89,47.31,-86.25]],ID["EPSG",3071]]', 'semi_major_axis': 6378137.0, 'semi_minor_axis': 6356752.314140356, 'inverse_flattening': 298.257222101, 'reference_ellipsoid_name': 'GRS 1980', 'longitude_of_prime_meridian': 0.0, 'prime_meridian_name': 'Greenwich', 'geographic_crs_name': 'NAD83(HARN)', 'horizontal_datum_name': 'NAD83 (High Accuracy Reference Network)', 'projected_crs_name': 'NAD83(HARN) / Wisconsin Transverse Mercator', 'grid_mapping_name': 'transverse_mercator', 'latitude_of_projection_origin': 0.0, 'longitude_of_central_meridian': -90.0, 'false_easting': 520000.0, 'false_northing': -4480000.0, 'scale_factor_at_central_meridian': 0.9996, 'authority': 'EPSG', 'wkid': '3071'}
-    <xarray.DataArray 'LM_gate_times' (LM_gate_times: 28)>
-    array([-1.135000e-06,  3.650000e-07,  2.365000e-06,  4.365000e-06,
-            6.365000e-06,  8.365000e-06,  1.036500e-05,  1.286500e-05,
-            1.636500e-05,  2.086500e-05,  2.636500e-05,  3.336500e-05,
-            4.236500e-05,  5.386500e-05,  6.836500e-05,  8.636500e-05,
-            1.088650e-04,  1.368650e-04,  1.723650e-04,  2.178650e-04,
-            2.748650e-04,  3.468650e-04,  4.378650e-04,  5.518650e-04,
-            6.958650e-04,  8.773650e-04,  1.105865e-03,  1.394365e-03])
-    Coordinates:
-        spatial_ref    float64 ...
-      * LM_gate_times  (LM_gate_times) float64 -1.135e-06 3.65e-07 ... 0.001394
-    Attributes:
-        standard_name:  LM_gate_times
-        null_value:     not_defined
-        bounds:         LM_gate_times_bnds
-        units:          seconds
-        grid_mapping:   spatial_ref
-        valid_range:    [-1.135000e-06  1.394365e-03]
-        long_name:      low moment gate times
-    -1.135e-06
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 107-108
+.. GENERATED FROM PYTHON SOURCE LINES 102-103
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-113
+.. GENERATED FROM PYTHON SOURCE LINES 103-109
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Make a figure of one of the raster data variables, using Xarray's plotter
@@ -294,6 +259,7 @@ Plotting
     new_survey.raster['magnetic_tmi'].plot(cmap='jet')
     plt.tight_layout()
     plt.show()
+
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_to_netcdf_001.png
@@ -308,28 +274,22 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.555 seconds)
+   **Total running time of the script:** (0 minutes 2.983 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_csv_skytem_to_netcdf.ipynb <plot_csv_skytem_to_netcdf.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_csv_skytem_to_netcdf.py <plot_csv_skytem_to_netcdf.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_csv_skytem_to_netcdf.ipynb <plot_csv_skytem_to_netcdf.ipynb>`
+      :download:`Download Python source code: plot_csv_skytem_to_netcdf.py <plot_csv_skytem_to_netcdf.py>`
 
 
 .. only:: html

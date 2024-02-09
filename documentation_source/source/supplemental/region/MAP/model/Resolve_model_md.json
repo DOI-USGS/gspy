@@ -108,7 +108,7 @@
                 "null_value": "not_defined",
                 "axis" : "Z",
                 "positive" : "up",
-                "vertical_datum" : "FIX ME ??"
+                "datum" : "FIX ME ??"
             },
             "ALT": {
                 "standard_name": "not_defined",

@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -31,7 +31,7 @@ Burton, B.L., Minsley, B.J., Bloss, B.R., and Kress, W.H., 2021, Airborne electr
 
 .. GENERATED FROM PYTHON SOURCE LINES 15-19
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
@@ -55,7 +55,7 @@ Initialize the Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 25-35
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Path to example files
@@ -81,7 +81,7 @@ Define input data file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 38-44
 
-.. code-block:: default
+.. code-block:: Python
 
     d_data = join(data_path, 'data//Resolve.csv')
     d_supp = join(data_path, 'data//Resolve_data_md.json')
@@ -103,7 +103,7 @@ Define input model file and associated metadata file
 
 .. GENERATED FROM PYTHON SOURCE LINES 47-53
 
-.. code-block:: default
+.. code-block:: Python
 
     m_data = join(data_path, 'model//Resolve_model.csv')
     m_supp = join(data_path, 'model//Resolve_model_md.json')
@@ -124,7 +124,7 @@ Save to NetCDF file
 
 .. GENERATED FROM PYTHON SOURCE LINES 55-58
 
-.. code-block:: default
+.. code-block:: Python
 
     d_out = join(data_path, 'model//Resolve.nc')
     survey.write_netcdf(d_out)
@@ -142,9 +142,9 @@ Reading back in the GS NetCDF file
 
 .. GENERATED FROM PYTHON SOURCE LINES 60-65
 
-.. code-block:: default
+.. code-block:: Python
 
-    new_survey = Survey().read_netcdf(d_out)
+    new_survey = Survey.open_netcdf(d_out)
 
     # Check the Survey information
     print(new_survey.xarray)
@@ -154,8 +154,6 @@ Reading back in the GS NetCDF file
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -187,75 +185,41 @@ Reading back in the GS NetCDF file
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-78
+.. GENERATED FROM PYTHON SOURCE LINES 67-90
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Make a scatter plot of a specific data variable, using GSPy's plotter
+    # plt.figure()
+    # new_survey.tabular[0].gs_tabular.scatter(hue='DTM', vmin=30, vmax=50)
+
+
+    # Subsetting by line number, and plotting by distance along that line
+    # new_survey.tabular[0].gs_tabular.subset('line', 10010)
+    tmp = new_survey.tabular[0].where(new_survey.tabular[0]['line']==10010)
     plt.figure()
-    new_survey.tabular[0].gs_tabular.scatter('DTM', vmin=30, vmax=50)
+    # plt.subplot(121)
+    # tmp.gs_tabular.plot(hue='DTM')
+    # plt.subplot(122)
+    # tmp.gs_tabular.scatter(x='x', y='DTM')
+    tmp.gs_tabular.scatter(y='DTM')
+
+    #IF YOU SPECIFY HUE ITS A 2D COLOUR Plot
+    #OTHERWISE ITS JUST A PLOT (LINE POINTS ETC)
 
     # Make a scatter plot of a specific model variable, using GSPy's plotter
-    plt.figure()
-    new_survey.tabular[1].gs_tabular.scatter('DOI_STANDARD')
+    # plt.figure()
+    # new_survey.tabular[1].gs_tabular.scatter(hue='DOI_STANDARD')
     plt.show()
 
-    # Check the model dataset
-    print(new_survey.tabular[1])
 
 
-.. rst-class:: sphx-glr-horizontal
+.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
+   :alt: plot csv resolve to netcdf
+   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
+   :class: sphx-glr-single-img
 
-
-    *
-
-      .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
-         :alt: plot csv resolve to netcdf
-         :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
-         :class: sphx-glr-multi-img
-
-    *
-
-      .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_002.png
-         :alt: plot csv resolve to netcdf
-         :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_002.png
-         :class: sphx-glr-multi-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    <xarray.Dataset>
-    Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
-    Coordinates:
-        spatial_ref       float64 ...
-      * index             (index) int32 0 1 2 3 4 5 ... 9994 9995 9996 9997 9998
-      * layer_depth       (layer_depth) float64 0.5 1.55 2.7 ... 109.2 119.7 132.5
-      * nv                (nv) int64 0 1
-        x                 (index) float64 5.36e+05 5.36e+05 ... 5.298e+05 5.297e+05
-        y                 (index) float64 1.205e+06 1.205e+06 ... 1.197e+06
-        z                 (index) float64 ...
-    Data variables: (12/18)
-        layer_depth_bnds  (layer_depth, nv) float64 ...
-        LINE              (index) int64 ...
-        LAT_WGS84_dd      (index) float64 ...
-        LON_WGS84_dd      (index) float64 ...
-        X_WGS84_Albers    (index) float64 ...
-        Y_WGS84_Albers    (index) float64 ...
-        ...                ...
-        RESDATA           (index) float64 ...
-        RESTOTAL          (index) float64 ...
-        RHO_I             (index, layer_depth) float64 ...
-        RHO_I_STD         (index, layer_depth) float64 ...
-        DOI_CONSERVATIVE  (index) float64 ...
-        DOI_STANDARD      (index) float64 66.2 78.2 78.2 78.6 ... 87.6 87.9 88.0
-    Attributes:
-        content:  inverted resistivity models
-        comment:  This dataset includes inverted resistivity models derived from ...
 
 
 
@@ -263,28 +227,22 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.644 seconds)
+   **Total running time of the script:** (0 minutes 1.497 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_csv_resolve_to_netcdf.ipynb <plot_csv_resolve_to_netcdf.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_csv_resolve_to_netcdf.py <plot_csv_resolve_to_netcdf.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_csv_resolve_to_netcdf.ipynb <plot_csv_resolve_to_netcdf.ipynb>`
+      :download:`Download Python source code: plot_csv_resolve_to_netcdf.py <plot_csv_resolve_to_netcdf.py>`
 
 
 .. only:: html

@@ -3,7 +3,7 @@
     	"content": "inverted resistivity models",
         "comment": "This dataset includes inverted resistivity models derived from processed AEM data produced by USGS"
     },
-    
+
     "inversion" : {
         "model_file" : "WI_SkyTEM_2021_InvertedModels.csv",
         "inversion_software" : "Aarhus Workbench",
@@ -12,7 +12,7 @@
 	    "comment": "Processed data were inverted in Aarhus Workbench software (v 6.0.1.0) using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models were exported to netCDF 11/2021.",
         "data_file" : "WI_SkyTEM_2021_ProcessedData.csv"
     },
-    
+
 	"coordinates" : {
    		"x" : "E_N83WTM",
     	"y" : "N_N83WTM",
@@ -26,18 +26,18 @@
             "long_name": "Depth to model layer",
             "units": "meters",
             "null_value": "not_defined",
-            "centers": [0.375,   1.16 ,   2.02 ,   
-            			2.965,   4.005,   5.145,   
-            			6.39 , 7.755,   9.255,  
-            			10.9  ,  12.7  ,  14.675,  
-            			16.845,  19.22 , 21.825,  
-            			24.685,  27.815,  31.25 ,  
-            			35.02 ,  39.15 ,  43.68 , 
-            			48.65 ,  54.095,  60.065,  
-            			66.615,  73.795,  81.67 ,  
-            			90.31 , 99.78 , 110.16 , 
-            			121.545, 134.03 , 147.72 , 
-            			162.73 , 179.19 , 197.24 , 
+            "centers": [0.375,   1.16 ,   2.02 ,
+            			2.965,   4.005,   5.145,
+            			6.39 , 7.755,   9.255,
+            			10.9  ,  12.7  ,  14.675,
+            			16.845,  19.22 , 21.825,
+            			24.685,  27.815,  31.25 ,
+            			35.02 ,  39.15 ,  43.68 ,
+            			48.65 ,  54.095,  60.065,
+            			66.615,  73.795,  81.67 ,
+            			90.31 , 99.78 , 110.16 ,
+            			121.545, 134.03 , 147.72 ,
+            			162.73 , 179.19 , 197.24 ,
             			217.035, 238.745, 262.55 , 343.75],
             "bounds": [[  0.0  ,   0.75],
 					   [  0.75,   1.57],
@@ -81,7 +81,7 @@
 					   [275.0  , 412.5 ]]
         }
     },
-    
+
     "variable_metadata": {
         "pINDEX": {
             "standard_name": "processing_index",
@@ -115,7 +115,7 @@
             "units": "day",
             "null_value": "not_defined",
             "axis" : "T",
-            "time_datum" : "January 1, 1900"
+            "datum" : "January 1, 1900"
         },
         "RECORD": {
             "standard_name": "record",
@@ -130,7 +130,7 @@
             "null_value": "not_defined",
             "axis" : "Z",
             "positive" : "up",
-            "vertical_datum" : "North American Vertical Datum of 1988 (NAVD88)"
+            "datum" : "North American Vertical Datum of 1988 (NAVD88)"
         },
         "ALT": {
             "standard_name": "altitude",
@@ -206,14 +206,14 @@
             "units": "meter",
             "null_value": "not_defined",
             "dimensions": ["index", "layer_depth"]
-        },        
+        },
         "DEP_BOT": {
             "standard_name": "depth_bottom",
             "long_name": "Bottom of model layers",
             "units": "meter",
             "null_value": "not_defined",
             "dimensions": ["index", "layer_depth"]
-        }, 
+        },
         "LINE_NO": {
             "standard_name": "line_number",
             "long_name": "Line number",

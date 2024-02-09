@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -30,7 +30,7 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 
 .. GENERATED FROM PYTHON SOURCE LINES 14-19
 
-.. code-block:: default
+.. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
@@ -50,7 +50,7 @@ First Create the Survey & Data Objects
 
 .. GENERATED FROM PYTHON SOURCE LINES 21-34
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Initialize the Survey
@@ -83,7 +83,7 @@ Survey
 
 .. GENERATED FROM PYTHON SOURCE LINES 40-45
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # The Survey's metadata is accessed through the xarray property
@@ -95,8 +95,6 @@ Survey
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -132,7 +130,7 @@ To look just at the attributes
 
 .. GENERATED FROM PYTHON SOURCE LINES 47-50
 
-.. code-block:: default
+.. code-block:: Python
 
     print('Survey Attributes:\n')
     pprint(survey.xarray.attrs)
@@ -142,8 +140,6 @@ To look just at the attributes
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -169,7 +165,7 @@ Or expand a specific variable
 
 .. GENERATED FROM PYTHON SOURCE LINES 52-55
 
-.. code-block:: default
+.. code-block:: Python
 
     print('Survey Information:\n')
     print(survey.xarray['survey_information'])
@@ -179,8 +175,6 @@ Or expand a specific variable
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -216,7 +210,7 @@ type is present then the xarray object is returned simply by the name of the gro
 
 .. GENERATED FROM PYTHON SOURCE LINES 61-70
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Tabular
@@ -233,8 +227,6 @@ type is present then the xarray object is returned simply by the name of the gro
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     Tabular:
@@ -246,23 +238,23 @@ type is present then the xarray object is returned simply by the name of the gro
       * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
       * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
       * nv               (nv) int64 0 1
-        x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
+        x                (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+        y                (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+        z                (index) float64 45.83 46.61 46.95 ... 177.0 179.4 177.2
     Data variables: (12/62)
         gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
         Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
         Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-        Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
+        Fiducial         (index) float64 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
         Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
         Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
         ...               ...
-        Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
-        Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
-        Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
-        Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
-        Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
-        Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+        Z_PrimaryField   (index) float64 14.69 14.53 15.06 ... 16.77 15.95 14.99
+        Z_VLF1           (index) float64 3.696 3.733 3.729 ... 3.732 3.734 3.71
+        Z_VLF2           (index) float64 3.684 3.711 3.705 ... 3.701 3.717 3.699
+        Z_VLF3           (index) float64 3.637 3.607 3.623 ... 3.654 3.602 3.614
+        Z_VLF4           (index) float64 3.567 3.576 3.621 ... 3.616 3.594 3.586
+        Z_Geofact        (index) float64 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
     Attributes:
         content:  raw data
         comment:  This dataset includes minimally processed (raw) AEM data
@@ -293,7 +285,7 @@ Multiple Groups
 
 .. GENERATED FROM PYTHON SOURCE LINES 72-79
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # If more than one Dataset is present under the group, then the list begins indexing
@@ -315,7 +307,7 @@ Now the first dataset is accessed at index 0
 
 .. GENERATED FROM PYTHON SOURCE LINES 81-84
 
-.. code-block:: default
+.. code-block:: Python
 
     print('First Tabular Group:\n')
     print(survey.tabular[0])
@@ -325,8 +317,6 @@ Now the first dataset is accessed at index 0
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -339,23 +329,23 @@ Now the first dataset is accessed at index 0
       * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
       * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
       * nv               (nv) int64 0 1
-        x                (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y                (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z                (index) float32 45.83 46.61 46.95 ... 177.0 179.4 177.2
+        x                (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+        y                (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+        z                (index) float64 45.83 46.61 46.95 ... 177.0 179.4 177.2
     Data variables: (12/62)
         gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
         Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
         Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-        Fiducial         (index) float32 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
+        Fiducial         (index) float64 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
         Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
         Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
         ...               ...
-        Z_PrimaryField   (index) float32 14.69 14.53 15.06 ... 16.76 15.95 14.99
-        Z_VLF1           (index) float32 3.696 3.733 3.729 ... 3.732 3.734 3.71
-        Z_VLF2           (index) float32 3.684 3.711 3.705 ... 3.701 3.717 3.699
-        Z_VLF3           (index) float32 3.637 3.607 3.623 ... 3.654 3.602 3.614
-        Z_VLF4           (index) float32 3.567 3.576 3.621 ... 3.616 3.594 3.586
-        Z_Geofact        (index) float32 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+        Z_PrimaryField   (index) float64 14.69 14.53 15.06 ... 16.77 15.95 14.99
+        Z_VLF1           (index) float64 3.696 3.733 3.729 ... 3.732 3.734 3.71
+        Z_VLF2           (index) float64 3.684 3.711 3.705 ... 3.701 3.717 3.699
+        Z_VLF3           (index) float64 3.637 3.607 3.623 ... 3.654 3.602 3.614
+        Z_VLF4           (index) float64 3.567 3.576 3.621 ... 3.616 3.594 3.586
+        Z_Geofact        (index) float64 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
     Attributes:
         content:  raw data
         comment:  This dataset includes minimally processed (raw) AEM data
@@ -369,7 +359,7 @@ and the second is located at index 1
 
 .. GENERATED FROM PYTHON SOURCE LINES 86-89
 
-.. code-block:: default
+.. code-block:: Python
 
     print('Second Tabular Group:\n')
     print(survey.tabular[1])
@@ -379,8 +369,6 @@ and the second is located at index 1
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -395,9 +383,9 @@ and the second is located at index 1
       * layer_depth              (layer_depth) float64 1.5 4.65 ... 424.2 467.5
       * nv                       (nv) int64 0 1
       * gate_times               (gate_times) float64 1.085e-05 ... 0.01338
-        x                        (index) float32 3.579e+05 3.579e+05 ... 4.906e+05
-        y                        (index) float32 1.211e+06 1.211e+06 ... 1.577e+06
-        z                        (index) float32 45.83 46.61 46.95 ... 179.4 177.2
+        x                        (index) float64 3.579e+05 3.579e+05 ... 4.906e+05
+        y                        (index) float64 1.211e+06 1.211e+06 ... 1.577e+06
+        z                        (index) float64 45.83 46.61 46.95 ... 179.4 177.2
     Data variables: (12/49)
         layer_depth_bnds         (layer_depth, nv) float64 0.0 3.0 ... 445.9 489.1
         gate_times_bnds          (gate_times, nv) float64 5.43e-06 ... 0.01666
@@ -440,7 +428,7 @@ corresponds to the rows of the input text file representing individual measureme
 
 .. GENERATED FROM PYTHON SOURCE LINES 103-105
 
-.. code-block:: default
+.. code-block:: Python
 
     print(survey.tabular[1]['index'])
 
@@ -450,8 +438,6 @@ corresponds to the rows of the input text file representing individual measureme
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     <xarray.DataArray 'index' (index: 20701)>
@@ -459,9 +445,9 @@ corresponds to the rows of the input text file representing individual measureme
     Coordinates:
         spatial_ref  float64 0.0
       * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-        x            (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y            (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z            (index) float32 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
+        x            (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+        y            (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+        z            (index) float64 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
     Attributes:
         standard_name:  index
         long_name:      Index of individual data points
@@ -481,7 +467,7 @@ to the dimension through the "bounds" attribute.
 
 .. GENERATED FROM PYTHON SOURCE LINES 109-113
 
-.. code-block:: default
+.. code-block:: Python
 
     print('example non-discrete dimension:\n')
     print(survey.tabular[1]['gate_times'])
@@ -492,8 +478,6 @@ to the dimension through the "bounds" attribute.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -564,7 +548,7 @@ such as ``index``, ``gate_times``, ``nv`` in this example:
 
 .. GENERATED FROM PYTHON SOURCE LINES 123-125
 
-.. code-block:: default
+.. code-block:: Python
 
     print(survey.tabular[0].coords)
 
@@ -574,8 +558,6 @@ such as ``index``, ``gate_times``, ``nv`` in this example:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     Coordinates:
@@ -583,9 +565,9 @@ such as ``index``, ``gate_times``, ``nv`` in this example:
       * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
       * gate_times   (gate_times) float64 1.085e-05 3.255e-05 ... 0.008301 0.01338
       * nv           (nv) int64 0 1
-        x            (index) float32 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y            (index) float32 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z            (index) float32 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
+        x            (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
+        y            (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
+        z            (index) float64 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
 
 
 
@@ -618,7 +600,7 @@ data dimensions correspond directly to either spatial or temporal coordinates (`
 
 .. GENERATED FROM PYTHON SOURCE LINES 145-147
 
-.. code-block:: default
+.. code-block:: Python
 
     print(survey.raster.coords)
 
@@ -627,8 +609,6 @@ data dimensions correspond directly to either spatial or temporal coordinates (`
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -675,7 +655,7 @@ contain a brief summary of the contents of the dataset.
 
 .. GENERATED FROM PYTHON SOURCE LINES 172-174
 
-.. code-block:: default
+.. code-block:: Python
 
     pprint(survey.tabular[1].attrs)
 
@@ -684,8 +664,6 @@ contain a brief summary of the contents of the dataset.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -707,7 +685,7 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. GENERATED FROM PYTHON SOURCE LINES 180-180
 
-.. code-block:: default
+.. code-block:: Python
 
     pprint(survey.tabular[1]['conductivity'].attrs)
 
@@ -715,16 +693,14 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     {'format': '30e15.6',
      'grid_mapping': 'spatial_ref',
-     'long_name': 'Layer conductivity',
+     'long_name': 'not_defined',
      'null_value': 'not_defined',
      'standard_name': 'conductivity',
-     'units': 'S/m',
+     'units': 'not_defined',
      'valid_range': array([1.e-04, 1.e+01])}
 
 
@@ -733,28 +709,22 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.894 seconds)
+   **Total running time of the script:** (0 minutes 1.320 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_xarray_methods.ipynb <plot_xarray_methods.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_xarray_methods.py <plot_xarray_methods.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_xarray_methods.ipynb <plot_xarray_methods.ipynb>`
+      :download:`Download Python source code: plot_xarray_methods.py <plot_xarray_methods.py>`
 
 
 .. only:: html

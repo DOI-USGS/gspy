@@ -111,7 +111,8 @@ class Tabular(Dataset):
         # Read the GSPy json file.
         json_md = self.read_metadata(metadata_file)
 
-        file = self.file_handler.read(filename)
+        # Read in the data using the respective file type handler
+        file = self.file_handler.read(filename, **kwargs)
 
         # Add the index coordinate
         self.add_coordinate_from_values('index',
@@ -124,21 +125,21 @@ class Tabular(Dataset):
                                             'null_value'    : 'not_defined'})
 
         # Add the user defined coordinates-dimensions from the json file
-        dimensions = json_md['dimensions']
-        coordinates = json_md['coordinates']
-        reverse_coordinates = {v:k for k,v in coordinates.items()}
+        dimensions = json_md.get('dimensions')
+        coordinates = json_md.get('coordinates')
 
-        for key in list(dimensions.keys()):
-            b = reverse_coordinates.get(key, key)
-            # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
-            if isinstance(dimensions[key], dict):
-                # dicts are defined explicitly in the json file.
-                self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+        if coordinates is not None:
+            if dimensions is not None:
+                for key in list(dimensions.keys()):
+                    b = coordinates.get(key, key)
+                    # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
+                    if isinstance(dimensions[key], dict):
+                        # dicts are defined explicitly in the json file.
+                        self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
         # Write out a template json file when no variable metadata is found
         if not 'variable_metadata' in json_md:
-            # ??? Fix Me for ASEG
-            cls._create_variable_metadata_template(filename, file.df.columns)
+            cls._create_variable_metadata_template(metadata_file, file.df.columns, **json_md)
 
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
@@ -155,6 +156,8 @@ class Tabular(Dataset):
                                             is_projected = self.is_projected,
                                             is_dimension=False,
                                             **dic)
+
+
 
         column_counts = cls.count_column_headers(file.columns)
 
@@ -226,28 +229,30 @@ class Tabular(Dataset):
         """
         return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
 
-    # def subset(self, key, value):
-    #     """Subset xarray where xarray[key] == value
+    def get_fortran_format(self, key, default_f32='f10.3', default_f64='g16.6'):
 
-    #     Parameters
-    #     ----------
-    #     key : str
-    #         Key in xarray Dataset
-    #     value : scalar
-    #         Subset where entry equals value
+        values = self._obj.data_vars[key]
 
-    #     Returns
-    #     -------
-    #     out : gspy.Tabular
+        if 'format' in values.attrs:
+            return values.attrs['format']
 
-    #     """
-    #     out = type(self)()
+        dtype = values.dtype
+        if dtype == np.int32:
 
-    #     out._xarray = self.where(self[key] == value)
-    #     out._spatial_ref = self.spatial_ref
-    #     out._key_mapping = self.key_mapping
+            # Get the max required spaces
+            large = np.max(np.abs(values))
+            p1 = values.min() < 0.0
 
-    #     return out
+            out = "i{}".format(large%10 + p1)
+        if dtype == np.float32:
+            out = default_f32
+        if dtype == np.float64:
+            out = default_f64
+
+        if values.ndim == 2:
+            out = "{}".format(values.shape[1]) + out
+
+        return out
 
     def write_netcdf(self, filename, group='tabular'):
         """Write to netcdf file

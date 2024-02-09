@@ -8,11 +8,11 @@ import rioxarray
 
 from pprint import pprint
 
+from ...utilities import dump_metadata_to_file
 from .Variable_Metadata import variable_metadata
 from .xarray_gs.Dataset import Dataset
-# from .json_handler import attach_coordinate_to_xarray_from_dict
-
 import xarray as xr
+
 @xr.register_dataset_accessor("gs_raster")
 class Raster(Dataset):
     """Class defining a set of gridded data (2D or 3D).
@@ -216,7 +216,6 @@ class Raster(Dataset):
 
         return self
 
-
     def read_tif(self, filename):
         """Reads GeoTIFF file
 
@@ -326,8 +325,8 @@ class Raster(Dataset):
         """
         super().write_zarr(filename, group)
 
-    def write_metadata_template(self):
-        """Write JSON metadata template
+    def write_metadata_template(self, filename="raster_md.yml"):
+        """Write JSON metadata template for a raster dataset
 
         Outputs a template JSON metadata file needed for adding Raster data. All required
         dictionaries are printed (dataset_attrs, key_mapping, raster_files, variable_metadata).
@@ -368,7 +367,7 @@ class Raster(Dataset):
                 "origin" : 0.0,
                 "axis" : "Z",
                 "positive" : "down",
-                "vertical_datum" : "ground surface"
+                "datum" : "ground surface"
                 }
         }
 
@@ -412,8 +411,7 @@ class Raster(Dataset):
                 }
             }
 
-        with open("raster_md.json", "w") as f:
-            json.dump(out, f, indent=4)
+        dump_metadata_to_file(out, filename)
 
     def to_tif(self):
         """ Export GeoTIFF files from xarray

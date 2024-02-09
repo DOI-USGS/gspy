@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -29,7 +29,7 @@ This image shows a snippet of what the output template json file contains. Each 
 
 .. GENERATED FROM PYTHON SOURCE LINES 13-19
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from os.path import join
@@ -45,7 +45,7 @@ Generate the Variable Metadata Template for My Dataset
 
 .. GENERATED FROM PYTHON SOURCE LINES 22-32
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Path to example files
@@ -60,7 +60,7 @@ Generate the Variable Metadata Template for My Dataset
 
 .. GENERATED FROM PYTHON SOURCE LINES 33-50
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Define input data file (CSV format) and the
@@ -87,30 +87,19 @@ Generate the Variable Metadata Template for My Dataset
    :align: center
 
 
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** ( 0 minutes  0.000 seconds)
-
-
 .. _sphx_glr_download_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: help_I_have_no_variable_metadata.ipynb <help_I_have_no_variable_metadata.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: help_I_have_no_variable_metadata.py <help_I_have_no_variable_metadata.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: help_I_have_no_variable_metadata.ipynb <help_I_have_no_variable_metadata.ipynb>`
+      :download:`Download Python source code: help_I_have_no_variable_metadata.py <help_I_have_no_variable_metadata.py>`
 
 
 .. only:: html

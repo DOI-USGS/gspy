@@ -30,7 +30,7 @@ class csv_gs(object):
         self = cls()
         # Read the csv file
         self._df = pd.read_csv(filename, na_values=['NaN'])
-        weird = (self.df.applymap(type) != self.df.iloc[0].apply(type)).any(axis=0)
+        weird = (self.df.map(type) != self.df.iloc[0].apply(type)).any(axis=0)
         for w in weird.keys():
             if weird[w]:
                 self.df[w] = pd.to_numeric(self.df[w], errors='coerce')

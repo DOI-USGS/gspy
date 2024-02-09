@@ -57,7 +57,7 @@ survey.write_netcdf(d_out)
 
 #%%
 # Reading back in the GS NetCDF file
-new_survey = Survey().read_netcdf(d_out)
+new_survey = Survey.open_netcdf(d_out)
 
 # Check the Survey information
 print(new_survey.xarray)
@@ -66,13 +66,24 @@ print(new_survey.xarray)
 # Plotting
 
 # Make a scatter plot of a specific data variable, using GSPy's plotter
+# plt.figure()
+# new_survey.tabular[0].gs_tabular.scatter(hue='DTM', vmin=30, vmax=50)
+
+
+# Subsetting by line number, and plotting by distance along that line
+# new_survey.tabular[0].gs_tabular.subset('line', 10010)
+tmp = new_survey.tabular[0].where(new_survey.tabular[0]['line']==10010)
 plt.figure()
-new_survey.tabular[0].gs_tabular.scatter('DTM', vmin=30, vmax=50)
+# plt.subplot(121)
+# tmp.gs_tabular.plot(hue='DTM')
+# plt.subplot(122)
+# tmp.gs_tabular.scatter(x='x', y='DTM')
+tmp.gs_tabular.scatter(y='DTM')
+
+#IF YOU SPECIFY HUE ITS A 2D COLOUR Plot
+#OTHERWISE ITS JUST A PLOT (LINE POINTS ETC)
 
 # Make a scatter plot of a specific model variable, using GSPy's plotter
-plt.figure()
-new_survey.tabular[1].gs_tabular.scatter('DOI_STANDARD')
+# plt.figure()
+# new_survey.tabular[1].gs_tabular.scatter(hue='DOI_STANDARD')
 plt.show()
-
-# Check the model dataset
-print(new_survey.tabular[1])

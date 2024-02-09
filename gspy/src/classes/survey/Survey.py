@@ -1,5 +1,4 @@
 import os
-import json
 from copy import deepcopy
 from pprint import pprint
 import xarray as xr
@@ -9,7 +8,7 @@ import h5py
 from ..data.xarray_gs.Dataset import Dataset
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
-from ...utilities import flatten
+from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
 
 import xarray as xr
 
@@ -39,7 +38,7 @@ class Survey(object):
     Parameters
     ----------
     metadata : str or dict
-        * If str, a json metadata file
+        * If str, a metadata file
         * If dict, dictionary of survey metadata.
 
     Returns
@@ -110,7 +109,7 @@ class Survey(object):
             self._xarray = kwargs
         else:
 
-            assert isinstance(kwargs, dict), TypeError('json_metadata must have type dict')
+            assert isinstance(kwargs, dict), TypeError('metadata must have type dict')
             assert "dataset_attrs" in kwargs, ValueError("Survey metadata must contain entry 'dataset_attrs")
             assert "spatial_ref" in kwargs, ValueError("Survey metadata must contain entry 'spatial_ref")
             assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError("dataset_attrs must contain at least {}".format(required))
@@ -175,12 +174,12 @@ class Survey(object):
         self._tabular.append(out)
 
     def read_metadata(self, filename=None):
-        """Read json metadata for the survey
+        """Read metadata for the survey
 
         Parameters
         ----------
         filename : str
-            Json file.
+            Metadata file.
 
         Returns
         -------
@@ -197,13 +196,10 @@ class Survey(object):
             raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
 
         # reading the data from the file
-        with open(filename) as f:
-            s = f.read()
-
-        return json.loads(s)
+        return load_metadata_from_file(filename)
 
     @staticmethod
-    def write_metadata_template():
+    def write_metadata_template(filename="survey_md.yml"):
         """Creates a metadata template for a Survey
 
         If a Survey metadata file is not found or passed, an empty template file is generated and
@@ -271,8 +267,7 @@ class Survey(object):
                 }
         }
 
-        with open("survey_md.json", "w") as f:
-            json.dump(out, f, indent=4)
+        dump_metadata_to_file(out, filename=filename)
 
     @classmethod
     def open_netcdf(cls, filename, **kwargs):

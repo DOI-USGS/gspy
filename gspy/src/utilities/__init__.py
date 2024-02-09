@@ -1,3 +1,17 @@
+import json
+import yaml
+
+def check_key_whitespace(this, flag=False):
+    if not isinstance(this, dict):
+        return flag
+    for key, item in this.items():
+        if ' ' in key:
+            print('key "{}" contains whitespace. Please remove!'.format(key))
+            key = key.strip()
+            flag = True
+        flag = check_key_whitespace(item, flag)
+    return flag
+
 def flatten(current, key, result):
     """Unpacks a dictionary of dictionaries into a single dict with different keys
     """
@@ -20,3 +34,21 @@ def unflatten(old):
         else:
             out[key] = item
     return out
+
+def dump_metadata_to_file(dic, filename):
+
+    with open(filename, "w") as f:
+        if 'json' in filename:
+            json.dump(dic, f, indent=4)
+        elif 'yml' in filename:
+            yaml.dump(dic, f)
+        else:
+            raise Exception("Unknown extension for metadata file {}, please use json or yml".format(filename))
+
+def load_metadata_from_file(filename):
+    with open(filename) as f:
+        if 'json' in filename:
+            md = json.loads(f.read())
+        elif 'yml' in filename:
+            md = yaml.safe_load(f)
+    return md

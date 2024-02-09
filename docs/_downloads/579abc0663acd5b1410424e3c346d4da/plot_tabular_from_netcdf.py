@@ -23,7 +23,7 @@ data_path = '..//..//supplemental//'
 
 # Read in ASEG data file
 data_file = data_path + 'region//MAP//data//Tempest.nc'
-survey = Survey().read_netcdf(data_file)
+survey = Survey.open_netcdf(data_file)
 
 # Plot a map of the scattered data points
 plt.figure()
