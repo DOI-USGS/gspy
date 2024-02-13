@@ -18,18 +18,18 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	cp -r $(BUILDDIR)/$@/* ../docs
+	mv -r $(BUILDDIR)/$@/* ../docs
 
 clean:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	find ./source/examples -name "*.md5" -type f -delete
-	find ./source/examples -name "*.pickle" -type f -delete
-	find ./source/examples -name "*.ipynb" -type f -delete
-	find ./source/examples -name "plot_*.rst" -type f -delete
-	find ./source/examples -name "*.h5" -type f -delete
-	find ./source/examples -name "*.vtk" -type f -delete
-	find ./source/examples -name "*.png" -type f -delete
-	find ./source/examples -name "index.rst" -type f -delete
+	find ./source -name "*.md5" -type f -delete
+	find ./source -name "*.pickle" -type f -delete
+	find ./source -name "*.ipynb" -type f -delete
+	find ./source -name "plot_*.rst" -type f -delete
+	find ./source -name "*.h5" -type f -delete
+	find ./source -name "*.vtk" -type f -delete
+	find ./source -name "*.png" -type f -delete
+	find ./source -name "index.rst" -type f -delete
 
 cleanGallery:
 	find ./source/examples -name "*.md5" -type f -delete

@@ -5,6 +5,7 @@ egg-info
 *checkpoint*
 *.h5
 *.nc
+*.pickle
 git_push.sh
 build/
 documentation_source/build/

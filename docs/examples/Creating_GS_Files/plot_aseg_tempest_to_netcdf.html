@@ -141,6 +141,10 @@ Define input data file and associated metadata file</p>
 <span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>gspy/src/utilities/aseg_gdf_handler.py:144: SyntaxWarning: invalid escape sequence &#39;\s&#39;
+  self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, sep=&#39;\s+&#39;)
+</pre></div>
+</div>
 <p>2. Inverted Models -
 Import inverted AEM models from ASEG-format.
 Define input data file and associated metadata file</p>
@@ -202,7 +206,7 @@ Attributes:
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" alt="plot aseg tempest to netcdf" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.511 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 14.141 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/5d748e1ff1eae67bd06af2fe99354ec8/plot_aseg_tempest_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_aseg_tempest_to_netcdf.ipynb</span></code></a></p>

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:09.642** total execution time for 5 files **from examples/Creating_GS_Files**:
+**00:20.493** total execution time for 5 files **from examples/Creating_GS_Files**:
 
 .. container::
 
@@ -33,16 +33,16 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py` (``plot_aseg_tempest_to_netcdf.py``)
-     - 00:03.511
+     - 00:14.141
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py` (``plot_csv_skytem_to_netcdf.py``)
-     - 00:02.983
+     - 00:02.890
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py` (``plot_tifs_to_netcdf.py``)
-     - 00:01.652
+     - 00:02.026
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py` (``plot_csv_resolve_to_netcdf.py``)
-     - 00:01.497
+     - 00:01.437
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``help_I_have_no_variable_metadata.py``)
      - 00:00.000
