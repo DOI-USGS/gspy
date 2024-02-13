@@ -32,7 +32,7 @@ from gspy import Survey
 data_path = '..//..//supplemental//region//WI'
 
 # Survey metadata file
-metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
+metadata = join(data_path, "data//WI_SkyTEM_survey_md.json")
 
 # Establish the Survey
 survey = Survey(metadata)

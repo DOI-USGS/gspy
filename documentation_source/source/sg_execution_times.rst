@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:22.138** total execution time for 7 files **from all galleries**:
+**00:11.431** total execution time for 7 files **from all galleries**:
 
 .. container::
 
@@ -33,22 +33,22 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py` (``examples/Creating_GS_Files/plot_aseg_tempest_to_netcdf.py``)
-     - 00:14.141
+     - 00:03.511
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py` (``examples/Creating_GS_Files/plot_csv_skytem_to_netcdf.py``)
-     - 00:02.890
+     - 00:02.983
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py` (``examples/Creating_GS_Files/plot_tifs_to_netcdf.py``)
-     - 00:02.026
+     - 00:01.652
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py` (``examples/Creating_GS_Files/plot_csv_resolve_to_netcdf.py``)
-     - 00:01.437
+     - 00:01.497
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
-     - 00:01.199
+     - 00:01.320
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
-     - 00:00.447
+     - 00:00.469
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``examples/Creating_GS_Files/help_I_have_no_variable_metadata.py``)
      - 00:00.000
