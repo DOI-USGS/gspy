@@ -66,6 +66,13 @@ echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 echo "Tagged with $NEW_TAG"
 
+cd documentation_source
+make html
+make clean
+cd ..
+git add docs/
+git commit -m "docs"
+
 # Github stuff
 python update_version.py $NEW_TAG
 git add setup.py
