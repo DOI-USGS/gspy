@@ -80,7 +80,7 @@ git commit -m "update version"
 
 git tag $NEW_TAG
 git push --tags
-git push origin master
+git push origin master develop
 
 # Pypi stuff
 python -m build
