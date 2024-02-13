@@ -10,7 +10,7 @@ from setuptools import find_packages, setup
 from distutils.command.sdist import sdist
 cmdclass={'sdist': sdist}
 
-__version__ = '1.1.1'
+__version__ = '1.2.0'
 
 setup(name='gspy',
     packages=find_packages(),
