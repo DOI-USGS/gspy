@@ -68,7 +68,7 @@ Initialize the Survey
     data_path = '..//..//supplemental//region//WI'
 
     # Survey metadata file
-    metadata = join(data_path, "data//WI_SkyTEM_survey_md.json")
+    metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
 
     # Establish the Survey
     survey = Survey(metadata)
@@ -274,7 +274,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.983 seconds)
+   **Total running time of the script:** (0 minutes 2.803 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py:
