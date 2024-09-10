@@ -147,7 +147,7 @@ class Coordinate(DataArray):
         out = name
         if is_projected:
             if name in ('x', 'y'):
-                out = "projection_{}_coordinate".format(name)
+                out = f"projection_{name}_coordinate"
         return out
 
     @staticmethod
