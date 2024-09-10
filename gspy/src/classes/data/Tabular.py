@@ -279,3 +279,62 @@ class Tabular(Dataset):
 
         """
         super().write_zarr(filename, group)
+
+
+    def plot_cross_section(self, line_number, variable, hang_from='elevation', **kwargs):
+
+        keys = ['line', variable, 'layer_depth_bnds']
+
+        if hang_from is not None:
+            keys.append(hang_from)
+
+        subset = self._obj[keys]
+        subset = subset.where(subset.line == line_number, drop=True)
+
+        from geobipy import StatArray, RectilinearMesh2D, Model
+
+        x = subset.gs_tabular.x_axis(kwargs.pop('axis', 'x'))
+
+        z = subset['layer_depth_bnds'].values
+        z = np.hstack([z[:, 0, 0], z[-1, -1, 0]])
+
+        if hang_from is not None:
+            hanger = subset[hang_from]
+            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
+                                    y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']),
+                                    y_relative_to = StatArray(hanger.values, name=hanger.attrs['standard_name'], units=hanger.attrs['units']))
+        else:
+            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
+                                     y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']))
+
+        v = subset[variable]
+        model = Model(mesh = mesh, values=StatArray(v.values, name=v.attrs['standard_name'], units=v.attrs['units']))
+
+        return model.pcolor(**kwargs)
+
+    @property
+    def distance_along_line(self):
+        # Check the crs
+        if self.is_projected:
+            out = np.sqrt((self._obj['x'] - self._obj['x'][0])**2.0 + (self._obj['y'] - self._obj['y'][0])**2.0)
+            out.attrs['standard_name'] = 'Distance'
+            out.attrs['units'] = self._obj['x'].attrs['units']
+            return out
+
+        else:
+            # Haversine
+            from ...utilities.maths import haversine_distance
+            out = haversine_distance(self._obj['x'], self._obj['y'], self._obj['x'][0], self._obj['y'][0])
+            out.attrs['standard_name'] = 'Distance'
+            out.attrs['units'] = 'm'
+            return out
+
+    def x_axis(self, axis):
+
+        if axis in ['x', 'y']:
+            return self._obj[axis]
+        elif axis == 'distance':
+            return self.distance_along_line
+
+
+        assert False, ValueError("axis must be in ['x', 'y', 'distance']")
