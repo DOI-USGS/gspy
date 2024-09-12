@@ -21,7 +21,7 @@ dependencies = {file = ["requirements.txt"]}
 [project.urls]
 "Homepage" = "https://github.com/usgs/gspy"
 
-[geobipy.optional-dependencies]
+[project.optional-dependencies]
 docs = ["sphinx_gallery", "sphinx_rtd_theme", "twine"]
 plotting = ["geobipy"]
 
