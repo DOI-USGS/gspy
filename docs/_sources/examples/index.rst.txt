@@ -9,6 +9,9 @@ Examples
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 
@@ -23,10 +26,11 @@ Creating GS Files
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as wel...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:">
 
 .. only:: html
 
@@ -43,7 +47,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:">
 
 .. only:: html
 
@@ -60,7 +64,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti...">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension.">
 
 .. only:: html
 
@@ -77,7 +81,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata.">
 
 .. only:: html
 
@@ -94,7 +98,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:">
 
 .. only:: html
 
@@ -108,6 +112,8 @@ Creating GS Files
       <div class="sphx-glr-thumbnail-title">Multi-dataset Survey</div>
     </div>
 
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 
@@ -132,10 +138,11 @@ Interacting With GS Files
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xa...">
+    <div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xarray Datasets. This example demonstrates how to access the xarray object for each class, and methods for exploring the data and metadata.">
 
 .. only:: html
 
@@ -152,7 +159,7 @@ Interacting With GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ...">
+    <div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the Survey adhere to the same CRS.">
 
 .. only:: html
 
@@ -169,6 +176,25 @@ Interacting With GS Files
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Plotting Cross Sections">
+
+.. only:: html
+
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_cross_section_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_cross_section.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plotting Cross Sections</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
     </div>
 
 
@@ -177,6 +203,7 @@ Interacting With GS Files
 
    /examples/Interacting_With_GS_Files/plot_xarray_methods
    /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
+   /examples/Interacting_With_GS_Files/plot_cross_section
 
 
 .. only:: html

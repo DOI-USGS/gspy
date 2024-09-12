@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -157,16 +157,16 @@ Reading back in the GS NetCDF file
 
  .. code-block:: none
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 48B
     Dimensions:                 ()
     Coordinates:
-        spatial_ref             float64 ...
+        spatial_ref             float64 8B ...
     Data variables:
-        survey_information      float64 ...
-        survey_units            float64 ...
-        system_information      float64 ...
-        flightline_information  float64 ...
-        survey_equipment        float64 ...
+        survey_information      float64 8B ...
+        survey_units            float64 8B ...
+        system_information      float64 8B ...
+        flightline_information  float64 8B ...
+        survey_equipment        float64 8B ...
     Attributes:
         title:        Example Resolve Airborne Electromagnetic (AEM) Raw Data
         institution:  USGS Geology, Geophysics, & Geochemistry Science Center
@@ -227,7 +227,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.595 seconds)
+   **Total running time of the script:** (0 minutes 1.577 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:
@@ -243,6 +243,10 @@ Plotting
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_csv_resolve_to_netcdf.py <plot_csv_resolve_to_netcdf.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_csv_resolve_to_netcdf.zip <plot_csv_resolve_to_netcdf.zip>`
 
 
 .. only:: html

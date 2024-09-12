@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -100,16 +100,16 @@ Survey
 
     Survey:
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 48B
     Dimensions:                 ()
     Coordinates:
-        spatial_ref             float64 0.0
+        spatial_ref             float64 8B 0.0
     Data variables:
-        survey_information      float64 nan
-        survey_units            float64 nan
-        system_information      float64 nan
-        flightline_information  float64 nan
-        survey_equipment        float64 nan
+        survey_information      float64 8B nan
+        survey_units            float64 8B nan
+        system_information      float64 8B nan
+        flightline_information  float64 8B nan
+        survey_equipment        float64 8B nan
     Attributes:
         title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
         institution:  USGS Geology, Geophysics, & Geochemistry Science Center
@@ -180,10 +180,10 @@ Or expand a specific variable
 
     Survey Information:
 
-    <xarray.DataArray 'survey_information' ()>
+    <xarray.DataArray 'survey_information' ()> Size: 8B
     array(nan)
     Coordinates:
-        spatial_ref  float64 0.0
+        spatial_ref  float64 8B 0.0
     Attributes:
         contractor_project_number:  603756FWA
         contractor:                 CGG Canada Services Ltd.
@@ -231,47 +231,47 @@ type is present then the xarray object is returned simply by the name of the gro
 
     Tabular:
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 20MB
     Dimensions:          (index: 20701, gate_times: 15, nv: 2)
     Coordinates:
-        spatial_ref      float64 0.0
-      * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-      * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
-      * nv               (nv) int64 0 1
-        x                (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y                (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z                (index) float64 45.83 46.61 46.95 ... 177.0 179.4 177.2
+        spatial_ref      float64 8B 0.0
+      * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+      * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+      * nv               (nv) int64 16B 0 1
+        x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
+        y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
+        z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
     Data variables: (12/62)
-        gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
-        Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
-        Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-        Fiducial         (index) float64 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
-        Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
-        Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
+        gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
+        Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
+        Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
+        Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
+        Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
+        Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
         ...               ...
-        Z_PrimaryField   (index) float64 14.69 14.53 15.06 ... 16.77 15.95 14.99
-        Z_VLF1           (index) float64 3.696 3.733 3.729 ... 3.732 3.734 3.71
-        Z_VLF2           (index) float64 3.684 3.711 3.705 ... 3.701 3.717 3.699
-        Z_VLF3           (index) float64 3.637 3.607 3.623 ... 3.654 3.602 3.614
-        Z_VLF4           (index) float64 3.567 3.576 3.621 ... 3.616 3.594 3.586
-        Z_Geofact        (index) float64 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+        Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
+        Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
+        Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
+        Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
+        Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
+        Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
     Attributes:
         content:  raw data
         comment:  This dataset includes minimally processed (raw) AEM data
 
     Raster:
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 6MB
     Dimensions:       (x: 599, nv: 2, y: 1212)
     Coordinates:
-        spatial_ref   float64 0.0
-      * x             (x) float64 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
-      * nv            (nv) int64 0 1
-      * y             (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        spatial_ref   float64 8B 0.0
+      * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * nv            (nv) int64 16B 0 1
+      * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Data variables:
-        x_bnds        (x, nv) float64 2.925e+05 2.931e+05 ... 6.513e+05 6.519e+05
-        y_bnds        (y, nv) float64 1.607e+06 1.606e+06 ... 8.805e+05 8.799e+05
-        magnetic_tmi  (y, x) float64 1.701e+38 1.701e+38 ... 1.701e+38 1.701e+38
+        x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
+        y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
+        magnetic_tmi  (y, x) float64 6MB 1.701e+38 1.701e+38 ... 1.701e+38 1.701e+38
     Attributes:
         comment:  <additional details or ancillary information>
         content:  gridded magnetic map
@@ -322,30 +322,30 @@ Now the first dataset is accessed at index 0
 
     First Tabular Group:
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 20MB
     Dimensions:          (index: 20701, gate_times: 15, nv: 2)
     Coordinates:
-        spatial_ref      float64 0.0
-      * index            (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-      * gate_times       (gate_times) float64 1.085e-05 3.255e-05 ... 0.01338
-      * nv               (nv) int64 0 1
-        x                (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y                (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z                (index) float64 45.83 46.61 46.95 ... 177.0 179.4 177.2
+        spatial_ref      float64 8B 0.0
+      * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+      * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+      * nv               (nv) int64 16B 0 1
+        x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
+        y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
+        z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
     Data variables: (12/62)
-        gate_times_bnds  (gate_times, nv) float64 5.43e-06 1.628e-05 ... 0.01666
-        Line             (index) int32 225401 225401 225401 ... 262001 262001 262001
-        Flight           (index) int32 10 10 10 10 10 10 10 ... 70 70 70 70 70 70 70
-        Fiducial         (index) float64 7.836e+03 7.836e+03 ... 1.282e+04 1.282e+04
-        Proj_CGG         (index) int32 603756 603756 603756 ... 603756 603756 603756
-        Proj_Client      (index) int32 9999 9999 9999 9999 ... 9999 9999 9999 9999
+        gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
+        Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
+        Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
+        Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
+        Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
+        Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
         ...               ...
-        Z_PrimaryField   (index) float64 14.69 14.53 15.06 ... 16.77 15.95 14.99
-        Z_VLF1           (index) float64 3.696 3.733 3.729 ... 3.732 3.734 3.71
-        Z_VLF2           (index) float64 3.684 3.711 3.705 ... 3.701 3.717 3.699
-        Z_VLF3           (index) float64 3.637 3.607 3.623 ... 3.654 3.602 3.614
-        Z_VLF4           (index) float64 3.567 3.576 3.621 ... 3.616 3.594 3.586
-        Z_Geofact        (index) float64 0.9969 0.9862 1.022 ... 1.123 1.069 1.004
+        Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
+        Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
+        Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
+        Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
+        Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
+        Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
     Attributes:
         content:  raw data
         comment:  This dataset includes minimally processed (raw) AEM data
@@ -374,32 +374,32 @@ and the second is located at index 1
 
     Second Tabular Group:
 
-    <xarray.Dataset>
+    <xarray.Dataset> Size: 31MB
     Dimensions:                  (index: 20701, layer_depth: 30, nv: 2,
                                   gate_times: 15)
     Coordinates:
-        spatial_ref              float64 0.0
-      * index                    (index) int32 0 1 2 3 4 ... 20697 20698 20699 20700
-      * layer_depth              (layer_depth) float64 1.5 4.65 ... 424.2 467.5
-      * nv                       (nv) int64 0 1
-      * gate_times               (gate_times) float64 1.085e-05 ... 0.01338
-        x                        (index) float64 3.579e+05 3.579e+05 ... 4.906e+05
-        y                        (index) float64 1.211e+06 1.211e+06 ... 1.577e+06
-        z                        (index) float64 45.83 46.61 46.95 ... 179.4 177.2
+        spatial_ref              float64 8B 0.0
+      * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+      * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+      * nv                       (nv) int64 16B 0 1
+      * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+        x                        (index) float64 166kB 3.579e+05 ... 4.906e+05
+        y                        (index) float64 166kB 1.211e+06 ... 1.577e+06
+        z                        (index) float64 166kB 45.83 46.61 ... 179.4 177.2
     Data variables: (12/49)
-        layer_depth_bnds         (layer_depth, nv) float64 0.0 3.0 ... 445.9 489.1
-        gate_times_bnds          (gate_times, nv) float64 5.43e-06 ... 0.01666
-        uniqueid                 (index) int32 0 1 2 3 4 ... 20697 20698 20699 20700
-        survey                   (index) int32 9999 9999 9999 ... 9999 9999 9999
-        date                     (index) int32 20191128 20191128 ... 20200227
-        flight                   (index) int32 10 10 10 10 10 10 ... 70 70 70 70 70
+        layer_depth_bnds         (layer_depth, nv) float64 480B 0.0 3.0 ... 489.1
+        gate_times_bnds          (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
+        uniqueid                 (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+        survey                   (index) int32 83kB 9999 9999 9999 ... 9999 9999
+        date                     (index) int32 83kB 20191128 20191128 ... 20200227
+        flight                   (index) int32 83kB 10 10 10 10 10 ... 70 70 70 70
         ...                       ...
-        PhiC                     (index) float64 0.4491 0.4759 0.129 ... 1.61 1.289
-        PhiT                     (index) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-        PhiG                     (index) float64 0.9652 0.6608 ... 0.7603 1.457
-        PhiS                     (index) float64 0.1158 0.1392 ... 0.2877 0.1705
-        Lambda                   (index) float64 0.5968 0.5487 ... 0.3808 1.771
-        Iterations               (index) int32 20 19 25 25 25 18 ... 28 30 30 27 29
+        PhiC                     (index) float64 166kB 0.4491 0.4759 ... 1.61 1.289
+        PhiT                     (index) float64 166kB 0.0 0.0 0.0 ... 0.0 0.0 0.0
+        PhiG                     (index) float64 166kB 0.9652 0.6608 ... 1.457
+        PhiS                     (index) float64 166kB 0.1158 0.1392 ... 0.1705
+        Lambda                   (index) float64 166kB 0.5968 0.5487 ... 1.771
+        Iterations               (index) int32 83kB 20 19 25 25 25 ... 30 30 27 29
     Attributes:
         content:  inverted resistivity models
         comment:  This dataset includes inverted resistivity models derived from ...
@@ -440,14 +440,14 @@ corresponds to the rows of the input text file representing individual measureme
 
  .. code-block:: none
 
-    <xarray.DataArray 'index' (index: 20701)>
+    <xarray.DataArray 'index' (index: 20701)> Size: 83kB
     array([    0,     1,     2, ..., 20698, 20699, 20700], dtype=int32)
     Coordinates:
-        spatial_ref  float64 0.0
-      * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-        x            (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y            (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z            (index) float64 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
+        spatial_ref  float64 8B 0.0
+      * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
+        x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
+        y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
+        z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
     Attributes:
         standard_name:  index
         long_name:      Index of individual data points
@@ -483,13 +483,13 @@ to the dimension through the "bounds" attribute.
 
     example non-discrete dimension:
 
-    <xarray.DataArray 'gate_times' (gate_times: 15)>
+    <xarray.DataArray 'gate_times' (gate_times: 15)> Size: 120B
     array([1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05, 1.410600e-04,
            2.278700e-04, 3.689300e-04, 5.859500e-04, 9.114800e-04, 1.410630e-03,
            2.191900e-03, 3.418070e-03, 5.338690e-03, 8.301020e-03, 1.337928e-02])
     Coordinates:
-        spatial_ref  float64 0.0
-      * gate_times   (gate_times) float64 1.085e-05 3.255e-05 ... 0.008301 0.01338
+        spatial_ref  float64 8B 0.0
+      * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     Attributes:
         standard_name:  gate_times
         long_name:      receiver gate times
@@ -502,7 +502,7 @@ to the dimension through the "bounds" attribute.
 
     corresponding bounds on non-discrete dimension:
 
-    <xarray.DataArray 'gate_times_bnds' (gate_times: 15, nv: 2)>
+    <xarray.DataArray 'gate_times_bnds' (gate_times: 15, nv: 2)> Size: 240B
     array([[5.430000e-06, 1.628000e-05],
            [2.713000e-05, 3.798000e-05],
            [4.883000e-05, 5.968000e-05],
@@ -519,9 +519,9 @@ to the dimension through the "bounds" attribute.
            [6.516030e-03, 1.008600e-02],
            [1.009686e-02, 1.666171e-02]])
     Coordinates:
-        spatial_ref  float64 0.0
-      * nv           (nv) int64 0 1
-      * gate_times   (gate_times) float64 1.085e-05 3.255e-05 ... 0.008301 0.01338
+        spatial_ref  float64 8B 0.0
+      * nv           (nv) int64 16B 0 1
+      * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     Attributes:
         standard_name:  gate_times_bounds
         long_name:      receiver gate times cell boundaries
@@ -561,13 +561,13 @@ such as ``index``, ``gate_times``, ``nv`` in this example:
  .. code-block:: none
 
     Coordinates:
-        spatial_ref  float64 0.0
-      * index        (index) int32 0 1 2 3 4 5 ... 20696 20697 20698 20699 20700
-      * gate_times   (gate_times) float64 1.085e-05 3.255e-05 ... 0.008301 0.01338
-      * nv           (nv) int64 0 1
-        x            (index) float64 3.579e+05 3.579e+05 ... 4.907e+05 4.906e+05
-        y            (index) float64 1.211e+06 1.211e+06 ... 1.577e+06 1.577e+06
-        z            (index) float64 45.83 46.61 46.95 46.66 ... 177.0 179.4 177.2
+        spatial_ref  float64 8B 0.0
+      * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
+      * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+      * nv           (nv) int64 16B 0 1
+        x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
+        y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
+        z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
 
 
 
@@ -613,10 +613,10 @@ data dimensions correspond directly to either spatial or temporal coordinates (`
  .. code-block:: none
 
     Coordinates:
-        spatial_ref  float64 0.0
-      * x            (x) float64 2.928e+05 2.934e+05 2.94e+05 ... 6.51e+05 6.516e+05
-      * nv           (nv) int64 0 1
-      * y            (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        spatial_ref  float64 8B 0.0
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * nv           (nv) int64 16B 0 1
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 
 
 
@@ -709,7 +709,7 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.227 seconds)
+   **Total running time of the script:** (0 minutes 1.443 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py:
@@ -725,6 +725,10 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_xarray_methods.py <plot_xarray_methods.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_xarray_methods.zip <plot_xarray_methods.zip>`
 
 
 .. only:: html

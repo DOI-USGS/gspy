@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -100,6 +100,10 @@ Generate the Variable Metadata Template for My Dataset
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: help_I_have_no_variable_metadata.py <help_I_have_no_variable_metadata.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: help_I_have_no_variable_metadata.zip <help_I_have_no_variable_metadata.zip>`
 
 
 .. only:: html

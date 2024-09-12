@@ -4,11 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Examples &mdash; gspy 1.0.1 documentation</title>
+  <title>Examples &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
-      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -20,8 +20,8 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=292eb321"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/documentation_options.js?v=fd7cadf9"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -42,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.1
+                1.2.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,6 +67,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#interacting-with-gs-files">Interacting With GS Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html">Basic Class Structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_coordinate_reference_systems.html">Coordinate Reference Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_cross_section.html">Plotting Cross Sections</a></li>
 </ul>
 </li>
 </ul>
@@ -102,19 +103,19 @@
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
 <div class="sphx-glr-thumbnails"></div><section id="creating-gs-files">
 <h2>Creating GS Files<a class="headerlink" href="#creating-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as wel..."><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png" />
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:"><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_to_netcdf_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"><span class="std std-ref">ASEG to NetCDF</span></a></p>
   <div class="sphx-glr-thumbnail-title">ASEG to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF for..."><img alt="" src="../_images/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png" />
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:"><img alt="" src="../_images/sphx_glr_plot_csv_resolve_to_netcdf_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-csv-resolve-to-netcdf-py"><span class="std std-ref">CSV to NetCDF</span></a></p>
   <div class="sphx-glr-thumbnail-title">CSV to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.ti..."><img alt="" src="../_images/sphx_glr_plot_tifs_to_netcdf_thumb.png" />
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension."><img alt="" src="../_images/sphx_glr_plot_tifs_to_netcdf_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_tifs_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-tifs-to-netcdf-py"><span class="std std-ref">GeoTIFFs to NetCDF</span></a></p>
   <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious..."><img alt="" src="../_images/sphx_glr_help_I_have_no_variable_metadata_thumb.png" />
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata."><img alt="" src="../_images/sphx_glr_help_I_have_no_variable_metadata_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/help_I_have_no_variable_metadata.html#sphx-glr-examples-creating-gs-files-help-i-have-no-variable-metadata-py"><span class="std std-ref">Help! I have no variable metadata</span></a></p>
   <div class="sphx-glr-thumbnail-title">Help! I have no variable metadata</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its ..."><img alt="" src="../_images/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png" />
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:"><img alt="" src="../_images/sphx_glr_plot_csv_skytem_to_netcdf_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py"><span class="std std-ref">Multi-dataset Survey</span></a></p>
   <div class="sphx-glr-thumbnail-title">Multi-dataset Survey</div>
 </div></div><div class="toctree-wrapper compound">
@@ -122,12 +123,15 @@
 </section>
 <section id="interacting-with-gs-files">
 <h2>Interacting With GS Files<a class="headerlink" href="#interacting-with-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xa..."><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xarray Datasets. This example demonstrates how to access the xarray object for each class, and methods for exploring the data and metadata."><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
 <p><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html#sphx-glr-examples-interacting-with-gs-files-plot-xarray-methods-py"><span class="std std-ref">Basic Class Structure</span></a></p>
   <div class="sphx-glr-thumbnail-title">Basic Class Structure</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the ..."><img alt="" src="../_images/sphx_glr_plot_coordinate_reference_systems_thumb.png" />
+</div><div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the Survey adhere to the same CRS."><img alt="" src="../_images/sphx_glr_plot_coordinate_reference_systems_thumb.png" />
 <p><a class="reference internal" href="Interacting_With_GS_Files/plot_coordinate_reference_systems.html#sphx-glr-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py"><span class="std std-ref">Coordinate Reference Systems</span></a></p>
   <div class="sphx-glr-thumbnail-title">Coordinate Reference Systems</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Plotting Cross Sections"><img alt="" src="../_images/sphx_glr_plot_cross_section_thumb.png" />
+<p><a class="reference internal" href="Interacting_With_GS_Files/plot_cross_section.html#sphx-glr-examples-interacting-with-gs-files-plot-cross-section-py"><span class="std std-ref">Plotting Cross Sections</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plotting Cross Sections</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-footer sphx-glr-footer-gallery docutils container">

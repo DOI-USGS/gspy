@@ -4,11 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASEG to NetCDF &mdash; gspy 1.0.1 documentation</title>
+  <title>ASEG to NetCDF &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -20,8 +20,8 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=292eb321"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -42,7 +42,7 @@
             gspy
           </a>
               <div class="version">
-                1.0.1
+                1.2.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -101,7 +101,7 @@
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"><span class="std std-ref">Go to the end</span></a>
-to download the full example code</p>
+to download the full example code.</p>
 </div>
 <section class="sphx-glr-example-title" id="aseg-to-netcdf">
 <span id="sphx-glr-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py"></span><h1>ASEG to NetCDF<a class="headerlink" href="#aseg-to-netcdf" title="Link to this heading"></a></h1>
@@ -171,12 +171,12 @@ Define input metadata file (which contains the TIF filenames linked with desired
 <span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 ...
-  * x            (x) float64 2.928e+05 2.934e+05 2.94e+05 ... 6.51e+05 6.516e+05
-  * y            (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    spatial_ref  float64 8B ...
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 Attributes:
     standard_name:  total_magnetic_intensity
     null_value:     1.70141e+38
@@ -202,13 +202,16 @@ Attributes:
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_001.png" alt="plot aseg tempest to netcdf" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.388 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.251 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/5d748e1ff1eae67bd06af2fe99354ec8/plot_aseg_tempest_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_aseg_tempest_to_netcdf.ipynb</span></code></a></p>
 </div>
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f757326c59593466a9918aff9f15e6e9/plot_aseg_tempest_to_netcdf.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_aseg_tempest_to_netcdf.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/689f53cde83794cadf036ced17b16c14/plot_aseg_tempest_to_netcdf.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_aseg_tempest_to_netcdf.zip</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -87,10 +87,10 @@ all information is contained within attributes.
 
  .. code-block:: none
 
-    <xarray.DataArray 'spatial_ref' ()>
+    <xarray.DataArray 'spatial_ref' ()> Size: 8B
     array(0.)
     Coordinates:
-        spatial_ref  float64 0.0
+        spatial_ref  float64 8B 0.0
     Attributes: (12/18)
         crs_wkt:                           PROJCRS["NAD83(HARN) / Wisconsin Trans...
         semi_major_axis:                   6378137.0
@@ -127,10 +127,10 @@ The Survey also has a spatial_ref property which returns the ``spatial_ref`` var
 
  .. code-block:: none
 
-    <xarray.DataArray 'spatial_ref' ()>
+    <xarray.DataArray 'spatial_ref' ()> Size: 8B
     array(0.)
     Coordinates:
-        spatial_ref  float64 0.0
+        spatial_ref  float64 8B 0.0
     Attributes: (12/18)
         crs_wkt:                           PROJCRS["NAD83(HARN) / Wisconsin Trans...
         semi_major_axis:                   6378137.0
@@ -263,7 +263,7 @@ EPSG will be used by default.
 
  .. code-block:: none
 
-    <xarray.DataArray ()>
+    <xarray.DataArray ()> Size: 8B
     array(0.)
     Attributes:
         crs_wkt:                      GEOGCRS["WGS 84",ENSEMBLE["World Geodetic S...
@@ -294,7 +294,7 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.422 seconds)
+   **Total running time of the script:** (0 minutes 0.503 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:
@@ -310,6 +310,10 @@ changed to longitude and latitude.
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_coordinate_reference_systems.py <plot_coordinate_reference_systems.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_coordinate_reference_systems.zip <plot_coordinate_reference_systems.zip>`
 
 
 .. only:: html

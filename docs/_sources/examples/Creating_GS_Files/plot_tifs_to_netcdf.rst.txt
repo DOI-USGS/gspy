@@ -11,7 +11,7 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_tifs_to_netcdf.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -212,12 +212,12 @@ Plotting
 
  .. code-block:: none
 
-    <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)>
+    <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
-        spatial_ref  float64 ...
-      * x            (x) float64 2.928e+05 2.934e+05 2.94e+05 ... 6.51e+05 6.516e+05
-      * y            (y) float64 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
         standard_name:  total_magnetic_intensity
         null_value:     1.70141e+38
@@ -232,7 +232,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.755 seconds)
+   **Total running time of the script:** (0 minutes 1.774 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_tifs_to_netcdf.py:
@@ -248,6 +248,10 @@ Plotting
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_tifs_to_netcdf.py <plot_tifs_to_netcdf.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: plot_tifs_to_netcdf.zip <plot_tifs_to_netcdf.zip>`
 
 
 .. only:: html
