@@ -66,23 +66,24 @@ echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 echo "Tagged with $NEW_TAG"
 
+# # Github stuff
+python update_version.py $NEW_TAG
+git add setup.py
+git commit -m "update version"
+
 cd documentation_source
+make clean
 make html
 make clean
 cd ..
 git add docs/
 git commit -m "docs"
 
-# Github stuff
-python update_version.py $NEW_TAG
-git add pyproject.toml
-git commit -m "update version"
-
 git tag $NEW_TAG
 git push --tags
 git push origin master develop
 
-# Pypi stuff
+Pypi stuff
 python -m build
 twine upload --skip-existing dist/*
 
