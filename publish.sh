@@ -7,8 +7,8 @@
 
 # Run me by using
 # ./publish -v patch
-# ./publish -v major
 # ./publish -v minor
+# ./publish -v major
 # to increment each of those by just 1.
 
 VERSION=""
@@ -75,7 +75,7 @@ git commit -m "docs"
 
 # Github stuff
 python update_version.py $NEW_TAG
-git add setup.py
+git add pyproject.toml
 git commit -m "update version"
 
 git tag $NEW_TAG
