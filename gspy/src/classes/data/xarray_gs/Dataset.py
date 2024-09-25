@@ -231,7 +231,7 @@ class Dataset:
 
         """
         tmp = tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])
-        assert all(values.shape == tmp), ValueError("Shape {} of variable {} does not match specified dimensions {} with shape {}".format(values.shape, name, kwargs['dimensions'], tmp))
+        assert all(np.shape(values) == tmp), ValueError("Shape {} of variable {} does not match specified dimensions {} with shape {}".format(np.shape(values), name, kwargs['dimensions'], tmp))
 
         kwargs['coords'] = [self._obj.coords[dim] for dim in kwargs['dimensions']]
         self._obj[name] = DataArray.from_values(name, values, **kwargs)
@@ -433,10 +433,10 @@ class Dataset:
 
         return self
 
-    def update_attrs(self, **kwargs):
+    def update_attrs(self, key='', **kwargs):
         """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
         """
-        kwargs = flatten(kwargs, '', {})
+        kwargs = flatten(kwargs, key, {})
         self._obj.attrs.update(kwargs)
 
     def write_netcdf(self, filename, group, **kwargs):

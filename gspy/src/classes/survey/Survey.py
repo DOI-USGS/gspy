@@ -6,6 +6,7 @@ from netCDF4 import Dataset as ncdf4_Dataset
 import h5py
 
 from ..data.xarray_gs.Dataset import Dataset
+from ..data.GS_Data import GS_Data
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
 from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
@@ -159,19 +160,7 @@ class Survey(object):
         gspy.Tabular : For instantiation/reading requirements
 
         """
-        from ..data import tabular_aseg
-        from ..data import tabular_csv
-
-        if type == 'aseg':
-            out = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
-
-        elif type == 'csv':
-            out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
-
-        elif type == 'netcdf':
-            out = Tabular.open_netcdf(data_filename, **kwargs)
-
-        self._tabular.append(out)
+        self._tabular.append(GS_Data.read(type, data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs))
 
     def read_metadata(self, filename=None):
         """Read metadata for the survey
@@ -190,7 +179,6 @@ class Survey(object):
         Survey.write_metadata_template : For more metadata data information
 
         """
-
         if filename is None:
             self.write_metadata_template()
             raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
@@ -333,7 +321,8 @@ class Survey(object):
 
         # Tabular
         for i, m in enumerate(self._tabular):
-            Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
+            m.write_netcdf(filename, group="survey/tabular/{}".format(i))
+            # Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
 
         # Raster
         for i, m in enumerate(self._raster):

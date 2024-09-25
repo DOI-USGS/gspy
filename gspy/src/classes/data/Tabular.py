@@ -109,7 +109,10 @@ class Tabular(Dataset):
         self = self.set_spatial_ref(spatial_ref)
 
         # Read the GSPy json file.
-        json_md = self.read_metadata(metadata_file)
+        if isinstance(metadata_file, str):
+            json_md = self.read_metadata(metadata_file)
+        else:
+            json_md = metadata_file
 
         # Read in the data using the respective file type handler
         file = self.file_handler.read(filename, **kwargs)
@@ -125,8 +128,8 @@ class Tabular(Dataset):
                                             'null_value'    : 'not_defined'})
 
         # Add the user defined coordinates-dimensions from the json file
-        dimensions = json_md.get('dimensions')
-        coordinates = json_md.get('coordinates')
+        dimensions = json_md.pop('dimensions')
+        coordinates = json_md.pop('coordinates')
 
         if coordinates is not None:
             if dimensions is not None:
@@ -164,7 +167,8 @@ class Tabular(Dataset):
         # Combine the column headers in the file with keys from the json metadata
         # If there is a variable with raw columns specified, we need to remove those individual columns
         # Otherwise they are duplicated.
-        for key, item in json_md['variable_metadata'].items():
+        variable_md = json_md.pop('variable_metadata')
+        for key, item in variable_md.items():
             if key not in column_counts:
                 if 'raw_data_columns' in item:
                     for raw_key in item['raw_data_columns']:
@@ -175,7 +179,7 @@ class Tabular(Dataset):
         # Start adding the data variables
         for var in column_counts:
 
-            var_meta = self.get_attrs(file, var, **json_md['variable_metadata'].get(var, {}))
+            var_meta = self.get_attrs(file, var, **variable_md.get(var, {}))
 
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
@@ -211,23 +215,23 @@ class Tabular(Dataset):
 
         return self._obj
 
-    @classmethod
-    def open_netcdf(cls, filename, group='tabular', **kwargs):
-        """Lazy loads a netCDF file but enforces CF convention when opening
+    # @classmethod
+    # def open_netcdf(cls, filename, group='tabular', **kwargs):
+    #     """Lazy loads a netCDF file but enforces CF convention when opening
 
-        Parameters
-        ----------
-        filename : str
-            NetCDF file
-        group : str, optional
-            The NetCDF group containing Tabular data, by default 'tabular'
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         NetCDF file
+    #     group : str, optional
+    #         The NetCDF group containing Tabular data, by default 'tabular'
 
-        Returns
-        -------
-        xarray.Dataset
+    #     Returns
+    #     -------
+    #     xarray.Dataset
 
-        """
-        return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
+    #     """
+    #     return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
 
     def get_fortran_format(self, key, default_f32='f10.3', default_f64='g16.6'):
 

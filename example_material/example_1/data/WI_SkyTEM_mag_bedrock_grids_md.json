@@ -3,17 +3,17 @@
     	"content" : "gridded magnetic and bedrock maps",
         "comment": "This dataset includes AEM-derived estimates of the elevation of the top of bedrock produced by USGS"
     },
-    
+
 	"coordinates" : {
    		"x" : "E_Nad83",
     	"y" : "N_Nad83"
 	},
-	
+
 	"dimensions" : {
    		"x" : "E_Nad83",
     	"y" : "N_Nad83"
 	},
-	
+
     "raster_files" : {
         "magnetic_tmi": ["Midwest_Core_MAG_TMI_NAD83.tif"],
         "magnetic_rmf": ["Midwest_Core_MAG_RMF_NAD83.tif"],
@@ -27,7 +27,7 @@
             "long_name": "Total magnetic intensity, diurnally corrected and filtered",
             "units": "nanoTesla",
             "null_value": -9999.99,
-            "files" : ["../../supplemental/region/WI/data/Midwest_Core_MAG_TMI_NAD83.tif"],
+            "files" : ["../../../../example_material/example_1/data/Midwest_Core_MAG_TMI_NAD83.tif"],
             "dimensions": ["x", "y"]
         },
         "magnetic_rmf": {
@@ -35,7 +35,7 @@
             "long_name": "Residual magnetic field, IGRF corrected from 2015 model",
             "units": "nanoTesla",
             "null_value": -9999.99,
-            "files" : ["../../supplemental/region/WI/data/Midwest_Core_MAG_RMF_NAD83.tif"],
+            "files" : ["../../../../example_material/example_1/data/Midwest_Core_MAG_RMF_NAD83.tif"],
             "dimensions": ["x", "y"]
         },
         "bedrock_top_elevation": {
@@ -43,7 +43,7 @@
             "long_name": "Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)",
             "units": "foot",
             "null_value": -9999.99,
-            "files" : ["../../supplemental/region/WI/data/topBedrock_ft.tif"],
+            "files" : ["../../../../example_material/example_1/data/topBedrock_ft.tif"],
             "dimensions": ["x", "y"]
         },
         "bedrock_depth": {
@@ -51,7 +51,7 @@
             "long_name": "Depth to bedrock",
             "units": "foot",
             "null_value": -9999.99,
-            "files" : ["../../supplemental/region/WI/data/BedrockDepth_ft.tif"],
+            "files" : ["../../../../example_material/example_1/data/BedrockDepth_ft.tif"],
             "dimensions": ["x", "y"]
         },
         "E_Nad83": {

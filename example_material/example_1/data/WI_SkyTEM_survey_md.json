@@ -1,0 +1,68 @@
+{
+    "dataset_attrs" : {
+        "title": "SkyTEM Airborne Electromagnetic (AEM) Survey, Northeast Wisconsin Bedrock Mapping",
+        "institution": "USGS Geology, Geophysics, and Geochemistry Science Center",
+        "source":  "SkyTEM raw data, USGS processed data and inverted resistivity models, and depth to bedrock surface",
+        "history": "(1) Data acquisition 01/2021 - 02/2021 by SkyTEM Canada Inc.; (2) AEM and magnetic data processing by SkyTEM Canada Inc. 02/2021 - 03/2021; raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 03/2021; Minimally processed AEM data exported to netCDF /tabular/0 group 11/2021; (3) Minimally processed binary data and system response information received from the contractor were imported into the Aarhus Workbench software (v 6.0.1.0) where data were processed by USGS 03/2021 - 06/2021. Processed AEM data exported to netCDF /tabular/1 group 11/2021; (4) Processed data were inverted in Aarhus Workbench software using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models exported to netCDF /tabular/2 group 11/2021. (5) Resistivity models were imported into the Geoscene3D software (v. 12.0.0.680) and points were generated at the first depth where resistivity exceeded 325 ohm-meters. These points were visually inspected and manually adjusted in selected areas to produce an AEM-derived estmiate of the elevation of the top of bedrock by USGS together with WGNHS 06/2021 - 07/2021. Points were exported to netCDF /tabular/3 group 11/2021. (6) Bedrock elevation points were interpolated using kriging in Geoscene3D software to produce a regular bedrock elevation grid 07/2021. (7) A bedrock depth grid was calculated in QGIS software (v. 3.14.1-Pi) by subtracting the bedrock elevation from land surface elevation. (8) Bedrock elevation, bedrock depth, and SkyTEM-provided magnetic grids were aligned to a common 100m x 100m grid and exported to netCDF /raster/0 group 11/2021.",
+        "references": "Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M.A. Muldoon, E.K. Stewart, R.J. Hunt, S.R. James, N.L. Foks, and M.J. Komiskey, 2021, Airborne electromagnetic and magnetic survey data, northeast Wisconsin, 2021, U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.",
+        "comment": "This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM, fully processed data used as input to inversion, laterally constrained inverted resistivity models, and derived estimates of bedrock depth.",
+        "summary": "Airborne electromagnetic (AEM) and magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.",
+        "content": "survey information (group /survey), raw data (group /survey/tabular/0), processed data (group /survey/tabular/1), inverted resistivity models (group /survey/tabular/2), bedrock elevation points (group /survey/tabular/3), gridded magnetic and bedrock maps (group /survey/raster/0)",
+        "created_by": "gspy==0.1.0",
+        "conventions": "CF-1.8, GS-0.0"
+    },
+
+    "survey_information" :   {
+        "contractor_project_number" : "20022",
+        "contractor" : "SkyTEM Canada Inc",
+        "client" : "U.S. Geological Survey",
+        "survey_type" : "EM/Mag",
+        "survey_area_name" : "Northeast Wisconsin Bedrock Mapping",
+        "state" : "WI",
+        "country" : "USA",
+        "acquisition_start" : "20210117",
+        "acquisition_end" : "20210207",
+        "survey_attributes_units": "SI"
+    },
+
+   "spatial_ref" : {
+        "wkid": "3071",
+        "authority": "EPSG",
+	    "vertical_crs": "NAVD88"
+    },
+
+    "flightline_information" : {
+        "traverse_line_spacing" : "800 m",
+        "traverse_line_direction" : "nw-se",
+        "tie_line_spacing" : "n/a",
+        "tie_line_direction" : "n/a",
+        "nominal_terrain_clearance" : "30 m",
+        "final_line_kilometers" : "3170 km",
+        "traverse_line_numbers" : "100101 - 115201",
+        "repeat_line_numbers" : "920001 - 920006",
+        "pre_zero_line_numbers" : "n/a",
+        "post_zero_line_numbers" : "n/a"
+    },
+
+
+
+    "survey_equipment" : {
+        "aircraft" : "Eurocopter Astar 350 B3",
+        "magnetometer" : "Geometrics G822A, Kroum KMAG4 counter",
+        "magnetometer_installation" : "Front of transmitter frame",
+        "electromagnetic_system" : "SkyTEM 304M",
+        "electromagnetic_installation" : "Rigid transmitter frame 40m beneath helicopter, Receiver coils at rear of transmitter frame 2m vertical offset",
+        "spectrometer_system" : "n/a",
+        "spectrometer_installation" : "n/a",
+        "spectrometer_sample_rate" : "n/a",
+        "radar_altimeter_system" : "n/a",
+        "radar_altimeter_sample_rate" : "n/a",
+        "laser_altimeter_system" : "MDL ILM 300R (2)",
+        "laser_altimeter_sample_rate" : "0.033 s",
+        "inclinometer_system" : "n/a",
+        "inclinometer_sample_rate" : "n/a",
+        "navigation_system" : "Real-time differential GPS Trimble Bullet III",
+        "navigation_sample_rate" : "1.0 s",
+        "acquisition_system" : "skytem"
+    }
+}

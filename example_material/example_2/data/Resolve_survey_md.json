@@ -1,0 +1,113 @@
+{
+    "dataset_attrs" : {
+        "title": "Example Resolve Airborne Electromagnetic (AEM) Raw Data",
+        "institution": "USGS Geology, Geophysics, & Geochemistry Science Center",
+        "source":  "Comma-separated text file exported from Geosoft",
+        "history": "<date and time when the data were produced and/or modified>",
+        "references": "<data release reference>",
+        "comment": "<additional details or ancillary information>",
+        "content": "<summary list of file contents, e.g. raw data (/survey/tabular/0), processed data (/survey/tabular/1)>",
+        "conventions": "CF-1.8, GS-0.0.1",
+        "created_by": "gspy==0.0.1"
+    },
+
+    "survey_information" : {
+        "contractor_project_number" : "603756RWA",
+        "contractor" : "CGG Canada Services Ltd.",
+        "client" : "U.S. Geological Survey",
+        "survey_type" : ["electromagnetic","magnetic","radiometric"],
+        "survey_area_name" : "Mississippi Alluvial Plain (MAP) Shellmound",
+        "state" : "MS",
+        "country" : "USA",
+        "acquisition_start" : "20180220",
+        "acquisition_end" : "20180304",
+        "dataset_created" : "20180517"
+    },
+
+    "survey_units" : {
+	"time" : "seconds [s]",
+	"area" : "square meters [m^2]",
+	"distance" : "meters [m]",
+	"line_direction" : "degrees [deg]",
+	"frequency" : "Hertz [Hz]",
+	"electromagnetic_moment" : "Ampere square meters [Am^2]",
+	"electromagnetic_secondary_field" : "parts per million [ppm]",
+	"spectrometer_volume" : "liter [L]"
+    },
+
+    "spatial_ref" : {
+        "wkid" : "5070",
+        "authority" : "EPSG"
+    },
+
+    "system_information" : {
+        "electromagnetic_system": {
+        "instrument_type" : "resolve",
+	    "data_normalized" : "True",
+	    "output_data_type" : "ppm",
+        "number_of_transmitters" : 6,
+	    "number_of_receivers" : 6,
+	    "number_of_components" : 6,
+	    "reference_frame" : "right-handed positive up",
+        "output_sample_frequency" : 10,
+
+        "transmitter_orientation" : ["z", "z", "x", "z", "z", "z"],
+        "transmitter_nominal_frequency" : [400, 1800, 3300, 8200, 40000, 140000],
+        "transmitter_actual_frequency" : [381, 1829, 3385, 8261, 40430, 133400],
+        "transmitter_moment" : [359, 187, 150, 72, 49, 17],
+
+        "receiver_orientation" : ["z", "z", "x", "z", "z", "z"],
+        "receiver_nominal_frequency" : [400, 1800, 3300, 8200, 40000, 140000],
+        "receiver_actual_frequency" : [381, 1829, 3385, 8261, 40430, 133400],
+
+        "component_name" : ["400z", "1800z", "3300x", "8200z", "40000z", "140000z"],
+        "component_txrx_dx" : [7.93, 7.95, 9.06, 7.93, 7.92, 7.97],
+	    "component_txrx_dy" : [0, 0, 0, 0, 0, 0],
+	    "component_txrx_dz" : [0, 0, 0, 0, 0, 0],
+        "component_orientation" : ["coplanar", "coplanar", "coaxial", "coplanar", "coplanar", "coplanar"]
+        },
+
+
+
+	"magnetic_system": {
+            "sample_frequency" : 10.0,
+            "sensitivity" : 0.001
+	},
+
+        "radiometric_system": {
+            "crystal_type" : "NaI",
+	    "sample_frequency" : 1.0,
+	    "downward_volume" : 16.8,
+	    "upward_volume" : 4.2
+
+        }
+    },
+
+    "flightline_information" : {
+        "traverse_line_spacing" : [993,248],
+        "traverse_line_direction" : [92,272],
+        "tie_line_spacing" : 23883,
+        "tie_line_direction" : [2,182],
+        "nominal_terrain_clearance" : 30,
+        "final_line_kilometers" : 2358,
+        "traverse_line_numbers" : "10010 - 11060",
+        "tie_line_numbers": "19010,19020"
+
+    },
+
+    "survey_equipment" : {
+        "aircraft" : "AS350 B2 Helicopter",
+	"aircraft_registration" : "C-FZTA",
+	"aircraft_operator" : "Questral Helicopters Ltd",
+        "magnetometer" : "Scintrex Cs-3 Cesium Vapour",
+        "magnetometer_installation" : "mounted in the EM bird",
+        "spectrometer_system" : "Radiation Solutions RS-500",
+        "spectrometer_installation" : "on board the helicopter",
+        "radar_altimeter_system" : "Honeywell Sperry Altimeter System",
+        "laser_altimeter_system" : "Optech ADMGPA100",
+        "navigation_system" : "NovAtel OEM4 Card with an Aero antenna mounted on the tail of the helicopter",
+        "acquisition_system" : "CGG HeliDAS",
+        "electromagnetic_system" : "RESOLVE, symmetric dipole configuration",
+        "electromagnetic_installation" : "9 metre bird containing the EM transmitter and receiver coil pairs (five coplanar and one coaxial), one or two magnetometers, a laser altimeter and a GPS antenna for flight path recovery, is towed by helicopter using a 30 m cable."
+    }
+}
