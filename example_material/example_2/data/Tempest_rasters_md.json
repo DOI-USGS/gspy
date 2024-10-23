@@ -51,11 +51,11 @@
             "long_name": "Electrical Resistivity on Logarithmic Scale",
             "units": "log10_ohm_m",
             "null_value": -9999.99,
-            "files": ["../../supplemental/region/MAP/data/resistivity_0_5m.tif",
-                      "../../supplemental/region/MAP/data/resistivity_5_10m.tif",
-                      "../../supplemental/region/MAP/data/resistivity_10_15m.tif",
-                      "../../supplemental/region/MAP/data/resistivity_15_20m.tif",
-                      "../../supplemental/region/MAP/data/resistivity_20_25m.tif"]
+            "files": ["..//..//..//../example_material//example_2//data/resistivity_0_5m.tif",
+                      "..//..//..//../example_material//example_2//data/resistivity_5_10m.tif",
+                      "..//..//..//../example_material//example_2//data/resistivity_10_15m.tif",
+                      "..//..//..//../example_material//example_2//data/resistivity_15_20m.tif",
+                      "..//..//..//../example_material//example_2//data/resistivity_20_25m.tif"]
         },
         "magnetic_tmi": {
             "dimensions": ["x", "y"],
@@ -63,7 +63,7 @@
             "long_name": "Total magnetic intensity, diurnally corrected and filtered",
             "units": "nT",
             "null_value": -999999,
-            "files": ["../../supplemental/region/MAP/data/mag_aligned.tif"]
+            "files": ["../../../../example_material/example_2/data/mag_aligned.tif"]
         }
     }
 }

@@ -1,7 +1,10 @@
 {
     "dataset_attrs" : {
     	"content": "raw data",
-        "comment": "This dataset includes minimally processed (raw) AEM data"
+        "comment": "This dataset includes minimally processed (raw) AEM data",
+        "type" : "data",
+        "method" : "electromagnetic",
+        "instrument" : "resolve"
     },
 
     "coordinates" : {

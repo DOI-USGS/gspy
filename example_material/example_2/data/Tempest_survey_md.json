@@ -30,75 +30,13 @@
     },
 
     "survey_units" : {
-	"time" : "seconds [s]",
-	"area" : "square meters [m^2]",
-	"current" : "Amperes [A]",
-	"frequency" : "Hertz [Hz]",
-	"electromagnetic_moment" : "Ampere square meters [Am^2]",
-	"magnetometer_b_field" : "nano Tesla [nT]",
-	"electromagnetic_b_field" : "femto tesla [fT]"
-    },
-	
-    "system_information" : {
-        "electromagnetic_system": {
-            "instrument_type" : "tempest",
-            "data_normalized" : "True",
-	    "output_data_type" : "B",
-            "number_of_transmitters" : 1,
-	    "number_of_receivers" : 2,
-	    "number_of_components" : 2,
-            "reference_frame" : "right-handed positive up",
-            "output_sample_frequency" : 5,
-	    "digitization_frequency" : 92160,
-
-            "transmitter_0_name" : "Z",
-            "tranmitter_0_area" : 155,
-            "transmitter_0_waveform_type" : "square",
-            "transmitter_0_waveform_time" : [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02],
-            "transmitter_0_wave_current" : [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0],
-            "transmitter_0_scale_factor" : 0.5,
-            "transmitter_0_peak_current" : 560,
-            "transmitter_0_peak_moment" : 86800,
-            "transmitter_0_base_frequency" : 30,
-            "transmitter_0_orientation" : "Z",
-	    "transmitter_0_number_of_turns" : 1,
-	    "transmitter_0_on_time" : 0.00833,
-	    "transmitter_0_off_time" : 0.00833,
-             "receiver_0_name" : "Z",
-             "receiver_0_orientation" : "Z",
-             
-             "receiver_1_name" : "X",
-             "receiver_1_orientation" : "X",
-             
-             "component_0_name" : "Z",
-	    "component_0_transmitter_index" : 0,
-	    "component_0_receiver_index" : 0,
-	    "component_0_number_of_gates" : 15,
-	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
-	    "component_0_gate_width" : [0.00001085, 0.00001085, 0.00001085, 0.00003255, 0.00005425, 0.00009766, 0.00016277, 0.00024957, 0.00037979, 0.0005968, 0.00094404, 0.00148659, 0.00233296, 0.00356997, 0.00656485],
-	    "component_0_txrx_dx" : -120,
-	    "component_0_txrx_dy" : 0,
-	    "component_0_txrx_dz" : -52,
-
-        "component_1_name" : "X",
-	    "component_0_transmitter_index" : 0,
-	    "component_0_receiver_index" : 0,
-	    "component_0_number_of_gates" : 15,
-	    "component_0_gate_center" : [0.00001085, 0.00001085, 0.00005426, 0.00008681, 0.00014106, 0.00022787, 0.00036893, 0.00058595, 0.00091148, 0.00141063, 0.00219190, 0.00341807, 0.00533869, 0.00830102, 0.01337928],
-	    "component_0_gate_width" : [0.00001085, 0.00001085, 0.00001085, 0.00003255, 0.00005425, 0.00009766, 0.00016277, 0.00024957, 0.00037979, 0.0005968, 0.00094404, 0.00148659, 0.00233296, 0.00356997, 0.00656485],
-	    "component_0_txrx_dx" : -120,
-	    "component_0_txrx_dy" : 0,
-	    "component_0_txrx_dz" : -52
-        },
-	    
-        "magnetic_system": {
-            "sample_frequency" : 1.0,
-            "resolution" : 0.001
-
-	},
-        "radiometric_system": {
-            "sample_frequency" : 1.0
-        }
+        "time" : "seconds [s]",
+        "area" : "square meters [m^2]",
+        "current" : "Amperes [A]",
+        "frequency" : "Hertz [Hz]",
+        "electromagnetic_moment" : "Ampere square meters [Am^2]",
+        "magnetometer_b_field" : "nano Tesla [nT]",
+        "electromagnetic_b_field" : "femto tesla [fT]"
     },
 
     "flightline_information" : {
@@ -114,7 +52,7 @@
 
     "survey_equipment" : {
         "aircraft" : "Cessna C208B",
-	"aircraft_registration" : "VH-FHY",
+        "aircraft_registration" : "VH-FHY",
         "magnetometer" : "Bartington MAG-03MS100 three-axis fluxgate",
         "magnetometer_installation" : "Stinger mounted",
         "electromagnetic_system" : "30Hz TEMPEST",

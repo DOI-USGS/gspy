@@ -54,21 +54,6 @@ class Dataset:
     def spatial_ref(self):
         return self._obj['spatial_ref']
 
-    @classmethod
-    def open_dataset(cls, *args, **kwargs):
-        """Open (lazy loading) a netcdf.
-
-        Wraps around the xarray open_dataset but forces xarray to honour gate times and the CF convention.
-
-        Returns
-        -------
-        xarray.Dataset
-            Native xrray Dataset
-        """
-        kwargs['decode_times'] = kwargs.get('decode_times', False)
-        kwargs['decode_cf'] = kwargs.get('decode_cf', True)
-        return open_dataset(*args, **kwargs)
-
     def add_bounds_to_coordinate(self, name, **kwargs):
         """Adds bounds to a coordinate.
 
@@ -292,7 +277,7 @@ class Dataset:
         return dic
 
     @classmethod
-    def open_netcdf(cls, filename, group, **kwargs):
+    def open_netcdf(cls, *args, **kwargs):
         """Read Data from a netcdf file using xrray's lazy open_dataset
 
         Parameters
@@ -307,7 +292,9 @@ class Dataset:
         Dataset
 
         """
-        return Dataset.open_dataset(filename, group=group.lower(), **kwargs)
+        kwargs['decode_times'] = kwargs.get('decode_times', False)
+        kwargs['decode_cf'] = kwargs.get('decode_cf', True)
+        return open_dataset(*args, **kwargs)
 
     def plot(self, hue, **kwargs):
         """Scatter plot of variable against x, y co-ordinates

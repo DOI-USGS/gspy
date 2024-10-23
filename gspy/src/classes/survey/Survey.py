@@ -6,6 +6,7 @@ from netCDF4 import Dataset as ncdf4_Dataset
 import h5py
 
 from ..data.xarray_gs.Dataset import Dataset
+from ..data.System import System
 from ..data.GS_Data import GS_Data
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
@@ -13,7 +14,7 @@ from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
 
 import xarray as xr
 
-class Survey(object):
+class Survey(dict):
     """Class defining a survey or dataset
 
     The Survey group contains general metadata about the survey or data colleciton as a whole.
@@ -53,28 +54,29 @@ class Survey(object):
     """
 
     def __init__(self, metadata=None):
-        self._tabular = []
-        self._raster = []
+
+        self._system = {}
 
         if metadata is not None:
             if isinstance(metadata, str):
                 # read survey metadata file
                 metadata = self.read_metadata(metadata)
 
+            metadata = self.add_system(**metadata)
             # make xarray
             self.xarray = metadata
 
-    @property
-    def tabular(self):
-        if len(self._tabular) == 1:
-            return self._tabular[0]
-        return self._tabular
+    def add_system(self, **kwargs):
+        # Pop system(s) information from the metadata
+        for key in list(kwargs.keys()):
+            if "system" in key:
+                value = kwargs.pop(key)
+                self._system[key] = System.from_dict(**value)
+        return kwargs
 
     @property
-    def raster(self):
-        if len(self._raster) == 1:
-            return self._raster[0]
-        return self._raster
+    def system(self):
+        return self._system
 
     @property
     def spatial_ref(self):
@@ -135,32 +137,19 @@ class Survey(object):
 
             self._xarray = ds._obj
 
-    def add_raster(self, *args, **kwargs):
-        """Add Raster data to the survey.
+    # def add_data(self, key, *args, **kwargs):
+    #     self.add_gs_data(key, *args, type="data", **kwargs)
 
-        See Also
-        --------
-        gspy.Raster : For instantiation/reading requirements
+    # def add_model(self, key, *args, **kwargs):
+    #     self.add_gs_data(key, *args, type="model", **kwargs)
 
-        """
-        self._raster.append(Raster.read(*args, spatial_ref=self.spatial_ref, **kwargs))
+    def add_data(self, key, *args, **kwargs):
+        self[key] = GS_Data.read(*args, spatial_ref=self.spatial_ref, **kwargs)
 
-    def add_tabular(self, type, data_filename, metadata_file=None, **kwargs):
-        """Add Tabular data to the survey
-
-        Parameters
-        ----------
-        data_filename : str
-            File to read data from
-        metadata_file : str, optional
-            Metadata file for the tabular data
-
-        See Also
-        --------
-        gspy.Tabular : For instantiation/reading requirements
-
-        """
-        self._tabular.append(GS_Data.read(type, data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs))
+        if type is 'data':
+            self.attrs['surveys'].append('/survey/raw_data/skytem_system')
+            self.attrs['surveys'].append('/survey/raw_data/magnetic_system')
+            self.surveys.append('/survey/processed_data/skytem_system')
 
     def read_metadata(self, filename=None):
         """Read metadata for the survey
@@ -274,22 +263,11 @@ class Survey(object):
 
         self = cls()
 
-        self.xarray = Dataset.open_dataset(filename, group='survey')
+        self.xarray = Dataset.open_netcdf(filename, group='survey')
 
-        with h5py.File(filename, 'r') as f:
-            groups = list(f['survey'].keys())
-
-        rootgrp = ncdf4_Dataset(filename)
-
-        if 'tabular' in groups:
-            for i in rootgrp.groups['survey'].groups['tabular'].groups:
-                self.add_tabular(type='netcdf', data_filename=filename, metadata_file=None, group='survey/tabular/{}'.format(int(i)), **kwargs)
-
-        if 'raster' in groups:
-            for i in rootgrp.groups['survey'].groups['raster'].groups:
-                self._raster.append(Raster.open_netcdf(filename=filename, group='survey/raster/{}'.format(int(i))))
-
-        rootgrp.close()
+        with ncdf4_Dataset(filename) as rootgrp:
+            for key in rootgrp.groups['survey'].groups:
+                self[key] = GS_Data.open_netcdf(filename, group=f'survey/{key}', **kwargs)
 
         return self
 
@@ -319,139 +297,145 @@ class Survey(object):
         # Survey
         self.xarray.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
 
-        # Tabular
-        for i, m in enumerate(self._tabular):
-            m.write_netcdf(filename, group="survey/tabular/{}".format(i))
-            # Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
-
-        # Raster
-        for i, m in enumerate(self._raster):
-            Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
-
-    def write_zarr(self, filename):
-        """Write a survey to a netcdf file as well as any attached datasets.
-
-        Parameters
-        ----------
-        filename : str
-            Netcdf file name
-
-        """
-
-        # Survey
-        self.xarray.to_zarr(filename, mode='w', group='survey')
-
-        # Tabular
-        for i, m in enumerate(self._tabular):
-            Tabular(m).write_zarr(filename, group="survey/tabular/{}".format(i))
-
-        # Raster
-        for i, m in enumerate(self._raster):
-            Raster(m).write_zarr(filename, group='survey/raster/{}'.format(i))
-
-    def write_ncml(self, filename):
-        """ Write an NcML (NetCDF XML) metadata file
-
-        TODO: Re-write this.
-
-        Parameters
-        ----------
-        filename : str
-            Name of the NetCDF file to generate NcML for
-
-        """
-
-        infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
-        f = open(infile, 'w')
-
-        f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        f.write('<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{}">\n\n'.format(filename.split(os.sep)[-1]))
-        f.write('<group name="/survey">\n\n')
-
-        ### Survey Dimensions:
-        for dim in self.xarray.dims:
-            f.write('  <dimension name="%s" length="%s"/>\n' % (dim, self.xarray.dims[dim]))
-        if len(self.xarray.dims) > 0:
-            f.write('\n')
-
-        ### Survey Attributes:
-        for attr in self.xarray.attrs:
-            att_val = self.xarray.attrs[attr]
-            if '"' in str(att_val):
-                att_val = att_val.replace('"',"'")
-            f.write('  <attribute name="%s" value="%s"/>\n' % (attr, att_val))
-        f.write('\n')
-
-        ### Survey Variables:
-        for var in self.xarray.variables:
-            tmpvar = self.xarray.variables[var]
-            dtype = str(tmpvar.dtype).title()[:-2]
-            if var == 'crs' or dtype == 'object':
-                f.write('  <variable name="%s" shape="%s" type="String">\n' % (var, " ".join(tmpvar.dims)))
+        for k, v in self.items():
+            if isinstance(v, GS_Data):
+                v.write_netcdf(filename, group=f'survey/{k}')
             else:
-                f.write('  <variable name="%s" shape="%s" type="%s">\n' % (var, " ".join(tmpvar.dims), dtype))
-            for attr in tmpvar.attrs:
-                att_val = tmpvar.attrs[attr]
-                if '"' in str(att_val):
-                    att_val = att_val.replace('"',"'")
-                f.write('    <attribute name="%s" type="String" value="%s"/>\n' % (attr, att_val))
-            f.write('  </variable>\n\n')
-        f.close()
+                v.gs_dataset.write_netcdf(filename, group=f'survey/{k}')
 
-        # Tabular
-        for i, m in enumerate(self._tabular):
-            f = open(infile, 'a')
-            if i == 0:
-                f.write('  <group name="/tabular">\n\n')
-            f.write('    <group name="/{}">\n\n'.format(i))
-            f.close()
-            m.gs_dataset.write_ncml(filename, group="tabular", index=i)
-            f = open(infile, 'a')
-            f.write('    </group>\n\n')
-            if i == len(self._tabular)-1:
-                f.write('  </group>\n\n')
-            f.close()
+        # # Tabular
+        # for i, m in enumerate(self._tabular):
+        #     m.write_netcdf(filename, group="survey/tabular".format(i))
+        #     # Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
 
-        # Raster
-        for i, m in enumerate(self._raster):
-            f = open(infile, 'a')
-            if i == 0:
-                f.write('  <group name="/raster">\n\n')
-            f.write('    <group name="/{}">\n\n'.format(i))
-            f.close()
-            m.gs_dataset.write_ncml(filename, group="raster", index=i)
-            f = open(infile, 'a')
-            f.write('    </group>\n\n')
-            if i == len(self._raster)-1:
-                f.write('  </group>\n\n')
-            f.close()
+        # # Raster
+        # for i, m in enumerate(self._raster):
+        #     Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
 
-        f = open(infile, 'a')
-        f.write('</group>\n\n')
-        f.write('</netcdf>')
-        f.close()
+    # def write_zarr(self, filename):
+    #     """Write a survey to a netcdf file as well as any attached datasets.
 
-    @property
-    def contents(self):
-        """print out the contents of the survey"""
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         Netcdf file name
 
-        out = ""
-        # tabular
-        if len(self.tabular) > 0:
-            out += 'tabular:\n'
-            if isinstance(self.tabular, list):
-                for t, tab in enumerate(self.tabular):
-                    out += '    [%i] %s\n' % (t, tab.attrs['content'])
-            else:
-                out += '    [0] %s\n' % (self.tabular.attrs['content'])
+    #     """
 
-        # raster
-        if len(self.raster) > 0:
-            out += 'raster:\n'
-            if isinstance(self.raster, list):
-                for r, rast in enumerate(self.raster):
-                    out += '    [%i] %s\n' % (r, rast.attrs['content'])
-            else:
-                out += '    [0] %s\n' % (self.raster.attrs['content'])
+    #     # Survey
+    #     self.xarray.to_zarr(filename, mode='w', group='survey')
 
-        return out
+    #     # Tabular
+    #     for i, m in enumerate(self._tabular):
+    #         Tabular(m).write_zarr(filename, group="survey/tabular/{}".format(i))
+
+    #     # Raster
+    #     for i, m in enumerate(self._raster):
+    #         Raster(m).write_zarr(filename, group='survey/raster/{}'.format(i))
+
+    # def write_ncml(self, filename):
+    #     """ Write an NcML (NetCDF XML) metadata file
+
+    #     TODO: Re-write this.
+
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         Name of the NetCDF file to generate NcML for
+
+    #     """
+
+    #     infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
+    #     f = open(infile, 'w')
+
+    #     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    #     f.write('<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{}">\n\n'.format(filename.split(os.sep)[-1]))
+    #     f.write('<group name="/survey">\n\n')
+
+    #     ### Survey Dimensions:
+    #     for dim in self.xarray.dims:
+    #         f.write('  <dimension name="%s" length="%s"/>\n' % (dim, self.xarray.dims[dim]))
+    #     if len(self.xarray.dims) > 0:
+    #         f.write('\n')
+
+    #     ### Survey Attributes:
+    #     for attr in self.xarray.attrs:
+    #         att_val = self.xarray.attrs[attr]
+    #         if '"' in str(att_val):
+    #             att_val = att_val.replace('"',"'")
+    #         f.write('  <attribute name="%s" value="%s"/>\n' % (attr, att_val))
+    #     f.write('\n')
+
+    #     ### Survey Variables:
+    #     for var in self.xarray.variables:
+    #         tmpvar = self.xarray.variables[var]
+    #         dtype = str(tmpvar.dtype).title()[:-2]
+    #         if var == 'crs' or dtype == 'object':
+    #             f.write('  <variable name="%s" shape="%s" type="String">\n' % (var, " ".join(tmpvar.dims)))
+    #         else:
+    #             f.write('  <variable name="%s" shape="%s" type="%s">\n' % (var, " ".join(tmpvar.dims), dtype))
+    #         for attr in tmpvar.attrs:
+    #             att_val = tmpvar.attrs[attr]
+    #             if '"' in str(att_val):
+    #                 att_val = att_val.replace('"',"'")
+    #             f.write('    <attribute name="%s" type="String" value="%s"/>\n' % (attr, att_val))
+    #         f.write('  </variable>\n\n')
+    #     f.close()
+
+    #     # Tabular
+    #     for i, m in enumerate(self._tabular):
+    #         f = open(infile, 'a')
+    #         if i == 0:
+    #             f.write('  <group name="/tabular">\n\n')
+    #         f.write('    <group name="/{}">\n\n'.format(i))
+    #         f.close()
+    #         m.gs_dataset.write_ncml(filename, group="tabular", index=i)
+    #         f = open(infile, 'a')
+    #         f.write('    </group>\n\n')
+    #         if i == len(self._tabular)-1:
+    #             f.write('  </group>\n\n')
+    #         f.close()
+
+    #     # Raster
+    #     for i, m in enumerate(self._raster):
+    #         f = open(infile, 'a')
+    #         if i == 0:
+    #             f.write('  <group name="/raster">\n\n')
+    #         f.write('    <group name="/{}">\n\n'.format(i))
+    #         f.close()
+    #         m.gs_dataset.write_ncml(filename, group="raster", index=i)
+    #         f = open(infile, 'a')
+    #         f.write('    </group>\n\n')
+    #         if i == len(self._raster)-1:
+    #             f.write('  </group>\n\n')
+    #         f.close()
+
+    #     f = open(infile, 'a')
+    #     f.write('</group>\n\n')
+    #     f.write('</netcdf>')
+    #     f.close()
+
+    # @property
+    # def contents(self):
+    #     """print out the contents of the survey"""
+
+    #     out = ""
+    #     # tabular
+    #     if len(self.tabular) > 0:
+    #         out += 'tabular:\n'
+    #         if isinstance(self.tabular, list):
+    #             for t, tab in enumerate(self.tabular):
+    #                 out += '    [%i] %s\n' % (t, tab.attrs['content'])
+    #         else:
+    #             out += '    [0] %s\n' % (self.tabular.attrs['content'])
+
+    #     # raster
+    #     if len(self.raster) > 0:
+    #         out += 'raster:\n'
+    #         if isinstance(self.raster, list):
+    #             for r, rast in enumerate(self.raster):
+    #                 out += '    [%i] %s\n' % (r, rast.attrs['content'])
+    #         else:
+    #             out += '    [0] %s\n' % (self.raster.attrs['content'])
+
+    #     return out

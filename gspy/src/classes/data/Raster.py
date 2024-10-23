@@ -57,7 +57,7 @@ class Raster(Dataset):
         return self.type == 'tif'
 
     @classmethod
-    def read(cls, metadata_file, spatial_ref=None, netcdf_file=None, **kwargs):
+    def read(cls, metadata_file, spatial_ref=None, **kwargs):
         """
         Instantiate a Raster class from metadata and data files.
 
@@ -80,29 +80,26 @@ class Raster(Dataset):
         self = cls(tmp)
         self = self.set_spatial_ref(spatial_ref)
 
-        if netcdf_file is not None:
-            return Raster.open_netcdf(netcdf_file, spatial_ref=spatial_ref, **kwargs)
-        else:
-            # read the metadata file
-            json_md = self.read_metadata(metadata_file)
+        # read the metadata file
+        json_md = self.read_metadata(metadata_file)
 
-            dimensions = json_md['dimensions']
-            coordinates = json_md['coordinates']
-            reverse_coordinates = {v:k for k,v in coordinates.items()}
+        dimensions = json_md['dimensions']
+        coordinates = json_md['coordinates']
+        reverse_coordinates = {v:k for k,v in coordinates.items()}
 
-            # Add the user defined coordinates-dimensions from the json file
-            for key in list(dimensions.keys()):
-                b = reverse_coordinates.get(key, key)
-                assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
-                if isinstance(dimensions[key], dict):
-                    # dicts are defined explicitly in the json file.
-                    self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+        # Add the user defined coordinates-dimensions from the json file
+        for key in list(dimensions.keys()):
+            b = reverse_coordinates.get(key, key)
+            assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
+            if isinstance(dimensions[key], dict):
+                # dicts are defined explicitly in the json file.
+                self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
-            var_meta = variable_metadata(**json_md['variable_metadata'])
+        var_meta = variable_metadata(**json_md['variable_metadata'])
 
-            for var in var_meta.keys():
-                if 'files' in var_meta[var]:
-                    self = self.read_raster_using_metadata(var, json_md, **var_meta[var])
+        for var in var_meta.keys():
+            if 'files' in var_meta[var]:
+                self = self.read_raster_using_metadata(var, json_md, **var_meta[var])
 
         # add global attrs to tabular, skip variable_metadata and dimensions
         self.update_attrs(**json_md['dataset_attrs'])

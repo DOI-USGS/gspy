@@ -34,7 +34,7 @@ from pprint import pprint
 # Initialize the Survey
 
 # Path to example files
-data_path = "..//..//supplemental//region//MAP"
+data_path = "..//..//..//..//example_material//example_2"
 
 # Survey metadata file
 metadata = join(data_path, "data//Tempest_survey_md.json")
@@ -50,7 +50,7 @@ survey = Survey(metadata)
 d_supp1 = join(data_path, 'data//Tempest_raster_md.json')
 
 # Read data and format as Raster class object
-survey.add_raster(metadata_file=d_supp1)
+survey.add_data(key="map", metadata_file=d_supp1)
 
 #%%
 # Create the Second Raster Dataset
@@ -60,7 +60,7 @@ survey.add_raster(metadata_file=d_supp1)
 d_supp2 = join(data_path, 'data//Tempest_rasters_md.json')
 
 # Read data and format as Raster class object
-survey.add_raster(metadata_file=d_supp2)
+survey.add_data(key="maps", metadata_file=d_supp2)
 
 #%%
 # Save to NetCDF file
@@ -76,15 +76,13 @@ new_survey = Survey.open_netcdf(d_out)
 
 # Make a map-view plot of a specific data variable, using Xarray's plotter
 # In this case, we slice the 3-D resistivity variable along the depth dimension
-new_survey.raster[1]['resistivity'].plot(col='z', vmax=3, cmap='jet')
+new_survey["maps"]['resistivity'].plot(col='z', vmax=3, cmap='jet', robust=True)
 
 # Make a map-view plot comparing the different x-y discretization of the two magnetic variables, using Xarray's plotter
 plt.figure()
 ax=plt.gca()
-new_survey.raster[1]['magnetic_tmi'].plot(ax=ax, vmin=-1000, vmax=1000, cmap='jet')
-new_survey.raster[0]['magnetic_tmi'].plot(ax=ax, vmin=-1000, vmax=1000, cmap='Greys', cbar_kwargs={'label': ''})
+new_survey["maps"]['magnetic_tmi'].plot(ax=ax, cmap='jet', robust=True)
+new_survey["map"]['magnetic_tmi'].plot(ax=ax, cmap='Greys', cbar_kwargs={'label': ''}, robust=True)
 plt.ylim([1.20556e6, 1.21476e6])
 plt.xlim([3.5201e5, 3.6396e5])
 plt.show()
-
-print(new_survey.raster[0]['magnetic_tmi'])

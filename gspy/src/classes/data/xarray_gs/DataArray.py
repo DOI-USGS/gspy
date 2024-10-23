@@ -136,7 +136,7 @@ class DataArray:
 
         """
         cls.check_metadata(name, **kwargs)
-        values = cls.catch_nan(values, name=name, **kwargs)
+        # values = cls.catch_nan(values, name=name, **kwargs)
 
         if not isinstance(values[0], str):
             kwargs['valid_range'] = cls.valid_range(values, name=name, **kwargs)

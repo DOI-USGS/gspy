@@ -75,7 +75,7 @@ class Tabular(Dataset):
         self._type = value
 
     @classmethod
-    def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
+    def read(cls, filename, metadata_file=None, spatial_ref=None, system=None, **kwargs):
         """Instantiate a Tabular class from tabular data
 
         When reading the metadata and data file, the following are established in order
@@ -126,6 +126,11 @@ class Tabular(Dataset):
                                             'long_name'     : 'Index of individual data points',
                                             'units'         : 'not_defined',
                                             'null_value'    : 'not_defined'})
+
+        # if system is not None:
+            # GRAB ANY CDs FROM THE SYSTEM FIRST
+            # self = self.add_coord([coord for coord in system.coords])
+
 
         # Add the user defined coordinates-dimensions from the json file
         dimensions = json_md.pop('dimensions')
@@ -215,24 +220,6 @@ class Tabular(Dataset):
 
         return self._obj
 
-    # @classmethod
-    # def open_netcdf(cls, filename, group='tabular', **kwargs):
-    #     """Lazy loads a netCDF file but enforces CF convention when opening
-
-    #     Parameters
-    #     ----------
-    #     filename : str
-    #         NetCDF file
-    #     group : str, optional
-    #         The NetCDF group containing Tabular data, by default 'tabular'
-
-    #     Returns
-    #     -------
-    #     xarray.Dataset
-
-    #     """
-    #     return super(Tabular, cls).open_netcdf(filename, group, **kwargs)
-
     def get_fortran_format(self, key, default_f32='f10.3', default_f64='g16.6'):
 
         values = self._obj.data_vars[key]
@@ -283,6 +270,12 @@ class Tabular(Dataset):
 
         """
         super().write_zarr(filename, group)
+
+    def interpolate(self, dx, dy, variable, **kwargs):
+        from geobipy import Point
+
+        pc3d = Point(self['x'], self['y'], None)
+        pc3d.interpolate()
 
 
     def plot_cross_section(self, line_number, variable, hang_from='elevation', **kwargs):

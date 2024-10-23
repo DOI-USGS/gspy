@@ -20,16 +20,16 @@ from pprint import pprint
 # First Create the Survey & Data Objects
 
 # Initialize the Survey
-data_path = '..//..//supplemental//region//MAP'
+data_path = '..//..//..//..//example_material//example_2'
 metadata = join(data_path, "data//Tempest_survey_md.json")
 survey = Survey(metadata)
 
 # Add Tabular and Raster Datasets
 t_data = join(data_path, 'data//Tempest.dat')
 t_supp = join(data_path, 'data//Tempest_data_md.json')
-survey.add_tabular(type='aseg', data_filename=t_data, metadata_file=t_supp)
+survey.add_data(key="data", data_filename=t_data, metadata_file=t_supp)
 r_supp = join(data_path, 'data//Tempest_raster_md.json')
-survey.add_raster(metadata_file = r_supp)
+survey.add_data(key="map", metadata_file = r_supp)
 
 #%% 
 # Accessing the Xarray object
@@ -61,11 +61,11 @@ print(survey.xarray['survey_information'])
 
 # Tabular
 print('Tabular:\n')
-print(survey.tabular)
+print(survey['data'])
 
 # Raster
 print('\nRaster:\n')
-print(survey.raster)
+print(survey['map'])
 
 ################################################################################
 # Multiple Groups
@@ -74,17 +74,12 @@ print(survey.raster)
 # For example, let's add a second Tabular Dataset
 m_data = join(data_path, 'model//Tempest_model.dat')
 m_supp = join(data_path, 'model//Tempest_model_md.json')
-survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
-
-################################################################################
-# Now the first dataset is accessed at index 0
-print('First Tabular Group:\n')
-print(survey.tabular[0])
+survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
 
 ################################################################################
 # and the second is located at index 1
 print('Second Tabular Group:\n')
-print(survey.tabular[1])
+print(survey['model'])
 
 #%% 
 # Coordinates, Dimensions, and Attributes
@@ -100,16 +95,16 @@ print(survey.tabular[1])
 ################################################################################
 # Tabular data are typicaly 1-D or 2-D variables with the primary dimension being ``index``, which
 # corresponds to the rows of the input text file representing individual measurements.
-print(survey.tabular[1]['index'])
+print(survey['model']['index'])
 
 ################################################################################
 # If a dimension is not discrete, meaning it represents ranges (such as depth layers), 
 # then the bounds on each dimension value also need to be defined, and are linked 
 # to the dimension through the "bounds" attribute.
 print('example non-discrete dimension:\n')
-print(survey.tabular[1]['gate_times'])
+print(survey['model']['gate_times'])
 print('\n\ncorresponding bounds on non-discrete dimension:\n')
-print(survey.tabular[1]['gate_times_bnds'])
+print(survey['model']['gate_times_bnds'])
 #%%
 # Coordinates
 # ^^^^^^^^^^^
@@ -120,7 +115,7 @@ print(survey.tabular[1]['gate_times_bnds'])
 # This means a dataset can have both dimensional and non-dimensional coordinates.
 # Dimensional coordinates are noted with a * (or bold text) in printed output of the xarray,
 # such as ``index``, ``gate_times``, ``nv`` in this example:
-print(survey.tabular[0].coords)
+print(survey['data'].dataset.coords)
 
 ################################################################################
 # Tabular Coordinates
@@ -142,7 +137,7 @@ print(survey.tabular[0].coords)
 # Raster data are gridded, typically representing maps or multi-dimensional models.
 # Therefore, Raster data almost always have dimensional coordinates, i.e., the 
 # data dimensions correspond directly to either spatial or temporal coordinates (``x``, ``y``, ``z``, ``t``).
-print(survey.raster.coords)
+print(survey['map'].coords)
 
 ################################################################################
 # The Spatial Reference Coordinate
@@ -169,7 +164,7 @@ print(survey.raster.coords)
 # information about a dataset group as a whole, such as model inversion parameters
 # or other processing descriptions. At a minimum, a ``content`` attribute should
 # contain a brief summary of the contents of the dataset.
-pprint(survey.tabular[1].attrs)
+pprint(survey['model'].attrs)
 
 ################################################################################
 # Variable attributes
@@ -177,4 +172,4 @@ pprint(survey.tabular[1].attrs)
 ################################################################################
 # Each data variable must contain attributes detailing the metadata 
 # of that individual variable. These follow the `Climate and Forecast (CF) metadata conventions <http://cfconventions.org/>`_.
-pprint(survey.tabular[1]['conductivity'].attrs)
+pprint(survey['model']['conductivity'].attrs)

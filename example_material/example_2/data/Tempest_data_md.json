@@ -38,6 +38,46 @@
         }
     },
 
+    "electromagnetic_system" : {
+        "instrument_type" : "tempest",
+        "data_normalized" : "True",
+	    "output_data_type" : "B",
+        "reference_frame" : "right-handed positive up",
+        "output_sample_frequency" : 5,
+	    "digitization_frequency" : 92160,
+    
+        "transmitter_label" : "Z",
+        "transmitter_area" : 155,
+        "transmitter_waveform_type" : "square",
+        "transmitter_waveform_time" : [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02],
+        "transmitter_waveform_current" : [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0],
+        "transmitter_scale_factor" : 0.5,
+        "transmitter_peak_current" : 560,
+        "transmitter_peak_moment" : 86800,
+        "transmitter_base_frequency" : 30,
+        "transmitter_orientation" : "Z",
+        "transmitter_number_of_turns" : 1,
+        "transmitter_on_time" : 0.00833,
+        "transmitter_off_time" : 0.00833,
+
+        "receiver_label" : ["z", "x"],
+        "receiver_orientation" : ["z", "x"],
+
+        "component_transmitters" : ["z", "z"],
+        "component_receivers" : ["z", "x"],
+	    "component_txrx_dx" : [-120, -120],
+	    "component_txrx_dy" : [0, 0],
+	    "component_txrx_dz" : [-52, -52],
+        "component_gate_times" : ["gate_times", "gate_times"]
+    },
+    "magnetic_system": {
+        "sample_frequency" : 1.0,
+        "resolution" : 0.001
+    },
+    "radiometric_system": {
+        "sample_frequency" : 1.0
+    },
+
     "variable_metadata": {
         "Easting_Albers" : {
             "axis" : "X"

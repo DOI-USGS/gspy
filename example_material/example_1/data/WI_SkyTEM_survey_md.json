@@ -64,5 +64,20 @@
         "navigation_system" : "Real-time differential GPS Trimble Bullet III",
         "navigation_sample_rate" : "1.0 s",
         "acquisition_system" : "skytem"
+    },
+
+    origin incrememnt length for regular "rectilinear"
+    origin array of increment
+    explicit bounds, compute the centers
+    explicit centers with bounds
+
+    "magnetic_system": {
+        "type" : "system",
+        "mode" : "airborne",
+        "method" : "magnetic",
+        "submethod" : "total field",
+        "instrument" : "cesium vapour",
+        "sample_rate" : "0.1 s",
+        "resolution" : "0.002 nT"
     }
 }

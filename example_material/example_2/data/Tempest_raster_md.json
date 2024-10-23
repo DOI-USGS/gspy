@@ -21,7 +21,7 @@
             "long_name": "Total magnetic intensity, diurnally corrected and filtered",
             "units": "nT",
             "null_value": 1.70141e38,
-            "files": ["../../supplemental/region/MAP/data/mag.tif"]
+            "files": ["../../../../example_material/example_2/data/mag.tif"]
         },
         "Easting_Albers": {
             "standard_name": "easting_albers",

@@ -1,8 +1,10 @@
 {
     "dataset_attrs" : {
     	"content": "processed data",
-        "comment": "This dataset includes processed AEM data produced by USGS"
-        "from_system" : {"something done already"}
+        "comment": "This dataset includes processed AEM data produced by USGS",
+        "type" : "data",
+        "method" : "electromagnetic",
+        "instrument" : "skytem"
     },
 
     "coordinates" : {
@@ -11,47 +13,6 @@
     	"z" : "ELEVATION",
     	"t" : "TIMESTAMP"
 	},
-
-    "electromagnetic_system": {
-        "instrument_type" : "skytem 304M",
-        "data_normalized" : "True",
-        "skytem_skb_gex_available" : "True",
-        "reference_frame" : "right-handed positive down",
-        "coil_orientations" : "X,Z",
-        "sample_rate" : "0.1 s",
-
-        "transmitter_label" : ["LM", "HM"],
-        "transmitter_number_of_turns" : [1, 4],
-        "transmitter_coordinates" : [[[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]],
-                                     [[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]]],
-        "transmitter_area" : [342, 342],
-        "transmitter_waveform_type" : ["trapezoid", "trapezoid"],
-        "transmitter_waveform_time" : [[-3.1810E-003, -3.1019E-003, -2.9844E-003, -2.3810E-003, -2.3781E-003, -2.3779E-003, -2.3776E-003, -2.3763E-003, -8.0000E-004, -7.2093E-004, -6.0345E-004, 0.0000E+000, 3.0000E-008, 7.0000E-008, 2.7200E-006, 2.8000E-006, 2.9000E-006, 3.0100E-006, 3.1300E-006, 3.4100E-006, 4.7400E-006],
-                                       [-6.9167E-02, -6.9157E-02, -6.9153E-02, -6.9150E-02, -6.9143E-02, -6.9122E-02, -6.9118E-02, -6.9114E-02, -6.9107E-02, -6.9083E-02, -6.8159E-02, -6.6667E-02, -6.6627E-02, -6.6626E-02, -6.6622E-02, -2.5000E-03, -2.4899E-03, -2.4862E-03, -2.4830E-03, -2.4767E-03, -2.4637E-03, -2.4547E-03, -2.4510E-03, -2.4475E-03, -2.4442E-03, -2.4406E-03, -2.4159E-03, -2.2328E-03, -1.4913E-03, 0.0000E+00, 6.4270E-07, 8.9870E-07, 1.4267E-05, 4.0291E-05, 4.1331E-05, 4.4539E-05]],
-        "transmitter_waveform_current" : [[-0.0000E+000, -1.4067E-001, -3.0174E-001, -1.0000E+000, -7.5094E-003, 2.2879E-002, 3.7669E-002, -0.0000E+000, 0.0000E+000, 1.4063E-001, 3.0168E-001, 1.0000E+000, 9.9851E-001, 9.8817E-001, 5.9260E-002, 3.2392E-002, 7.5094E-003, -1.2284E-002, -2.6411E-002, -3.8086E-002, 0.0000E+000],
-                                          [-0.0000E+00, -3.3580E-02, -6.8755E-02, -1.0992E-01, -2.4885E-01, -7.3516E-01, -8.1234E-01, -8.6553E-01, -9.0296E-01, -9.2188E-01, -9.6364E-01, -1.0000E+00, -8.2124E-03, 7.2510E-03, -0.0000E+00, 0.0000E+00, 3.3780E-02, 6.5400E-02, 1.0996E-01, 2.3303E-01, 5.4048E-01, 7.4152E-01, 8.1301E-01, 8.6142E-01, 8.8900E-01, 9.0249E-01, 9.2195E-01, 9.3742E-01, 9.6367E-01, 1.0000E+00, 9.9562E-01, 9.8391E-01, 6.4740E-01, 9.9177E-04, -1.1094E-02, 0.0000E+00]],
-        "transmitter_current_scale_factor" : [1.0, 1.0],
-        "transmitter_peak_current" : [9.0, 110.0],
-        "transmitter_base_frequency" : [210.0, 75.0],
-        "transmitter_on_time" : [800E-06, 2500e-6],
-        "transmitter_off_time" : [1581E-06, 4167e-6],
-        "transmitter_orientation" : ["z", "x"],
-
-        "receiver_label" : ["z", "x"],
-        "receiver_orientation" : ["z", "x"],
-        "receiver_coil_low_pass_filter" : [628000.0, 250000.0],
-        "receiver_instrument_low_pass_filter" : [500000.0, 500000.0],
-        "receiver_area" : [105.0, 115.0],
-
-        "component_transmitters" : ["LM", "LM", "HM", "HM"],
-        "component_receiveers" : ["z", "z", "x", "x"],
-        "component_sample_rate" : [10.0, 10.0, 10.0, 10.0],
-        "component_txrx_dx" : [-13.25, -14.65, -13.25, -14.65],
-        "component_txrx_dy" : [0.0, 0.0, 0.0, 0.0],
-        "component_txrx_dz" : [-2.0, 0.0, -2.0, 0.0],
-        "component_data_type" : ["dBdt", "dBdt", "dBdt", "dBdt"],
-        "gate_times" : ["lm_gate_times", "lm_gate_times", "hm_gate_times", "hm_gate_times"]
-    },
 
     "magnetic_system": {
         "sample_rate" : "0.1 s",

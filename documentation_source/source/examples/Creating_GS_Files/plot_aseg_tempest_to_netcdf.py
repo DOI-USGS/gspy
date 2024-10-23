@@ -26,7 +26,7 @@ from gspy import Survey
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//supplemental//region//MAP'
+data_path = '..//..//..//..//example_material//example_2'
 
 # Survey Metadata file
 metadata = join(data_path, "data//Tempest_survey_md.json")
@@ -42,7 +42,7 @@ d_data = join(data_path, 'data//Tempest.dat')
 d_supp = join(data_path, 'data//Tempest_data_md.json')
 
 # Add the raw AEM data as a tabular dataset
-survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
+survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 
 #%%
 # 2. Inverted Models -
@@ -52,7 +52,7 @@ m_data = join(data_path, 'model//Tempest_model.dat')
 m_supp = join(data_path, 'model//Tempest_model_md.json')
 
 # Read model data and format as Tabular class object
-survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
+survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
 
 #%%
 # 3. Magnetic Intensity Map -
@@ -61,7 +61,7 @@ survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
 r_supp = join(data_path, 'data//Tempest_raster_md.json')
 
 # Read data and format as Raster class object
-survey.add_raster(metadata_file = r_supp)
+survey.add_data(key='maps', metadata_file = r_supp)
 
 # Save NetCDF file
 d_out = join(data_path, 'data//Tempest.nc')
@@ -72,7 +72,8 @@ survey.write_netcdf(d_out)
 new_survey = Survey.open_netcdf(d_out)
 
 # Once the survey is read in, we can access variables like a standard xarray dataset.
-print(new_survey.raster.magnetic_tmi)
+print(new_survey['maps'].magnetic_tmi)
+print(new_survey['maps']['magnetic_tmi'])
 
 # %%
 # Plotting
@@ -80,9 +81,9 @@ print(new_survey.raster.magnetic_tmi)
 # Make a scatter plot of a specific tabular variable, using GSPy's plotter
 plt.figure()
 # new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
-new_survey.tabular[0].gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
+new_survey['data'].dataset.gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
 
 # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 plt.figure()
-new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
+new_survey['maps']['magnetic_tmi'].plot(cmap='jet', robust=True)
 plt.show()
