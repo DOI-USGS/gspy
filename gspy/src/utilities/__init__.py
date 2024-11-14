@@ -45,7 +45,7 @@ def dump_metadata_to_file(dic, filename):
         else:
             raise Exception("Unknown extension for metadata file {}, please use json or yml".format(filename))
 
-def load_metadata_from_file(filename):
+def load_metadata_from_file(filename, **kwargs):
     with open(filename) as f:
         if 'json' in filename:
             md = json.loads(f.read())

@@ -61,22 +61,22 @@ class Coordinate(DataArray):
 
         """
         if 'centers' in kwargs:
-            values = kwargs.pop('centers')
+            kwargs['values'] = kwargs.pop('centers')
 
         else:
-            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError("Explicit dimension definition {} must have 'origin', 'increment', 'length".format(name))
+            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError("Explicit dimension definition {} must have origin, increment, length".format(name))
             x0, dx, nx = kwargs.pop('origin'), kwargs.pop('increment'), kwargs.pop('length')
-            values = (arange(nx) * dx) + x0
+            kwargs['values'] = (arange(nx) * dx) + x0
 
         # Add a check for units to conform to ARC reading
         if 'units' in kwargs:
             if kwargs['units'] == 'm':
                 kwargs['units'] = 'meters'
 
-        return Coordinate.from_values(name, values, is_projected, is_dimension, **kwargs)
+        return Coordinate.from_values(name, is_projected, is_dimension, **kwargs)
 
     @classmethod
-    def from_values(cls, name, values, is_projected=False, is_dimension=False, **kwargs):
+    def from_values(cls, name, is_projected=False, is_dimension=False, **kwargs):
         """Generate a Coordinate from an array of values.
 
         Parameters
@@ -121,12 +121,12 @@ class Coordinate(DataArray):
 
         if is_dimension:
             dims = [name]
-            coords = {name : values}
+            coords = {name : kwargs['values']}
         else:
             dims = kwargs.pop('dimensions')
             coords = kwargs.pop('coords')
 
-        return super().from_values(name, values, dimensions=dims, coords=coords, **kwargs)
+        return super().from_values(name, dimensions=dims, coords=coords, **kwargs)
 
     @staticmethod
     def check_is_projected(name, is_projected):

@@ -80,8 +80,10 @@ class Raster(Dataset):
         self = cls(tmp)
         self = self.set_spatial_ref(spatial_ref)
 
-        # read the metadata file
-        json_md = self.read_metadata(metadata_file)
+        if isinstance(metadata_file, str):
+            json_md = self.read_metadata(metadata_file)
+        else:
+            json_md = metadata_file
 
         dimensions = json_md['dimensions']
         coordinates = json_md['coordinates']
@@ -140,7 +142,7 @@ class Raster(Dataset):
             if (coord in coordinates) & (not coord in self._obj.coords):
                 # if not already in xarray, add
                 self = self.add_coordinate_from_values(coord,
-                                                ds[coord].values,
+                                                values=ds[coord].values,
                                                 is_projected=self.is_projected,
                                                 is_dimension=True,
                                                 **json_metadata['variable_metadata'][coordinates[coord]])
@@ -169,7 +171,7 @@ class Raster(Dataset):
             #     values = np.swapaxes(values, 0, swap_to)
 
         # Add the variable to the dataset
-        self.add_variable_from_values(name, values, **kwargs)
+        self.add_variable_from_values(name, values=values, **kwargs)
 
         # Now handle the spatial ref.  This should be done FIRST
         raster_spatial_reference = [coord for coord in ds.coords if coord not in ('x', 'y')][0]

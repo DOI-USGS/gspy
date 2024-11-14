@@ -102,10 +102,10 @@ class Tabular(Dataset):
         ..survey.Spatial_ref : For information on creating a spatial ref
 
         """
-
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
 
+        # Set the spatial ref
         self = self.set_spatial_ref(spatial_ref)
 
         # Read the GSPy json file.
@@ -115,11 +115,13 @@ class Tabular(Dataset):
             json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, **kwargs)
+        file = self.file_handler.read(filename)
+
+        file.df.columns = [x for x in file.df.columns]
 
         # Add the index coordinate
         self.add_coordinate_from_values('index',
-                                         arange(file.nrecords, dtype=int32),
+                                         values=arange(file.nrecords, dtype=int32),
                                          discrete = True,
                                          is_dimension=True,
                                          **{'standard_name' : 'index',
@@ -127,14 +129,9 @@ class Tabular(Dataset):
                                             'units'         : 'not_defined',
                                             'null_value'    : 'not_defined'})
 
-        # if system is not None:
-            # GRAB ANY CDs FROM THE SYSTEM FIRST
-            # self = self.add_coord([coord for coord in system.coords])
-
-
         # Add the user defined coordinates-dimensions from the json file
-        dimensions = json_md.pop('dimensions')
-        coordinates = json_md.pop('coordinates')
+        dimensions = json_md.pop('dimensions', None)
+        coordinates = json_md.pop('coordinates', None)
 
         if coordinates is not None:
             if dimensions is not None:
@@ -143,7 +140,7 @@ class Tabular(Dataset):
                     # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
                     if isinstance(dimensions[key], dict):
                         # dicts are defined explicitly in the json file.
-                        self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+                        self = self.add_coordinate_from_dict(b.lower(), is_dimension=True, **dimensions[key])
 
         # Write out a template json file when no variable metadata is found
         if not 'variable_metadata' in json_md:
@@ -157,15 +154,13 @@ class Tabular(Dataset):
             dic = self.get_attrs(file, coord, **json_md['variable_metadata'].get(coord, {}))
 
             # Might need to handle already added coords from the dimensions dict.
-            self.add_coordinate_from_values(key,
-                                            file.df[coord].values,
+            self.add_coordinate_from_values(key.lower(),
+                                            values=file.df[coord].values,
                                             dimensions=["index"],
                                             discrete = discrete,
                                             is_projected = self.is_projected,
                                             is_dimension=False,
                                             **dic)
-
-
 
         column_counts = cls.count_column_headers(file.columns)
 
@@ -191,8 +186,8 @@ class Tabular(Dataset):
 
                 # Use a column from the CSV file and add it as a variable
                 if var in all_columns:
-                    self = self.add_variable_from_values(var,
-                                                  file.df[var].values,
+                    self = self.add_variable_from_values(var.lower(),
+                                                  values=file.df[var].values,
                                                   dimensions = ["index"],
                                                   **var_meta)
 
@@ -211,9 +206,18 @@ class Tabular(Dataset):
                                                           'if needing to combine unique columns to new variable without an [i] increment').format(var))
 
                     assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]'.format(var))
-                    assert all([dim in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
+                    # Check for the dimensions of the variable and try adding from a system class.
 
-                    self.add_variable_from_values(var, values, **var_meta)
+                    for dim in var_meta['dimensions']:
+                        if dim.lower() not in self._obj.dims:
+                            if system is not None:
+                                for key, item in system.items():
+                                    if dim.lower() in item.coords:
+                                        self._obj = self._obj.assign_coords({dim.lower():item.coords[dim.lower()]})
+
+                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
+
+                    self.add_variable_from_values(var, values=values, **var_meta)
 
         # add global attrs to tabular, skip variable_metadata and dimensions
         self.update_attrs(**json_md['dataset_attrs'])

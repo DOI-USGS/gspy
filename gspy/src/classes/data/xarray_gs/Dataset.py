@@ -39,6 +39,8 @@ class Dataset:
         out : bool
 
         """
+        if not 'spatial_ref' in self._obj:
+            return False
         return self._obj['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
 
     @property
@@ -136,7 +138,7 @@ class Dataset:
 
         return self
 
-    def add_coordinate_from_values(self, name, values, discrete=False, is_dimension=False, **kwargs):
+    def add_coordinate_from_values(self, name, discrete=False, is_dimension=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset using an array of values defining center values.
 
         The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
@@ -170,12 +172,13 @@ class Dataset:
 
         """
 
+        # values = kwargs['values']
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
         if (not is_dimension) and ('dimensions' in kwargs):
             kwargs['coords'] = kwargs.pop('coords', {key:self._obj[key] for key in kwargs['dimensions']})
 
-        self._obj[name] = Coordinate.from_values(name, values, is_dimension=is_dimension, **kwargs)
+        self._obj[name] = Coordinate.from_values(name, is_dimension=is_dimension, **kwargs)
         self._obj = self._obj.assign_coords({name : self._obj[name]})
 
         # Add the bounds of the coordinate
@@ -184,7 +187,7 @@ class Dataset:
 
         return self
 
-    def add_variable_from_values(self, name, values, **kwargs):
+    def add_variable_from_values(self, name, **kwargs):
         """Add a variable to the Dataset
 
         Automatically maintains coords on the variable given its dims.
@@ -215,11 +218,25 @@ class Dataset:
             If the shape of the values does not match the specified dimensions.
 
         """
-        tmp = tuple([self._obj[vdim].size for vdim in kwargs['dimensions']])
-        assert all(np.shape(values) == tmp), ValueError("Shape {} of variable {} does not match specified dimensions {} with shape {}".format(np.shape(values), name, kwargs['dimensions'], tmp))
+        values = kwargs['values']
 
-        kwargs['coords'] = [self._obj.coords[dim] for dim in kwargs['dimensions']]
-        self._obj[name] = DataArray.from_values(name, values, **kwargs)
+        if "dimensions" in kwargs:
+            if isinstance(kwargs['dimensions'], str):
+                kwargs['dimensions'] = [kwargs['dimensions']]
+
+
+            tmp = tuple([self._obj[vdim.lower()].size for vdim in kwargs['dimensions']])
+            shp = np.shape(values)
+
+            shape_check = [x==y for x, y in zip(shp, tmp)]
+
+            for i, good in enumerate(shape_check):
+                dim = kwargs['dimensions'][i]
+                assert good, ValueError(f"Size of data for variable {name} along dimension {dim} is {shp[i]} and does not match xarray dimension with size {tmp[i]}")
+
+            kwargs['coords'] = [self._obj.coords[dim.lower()] for dim in kwargs['dimensions']]
+
+        self._obj[name] = DataArray.from_values(name, **kwargs)
 
         return self
 
@@ -233,7 +250,7 @@ class Dataset:
         """
         if not 'nv' in self._obj:
             self = self.add_coordinate_from_values('nv',
-                                                   r_[0, 1],
+                                                   values=r_[0, 1],
                                                    is_projected=False,
                                                    is_dimension=True,
                                                    discrete=True,
@@ -273,6 +290,9 @@ class Dataset:
         if 'coordinates' in dic:
             for key, value in dic['coordinates'].items():
                 dic['coordinates'][key] = value.strip()
+
+        if "variable_metadata" in dic:
+            dic['variable_metadata'] = {key.lower():item for key, item in dic['variable_metadata'].items()}
 
         return dic
 

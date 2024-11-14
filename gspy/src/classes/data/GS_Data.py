@@ -17,9 +17,9 @@ class GS_Data(object):
     """Class defining a survey or dataset
     """
 
-    def __init__(self):
-        self._dataset = None
-        self._system = {}
+    def __init__(self, dataset=None, system={}):
+        self._dataset = dataset
+        self._system = system
 
     @property
     def dataset(self):
@@ -38,48 +38,44 @@ class GS_Data(object):
 
         self = cls()
 
-        system = kwargs.pop('system', None)
+        json_md = load_metadata_from_file(metadata_file)
+
+        system = kwargs.get('system', None)
 
         # READ THE SYSTEM FIRST
         if system is None:
-            self.add_system(**kwargs)
-        self._system = system
+            for key in list(json_md.keys()):
+                if "system" in key:
+                    if system is None:
+                        system = {}
+                    value = json_md.pop(key)
+                    system[key] = System.from_dict(**value)
 
+        # Attach apriori given system dict
+        kwargs['system'] = system
 
         if data_filename is None:
-            self._dataset = Raster.read(metadata_file=metadata_file, spatial_ref=spatial_ref, **kwargs)
+            self._dataset = Raster.read(metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
         else:
             from . import tabular_aseg
             from . import tabular_csv
 
             file_name, file_extension = os.path.splitext(data_filename)
 
-            json_md = load_metadata_from_file(metadata_file)
             if file_extension == '.dat':
                 if os.path.isfile(file_name+'.dfn'):
-                    data = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, system=system, **kwargs)
+                    data = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
                 else:
                     file_extension = '.csv'
 
             if file_extension == '.csv':
-                data = tabular_csv.Tabular_csv.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, system=system, **kwargs)
+                data = tabular_csv.Tabular_csv.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
 
             self._dataset = data
+            if system is not None:
+                self._system = system
 
-            # HOW DO WE PASS CDs FROM THE SYSTEM TO THE READ METHODS OF THE DATA.
-
-
-
-            if self.system is not None:
-                for key, value in self.system.items():
-                    if value.attrs['method'] == self.dataset.attrs['method']:
-                        value.gs_system.check_against_data(self.dataset)
-
-                        # We need to add the coordinate dimensions pf the gatetimes from the data to the system
-
-
-
-        if self.system is None:
+        if len(self.system) == 0:
             return self.dataset
         else:
             return self
@@ -90,7 +86,14 @@ class GS_Data(object):
             if "system" in key:
                 value = kwargs.pop(key)
                 self._system[key] = System.from_dict(**value)
+
         return kwargs
+
+    def scatter(self, *args, **kwargs):
+        return self.dataset.gs_tabular.scatter(*args, **kwargs)
+
+    def subset(self, key, value):
+        return type(self)(self.dataset.where(self.dataset[key]==value), self.system)
 
     def system_present(self, **kwargs):
         return any(['system' in x for x in list(kwargs.keys())])
@@ -98,21 +101,31 @@ class GS_Data(object):
     @classmethod
     def open_netcdf(cls, filename, **kwargs):
 
-        self = cls()
+        self = cls(dataset=None, system={})
+
+        incoming_handle = 'handle' in kwargs
+        handle = kwargs.pop('handle', h5py.File(filename, 'r'))
+
         self._dataset = Dataset.open_netcdf(filename, **kwargs)
 
-        survey/walktem_40m/system
-        survey/walktem_100m/system
+        group = kwargs.pop('group')
 
-        try:
-            self._system = Dataset.open_netcdf(filename, group=kwargs.pop('group')+'/system', **kwargs)
-            return self
-        except:
+        for key in list(handle[group].keys()):
+            if '_system' in key:
+                self._system[key] = Dataset.open_netcdf(filename, group=f'{group}/{key}', **kwargs)
+
+        if not incoming_handle:
+            handle.close()
+
+        if len(self.system) == 0:
             return self.dataset
+        else:
+            return self
 
     def write_netcdf(self, filename, group):
 
         self._dataset.gs_dataset.write_netcdf(filename, group)
 
         if self.system is not None:
-            self._system.gs_dataset.write_netcdf(filename, group+'/system')
+            for key, value in self.system.items():
+                value.gs_dataset.write_netcdf(filename, f'{group}/{key}')

@@ -1,5 +1,5 @@
 from copy import deepcopy
-from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, r_, std, zeros, nan, min,max
+from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, ndim, r_, std, zeros, nan, min,max
 from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray as xr_DataArray
@@ -45,6 +45,7 @@ class DataArray:
         # Return if the coordinate already has bounds
         if 'bounds' in coordinate.attrs:
             return
+
         if bounds is None:
             bounds = zeros((coordinate.size, 2))
             centre = median(diff(coordinate.values)) * 0.5
@@ -63,13 +64,10 @@ class DataArray:
         attrs['long_name'] = coordinate.attrs['long_name'] + ' cell boundaries'
         attrs['valid_range'] = cls.valid_range(bounds, name, **kwargs)
 
-        dims = kwargs.pop('dims', None)
-        coords = kwargs.pop('coords', None)
-
         self = xr_DataArray(bounds,
-                   dims=dims,
-                   coords=coords,
-                   attrs=attrs)
+                            dims=kwargs.pop('dims', None),
+                            coords=kwargs.pop('coords', None),
+                            attrs=attrs)
 
         return self
 
@@ -96,10 +94,10 @@ class DataArray:
             If required metadata is missing.
 
         """
-        assert all([x in kwargs.keys() for x in default_metadata]), ValueError("Variable {} must have metadata entries {}".format(default_metadata))
+        assert all([x in kwargs.keys() for x in default_metadata]), ValueError(f"Variable {name} must have metadata entries {default_metadata}")
 
     @classmethod
-    def from_values(cls, name, values, **kwargs):
+    def from_values(cls, name, **kwargs):
         """Generates an xarray.DataArray using an array of values
 
         Wraps around the xarray.DataArray instantiator and checks for Nans and adds CF convention metadata entries like valid_range, grid_mapping.
@@ -135,11 +133,18 @@ class DataArray:
         xarray.DataArray
 
         """
-        cls.check_metadata(name, **kwargs)
-        # values = cls.catch_nan(values, name=name, **kwargs)
+        values = kwargs.pop('values')
+        nd = ndim(values)
 
-        if not isinstance(values[0], str):
-            kwargs['valid_range'] = cls.valid_range(values, name=name, **kwargs)
+        if kwargs.pop('check', True):
+            cls.check_metadata(name, **kwargs)
+
+            if nd:
+                assert "dimensions" in kwargs, ValueError("dimensions must be specified for array_like variables")
+
+        if nd > 0:
+            if not isinstance(values[0], str):
+                kwargs['valid_range'] = cls.valid_range(values, name=name, **kwargs)
 
         kwargs['grid_mapping'] = kwargs.pop('grid_mapping', 'spatial_ref')
 
@@ -147,8 +152,8 @@ class DataArray:
             values = values.astype(kwargs['dtype'])
 
         out = xr_DataArray(values,
-                dims=kwargs.pop('dimensions'),
-                coords=kwargs.pop('coords'),
+                dims=kwargs.pop('dimensions', None),
+                coords=kwargs.pop('coords', None),
                 attrs=kwargs)
 
         return out

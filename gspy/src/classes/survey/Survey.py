@@ -4,6 +4,7 @@ from pprint import pprint
 import xarray as xr
 from netCDF4 import Dataset as ncdf4_Dataset
 import h5py
+import h5netcdf
 
 from ..data.xarray_gs.Dataset import Dataset
 from ..data.System import System
@@ -67,11 +68,11 @@ class Survey(dict):
             self.xarray = metadata
 
     def add_system(self, **kwargs):
-        # Pop system(s) information from the metadata
         for key in list(kwargs.keys()):
             if "system" in key:
                 value = kwargs.pop(key)
                 self._system[key] = System.from_dict(**value)
+
         return kwargs
 
     @property
@@ -145,11 +146,6 @@ class Survey(dict):
 
     def add_data(self, key, *args, **kwargs):
         self[key] = GS_Data.read(*args, spatial_ref=self.spatial_ref, **kwargs)
-
-        if type is 'data':
-            self.attrs['surveys'].append('/survey/raw_data/skytem_system')
-            self.attrs['surveys'].append('/survey/raw_data/magnetic_system')
-            self.surveys.append('/survey/processed_data/skytem_system')
 
     def read_metadata(self, filename=None):
         """Read metadata for the survey
@@ -263,11 +259,16 @@ class Survey(dict):
 
         self = cls()
 
-        self.xarray = Dataset.open_netcdf(filename, group='survey')
+        self.xarray = Dataset.open_netcdf(filename, group='survey', engine='h5netcdf')
+        kwargs['handle'] = h5py.File(filename, 'r')
 
         with ncdf4_Dataset(filename) as rootgrp:
             for key in rootgrp.groups['survey'].groups:
-                self[key] = GS_Data.open_netcdf(filename, group=f'survey/{key}', **kwargs)
+                self[key] = GS_Data.open_netcdf(filename, group=f'/survey/{key}', **kwargs)
+
+        kwargs['handle'].close()
+
+
 
         return self
 

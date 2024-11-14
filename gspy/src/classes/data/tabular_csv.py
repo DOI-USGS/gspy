@@ -47,7 +47,7 @@ class Tabular_csv(Tabular):
 
     @staticmethod
     def get_attrs(file_handle, variable, **kwargs):
-        assert all([x in kwargs for x in ('long_name', 'standard_name', 'null_value', 'units')]), ValueError("Must have at least 'long_name', 'standard_name', 'null_value', 'units'")
+        assert all([x in kwargs for x in ('long_name', 'standard_name', 'null_value', 'units')]), ValueError(f"Variable {variable} Must have at least 'long_name', 'standard_name', 'null_value', 'units'")
         return kwargs
 
     def write_metadata_template(self, filename="csv_md.yml"):

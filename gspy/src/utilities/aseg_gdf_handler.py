@@ -141,7 +141,7 @@ class aseg_gdf2_gs(object):
 
         else:
             # Open the data file, there is no header
-            self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, sep='\s+')
+            self._df = read_csv(self.data_file_name, names=self.columns, dtype=self.numpy_formats, index_col=False, sep=r'\s+')
 
         return self
 
@@ -189,23 +189,43 @@ class aseg_gdf2_gs(object):
         return first_col_width, dfn_md
 
     def _parse_record(self, line):
+        """Parse a single line in the aseg DFN file
 
+        Parameters
+        ----------
+        line : str
+            line in file
+
+        Returns
+        -------
+        standard_name : str
+            Key name for the record
+        metadata : dict
+            Metadata for this key name
+
+        """
         assert not b";" in line, ValueError("Trying to parse {} with multiple semicolons")
 
+        # Double check for non-ascii entries and Error out
         result = chardet.detect(line)
         assert result['encoding'] == "ascii", ValueError("Non ascii entry(its probably the units), on line \n{}".format(line))
 
+        # Decode the line in the DFN to utf-8
         line = line.decode("utf-8")
 
+        # Split the line based on semi colons
+        # And then again using : or ,
         info = line.split(";")[-1]
         tmp = re.split(":|,", info)
 
         assert len(tmp) >= 2, ValueError("Could not parse a record name and format on line {}".format(line))
 
+        # The first two entries in the record are std_name and entry format
         standard_name, format = tmp[:2]
         if ' ' in standard_name:
             standard_name = standard_name.strip().replace(' ', '_')
 
+        # Create a template
         metadata = {'standard_name' : standard_name.strip().lower(),
                     'long_name' : "not_defined",
                     'units' : "not_defined",
@@ -214,16 +234,22 @@ class aseg_gdf2_gs(object):
                     }
 
         for attr in tmp[2:]:
+            # For each entry in the record parse potentially different substrings for "name", or "units".
+            attr = attr.strip()
+            attr = attr.replace(" =", "=")
+
             if 'NULL=' in attr or 'null=' in attr:
+                attr = attr.replace(" ", "")
                 metadata['null_value'] = re.split("=", attr)[-1]
-                next
 
-            if 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
+            elif 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
+                attr = attr.replace(" ", "")
                 metadata['units'] = re.split("=", attr)[-1]
-                next
 
-            if 'NAME=' in attr or 'name=' in attr:
+            elif 'NAME=' in attr or 'name=' in attr:
                 metadata['long_name'] = re.split("=", attr)[-1]
-                next
+
+            else: # This should be the long name
+                metadata['long_name'] = attr
 
         return standard_name, metadata
