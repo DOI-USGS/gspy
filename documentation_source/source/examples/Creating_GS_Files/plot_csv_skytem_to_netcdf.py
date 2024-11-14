@@ -44,7 +44,7 @@ survey = Survey(metadata)
 # Import raw AEM data from CSV-format.
 # Define input data file and associated metadata file
 d_data1 = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
-d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.json')
+d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
 survey.add_data(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, system=survey.system)
@@ -54,7 +54,7 @@ survey.add_data(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, sy
 # Import processed AEM data from CSV-format.
 # Define input data file and associated metadata file
 d_data2 = join(data_path, 'data//WI_SkyTEM_2021_ProcessedData.csv')
-d_supp2 = join(data_path, 'data//WI_SkyTEM_processed_data_md.json')
+d_supp2 = join(data_path, 'data//WI_SkyTEM_processed_data_md.yml')
 
 system = {"skytem_system" : survey.system["nominal_system"].isel(lm_gate_times=np.s_[1:], hm_gate_times=np.s_[10:]),
           "magnetic_system" : survey.system["magnetic_system"]}
@@ -66,7 +66,7 @@ survey.add_data(key='processed_data', data_filename=d_data2, metadata_file=d_sup
 # Import inverted AEM models from CSV-format.
 # Define input data file and associated metadata file
 m_data3 = join(data_path, 'model//WI_SkyTEM_2021_InvertedModels.csv')
-m_supp3 = join(data_path, 'model//WI_SkyTEM_inverted_models_md.json')
+m_supp3 = join(data_path, 'model//WI_SkyTEM_inverted_models_md.yml')
 
 # Add the inverted AEM models as a tabular dataset
 survey.add_data(key='inverted_models', data_filename=m_data3, metadata_file=m_supp3)
@@ -76,7 +76,7 @@ survey.add_data(key='inverted_models', data_filename=m_data3, metadata_file=m_su
 # Import AEM-based estimated of depth to bedrock from CSV-format.
 # Define input data file and associated metadata file
 d_data4 = join(data_path, 'data//topDolomite_Blocky_LidarDEM.csv')
-d_supp4 = join(data_path, 'data//WI_SkyTEM_bedrock_picks_md.json')
+d_supp4 = join(data_path, 'data//WI_SkyTEM_bedrock_picks_md.yml')
 
 # Add the AEM-based estimated of depth to bedrock as a tabular dataset
 survey.add_data(key='depth_to_bedrock', data_filename=d_data4, metadata_file=d_supp4)
@@ -85,7 +85,7 @@ survey.add_data(key='depth_to_bedrock', data_filename=d_data4, metadata_file=d_s
 # 5 - Derivative Maps -
 # Import interpolated bedrock and magnetic maps from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked to variable names)
-m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.json')
+m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.yml')
 
 # Add the interpolated maps as a raster dataset
 survey.add_data(key='derived_maps', metadata_file=m_supp5)
@@ -94,7 +94,6 @@ survey.add_data(key='derived_maps', metadata_file=m_supp5)
 # Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
 survey.write_netcdf(d_out)
-
 
 #%%
 # Reading back in

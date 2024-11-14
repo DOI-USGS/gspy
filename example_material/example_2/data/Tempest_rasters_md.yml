@@ -1,0 +1,61 @@
+dataset_attrs:
+    comment: <additional details or ancillary information>
+    content: interpolated resistivity models (3-D depth grid) and magnetic map (2-D)
+
+coordinates:
+    comment: Coordinates map variables in space and time x y z t
+    x: Easting_Albers
+    y: Northing_Albers
+    z: depth
+
+dimensions:
+    comment: Define the actual values along each axis or dimension of the variables. If these are defined inside the data file (such as x and y), it's a string. Otherwise, an explicit definition is needed here.
+    x: easting_albers
+    y: northing_albers
+    depth:
+        comment: depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.
+        standard_name: depth
+        long_name: Depth below earth's surface DTM
+        units: m
+        null_value: not_defined
+        length: 5
+        increment: 5.0
+        origin: 0.0
+        axis: z
+        positive: down
+        datum: ground surface
+
+variable_metadata:
+    Easting_Albers:
+        standard_name: easting_albers
+        long_name: Easting
+        units: meter
+        null_value: not_defined
+        axis: x
+
+    Northing_Albers:
+        standard_name: northing_albers
+        long_name: Northing
+        units: meter
+        null_value: not_defined
+        axis: y
+
+    resistivity:
+        dimensions: [x, y, z]
+        standard_name: log10_resistivity
+        long_name: Electrical Resistivity on Logarithmic Scale
+        units: log10_ohm_m
+        null_value: -9999.99
+        files: [..//..//..//../example_material//example_2//data/resistivity_0_5m.tif,
+                    ..//..//..//../example_material//example_2//data/resistivity_5_10m.tif,
+                    ..//..//..//../example_material//example_2//data/resistivity_10_15m.tif,
+                    ..//..//..//../example_material//example_2//data/resistivity_15_20m.tif,
+                    ..//..//..//../example_material//example_2//data/resistivity_20_25m.tif]
+
+    magnetic_tmi:
+        dimensions: [x, y]
+        standard_name: total_magnetic_intensity
+        long_name: Total magnetic intensity, diurnally corrected and filtered
+        units: nT
+        null_value: -999999
+        files: [../../../../example_material/example_2/data/mag_aligned.tif]

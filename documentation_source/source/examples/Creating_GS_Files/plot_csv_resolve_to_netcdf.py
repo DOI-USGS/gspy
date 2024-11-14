@@ -44,7 +44,7 @@ survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 # Import inverted AEM models from CSV-format.
 # Define input model file and associated metadata file
 m_data = join(data_path, 'model//Resolve_model.csv')
-m_supp = join(data_path, 'model//Resolve_model_md.json')
+m_supp = join(data_path, 'model//Resolve_model_md.yml')
 
 # Add the inverted AEM models as a tabular dataset
 survey.add_data(key="model", data_filename=m_data, metadata_file=m_supp)

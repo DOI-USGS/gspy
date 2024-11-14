@@ -37,7 +37,7 @@ from pprint import pprint
 data_path = "..//..//..//..//example_material//example_2"
 
 # Survey metadata file
-metadata = join(data_path, "data//Tempest_survey_md.json")
+metadata = join(data_path, "data//Tempest_survey_md.yml")
 
 # Establish the Survey
 survey = Survey(metadata)
@@ -47,7 +47,7 @@ survey = Survey(metadata)
 
 # Import 2-D magnetic data, discretized on 600 m x 600 m grid
 # Define input metadata file (which contains the TIF filename linked with desired variable name)
-d_supp1 = join(data_path, 'data//Tempest_raster_md.json')
+d_supp1 = join(data_path, 'data//Tempest_raster_md.yml')
 
 # Read data and format as Raster class object
 survey.add_data(key="map", metadata_file=d_supp1)
@@ -57,7 +57,7 @@ survey.add_data(key="map", metadata_file=d_supp1)
 
 # Import both 3-D resistivity and 2-D magnetic data, aligned onto a common 1000 m x 1000 m grid
 # Define input metadata file (which contains the TIF filenames linked with desired variable names)
-d_supp2 = join(data_path, 'data//Tempest_rasters_md.json')
+d_supp2 = join(data_path, 'data//Tempest_rasters_md.yml')
 
 # Read data and format as Raster class object
 survey.add_data(key="maps", metadata_file=d_supp2)

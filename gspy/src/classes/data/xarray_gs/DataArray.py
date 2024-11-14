@@ -226,8 +226,7 @@ class DataArray:
         if nv == 'not_defined':
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
-            assert not isinstance(nv, str), ValueError(("Numerical null_value defined as a string in json file for variable {}."
-                                                        "Please make it a number".format(kwargs['standard_name'])))
+            assert not isinstance(nv, str), ValueError(f"Numerical null_value defined as a string in metadata file for variable {kwargs['standard_name']}.\nPlease make it a number. If this number is in scientific notation please use the following format x.xe+10 or x.xe-10.")
             tmp = values[values != nv]
             valid_range = asarray([nanmin(tmp), nanmax(tmp)], dtype=kwargs.get('dtype', None))
 

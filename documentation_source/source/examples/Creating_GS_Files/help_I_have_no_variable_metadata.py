@@ -24,7 +24,7 @@ from matplotlib import image as img
 data_path = '..//..//..//..//example_material//example_2'
 
 # Define the Survey metadata file
-metadata = join(data_path, "data//Resolve_survey_md.json")
+metadata = join(data_path, "data//Resolve_survey_md.yml")
 
 # Initialize the Survey
 survey = Survey(metadata)
@@ -34,7 +34,7 @@ survey = Survey(metadata)
 # Define input data file (CSV format) and the
 # associated metadata file (without the variable_metadata dictionary)
 d_data = join(data_path, 'data//Resolve.csv')
-d_supp = join(data_path, 'data//Resolve_data_md_without_variables.json')
+d_supp = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
 # Attempt to add the raw AEM data from CSV-format
 # This will trigger an error message when no variable metadata is found, however the error will

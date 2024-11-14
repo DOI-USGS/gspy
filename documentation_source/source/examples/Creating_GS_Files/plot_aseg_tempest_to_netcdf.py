@@ -29,7 +29,7 @@ from gspy import Survey
 data_path = '..//..//..//..//example_material//example_2'
 
 # Survey Metadata file
-metadata = join(data_path, "data//Tempest_survey_md.json")
+metadata = join(data_path, "data//Tempest_survey_md.yml")
 
 # Establish survey instance
 survey = Survey(metadata)
@@ -49,7 +49,7 @@ survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 # Import inverted AEM models from ASEG-format.
 # Define input data file and associated metadata file
 m_data = join(data_path, 'model//Tempest_model.dat')
-m_supp = join(data_path, 'model//Tempest_model_md.json')
+m_supp = join(data_path, 'model//Tempest_model_md.yml')
 
 # Read model data and format as Tabular class object
 survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
@@ -58,7 +58,7 @@ survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
 # 3. Magnetic Intensity Map -
 # Import the magnetic data from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked with desired variable names)
-r_supp = join(data_path, 'data//Tempest_raster_md.json')
+r_supp = join(data_path, 'data//Tempest_raster_md.yml')
 
 # Read data and format as Raster class object
 survey.add_data(key='maps', metadata_file = r_supp)
@@ -81,7 +81,6 @@ print(new_survey['maps']['magnetic_tmi'])
 # Plotting
 
 # Make a scatter plot of a specific tabular variable, using GSPy's plotter
-print(new_survey['data'])
 plt.figure()
 new_survey['data'].scatter(x='x', hue='tx_height', cmap='jet')
 

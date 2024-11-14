@@ -1,0 +1,170 @@
+dataset_attrs:
+    content: inverted resistivity models
+    comment: This dataset includes inverted resistivity models derived from processed AEM data produced by USGS
+
+coordinates:
+    x: X_WGS84_Albers
+    y: Y_WGS84_Albers
+    z: DEM
+
+inversion:
+    model_file: Resolve_model_0.csv
+    inversion_software: Aarhus Workbench
+    software_version: Aarhus Workbench version 5.5.0
+    date: 20181101
+    comment: Vertical and lateral constraints on resistivity were run with values of 5.0 and 2.0 and a homogeneous half-space with resistivity values of 40 ohm-meters for the prior model.  Sensor altitude was treated as a free parameter with an a-priori standard deviation of 0.5 m and a lateral constraint standard deviation factor of 1.30.
+    data_file: Resolve.csv
+
+dimensions:
+    layer_depth:
+        standard_name: layer_depth
+        long_name: Depth to model layer
+        units: meters
+        null_value: not_defined
+        centers: [  0.5 ,   1.55,   2.7 ,   3.95,   5.3 ,   6.75,   8.35,  10.1 ,
+                        12.0  ,  14.1 ,  16.4 ,  18.9 ,  21.6 ,  24.55,  27.8 ,  31.35,
+                        35.2 ,  39.4 ,  43.95,  48.9 ,  54.3 ,  60.2 ,  66.65,  73.65,
+                        81.3 ,  89.65,  98.75, 109.15, 119.65, 132.5 ]
+        bounds: [[  0.0 ,   1.0 ],
+                    [  1.0 ,   2.1],
+                    [  2.1,   3.3],
+                    [  3.3,   4.6],
+                    [  4.6,   6.0 ],
+                    [  6.0 ,   7.5],
+                    [  7.5,   9.2],
+                    [  9.2,  11.0 ],
+                    [ 11.0 ,  13.0 ],
+                    [ 13.0 ,  15.2],
+                    [ 15.2,  17.6],
+                    [ 17.6,  20.2],
+                    [ 20.2,  23.0 ],
+                    [ 23.0 ,  26.1],
+                    [ 26.1,  29.5],
+                    [ 29.5,  33.2],
+                    [ 33.2,  37.2],
+                    [ 37.2,  41.6],
+                    [ 41.6,  46.3],
+                    [ 46.3,  51.5],
+                    [ 51.5,  57.1],
+                    [ 57.1,  63.3],
+                    [ 63.3,  70.0 ],
+                    [ 70.0 ,  77.3],
+                    [ 77.3,  85.3],
+                    [ 85.3,  94.0 ],
+                    [ 94.0 , 104.0 ],
+                    [104.0 , 114.0 ],
+                    [114.0 , 125.0 ],
+                    [125.0 , 140.0 ]]
+
+variable_metadata:
+    LINE:
+        standard_name: line
+        long_name: Line number
+        units: not_defined
+        null_value: not_defined
+
+    LAT_WGS84_dd:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    LON_WGS84_dd:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    X_WGS84_Albers:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+        axis: x
+
+    Y_WGS84_Albers:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+        axis: y
+
+    RECORD:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    DEM:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+        axis: Z
+        positive: up
+        datum: v_datum
+
+    ALT:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    INVALT:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    DELTAALT:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    NUMDATA:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    RESDATA:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    RESTOTAL:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    DOI_CONSERVATIVE:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    DOI_STANDARD:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+
+    RHO_I:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+        dimensions: [index, layer_depth]
+
+    RHO_I_STD:
+        standard_name: not_defined
+        long_name: not_defined
+        units: not_defined
+        null_value: not_defined
+        dimensions: [index, layer_depth]
+
+
+
