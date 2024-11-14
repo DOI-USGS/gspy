@@ -53,17 +53,16 @@ Convert the resolve csv data to NetCDF
 
 Initialize the Survey
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-35
+.. GENERATED FROM PYTHON SOURCE LINES 25-34
 
 .. code-block:: Python
 
 
     # Path to example files
-    data_path = '..//..//supplemental//region//MAP'
+    data_path = '..//..//..//..//example_material//example_2'
 
     # Survey metadata file
-    metadata = join(data_path, "data//Resolve_survey_md.json")
-
+    metadata = join(data_path, "data//Resolve_survey_md.yml")
     # Establish the Survey
     survey = Survey(metadata)
 
@@ -74,20 +73,20 @@ Initialize the Survey
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-38
+.. GENERATED FROM PYTHON SOURCE LINES 35-37
 
 Import raw AEM data from CSV-format.
 Define input data file and associated metadata file
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-44
+.. GENERATED FROM PYTHON SOURCE LINES 37-43
 
 .. code-block:: Python
 
     d_data = join(data_path, 'data//Resolve.csv')
-    d_supp = join(data_path, 'data//Resolve_data_md.json')
+    d_supp = join(data_path, 'data//Resolve_data_md.yml')
 
     # Add the raw AEM data as a tabular dataset
-    survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
+    survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 
 
 
@@ -96,20 +95,20 @@ Define input data file and associated metadata file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-47
+.. GENERATED FROM PYTHON SOURCE LINES 44-46
 
 Import inverted AEM models from CSV-format.
 Define input model file and associated metadata file
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-53
+.. GENERATED FROM PYTHON SOURCE LINES 46-52
 
 .. code-block:: Python
 
     m_data = join(data_path, 'model//Resolve_model.csv')
-    m_supp = join(data_path, 'model//Resolve_model_md.json')
+    m_supp = join(data_path, 'model//Resolve_model_md.yml')
 
     # Add the inverted AEM models as a tabular dataset
-    survey.add_tabular(type='csv', data_filename=m_data, metadata_file=m_supp)
+    survey.add_data(key="model", data_filename=m_data, metadata_file=m_supp)
 
 
 
@@ -118,11 +117,11 @@ Define input model file and associated metadata file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-55
+.. GENERATED FROM PYTHON SOURCE LINES 53-54
 
 Save to NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-58
+.. GENERATED FROM PYTHON SOURCE LINES 54-57
 
 .. code-block:: Python
 
@@ -136,89 +135,81 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-60
+.. GENERATED FROM PYTHON SOURCE LINES 58-59
 
 Reading back in the GS NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-65
+.. GENERATED FROM PYTHON SOURCE LINES 59-62
 
 .. code-block:: Python
 
     new_survey = Survey.open_netcdf(d_out)
 
     # Check the Survey information
-    print(new_survey.xarray)
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    <xarray.Dataset> Size: 48B
-    Dimensions:                 ()
-    Coordinates:
-        spatial_ref             float64 8B ...
-    Data variables:
-        survey_information      float64 8B ...
-        survey_units            float64 8B ...
-        system_information      float64 8B ...
-        flightline_information  float64 8B ...
-        survey_equipment        float64 8B ...
-    Attributes:
-        title:        Example Resolve Airborne Electromagnetic (AEM) Raw Data
-        institution:  USGS Geology, Geophysics, & Geochemistry Science Center
-        source:       Comma-separated text file exported from Geosoft
-        history:      <date and time when the data were produced and/or modified>
-        references:   <data release reference>
-        comment:      <additional details or ancillary information>
-        content:      <summary list of file contents, e.g. raw data (/survey/tabu...
-        conventions:  CF-1.8, GS-0.0.1
-        created_by:   gspy==0.0.1
 
 
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 66-67
+.. GENERATED FROM PYTHON SOURCE LINES 63-64
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-90
+.. GENERATED FROM PYTHON SOURCE LINES 64-87
 
 .. code-block:: Python
 
 
     # Make a scatter plot of a specific data variable, using GSPy's plotter
-    # plt.figure()
-    # new_survey.tabular[0].gs_tabular.scatter(hue='DTM', vmin=30, vmax=50)
+    plt.figure()
+    new_survey['data'].scatter(hue='dtm', vmin=30, vmax=50)
 
 
     # Subsetting by line number, and plotting by distance along that line
-    # new_survey.tabular[0].gs_tabular.subset('line', 10010)
-    tmp = new_survey.tabular[0].where(new_survey.tabular[0]['line']==10010)
+    tmp = new_survey['data'].subset('line', 10010)
+    # tmp = new_survey['data'].where(new_survey['data'].dataset['line']==10010)
     plt.figure()
     # plt.subplot(121)
     # tmp.gs_tabular.plot(hue='DTM')
     # plt.subplot(122)
     # tmp.gs_tabular.scatter(x='x', y='DTM')
-    tmp.gs_tabular.scatter(y='DTM')
+    tmp.scatter(y='dtm')
 
     #IF YOU SPECIFY HUE ITS A 2D COLOUR Plot
     #OTHERWISE ITS JUST A PLOT (LINE POINTS ETC)
 
     # Make a scatter plot of a specific model variable, using GSPy's plotter
-    # plt.figure()
-    # new_survey.tabular[1].gs_tabular.scatter(hue='DOI_STANDARD')
+    plt.figure()
+    new_survey['model'].gs_tabular.scatter(hue='doi_standard')
     plt.show()
 
 
 
-.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
-   :alt: plot csv resolve to netcdf
-   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
-   :class: sphx-glr-single-img
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
+         :alt: plot csv resolve to netcdf
+         :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_001.png
+         :class: sphx-glr-multi-img
+
+    *
+
+      .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_002.png
+         :alt: plot csv resolve to netcdf
+         :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_002.png
+         :class: sphx-glr-multi-img
+
+    *
+
+      .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_003.png
+         :alt: plot csv resolve to netcdf
+         :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_resolve_to_netcdf_003.png
+         :class: sphx-glr-multi-img
 
 
 
@@ -227,7 +218,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.577 seconds)
+   **Total running time of the script:** (0 minutes 2.464 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py:

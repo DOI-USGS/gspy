@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coordinate Reference Systems &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../index.html" class="icon icon-home">
             gspy
           </a>
-              <div class="version">
-                1.2.2
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -114,13 +109,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 </pre></div>
 </div>
-<p>Set up the Survey</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//WI_SkyTEM_survey_md.json&quot;</span><span class="p">)</span>
-<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
-<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.json&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="s2">&quot;../../../../example_material/example_1/model/WISkyTEM.nc&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The CRS variable is called <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> and gets initialized in the Survey.
@@ -130,9 +119,9 @@ all information is contained within attributes.</p>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;spatial_ref&#39; ()&gt; Size: 8B
-array(0.)
+[1 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
 Attributes: (12/18)
     crs_wkt:                           PROJCRS[&quot;NAD83(HARN) / Wisconsin Trans...
     semi_major_axis:                   6378137.0
@@ -151,12 +140,14 @@ Attributes: (12/18)
 </div>
 <p>The Survey also has a spatial_ref property which returns the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> variable</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">spatial_ref</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;spatial_ref&#39; ()&gt; Size: 8B
-array(0.)
+[1 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
 Attributes: (12/18)
     crs_wkt:                           PROJCRS[&quot;NAD83(HARN) / Wisconsin Trans...
     semi_major_axis:                   6378137.0
@@ -171,6 +162,7 @@ Attributes: (12/18)
     scale_factor_at_central_meridian:  0.9996
     authority:                         EPSG
     wkid:                              3071
+[&#39;raw_data&#39;, &#39;processed_data&#39;, &#39;inverted_models&#39;, &#39;depth_to_bedrock&#39;, &#39;derived_maps&#39;]
 </pre></div>
 </div>
 <section id="grid-mapping">
@@ -191,7 +183,7 @@ crs_wkt: PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEO
 </div>
 <p>Then, each data variable should have an attribute <code class="docutils literal notranslate"><span class="pre">grid_mapping</span></code> that references
 the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> coordinate variable</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="s1">&#39;DEM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;dem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;axis&#39;: &#39;Z&#39;,
@@ -246,7 +238,7 @@ groups are also updated to match and all coordinate variables (particularly
 projected coordinate system with easting and northing coordinates to a geographic
 coordinate system, then the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinate variables need to be
 changed to longitude and latitude.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.503 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.135 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/331b093053e93b2a1bdc64c996d05bde/plot_coordinate_reference_systems.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_coordinate_reference_systems.ipynb</span></code></a></p>

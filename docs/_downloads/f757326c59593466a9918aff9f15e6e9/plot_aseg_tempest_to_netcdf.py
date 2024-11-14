@@ -26,10 +26,10 @@ from gspy import Survey
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//supplemental//region//MAP'
+data_path = '..//..//..//..//example_material//example_2'
 
 # Survey Metadata file
-metadata = join(data_path, "data//Tempest_survey_md.json")
+metadata = join(data_path, "data//Tempest_survey_md.yml")
 
 # Establish survey instance
 survey = Survey(metadata)
@@ -39,29 +39,29 @@ survey = Survey(metadata)
 # Import raw AEM data from ASEG-format.
 # Define input data file and associated metadata file
 d_data = join(data_path, 'data//Tempest.dat')
-d_supp = join(data_path, 'data//Tempest_data_md.json')
+d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
-survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
+survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 
 #%%
 # 2. Inverted Models -
 # Import inverted AEM models from ASEG-format.
 # Define input data file and associated metadata file
 m_data = join(data_path, 'model//Tempest_model.dat')
-m_supp = join(data_path, 'model//Tempest_model_md.json')
+m_supp = join(data_path, 'model//Tempest_model_md.yml')
 
 # Read model data and format as Tabular class object
-survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
+survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
 
 #%%
 # 3. Magnetic Intensity Map -
 # Import the magnetic data from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked with desired variable names)
-r_supp = join(data_path, 'data//Tempest_raster_md.json')
+r_supp = join(data_path, 'data//Tempest_raster_md.yml')
 
 # Read data and format as Raster class object
-survey.add_raster(metadata_file = r_supp)
+survey.add_data(key='maps', metadata_file = r_supp)
 
 # Save NetCDF file
 d_out = join(data_path, 'data//Tempest.nc')
@@ -71,18 +71,20 @@ survey.write_netcdf(d_out)
 # Read back in the NetCDF file
 new_survey = Survey.open_netcdf(d_out)
 
-# Once the survey is read in, we can access variables like a standard xarray dataset.
-print(new_survey.raster.magnetic_tmi)
+print(new_survey['maps'])
+# print(new_survey['maps'].system)
+# # Once the survey is read in, we can access variables like a standard xarray dataset.
+print(new_survey['maps'].magnetic_tmi)
+print(new_survey['maps']['magnetic_tmi'])
 
 # %%
 # Plotting
 
 # Make a scatter plot of a specific tabular variable, using GSPy's plotter
 plt.figure()
-# new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
-new_survey.tabular[0].gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
+new_survey['data'].scatter(x='x', hue='tx_height', cmap='jet')
 
 # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 plt.figure()
-new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
+new_survey['maps']['magnetic_tmi'].plot(cmap='jet', robust=True)
 plt.show()

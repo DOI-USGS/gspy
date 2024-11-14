@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gs_Dataset &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=fd7cadf9"></script>
-        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=fd7cadf9"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../../../../index.html" class="icon icon-home">
             gspy
           </a>
-              <div class="version">
-                1.2.2
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -103,10 +98,13 @@
              
   <section id="gs-dataset">
 <h1>gs_Dataset<a class="headerlink" href="#gs-dataset" title="Link to this heading"></a></h1>
-<div class="graphviz"><img src="../../../../../_images/inheritance-3fc84a0d3c7eee00a5d4e636bfac07a23ec71446.png" alt="Inheritance diagram of gspy.src.classes.data.xarray_gs.Dataset" usemap="#inheritancef543939383" class="inheritance graphviz" /></div>
-<map id="inheritancef543939383" name="inheritancef543939383">
-<area shape="rect" id="node1" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,32"/>
-</map><dl class="py class" id="module-gspy.src.classes.data.xarray_gs.Dataset">
+digraph inheritancef543939383 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;Dataset&quot; [URL=&quot;#gspy.src.classes.data.xarray_gs.Dataset.Dataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.&quot;];
+}
+<dl class="py class" id="module-gspy.src.classes.data.xarray_gs.Dataset">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.xarray_gs.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset" title="Link to this definition"></a></dt>
 <dd><p>Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.</p>
@@ -184,7 +182,7 @@ coordinate is not discrete.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values">
-<span class="sig-name descname"><span class="pre">add_coordinate_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_coordinate_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_coordinate_from_values" title="Link to this definition"></a></dt>
 <dd><p>Attach a coordinate/dimension to a Dataset using an array of values defining center values.</p>
 <p>The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
 coordinate is not discrete.</p>
@@ -222,7 +220,7 @@ coordinate is not discrete.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values">
-<span class="sig-name descname"><span class="pre">add_variable_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_variable_from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.add_variable_from_values" title="Link to this definition"></a></dt>
 <dd><p>Add a variable to the Dataset</p>
 <p>Automatically maintains coords on the variable given its dims.</p>
 <div class="admonition important">
@@ -272,23 +270,8 @@ coordinate is not discrete.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_dataset" title="Link to this definition"></a></dt>
-<dd><p>Open (lazy loading) a netcdf.</p>
-<p>Wraps around the xarray open_dataset but forces xarray to honour gate times and the CF convention.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Native xrray Dataset</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>xarray.Dataset</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_netcdf">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_netcdf" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.open_netcdf" title="Link to this definition"></a></dt>
 <dd><p>Read Data from a netcdf file using xrray’s lazy open_dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -400,7 +383,7 @@ coordinate is not discrete.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs">
-<span class="sig-name descname"><span class="pre">update_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">update_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.xarray_gs.Dataset.Dataset.update_attrs" title="Link to this definition"></a></dt>
 <dd><p>Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.</p>
 </dd></dl>
 

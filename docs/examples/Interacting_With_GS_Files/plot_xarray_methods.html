@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Basic Class Structure &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../index.html" class="icon icon-home">
             gspy
           </a>
-              <div class="version">
-                1.2.2
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -114,40 +109,28 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 </pre></div>
 </div>
-<p>First Create the Survey &amp; Data Objects</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Survey</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//MAP&#39;</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.json&quot;</span><span class="p">)</span>
-<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
-
-<span class="c1"># Add Tabular and Raster Datasets</span>
-<span class="n">t_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
-<span class="n">t_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.json&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">t_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">t_supp</span><span class="p">)</span>
-<span class="n">r_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.json&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span> <span class="o">=</span> <span class="n">r_supp</span><span class="p">)</span>
+<p>First open the netcdf GS standard survey file.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="s2">&quot;../../../../example_material/example_2/data/Tempest.nc&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="accessing-the-xarray-object">
 <h2>Accessing the Xarray object<a class="headerlink" href="#accessing-the-xarray-object" title="Link to this heading"></a></h2>
 <p>Survey</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The Survey&#39;s metadata is accessed through the xarray property</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey:
-
-&lt;xarray.Dataset&gt; Size: 48B
+&lt;xarray.Dataset&gt; Size: 40B
 Dimensions:                 ()
 Coordinates:
-    spatial_ref             float64 8B 0.0
+    spatial_ref             float64 8B ...
 Data variables:
-    survey_information      float64 8B nan
-    survey_units            float64 8B nan
-    system_information      float64 8B nan
-    flightline_information  float64 8B nan
-    survey_equipment        float64 8B nan
+    survey_information      float64 8B ...
+    survey_units            float64 8B ...
+    flightline_information  float64 8B ...
+    survey_equipment        float64 8B ...
 Attributes:
     title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
     institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
@@ -187,129 +170,66 @@ Attributes:
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey Information:
 
 &lt;xarray.DataArray &#39;survey_information&#39; ()&gt; Size: 8B
-array(nan)
+[1 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
 Attributes:
     contractor_project_number:  603756FWA
     contractor:                 CGG Canada Services Ltd.
     client:                     U.S. Geological Survey
-    survey_type:                [&#39;electromagnetic&#39;, &#39;magnetic&#39;, &#39;radiometric&#39;]
+    survey_type:                electromagneticmagneticradiometric
     survey_area_name:           Mississippi Alluvial Plain (MAP)
-    state:                      [&#39;MO&#39;, &#39;AR&#39;, &#39;TN&#39;, &#39;MS&#39;, &#39;LA&#39;, &#39;IL&#39;, &#39;KY&#39;]
+    state:                      MOARTNMSLAILKY
     country:                    USA
     acquisition_start:          20191120
     acquisition_end:            20200307
     dataset_created:            20200420
 </pre></div>
 </div>
-<p>Tabular &amp; Raster</p>
-<p>Datasets are attached to the Survey as lists, however if only one Dataset of a given
-type is present then the xarray object is returned simply by the name of the group</p>
+<p>Datasets
+Get the list of datasets attached to the survey</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;data&#39;, &#39;model&#39;, &#39;maps&#39;]
+</pre></div>
+</div>
+<p>Datasets are attached to the Survey regardless of their format whether unstructured tabular data or
+image-type raster data</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabular</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tabular:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
 
 <span class="c1"># Raster</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Raster:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">raster</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;maps&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Tabular:
 
-&lt;xarray.Dataset&gt; Size: 20MB
-Dimensions:          (index: 20701, gate_times: 15, nv: 2)
-Coordinates:
-    spatial_ref      float64 8B 0.0
-  * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
-  * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-  * nv               (nv) int64 16B 0 1
-    x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-    y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-    z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
-Data variables: (12/62)
-    gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-    Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
-    Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
-    Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
-    Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
-    Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
-    ...               ...
-    Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
-    Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
-    Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
-    Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
-    Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
-    Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
-Attributes:
-    content:  raw data
-    comment:  This dataset includes minimally processed (raw) AEM data
+&lt;gspy.src.classes.data.GS_Data.GS_Data object at 0x112f44a70&gt;
 
 Raster:
 
 &lt;xarray.Dataset&gt; Size: 6MB
 Dimensions:       (x: 599, nv: 2, y: 1212)
 Coordinates:
-    spatial_ref   float64 8B 0.0
+    spatial_ref   float64 8B ...
   * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * nv            (nv) int64 16B 0 1
   * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 Data variables:
-    x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
-    y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
-    magnetic_tmi  (y, x) float64 6MB 1.701e+38 1.701e+38 ... 1.701e+38 1.701e+38
+    x_bnds        (x, nv) float64 10kB ...
+    y_bnds        (y, nv) float64 19kB ...
+    magnetic_tmi  (y, x) float64 6MB ...
 Attributes:
     comment:  &lt;additional details or ancillary information&gt;
     content:  gridded magnetic map
 </pre></div>
 </div>
-<p>Multiple Groups</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If more than one Dataset is present under the group, then the list begins indexing</span>
-<span class="c1"># For example, let&#39;s add a second Tabular Dataset</span>
-<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
-<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.json&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aseg&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now the first dataset is accessed at index 0</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First Tabular Group:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>First Tabular Group:
-
-&lt;xarray.Dataset&gt; Size: 20MB
-Dimensions:          (index: 20701, gate_times: 15, nv: 2)
-Coordinates:
-    spatial_ref      float64 8B 0.0
-  * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
-  * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-  * nv               (nv) int64 16B 0 1
-    x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-    y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-    z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
-Data variables: (12/62)
-    gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-    Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
-    Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
-    Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
-    Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
-    Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
-    ...               ...
-    Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
-    Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
-    Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
-    Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
-    Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
-    Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
-Attributes:
-    content:  raw data
-    comment:  This dataset includes minimally processed (raw) AEM data
-</pre></div>
-</div>
 <p>and the second is located at index 1</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Second Tabular Group:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Second Tabular Group:
@@ -318,28 +238,28 @@ Attributes:
 Dimensions:                  (index: 20701, layer_depth: 30, nv: 2,
                               gate_times: 15)
 Coordinates:
-    spatial_ref              float64 8B 0.0
+    spatial_ref              float64 8B ...
   * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
   * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
   * nv                       (nv) int64 16B 0 1
   * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
-    x                        (index) float64 166kB 3.579e+05 ... 4.906e+05
-    y                        (index) float64 166kB 1.211e+06 ... 1.577e+06
-    z                        (index) float64 166kB 45.83 46.61 ... 179.4 177.2
+    x                        (index) float64 166kB ...
+    y                        (index) float64 166kB ...
+    z                        (index) float64 166kB ...
 Data variables: (12/49)
-    layer_depth_bnds         (layer_depth, nv) float64 480B 0.0 3.0 ... 489.1
-    gate_times_bnds          (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-    uniqueid                 (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
-    survey                   (index) int32 83kB 9999 9999 9999 ... 9999 9999
-    date                     (index) int32 83kB 20191128 20191128 ... 20200227
-    flight                   (index) int32 83kB 10 10 10 10 10 ... 70 70 70 70
+    layer_depth_bnds         (layer_depth, nv) float64 480B ...
+    gate_times_bnds          (gate_times, nv) float64 240B ...
+    uniqueid                 (index) int32 83kB ...
+    survey                   (index) int32 83kB ...
+    date                     (index) int32 83kB ...
+    flight                   (index) int32 83kB ...
     ...                       ...
-    PhiC                     (index) float64 166kB 0.4491 0.4759 ... 1.61 1.289
-    PhiT                     (index) float64 166kB 0.0 0.0 0.0 ... 0.0 0.0 0.0
-    PhiG                     (index) float64 166kB 0.9652 0.6608 ... 1.457
-    PhiS                     (index) float64 166kB 0.1158 0.1392 ... 0.1705
-    Lambda                   (index) float64 166kB 0.5968 0.5487 ... 1.771
-    Iterations               (index) int32 83kB 20 19 25 25 25 ... 30 30 27 29
+    phic                     (index) float64 166kB ...
+    phit                     (index) float64 166kB ...
+    phig                     (index) float64 166kB ...
+    phis                     (index) float64 166kB ...
+    lambda                   (index) float64 166kB ...
+    iterations               (index) int32 83kB ...
 Attributes:
     content:  inverted resistivity models
     comment:  This dataset includes inverted resistivity models derived from ...
@@ -353,33 +273,33 @@ Attributes:
 <h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading"></a></h3>
 <p>Tabular data are typicaly 1-D or 2-D variables with the primary dimension being <code class="docutils literal notranslate"><span class="pre">index</span></code>, which
 corresponds to the rows of the input text file representing individual measurements.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;index&#39; (index: 20701)&gt; Size: 83kB
 array([    0,     1,     2, ..., 20698, 20699, 20700], dtype=int32)
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
   * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
-    x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-    y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-    z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
+    x            (index) float64 166kB ...
+    y            (index) float64 166kB ...
+    z            (index) float64 166kB ...
 Attributes:
     standard_name:  index
-    long_name:      Index of individual data points
-    units:          not_defined
     null_value:     not_defined
-    valid_range:    [    0 20700]
+    units:          not_defined
     grid_mapping:   spatial_ref
+    valid_range:    [    0 20700]
+    long_name:      Index of individual data points
 </pre></div>
 </div>
 <p>If a dimension is not discrete, meaning it represents ranges (such as depth layers),
 then the bounds on each dimension value also need to be defined, and are linked
 to the dimension through the “bounds” attribute.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;example non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;gate_times&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">corresponding bounds on non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;gate_times_bnds&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times_bnds&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>example non-discrete dimension:
@@ -389,47 +309,32 @@ array([1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05, 1.410600e-04,
        2.278700e-04, 3.689300e-04, 5.859500e-04, 9.114800e-04, 1.410630e-03,
        2.191900e-03, 3.418070e-03, 5.338690e-03, 8.301020e-03, 1.337928e-02])
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 Attributes:
     standard_name:  gate_times
-    long_name:      receiver gate times
-    units:          seconds
     null_value:     not_defined
-    valid_range:    [1.085000e-05 1.337928e-02]
-    grid_mapping:   spatial_ref
     bounds:         gate_times_bnds
+    units:          seconds
+    grid_mapping:   spatial_ref
+    valid_range:    [1.085000e-05 1.337928e-02]
+    long_name:      receiver gate times
 
 
 corresponding bounds on non-discrete dimension:
 
 &lt;xarray.DataArray &#39;gate_times_bnds&#39; (gate_times: 15, nv: 2)&gt; Size: 240B
-array([[5.430000e-06, 1.628000e-05],
-       [2.713000e-05, 3.798000e-05],
-       [4.883000e-05, 5.968000e-05],
-       [7.053000e-05, 1.030800e-04],
-       [1.139400e-04, 1.681900e-04],
-       [1.790400e-04, 2.767000e-04],
-       [2.875500e-04, 4.503200e-04],
-       [4.611700e-04, 7.107400e-04],
-       [7.215900e-04, 1.101380e-03],
-       [1.112230e-03, 1.709030e-03],
-       [1.719880e-03, 2.663920e-03],
-       [2.674770e-03, 4.161360e-03],
-       [4.172210e-03, 6.505170e-03],
-       [6.516030e-03, 1.008600e-02],
-       [1.009686e-02, 1.666171e-02]])
+[30 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
   * nv           (nv) int64 16B 0 1
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 Attributes:
     standard_name:  gate_times_bounds
-    long_name:      receiver gate times cell boundaries
-    units:          seconds
     null_value:     not_defined
-    valid_range:    [5.430000e-06 1.666171e-02]
     grid_mapping:   spatial_ref
+    valid_range:    [5.430000e-06 1.666171e-02]
+    long_name:      receiver gate times cell boundaries
 </pre></div>
 </div>
 </section>
@@ -440,17 +345,16 @@ Additionally, all dimensions are by default classified as a coordinate.
 This means a dataset can have both dimensional and non-dimensional coordinates.
 Dimensional coordinates are noted with a * (or bold text) in printed output of the xarray,
 such as <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">gate_times</span></code>, <code class="docutils literal notranslate"><span class="pre">nv</span></code> in this example:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
   * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
+    x            (index) float64 166kB ...
+    y            (index) float64 166kB ...
+    z            (index) float64 166kB ...
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-  * nv           (nv) int64 16B 0 1
-    x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-    y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-    z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
 </pre></div>
 </div>
 <p>Tabular Coordinates</p>
@@ -464,11 +368,11 @@ temporal coordinates of the data points.</p>
 <p>Raster data are gridded, typically representing maps or multi-dimensional models.
 Therefore, Raster data almost always have dimensional coordinates, i.e., the
 data dimensions correspond directly to either spatial or temporal coordinates (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>).</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">raster</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coordinates:
-    spatial_ref  float64 8B 0.0
+    spatial_ref  float64 8B ...
   * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * nv           (nv) int64 16B 0 1
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
@@ -489,7 +393,7 @@ for more details.</p>
 information about a dataset group as a whole, such as model inversion parameters
 or other processing descriptions. At a minimum, a <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute should
 contain a brief summary of the contents of the dataset.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset includes inverted resistivity models derived from &#39;
@@ -500,19 +404,19 @@ contain a brief summary of the contents of the dataset.</p>
 <p>Variable attributes</p>
 <p>Each data variable must contain attributes detailing the metadata
 of that individual variable. These follow the <a class="reference external" href="http://cfconventions.org/">Climate and Forecast (CF) metadata conventions</a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">tabular</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;conductivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;conductivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;format&#39;: &#39;30e15.6&#39;,
  &#39;grid_mapping&#39;: &#39;spatial_ref&#39;,
- &#39;long_name&#39;: &#39;not_defined&#39;,
+ &#39;long_name&#39;: &#39;Layer conductivity&#39;,
  &#39;null_value&#39;: &#39;not_defined&#39;,
  &#39;standard_name&#39;: &#39;conductivity&#39;,
- &#39;units&#39;: &#39;not_defined&#39;,
+ &#39;units&#39;: &#39;S/m&#39;,
  &#39;valid_range&#39;: array([1.e-04, 1.e+01])}
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.443 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.632 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>

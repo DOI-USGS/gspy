@@ -43,25 +43,40 @@ Plotting Cross Sections
 
 First Create the Survey & Data Objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-28
+.. GENERATED FROM PYTHON SOURCE LINES 15-26
 
 .. code-block:: Python
 
 
     # Initialize the Survey
-    data_path = '..//..//supplemental//region//MAP//data//'
+    data_path = '..//..//..//..//example_material//example_2/data'
 
-    survey = Survey.open_netcdf(data_path + "Tempest.nc")
-
-    tab = survey.tabular[1]
+    survey = Survey.open_netcdf(join(data_path, "Tempest.nc"))
 
     plt.figure()
-    ax, pm, cb = survey.tabular[1].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from=None, axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+    ax, pm, cb = survey['model'].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from=None, axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
 
     plt.figure()
-    _, pm, cb = survey.tabular[1].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+    _, pm, cb = survey['model'].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
     plt.show()
 
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
+         :alt: plot cross section
+         :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
+         :class: sphx-glr-multi-img
+
+    *
+
+      .. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
+         :alt: plot cross section
+         :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
+         :class: sphx-glr-multi-img
 
 
 
@@ -70,7 +85,7 @@ First Create the Survey & Data Objects
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 8.321 seconds)
+   **Total running time of the script:** (0 minutes 13.611 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_cross_section.py:

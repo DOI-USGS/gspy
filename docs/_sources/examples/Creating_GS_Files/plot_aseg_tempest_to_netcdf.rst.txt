@@ -60,10 +60,10 @@ Initialize the Survey
 
 
     # Path to example files
-    data_path = '..//..//supplemental//region//MAP'
+    data_path = '..//..//..//..//example_material//example_2'
 
     # Survey Metadata file
-    metadata = join(data_path, "data//Tempest_survey_md.json")
+    metadata = join(data_path, "data//Tempest_survey_md.yml")
 
     # Establish survey instance
     survey = Survey(metadata)
@@ -86,10 +86,10 @@ Define input data file and associated metadata file
 .. code-block:: Python
 
     d_data = join(data_path, 'data//Tempest.dat')
-    d_supp = join(data_path, 'data//Tempest_data_md.json')
+    d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
     # Add the raw AEM data as a tabular dataset
-    survey.add_tabular(type='aseg', data_filename=d_data, metadata_file=d_supp)
+    survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 
 
 
@@ -109,10 +109,10 @@ Define input data file and associated metadata file
 .. code-block:: Python
 
     m_data = join(data_path, 'model//Tempest_model.dat')
-    m_supp = join(data_path, 'model//Tempest_model_md.json')
+    m_supp = join(data_path, 'model//Tempest_model_md.yml')
 
     # Read model data and format as Tabular class object
-    survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
+    survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
 
 
 
@@ -131,10 +131,10 @@ Define input metadata file (which contains the TIF filenames linked with desired
 
 .. code-block:: Python
 
-    r_supp = join(data_path, 'data//Tempest_raster_md.json')
+    r_supp = join(data_path, 'data//Tempest_raster_md.yml')
 
     # Read data and format as Raster class object
-    survey.add_raster(metadata_file = r_supp)
+    survey.add_data(key='maps', metadata_file = r_supp)
 
     # Save NetCDF file
     d_out = join(data_path, 'data//Tempest.nc')
@@ -151,14 +151,17 @@ Define input metadata file (which contains the TIF filenames linked with desired
 
 Read back in the NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-77
+.. GENERATED FROM PYTHON SOURCE LINES 72-80
 
 .. code-block:: Python
 
     new_survey = Survey.open_netcdf(d_out)
 
-    # Once the survey is read in, we can access variables like a standard xarray dataset.
-    print(new_survey.raster.magnetic_tmi)
+    print(new_survey['maps'])
+    # print(new_survey['maps'].system)
+    # # Once the survey is read in, we can access variables like a standard xarray dataset.
+    print(new_survey['maps'].magnetic_tmi)
+    print(new_survey['maps']['magnetic_tmi'])
 
 
 
@@ -168,6 +171,33 @@ Read back in the NetCDF file
 
  .. code-block:: none
 
+    <xarray.Dataset> Size: 6MB
+    Dimensions:       (x: 599, nv: 2, y: 1212)
+    Coordinates:
+        spatial_ref   float64 8B ...
+      * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * nv            (nv) int64 16B 0 1
+      * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    Data variables:
+        x_bnds        (x, nv) float64 10kB ...
+        y_bnds        (y, nv) float64 19kB ...
+        magnetic_tmi  (y, x) float64 6MB ...
+    Attributes:
+        comment:  <additional details or ancillary information>
+        content:  gridded magnetic map
+    <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
+    [725988 values with dtype=float64]
+    Coordinates:
+        spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    Attributes:
+        standard_name:  total_magnetic_intensity
+        null_value:     1.70141e+38
+        units:          nT
+        grid_mapping:   spatial_ref
+        valid_range:    [-17504.6640625   11490.32324219]
+        long_name:      Total magnetic intensity, diurnally corrected and filtered
     <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
@@ -185,23 +215,22 @@ Read back in the NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-79
+.. GENERATED FROM PYTHON SOURCE LINES 81-82
 
 Plotting
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-89
+.. GENERATED FROM PYTHON SOURCE LINES 82-91
 
 .. code-block:: Python
 
 
     # Make a scatter plot of a specific tabular variable, using GSPy's plotter
     plt.figure()
-    # new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
-    new_survey.tabular[0].gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
+    new_survey['data'].scatter(x='x', hue='tx_height', cmap='jet')
 
     # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
     plt.figure()
-    new_survey.raster['magnetic_tmi'].plot(vmin=-1000, vmax=1000, cmap='jet')
+    new_survey['maps']['magnetic_tmi'].plot(cmap='jet', robust=True)
     plt.show()
 
 
@@ -230,7 +259,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 5.251 seconds)
+   **Total running time of the script:** (0 minutes 5.156 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py:

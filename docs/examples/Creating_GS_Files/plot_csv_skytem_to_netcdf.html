@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multi-dataset Survey &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fd7cadf9"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../index.html" class="icon icon-home">
             gspy
           </a>
-              <div class="version">
-                1.2.2
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -119,6 +114,7 @@ To make the size of this example more managable, some of the input datasets have
 Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P93SY9LI">https://doi.org/10.5066/P93SY9LI</a>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 </pre></div>
 </div>
@@ -126,7 +122,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <h2>Convert the Skytem csv data to NetCDF<a class="headerlink" href="#convert-the-skytem-csv-data-to-netcdf" title="Link to this heading"></a></h2>
 <p>Initialize the Survey</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//supplemental//region//WI&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//..//..//example_material//example_1&#39;</span>
 
 <span class="c1"># Survey metadata file</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//WI_SkyTEM_survey_md.yml&quot;</span><span class="p">)</span>
@@ -139,66 +135,57 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 Import raw AEM data from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.json&#39;</span><span class="p">)</span>
+<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>2 - Processed Data -
 Import processed AEM data from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ProcessedData.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_processed_data_md.json&#39;</span><span class="p">)</span>
+<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_processed_data_md.yml&#39;</span><span class="p">)</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;skytem_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">[</span><span class="s2">&quot;nominal_system&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">lm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">hm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">10</span><span class="p">:]),</span>
+          <span class="s2">&quot;magnetic_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">[</span><span class="s2">&quot;magnetic_system&quot;</span><span class="p">]}</span>
 
 <span class="c1"># Add the processed AEM data as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;processed_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>3 - Inverted Models -
 Import inverted AEM models from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
-<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_inverted_models_md.json&#39;</span><span class="p">)</span>
+<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_inverted_models_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>4 - Bedrock Picks -
 Import AEM-based estimated of depth to bedrock from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//topDolomite_Blocky_LidarDEM.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_bedrock_picks_md.json&#39;</span><span class="p">)</span>
+<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_bedrock_picks_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_tabular</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;depth_to_bedrock&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>5 - Derivative Maps -
 Import interpolated bedrock and magnetic maps from TIF-format.
 Define input metadata file (which contains the TIF filenames linked to variable names)</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.json&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the interpolated maps as a raster dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_raster</span><span class="p">(</span><span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Save to NetCDF file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WISkyTEM.nc&#39;</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
-
-<span class="c1"># print a summary of the survey contents</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tabular:
-    [0] raw data
-    [1] processed data
-    [2] inverted resistivity models
-    [3] bedrock elevation points
-raster:
-    [0] gridded magnetic and bedrock maps
 </pre></div>
 </div>
 <p>Reading back in</p>
@@ -206,14 +193,28 @@ raster:
 </pre></div>
 </div>
 <p>Plotting</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="o">.</span><span class="n">raster</span><span class="p">[</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;processed_data&#39;</span><span class="p">][</span><span class="s1">&#39;elevation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span>
+<span class="n">d</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.276 seconds)</p>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+</ul>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.187 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/126324517196134368a58612b6143418/plot_csv_skytem_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem_to_netcdf.ipynb</span></code></a></p>

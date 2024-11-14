@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tabular_csv &mdash; gspy 1.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=fd7cadf9"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=fd7cadf9"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             gspy
           </a>
-              <div class="version">
-                1.2.2
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -102,12 +97,17 @@
              
   <section id="tabular-csv">
 <h1>Tabular_csv<a class="headerlink" href="#tabular-csv" title="Link to this heading"></a></h1>
-<div class="graphviz"><img src="../../../../_images/inheritance-a06c3d3ac74741b4f15997485f5d445b801973ac.png" alt="Inheritance diagram of gspy.src.classes.data.tabular_csv" usemap="#inheritance9545d01de6" class="inheritance graphviz" /></div>
-<map id="inheritance9545d01de6" name="inheritance9545d01de6">
-<area shape="rect" id="node1" href="xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,32"/>
-<area shape="rect" id="node2" href="tabular.html#gspy.src.classes.data.Tabular.Tabular" target="_top" title="Accessor to xarray.Dataset that handles Tabular data" alt="" coords="125,5,197,32"/>
-<area shape="rect" id="node3" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" target="_top" title="Class to handle tabular csv files." alt="" coords="245,5,337,32"/>
-</map><dl class="py class" id="module-gspy.src.classes.data.tabular_csv">
+digraph inheritance9545d01de6 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;Dataset&quot; [URL=&quot;xarray_gs/Dataset_gs.html#gspy.src.classes.data.xarray_gs.Dataset.Dataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.&quot;];
+  &quot;Tabular&quot; [URL=&quot;tabular.html#gspy.src.classes.data.Tabular.Tabular&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset that handles Tabular data&quot;];
+  &quot;Dataset&quot; -&gt; &quot;Tabular&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Tabular_csv&quot; [URL=&quot;#gspy.src.classes.data.tabular_csv.Tabular_csv&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Class to handle tabular csv files.&quot;];
+  &quot;Tabular&quot; -&gt; &quot;Tabular_csv&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<dl class="py class" id="module-gspy.src.classes.data.tabular_csv">
 <dt class="sig sig-object py" id="gspy.src.classes.data.tabular_csv.Tabular_csv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.src.classes.data.tabular_csv.</span></span><span class="sig-name descname"><span class="pre">Tabular_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.src.classes.data.tabular_csv.Tabular_csv" title="Link to this definition"></a></dt>
 <dd><p>Class to handle tabular csv files.</p>

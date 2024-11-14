@@ -46,24 +46,14 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 
 .. GENERATED FROM PYTHON SOURCE LINES 20-21
 
-First Create the Survey & Data Objects
+First open the netcdf GS standard survey file.
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-34
+.. GENERATED FROM PYTHON SOURCE LINES 21-24
 
 .. code-block:: Python
 
 
-    # Initialize the Survey
-    data_path = '..//..//supplemental//region//MAP'
-    metadata = join(data_path, "data//Tempest_survey_md.json")
-    survey = Survey(metadata)
-
-    # Add Tabular and Raster Datasets
-    t_data = join(data_path, 'data//Tempest.dat')
-    t_supp = join(data_path, 'data//Tempest_data_md.json')
-    survey.add_tabular(type='aseg', data_filename=t_data, metadata_file=t_supp)
-    r_supp = join(data_path, 'data//Tempest_raster_md.json')
-    survey.add_raster(metadata_file = r_supp)
+    survey = Survey.open_netcdf("../../../../example_material/example_2/data/Tempest.nc")
 
 
 
@@ -72,22 +62,22 @@ First Create the Survey & Data Objects
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-37
+.. GENERATED FROM PYTHON SOURCE LINES 25-27
 
 Accessing the Xarray object
 +++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-40
+.. GENERATED FROM PYTHON SOURCE LINES 29-30
 
 Survey
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-45
+.. GENERATED FROM PYTHON SOURCE LINES 30-35
 
 .. code-block:: Python
 
 
     # The Survey's metadata is accessed through the xarray property
-    print('Survey:\n')
+    print('Survey:')
     print(survey.xarray)
 
 
@@ -99,17 +89,15 @@ Survey
  .. code-block:: none
 
     Survey:
-
-    <xarray.Dataset> Size: 48B
+    <xarray.Dataset> Size: 40B
     Dimensions:                 ()
     Coordinates:
-        spatial_ref             float64 8B 0.0
+        spatial_ref             float64 8B ...
     Data variables:
-        survey_information      float64 8B nan
-        survey_units            float64 8B nan
-        system_information      float64 8B nan
-        flightline_information  float64 8B nan
-        survey_equipment        float64 8B nan
+        survey_information      float64 8B ...
+        survey_units            float64 8B ...
+        flightline_information  float64 8B ...
+        survey_equipment        float64 8B ...
     Attributes:
         title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
         institution:  USGS Geology, Geophysics, & Geochemistry Science Center
@@ -124,11 +112,11 @@ Survey
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-47
+.. GENERATED FROM PYTHON SOURCE LINES 36-37
 
 To look just at the attributes
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-50
+.. GENERATED FROM PYTHON SOURCE LINES 37-40
 
 .. code-block:: Python
 
@@ -159,11 +147,11 @@ To look just at the attributes
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-52
+.. GENERATED FROM PYTHON SOURCE LINES 41-42
 
 Or expand a specific variable
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-55
+.. GENERATED FROM PYTHON SOURCE LINES 42-45
 
 .. code-block:: Python
 
@@ -181,16 +169,16 @@ Or expand a specific variable
     Survey Information:
 
     <xarray.DataArray 'survey_information' ()> Size: 8B
-    array(nan)
+    [1 values with dtype=float64]
     Coordinates:
-        spatial_ref  float64 8B 0.0
+        spatial_ref  float64 8B ...
     Attributes:
         contractor_project_number:  603756FWA
         contractor:                 CGG Canada Services Ltd.
         client:                     U.S. Geological Survey
-        survey_type:                ['electromagnetic', 'magnetic', 'radiometric']
+        survey_type:                electromagneticmagneticradiometric
         survey_area_name:           Mississippi Alluvial Plain (MAP)
-        state:                      ['MO', 'AR', 'TN', 'MS', 'LA', 'IL', 'KY']
+        state:                      MOARTNMSLAILKY
         country:                    USA
         acquisition_start:          20191120
         acquisition_end:            20200307
@@ -199,27 +187,47 @@ Or expand a specific variable
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-57
+.. GENERATED FROM PYTHON SOURCE LINES 46-48
 
-Tabular & Raster
+Datasets
+Get the list of datasets attached to the survey
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-61
+.. GENERATED FROM PYTHON SOURCE LINES 48-50
 
-Datasets are attached to the Survey as lists, however if only one Dataset of a given 
-type is present then the xarray object is returned simply by the name of the group
+.. code-block:: Python
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-70
+    print(survey.datasets)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    ['data', 'model', 'maps']
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
+
+Datasets are attached to the Survey regardless of their format whether unstructured tabular data or
+image-type raster data
+
+.. GENERATED FROM PYTHON SOURCE LINES 53-62
 
 .. code-block:: Python
 
 
     # Tabular
     print('Tabular:\n')
-    print(survey.tabular)
+    print(survey['data'])
 
     # Raster
     print('\nRaster:\n')
-    print(survey.raster)
+    print(survey['maps'])
 
 
 
@@ -231,47 +239,21 @@ type is present then the xarray object is returned simply by the name of the gro
 
     Tabular:
 
-    <xarray.Dataset> Size: 20MB
-    Dimensions:          (index: 20701, gate_times: 15, nv: 2)
-    Coordinates:
-        spatial_ref      float64 8B 0.0
-      * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
-      * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-      * nv               (nv) int64 16B 0 1
-        x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-        y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-        z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
-    Data variables: (12/62)
-        gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-        Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
-        Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
-        Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
-        Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
-        Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
-        ...               ...
-        Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
-        Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
-        Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
-        Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
-        Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
-        Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
-    Attributes:
-        content:  raw data
-        comment:  This dataset includes minimally processed (raw) AEM data
+    <gspy.src.classes.data.GS_Data.GS_Data object at 0x112f44a70>
 
     Raster:
 
     <xarray.Dataset> Size: 6MB
     Dimensions:       (x: 599, nv: 2, y: 1212)
     Coordinates:
-        spatial_ref   float64 8B 0.0
+        spatial_ref   float64 8B ...
       * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
       * nv            (nv) int64 16B 0 1
       * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Data variables:
-        x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
-        y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
-        magnetic_tmi  (y, x) float64 6MB 1.701e+38 1.701e+38 ... 1.701e+38 1.701e+38
+        x_bnds        (x, nv) float64 10kB ...
+        y_bnds        (y, nv) float64 19kB ...
+        magnetic_tmi  (y, x) float64 6MB ...
     Attributes:
         comment:  <additional details or ancillary information>
         content:  gridded magnetic map
@@ -279,90 +261,16 @@ type is present then the xarray object is returned simply by the name of the gro
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-72
-
-Multiple Groups
-
-.. GENERATED FROM PYTHON SOURCE LINES 72-79
-
-.. code-block:: Python
-
-
-    # If more than one Dataset is present under the group, then the list begins indexing
-    # For example, let's add a second Tabular Dataset
-    m_data = join(data_path, 'model//Tempest_model.dat')
-    m_supp = join(data_path, 'model//Tempest_model_md.json')
-    survey.add_tabular(type='aseg', data_filename=m_data, metadata_file=m_supp)
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 80-81
-
-Now the first dataset is accessed at index 0
-
-.. GENERATED FROM PYTHON SOURCE LINES 81-84
-
-.. code-block:: Python
-
-    print('First Tabular Group:\n')
-    print(survey.tabular[0])
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    First Tabular Group:
-
-    <xarray.Dataset> Size: 20MB
-    Dimensions:          (index: 20701, gate_times: 15, nv: 2)
-    Coordinates:
-        spatial_ref      float64 8B 0.0
-      * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
-      * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-      * nv               (nv) int64 16B 0 1
-        x                (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-        y                (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-        z                (index) float64 166kB 45.83 46.61 46.95 ... 179.4 177.2
-    Data variables: (12/62)
-        gate_times_bnds  (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-        Line             (index) int32 83kB 225401 225401 225401 ... 262001 262001
-        Flight           (index) int32 83kB 10 10 10 10 10 10 ... 70 70 70 70 70 70
-        Fiducial         (index) float64 166kB 7.836e+03 7.836e+03 ... 1.282e+04
-        Proj_CGG         (index) int32 83kB 603756 603756 603756 ... 603756 603756
-        Proj_Client      (index) int32 83kB 9999 9999 9999 9999 ... 9999 9999 9999
-        ...               ...
-        Z_PrimaryField   (index) float64 166kB 14.69 14.53 15.06 ... 15.95 14.99
-        Z_VLF1           (index) float64 166kB 3.696 3.733 3.729 ... 3.734 3.71
-        Z_VLF2           (index) float64 166kB 3.684 3.711 3.705 ... 3.717 3.699
-        Z_VLF3           (index) float64 166kB 3.637 3.607 3.623 ... 3.602 3.614
-        Z_VLF4           (index) float64 166kB 3.567 3.576 3.621 ... 3.594 3.586
-        Z_Geofact        (index) float64 166kB 0.9969 0.9862 1.022 ... 1.069 1.004
-    Attributes:
-        content:  raw data
-        comment:  This dataset includes minimally processed (raw) AEM data
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
+.. GENERATED FROM PYTHON SOURCE LINES 63-64
 
 and the second is located at index 1
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-89
+.. GENERATED FROM PYTHON SOURCE LINES 64-67
 
 .. code-block:: Python
 
     print('Second Tabular Group:\n')
-    print(survey.tabular[1])
+    print(survey['model'])
 
 
 
@@ -378,28 +286,28 @@ and the second is located at index 1
     Dimensions:                  (index: 20701, layer_depth: 30, nv: 2,
                                   gate_times: 15)
     Coordinates:
-        spatial_ref              float64 8B 0.0
+        spatial_ref              float64 8B ...
       * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
       * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
       * nv                       (nv) int64 16B 0 1
       * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
-        x                        (index) float64 166kB 3.579e+05 ... 4.906e+05
-        y                        (index) float64 166kB 1.211e+06 ... 1.577e+06
-        z                        (index) float64 166kB 45.83 46.61 ... 179.4 177.2
+        x                        (index) float64 166kB ...
+        y                        (index) float64 166kB ...
+        z                        (index) float64 166kB ...
     Data variables: (12/49)
-        layer_depth_bnds         (layer_depth, nv) float64 480B 0.0 3.0 ... 489.1
-        gate_times_bnds          (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-        uniqueid                 (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
-        survey                   (index) int32 83kB 9999 9999 9999 ... 9999 9999
-        date                     (index) int32 83kB 20191128 20191128 ... 20200227
-        flight                   (index) int32 83kB 10 10 10 10 10 ... 70 70 70 70
+        layer_depth_bnds         (layer_depth, nv) float64 480B ...
+        gate_times_bnds          (gate_times, nv) float64 240B ...
+        uniqueid                 (index) int32 83kB ...
+        survey                   (index) int32 83kB ...
+        date                     (index) int32 83kB ...
+        flight                   (index) int32 83kB ...
         ...                       ...
-        PhiC                     (index) float64 166kB 0.4491 0.4759 ... 1.61 1.289
-        PhiT                     (index) float64 166kB 0.0 0.0 0.0 ... 0.0 0.0 0.0
-        PhiG                     (index) float64 166kB 0.9652 0.6608 ... 1.457
-        PhiS                     (index) float64 166kB 0.1158 0.1392 ... 0.1705
-        Lambda                   (index) float64 166kB 0.5968 0.5487 ... 1.771
-        Iterations               (index) int32 83kB 20 19 25 25 25 ... 30 30 27 29
+        phic                     (index) float64 166kB ...
+        phit                     (index) float64 166kB ...
+        phig                     (index) float64 166kB ...
+        phis                     (index) float64 166kB ...
+        lambda                   (index) float64 166kB ...
+        iterations               (index) int32 83kB ...
     Attributes:
         content:  inverted resistivity models
         comment:  This dataset includes inverted resistivity models derived from ...
@@ -407,30 +315,30 @@ and the second is located at index 1
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-92
+.. GENERATED FROM PYTHON SOURCE LINES 68-70
 
 Coordinates, Dimensions, and Attributes
 +++++++++++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-95
+.. GENERATED FROM PYTHON SOURCE LINES 72-73
 
 All data variables must have dimensions, coordinate, and attributes
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-99
+.. GENERATED FROM PYTHON SOURCE LINES 75-77
 
 Dimensions
 ^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-103
+.. GENERATED FROM PYTHON SOURCE LINES 79-81
 
 Tabular data are typicaly 1-D or 2-D variables with the primary dimension being ``index``, which
 corresponds to the rows of the input text file representing individual measurements.
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-105
+.. GENERATED FROM PYTHON SOURCE LINES 81-83
 
 .. code-block:: Python
 
-    print(survey.tabular[1]['index'])
+    print(survey['model']['index'])
 
 
 
@@ -443,36 +351,36 @@ corresponds to the rows of the input text file representing individual measureme
     <xarray.DataArray 'index' (index: 20701)> Size: 83kB
     array([    0,     1,     2, ..., 20698, 20699, 20700], dtype=int32)
     Coordinates:
-        spatial_ref  float64 8B 0.0
+        spatial_ref  float64 8B ...
       * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
-        x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-        y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-        z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
+        x            (index) float64 166kB ...
+        y            (index) float64 166kB ...
+        z            (index) float64 166kB ...
     Attributes:
         standard_name:  index
-        long_name:      Index of individual data points
-        units:          not_defined
         null_value:     not_defined
-        valid_range:    [    0 20700]
+        units:          not_defined
         grid_mapping:   spatial_ref
+        valid_range:    [    0 20700]
+        long_name:      Index of individual data points
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-109
+.. GENERATED FROM PYTHON SOURCE LINES 84-87
 
-If a dimension is not discrete, meaning it represents ranges (such as depth layers), 
-then the bounds on each dimension value also need to be defined, and are linked 
+If a dimension is not discrete, meaning it represents ranges (such as depth layers),
+then the bounds on each dimension value also need to be defined, and are linked
 to the dimension through the "bounds" attribute.
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-113
+.. GENERATED FROM PYTHON SOURCE LINES 87-91
 
 .. code-block:: Python
 
     print('example non-discrete dimension:\n')
-    print(survey.tabular[1]['gate_times'])
+    print(survey['model']['gate_times'])
     print('\n\ncorresponding bounds on non-discrete dimension:\n')
-    print(survey.tabular[1]['gate_times_bnds'])
+    print(survey['model']['gate_times_bnds'])
 
 
 
@@ -488,69 +396,105 @@ to the dimension through the "bounds" attribute.
            2.278700e-04, 3.689300e-04, 5.859500e-04, 9.114800e-04, 1.410630e-03,
            2.191900e-03, 3.418070e-03, 5.338690e-03, 8.301020e-03, 1.337928e-02])
     Coordinates:
-        spatial_ref  float64 8B 0.0
+        spatial_ref  float64 8B ...
       * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     Attributes:
         standard_name:  gate_times
-        long_name:      receiver gate times
-        units:          seconds
         null_value:     not_defined
-        valid_range:    [1.085000e-05 1.337928e-02]
-        grid_mapping:   spatial_ref
         bounds:         gate_times_bnds
+        units:          seconds
+        grid_mapping:   spatial_ref
+        valid_range:    [1.085000e-05 1.337928e-02]
+        long_name:      receiver gate times
 
 
     corresponding bounds on non-discrete dimension:
 
     <xarray.DataArray 'gate_times_bnds' (gate_times: 15, nv: 2)> Size: 240B
-    array([[5.430000e-06, 1.628000e-05],
-           [2.713000e-05, 3.798000e-05],
-           [4.883000e-05, 5.968000e-05],
-           [7.053000e-05, 1.030800e-04],
-           [1.139400e-04, 1.681900e-04],
-           [1.790400e-04, 2.767000e-04],
-           [2.875500e-04, 4.503200e-04],
-           [4.611700e-04, 7.107400e-04],
-           [7.215900e-04, 1.101380e-03],
-           [1.112230e-03, 1.709030e-03],
-           [1.719880e-03, 2.663920e-03],
-           [2.674770e-03, 4.161360e-03],
-           [4.172210e-03, 6.505170e-03],
-           [6.516030e-03, 1.008600e-02],
-           [1.009686e-02, 1.666171e-02]])
+    [30 values with dtype=float64]
     Coordinates:
-        spatial_ref  float64 8B 0.0
+        spatial_ref  float64 8B ...
       * nv           (nv) int64 16B 0 1
       * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     Attributes:
         standard_name:  gate_times_bounds
-        long_name:      receiver gate times cell boundaries
-        units:          seconds
         null_value:     not_defined
-        valid_range:    [5.430000e-06 1.666171e-02]
         grid_mapping:   spatial_ref
+        valid_range:    [5.430000e-06 1.666171e-02]
+        long_name:      receiver gate times cell boundaries
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-116
+.. GENERATED FROM PYTHON SOURCE LINES 92-94
 
 Coordinates
 ^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 118-123
+.. GENERATED FROM PYTHON SOURCE LINES 96-101
 
-Coordinates define the spatial and temporal positioning of the data (X Y Z T). 
-Additionally, all dimensions are by default classified as a coordinate. 
+Coordinates define the spatial and temporal positioning of the data (X Y Z T).
+Additionally, all dimensions are by default classified as a coordinate.
 This means a dataset can have both dimensional and non-dimensional coordinates.
 Dimensional coordinates are noted with a * (or bold text) in printed output of the xarray,
 such as ``index``, ``gate_times``, ``nv`` in this example:
+
+.. GENERATED FROM PYTHON SOURCE LINES 101-103
+
+.. code-block:: Python
+
+    print(survey['data'].dataset.coords)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Coordinates:
+        spatial_ref  float64 8B ...
+      * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
+        x            (index) float64 166kB ...
+        y            (index) float64 166kB ...
+        z            (index) float64 166kB ...
+      * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 104-105
+
+Tabular Coordinates
+
+.. GENERATED FROM PYTHON SOURCE LINES 107-112
+
+In Tabular data, coordinates are typically non-dimensional, since the primary dataset
+dimension is ``index``. By default, we define the spatial coordinates, ``x`` and ``y``,
+based on the longitude and latitude (or easting/northing) data variables. If relevant,
+``z`` and ``t`` coordinate variables can also be defined, representing the vertical and
+temporal coordinates of the data points.
+
+.. GENERATED FROM PYTHON SOURCE LINES 114-115
+
+Note: All coordinates must match the coordinate reference system defined in the Survey.
+
+.. GENERATED FROM PYTHON SOURCE LINES 117-118
+
+Raster Coordinates
+
+.. GENERATED FROM PYTHON SOURCE LINES 120-123
+
+Raster data are gridded, typically representing maps or multi-dimensional models.
+Therefore, Raster data almost always have dimensional coordinates, i.e., the
+data dimensions correspond directly to either spatial or temporal coordinates (``x``, ``y``, ``z``, ``t``).
 
 .. GENERATED FROM PYTHON SOURCE LINES 123-125
 
 .. code-block:: Python
 
-    print(survey.tabular[0].coords)
+    print(survey['maps'].coords)
 
 
 
@@ -561,59 +505,7 @@ such as ``index``, ``gate_times``, ``nv`` in this example:
  .. code-block:: none
 
     Coordinates:
-        spatial_ref  float64 8B 0.0
-      * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
-      * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-      * nv           (nv) int64 16B 0 1
-        x            (index) float64 166kB 3.579e+05 3.579e+05 ... 4.906e+05
-        y            (index) float64 166kB 1.211e+06 1.211e+06 ... 1.577e+06
-        z            (index) float64 166kB 45.83 46.61 46.95 ... 177.0 179.4 177.2
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 126-127
-
-Tabular Coordinates
-
-.. GENERATED FROM PYTHON SOURCE LINES 129-134
-
-In Tabular data, coordinates are typically non-dimensional, since the primary dataset
-dimension is ``index``. By default, we define the spatial coordinates, ``x`` and ``y``,
-based on the longitude and latitude (or easting/northing) data variables. If relevant, 
-``z`` and ``t`` coordinate variables can also be defined, representing the vertical and 
-temporal coordinates of the data points. 
-
-.. GENERATED FROM PYTHON SOURCE LINES 136-137
-
-Note: All coordinates must match the coordinate reference system defined in the Survey.
-
-.. GENERATED FROM PYTHON SOURCE LINES 139-140
-
-Raster Coordinates
-
-.. GENERATED FROM PYTHON SOURCE LINES 142-145
-
-Raster data are gridded, typically representing maps or multi-dimensional models.
-Therefore, Raster data almost always have dimensional coordinates, i.e., the 
-data dimensions correspond directly to either spatial or temporal coordinates (``x``, ``y``, ``z``, ``t``).
-
-.. GENERATED FROM PYTHON SOURCE LINES 145-147
-
-.. code-block:: Python
-
-    print(survey.raster.coords)
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Coordinates:
-        spatial_ref  float64 8B 0.0
+        spatial_ref  float64 8B ...
       * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
       * nv           (nv) int64 16B 0 1
       * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
@@ -621,43 +513,43 @@ data dimensions correspond directly to either spatial or temporal coordinates (`
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 148-149
+.. GENERATED FROM PYTHON SOURCE LINES 126-127
 
 The Spatial Reference Coordinate
 
-.. GENERATED FROM PYTHON SOURCE LINES 151-154
+.. GENERATED FROM PYTHON SOURCE LINES 129-132
 
 the ``spatial_ref`` coordinate variable is a non-dimensional coordinate that
-contains information on the coordinate reference system. For more information, 
+contains information on the coordinate reference system. For more information,
 see :ref:`Coordinate Reference Systems <coordinate reference systems>`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 156-158
+.. GENERATED FROM PYTHON SOURCE LINES 134-136
 
 Attributes
 ^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 160-163
+.. GENERATED FROM PYTHON SOURCE LINES 138-141
 
-Both datasets and data variables have attributes (metadata fields). Certain 
+Both datasets and data variables have attributes (metadata fields). Certain
 attributes are required, see our documentation on :ref:`the GS standard <GS Convention Requirements>`.
 for more details.
 
-.. GENERATED FROM PYTHON SOURCE LINES 165-166
+.. GENERATED FROM PYTHON SOURCE LINES 143-144
 
 Dataset attributes
 
-.. GENERATED FROM PYTHON SOURCE LINES 168-172
+.. GENERATED FROM PYTHON SOURCE LINES 146-150
 
-Dataset attributes provide users a way to document and describe supplementary 
+Dataset attributes provide users a way to document and describe supplementary
 information about a dataset group as a whole, such as model inversion parameters
 or other processing descriptions. At a minimum, a ``content`` attribute should
 contain a brief summary of the contents of the dataset.
 
-.. GENERATED FROM PYTHON SOURCE LINES 172-174
+.. GENERATED FROM PYTHON SOURCE LINES 150-152
 
 .. code-block:: Python
 
-    pprint(survey.tabular[1].attrs)
+    pprint(survey['model'].attrs)
 
 
 
@@ -674,20 +566,20 @@ contain a brief summary of the contents of the dataset.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 175-176
+.. GENERATED FROM PYTHON SOURCE LINES 153-154
 
 Variable attributes
 
-.. GENERATED FROM PYTHON SOURCE LINES 178-180
+.. GENERATED FROM PYTHON SOURCE LINES 156-158
 
-Each data variable must contain attributes detailing the metadata 
+Each data variable must contain attributes detailing the metadata
 of that individual variable. These follow the `Climate and Forecast (CF) metadata conventions <http://cfconventions.org/>`_.
 
-.. GENERATED FROM PYTHON SOURCE LINES 180-180
+.. GENERATED FROM PYTHON SOURCE LINES 158-158
 
 .. code-block:: Python
 
-    pprint(survey.tabular[1]['conductivity'].attrs)
+    pprint(survey['model']['conductivity'].attrs)
 
 
 
@@ -697,10 +589,10 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
     {'format': '30e15.6',
      'grid_mapping': 'spatial_ref',
-     'long_name': 'not_defined',
+     'long_name': 'Layer conductivity',
      'null_value': 'not_defined',
      'standard_name': 'conductivity',
-     'units': 'not_defined',
+     'units': 'S/m',
      'valid_range': array([1.e-04, 1.e+01])}
 
 
@@ -709,7 +601,7 @@ of that individual variable. These follow the `Climate and Forecast (CF) metadat
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.443 seconds)
+   **Total running time of the script:** (0 minutes 0.632 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py:
