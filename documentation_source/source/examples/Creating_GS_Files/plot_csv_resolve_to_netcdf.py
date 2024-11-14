@@ -82,5 +82,5 @@ tmp.scatter(y='dtm')
 
 # Make a scatter plot of a specific model variable, using GSPy's plotter
 plt.figure()
-new_survey['model'].scatter(hue='doi_standard')
+new_survey['model'].gs_tabular.scatter(hue='doi_standard')
 plt.show()
