@@ -90,8 +90,6 @@ m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.json')
 # Add the interpolated maps as a raster dataset
 survey.add_data(key='derived_maps', metadata_file=m_supp5)
 
-input("Discuss putting data files and tabular vs raster inside the metadata. To remove conditional imports.")
-
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
