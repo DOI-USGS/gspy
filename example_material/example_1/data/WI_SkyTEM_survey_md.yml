@@ -1,20 +1,14 @@
-
 dataset_attrs:
-    title: SkyTEM Airborne Electromagnetic (AEM) Survey, Northeast  ...
-    institution: USGS Geology, Geophysics, and Geochemistry ...
-    source:  SkyTEM raw data, USGS processed data and inverted ...
-    history: (1) Data acquisition 01/2021 - 02/2021 by SkyTEM ...
-    references: Minsley, Burke J., B.R. Bloss, D.J. Hart ...
-    comment: This dataset includes minimally processed (raw) ...
-    summary: Airborne electromagnetic (AEM) and magnetic survey ...
-    content: survey information (/survey), raw data (/survey/tabular ...
-    created_by: gspy==0.1.0,
+    title: SkyTEM Airborne Electromagnetic (AEM) Survey, Northeast Wisconsin Bedrock Mapping
+    institution: USGS Geology, Geophysics, and Geochemistry Science Center
+    source:  SkyTEM raw data, USGS processed data and inverted resistivity models, and depth to bedrock surface
+    history: (1) Data acquisition 01/2021 - 02/2021 by SkyTEM Canada Inc.; (2) AEM and magnetic data processing by SkyTEM Canada Inc. 02/2021 - 03/2021; raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 03/2021; Minimally processed AEM data exported to netCDF /tabular/0 group 11/2021; (3) Minimally processed binary data and system response information received from the contractor were imported into the Aarhus Workbench software (v 6.0.1.0) where data were processed by USGS 03/2021 - 06/2021. Processed AEM data exported to netCDF /tabular/1 group 11/2021; (4) Processed data were inverted in Aarhus Workbench software using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models exported to netCDF /tabular/2 group 11/2021. (5) Resistivity models were imported into the Geoscene3D software (v. 12.0.0.680) and points were generated at the first depth where resistivity exceeded 325 ohm-meters. These points were visually inspected and manually adjusted in selected areas to produce an AEM-derived estmiate of the elevation of the top of bedrock by USGS together with WGNHS 06/2021 - 07/2021. Points were exported to netCDF /tabular/3 group 11/2021. (6) Bedrock elevation points were interpolated using kriging in Geoscene3D software to produce a regular bedrock elevation grid 07/2021. (7) A bedrock depth grid was calculated in QGIS software (v. 3.14.1-Pi) by subtracting the bedrock elevation from land surface elevation. (8) Bedrock elevation, bedrock depth, and SkyTEM-provided magnetic grids were aligned to a common 100m x 100m grid and exported to netCDF /raster/0 group 11/2021.
+    references: Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M.A. Muldoon, E.K. Stewart, R.J. Hunt, S.R. James, N.L. Foks, and M.J. Komiskey, 2021, Airborne electromagnetic and magnetic survey data, northeast Wisconsin, 2021, U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
+    comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM, fully processed data used as input to inversion, laterally constrained inverted resistivity models, and derived estimates of bedrock depth.
+    summary: Airborne electromagnetic (AEM) and magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.
+    content: survey information (group /survey), raw data (group /survey/tabular/0), processed data (group /survey/tabular/1), inverted resistivity models (group /survey/tabular/2), bedrock elevation points (group /survey/tabular/3), gridded magnetic and bedrock maps (group /survey/raster/0)
+    created_by: gspy==0.1.0
     conventions: CF-1.8, GS-0.0
-
-spatial_ref:
-    wkid: 3071
-    authority: EPSG
-    vertical_crs: NAVD88
 
 survey_information:
     contractor_project_number: 20022
@@ -28,27 +22,212 @@ survey_information:
     acquisition_end: 20210207
     survey_attributes_units: SI
 
+spatial_ref:
+    wkid: 3071
+    authority: EPSG
+    vertical_crs: NAVD88
+
 flightline_information:
     traverse_line_spacing: 800 m
     traverse_line_direction: nw-se
+    tie_line_spacing: n/a
+    tie_line_direction: n/a
     nominal_terrain_clearance: 30 m
     final_line_kilometers: 3170 km
     traverse_line_numbers: 100101 - 115201
     repeat_line_numbers: 920001 - 920006
-
-system_information:
-    electromagnetic_system:
-        number_of_transmitters: 2
-        reference_frame: right-handed positive down
-        transmitter_0_waveform_time: [-3.1810E-003, -3.1019E-003]
-        transmitter_0_waveform_current: [-0.0000E+000, -1.4067E-001]
-    magnetic_system:
-        sample_rate: 0.1 s
-        resolution: 0.002 nT
+    pre_zero_line_numbers: n/a
+    post_zero_line_numbers: n/a
 
 survey_equipment:
     aircraft: Eurocopter Astar 350 B3
-    electromagnetic_system: SkyTEM 304M
-    electromagnetic_installation: Rigid transmitter frame 40m beneath helicopter
     magnetometer: Geometrics G822A, Kroum KMAG4 counter
+    magnetometer_installation: Front of transmitter frame
+    electromagnetic_system: SkyTEM 304M
+    electromagnetic_installation: Rigid transmitter frame 40m beneath helicopter, Receiver coils at rear of transmitter frame 2m vertical offset
+    spectrometer_system: n/a
+    spectrometer_installation: n/a
+    spectrometer_sample_rate: n/a
+    radar_altimeter_system: n/a
+    radar_altimeter_sample_rate: n/a
+    laser_altimeter_system: MDL ILM 300R (2)
+    laser_altimeter_sample_rate: 0.033 s
+    inclinometer_system: n/a
+    inclinometer_sample_rate: n/a
     navigation_system: Real-time differential GPS Trimble Bullet III
+    navigation_sample_rate: 1.0 s
+    acquisition_system: skytem
+
+nominal_system:
+    type: system
+    mode: airborne
+    method: electromagnetic
+    submethod: time domain
+    instrument: skytem 304M
+    data_normalized: True
+    skytem_skb_gex_available: True
+    reference_frame: right-handed positive down
+    coil_orientations: X, Z
+    sample_rate: 0.1
+
+    transmitter_label: [LM, HM]
+    transmitter_number_of_turns: [1, 4]
+    transmitter_coordinates: [[[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]],
+                              [[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]]]
+    transmitter_area: [342, 342]
+    transmitter_waveform_type: [trapezoid, trapezoid]
+    transmitter_waveform_time: [[-3.1810E-003, -3.1019E-003, -2.9844E-003, -2.3810E-003, -2.3781E-003, -2.3779E-003, -2.3776E-003, -2.3763E-003, -8.0000E-004, -7.2093E-004, -6.0345E-004, 0.0000E+000, 3.0000E-008, 7.0000E-008, 2.7200E-006, 2.8000E-006, 2.9000E-006, 3.0100E-006, 3.1300E-006, 3.4100E-006, 4.7400E-006],
+                                [-6.9167E-02, -6.9157E-02, -6.9153E-02, -6.9150E-02, -6.9143E-02, -6.9122E-02, -6.9118E-02, -6.9114E-02, -6.9107E-02, -6.9083E-02, -6.8159E-02, -6.6667E-02, -6.6627E-02, -6.6626E-02, -6.6622E-02, -2.5000E-03, -2.4899E-03, -2.4862E-03, -2.4830E-03, -2.4767E-03, -2.4637E-03, -2.4547E-03, -2.4510E-03, -2.4475E-03, -2.4442E-03, -2.4406E-03, -2.4159E-03, -2.2328E-03, -1.4913E-03, 0.0000E+00, 6.4270E-07, 8.9870E-07, 1.4267E-05, 4.0291E-05, 4.1331E-05, 4.4539E-05]]
+    transmitter_waveform_current: [[-0.0000E+000, -1.4067E-001, -3.0174E-001, -1.0000E+000, -7.5094E-003, 2.2879E-002, 3.7669E-002, -0.0000E+000, 0.0000E+000, 1.4063E-001, 3.0168E-001, 1.0000E+000, 9.9851E-001, 9.8817E-001, 5.9260E-002, 3.2392E-002, 7.5094E-003, -1.2284E-002, -2.6411E-002, -3.8086E-002, 0.0000E+000],
+                                   [-0.0000E+00, -3.3580E-02, -6.8755E-02, -1.0992E-01, -2.4885E-01, -7.3516E-01, -8.1234E-01, -8.6553E-01, -9.0296E-01, -9.2188E-01, -9.6364E-01, -1.0000E+00, -8.2124E-03, 7.2510E-03, -0.0000E+00, 0.0000E+00, 3.3780E-02, 6.5400E-02, 1.0996E-01, 2.3303E-01, 5.4048E-01, 7.4152E-01, 8.1301E-01, 8.6142E-01, 8.8900E-01, 9.0249E-01, 9.2195E-01, 9.3742E-01, 9.6367E-01, 1.0000E+00, 9.9562E-01, 9.8391E-01, 6.4740E-01, 9.9177E-04, -1.1094E-02, 0.0000E+00]]
+    transmitter_current_scale_factor: [1.0, 1.0]
+    transmitter_peak_current: [9.0, 110.0]
+    transmitter_base_frequency: [210.0, 75.0]
+    transmitter_on_time: [800E-06, 2500e-6]
+    transmitter_off_time: [1581E-06, 4167e-6]
+    transmitter_orientation: [z, x]
+
+    receiver_label: [z, x]
+    receiver_orientation: [z, x]
+    receiver_coil_low_pass_filter: [628000.0, 250000.0]
+    receiver_instrument_low_pass_filter: [500000.0, 500000.0]
+    receiver_area: [105.0, 115.0]
+
+    component_transmitters: [LM, LM, HM, HM]
+    component_receivers: [z, z, x, x]
+    component_sample_rate: [10.0, 10.0, 10.0, 10.0]
+    component_txrx_dx: [-13.25, -14.65, -13.25, -14.65]
+    component_txrx_dy: [0.0, 0.0, 0.0, 0.0]
+    component_txrx_dz: [-2.0, 0.0, -2.0, 0.0]
+    component_data_type: [dBdt, dBdt, dBdt, dBdt]
+    component_gate_times: [LM_gate_times, LM_gate_times, HM_gate_times, HM_gate_times]
+
+    variable_metadata:
+        sample_rate:
+            units: ms
+        area:
+            units: km^2
+
+    dimensions:
+        gate_times:
+            standard_name: raw_gate_times
+            long_name: raw gate times
+            units: seconds
+            null_value: not_defined
+            centers: [5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
+
+        lm_gate_times:
+            standard_name: lm_gate_times
+            long_name: calibrated low moment gate times
+            units: seconds
+            null_value: not_defined
+            bounds: [[-1.420000e-06, -8.500000e-07],
+                    [-4.200000e-07,  1.150000e-06],
+                    [ 1.580000e-06,  3.150000e-06],
+                    [ 3.580000e-06,  5.150000e-06],
+                    [ 5.580000e-06,  7.150000e-06],
+                    [ 7.580000e-06,  9.150000e-06],
+                    [ 9.580000e-06,  1.115000e-05],
+                    [ 1.158000e-05,  1.415000e-05],
+                    [ 1.458000e-05,  1.815000e-05],
+                    [ 1.858000e-05,  2.315000e-05],
+                    [ 2.358000e-05,  2.915000e-05],
+                    [ 2.958000e-05,  3.715000e-05],
+                    [ 3.758000e-05,  4.715000e-05],
+                    [ 4.758000e-05,  6.015000e-05],
+                    [ 6.056500e-05,  7.616500e-05],
+                    [ 7.656500e-05,  9.616500e-05],
+                    [ 9.656500e-05,  1.211650e-04],
+                    [ 1.215650e-04,  1.521650e-04],
+                    [ 1.525650e-04,  1.921650e-04],
+                    [ 1.925650e-04,  2.431650e-04],
+                    [ 2.435650e-04,  3.061650e-04],
+                    [ 3.065650e-04,  3.871650e-04],
+                    [ 3.875650e-04,  4.881650e-04],
+                    [ 4.885650e-04,  6.151650e-04],
+                    [ 6.155650e-04,  7.761650e-04],
+                    [ 7.765650e-04,  9.781650e-04],
+                    [ 9.785650e-04,  1.233165e-03],
+                    [ 1.233565e-03,  1.555165e-03]]
+            centers: [-1.135000E-06,  3.650000E-07,  2.365000E-06,  4.365000E-06, 6.365000E-06,  8.365000E-06,  1.036500E-05,  1.286500E-05, 1.636500E-05,  2.086500E-05,  2.636500E-05,  3.336500E-05, 4.236500E-05,  5.386500E-05,  6.836500E-05,  8.636500E-05, 1.088650E-04,  1.368650E-04,  1.723650E-04,  2.178650E-04, 2.748650E-04,  3.468650E-04,  4.378650E-04,  5.518650E-04, 6.958650E-04,  8.773650E-04,  1.105865E-03,  1.394365E-03]
+        hm_gate_times:
+            standard_name: hm_gate_times
+            long_name: calibrated high moment gate times
+            units: seconds
+            null_value: not_defined
+            bounds: [[2.85800e-05, 2.91500e-05],
+                    [2.95800e-05, 3.11500e-05],
+                    [3.15800e-05, 3.31500e-05],
+                    [3.35800e-05, 3.51500e-05],
+                    [3.55800e-05, 3.71500e-05],
+                    [3.75800e-05, 3.91500e-05],
+                    [3.95800e-05, 4.11500e-05],
+                    [4.15800e-05, 4.41500e-05],
+                    [4.45800e-05, 4.81500e-05],
+                    [4.85800e-05, 5.31500e-05],
+                    [5.35800e-05, 5.91500e-05],
+                    [5.95800e-05, 6.71500e-05],
+                    [6.75800e-05, 7.71500e-05],
+                    [7.75800e-05, 9.01500e-05],
+                    [9.05800e-05, 1.06150e-04],
+                    [1.06580e-04, 1.26150e-04],
+                    [1.26580e-04, 1.51150e-04],
+                    [1.51580e-04, 1.82150e-04],
+                    [1.82580e-04, 2.22150e-04],
+                    [2.22580e-04, 2.73150e-04],
+                    [2.73580e-04, 3.36150e-04],
+                    [3.36580e-04, 4.17150e-04],
+                    [4.17580e-04, 5.18150e-04],
+                    [5.18580e-04, 6.45150e-04],
+                    [6.45580e-04, 8.06150e-04],
+                    [8.06580e-04, 1.00815e-03],
+                    [1.00858e-03, 1.26315e-03],
+                    [1.26358e-03, 1.58515e-03],
+                    [1.58558e-03, 1.99115e-03],
+                    [1.99158e-03, 2.50215e-03],
+                    [2.50258e-03, 3.14815e-03],
+                    [3.14858e-03, 3.94015e-03]]
+            centers: [2.886500E-05, 3.036500E-05, 3.236500E-05, 3.436500E-05, 3.636500E-05, 3.836500E-05, 4.036500E-05, 4.286500E-05, 4.636500E-05, 5.086500E-05, 5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
+
+magnetic_system:
+    type: system
+    mode: airborne
+    method: magnetic
+    submethod: total field
+    instrument: cesium vapour
+    variables:
+        sample_rate:
+            values: 0.1
+        resolution:
+            values: 0.002
+
+generic_system:
+    type: system
+    mode: not_defined
+    method: not_defined
+    submethod: not_defined
+    instrument: not_defined
+    dimensions:
+        n_s:
+            origin: 0
+            length: 3
+            increment: 1
+        n_v:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+            origin: 0
+            increment: 1
+            length: 8
+
+    variables:
+        array:
+            values: [1,2,3,4,5,6,7,8]
+            dimensions: "n_v"
+        strs:
+            values: ['a', 'b', 'c']
+            dimensions: "n_s"
+        scalar:
+            values: 5.0
+

@@ -39,7 +39,7 @@ survey = Survey(metadata)
 # Import raw AEM data from ASEG-format.
 # Define input data file and associated metadata file
 d_data = join(data_path, 'data//Tempest.dat')
-d_supp = join(data_path, 'data//Tempest_data_md.json')
+d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
 survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
@@ -71,7 +71,9 @@ survey.write_netcdf(d_out)
 # Read back in the NetCDF file
 new_survey = Survey.open_netcdf(d_out)
 
-# Once the survey is read in, we can access variables like a standard xarray dataset.
+print(new_survey['maps'])
+# print(new_survey['maps'].system)
+# # Once the survey is read in, we can access variables like a standard xarray dataset.
 print(new_survey['maps'].magnetic_tmi)
 print(new_survey['maps']['magnetic_tmi'])
 
@@ -79,9 +81,9 @@ print(new_survey['maps']['magnetic_tmi'])
 # Plotting
 
 # Make a scatter plot of a specific tabular variable, using GSPy's plotter
+print(new_survey['data'])
 plt.figure()
-# new_survey.tabular[0]['Tx_Height'].plot(x='x', marker='o', linestyle='None')
-new_survey['data'].dataset.gs_tabular.scatter(x='x', hue='Tx_Height', cmap='jet')
+new_survey['data'].scatter(x='x', hue='tx_height', cmap='jet')
 
 # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 plt.figure()
