@@ -17,21 +17,11 @@ from gspy import Survey
 from pprint import pprint
 
 #%%
-# First Create the Survey & Data Objects
+# First open the netcdf GS standard survey file.
 
-# Initialize the Survey
-data_path = '..//..//..//..//example_material//example_2'
-metadata = join(data_path, "data//Tempest_survey_md.json")
-survey = Survey(metadata)
+survey = Survey.open_netcdf("../../../../example_material/example_2/data/Tempest.nc")
 
-# Add Tabular and Raster Datasets
-t_data = join(data_path, 'data//Tempest.dat')
-t_supp = join(data_path, 'data//Tempest_data_md.json')
-survey.add_data(key="data", data_filename=t_data, metadata_file=t_supp)
-r_supp = join(data_path, 'data//Tempest_raster_md.json')
-survey.add_data(key="map", metadata_file = r_supp)
-
-#%% 
+#%%
 # Accessing the Xarray object
 # +++++++++++++++++++++++++++
 
@@ -39,7 +29,7 @@ survey.add_data(key="map", metadata_file = r_supp)
 # Survey
 
 # The Survey's metadata is accessed through the xarray property
-print('Survey:\n')
+print('Survey:')
 print(survey.xarray)
 
 ################################################################################
@@ -53,11 +43,13 @@ print('Survey Information:\n')
 print(survey.xarray['survey_information'])
 
 ################################################################################
-# Tabular & Raster
+# Datasets
+# Get the list of datasets attached to the survey
+print(survey.datasets)
 
 ################################################################################
-# Datasets are attached to the Survey as lists, however if only one Dataset of a given 
-# type is present then the xarray object is returned simply by the name of the group
+# Datasets are attached to the Survey regardless of their format whether unstructured tabular data or
+# image-type raster data
 
 # Tabular
 print('Tabular:\n')
@@ -65,23 +57,14 @@ print(survey['data'])
 
 # Raster
 print('\nRaster:\n')
-print(survey['map'])
-
-################################################################################
-# Multiple Groups
-
-# If more than one Dataset is present under the group, then the list begins indexing
-# For example, let's add a second Tabular Dataset
-m_data = join(data_path, 'model//Tempest_model.dat')
-m_supp = join(data_path, 'model//Tempest_model_md.json')
-survey.add_data(key='model', data_filename=m_data, metadata_file=m_supp)
+print(survey['maps'])
 
 ################################################################################
 # and the second is located at index 1
 print('Second Tabular Group:\n')
 print(survey['model'])
 
-#%% 
+#%%
 # Coordinates, Dimensions, and Attributes
 # +++++++++++++++++++++++++++++++++++++++
 
@@ -98,8 +81,8 @@ print(survey['model'])
 print(survey['model']['index'])
 
 ################################################################################
-# If a dimension is not discrete, meaning it represents ranges (such as depth layers), 
-# then the bounds on each dimension value also need to be defined, and are linked 
+# If a dimension is not discrete, meaning it represents ranges (such as depth layers),
+# then the bounds on each dimension value also need to be defined, and are linked
 # to the dimension through the "bounds" attribute.
 print('example non-discrete dimension:\n')
 print(survey['model']['gate_times'])
@@ -110,8 +93,8 @@ print(survey['model']['gate_times_bnds'])
 # ^^^^^^^^^^^
 
 ################################################################################
-# Coordinates define the spatial and temporal positioning of the data (X Y Z T). 
-# Additionally, all dimensions are by default classified as a coordinate. 
+# Coordinates define the spatial and temporal positioning of the data (X Y Z T).
+# Additionally, all dimensions are by default classified as a coordinate.
 # This means a dataset can have both dimensional and non-dimensional coordinates.
 # Dimensional coordinates are noted with a * (or bold text) in printed output of the xarray,
 # such as ``index``, ``gate_times``, ``nv`` in this example:
@@ -123,9 +106,9 @@ print(survey['data'].dataset.coords)
 ################################################################################
 # In Tabular data, coordinates are typically non-dimensional, since the primary dataset
 # dimension is ``index``. By default, we define the spatial coordinates, ``x`` and ``y``,
-# based on the longitude and latitude (or easting/northing) data variables. If relevant, 
-# ``z`` and ``t`` coordinate variables can also be defined, representing the vertical and 
-# temporal coordinates of the data points. 
+# based on the longitude and latitude (or easting/northing) data variables. If relevant,
+# ``z`` and ``t`` coordinate variables can also be defined, representing the vertical and
+# temporal coordinates of the data points.
 
 ################################################################################
 # Note: All coordinates must match the coordinate reference system defined in the Survey.
@@ -135,16 +118,16 @@ print(survey['data'].dataset.coords)
 
 ################################################################################
 # Raster data are gridded, typically representing maps or multi-dimensional models.
-# Therefore, Raster data almost always have dimensional coordinates, i.e., the 
+# Therefore, Raster data almost always have dimensional coordinates, i.e., the
 # data dimensions correspond directly to either spatial or temporal coordinates (``x``, ``y``, ``z``, ``t``).
-print(survey['map'].coords)
+print(survey['maps'].coords)
 
 ################################################################################
 # The Spatial Reference Coordinate
 
 ################################################################################
 # the ``spatial_ref`` coordinate variable is a non-dimensional coordinate that
-# contains information on the coordinate reference system. For more information, 
+# contains information on the coordinate reference system. For more information,
 # see :ref:`Coordinate Reference Systems <coordinate reference systems>`.
 
 #%%
@@ -152,7 +135,7 @@ print(survey['map'].coords)
 # ^^^^^^^^^^
 
 ################################################################################
-# Both datasets and data variables have attributes (metadata fields). Certain 
+# Both datasets and data variables have attributes (metadata fields). Certain
 # attributes are required, see our documentation on :ref:`the GS standard <GS Convention Requirements>`.
 # for more details.
 
@@ -160,7 +143,7 @@ print(survey['map'].coords)
 # Dataset attributes
 
 ################################################################################
-# Dataset attributes provide users a way to document and describe supplementary 
+# Dataset attributes provide users a way to document and describe supplementary
 # information about a dataset group as a whole, such as model inversion parameters
 # or other processing descriptions. At a minimum, a ``content`` attribute should
 # contain a brief summary of the contents of the dataset.
@@ -170,6 +153,6 @@ pprint(survey['model'].attrs)
 # Variable attributes
 
 ################################################################################
-# Each data variable must contain attributes detailing the metadata 
+# Each data variable must contain attributes detailing the metadata
 # of that individual variable. These follow the `Climate and Forecast (CF) metadata conventions <http://cfconventions.org/>`_.
 pprint(survey['model']['conductivity'].attrs)

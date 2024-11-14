@@ -76,6 +76,10 @@ class Survey(dict):
         return kwargs
 
     @property
+    def datasets(self):
+        return list(self.keys())
+
+    @property
     def system(self):
         return self._system
 
