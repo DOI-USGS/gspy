@@ -1,18 +1,23 @@
 """
-Help! I have no variable metadata
----------------------------------
+Help! I have no metadata
+------------------------
 
-This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata.
+This example shows how GSPy can help when you have a large data file and need to do the
+tedious task of filling out the variable metadata.
 
-By doing a first-pass through GSPy with a data json file that is *missing* the ``variable_metadata`` dictionary, the code will break, but will generate a template file containing placeholder metadata dictionaries for all variables from the data file (in this case the column headers of the CSV data file). The user can then fill in this template and then add it to the data json file.
+By doing a first-pass through GSPy with a data json file that is *missing* the ``variable_metadata`` dictionary,
+the code will break, but will generate a template file containing placeholder metadata dictionaries for all
+variables from the data file (in this case the column headers of the CSV data file). The user can then fill in
+this template and then add it to the data json file.
 
-This image shows a snippet of what the output template json file contains. Each variable is given a dictionary of attributes with the default values of "not_defined" which the user can then go through and update.
+This image shows a snippet of what the output template json file contains. Each variable is given a dictionary
+of attributes with the default values of "not_defined" which the user can then go through and update.
 
 """
 #%%
 
 from os.path import join
-from gspy import Survey
+from gspy import Survey, GS_Data
 import matplotlib.pyplot as plt
 from matplotlib import image as img
 
@@ -27,7 +32,9 @@ data_path = '..//..//..//..//example_material//example_2'
 metadata = join(data_path, "data//Resolve_survey_md.yml")
 
 # Initialize the Survey
-survey = Survey(metadata)
+template = Survey.metadata_template(metadata)
+template.dump("template_md_survey.yml")
+
 
 #%%
 
@@ -36,16 +43,29 @@ survey = Survey(metadata)
 d_data = join(data_path, 'data//Resolve.csv')
 d_supp = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
-# Attempt to add the raw AEM data from CSV-format
-# This will trigger an error message when no variable metadata is found, however the error will
-# output a template json file with this dataset's variable names, to then be filled in by the user
-plt.imshow(img.imread("../../_static/variable_metadata_template_snippet.png"))
+template = GS_Data.metadata_template(d_data)
+template.dump("template_md_resolve.yml")
+
+
+data_path = '..//..//..//..//example_material//example_1'
+
+d_data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
+d_supp = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
+template = GS_Data.metadata_template(d_data, d_supp)
+template.dump("template_md_skytem.yml")
+
+# # Attempt to add the raw AEM data from CSV-format
+# # This will trigger an error message when no variable metadata is found, however the error will
+# # output a template json file with this dataset's variable names, to then be filled in by the user
+# plt.imshow(img.imread("../../_static/variable_metadata_template_snippet.png"))
+
+# template = GS_Data.create_metadata_template(data_filename=d_data, metadata_file=d_supp)
+# template.dump("Resolve.csv_metadata_template.yml")
 
 # try:
-#    survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
+# survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
 # except Exception as e:
 #    print(e)
-# print(e)
 
 # %%
 # .. image:: ..//..//_static//variable_metadata_template_snippet.png

@@ -2,7 +2,8 @@ import os
 from pprint import pprint
 import numpy as np
 import xarray as xr
-from ...utilities import dump_metadata_to_file
+# from ...utilities import dump_metadata_to_file
+from ..metadata.Metadata import Metadata
 from .xarray_gs.Dataset import Dataset
 
 required_keys = ('type',
@@ -318,8 +319,12 @@ class System(Dataset):
 
         if 'transmitter_coordinates' in kwargs:
 
+            tcoords = kwargs['transmitter_coordinates']
+            if np.ndim(tcoords) == 2:
+                tcoords = [tcoords]
+
             for i in range(self._obj.sizes['n_transmitters']):
-                c = kwargs['transmitter_coordinates'][i]
+                c = tcoords[i]
                 l = self._obj['transmitter_label'][i].item().lower()
 
                 self = self.add_coordinate_from_values(f'{l}_loop_vertices',

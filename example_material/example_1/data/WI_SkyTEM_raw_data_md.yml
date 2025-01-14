@@ -12,7 +12,7 @@ coordinates:
     z: DEM
     t: DateTime
 
-variable_metadata:
+variables:
     Line:
         standard_name: line
         long_name: Line number

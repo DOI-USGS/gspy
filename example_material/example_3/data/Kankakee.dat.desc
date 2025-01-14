@@ -1,0 +1,59 @@
+ExportSoftware:dsQC-1.1.25.57710_6d8f6eac-LM Exported:20230809T022641Z
+DATATYPE             Project type (TEM, TIP, etc)
+CONFIG               Survey configuration type (Fixed Loop, Moving Loop, Slingram, etc)
+LINE                 Line number (name), but always = 'Multi'
+COMPANY              Company name
+PROSPECT             Prospect name
+TENEMENT             Tenement name
+GRID                 Projection grid for grid positions
+DATUM                Projection datum for grid positions
+ZONE                 (ZoneHemishpere) GRID zone and hemisphere for grid positions
+FID                  Unique reading identifier
+ACQ                  Acquire index, this is incremented each time the user presses the acquire button
+ACQ_RDG              Reading index, for a particular acquire, reset to 0 for each acquire
+ACQ_TIME             (UTC ISO-8601) Time for when the raw data started to be acquired, matches raw file name
+TIME                 (UTC ISO-8601) Time of the first sample in the stack
+TS                   (UTC Linux) Time of the first sample in the stack
+LINEFLIP             (bool) '1' indicates line data was collected in reverse order to planned waypoint file
+EAST                 (m) Calculated reading position easting (in selected GRID)
+NORTH                (m) Calculated reading position northing (in selected GRID)
+HEIGHT               (m) Calculated reading position height above MSL (in selected GRID)
+GPS_TIME             (UTC ISO-8601) Timestamp of GPS antenna position
+GPS_EAST             (m) GPS antenna position easting (in selected GRID)
+GPS_NORTH            (m) GPS antenna position northing (in selected GRID)
+GPS_HEIGHT           (m) GPS antenna position height above MSL (in selected GRID)
+TX_EAST              (m) Calculated TX centre position easting (in selected GRID)
+TX_NORTH             (m) Calculated TX centre position northing (in selected GRID)
+TX_HEIGHT            (m) Calculated TX centre position height above MSL (in selected GRID)
+RX_EAST              (m) Calculated RX centre position easting (in selected GRID)
+RX_NORTH             (m) Calculated RX centre position northing (in selected GRID)
+RX_HEIGHT            (m) Calculated RX centre position height above MSL (in selected GRID)
+ADC                  (group.channel) Receiver hardware channel identification
+C                    Sensor axis component
+SAMPLERATE           (sps) Number of samples per second used for the acquire
+STACKS               Number of half-waveforms (stack) used to calculate the stack data
+RX_SERIAL            Receiver hardware serial number
+RX_SW_VER            Receiver software firmware version
+FREQ                 (Hz) Transmitter base frequency
+CURRENT              (A) Transmitter current output per turn
+TURNOFF              (ms) Transmitter turn off time
+TX_MOMENT            (A.m2) Transmitter moment (Current * Area * Turns)
+VLF_FILTER           List of VLF filters applied to the data
+WINSCHEME            Window scheme applied to the data
+SENSORNAME           Sensor name
+SENSORCLASS          Sensor class type (Coil, Magnetometer etc)
+SENSORDELAY          (us) Sensor group delay time
+SENSOR_OFFSET_ALONG  (m) Sensor offset from GPS antenna along line ('-' is behind)
+SENSOR_OFFSET_ACROSS (m) Sensor offset from GPS antenna across line ('-' is to left)
+SENSOR_OFFSET_HEIGHT (m) Sensor vertical offset from GPS antenna ('-' is below)
+SENSOR_CALIBRATION   Sensor Calibration Version
+UNITS                Units used for the data in (UNITS)
+GAIN                 Hardware channel amplifier gain
+DC_OFFSET            (V) Measured DC voltage offset of the receiver hardware channel
+PRIMARY              (UNITS) Calculated primary field from the stack
+NOISE                (UNITS) Calculated offtime standard deviation amplitude
+POWERFREQ            (Hz) Power line frequency used to calculate amplitude and phase
+POWERAMPL            (UNITS) Calculated power line amplitude
+POWERPHASE           (rad) Calculated power line phase
+NCH                  Number of 'CH' columns
+CH[01-xx]            (UNITS) Time channel windows data

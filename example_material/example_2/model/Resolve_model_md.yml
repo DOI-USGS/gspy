@@ -56,7 +56,7 @@ dimensions:
                     [114.0 , 125.0 ],
                     [125.0 , 140.0 ]]
 
-variable_metadata:
+variables:
     LINE:
         standard_name: line
         long_name: Line number

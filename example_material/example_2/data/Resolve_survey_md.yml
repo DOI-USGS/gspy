@@ -9,7 +9,6 @@ dataset_attrs:
     conventions: CF-1.8, GS-0.0.1
     created_by: gspy==0.0.1
 
-
 survey_information:
     contractor_project_number: 603756RWA
     contractor: CGG Canada Services Ltd.

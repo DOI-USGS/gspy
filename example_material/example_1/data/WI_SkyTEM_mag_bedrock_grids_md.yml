@@ -16,7 +16,7 @@ raster_files :
     bedrock_top_elevation: [topBedrock_ft.tif]
     bedrock_depth: [BedrockDepth_ft.tif]
 
-variable_metadata:
+variables:
     magnetic_tmi:
         standard_name: total_magnetic_intensity
         long_name: Total magnetic intensity, diurnally corrected and filtered

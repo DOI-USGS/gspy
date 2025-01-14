@@ -8,6 +8,7 @@ import numpy as np
 from numpy import arange, int32
 
 from .xarray_gs.Dataset import Dataset
+from ..file_handlers import file_handler
 
 from xarray import register_dataset_accessor
 
@@ -24,37 +25,6 @@ class Tabular(Dataset):
         self._obj = xarray_obj
 
     @property
-    def _allowed_file_types(self):
-        return ('aseg', 'csv', 'netcdf')
-
-    @staticmethod
-    def count_column_headers(columns):
-        """Takes the header of a csv and counts repeated entries
-
-        A header "depth[0], depth[1], depth[2] will create an entry {'depth':3}
-
-        Parameters
-        ----------
-        columns : list of str
-            list of column names
-
-        Returns
-        -------
-        dict
-            Dictionary with each unique column name and its count
-
-        """
-        out = {}
-        for col in columns:
-            if '[' in col:
-                col = col.split('[')[0]
-            if col in out:
-                out[col] += 1
-            else:
-                out[col] = 1
-        return out
-
-    @property
     def is_netcdf(self):
         return self.type == 'netcdf'
 
@@ -67,12 +37,39 @@ class Tabular(Dataset):
         str
             File type
         """
-        return self._type
+        return self.file.type
 
     @type.setter
     def type(self, value):
         assert value in self._allowed_file_types, ValueError('type must be in {}'.format(self._allowed_file_types))
         self._type = value
+
+    @staticmethod
+    def metadata_template(filename,  metadata_file=None, system=None, **kwargs):
+
+        tmp = xr.Dataset(attrs={})
+        self = Tabular(tmp)
+
+        self.file_handler = file_handler(filename)
+
+        # Read the GSPy json file.
+        json_md = {}
+        if metadata_file is not None:
+            if isinstance(metadata_file, str):
+                json_md = self.read_metadata(metadata_file)
+            else:
+                json_md = metadata_file
+
+        # Read in the data using the respective file type handler
+        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}))
+
+        out = file.metadata_template
+
+        if 'coordinates' in json_md:
+            for k, v in json_md['coordinates'].items():
+                out['variables'][v]['axis'] = k
+
+        return out
 
     @classmethod
     def read(cls, filename, metadata_file=None, spatial_ref=None, system=None, **kwargs):
@@ -105,6 +102,8 @@ class Tabular(Dataset):
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
 
+        self.file_handler = file_handler(filename)
+
         # Set the spatial ref
         self = self.set_spatial_ref(spatial_ref)
 
@@ -115,9 +114,7 @@ class Tabular(Dataset):
             json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename)
-
-        file.df.columns = [x for x in file.df.columns]
+        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}))
 
         # Add the index coordinate
         self.add_coordinate_from_values('index',
@@ -143,15 +140,13 @@ class Tabular(Dataset):
                         self = self.add_coordinate_from_dict(b.lower(), is_dimension=True, **dimensions[key])
 
         # Write out a template json file when no variable metadata is found
-        if not 'variable_metadata' in json_md:
-            cls._create_variable_metadata_template(metadata_file, file.df.columns, **json_md)
+        if not 'variables' in json_md:
+            file.write_metadata_template()
 
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
             coord = coordinates[key].strip()
             discrete = key in ('x', 'y', 'z', 't')
-
-            dic = self.get_attrs(file, coord, **json_md['variable_metadata'].get(coord, {}))
 
             # Might need to handle already added coords from the dimensions dict.
             self.add_coordinate_from_values(key.lower(),
@@ -160,15 +155,14 @@ class Tabular(Dataset):
                                             discrete = discrete,
                                             is_projected = self.is_projected,
                                             is_dimension=False,
-                                            **dic)
+                                            **file.metadata[coord])
 
-        column_counts = cls.count_column_headers(file.columns)
+        column_counts = file.column_header_counts
 
         # Combine the column headers in the file with keys from the json metadata
         # If there is a variable with raw columns specified, we need to remove those individual columns
         # Otherwise they are duplicated.
-        variable_md = json_md.pop('variable_metadata')
-        for key, item in variable_md.items():
+        for key, item in file.metadata.items():
             if key not in column_counts:
                 if 'raw_data_columns' in item:
                     for raw_key in item['raw_data_columns']:
@@ -179,7 +173,7 @@ class Tabular(Dataset):
         # Start adding the data variables
         for var in column_counts:
 
-            var_meta = self.get_attrs(file, var, **variable_md.get(var, {}))
+            var_meta = file.metadata[var]
 
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
@@ -202,8 +196,8 @@ class Tabular(Dataset):
                         values = file.df[["{}[{}]".format(var, i) for i in range(column_counts[var])]].values
 
                     assert values is not None, ValueError(('{} not in data file, double check, '
-                                                          'raw_data_columns field required in variable_metadata '
-                                                          'if needing to combine unique columns to new variable without an [i] increment').format(var))
+                                                          'raw_data_columns field required in variables '
+                                                          'if combining unique columns to a new variable without an [i] increment').format(var))
 
                     assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]'.format(var))
                     # Check for the dimensions of the variable and try adding from a system class.
@@ -219,7 +213,7 @@ class Tabular(Dataset):
 
                     self.add_variable_from_values(var, values=values, **var_meta)
 
-        # add global attrs to tabular, skip variable_metadata and dimensions
+        # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
 
         return self._obj
@@ -339,3 +333,9 @@ class Tabular(Dataset):
 
 
         assert False, ValueError("axis must be in ['x', 'y', 'distance']")
+
+    def to_file(self, filename, **kwargs):
+
+        file_handler = file_handler(filename)
+
+        file_handler.to_file(self._obj, filename, **kwargs)

@@ -1,4 +1,3 @@
-
 dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM data
@@ -87,7 +86,7 @@ radiometric_system:
     instrument: not_defined
     sample_frequency: 1.0
 
-variable_metadata:
+variables:
     Easting_Albers:
         axis: X
     Northing_Albers:

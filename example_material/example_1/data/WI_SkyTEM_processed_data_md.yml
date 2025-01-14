@@ -77,7 +77,7 @@ skytem_system:
                     [3.14858e-03, 3.94015e-03]]
             centers: [5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
 
-variable_metadata:
+variables:
     pINDEX:
         standard_name: processing_index
         long_name: Unique index number for processing

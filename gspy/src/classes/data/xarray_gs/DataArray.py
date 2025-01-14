@@ -94,7 +94,9 @@ class DataArray:
             If required metadata is missing.
 
         """
-        assert all([x in kwargs.keys() for x in default_metadata]), ValueError(f"Variable {name} must have metadata entries {default_metadata}")
+        missing = [x for x in default_metadata if x not in kwargs.keys()]
+
+        assert len(missing) == 0, ValueError(f"Metadata for variable {name} is missing entries {missing}")
 
     @classmethod
     def from_values(cls, name, **kwargs):
@@ -220,7 +222,6 @@ class DataArray:
             [nanmin(values), nanmax(values)]
         """
 
-        # kwargs.pop('coords')
         nv = kwargs.get('null_value', 'not_defined')
 
         if nv == 'not_defined':

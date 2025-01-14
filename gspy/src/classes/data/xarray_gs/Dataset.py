@@ -10,7 +10,8 @@ from xarray import open_dataset
 from .DataArray import DataArray
 from .Coordinate import Coordinate
 
-from ....utilities import flatten, unflatten, load_metadata_from_file, check_key_whitespace
+# from ....utilities import flatten, unflatten, load_metadata_from_file, check_key_whitespace
+from ...metadata.Metadata import Metadata
 from ...survey.Spatial_ref import Spatial_ref
 
 from xarray import register_dataset_accessor
@@ -291,8 +292,8 @@ class Dataset:
             for key, value in dic['coordinates'].items():
                 dic['coordinates'][key] = value.strip()
 
-        if "variable_metadata" in dic:
-            dic['variable_metadata'] = {key.lower():item for key, item in dic['variable_metadata'].items()}
+        if "variables" in dic:
+            dic['variables'] = {key.lower():item for key, item in dic['variables'].items()}
 
         return dic
 
@@ -443,8 +444,8 @@ class Dataset:
     def update_attrs(self, key='', **kwargs):
         """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
         """
-        kwargs = flatten(kwargs, key, {})
-        self._obj.attrs.update(kwargs)
+        # kwargs = flatten(kwargs, key, {})
+        self._obj.attrs.update(Metadata(kwargs).flatten())
 
     def write_netcdf(self, filename, group, **kwargs):
         """Write to netcdf file

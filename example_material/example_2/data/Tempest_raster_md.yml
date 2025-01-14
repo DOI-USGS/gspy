@@ -10,7 +10,7 @@ dimensions:
     x: Easting_Albers
     y: Northing_Albers
 
-variable_metadata:
+variables:
     magnetic_tmi:
         dimensions: [x, y]
         standard_name: total_magnetic_intensity

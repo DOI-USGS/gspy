@@ -88,7 +88,7 @@ dimensions:
         positive: down
         datum: ground surface
 
-variable_metadata:
+variables:
         line:
             standard_name: line
             long_name: Line Number

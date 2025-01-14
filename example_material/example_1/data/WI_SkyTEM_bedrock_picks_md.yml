@@ -7,7 +7,7 @@ coordinates:
     x: E_N83WTM
     y: N_N83WTM
 
-variable_metadata:
+variables:
     ID:
         standard_name: identifier
         long_name: Unique identifier

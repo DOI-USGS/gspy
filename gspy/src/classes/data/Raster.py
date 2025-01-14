@@ -8,8 +8,8 @@ import rioxarray
 
 from pprint import pprint
 
-from ...utilities import dump_metadata_to_file
-from .Variable_Metadata import variable_metadata
+from ..metadata.Metadata import Metadata
+from ..metadata.Variable_metadata import Variable_metadata
 from .xarray_gs.Dataset import Dataset
 import xarray as xr
 
@@ -97,13 +97,13 @@ class Raster(Dataset):
                 # dicts are defined explicitly in the json file.
                 self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
-        var_meta = variable_metadata(**json_md['variable_metadata'])
+        var_meta = Variable_metadata(**json_md['variables'])
 
         for var in var_meta.keys():
             if 'files' in var_meta[var]:
                 self = self.read_raster_using_metadata(var, json_md, **var_meta[var])
 
-        # add global attrs to tabular, skip variable_metadata and dimensions
+        # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
 
         return self._obj
@@ -145,7 +145,7 @@ class Raster(Dataset):
                                                 values=ds[coord].values,
                                                 is_projected=self.is_projected,
                                                 is_dimension=True,
-                                                **json_metadata['variable_metadata'][coordinates[coord]])
+                                                **json_metadata['variables'][coordinates[coord]])
                 # If coord already exists, pass ...
                 # Assumes existing coord matches!!!!!
                 # Not Yet Implemented: reconciliation step for adding multiple x,y,z,t coords OR resampling / realigning
@@ -203,9 +203,9 @@ class Raster(Dataset):
         #         nodata = None
 
         #     # supersede fill value from file with variable metadata value, if present
-        #     if 'null_value' in json_metadata['variable_metadata'][name]:
-        #         if json_metadata['variable_metadata'][name]['null_value'] != 'not_defined':
-        #             nodata = json_metadata['variable_metadata'][name]['null_value']
+        #     if 'null_value' in json_metadata['variables'][name]:
+        #         if json_metadata['variables'][name]['null_value'] != 'not_defined':
+        #             nodata = json_metadata['variables'][name]['null_value']
 
         #     # reproject, accounting for nodata value if present
         #     if nodata is None:
@@ -328,7 +328,7 @@ class Raster(Dataset):
         """Write JSON metadata template for a raster dataset
 
         Outputs a template JSON metadata file needed for adding Raster data. All required
-        dictionaries are printed (dataset_attrs, key_mapping, raster_files, variable_metadata).
+        dictionaries are printed (dataset_attrs, key_mapping, raster_files, variables).
         Additional dictionaries can be optionally added to document more information or
         ancillary metadata relevant to the specific Raster data.
 
@@ -370,7 +370,7 @@ class Raster(Dataset):
                 }
         }
 
-        out["variable_metadata"] = {
+        out["variables"] = {
             "lat": {
                 "standard_name": "",
                 "long_name": "",

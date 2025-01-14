@@ -1,0 +1,118 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    method: electromagnetic
+    instrument: loupe
+
+coordinates:
+    x: EAST
+    y: NORTH
+    z: HEIGHT
+
+loupe_system:
+    type: system
+    mode: ground
+    method: electromagnetic
+    submethod: time domain
+    instrument: loupe
+
+    data_normalized: True
+    reference_frame: right-handed positive down
+    sample_rate: 0.1
+    digitization_frequency: 504000.0
+    stacks: 360
+    powerline_frequency: 60.0
+
+    transmitter_label: z
+    transmitter_number_of_turns: 13
+    transmitter_coordinates: [[0.33,0.14,0.00],[0.14,0.33,0.00],[-0.14,0.33,0.00],[-0.33,0.14,0.00],[-0.33,-0.14,0.00],[-0.14,-0.33,0.00],[0.14,-0.33,0.00],[0.33,-0.14,0.00]]
+    transmitter_area: 0.358
+    transmitter_waveform_type: trapezoid
+    transmitter_waveform_time: [-2.77778E-003, -2.76878E-003, 0.00000E+000, 9.0000E-006]
+    transmitter_waveform_current: [0.0000E+000, 1.0000E+000, 1.0000E+000, 0.0000E+000]
+    transmitter_current_scale_factor: 1.0
+    transmitter_peak_current: 20.0
+    transmitter_moment: 94.42
+    transmitter_base_frequency: 90.0
+    transmitter_on_time: 2.76878E-003
+    transmitter_off_time: 2.78678E-003
+    transmitter_orientation: z
+    transmitter_height: 1.0
+
+    receiver_label: [x, y, z]
+    receiver_orientation: [x, y, z]
+    receiver_coil_low_pass_filter: [100000.0, 100000.0, 100000.0]
+    receiver_instrument_low_pass_filter: [250000.0, 250000.0, 250000.0]
+    receiver_area: [200.0, 200.0, 200.0]
+    receiver_delay_time: [4.58E-06, 4.58E-06, 4.58E-06]
+    receiver_height: [1.75, 1.75, 1.75]
+    receiver_gain: [10, 10, 10]
+
+    component_transmitters: [z, z, z]
+    component_receivers: [x, y, z]
+    component_sample_rate: [1.0, 1.0, 1.0]
+    component_txrx_dx: [-10.0, -10.0, -10.0]
+    component_txrx_dy: [0.0, 0.0, 0.0]
+    component_txrx_dz: [-0.75, -0.75, -0.75]
+    component_data_type: [dBdt, dBdt, dBdt, dBdt]
+    component_gate_times: [gate_times, gate_times, gate_times]
+
+    variables:
+        sample_rate:
+            units: s
+        transmitter_area:
+            units: m^2
+
+    dimensions:
+        gate_times:
+            standard_name: gate_times
+            long_name: receiver gate times
+            units: seconds
+            null_value: not_defined
+            bounds: [[1.09800E-05, 1.49500E-05],
+                     [1.29700E-05, 1.69400E-05],
+                     [1.49500E-05, 1.89200E-05],
+                     [1.69400E-05, 2.09000E-05],
+                     [1.89200E-05, 2.28900E-05],
+                     [2.09000E-05, 2.88400E-05],
+                     [2.68600E-05, 3.47900E-05],
+                     [3.28100E-05, 4.47100E-05],
+                     [4.07500E-05, 5.66200E-05],
+                     [5.26500E-05, 7.24900E-05],
+                     [6.65400E-05, 9.03500E-05],
+                     [8.63800E-05, 1.18130E-04],
+                     [1.12170E-04, 1.55830E-04],
+                     [1.45900E-04, 2.01460E-04],
+                     [1.91540E-04, 2.66940E-04],
+                     [2.53050E-04, 3.52250E-04],
+                     [3.32410E-04, 4.67330E-04],
+                     [4.39560E-04, 6.22100E-04],
+                     [5.82410E-04, 8.22490E-04],
+                     [7.72890E-04, 1.09233E-03],
+                     [1.02487E-03, 1.44948E-03],
+                     [1.36019E-03, 1.92567E-03],
+                     [1.80860E-03, 2.55662E-03]]
+            centers: [1.2965e-05, 1.4955e-05, 1.6935e-05, 1.8920e-05, 2.0905e-05, 2.4870e-05,
+                      3.0825e-05, 3.8760e-05, 4.8685e-05, 6.2570e-05, 7.8445e-05, 1.0226e-04,
+                      1.3400e-04, 1.7368e-04, 2.2924e-04, 3.0265e-04, 3.9987e-04, 5.3083e-04,
+                      7.0245e-04, 9.3261e-04, 1.2372e-03, 1.6429e-03, 2.1826e-03]
+
+variables:
+    EAST:
+        axis: x
+        units: m
+        null_value: "not_defined"
+    NORTH:
+        axis: y
+        units: m
+        null_value: "not_defined"
+    HEIGHT:
+        axis: z
+        positive: up
+        datum: NAD88
+        units: m
+        null_value: "not_defined"
+    CH:
+        em_system_components: 1
+        dimensions: [index, gate_times]

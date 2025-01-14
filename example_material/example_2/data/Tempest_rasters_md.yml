@@ -25,7 +25,7 @@ dimensions:
         positive: down
         datum: ground surface
 
-variable_metadata:
+variables:
     Easting_Albers:
         standard_name: easting_albers
         long_name: Easting

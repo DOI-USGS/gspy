@@ -11,7 +11,8 @@ from ..data.System import System
 from ..data.GS_Data import GS_Data
 from ..data.Tabular import Tabular
 from ..data.Raster import Raster
-from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
+# from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
+from ..metadata.Metadata import Metadata
 
 import xarray as xr
 
@@ -36,7 +37,7 @@ class Survey(dict):
 
     Once instantiated, tabular and raster classes can be added to the survey. Each tabular or raster dataset is a separate xarray.Dataset.
 
-    ``Survey(metadata)``
+    Survey(metadata)
 
     Parameters
     ----------
@@ -66,6 +67,8 @@ class Survey(dict):
             metadata = self.add_system(**metadata)
             # make xarray
             self.xarray = metadata
+        else:
+            self.xarray = xr.Dataset(attrs = {})
 
     def add_system(self, **kwargs):
         for key in list(kwargs.keys()):
@@ -129,7 +132,7 @@ class Survey(dict):
             for key in kwargs:
                 if key not in ('spatial_ref', 'dataset_attrs'):
                     tmpdict2 = {k: v for k, v in kwargs[key].items() if v}
-                    tmpdict2 = flatten(tmpdict2, '', {})
+                    tmpdict2 = Metadata(tmpdict2).flatten()
 
                     for k,v in tmpdict2.items():
                         if isinstance(v,list):
@@ -173,7 +176,38 @@ class Survey(dict):
             raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
 
         # reading the data from the file
-        return load_metadata_from_file(filename)
+        return Metadata.read(filename)
+
+    @staticmethod
+    def metadata_template(metadata_filename=None, **kwargs):
+
+        self = Survey(metadata=metadata_filename)
+
+        tmp = {} if self.xarray is None else self.xarray.attrs
+        a = Metadata.merge(dict(title = "", institution = "", source = "", history = "",
+                        references = "", comment = "", conventions = "CF-1.8"), tmp)
+        tmp = {} if not 'survey_information' in self.xarray else self.xarray.survey_information.attrs
+        b = Metadata.merge(dict(contractor_project_number = "", contractor = "", client = "",
+                                survey_type = "", survey_area_name = "", state = "", country = "",
+                                acquisition_start = "yyyymmdd", acquisition_end = "yyyymmdd",
+                                dataset_created = "yyyymmdd"), tmp)
+        tmp = {} if not 'spatial_ref' in self.xarray else self.xarray.spatial_ref.attrs
+        c = Metadata.merge(dict(datum = "", projection = "", utm_zone = "", epsg = ""), tmp)
+        tmp = {} if not 'flightline_information' in self.xarray else self.xarray.flightline_information.attrs
+        d = Metadata.merge(dict(traverse_line_spacing = "", traverse_line_direction = "", tie_line_spacing = "",
+                                tie_line_direction = "", nominal_line_spacing = "", nominal_terrain_clearance = "",
+                                final_line_kilometers = "", traverse_line_numbers = "", tie_line_numbers = ""), tmp)
+        tmp = {} if not 'survey_equipment' in self.xarray else self.xarray.survey_equipment.attrs
+        e = Metadata.merge(dict(aircraft = "", magnetometer = "", spectrometer_system = "",
+                                radar_altimeter_system = "", radar_altimeter_sample_rat = "",
+                                laser_altimeter_system = "", navigation_system = "", acquisition_system = ""), tmp)
+
+        out = Metadata(dict(dataset_attrs = a,
+                    survey_information = b,
+                    spatial_ref = c,
+                    flightline_information = d,
+                    survey_equipment = e))
+        return out
 
     @staticmethod
     def write_metadata_template(filename="survey_md.yml"):
@@ -190,59 +224,7 @@ class Survey(dict):
 
         print("\nGenerating an empty metadata file for the survey.\n")
 
-        out = {
-            "dataset_attrs" : {
-                "title": "",
-                "institution": "",
-                "source":  "",
-                "history": "",
-                "references": "",
-                "comment": "",
-                "conventions": "CF-1.8"
-                },
-            "survey_information" : {
-                "contractor_project_number" : "",
-                "contractor" : "",
-                "client" : "",
-                "survey_type" : "",
-                "survey_area_name" : "",
-                "state" : "",
-                "country" : "",
-                "acquisition_start" : "yyyymmdd",
-                "acquisition_end" : "yyyymmdd",
-                "dataset_created" : "yyyymmdd"
-                },
-            "spatial_ref" : {
-                "datum" : "",
-                "projection" : "",
-                "utm_zone" : "",
-                "epsg": ""
-                },
-            "flightline_information" : {
-                "traverse_line_spacing" : "",
-                "traverse_line_direction" : "",
-                "tie_line_spacing" : "",
-                "tie_line_direction" : "",
-                "nominal_line_spacing" : "",
-                "nominal_terrain_clearance" : "",
-                "final_line_kilometers" : "",
-                "traverse_line_numbers" : "",
-                "tie_line_numbers": ""
-                },
-            "survey_equipment" : {
-                "aircraft" : "",
-                "magnetometer" : "",
-                "spectrometer_system" : "",
-                "radar_altimeter_system" : "",
-                "radar_altimeter_sample_rat" : "",
-                "laser_altimeter_system" : "",
-                "navigation_system" : "",
-                "acquisition_system" : ""
-                },
-            "system_information" : {
-                "instrument_type" : ""
-                }
-        }
+        out = self.me
 
         dump_metadata_to_file(out, filename=filename)
 

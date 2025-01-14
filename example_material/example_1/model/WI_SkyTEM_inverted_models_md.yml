@@ -76,7 +76,7 @@ dimensions:
                     [250.1 , 275.0  ],
                     [275.0  , 412.5 ]]
 
-variable_metadata:
+variables:
     pINDEX:
         standard_name: processing_index
         long_name: Unique index number for processing

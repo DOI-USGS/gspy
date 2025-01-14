@@ -102,7 +102,7 @@ nominal_system:
     component_data_type: [dBdt, dBdt, dBdt, dBdt]
     component_gate_times: [LM_gate_times, LM_gate_times, HM_gate_times, HM_gate_times]
 
-    variable_metadata:
+    variables:
         sample_rate:
             units: ms
         area:

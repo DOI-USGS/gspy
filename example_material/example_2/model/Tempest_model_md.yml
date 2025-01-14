@@ -84,7 +84,7 @@ dimensions:
             9.114800e-04, 1.410630e-03, 2.191900e-03, 3.418070e-03,
             5.338690e-03, 8.301020e-03, 1.337928e-02]
 
-variable_metadata:
+variables:
     easting:
         axis: x
 

@@ -18,6 +18,20 @@ class Coordinate(DataArray):
 
     """
 
+    @property
+    def metadata(self):
+
+        return {"standard_name": "",
+               "long_name": "Can specify centers and/or bounds, or origin/increment/length",
+               "units": "",
+               "null_value": "not_defined",
+               "centers" : [0, 1, 2],
+               "bounds" : [[-0.5, 0.5], [0.5, 1.5], [1.5, 2.5]],
+               "origin " : -0.5,
+               "increment" : 1.0,
+               "length" : 3}
+
+
     @classmethod
     def from_dict(cls, name, is_projected=False, is_dimension=False, **kwargs):
         """Specifically generates a coordinate/dimension from a dict.

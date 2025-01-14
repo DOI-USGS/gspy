@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gspy"
+version = "1.2.2"
+description = "gspy converts commonly used data formats into a netcdf file honoring our GS convention."
+readme = { file = "README.rst", content-type = "text/x-rst" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Leon Foks", email = "nfoks@contractor.usgs.gov" },
+    { name = "Stephanie James", email = "sjames@usgs.gov" },
+    { name = "Burke Minsley", email = "bminsley@usgs.gov" }
+]
+classifiers = [
+    'License :: OSI Approved',
+    'License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication',
+    'Programming Language :: Python :: 3',
+    'Topic :: Scientific/Engineering'
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.optional-dependencies]
+docs = ["sphinx_gallery", "sphinx_rtd_theme"]
+plot = ["geobipy"]
+
+[tool.setuptools.packages.find]
+where = ["."]

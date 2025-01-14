@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from copy import deepcopy
 from pprint import pprint
 import xarray as xr
@@ -9,7 +10,8 @@ from .xarray_gs.Dataset import Dataset
 from .Tabular import Tabular
 from .Raster import Raster
 from .System import System
-from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
+# from ...utilities import flatten, dump_metadata_to_file, load_metadata_from_file
+from ..metadata.Metadata import Metadata
 
 import xarray as xr
 
@@ -33,12 +35,36 @@ class GS_Data(object):
         if self.system is not None:
             return self.dataset[value]
 
+    @staticmethod
+    def metadata_template(data_filename=None, metadata_file=None, **kwargs):
+
+        system = kwargs.get('system', None)
+        json_md = Metadata()
+
+        if metadata_file is not None:
+            # assert metadata_file is not None, ValueError("metadata_file not specified")
+            json_md = Metadata.read(metadata_file)
+
+            # READ THE SYSTEM FIRST
+            if system is None:
+                for key in list(json_md.keys()):
+                    if "system" in key:
+                        if system is None:
+                            system = {}
+                        value = json_md.pop(key)
+                        system[key] = System.from_dict(**value)
+
+        # Attach apriori given system dict
+        kwargs['system'] = system
+
+        return Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
+
     @classmethod
     def read(cls, data_filename=None, metadata_file=None, spatial_ref=None, **kwargs):
 
         self = cls()
 
-        json_md = load_metadata_from_file(metadata_file)
+        json_md = Metadata.read(metadata_file)
 
         system = kwargs.get('system', None)
 
@@ -57,19 +83,8 @@ class GS_Data(object):
         if data_filename is None:
             self._dataset = Raster.read(metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
         else:
-            from . import tabular_aseg
-            from . import tabular_csv
 
-            file_name, file_extension = os.path.splitext(data_filename)
-
-            if file_extension == '.dat':
-                if os.path.isfile(file_name+'.dfn'):
-                    data = tabular_aseg.Tabular_aseg.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
-                else:
-                    file_extension = '.csv'
-
-            if file_extension == '.csv':
-                data = tabular_csv.Tabular_csv.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
+            data = Tabular.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
 
             self._dataset = data
             if system is not None:
