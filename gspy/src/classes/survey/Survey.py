@@ -66,9 +66,9 @@ class Survey(dict):
 
             metadata = self.add_system(**metadata)
             # make xarray
-            self.xarray = metadata
+            self.xarray_from_dict(**metadata)
         else:
-            self.xarray = xr.Dataset(attrs = {})
+            self._xarray = xr.Dataset(attrs = {})
 
     def add_system(self, **kwargs):
         for key in list(kwargs.keys()):
@@ -99,7 +99,11 @@ class Survey(dict):
         return self._xarray
 
     @xarray.setter
-    def xarray(self, kwargs):
+    def xarray(self, value):
+        assert isinstance(value, xr.Dataset), TypeError(f"xarray must have type {xr.Dataset}")
+        self._xarray = value
+
+    def xarray_from_dict(self, **kwargs):
         """Attach an xarray.Dataset containing GS metadata or create one from a dict
 
         Parameters
@@ -117,7 +121,7 @@ class Survey(dict):
         required = ("title", "institution", "source", "history", "references")
         if isinstance(kwargs, xr.Dataset):
             assert all([x in kwargs.attrs for x in required]), ValueError("Dataset.attrs must contain at least {}".format(required))
-            self._xarray = kwargs
+            self.xarray = kwargs
         else:
 
             assert isinstance(kwargs, dict), TypeError('metadata must have type dict')
@@ -143,7 +147,7 @@ class Survey(dict):
 
             ds = ds.set_spatial_ref(kwargs['spatial_ref'])
 
-            self._xarray = ds._obj
+            self.xarray = ds._obj
 
     # def add_data(self, key, *args, **kwargs):
     #     self.add_gs_data(key, *args, type="data", **kwargs)
