@@ -93,20 +93,20 @@ nominal_system:
     receiver_instrument_low_pass_filter: [500000.0, 500000.0]
     receiver_area: [105.0, 115.0]
 
-    component_transmitters: [LM, LM, HM, HM]
+    component_transmitters: [LM, HM, LM, HM]
     component_receivers: [z, z, x, x]
     component_sample_rate: [10.0, 10.0, 10.0, 10.0]
-    component_txrx_dx: [-13.25, -14.65, -13.25, -14.65]
+    component_txrx_dx: [-13.25, -13.25, -14.65, -14.65]
     component_txrx_dy: [0.0, 0.0, 0.0, 0.0]
     component_txrx_dz: [-2.0, 0.0, -2.0, 0.0]
     component_data_type: [dBdt, dBdt, dBdt, dBdt]
-    component_gate_times: [LM_gate_times, LM_gate_times, HM_gate_times, HM_gate_times]
+    component_gate_times: [LM_gate_times, HM_gate_times, LM_gate_times, HM_gate_times]
 
     variables:
         sample_rate:
-            units: ms
-        area:
-            units: km^2
+            units: s
+        receiver_area:
+            units: m^2
 
     dimensions:
         gate_times:
