@@ -51,6 +51,8 @@ class Metadata(dict):
 
     def dump(self, filename):
 
+        print(Warning(f"Writing metadata to {filename}.  Entries that need filling in are denoted with '??'"))
+
         def __yaml_dump(this, file, indent=0, key=None):
             if isinstance(this, dict):
                 if key is not None:

@@ -127,23 +127,22 @@ class file_handler(ABC):
                 out[col] = 1
         return out
 
-    @property
     @abstractmethod
-    def metadata_template(self):
+    def metadata_template(self, **kwargs):
         out = Metadata()
 
         template = {"content": "<summary statement of what the dataset contains>",
                     "comment": "<additional details or ancillary information>",
-                    "type" : "",
-                    "method" : "",
-                    "instrument" : ""}
-        out["dataset_attrs"] = self.metadata.get('dataset_attrs', template.copy())
+                    "type" : "??",
+                    "method" : "??",
+                    "instrument" : "??"}
+        out["dataset_attrs"] = Metadata.merge(template, kwargs.get('dataset_attrs', {}))
 
-        template = {"x" : "",
-                    "y" : "",
-                    "z" : "",
-                    "time" : ""}
-        out["coordinates"] = self.metadata.get('coordinates', template)
+        template = {"x" : "??",
+                    "y" : "??",
+                    "z" : "??",
+                    "t" : "??"}
+        out["coordinates"] = Metadata.merge(template, kwargs.get('coordinates', {}))
 
         return out
 
