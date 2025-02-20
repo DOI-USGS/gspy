@@ -8,12 +8,14 @@ def file_handler(filename):
     file_name, file_extension = splitext(filename)
     file_extension = file_extension.lower()
 
-    if file_extension == '.csv':
-        return csv_handler
-    elif file_extension == '.dat':
+    # Detect data type using file extensions.
+    # Aseg .dat comes with a .dfn file
+    # Loupe .dat comes with a .desc file
+    if file_extension == '.dat':
         if isfile(file_name+'.dfn'):
             return aseg_gdf2_handler
         elif isfile(file_name+file_extension+'.desc'):
             return loupe_handler
-        else:
-            return csv_handler
+
+    # Catch all others as a csv i.e. .xyz, .csv
+    return csv_handler
