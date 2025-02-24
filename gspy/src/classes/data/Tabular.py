@@ -61,13 +61,18 @@ class Tabular(Dataset):
                 json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}))
+        file = self.file_handler.read(filename, metadata=json_md)
 
-        out = file.metadata_template
+        out = file.metadata_template(**json_md)
 
         if 'coordinates' in json_md:
             for k, v in json_md['coordinates'].items():
-                out['variables'][v]['axis'] = k
+                entry = out['variables'][v]
+                entry['axis'] = entry.get('axis', k)
+                if k == 'z':
+                    entry["positive"] = entry.get('positive', "??")
+                if k in ('z', 't'):
+                    entry["datum"] = entry.get("datum", "??")
 
         return out
 

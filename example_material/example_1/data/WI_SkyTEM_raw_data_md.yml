@@ -3,8 +3,12 @@ dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
     type: data
+    structure: tabular
+    mode: airborne
     method: electromagnetic
+    submethod: time domain
     instrument: skytem
+    property: ''
 
 coordinates:
     x: E_Nad83
@@ -13,12 +17,6 @@ coordinates:
     t: DateTime
 
 variables:
-    Line:
-        standard_name: line
-        long_name: Line number
-        units: not_defined
-        null_value: not_defined
-
     E_Nad83:
         standard_name: easting_nad83
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
