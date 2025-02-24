@@ -7,8 +7,8 @@ dataset_attrs:
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM, fully processed data used as input to inversion, laterally constrained inverted resistivity models, and derived estimates of bedrock depth.
     summary: Airborne electromagnetic (AEM) and magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.
     content: survey information (group /survey), raw data (group /survey/tabular/0), processed data (group /survey/tabular/1), inverted resistivity models (group /survey/tabular/2), bedrock elevation points (group /survey/tabular/3), gridded magnetic and bedrock maps (group /survey/raster/0)
-    created_by: gspy==0.1.0
-    conventions: CF-1.8, GS-0.0
+    created_by: gspy==2.0.0
+    conventions: CF-1.8, GS-2.0
 
 survey_information:
     contractor_project_number: 20022

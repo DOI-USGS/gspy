@@ -1,6 +1,13 @@
 dataset_attrs :
     content : gridded magnetic and bedrock maps
     comment: This dataset includes AEM-derived estimates of the elevation of the top of bedrock produced by USGS
+    type: data
+    structure: raster
+    mode: airborne
+    method: electromagnetic
+    submethod: time domain
+    instrument: skytem
+    property: [magnetic, depth to bedrock]
 
 coordinates :
     x : E_Nad83

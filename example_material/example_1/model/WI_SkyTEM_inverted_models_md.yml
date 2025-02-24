@@ -1,6 +1,13 @@
 dataset_attrs:
     content: inverted resistivity models
     comment: This dataset includes inverted resistivity models derived from processed AEM data produced by USGS
+    type: model
+    structure: tabular
+    mode: airborne
+    method: electromagnetic
+    submethod: time domain
+    instrument: skytem
+    property: electrical resistivity
 
 inversion:
     model_file: WI_SkyTEM_2021_InvertedModels.csv
