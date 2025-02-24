@@ -11,6 +11,7 @@ class Metadata(dict):
             return filename
 
         with open(filename) as f:
+            filename = filename.replace('yaml', 'yml')
             if 'json' in filename:
                 return cls(json.loads(f.read()))
             elif 'yml' in filename:
