@@ -2,6 +2,12 @@ dataset_attrs:
     content: bedrock elevation points
     comment: This dataset includes AEM-derived point estimates of the elevation of the top of bedrock produced by USGS
     type: data
+    structure: tabular
+    mode: ''
+    method: ''
+    submethod: ''
+    instrument: ''
+    property: ''
 
 coordinates:
     x: E_N83WTM

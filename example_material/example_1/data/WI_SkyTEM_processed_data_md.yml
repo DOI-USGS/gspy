@@ -3,8 +3,12 @@ dataset_attrs:
     content: processed data
     comment: This dataset includes processed AEM data produced by USGS
     type: data
+    structure: tabular
+    mode: airborne
     method: electromagnetic
+    submethod: time domain
     instrument: skytem
+    property: ''
 
 coordinates:
     x: E_N83WTM

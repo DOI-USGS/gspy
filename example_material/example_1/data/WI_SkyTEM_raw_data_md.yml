@@ -3,8 +3,12 @@ dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
     type: data
+    structure: tabular
+    mode: airborne
     method: electromagnetic
+    submethod: time domain
     instrument: skytem
+    property: ''
 
 coordinates:
     x: E_Nad83
