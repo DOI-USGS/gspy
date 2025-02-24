@@ -12,10 +12,9 @@ class csv_handler(file_handler):
     def columns(self):
         return self.df.columns
 
-    @property
-    def metadata_template(self):
+    def metadata_template(self, **kwargs):
 
-        out = super().metadata_template
+        out = super().metadata_template(**kwargs)
 
         template = {"standard_name": "not_defined",
                     "long_name": "not_defined",
@@ -27,12 +26,10 @@ class csv_handler(file_handler):
         columns = sorted(list(columns_counts.keys()))
 
         for var in columns:
+            tmp = Metadata.merge(template, kwargs.get(var, {}))
             if columns_counts[var] > 1:
-                tmp = copy(template)
-                tmp['dimensions'] = ['index', 'dimension']
-                variables[var] = tmp
-            else:
-                variables[var] = copy(template)
+                tmp['dimensions'] = tmp.get('dimensions', ['index', '??'])
+            variables[var] = tmp
 
         out['variables'] = variables
 
@@ -58,6 +55,7 @@ class csv_handler(file_handler):
         self.metadata = {}
 
         self.combine_metadata(**metadata)
+
         return self
 
     def to_file(self, xr_dataset, filename):

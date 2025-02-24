@@ -41,6 +41,7 @@ class GS_Data(object):
         system = kwargs.get('system', None)
         json_md = Metadata()
 
+        system_metadata = {}
         if metadata_file is not None:
             # assert metadata_file is not None, ValueError("metadata_file not specified")
             json_md = Metadata.read(metadata_file)
@@ -53,14 +54,20 @@ class GS_Data(object):
                             system = {}
                         value = json_md.pop(key)
                         system[key] = System.from_dict(**value)
+                        system_metadata[key] = value
 
         # Attach apriori given system dict
         kwargs['system'] = system
 
-        return Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
+        out = Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
+
+        out = Metadata.merge(out, system_metadata)
+
+        return out
 
     @classmethod
     def read(cls, data_filename=None, metadata_file=None, spatial_ref=None, **kwargs):
+
 
         self = cls()
 
@@ -83,7 +90,6 @@ class GS_Data(object):
         if data_filename is None:
             self._dataset = Raster.read(metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
         else:
-
             data = Tabular.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
 
             self._dataset = data
