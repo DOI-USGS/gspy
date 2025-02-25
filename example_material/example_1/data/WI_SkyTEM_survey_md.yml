@@ -95,7 +95,7 @@ nominal_system:
 
     component_transmitters: [LM, HM, LM, HM]
     component_receivers: [z, z, x, x]
-    component_sample_rate: [10.0, 10.0, 10.0, 10.0]
+    component_sample_rate: [0.1, 0.1, 0.1, 0.1]
     component_txrx_dx: [-13.25, -13.25, -14.65, -14.65]
     component_txrx_dy: [0.0, 0.0, 0.0, 0.0]
     component_txrx_dz: [-2.0, 0.0, -2.0, 0.0]
@@ -103,7 +103,7 @@ nominal_system:
     component_gate_times: [LM_gate_times, HM_gate_times, LM_gate_times, HM_gate_times]
 
     variables:
-        sample_rate:
+        component_sample_rate:
             units: s
         receiver_area:
             units: m^2
