@@ -213,25 +213,6 @@ class Survey(dict):
                     survey_equipment = e))
         return out
 
-    @staticmethod
-    def write_metadata_template(filename="survey_md.yml"):
-        """Creates a metadata template for a Survey
-
-        If a Survey metadata file is not found or passed, an empty template file is generated and
-        an Exception is raised.
-
-        Raises
-        ------
-        Exception
-            "Please re-run and specify metadata when instantiating Survey()"
-        """
-
-        print("\nGenerating an empty metadata file for the survey.\n")
-
-        out = self.me
-
-        dump_metadata_to_file(out, filename=filename)
-
     @classmethod
     def open_netcdf(cls, filename, **kwargs):
         """Read a survey from a netcdf file with lazy loading
@@ -257,8 +238,6 @@ class Survey(dict):
                 self[key] = GS_Data.open_netcdf(filename, group=f'/survey/{key}', **kwargs)
 
         kwargs['handle'].close()
-
-
 
         return self
 
@@ -294,14 +273,8 @@ class Survey(dict):
             else:
                 v.gs_dataset.write_netcdf(filename, group=f'survey/{k}')
 
-        # # Tabular
-        # for i, m in enumerate(self._tabular):
-        #     m.write_netcdf(filename, group="survey/tabular".format(i))
-        #     # Tabular(m).write_netcdf(filename, group="survey/tabular/{}".format(i))
+                v.gs_dataset.write_netcdf(filename, group=f'survey/{k}', **kwargs)
 
-        # # Raster
-        # for i, m in enumerate(self._raster):
-        #     Raster(m).write_netcdf(filename, group='survey/raster/{}'.format(i))
 
     # def write_zarr(self, filename):
     #     """Write a survey to a netcdf file as well as any attached datasets.
