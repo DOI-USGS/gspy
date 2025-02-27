@@ -107,6 +107,3 @@ variables:
     EMZ_HPRG:
         em_system_components: 0
         dimensions: [index, gate_times]
-
-
-

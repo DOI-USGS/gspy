@@ -35,39 +35,30 @@ metadata = join(data_path, "data//Resolve_survey_md.yml")
 template = Survey.metadata_template(metadata)
 template.dump("template_md_survey.yml")
 
-
 #%%
-
 # Define input data file (CSV format) and the
 # associated metadata file (without the variable_metadata dictionary)
-d_data = join(data_path, 'data//Resolve.csv')
-d_supp = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+data = join(data_path, 'data//Resolve.csv')
+metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
-template = GS_Data.metadata_template(d_data)
+template = GS_Data.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")
 
-
+#%%
 data_path = '..//..//..//..//example_material//example_1'
 
-d_data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
-d_supp = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
-template = GS_Data.metadata_template(d_data, d_supp)
+data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
+metadata = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
+template = GS_Data.metadata_template(data, metadata)
 template.dump("template_md_skytem.yml")
 
-# # Attempt to add the raw AEM data from CSV-format
-# # This will trigger an error message when no variable metadata is found, however the error will
-# # output a template json file with this dataset's variable names, to then be filled in by the user
-# plt.imshow(img.imread("../../_static/variable_metadata_template_snippet.png"))
+#%%
+# Loupe Data
 
-# template = GS_Data.create_metadata_template(data_filename=d_data, metadata_file=d_supp)
-# template.dump("Resolve.csv_metadata_template.yml")
+data_path = '..//..//..//..//example_material//example_3'
 
-# try:
-# survey.add_data(key='data', data_filename=d_data, metadata_file=d_supp)
-# except Exception as e:
-#    print(e)
+data = join(data_path, 'data//Kankakee.dat')
+metadata = join(data_path, 'data//Loupe_data_md.yml')
 
-# %%
-# .. image:: ..//..//_static//variable_metadata_template_snippet.png
-#    :scale: 50 %
-#    :align: center
+template = GS_Data.metadata_template(data_filename=data, metadata_file=metadata)
+template.dump("template_md_loupe.yml")
