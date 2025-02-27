@@ -3,7 +3,6 @@ from pathlib import Path
 from copy import deepcopy
 from pprint import pprint
 import xarray as xr
-from netCDF4 import Dataset as ncdf4_Dataset
 import h5py
 
 from .xarray_gs.Dataset import Dataset
@@ -143,10 +142,10 @@ class GS_Data(object):
         else:
             return self
 
-    def write_netcdf(self, filename, group):
+    def write_netcdf(self, filename, group, **kwargs):
 
-        self._dataset.gs_dataset.write_netcdf(filename, group)
+        self._dataset.gs_dataset.write_netcdf(filename, group, **kwargs)
 
         if self.system is not None:
             for key, value in self.system.items():
-                value.gs_dataset.write_netcdf(filename, f'{group}/{key}')
+                value.gs_dataset.write_netcdf(filename, f'{group}/{key}', **kwargs)

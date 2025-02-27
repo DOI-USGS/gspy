@@ -230,7 +230,7 @@ class Survey(dict):
 
         self = cls()
 
-        self.xarray = Dataset.open_netcdf(filename, group='survey', engine='h5netcdf')
+        self.xarray = Dataset.open_netcdf(filename, group='survey', **kwargs)
         kwargs['handle'] = h5py.File(filename, 'r')
 
         with ncdf4_Dataset(filename) as rootgrp:
@@ -254,7 +254,7 @@ class Survey(dict):
         raise NotImplementedError()
 
 
-    def write_netcdf(self, filename):
+    def write_netcdf(self, filename, **kwargs):
         """Write a survey to a netcdf file as well as any attached datasets.
 
         Parameters
@@ -264,15 +264,16 @@ class Survey(dict):
 
         """
 
+        kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
+        kwargs['format'] = kwargs.get('format', 'netcdf4')
+
         # Survey
-        self.xarray.to_netcdf(filename, mode='w', group='survey', format='netcdf4', engine='netcdf4')
+        self.xarray.to_netcdf(filename, mode='w', group='survey', **kwargs)
 
         for k, v in self.items():
             if isinstance(v, GS_Data):
-                v.write_netcdf(filename, group=f'survey/{k}')
+                v.write_netcdf(filename, group=f'survey/{k}', **kwargs)
             else:
-                v.gs_dataset.write_netcdf(filename, group=f'survey/{k}')
-
                 v.gs_dataset.write_netcdf(filename, group=f'survey/{k}', **kwargs)
 
 

@@ -315,6 +315,9 @@ class Dataset:
         """
         kwargs['decode_times'] = kwargs.get('decode_times', False)
         kwargs['decode_cf'] = kwargs.get('decode_cf', True)
+        kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
+        kwargs['format'] = kwargs.get('format', 'NETCDF4')
+
         return open_dataset(*args, **kwargs)
 
     def plot(self, hue, **kwargs):
@@ -466,7 +469,10 @@ class Dataset:
                 # if 'grid_mapping' in self._obj[var].attrs:
                 #     del self._obj[var].attrs['grid_mapping']
 
-        self._obj.to_netcdf(filename, mode=mode, group=group, format='netcdf4', engine='netcdf4', **kwargs)
+        kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
+        kwargs['format'] = kwargs.get('format', 'netcdf4')
+
+        self._obj.to_netcdf(filename, mode=mode, group=group, **kwargs)
 
     def write_zarr(self, filename, group, **kwargs):
         """Write to netcdf file
