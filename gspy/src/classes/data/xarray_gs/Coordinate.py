@@ -140,6 +140,9 @@ class Coordinate(DataArray):
             dims = kwargs.pop('dimensions')
             coords = kwargs.pop('coords')
 
+        if "axis" in kwargs:
+            kwargs["axis"] = kwargs["axis"].upper()
+
         return super().from_values(name, dimensions=dims, coords=coords, **kwargs)
 
     @staticmethod
