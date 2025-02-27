@@ -72,7 +72,6 @@ class System(Dataset):
     def add_magnetic_system(cls, **kwargs):
         return cls.add_generic_system(**kwargs)
 
-
     @classmethod
     def add_electromagnetic_system(cls, **kwargs):
         cls.check_required(**kwargs)
@@ -347,7 +346,6 @@ class System(Dataset):
         return self
 
 
-
     def add_receivers(self, **kwargs):
         self = self.add_coordinate_from_values('n_receivers',
                                                 values = np.arange(np.size(kwargs.get('receiver_label'))),
@@ -418,4 +416,3 @@ class System(Dataset):
     @classmethod
     def valid_instrument(cls, **kwargs):
         return any(x in kwargs["instrument"] for x in ('resolve', 'skytem', 'tempest', 'cesium vapour'))
-
