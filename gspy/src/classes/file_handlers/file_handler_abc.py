@@ -94,8 +94,8 @@ class file_handler(ABC):
         """
         return None
 
-    def combine_metadata(self, **kwargs):
-        self.metadata = Metadata.merge(self.metadata, kwargs)
+    def combine_metadata(self, new, **kwargs):
+        self.metadata = Metadata.merge(self.metadata, new, **kwargs)
 
         # for key, item in self.metadata.items():
         #     assert all([x in item for x in ('long_name', 'standard_name', 'null_value', 'units')]), ValueError(f"Variable {key} Must have at least 'long_name', 'standard_name', 'null_value', 'units'")

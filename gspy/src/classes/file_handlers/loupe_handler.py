@@ -94,9 +94,9 @@ class loupe_handler(csv_handler):
 
         self.df = DataFrame(out_df)
 
-        self.metadata = desc_metadata
+        self.metadata = metadata
 
-        self.combine_metadata(**metadata)
+        self.combine_metadata(desc_metadata, matched_keys=True)
 
         return self
 

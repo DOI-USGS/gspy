@@ -20,7 +20,7 @@ class Metadata(dict):
         assert False, ValueError("metadata filename does not end with json or yml")
 
     @classmethod
-    def merge(cls, this, that):
+    def merge(cls, this, that, matched_keys=False, **kwargs):
         """Unpacks a dictionary of dictionaries into a single dict with different keys
 
         Parameters
@@ -46,7 +46,8 @@ class Metadata(dict):
                 else:
                     self[key] = value
             else:
-                self[key] = value
+                if not matched_keys:
+                    self[key] = value
 
         return cls(self)
 
