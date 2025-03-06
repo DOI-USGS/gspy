@@ -11,7 +11,13 @@ def file_handler(filename):
     # Detect data type using file extensions.
     # Aseg .dat comes with a .dfn file
     # Loupe .dat comes with a .desc file
-    if file_extension == '.dat':
+    # XYZ might be Workbench
+
+    workbench_handler = None
+    if file_extension == '.xyz':
+        if isfile(file_name[:-3]+"dat.xyz") and isfile(file_name[:-3]+"inv.xyz") and isfile(file_name[:-3]+"syn.xyz"):
+            return workbench_handler
+    elif file_extension == '.dat':
         if isfile(file_name+'.dfn'):
             return aseg_gdf2_handler
         elif isfile(file_name+file_extension+'.desc'):

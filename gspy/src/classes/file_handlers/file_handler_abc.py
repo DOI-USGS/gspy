@@ -135,7 +135,11 @@ class file_handler(ABC):
                     "comment": "<additional details or ancillary information>",
                     "type" : "??",
                     "method" : "??",
-                    "instrument" : "??"}
+                    "submethod" : "??",
+                    "instrument" : "??",
+                    "structure" : "??",
+                    "property" : "??",
+                    }
         out["dataset_attrs"] = Metadata.merge(template, kwargs.get('dataset_attrs', {}))
 
         template = {"x" : "??",
@@ -143,6 +147,10 @@ class file_handler(ABC):
                     "z" : "??",
                     "t" : "??"}
         out["coordinates"] = Metadata.merge(template, kwargs.get('coordinates', {}))
+
+        if 'dimensions' in kwargs:
+            template = {}
+            out["dimensions"] = Metadata.merge(template, kwargs.get('dimensions', {}))
 
         return out
 

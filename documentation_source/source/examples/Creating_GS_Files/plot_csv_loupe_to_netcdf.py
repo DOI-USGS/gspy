@@ -53,6 +53,8 @@ survey.write_netcdf(d_out)
 # Reading back in
 new_survey = Survey.open_netcdf(d_out)
 
+print(new_survey['raw_data'].dataset)
+
 #%%
 # Plotting
 plt.figure()

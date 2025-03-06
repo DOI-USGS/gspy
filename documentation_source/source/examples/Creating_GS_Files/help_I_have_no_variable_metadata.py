@@ -25,6 +25,15 @@ from matplotlib import image as img
 # Generate the Variable Metadata Template for My Dataset
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#%%
+# Zero existing metadata
+# Initialize the Survey
+template = Survey.metadata_template()
+template.dump("template_survey_empty.yml")
+
+
+#%%
+# Prefilled existing metadata file
 # Path to example files
 data_path = '..//..//..//..//example_material//example_2'
 
@@ -40,6 +49,9 @@ template.dump("template_md_survey.yml")
 # associated metadata file (without the variable_metadata dictionary)
 data = join(data_path, 'data//Resolve.csv')
 metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+
+template = GS_Data.metadata_template(data)
+template.dump("template_md_resolve_empty.yml")
 
 template = GS_Data.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")
@@ -58,7 +70,7 @@ template.dump("template_md_skytem.yml")
 data_path = '..//..//..//..//example_material//example_3'
 
 data = join(data_path, 'data//Kankakee.dat')
-metadata = join(data_path, 'data//Loupe_data_md.yml')
+metadata = join(data_path, 'data//loupe_data_metadata.yml')
 
 template = GS_Data.metadata_template(data_filename=data, metadata_file=metadata)
 template.dump("template_md_loupe.yml")

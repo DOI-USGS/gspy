@@ -147,7 +147,7 @@ class aseg_gdf2_handler(file_handler):
             # Open the data file, there is no header
             self._df = read_csv(self.filename, names=self.columns, dtype=self.numpy_formats, index_col=False, sep=r'\s+')
 
-        self.combine_metadata(**metadata)
+        self.combine_metadata(metadata)
 
         return self
 

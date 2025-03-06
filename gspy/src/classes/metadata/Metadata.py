@@ -1,3 +1,4 @@
+from os.path import splitext
 import json
 import yaml
 from pprint import pprint
@@ -12,12 +13,19 @@ class Metadata(dict):
 
         with open(filename) as f:
             filename = filename.replace('yaml', 'yml')
-            if 'json' in filename:
-                return cls(json.loads(f.read()))
-            elif 'yml' in filename:
-                return cls(yaml.safe_load(f))
 
-        assert False, ValueError("metadata filename does not end with json or yml")
+            base, extension = splitext(filename)
+
+            match extension:
+                case '.json':
+                    out = cls(json.loads(f.read()))
+                case '.yml':
+                    out =  cls(yaml.safe_load(f))
+                case _:
+                    assert False, ValueError("metadata filename does not end with json or yml")
+
+        out = out._sort_out_list_of_strings()
+        return out
 
     @classmethod
     def merge(cls, this, that, matched_keys=False, **kwargs):
@@ -114,3 +122,10 @@ class Metadata(dict):
 
     def print(self):
         pprint(self)
+
+    def _sort_out_list_of_strings(self):
+        for key, item in self.items():
+            if isinstance(item, list):
+                if all([isinstance(i, str) for i in item]):
+                    self[key] = ','.join(a for a in item)
+        return self

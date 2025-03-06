@@ -64,6 +64,7 @@ class Tabular(Dataset):
         file = self.file_handler.read(filename, metadata=json_md)
 
         out = file.metadata_template(**json_md)
+        out['dataset_attrs']['structure'] = 'tabular'
 
         if 'coordinates' in json_md:
             for k, v in json_md['coordinates'].items():
