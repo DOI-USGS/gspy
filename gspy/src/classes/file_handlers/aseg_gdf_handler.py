@@ -129,7 +129,7 @@ class aseg_gdf2_handler(file_handler):
         if fixed_format:
             widths = self.__col_widths_from_fortran_format(first_col_width)
 
-            test = read_fwf(self.filename, widths=widths)
+            test = read_fwf(self.filename, widths=widths, header=None)
 
             if test.values.shape[1] != len(self.columns):
                 test.columns = ['-'] + self.columns
