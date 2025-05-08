@@ -17,7 +17,7 @@ of attributes with the default values of "not_defined" which the user can then g
 #%%
 
 from os.path import join
-from gspy import Survey, GS_Data
+from gspy import Survey, Dataset
 import matplotlib.pyplot as plt
 from matplotlib import image as img
 
@@ -50,10 +50,10 @@ template.dump("template_md_survey.yml")
 data = join(data_path, 'data//Resolve.csv')
 metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
-template = GS_Data.metadata_template(data)
+template = Data.metadata_template(data)
 template.dump("template_md_resolve_empty.yml")
 
-template = GS_Data.metadata_template(data, metadata)
+template = Data.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")
 
 #%%
@@ -61,7 +61,7 @@ data_path = '..//..//..//..//example_material//example_1'
 
 data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
 metadata = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
-template = GS_Data.metadata_template(data, metadata)
+template = Data.metadata_template(data, metadata)
 template.dump("template_md_skytem.yml")
 
 #%%
@@ -72,5 +72,5 @@ data_path = '..//..//..//..//example_material//example_3'
 data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//loupe_data_metadata.yml')
 
-template = GS_Data.metadata_template(data_filename=data, metadata_file=metadata)
+template = Data.metadata_template(data_filename=data, metadata_file=metadata)
 template.dump("template_md_loupe.yml")
