@@ -24,27 +24,30 @@ class Survey(Container):
     @staticmethod
     def metadata_template(metadata={}, **kwargs):
 
-        self = Survey.from_dict(metadata)
-
-        print(self)
+        md = Survey.read_metadata(metadata) if isinstance(metadata, str) else metadata
 
         a = Metadata.merge(dict(title = "??", institution = "??", source = "??", history = "??",
-                        references = "??", comment = "??", conventions = "CF-1.8"), tmp)
-        tmp = {} if not 'survey_information' in self.xarray else self.xarray.survey_information.attrs
+                        references = "??", comment = "??", conventions = "CF-1.8"),
+                        md.get('dataset_attrs', {}))
+
         b = Metadata.merge(dict(contractor_project_number = "??", contractor = "??", client = "??",
                                 survey_type = "??", survey_area_name = "??", state = "??", country = "??",
                                 acquisition_start = "yyyymmdd", acquisition_end = "yyyymmdd",
-                                dataset_created = "yyyymmdd"), tmp)
-        tmp = {} if not 'spatial_ref' in self.xarray else self.xarray.spatial_ref.attrs
-        c = Metadata.merge(dict(datum = "??", projection = "??", utm_zone = "??", epsg = "??"), tmp)
-        tmp = {} if not 'flightline_information' in self.xarray else self.xarray.flightline_information.attrs
+                                dataset_created = "yyyymmdd"),
+                                md.get('survey_information', {}))
+
+        c = Metadata.merge(dict(datum = "??", projection = "??", utm_zone = "??", epsg = "??"),
+                           md.get('spatial_ref', {}))
+
         d = Metadata.merge(dict(traverse_line_spacing = "??", traverse_line_direction = "??", tie_line_spacing = "??",
                                 tie_line_direction = "??", nominal_line_spacing = "??", nominal_terrain_clearance = "??",
-                                final_line_kilometers = "??", traverse_line_numbers = "??", tie_line_numbers = "??"), tmp)
-        tmp = {} if not 'survey_equipment' in self.xarray else self.xarray.survey_equipment.attrs
+                                final_line_kilometers = "??", traverse_line_numbers = "??", tie_line_numbers = "??"),
+                                md.get('flightline_information', {}))
+
         e = Metadata.merge(dict(aircraft = "??", magnetometer = "??", spectrometer_system = "??",
                                 radar_altimeter_system = "??", radar_altimeter_sample_rate = "??",
-                                laser_altimeter_system = "??", navigation_system = "??", acquisition_system = "??"), tmp)
+                                laser_altimeter_system = "??", navigation_system = "??", acquisition_system = "??"),
+                                md.get('survey_equipment', {}))
 
         out = Metadata(dict(dataset_attrs = a,
                     survey_information = b,
@@ -52,7 +55,6 @@ class Survey(Container):
                     flightline_information = d,
                     survey_equipment = e))
         return out
-
 
     # # def write_ncml(self, filename):
     # #     """ Write an NcML (NetCDF XML) metadata file

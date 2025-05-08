@@ -13,8 +13,8 @@ from ..gs_dataarray.Spatial_ref import Spatial_ref
 
 from xarray import DataArray as xr_DataArray
 from xarray import Dataset as xr_Dataset
-from xarray import open_dataset
 from xarray import register_dataset_accessor
+
 
 @register_dataset_accessor('gs')
 class Dataset:
@@ -303,6 +303,41 @@ class Dataset:
     #         dic['variables'] = {key.lower():item for key, item in dic['variables'].items()}
 
     #     return dic
+
+    @staticmethod
+    def metadata_template(data_filename=None, metadata_file=None, **kwargs):
+
+        system = kwargs.get('system', {})
+        json_md = Metadata()
+
+        system_metadata = {}
+        if metadata_file is not None:
+            # assert metadata_file is not None, ValueError("metadata_file not specified")
+            json_md = Metadata.read(metadata_file)
+
+            # No systems were passed through, try to read from metadata
+            if len(system) == 0:
+                for key in list(json_md.keys()):
+                    if "system" in key:
+                        system[key] = json_md.pop(key)
+
+                # Systems were found, create a System datatree/dataset
+                from ..gs_datatree.Container import Container
+                if len(system) > 0:
+                    system_metadata[key] = system
+                    system, _ = Container.Systems(**system)
+
+
+        # Attach apriori given system dict
+        kwargs['system'] = system
+
+        from .Tabular import Tabular
+
+        out = Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
+
+        out = Metadata.merge(out, system_metadata)
+
+        return out
 
     def plot(self, hue, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
