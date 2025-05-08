@@ -1,6 +1,6 @@
 import warnings
 
-from .CRS import CRS
+from ..utilities.CRS import CRS
 from xarray import DataArray, register_dataarray_accessor
 
 @register_dataarray_accessor("spatial_ref")

@@ -10,10 +10,9 @@ from pprint import pprint
 
 from ..metadata.Metadata import Metadata
 from ..metadata.Variable_metadata import Variable_metadata
-from .xarray_gs.Dataset import Dataset
+from .Dataset import Dataset
 import xarray as xr
 
-@xr.register_dataset_accessor("gs_raster")
 class Raster(Dataset):
     """Class defining a set of gridded data (2D or 3D).
 
@@ -78,12 +77,17 @@ class Raster(Dataset):
         """
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
-        self = self.set_spatial_ref(spatial_ref)
 
         if isinstance(metadata_file, str):
             json_md = self.read_metadata(metadata_file)
         else:
             json_md = metadata_file
+
+        if spatial_ref is None:
+            spatial_ref = json_md.get('spatial_ref', None)
+            assert spatial_ref is not None, Exception("Spatial reference not defined in metadata file")
+
+        self._obj = self.set_spatial_ref(spatial_ref)
 
         dimensions = json_md['dimensions']
         coordinates = json_md['coordinates']
@@ -95,13 +99,13 @@ class Raster(Dataset):
             assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
             if isinstance(dimensions[key], dict):
                 # dicts are defined explicitly in the json file.
-                self = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
+                self._obj = self.add_coordinate_from_dict(b, is_dimension=True, **dimensions[key])
 
         var_meta = Variable_metadata(**json_md['variables'])
 
         for var in var_meta.keys():
             if 'files' in var_meta[var]:
-                self = self.read_raster_using_metadata(var, json_md, **var_meta[var])
+                self._obj = self.read_raster_using_metadata(var, json_md, **var_meta[var])
 
         # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
@@ -115,7 +119,7 @@ class Raster(Dataset):
         values = None
         # Read each file in the variables metadata
         for i, file in enumerate(files):
-            ds = self.read_tif(file)
+            ds = self.open_rasterio(file)
 
             shape = ds.shape
             if n_files > 1:
@@ -141,7 +145,7 @@ class Raster(Dataset):
         for coord in ds.coords:
             if (coord in coordinates) & (not coord in self._obj.coords):
                 # if not already in xarray, add
-                self = self.add_coordinate_from_values(coord,
+                self._obj = self.add_coordinate_from_values(coord,
                                                 values=ds[coord].values,
                                                 is_projected=self.is_projected,
                                                 is_dimension=True,
@@ -171,7 +175,7 @@ class Raster(Dataset):
             #     values = np.swapaxes(values, 0, swap_to)
 
         # Add the variable to the dataset
-        self.add_variable_from_values(name, values=values, **kwargs)
+        self._obj = self.add_variable_from_values(name, values=values, **kwargs)
 
         # Now handle the spatial ref.  This should be done FIRST
         raster_spatial_reference = [coord for coord in ds.coords if coord not in ('x', 'y')][0]
@@ -213,9 +217,9 @@ class Raster(Dataset):
         #     else:
         #         ds = ds.rio.reproject(target_crs, nodata=nodata)
 
-        return self
+        return self._obj
 
-    def read_tif(self, filename):
+    def open_rasterio(self, filename):
         """Reads GeoTIFF file
 
         Uses rioxarray to read GeoTIFF file as an xarray Dataset
@@ -242,7 +246,6 @@ class Raster(Dataset):
             #ds.attrs['null_value'] = ds.attrs['_FillValue']
 
         return ds
-
 
     def read_var_netcdf(self, filename, key, var_meta):
         """ Reads variable from NetCDF file and adds to Raster xarray
@@ -286,43 +289,17 @@ class Raster(Dataset):
 
         for i in range(3):
             if bnds_present[i]:
-                self = self.drop_vars(check_keys[i])
+                self._obj = self._obj.gs.drop_vars(check_keys[i])
 
         if self.spatial_ref['wkid'] != "None":
             target_crs = "{}:{}".format(self.spatial_ref['authority'], self.spatial_ref['wkid'])
         else:
             target_crs = self.spatial_ref['crs_wkt']
 
-        self = self.rio.reproject(target_crs)
+        self._obj = self._obj.gs.rio.reproject(target_crs)
         self._compute_bounds()
 
         return self._obj
-
-    def write_netcdf(self, filename, group='raster'):
-        """Write to netcdf file
-
-        Parameters
-        ----------
-        filename : str
-            Path to the file
-        group : str
-            Name of group within netcdf file
-
-        """
-        super().write_netcdf(filename, group)
-
-    def write_zarr(self, filename, group='raster'):
-        """Write to netcdf file
-
-        Parameters
-        ----------
-        filename : str
-            Path to the file
-        group : str
-            Name of group within netcdf file
-
-        """
-        super().write_zarr(filename, group)
 
     def write_metadata_template(self, filename="raster_md.yml"):
         """Write JSON metadata template for a raster dataset

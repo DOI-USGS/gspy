@@ -5,18 +5,18 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 import numpy as np
 from numpy import all, arange, asarray, diff, median, r_, zeros
+from ..gs_dataarray.DataArray import DataArray
+from ..gs_dataarray.Coordinate import Coordinate
+
+from ..metadata.Metadata import Metadata
+from ..gs_dataarray.Spatial_ref import Spatial_ref
+
 from xarray import DataArray as xr_DataArray
+from xarray import Dataset as xr_Dataset
 from xarray import open_dataset
-from .DataArray import DataArray
-from .Coordinate import Coordinate
-
-# from ....utilities import flatten, unflatten, load_metadata_from_file, check_key_whitespace
-from ...metadata.Metadata import Metadata
-from ...survey.Spatial_ref import Spatial_ref
-
 from xarray import register_dataset_accessor
 
-@register_dataset_accessor('gs_dataset')
+@register_dataset_accessor('gs')
 class Dataset:
     """Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.
 
@@ -91,7 +91,7 @@ class Dataset:
                                                                                **kwargs)
         self._obj[name].attrs['bounds'] = name + '_bnds'
 
-        return self
+        return self._obj
 
     def add_coordinate_from_dict(self, name, discrete=False, is_dimension=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset from a dictionary.
@@ -129,15 +129,14 @@ class Dataset:
 
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
-        tmp = Coordinate.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
         # Add the actual coordinate values
-        self._obj[name] = tmp
+        self._obj[name] = Coordinate.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
 
         # Add the bounds of the coordinate
         if not discrete or bounding_dict['bounds'] is not None:
-            self = self.add_bounds_to_coordinate(name, **bounding_dict)
+            self._obj = self.add_bounds_to_coordinate(name, **bounding_dict)
 
-        return self
+        return self._obj
 
     def add_coordinate_from_values(self, name, discrete=False, is_dimension=False, **kwargs):
         """Attach a coordinate/dimension to a Dataset using an array of values defining center values.
@@ -180,13 +179,21 @@ class Dataset:
             kwargs['coords'] = kwargs.pop('coords', {key:self._obj[key] for key in kwargs['dimensions']})
 
         self._obj[name] = Coordinate.from_values(name, is_dimension=is_dimension, **kwargs)
-        self._obj = self._obj.assign_coords({name : self._obj[name]})
+        self._obj = self.assign_coords(name, name, discrete, **bounding_dict)
+
+        return self._obj
+
+    def assign_coords(self, coord, data_var, discrete=False, **kwargs):
+
+        self._obj = self._obj.assign_coords({coord : self._obj[data_var]})
+
+        self._obj[coord].attrs.update({'axis':coord.upper()})
 
         # Add the bounds of the coordinate
         if not discrete:
-            self = self.add_bounds_to_coordinate(name, **bounding_dict)
+            self._obj = self.add_bounds_to_coordinate(coord, **kwargs)
 
-        return self
+        return self._obj
 
     def add_variable_from_values(self, name, **kwargs):
         """Add a variable to the Dataset
@@ -239,7 +246,7 @@ class Dataset:
 
         self._obj[name] = DataArray.from_values(name, **kwargs)
 
-        return self
+        return self._obj
 
     def _add_nv(self):
         """Adds a required dimension to the Dataset when bounds need to be specified.
@@ -250,7 +257,7 @@ class Dataset:
             _description_
         """
         if not 'nv' in self._obj:
-            self = self.add_coordinate_from_values('nv',
+            self._obj = self._obj.gs.add_coordinate_from_values('nv',
                                                    values=r_[0, 1],
                                                    is_projected=False,
                                                    is_dimension=True,
@@ -261,64 +268,41 @@ class Dataset:
                                                           null_value = 'not_defined'))
         return self._obj
 
-    def read_metadata(self, filename):
-        """Read json metadata file
+    # def read_metadata(self, filename):
+    #     """Read json metadata file
 
-        Parameters
-        ----------
-        filename : str
-            Json file
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         Json file
 
-        Returns
-        -------
-        dic : dict
-            Dictionary of JSON metadata
+    #     Returns
+    #     -------
+    #     dic : dict
+    #         Dictionary of JSON metadata
 
-        """
-        if filename == 'None':
-            return
+    #     """
+    #     if filename == 'None':
+    #         return
 
-        if filename is None:
-            self.write_metadata_template(filename)
-            raise Exception("Please re-run and specify metadata when instantiating {}".format(self.__class__.__name__))
+    #     if filename is None:
+    #         self.write_metadata_template(filename)
+    #         raise Exception("Please re-run and specify metadata when instantiating {}".format(self.__class__.__name__))
 
-        # reading the data from the file
-        dic = load_metadata_from_file(filename)
+    #     # reading the data from the file
+    #     dic = load_metadata_from_file(filename)
 
-        flag = check_key_whitespace(dic)
-        assert not flag, Exception("Metadata file {} has keys with whitespace.  Please remove spaces")
+    #     flag = check_key_whitespace(dic)
+    #     assert not flag, Exception("Metadata file {} has keys with whitespace.  Please remove spaces")
 
-        if 'coordinates' in dic:
-            for key, value in dic['coordinates'].items():
-                dic['coordinates'][key] = value.strip()
+    #     if 'coordinates' in dic:
+    #         for key, value in dic['coordinates'].items():
+    #             dic['coordinates'][key] = value.strip()
 
-        if "variables" in dic:
-            dic['variables'] = {key.lower():item for key, item in dic['variables'].items()}
+    #     if "variables" in dic:
+    #         dic['variables'] = {key.lower():item for key, item in dic['variables'].items()}
 
-        return dic
-
-    @classmethod
-    def open_netcdf(cls, *args, **kwargs):
-        """Read Data from a netcdf file using xrray's lazy open_dataset
-
-        Parameters
-        ----------
-        filename : str
-            Path to the netcdf file
-        group : str
-            Netcdf group name containing Dataset
-
-        Returns
-        -------
-        Dataset
-
-        """
-        kwargs['decode_times'] = kwargs.get('decode_times', False)
-        kwargs['decode_cf'] = kwargs.get('decode_cf', True)
-        kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
-        kwargs['format'] = kwargs.get('format', 'NETCDF4')
-
-        return open_dataset(*args, **kwargs)
+    #     return dic
 
     def plot(self, hue, **kwargs):
         """Scatter plot of variable against x, y co-ordinates
@@ -346,12 +330,12 @@ class Dataset:
             xlabel = "Distance ({})".format(self._obj['x'].attrs['units'])
         else:
             x = self._obj[x]
-            xlabel = 'x\n{}'.format(self._obj['x'].gs_dataarray.label)
+            xlabel = 'x\n{}'.format(self._obj['x'].gs.label)
 
         splot = plt.plot(x, self._obj[hue].values, **kwargs)
 
         plt.xlabel(xlabel)
-        plt.ylabel('y\n{}'.format(self._obj[hue].gs_dataarray.label))
+        plt.ylabel('y\n{}'.format(self._obj[hue].gs.label))
 
         # cb=plt.colorbar()
         # cb.set_label(r'{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
@@ -442,7 +426,7 @@ class Dataset:
             self._obj['spatial_ref'] = crs
             self._obj = self._obj.assign_coords({'spatial_ref' : crs})
 
-        return self
+        return self._obj
 
     def update_attrs(self, key='', **kwargs):
         """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
@@ -450,29 +434,49 @@ class Dataset:
         # kwargs = flatten(kwargs, key, {})
         self._obj.attrs.update(Metadata(kwargs).flatten())
 
-    def write_netcdf(self, filename, group, **kwargs):
-        """Write to netcdf file
+    def to_netcdf(self, *args, **kwargs):
+        """Write the survey to a netcdf file
 
         Parameters
         ----------
-        filename : str
-            Path to the file
-        group : str
-            Netcdf group name to write to
+        args : list
+            Arguments to pass to xarray.Dataset.to_netcdf
+        kwargs : dict
+            Keyword arguments to pass to xarray.Dataset.to_netcdf
+
+        Returns
+        -------
+        None
 
         """
-        mode = 'a' if os.path.isfile(filename) else 'w'
-        if 'raster' in group:
-            for var in self._obj.data_vars:
-                if self._obj[var].attrs['null_value'] != 'not_defined':
-                    self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
-                # if 'grid_mapping' in self._obj[var].attrs:
-                #     del self._obj[var].attrs['grid_mapping']
+        kwargs["format"] = kwargs.get("format", "NETCDF4")
+        kwargs["engine"] = kwargs.get("engine", "h5netcdf")
 
-        kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
-        kwargs['format'] = kwargs.get('format', 'netcdf4')
+        self._obj.to_netcdf(*args, **kwargs)
 
-        self._obj.to_netcdf(filename, mode=mode, group=group, **kwargs)
+    # def write_netcdf(self, filename, group, **kwargs):
+    #     """Write to netcdf file
+
+    #     Parameters
+    #     ----------
+    #     filename : str
+    #         Path to the file
+    #     group : str
+    #         Netcdf group name to write to
+
+    #     """
+    #     mode = 'a' if os.path.isfile(filename) else 'w'
+    #     if 'raster' in group:
+    #         for var in self._obj.data_vars:
+    #             if self._obj[var].attrs['null_value'] != 'not_defined':
+    #                 self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
+    #             # if 'grid_mapping' in self._obj[var].attrs:
+    #             #     del self._obj[var].attrs['grid_mapping']
+
+    #     kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
+    #     kwargs['format'] = kwargs.get('format', 'netcdf4')
+
+    #     self._obj.to_netcdf(filename, mode=mode, group=group, **kwargs)
 
     def write_zarr(self, filename, group, **kwargs):
         """Write to netcdf file
@@ -558,3 +562,117 @@ class Dataset:
             f.write('</netcdf>')
 
         f.close()
+
+    @classmethod
+    def Survey(cls, **kwargs):
+        """Attach an xarray.Dataset containing GS metadata or create one from a dict
+
+        Parameters
+        ----------
+        kwargs : xarray.Dataset or dict
+            * If xarray.Dataset checks for required metadata and spatial_ref
+            * If dict, checks for required metadata and a spatial_ref definition
+
+        See Also
+        --------
+        ...Survey.Spatial_ref : for more details of creating a Spatial_ref
+
+        """
+
+        required = ("title", "institution", "source", "history", "references")
+        if isinstance(kwargs, xr_Dataset):
+            assert all([x in kwargs.attrs for x in required]), ValueError("Dataset.attrs must contain at least {}".format(required))
+            xarray = kwargs
+        else:
+
+            assert isinstance(kwargs, dict), TypeError('metadata must have type dict')
+            assert "dataset_attrs" in kwargs, ValueError("Survey metadata must contain entry 'dataset_attrs")
+            assert "spatial_ref" in kwargs, ValueError("Survey metadata must contain entry 'spatial_ref")
+            assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError("dataset_attrs must contain at least {}".format(required))
+
+            ds = cls(xr_Dataset(attrs = {}))
+
+            ds.update_attrs(**kwargs["dataset_attrs"])
+
+            for key in kwargs:
+                if key not in ('spatial_ref', 'dataset_attrs'):
+                    tmpdict2 = {k: v for k, v in kwargs[key].items() if v}
+                    tmpdict2 = Metadata(tmpdict2).flatten()
+
+                    for k,v in tmpdict2.items():
+                        if isinstance(v,list):
+
+                            if isinstance(v[0],list):
+                                tmpdict2[k] = str(v)
+                    ds._obj[key] = xr_DataArray(attrs=tmpdict2)
+
+            ds._obj = ds.set_spatial_ref(kwargs['spatial_ref'])
+
+            return ds._obj
+
+    def subset(self, key, value):
+        return self._obj.where(self._obj[key]==value)
+
+    def interpolate(self, dx, dy, variable, **kwargs):
+        from geobipy import Point
+
+        pc3d = Point(self['x'], self['y'], None)
+        pc3d.interpolate()
+
+    def plot_cross_section(self, line_number, variable, hang_from='elevation', **kwargs):
+
+        keys = ['line', variable, 'layer_depth_bnds']
+
+        if hang_from is not None:
+            keys.append(hang_from)
+
+        subset = self._obj[keys]
+        subset = subset.where(subset.line == line_number, drop=True)
+
+        from geobipy import StatArray, RectilinearMesh2D, Model
+
+        x = subset.gs_tabular.x_axis(kwargs.pop('axis', 'x'))
+
+        z = subset['layer_depth_bnds'].values
+        z = np.hstack([z[:, 0, 0], z[-1, -1, 0]])
+
+        if hang_from is not None:
+            hanger = subset[hang_from]
+            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
+                                    y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']),
+                                    y_relative_to = StatArray(hanger.values, name=hanger.attrs['standard_name'], units=hanger.attrs['units']))
+        else:
+            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
+                                     y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']))
+
+        v = subset[variable]
+        model = Model(mesh = mesh, values=StatArray(v.values, name=v.attrs['standard_name'], units=v.attrs['units']))
+
+        return model.pcolor(**kwargs)
+
+    @property
+    def distance_along_line(self):
+        # Check the crs
+        if self.is_projected:
+            out = np.sqrt((self._obj['x'] - self._obj['x'][0])**2.0 + (self._obj['y'] - self._obj['y'][0])**2.0)
+            out.attrs['standard_name'] = 'Distance'
+            out.attrs['units'] = self._obj['x'].attrs['units']
+            return out
+
+        else:
+            # Haversine
+            from ..utilities.maths import haversine_distance
+            out = haversine_distance(self._obj['x'], self._obj['y'], self._obj['x'][0], self._obj['y'][0])
+            out.attrs['standard_name'] = 'Distance'
+            out.attrs['units'] = 'm'
+            return out
+
+    def x_axis(self, axis):
+
+        if axis in ['x', 'y']:
+            return self._obj[axis]
+        elif axis == 'distance':
+            return self.distance_along_line
+
+        assert False, ValueError("axis must be in ['x', 'y', 'distance']")
+

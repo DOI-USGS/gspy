@@ -7,12 +7,9 @@ import xarray as xr
 import numpy as np
 from numpy import arange, int32
 
-from .xarray_gs.Dataset import Dataset
+from .Dataset import Dataset
 from ..file_handlers import file_handler
 
-from xarray import register_dataset_accessor
-
-@register_dataset_accessor("gs_tabular")
 class Tabular(Dataset):
     """Accessor to xarray.Dataset that handles Tabular data
 
@@ -21,8 +18,8 @@ class Tabular(Dataset):
     gspy.Spatial_ref : For Spatial reference instantiation.
 
     """
-    def __init__(self, xarray_obj):
-        self._obj = xarray_obj
+    # def __init__(self, xarray_obj):
+    #     self._obj = xarray_obj
 
     @property
     def is_netcdf(self):
@@ -111,7 +108,7 @@ class Tabular(Dataset):
         self.file_handler = file_handler(filename)
 
         # Set the spatial ref
-        self = self.set_spatial_ref(spatial_ref)
+        self._obj = self._obj.gs.set_spatial_ref(spatial_ref)
 
         # Read the GSPy json file.
         if isinstance(metadata_file, str):
@@ -123,7 +120,7 @@ class Tabular(Dataset):
         file = self.file_handler.read(filename, metadata=json_md.get('variables', {}))
 
         # Add the index coordinate
-        self.add_coordinate_from_values('index',
+        self._obj = self.add_coordinate_from_values('index',
                                          values=arange(file.nrecords, dtype=int32),
                                          discrete = True,
                                          is_dimension=True,
@@ -143,7 +140,7 @@ class Tabular(Dataset):
                     # assert isinstance(dimensions[key], (str, dict)), Exception("NOT SURE WHAT TO DO HERE YET....")
                     if isinstance(dimensions[key], dict):
                         # dicts are defined explicitly in the json file.
-                        self = self.add_coordinate_from_dict(b.lower(), is_dimension=True, **dimensions[key])
+                        self._obj = self.add_coordinate_from_dict(b.lower(), is_dimension=True, **dimensions[key])
 
         # Write out a template json file when no variable metadata is found
         if not 'variables' in json_md:
@@ -155,7 +152,7 @@ class Tabular(Dataset):
             discrete = key in ('x', 'y', 'z', 't')
 
             # Might need to handle already added coords from the dimensions dict.
-            self.add_coordinate_from_values(key.lower(),
+            self._obj = self.add_coordinate_from_values(key.lower(),
                                             values=file.df[coord].values,
                                             dimensions=["index"],
                                             discrete = discrete,
@@ -186,7 +183,7 @@ class Tabular(Dataset):
 
                 # Use a column from the CSV file and add it as a variable
                 if var in all_columns:
-                    self = self.add_variable_from_values(var.lower(),
+                    self._obj = self.add_variable_from_values(var.lower(),
                                                   values=file.df[var].values,
                                                   dimensions = ["index"],
                                                   **var_meta)
@@ -217,7 +214,7 @@ class Tabular(Dataset):
 
                     assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
 
-                    self.add_variable_from_values(var, values=values, **var_meta)
+                    self._obj = self.add_variable_from_values(var, values=values, **var_meta)
 
         # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
@@ -248,97 +245,6 @@ class Tabular(Dataset):
             out = "{}".format(values.shape[1]) + out
 
         return out
-
-    def write_netcdf(self, filename, group='tabular'):
-        """Write to netcdf file
-
-        Parameters
-        ----------
-        filename : str
-            Path to the file
-        group : str, optional
-            Netcdf group name to use inside netcdf file. Default is 'tabular'
-
-        """
-        super().write_netcdf(filename, group)
-
-    def write_zarr(self, filename, group='tabular'):
-        """Write to netcdf file
-
-        Parameters
-        ----------
-        filename : str
-            Path to the file
-        group : str, optional
-            Netcdf group name to use inside netcdf file. Default is 'tabular'
-
-        """
-        super().write_zarr(filename, group)
-
-    def interpolate(self, dx, dy, variable, **kwargs):
-        from geobipy import Point
-
-        pc3d = Point(self['x'], self['y'], None)
-        pc3d.interpolate()
-
-
-    def plot_cross_section(self, line_number, variable, hang_from='elevation', **kwargs):
-
-        keys = ['line', variable, 'layer_depth_bnds']
-
-        if hang_from is not None:
-            keys.append(hang_from)
-
-        subset = self._obj[keys]
-        subset = subset.where(subset.line == line_number, drop=True)
-
-        from geobipy import StatArray, RectilinearMesh2D, Model
-
-        x = subset.gs_tabular.x_axis(kwargs.pop('axis', 'x'))
-
-        z = subset['layer_depth_bnds'].values
-        z = np.hstack([z[:, 0, 0], z[-1, -1, 0]])
-
-        if hang_from is not None:
-            hanger = subset[hang_from]
-            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
-                                    y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']),
-                                    y_relative_to = StatArray(hanger.values, name=hanger.attrs['standard_name'], units=hanger.attrs['units']))
-        else:
-            mesh = RectilinearMesh2D(x_centres = StatArray(x.values, name=x.attrs['standard_name'], units=x.attrs['units']),
-                                     y_edges = StatArray(-z, name=subset['layer_depth'].attrs['standard_name'], units=subset['layer_depth'].attrs['units']))
-
-        v = subset[variable]
-        model = Model(mesh = mesh, values=StatArray(v.values, name=v.attrs['standard_name'], units=v.attrs['units']))
-
-        return model.pcolor(**kwargs)
-
-    @property
-    def distance_along_line(self):
-        # Check the crs
-        if self.is_projected:
-            out = np.sqrt((self._obj['x'] - self._obj['x'][0])**2.0 + (self._obj['y'] - self._obj['y'][0])**2.0)
-            out.attrs['standard_name'] = 'Distance'
-            out.attrs['units'] = self._obj['x'].attrs['units']
-            return out
-
-        else:
-            # Haversine
-            from ...utilities.maths import haversine_distance
-            out = haversine_distance(self._obj['x'], self._obj['y'], self._obj['x'][0], self._obj['y'][0])
-            out.attrs['standard_name'] = 'Distance'
-            out.attrs['units'] = 'm'
-            return out
-
-    def x_axis(self, axis):
-
-        if axis in ['x', 'y']:
-            return self._obj[axis]
-        elif axis == 'distance':
-            return self.distance_along_line
-
-
-        assert False, ValueError("axis must be in ['x', 'y', 'distance']")
 
     def to_file(self, filename, **kwargs):
 

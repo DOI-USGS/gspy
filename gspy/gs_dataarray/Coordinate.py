@@ -1,9 +1,6 @@
 from numpy import arange
 from .DataArray import DataArray
 
-from xarray import register_dataarray_accessor
-
-@register_dataarray_accessor("gs_coordinate")
 class Coordinate(DataArray):
     """Accessor to xarray.DataArray to define a Coordinate.
 
@@ -20,7 +17,6 @@ class Coordinate(DataArray):
 
     @property
     def metadata(self):
-
         return {"standard_name": "",
                "long_name": "Can specify centers and/or bounds, or origin/increment/length",
                "units": "",
