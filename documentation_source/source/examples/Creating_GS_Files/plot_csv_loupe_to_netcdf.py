@@ -20,7 +20,7 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 import matplotlib.pyplot as plt
 from os.path import join
 import numpy as np
-from gspy import Survey, GS_Data
+import gspy
 
 
 #%%
@@ -37,30 +37,31 @@ data_path = '..//..//..//..//example_material//example_3'
 metadata = join(data_path, "data//LoupeEM_survey_md.yml")
 
 # Establish the Survey
-survey = Survey(metadata)
+root = gspy.Survey.from_dict(metadata)
+survey = root['survey']
+
+data_container = survey.gs.add_container('data')
 
 data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//Loupe_data_metadata.yml')
-survey.add_data(key='raw_data', data_filename=data, metadata_file=metadata)
-
+data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata)
 
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'data//Loupe.nc')
-survey.write_netcdf(d_out)
+root.gs.to_netcdf(d_out)
 
 #%%
 # Reading back in
-new_survey = Survey.open_netcdf(d_out)
-
-print(new_survey['raw_data'].dataset)
+dt = gspy.open_datatree(d_out)
+new_survey = dt['survey']
 
 #%%
 # Plotting
 plt.figure()
-new_survey['raw_data']['height'].plot(label='height')
-new_survey['raw_data']['tx_height'].plot(label='tx_height')
-new_survey['raw_data']['rx_height'].plot(label='rx_height')
+new_survey['data/raw_data']['height'].plot(label='height')
+new_survey['data/raw_data']['tx_height'].plot(label='tx_height')
+new_survey['data/raw_data']['rx_height'].plot(label='rx_height')
 plt.tight_layout()
 plt.legend()
 

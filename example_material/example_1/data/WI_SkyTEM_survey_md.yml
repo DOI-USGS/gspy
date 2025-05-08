@@ -200,34 +200,3 @@ magnetic_system:
             values: 0.1
         resolution:
             values: 0.002
-
-generic_system:
-    type: system
-    mode: not_defined
-    method: not_defined
-    submethod: not_defined
-    instrument: not_defined
-    dimensions:
-        n_s:
-            origin: 0
-            length: 3
-            increment: 1
-        n_v:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-            origin: 0
-            increment: 1
-            length: 8
-
-    variables:
-        array:
-            values: [1,2,3,4,5,6,7,8]
-            dimensions: "n_v"
-        strs:
-            values: ['a', 'b', 'c']
-            dimensions: "n_s"
-        scalar:
-            values: 5.0
-
