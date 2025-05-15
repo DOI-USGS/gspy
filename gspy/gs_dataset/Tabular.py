@@ -117,7 +117,7 @@ class Tabular(Dataset):
             json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}))
+        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}), **kwargs)
 
         # Add the index coordinate
         self._obj = self.add_coordinate_from_values('index',
