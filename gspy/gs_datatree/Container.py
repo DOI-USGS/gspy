@@ -263,3 +263,6 @@ class Container:
     def subset(self, key, value):
         out = self._obj.to_dataset()
         return out.where(out[key]==value)
+
+    def add_timestamp(self, *args, **kwargs):
+        self._obj.to_dataset().gs.add_timestamp(*args, **kwargs)
