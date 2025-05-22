@@ -39,8 +39,7 @@ data_path = '..//..//..//..//example_material//example_1'
 metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
 
 # Establish the Survey
-root = Survey.from_dict(metadata)
-survey = root['survey']
+survey = Survey.from_dict(metadata)
 
 data_container = survey.gs.add_container('data', **dict(content = "raw and processed data",
                                                         comment = "This is a test"))
@@ -68,9 +67,8 @@ system = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:
           "magnetic_system" : survey["magnetic_system"]}
 
 # Add the processed AEM data as a tabular dataset
-data_container.gs.add(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
+pd = data_container.gs.add(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
 
-# print(data_container)
 
 #%%
 # 3 - Inverted Models -
@@ -110,24 +108,22 @@ m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.yml')
 # Add the interpolated maps as a raster dataset
 derived_products.gs.add(key='maps', metadata_file=m_supp5)
 
-print(root.gs.tree)
+# print(root.gs.tree)
 
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
-root.gs.to_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
 
 #%%
 # The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
 
 data_container.gs.to_netcdf('test_datacontainer.nc')
 
+
 #%%
 # Reading back in
-dt = gspy.open_datatree(d_out)
-
-# Alias subgroups or containers inside the file.
-new_survey = dt['survey']
+new_survey = gspy.open_datatree(d_out)['survey']
 
 #%%
 # Plotting

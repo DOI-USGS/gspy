@@ -37,8 +37,7 @@ data_path = '..//..//..//..//example_material//example_3'
 metadata = join(data_path, "data//LoupeEM_survey_md.yml")
 
 # Establish the Survey
-root = gspy.Survey.from_dict(metadata)
-survey = root['survey']
+survey = gspy.Survey.from_dict(metadata)
 
 data_container = survey.gs.add_container('data')
 
@@ -49,12 +48,11 @@ data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'data//Loupe.nc')
-root.gs.to_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
 
 #%%
 # Reading back in
-dt = gspy.open_datatree(d_out)
-new_survey = dt['survey']
+new_survey = gspy.open_datatree(d_out)['survey']
 
 #%%
 # Plotting

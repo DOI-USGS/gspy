@@ -32,8 +32,7 @@ data_path = '..//..//..//..//example_material//example_2'
 metadata = join(data_path, "data//Tempest_survey_md.yml")
 
 # Establish survey instance
-root = gspy.Survey.from_dict(metadata)
-survey = root['survey']
+survey = gspy.Survey.from_dict(metadata)
 
 #%%
 # 1. Raw Data -
@@ -45,7 +44,7 @@ d_data = join(data_path, 'data//Tempest.dat')
 d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
-data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=d_supp)
+rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=d_supp)
 
 #%%
 # 2. Inverted Models
@@ -72,15 +71,11 @@ data_derived.gs.add(key='maps', metadata_file = r_supp)
 
 # Save NetCDF file
 d_out = join(data_path, 'data//Tempest.nc')
-root.gs.to_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
 
 #%%
 # Read back in the NetCDF file
-dt = gspy.open_datatree(d_out)
-
-print(dt.gs.tree)
-
-new_survey = dt['survey']
+new_survey = gspy.open_datatree(d_out)['survey']
 
 # Once the survey is read in, we can access variables like a standard xarray dataset.
 print(new_survey['data/derived_maps/maps'].magnetic_tmi)

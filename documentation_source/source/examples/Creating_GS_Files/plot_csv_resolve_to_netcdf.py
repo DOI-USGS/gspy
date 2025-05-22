@@ -29,8 +29,7 @@ data_path = '..//..//..//..//example_material//example_2'
 # Survey metadata file
 metadata = join(data_path, "data//Resolve_survey_md.yml")
 # Establish the Survey
-root = gspy.Survey.from_dict(metadata)
-survey = root['survey']
+survey = gspy.Survey.from_dict(metadata)
 
 #%%
 # Import raw AEM data from CSV-format.
@@ -59,15 +58,11 @@ model_container.gs.add(key="model", data_filename=m_data, metadata_file=m_supp)
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'model//Resolve.nc')
-root.gs.to_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
 
 #%%
 # Reading back in the GS NetCDF file
-dt = gspy.open_datatree(d_out)
-
-print(dt.gs.tree)
-
-new_survey = dt['survey']
+new_survey = gspy.open_datatree(d_out)['survey']
 
 # Check the Survey information
 #%%
