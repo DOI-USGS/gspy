@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 import numpy as np
 from numpy import all, arange, asarray, diff, median, r_, zeros
+from datetime import datetime
 from ..gs_dataarray.DataArray import DataArray
 from ..gs_dataarray.Coordinate import Coordinate
 
@@ -489,6 +490,7 @@ class Dataset:
 
         self._obj.to_netcdf(*args, **kwargs)
 
+
     # def write_netcdf(self, filename, group, **kwargs):
     #     """Write to netcdf file
 
@@ -710,4 +712,69 @@ class Dataset:
             return self.distance_along_line
 
         assert False, ValueError("axis must be in ['x', 'y', 'distance']")
+
+    def add_timestamp(self, key='datetime', date='date', time='time', datum='1900-01-01', date_format = None):
+        """Combine date and time strings into a numeric datetime
+        as decimal days since datum or date-zero, add as "t" axis.
+
+        Parameters
+        ----------
+        date : str
+            date , if date_format is None then it can be formatted: 'YYYY-MM-DD', 'YYYY/MM/DD', 'MM-DD-YYYY', or 'MM/DD/YYYY'
+        time : str
+           time in format 'HH:MM:SS' or 'HH:MM:SS.sss'
+        datum: str
+            date and time of date-zero in format 'YYYY-MM-DD', default is '1900-01-01'
+        date_format : str
+            custom format for date such as 'DD/MM/YYYY'
+
+        Returns
+        -------
+        self._obj
+            with numeric timestamp array added to variables.
+        """
+        assert not key in self._obj.variables, ValueError(f"Variable {key} already exists in dataset")
+
+        # Parse the date and time strings
+        d = self._obj[date].values.astype(str)
+
+        # Determine timestamp from dictionary formats
+        if date_format == None:
+            yr = "%Y?%m?%d"
+            mo = "%m?%d?%Y"
+            da = "%d?%m?%Y"
+
+            dlim = '-' if '-' in d[0] else '/'
+            splt = d[0].split(dlim)
+            fmt = yr if len(splt[0]) == 4 else da
+            # try to detect month first
+            if fmt == da:
+                if splt[1] > 12:
+                    fmt = mo
+                for i in range(len(d)):
+                    if d[i].split(dlim)[1] > 12:
+                        fmt = mo
+                        break
+
+            date_format = fmt.replace("?", dlim)
+
+        t = self._obj[time].values.astype(str)
+        time_format = "%H:%M:%S.%f" if '.' in t[0] else "%H:%M:%S"
+
+        # Combine date and time and save datetime as a variable with a T coordinate
+        combined_datetime = [datetime.strptime(f"{d[i]} {t[i]}", f"{date_format} {time_format}") for i in range(len(d))]
+
+        datum_datetime = np.datetime64(datetime.strptime(datum,'%Y-%m-%d'))
+
+        dt = (np.array(combined_datetime,dtype='datetime64[s]') - datum_datetime)/np.timedelta64(1,'D')
+
+        varmeta = {"standard_name": key,
+                   "long_name":"Time, decimal days",
+                   "units":"day",
+                   "null_value":"not_defined",
+                   "datum":datum}
+
+        self = self.add_variable_from_values(key, values=dt, dimensions='index', **varmeta)
+
+        return self._obj
 
