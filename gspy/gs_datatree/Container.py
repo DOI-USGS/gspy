@@ -121,6 +121,8 @@ class Container:
         self = cls(DataTree.from_dict(collection))
         self._obj.attrs.update(metadata)
 
+        self._obj.attrs['type'] = 'container'
+
         return self._obj
 
     @staticmethod
@@ -248,11 +250,13 @@ class Container:
         None
 
         """
-
         kwargs["format"] = kwargs.get("format", "NETCDF4")
         kwargs["engine"] = kwargs.get("engine", "h5netcdf")
 
-        self._obj.to_netcdf(*args, **kwargs)
+        # If this container is a survey, write out the parent to maintain '/' in the netcdf file
+        out = self._obj.parent if self._obj.attrs['type'] == 'survey' else self._obj
+
+        out.to_netcdf(*args, **kwargs)
 
     def plot(self, *args, **kwargs):
         self._obj.to_dataset().gs.plot(*args, **kwargs)

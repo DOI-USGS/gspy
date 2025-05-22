@@ -19,7 +19,9 @@ class Survey(Container):
         # Insert any nominal systems into the survey
         self._obj['survey'].update(systems)
 
-        return self._obj
+        self._obj['survey'].attrs['type'] = 'survey'
+
+        return self._obj['survey']
 
     @staticmethod
     def metadata_template(metadata={}, **kwargs):
