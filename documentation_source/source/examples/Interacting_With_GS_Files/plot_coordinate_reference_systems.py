@@ -59,7 +59,7 @@ pprint(survey['raw_data']['dem'].attrs)
 ################################################################################
 # If you need to make a new ``spatial_ref`` variable, this can
 # be done with GSPy's Spatial_ref class
-from gspy.src.classes.survey.Spatial_ref import Spatial_ref
+from gspy.gs_dataarray.Spatial_ref import Spatial_ref
 
 ################################################################################
 # The Spatial_ref class takes a dictionary of values and looks for a
