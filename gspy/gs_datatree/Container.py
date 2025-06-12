@@ -254,7 +254,14 @@ class Container:
         kwargs["engine"] = kwargs.get("engine", "h5netcdf")
 
         # If this container is a survey, write out the parent to maintain '/' in the netcdf file
-        out = self._obj.parent if self._obj.attrs['type'] == 'survey' else self._obj
+
+        if self._obj.attrs['type'] == 'survey':
+            for item in list(self._obj):
+                if self._obj[item].attrs.get('type', '') == 'system':
+                    del self._obj[item]
+            out = self._obj.parent
+        else:
+            out = self._obj
 
         out.to_netcdf(*args, **kwargs)
 
