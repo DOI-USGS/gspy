@@ -21,7 +21,7 @@
 Plotting Cross Sections
 -----------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 6-13
+.. GENERATED FROM PYTHON SOURCE LINES 6-14
 
 .. code-block:: Python
 
@@ -29,6 +29,7 @@ Plotting Cross Sections
     import numpy as np
     import matplotlib.pyplot as plt
     from os.path import join
+    import gspy
     from gspy import Survey
     from pprint import pprint
 
@@ -39,11 +40,11 @@ Plotting Cross Sections
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 15-16
 
 First Create the Survey & Data Objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-26
+.. GENERATED FROM PYTHON SOURCE LINES 16-34
 
 .. code-block:: Python
 
@@ -51,13 +52,20 @@ First Create the Survey & Data Objects
     # Initialize the Survey
     data_path = '..//..//..//..//example_material//example_2/data'
 
-    survey = Survey.open_netcdf(join(data_path, "Tempest.nc"))
+    survey = gspy.open_datatree(join(data_path, "Tempest.nc"))['survey']
 
     plt.figure()
-    ax, pm, cb = survey['model'].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from=None, axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+    survey['models/inverted_models'].gs.plot_cross_section(line_number=212201,
+                                                                        variable='conductivity',
+                                                                        hang_from=None,
+                                                                        axis='distance',
+                                                                        equalize=True,
+                                                                        log=10,
+                                                                        cmap='jet',
+                                                                        ylim=[-200, 100.0])
 
     plt.figure()
-    _, pm, cb = survey['model'].gs_tabular.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+    survey['models/inverted_models'].gs.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
     plt.show()
 
 
@@ -85,7 +93,7 @@ First Create the Survey & Data Objects
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 13.611 seconds)
+   **Total running time of the script:** (0 minutes 4.377 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_cross_section.py:

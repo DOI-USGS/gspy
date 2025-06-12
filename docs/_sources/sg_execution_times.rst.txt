@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:30.098** total execution time for 8 files **from all galleries**:
+**00:31.406** total execution time for 9 files **from all galleries**:
 
 .. container::
 
@@ -32,26 +32,29 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_cross_section.py` (``examples/Interacting_With_GS_Files/plot_cross_section.py``)
-     - 00:13.611
-     - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem_to_netcdf.py` (``examples/Creating_GS_Files/plot_csv_skytem_to_netcdf.py``)
-     - 00:05.187
+     - 00:08.466
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest_to_netcdf.py` (``examples/Creating_GS_Files/plot_aseg_tempest_to_netcdf.py``)
-     - 00:05.156
+     - 00:06.362
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_cross_section.py` (``examples/Interacting_With_GS_Files/plot_cross_section.py``)
+     - 00:04.377
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve_to_netcdf.py` (``examples/Creating_GS_Files/plot_csv_resolve_to_netcdf.py``)
-     - 00:02.464
+     - 00:04.174
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_loupe_to_netcdf.py` (``examples/Creating_GS_Files/plot_csv_loupe_to_netcdf.py``)
+     - 00:02.613
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs_to_netcdf.py` (``examples/Creating_GS_Files/plot_tifs_to_netcdf.py``)
-     - 00:01.913
+     - 00:02.133
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
-     - 00:01.135
+     - 00:01.843
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
-     - 00:00.632
+     - 00:01.437
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``examples/Creating_GS_Files/help_I_have_no_variable_metadata.py``)
      - 00:00.000

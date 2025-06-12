@@ -29,12 +29,13 @@ This example explores the CRS variable and shows how it is linked to data variab
 Dataset Reference:
 Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-21
+.. GENERATED FROM PYTHON SOURCE LINES 16-22
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
+    import gspy
     from gspy import Survey
     from pprint import pprint
 
@@ -45,12 +46,12 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-25
+.. GENERATED FROM PYTHON SOURCE LINES 23-26
 
 .. code-block:: Python
 
 
-    survey = Survey.open_netcdf("../../../../example_material/example_1/model/WISkyTEM.nc")
+    survey = gspy.open_datatree("../../../../example_material/example_1/model/WISkyTEM.nc")['survey']
 
 
 
@@ -59,60 +60,18 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-29
+.. GENERATED FROM PYTHON SOURCE LINES 27-30
 
 The CRS variable is called ``spatial_ref`` and gets initialized in the Survey.
 The ``spatial_ref`` is a dataless coordinate variable, meaning there are no data values,
 all information is contained within attributes.
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-31
-
-.. code-block:: Python
-
-    print(survey.xarray.spatial_ref)
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    <xarray.DataArray 'spatial_ref' ()> Size: 8B
-    [1 values with dtype=float64]
-    Coordinates:
-        spatial_ref  float64 8B ...
-    Attributes: (12/18)
-        crs_wkt:                           PROJCRS["NAD83(HARN) / Wisconsin Trans...
-        semi_major_axis:                   6378137.0
-        semi_minor_axis:                   6356752.314140356
-        inverse_flattening:                298.257222101
-        reference_ellipsoid_name:          GRS 1980
-        longitude_of_prime_meridian:       0.0
-        ...                                ...
-        longitude_of_central_meridian:     -90.0
-        false_easting:                     520000.0
-        false_northing:                    -4480000.0
-        scale_factor_at_central_meridian:  0.9996
-        authority:                         EPSG
-        wkid:                              3071
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 32-33
-
-The Survey also has a spatial_ref property which returns the ``spatial_ref`` variable
-
-.. GENERATED FROM PYTHON SOURCE LINES 33-37
+.. GENERATED FROM PYTHON SOURCE LINES 30-32
 
 .. code-block:: Python
 
     print(survey.spatial_ref)
 
-    print(survey.datasets)
-
 
 
 
@@ -139,30 +98,33 @@ The Survey also has a spatial_ref property which returns the ``spatial_ref`` var
         scale_factor_at_central_meridian:  0.9996
         authority:                         EPSG
         wkid:                              3071
-    ['raw_data', 'processed_data', 'inverted_models', 'depth_to_bedrock', 'derived_maps']
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-40
+.. GENERATED FROM PYTHON SOURCE LINES 33-34
+
+The Survey also has a spatial_ref property which returns the ``spatial_ref`` variable
+
+.. GENERATED FROM PYTHON SOURCE LINES 36-38
 
 Grid Mapping
 ++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-46
+.. GENERATED FROM PYTHON SOURCE LINES 40-44
 
 Following the `CF conventions on Grid Mappings <http://cfconventions.org/Data/cf-conventions/cf-conventions-1.10/cf-conventions.html#appendix-grid-mappings>`_,
 the ``spatial_ref`` variable should contain key information defining the coordinate
 reference system. The attribute ``grid_mapping_name`` is required. Other key
 attributes include ``wkid`` and ``crs_wkt``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-50
+.. GENERATED FROM PYTHON SOURCE LINES 44-48
 
 .. code-block:: Python
 
-    print('grid_mapping_name: '+survey.xarray.spatial_ref.attrs['grid_mapping_name'])
-    print('wkid: '+survey.xarray.spatial_ref.attrs['wkid'])
-    print('crs_wkt: '+survey.xarray.spatial_ref.attrs['crs_wkt'])
+    print('grid_mapping_name: '+survey.spatial_ref.attrs['grid_mapping_name'])
+    print('wkid: '+survey.spatial_ref.attrs['wkid'])
+    print('crs_wkt: '+survey.spatial_ref.attrs['crs_wkt'])
 
 
 
@@ -179,16 +141,16 @@ attributes include ``wkid`` and ``crs_wkt``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-53
+.. GENERATED FROM PYTHON SOURCE LINES 49-51
 
 Then, each data variable should have an attribute ``grid_mapping`` that references
 the ``spatial_ref`` coordinate variable
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-55
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 .. code-block:: Python
 
-    pprint(survey['raw_data']['dem'].attrs)
+    pprint(survey['data']['raw_data']['dem'].attrs)
 
 
 
@@ -211,21 +173,21 @@ the ``spatial_ref`` coordinate variable
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-58
+.. GENERATED FROM PYTHON SOURCE LINES 54-56
 
 Making a new Spatial Ref
 ++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-62
+.. GENERATED FROM PYTHON SOURCE LINES 58-60
 
 If you need to make a new ``spatial_ref`` variable, this can
 be done with GSPy's Spatial_ref class
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-64
+.. GENERATED FROM PYTHON SOURCE LINES 60-62
 
 .. code-block:: Python
 
-    from gspy.src.classes.survey.Spatial_ref import Spatial_ref
+    from gspy.gs_dataarray.Spatial_ref import Spatial_ref
 
 
 
@@ -234,7 +196,7 @@ be done with GSPy's Spatial_ref class
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-70
+.. GENERATED FROM PYTHON SOURCE LINES 63-68
 
 The Spatial_ref class takes a dictionary of values and looks for a
 ``wkid``, ``crs_wkt``, or a ``proj_string`` in that order. Note, a ``wkid``
@@ -242,7 +204,7 @@ should have an ``authority`` key passed with it either as a separate ``authority
 field, or as a colon separated string, e.g., 'EPSG:4326'. If none is provided
 EPSG will be used by default.
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-74
+.. GENERATED FROM PYTHON SOURCE LINES 68-72
 
 .. code-block:: Python
 
@@ -277,7 +239,7 @@ EPSG will be used by default.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-80
+.. GENERATED FROM PYTHON SOURCE LINES 73-78
 
 Note: If you are resetting the CRS variable in a Survey, be sure that all data
 groups are also updated to match and all coordinate variables (particularly
@@ -289,7 +251,7 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.135 seconds)
+   **Total running time of the script:** (0 minutes 1.843 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:

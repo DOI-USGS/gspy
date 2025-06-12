@@ -15,24 +15,22 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 #%%
 import matplotlib.pyplot as plt
 from os.path import join
+import gspy
 from gspy import Survey
 from pprint import pprint
 
 #%%
 
-survey = Survey.open_netcdf("../../../../example_material/example_1/model/WISkyTEM.nc")
+survey = gspy.open_datatree("../../../../example_material/example_1/model/WISkyTEM.nc")['survey']
 
 ################################################################################
 # The CRS variable is called ``spatial_ref`` and gets initialized in the Survey.
 # The ``spatial_ref`` is a dataless coordinate variable, meaning there are no data values,
 # all information is contained within attributes.
-print(survey.xarray.spatial_ref)
+print(survey.spatial_ref)
 
 ################################################################################
 # The Survey also has a spatial_ref property which returns the ``spatial_ref`` variable
-print(survey.spatial_ref)
-
-print(survey.datasets)
 
 #%%
 # Grid Mapping
@@ -43,14 +41,14 @@ print(survey.datasets)
 # the ``spatial_ref`` variable should contain key information defining the coordinate
 # reference system. The attribute ``grid_mapping_name`` is required. Other key
 # attributes include ``wkid`` and ``crs_wkt``.
-print('grid_mapping_name: '+survey.xarray.spatial_ref.attrs['grid_mapping_name'])
-print('wkid: '+survey.xarray.spatial_ref.attrs['wkid'])
-print('crs_wkt: '+survey.xarray.spatial_ref.attrs['crs_wkt'])
+print('grid_mapping_name: '+survey.spatial_ref.attrs['grid_mapping_name'])
+print('wkid: '+survey.spatial_ref.attrs['wkid'])
+print('crs_wkt: '+survey.spatial_ref.attrs['crs_wkt'])
 
 ################################################################################
 # Then, each data variable should have an attribute ``grid_mapping`` that references
 # the ``spatial_ref`` coordinate variable
-pprint(survey['raw_data']['dem'].attrs)
+pprint(survey['data']['raw_data']['dem'].attrs)
 
 #%%
 # Making a new Spatial Ref
@@ -59,7 +57,7 @@ pprint(survey['raw_data']['dem'].attrs)
 ################################################################################
 # If you need to make a new ``spatial_ref`` variable, this can
 # be done with GSPy's Spatial_ref class
-from gspy.src.classes.survey.Spatial_ref import Spatial_ref
+from gspy.gs_dataarray.Spatial_ref import Spatial_ref
 
 ################################################################################
 # The Spatial_ref class takes a dictionary of values and looks for a

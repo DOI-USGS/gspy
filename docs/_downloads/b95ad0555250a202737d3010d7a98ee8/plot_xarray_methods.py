@@ -13,13 +13,14 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 #%%
 import matplotlib.pyplot as plt
 from os.path import join
+import gspy
 from gspy import Survey
 from pprint import pprint
 
 #%%
 # First open the netcdf GS standard survey file.
 
-survey = Survey.open_netcdf("../../../../example_material/example_2/data/Tempest.nc")
+survey = gspy.open_datatree("../../../../example_material/example_2/data/Tempest.nc")['survey']
 
 #%%
 # Accessing the Xarray object
@@ -30,22 +31,22 @@ survey = Survey.open_netcdf("../../../../example_material/example_2/data/Tempest
 
 # The Survey's metadata is accessed through the xarray property
 print('Survey:')
-print(survey.xarray)
+print(survey)
 
 ################################################################################
 # To look just at the attributes
 print('Survey Attributes:\n')
-pprint(survey.xarray.attrs)
+pprint(survey.attrs)
 
 ################################################################################
 # Or expand a specific variable
 print('Survey Information:\n')
-print(survey.xarray['survey_information'])
+print(survey['survey_information'])
 
 ################################################################################
 # Datasets
 # Get the list of datasets attached to the survey
-print(survey.datasets)
+print(survey.items)
 
 ################################################################################
 # Datasets are attached to the Survey regardless of their format whether unstructured tabular data or
@@ -57,12 +58,12 @@ print(survey['data'])
 
 # Raster
 print('\nRaster:\n')
-print(survey['maps'])
+print(survey['data/derived_maps/maps'])
 
 ################################################################################
 # and the second is located at index 1
 print('Second Tabular Group:\n')
-print(survey['model'])
+print(survey['models/inverted_models'])
 
 #%%
 # Coordinates, Dimensions, and Attributes
@@ -78,16 +79,16 @@ print(survey['model'])
 ################################################################################
 # Tabular data are typicaly 1-D or 2-D variables with the primary dimension being ``index``, which
 # corresponds to the rows of the input text file representing individual measurements.
-print(survey['model']['index'])
+print(survey['models/inverted_models']['index'])
 
 ################################################################################
 # If a dimension is not discrete, meaning it represents ranges (such as depth layers),
 # then the bounds on each dimension value also need to be defined, and are linked
 # to the dimension through the "bounds" attribute.
 print('example non-discrete dimension:\n')
-print(survey['model']['gate_times'])
+print(survey['models/inverted_models']['gate_times'])
 print('\n\ncorresponding bounds on non-discrete dimension:\n')
-print(survey['model']['gate_times_bnds'])
+print(survey['models/inverted_models']['gate_times_bnds'])
 #%%
 # Coordinates
 # ^^^^^^^^^^^
@@ -120,7 +121,7 @@ print(survey['data'].dataset.coords)
 # Raster data are gridded, typically representing maps or multi-dimensional models.
 # Therefore, Raster data almost always have dimensional coordinates, i.e., the
 # data dimensions correspond directly to either spatial or temporal coordinates (``x``, ``y``, ``z``, ``t``).
-print(survey['maps'].coords)
+print(survey['data/derived_maps/maps'].coords)
 
 ################################################################################
 # The Spatial Reference Coordinate
@@ -147,7 +148,7 @@ print(survey['maps'].coords)
 # information about a dataset group as a whole, such as model inversion parameters
 # or other processing descriptions. At a minimum, a ``content`` attribute should
 # contain a brief summary of the contents of the dataset.
-pprint(survey['model'].attrs)
+pprint(survey['models/inverted_models'].attrs)
 
 ################################################################################
 # Variable attributes
@@ -155,4 +156,4 @@ pprint(survey['model'].attrs)
 ################################################################################
 # Each data variable must contain attributes detailing the metadata
 # of that individual variable. These follow the `Climate and Forecast (CF) metadata conventions <http://cfconventions.org/>`_.
-pprint(survey['model']['conductivity'].attrs)
+pprint(survey['models/inverted_models']['conductivity'].attrs)

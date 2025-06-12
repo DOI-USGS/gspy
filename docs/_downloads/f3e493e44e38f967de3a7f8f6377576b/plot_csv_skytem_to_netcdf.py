@@ -20,7 +20,9 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 import matplotlib.pyplot as plt
 from os.path import join
 import numpy as np
+import gspy
 from gspy import Survey
+import xarray as xr
 
 
 #%%
@@ -37,7 +39,10 @@ data_path = '..//..//..//..//example_material//example_1'
 metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
 
 # Establish the Survey
-survey = Survey(metadata)
+survey = Survey.from_dict(metadata)
+
+data_container = survey.gs.add_container('data', **dict(content = "raw and processed data",
+                                                        comment = "This is a test"))
 
 #%%
 # 1 - Raw Data -
@@ -47,7 +52,9 @@ d_data1 = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
 d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
-survey.add_data(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, system=survey.system)
+data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, system=survey.nominal_system)
+
+print(data_container)
 
 #%%
 # 2 - Processed Data -
@@ -56,20 +63,26 @@ survey.add_data(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, sy
 d_data2 = join(data_path, 'data//WI_SkyTEM_2021_ProcessedData.csv')
 d_supp2 = join(data_path, 'data//WI_SkyTEM_processed_data_md.yml')
 
-system = {"skytem_system" : survey.system["nominal_system"].isel(lm_gate_times=np.s_[1:], hm_gate_times=np.s_[10:]),
-          "magnetic_system" : survey.system["magnetic_system"]}
+system = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], hm_gate_times=np.s_[10:]),
+          "magnetic_system" : survey["magnetic_system"]}
 
 # Add the processed AEM data as a tabular dataset
-survey.add_data(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
+pd = data_container.gs.add(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
+
 #%%
 # 3 - Inverted Models -
+
+# Create a new container for models
+model_container = survey.gs.add_container('models', **dict(content = "Inverted models",
+                                                          comment = "This is a test"))
+
 # Import inverted AEM models from CSV-format.
 # Define input data file and associated metadata file
 m_data3 = join(data_path, 'model//WI_SkyTEM_2021_InvertedModels.csv')
 m_supp3 = join(data_path, 'model//WI_SkyTEM_inverted_models_md.yml')
 
 # Add the inverted AEM models as a tabular dataset
-survey.add_data(key='inverted_models', data_filename=m_data3, metadata_file=m_supp3)
+model_container.gs.add(key='inverted_models', data_filename=m_data3, metadata_file=m_supp3)
 
 #%%
 # 4 - Bedrock Picks -
@@ -79,39 +92,51 @@ d_data4 = join(data_path, 'data//topDolomite_Blocky_LidarDEM.csv')
 d_supp4 = join(data_path, 'data//WI_SkyTEM_bedrock_picks_md.yml')
 
 # Add the AEM-based estimated of depth to bedrock as a tabular dataset
-survey.add_data(key='depth_to_bedrock', data_filename=d_data4, metadata_file=d_supp4)
+data_container.gs.add(key='depth_to_bedrock', data_filename=d_data4, metadata_file=d_supp4)
 
 #%%
 # 5 - Derivative Maps -
+
+# We can add arbitrarily named containers to the survey
+derived_products = survey.gs.add_container('derived_products', **dict(content = "products derived from other data and models"))
+
 # Import interpolated bedrock and magnetic maps from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked to variable names)
 m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.yml')
 
 # Add the interpolated maps as a raster dataset
-survey.add_data(key='derived_maps', metadata_file=m_supp5)
+derived_products.gs.add(key='maps', metadata_file=m_supp5)
 
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
-survey.write_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
+
+#%%
+# The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
+
+data_container.gs.to_netcdf('test_datacontainer.nc')
 
 #%%
 # Reading back in
-new_survey = Survey.open_netcdf(d_out)
+new_survey = gspy.open_datatree(d_out)['survey']
+
+print(new_survey)
 
 #%%
 # Plotting
 plt.figure()
-new_survey['raw_data']['height'].plot()
+new_survey['data']['raw_data']['height'].plot()
 plt.tight_layout()
 
+pd = new_survey['data']['processed_data']
 plt.figure()
-new_survey['processed_data']['elevation'].plot()
+pd['elevation'].plot()
 plt.tight_layout()
 
-# Make a figure of one of the raster data variables, using Xarray's plotter
+m = new_survey['derived_products']['maps']
 plt.figure()
-d = new_survey['derived_maps']['magnetic_tmi']
-d.plot(cmap='jet')
+m['magnetic_tmi'].plot(cmap='jet')
 plt.tight_layout()
+
 plt.show()

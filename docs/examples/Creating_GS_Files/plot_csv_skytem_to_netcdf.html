@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Basic Class Structure" href="../Interacting_With_GS_Files/plot_xarray_methods.html" />
-    <link rel="prev" title="Help! I have no variable metadata" href="help_I_have_no_variable_metadata.html" /> 
+    <link rel="prev" title="Multi-dataset Survey" href="plot_csv_loupe_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,7 +55,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest_to_netcdf.html">ASEG to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve_to_netcdf.html">CSV to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs_to_netcdf.html">GeoTIFFs to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no variable metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_loupe_to_netcdf.html">Multi-dataset Survey</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Multi-dataset Survey</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-skytem-csv-data-to-netcdf">Convert the Skytem csv data to NetCDF</a></li>
 </ul>
@@ -115,7 +116,9 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gspy</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 </pre></div>
 </div>
 <section id="convert-the-skytem-csv-data-to-netcdf">
@@ -128,7 +131,10 @@ Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, 
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//WI_SkyTEM_survey_md.yml&quot;</span><span class="p">)</span>
 
 <span class="c1"># Establish the Survey</span>
-<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw and processed data&quot;</span><span class="p">,</span>
+                                                        <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This is a test&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>1 - Raw Data -
@@ -138,7 +144,95 @@ Define input data file and associated metadata file</p>
 <span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">)</span>
+<span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">survey</span><span class="o">.</span><span class="n">nominal_system</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_container</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;data&#39;&gt;
+Group: /survey/data
+│   Dimensions:      ()
+│   Data variables:
+│       spatial_ref  float64 8B 0.0
+│   Attributes:
+│       content:  raw and processed data
+│       comment:  This is a test
+│       type:     container
+└── Group: /survey/data/raw_data
+    │   Dimensions:          (index: 6785, hm_gate_times: 32, lm_gate_times: 28)
+    │   Coordinates:
+    │       spatial_ref      float64 8B 0.0
+    │     * index            (index) int32 27kB 0 1 2 3 4 5 ... 6780 6781 6782 6783 6784
+    │       x                (index) float64 54kB 7.243e+05 7.239e+05 ... 6.604e+05
+    │       y                (index) float64 54kB 4.916e+05 4.917e+05 ... 3.866e+05
+    │       z                (index) float64 54kB 176.8 217.3 231.6 ... 276.4 288.7
+    │       t                (index) float64 54kB 4.422e+04 4.422e+04 ... 4.424e+04
+    │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
+    │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
+    │   Data variables: (12/34)
+    │       _60hz_intensity  (index) float64 54kB -5.744e-08 -4.722e-08 ... -1.557e-07
+    │       alt              (index) float64 54kB 276.3 270.1 274.2 ... 320.0 331.7
+    │       anglex           (index) float64 54kB 3.284 1.052 2.916 ... -4.419 -4.376
+    │       angley           (index) float64 54kB -0.9891 -1.999 ... -1.013 -1.103
+    │       base_mag         (index) float64 54kB -1e+04 -1e+04 -1e+04 ... -1e+04 -1e+04
+    │       curr_hm          (index) float64 54kB 111.6 111.6 111.5 ... 110.4 110.4
+    │       ...               ...
+    │       mag_raw          (index) float64 54kB 5.481e+04 5.481e+04 ... 5.413e+04
+    │       n_nad83          (index) float64 54kB 4.916e+05 4.917e+05 ... 3.866e+05
+    │       n_wgs84          (index) float64 54kB 4.968e+06 4.969e+06 ... 4.866e+06
+    │       rmf              (index) float64 54kB 210.6 210.6 197.3 ... -124.5 -120.3
+    │       time             (index) object 54kB &#39;17:14:42&#39; &#39;17:15:02&#39; ... &#39;15:01:14&#39;
+    │       tmi              (index) float64 54kB 5.482e+04 5.482e+04 ... 5.413e+04
+    │   Attributes:
+    │       content:     raw data
+    │       comment:     This dataset includes minimally processed (raw) AEM and raw/...
+    │       type:        data
+    │       structure:   tabular
+    │       mode:        airborne
+    │       method:      electromagnetic
+    │       submethod:   time domain
+    │       instrument:  skytem
+    │       property:
+    └── Group: /survey/data/raw_data/nominal_system
+            Dimensions:                              (gate_times: 22, nv: 2,
+                                                      lm_gate_times: 28, hm_gate_times: 32,
+                                                      n_transmitters: 2,
+                                                      lm_waveform_time: 21,
+                                                      hm_waveform_time: 36,
+                                                      lm_loop_vertices: 8, xyz: 3,
+                                                      hm_loop_vertices: 8, n_receivers: 2,
+                                                      n_components: 4)
+            Coordinates:
+              * gate_times                           (gate_times) float64 176B 5.636e-05 ...
+              * nv                                   (nv) int64 16B 0 1
+              * n_transmitters                       (n_transmitters) int64 16B 0 1
+              * lm_waveform_time                     (lm_waveform_time) float64 168B -0.0...
+              * hm_waveform_time                     (hm_waveform_time) float64 288B -0.0...
+              * xyz                                  (xyz) int64 24B 0 1 2
+              * lm_loop_vertices                     (lm_loop_vertices) float64 64B 0.0 ....
+              * hm_loop_vertices                     (hm_loop_vertices) float64 64B 0.0 ....
+              * n_receivers                          (n_receivers) int64 16B 0 1
+              * n_components                         (n_components) int64 32B 0 1 2 3
+            Data variables: (12/29)
+                gate_times_bnds                      (gate_times, nv) float64 352B 2.036e...
+                lm_gate_times_bnds                   (lm_gate_times, nv) float64 448B -1....
+                hm_gate_times_bnds                   (hm_gate_times, nv) float64 512B 2.8...
+                transmitter_label                    (n_transmitters) &lt;U2 16B &#39;LM&#39; &#39;HM&#39;
+                transmitter_area                     (n_transmitters) float64 16B 342.0 3...
+                transmitter_base_frequency           (n_transmitters) float64 16B 210.0 75.0
+                ...                                   ...
+                component_receivers                  (n_components) &lt;U1 16B &#39;z&#39; &#39;z&#39; &#39;x&#39; &#39;x&#39;
+                component_sample_rate                (n_components) float64 32B 0.1 ... 0.1
+                component_txrx_dx                    (n_components) float64 32B -13.25 .....
+                component_txrx_dy                    (n_components) float64 32B 0.0 ... 0.0
+                component_txrx_dz                    (n_components) float64 32B -2.0 ... 0.0
+                component_gate_times                 (n_components) &lt;U13 208B &#39;LM_gate_ti...
+            Attributes:
+                type:        system
+                mode:        airborne
+                method:      electromagnetic
+                submethod:   time domain
+                instrument:  skytem 304M
 </pre></div>
 </div>
 <p>2 - Processed Data -
@@ -147,65 +241,1686 @@ Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ProcessedData.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_processed_data_md.yml&#39;</span><span class="p">)</span>
 
-<span class="n">system</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;skytem_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">[</span><span class="s2">&quot;nominal_system&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">lm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">hm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">10</span><span class="p">:]),</span>
-          <span class="s2">&quot;magnetic_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="o">.</span><span class="n">system</span><span class="p">[</span><span class="s2">&quot;magnetic_system&quot;</span><span class="p">]}</span>
+<span class="n">system</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;skytem_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="p">[</span><span class="s2">&quot;nominal_system&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">lm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">hm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">10</span><span class="p">:]),</span>
+          <span class="s2">&quot;magnetic_system&quot;</span> <span class="p">:</span> <span class="n">survey</span><span class="p">[</span><span class="s2">&quot;magnetic_system&quot;</span><span class="p">]}</span>
 
 <span class="c1"># Add the processed AEM data as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;processed_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">)</span>
+<span class="n">pd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;processed_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>3 - Inverted Models -
-Import inverted AEM models from CSV-format.
-Define input data file and associated metadata file</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
+<p>3 - Inverted Models -</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new container for models</span>
+<span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;Inverted models&quot;</span><span class="p">,</span>
+                                                          <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This is a test&quot;</span><span class="p">))</span>
+
+<span class="c1"># Import inverted AEM models from CSV-format.</span>
+<span class="c1"># Define input data file and associated metadata file</span>
+<span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_2021_InvertedModels.csv&#39;</span><span class="p">)</span>
 <span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WI_SkyTEM_inverted_models_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
+<span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>4 - Bedrock Picks -
+<div class="output_subarea output_html rendered_html output_result">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1f1f1f;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt; Size: 17MB
+Dimensions:           (index: 11677, layer_depth: 40, nv: 2)
+Coordinates:
+    spatial_ref       float64 8B 0.0
+  * index             (index) int32 47kB 0 1 2 3 4 ... 11673 11674 11675 11676
+  * layer_depth       (layer_depth) float64 320B 0.375 1.16 2.02 ... 262.6 343.8
+  * nv                (nv) int64 16B 0 1
+    x                 (index) float64 93kB 7.243e+05 7.241e+05 ... 7.108e+05
+    y                 (index) float64 93kB 4.916e+05 4.916e+05 ... 4.621e+05
+    z                 (index) float64 93kB 177.1 190.4 208.5 ... 231.2 238.8
+    t                 (index) float64 93kB 4.422e+04 4.422e+04 ... 4.421e+04
+Data variables: (12/22)
+    layer_depth_bnds  (layer_depth, nv) float64 640B 0.0 0.75 ... 275.0 412.5
+    pindex            (index) int64 93kB 0 10 20 30 ... 122341 122351 122361
+    sline_no          (index) int64 93kB 100100 100100 100100 ... 920000 920000
+    e_n83wtm          (index) float64 93kB 7.243e+05 7.241e+05 ... 7.108e+05
+    n_n83wtm          (index) float64 93kB 4.916e+05 4.916e+05 ... 4.621e+05
+    timestamp         (index) float64 93kB 4.422e+04 4.422e+04 ... 4.421e+04
+    ...                ...
+    RHO_I_STD         (index, layer_depth) float64 4MB 3.78 2.32 ... 1.33 3.34
+    DEP_TOP           (index, layer_depth) float64 4MB 0.0 0.75 ... 250.1 275.0
+    DEP_BOT           (index, layer_depth) float64 4MB 0.75 1.57 ... 275.0 412.5
+    doi_conservative  (index) float64 93kB 168.7 190.7 189.8 ... 228.0 233.6
+    doi_standard      (index) float64 93kB 186.8 212.1 208.0 ... 254.0 262.3
+    line_no           (index) int64 93kB 100101 100101 100101 ... 920006 920006
+Attributes:
+    content:     inverted resistivity models
+    comment:     This dataset includes inverted resistivity models derived fr...
+    type:        model
+    structure:   tabular
+    mode:        airborne
+    method:      electromagnetic
+    submethod:   time domain
+    instrument:  skytem
+    property:    electrical resistivity</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b1f2d887-0aa4-4aa7-97d5-2ac7f00edb51' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b1f2d887-0aa4-4aa7-97d5-2ac7f00edb51' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%; grid-column: 1 / -1'></div></div></li><li class='xr-section-item'><input id='section-153e9658-6abd-459a-9640-a036b4372b55' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-153e9658-6abd-459a-9640-a036b4372b55' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>index</span>: 11677</li><li><span class='xr-has-index'>layer_depth</span>: 40</li><li><span class='xr-has-index'>nv</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-81651a0a-1398-4927-bf75-8ea9a50524ec' class='xr-section-summary-in' type='checkbox'  checked><label for='section-81651a0a-1398-4927-bf75-8ea9a50524ec' class='xr-section-summary' >Coordinates: <span>(8)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-6d2b683a-aad5-4fa3-9464-9531b943615e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6d2b683a-aad5-4fa3-9464-9531b943615e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b6950a19-4bf9-49f7-bd5b-9781c1046677' class='xr-var-data-in' type='checkbox'><label for='data-b6950a19-4bf9-49f7-bd5b-9781c1046677' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83(HARN)</dd><dt><span>horizontal_datum_name :</span></dt><dd>NAD83 (High Accuracy Reference Network)</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83(HARN) / Wisconsin Transverse Mercator</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-90.0</dd><dt><span>false_easting :</span></dt><dd>520000.0</dd><dt><span>false_northing :</span></dt><dd>-4480000.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>3071</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>index</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>0 1 2 3 ... 11673 11674 11675 11676</div><input id='attrs-828eba8d-b69d-45ff-b7de-342ad95fc078' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-828eba8d-b69d-45ff-b7de-342ad95fc078' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-98e7a2d5-8cfb-4cff-9745-85f215186eb6' class='xr-var-data-in' type='checkbox'><label for='data-98e7a2d5-8cfb-4cff-9745-85f215186eb6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>index</dd><dt><span>long_name :</span></dt><dd>Index of individual data points</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[    0 11676]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>axis :</span></dt><dd>INDEX</dd></dl></div><div class='xr-var-data'><pre>array([    0,     1,     2, ..., 11674, 11675, 11676], dtype=int32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>layer_depth</span></div><div class='xr-var-dims'>(layer_depth)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.375 1.16 2.02 ... 262.6 343.8</div><input id='attrs-b95c68a3-0e4c-480a-a3db-c56da03318a2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b95c68a3-0e4c-480a-a3db-c56da03318a2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b3f891fa-70ac-4ad1-9a50-ca7e6b955578' class='xr-var-data-in' type='checkbox'><label for='data-b3f891fa-70ac-4ad1-9a50-ca7e6b955578' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>layer_depth</dd><dt><span>long_name :</span></dt><dd>Depth to model layer</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  0.375 343.75 ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>layer_depth_bnds</dd></dl></div><div class='xr-var-data'><pre>array([  0.375,   1.16 ,   2.02 ,   2.965,   4.005,   5.145,   6.39 ,   7.755,
+         9.255,  10.9  ,  12.7  ,  14.675,  16.845,  19.22 ,  21.825,  24.685,
+        27.815,  31.25 ,  35.02 ,  39.15 ,  43.68 ,  48.65 ,  54.095,  60.065,
+        66.615,  73.795,  81.67 ,  90.31 ,  99.78 , 110.16 , 121.545, 134.03 ,
+       147.72 , 162.73 , 179.19 , 197.24 , 217.035, 238.745, 262.55 , 343.75 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-52df3d02-d0a5-4c70-b10d-9a18f7df6931' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-52df3d02-d0a5-4c70-b10d-9a18f7df6931' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2824a054-ff50-46d4-8632-273b64f4f864' class='xr-var-data-in' type='checkbox'><label for='data-2824a054-ff50-46d4-8632-273b64f4f864' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0 1]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>axis :</span></dt><dd>NV</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.243e+05 7.241e+05 ... 7.108e+05</div><input id='attrs-7631a163-9346-4ea0-bc1a-42f44208ab11' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7631a163-9346-4ea0-bc1a-42f44208ab11' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-86ee05a1-4d73-47d9-ab4f-db2542a16e45' class='xr-var-data-in' type='checkbox'><label for='data-86ee05a1-4d73-47d9-ab4f-db2542a16e45' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[655018.1 732089. ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([724288.6, 724075.9, 723861.9, ..., 710195. , 710499.1, 710770.7])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.916e+05 4.916e+05 ... 4.621e+05</div><input id='attrs-94360dff-9d03-4c7a-94ce-3077d4a16bfa' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-94360dff-9d03-4c7a-94ce-3077d4a16bfa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0847b150-9143-4e41-aa1a-e2caddd010bb' class='xr-var-data-in' type='checkbox'><label for='data-0847b150-9143-4e41-aa1a-e2caddd010bb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[380036.3 492707.4]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([491578.8, 491648.9, 491716.5, ..., 462058.6, 462092. , 462119.5])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>z</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>177.1 190.4 208.5 ... 231.2 238.8</div><input id='attrs-cc34c462-b357-4b74-82c5-8f1a196b761e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cc34c462-b357-4b74-82c5-8f1a196b761e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6f7b792c-bff3-44fc-81c2-9f063105ec46' class='xr-var-data-in' type='checkbox'><label for='data-6f7b792c-bff3-44fc-81c2-9f063105ec46' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>z</dd><dt><span>long_name :</span></dt><dd>Digital elevation model</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>datum :</span></dt><dd>North American Vertical Datum of 1988 (NAVD88)</dd><dt><span>valid_range :</span></dt><dd>[176.5 341.3]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([177.1, 190.4, 208.5, ..., 231.6, 231.2, 238.8])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>t</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.422e+04 4.422e+04 ... 4.421e+04</div><input id='attrs-a12df69b-4c0a-499d-8753-6724a37b559b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a12df69b-4c0a-499d-8753-6724a37b559b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6c2401e2-9c61-4922-9aa6-9f51ac968c4b' class='xr-var-data-in' type='checkbox'><label for='data-6c2401e2-9c61-4922-9aa6-9f51ac968c4b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>t</dd><dt><span>long_name :</span></dt><dd>Time, decimal days since January 1, 1900</dd><dt><span>units :</span></dt><dd>day</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>datum :</span></dt><dd>January 1, 1900</dd><dt><span>valid_range :</span></dt><dd>[44214.72473 44235.63572]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([44216.71856, 44216.71867, 44216.71879, ..., 44214.74219,
+       44214.74231, 44214.74243])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6ae259ec-3010-4e22-972f-7b1637377a60' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6ae259ec-3010-4e22-972f-7b1637377a60' class='xr-section-summary'  title='Expand/collapse section'>Inherited coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-2c9c0019-5cbb-4868-a10d-f76abf08a139' class='xr-section-summary-in' type='checkbox'  ><label for='section-2c9c0019-5cbb-4868-a10d-f76abf08a139' class='xr-section-summary' >Data variables: <span>(22)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>layer_depth_bnds</span></div><div class='xr-var-dims'>(layer_depth, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.75 0.75 ... 275.0 275.0 412.5</div><input id='attrs-15e4b4a7-be13-4996-8167-a50b39ec3154' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-15e4b4a7-be13-4996-8167-a50b39ec3154' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d25c66de-3f78-4f39-b766-74b188c7f5f4' class='xr-var-data-in' type='checkbox'><label for='data-d25c66de-3f78-4f39-b766-74b188c7f5f4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>layer_depth_bounds</dd><dt><span>long_name :</span></dt><dd>Depth to model layer cell boundaries</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  0.  412.5]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[  0.  ,   0.75],
+       [  0.75,   1.57],
+       [  1.57,   2.47],
+       [  2.47,   3.46],
+       [  3.46,   4.55],
+       [  4.55,   5.74],
+       [  5.74,   7.04],
+       [  7.04,   8.47],
+       [  8.47,  10.04],
+       [ 10.04,  11.76],
+       [ 11.76,  13.64],
+       [ 13.64,  15.71],
+       [ 15.71,  17.98],
+       [ 17.98,  20.46],
+       [ 20.46,  23.19],
+       [ 23.19,  26.18],
+       [ 26.18,  29.45],
+       [ 29.45,  33.05],
+       [ 33.05,  36.99],
+       [ 36.99,  41.31],
+       [ 41.31,  46.05],
+       [ 46.05,  51.25],
+       [ 51.25,  56.94],
+       [ 56.94,  63.19],
+       [ 63.19,  70.04],
+       [ 70.04,  77.55],
+       [ 77.55,  85.79],
+       [ 85.79,  94.83],
+       [ 94.83, 104.73],
+       [104.73, 115.59],
+       [115.59, 127.5 ],
+       [127.5 , 140.56],
+       [140.56, 154.88],
+       [154.88, 170.58],
+       [170.58, 187.8 ],
+       [187.8 , 206.68],
+       [206.68, 227.39],
+       [227.39, 250.1 ],
+       [250.1 , 275.  ],
+       [275.  , 412.5 ]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>pindex</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 10 20 30 ... 122341 122351 122361</div><input id='attrs-ba902cf8-f7d4-45fb-9533-3a4265dc8b4d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ba902cf8-f7d4-45fb-9533-3a4265dc8b4d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bea8661d-6a6b-49ee-b72d-52d226ab1b99' class='xr-var-data-in' type='checkbox'><label for='data-bea8661d-6a6b-49ee-b72d-52d226ab1b99' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>processing_index</dd><dt><span>long_name :</span></dt><dd>Unique index number for processing</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[     0 122361]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([     0,     10,     20, ..., 122341, 122351, 122361])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sline_no</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>100100 100100 ... 920000 920000</div><input id='attrs-5e2bbc38-2f15-4dd1-905f-719be60f2661' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5e2bbc38-2f15-4dd1-905f-719be60f2661' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-57bf5fb9-dd5d-4fe6-aada-f791891361f5' class='xr-var-data-in' type='checkbox'><label for='data-57bf5fb9-dd5d-4fe6-aada-f791891361f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>master_line</dd><dt><span>long_name :</span></dt><dd>Master line number</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[100100 920000]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([100100, 100100, 100100, ..., 920000, 920000, 920000])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>e_n83wtm</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.243e+05 7.241e+05 ... 7.108e+05</div><input id='attrs-1823069f-d47c-4019-8881-7826fd56f028' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1823069f-d47c-4019-8881-7826fd56f028' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3fd960a6-f26e-4f27-a452-bce4ab0e1bc2' class='xr-var-data-in' type='checkbox'><label for='data-3fd960a6-f26e-4f27-a452-bce4ab0e1bc2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>easting_nad83</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>x</dd><dt><span>valid_range :</span></dt><dd>[655018.1 732089. ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([724288.6, 724075.9, 723861.9, ..., 710195. , 710499.1, 710770.7])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>n_n83wtm</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.916e+05 4.916e+05 ... 4.621e+05</div><input id='attrs-3e9adb9c-78c8-41e2-92d2-f70236484d78' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3e9adb9c-78c8-41e2-92d2-f70236484d78' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2d2d489f-bc19-4dc7-8b31-da6023c461e8' class='xr-var-data-in' type='checkbox'><label for='data-2d2d489f-bc19-4dc7-8b31-da6023c461e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>northing_nad83</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>y</dd><dt><span>valid_range :</span></dt><dd>[380036.3 492707.4]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([491578.8, 491648.9, 491716.5, ..., 462058.6, 462092. , 462119.5])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>timestamp</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.422e+04 4.422e+04 ... 4.421e+04</div><input id='attrs-83d19997-3e03-48ab-af76-e87bb3ec84a4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-83d19997-3e03-48ab-af76-e87bb3ec84a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b51d0d46-6baa-42d8-8133-c278004986db' class='xr-var-data-in' type='checkbox'><label for='data-b51d0d46-6baa-42d8-8133-c278004986db' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>timestamp</dd><dt><span>long_name :</span></dt><dd>Time, decimal days since January 1, 1900</dd><dt><span>units :</span></dt><dd>day</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>t</dd><dt><span>datum :</span></dt><dd>January 1, 1900</dd><dt><span>valid_range :</span></dt><dd>[44214.72473 44235.63572]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([44216.71856, 44216.71867, 44216.71879, ..., 44214.74219,
+       44214.74231, 44214.74243])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>record</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>19 29 39 49 ... 1047 1057 1067 1077</div><input id='attrs-8d9910cb-9598-47c7-a015-61e2b53307c2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8d9910cb-9598-47c7-a015-61e2b53307c2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-73838b14-7aea-4f57-9f1f-06726195ffca' class='xr-var-data-in' type='checkbox'><label for='data-73838b14-7aea-4f57-9f1f-06726195ffca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>record</dd><dt><span>long_name :</span></dt><dd>Workbench record number</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[    2 13262]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([  19,   29,   39, ..., 1057, 1067, 1077])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>elevation</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>177.1 190.4 208.5 ... 231.2 238.8</div><input id='attrs-3de497f2-d487-4881-acfa-699d65e774a6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3de497f2-d487-4881-acfa-699d65e774a6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a09f8808-8343-460c-95ef-854452a7fed8' class='xr-var-data-in' type='checkbox'><label for='data-a09f8808-8343-460c-95ef-854452a7fed8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>elevation</dd><dt><span>long_name :</span></dt><dd>Digital elevation model</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>z</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>datum :</span></dt><dd>North American Vertical Datum of 1988 (NAVD88)</dd><dt><span>valid_range :</span></dt><dd>[176.5 341.3]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([177.1, 190.4, 208.5, ..., 231.6, 231.2, 238.8])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>alt</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>98.63 77.03 60.45 ... 46.91 30.34</div><input id='attrs-d17813f6-0d13-4bd1-8f69-7b18325cca60' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d17813f6-0d13-4bd1-8f69-7b18325cca60' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ba5c6706-ed9c-471d-83df-6c6c51bf7021' class='xr-var-data-in' type='checkbox'><label for='data-ba5c6706-ed9c-471d-83df-6c6c51bf7021' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>altitude</dd><dt><span>long_name :</span></dt><dd>DGPS instrument altitude</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[ 18.23 147.6 ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([98.63, 77.03, 60.45, ..., 52.01, 46.91, 30.34])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>invalt</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>96.5 81.65 64.2 ... 48.3 30.15</div><input id='attrs-96b15e51-82a2-4c5a-815d-f7c403cc39dd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-96b15e51-82a2-4c5a-815d-f7c403cc39dd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ed6a74b4-4e4e-492e-ae2d-bef4601c2449' class='xr-var-data-in' type='checkbox'><label for='data-ed6a74b4-4e4e-492e-ae2d-bef4601c2449' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>inverted_altitude</dd><dt><span>long_name :</span></dt><dd>Inverted instrument altitude</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[ 17.95 151.9 ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([96.5 , 81.65, 64.2 , ..., 53.79, 48.3 , 30.15])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>invaltstd</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.01 0.0136 ... 0.0212 0.0356</div><input id='attrs-5165fc9c-3ce5-4cff-b124-1fcd8498711d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5165fc9c-3ce5-4cff-b124-1fcd8498711d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc164494-6e13-4338-b1d2-d40819b2befa' class='xr-var-data-in' type='checkbox'><label for='data-fc164494-6e13-4338-b1d2-d40819b2befa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>inverted_altitude_uncertainty</dd><dt><span>long_name :</span></dt><dd>Standard deviation of inverted instrument altitude</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0.0034 0.0587]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([0.01  , 0.0136, 0.0165, ..., 0.0187, 0.0212, 0.0356])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>deltaalt</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-2.13 4.62 3.75 ... 1.78 1.39 -0.19</div><input id='attrs-56d0052d-3154-42c4-8aab-1a3d7d338675' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-56d0052d-3154-42c4-8aab-1a3d7d338675' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5acc310d-09d5-45bf-96c5-0dea82faf693' class='xr-var-data-in' type='checkbox'><label for='data-5acc310d-09d5-45bf-96c5-0dea82faf693' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>inverted_altitude_difference</dd><dt><span>long_name :</span></dt><dd>Measured minus inverted altitude</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[-23.4   69.89]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([-2.13,  4.62,  3.75, ...,  1.78,  1.39, -0.19])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>numdata</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>27 27 26 23 28 27 ... 31 30 9 26 25</div><input id='attrs-2bff175a-6169-4227-a02f-75c601f1ee12' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2bff175a-6169-4227-a02f-75c601f1ee12' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-92966493-29af-4f0b-897d-eb933e09732b' class='xr-var-data-in' type='checkbox'><label for='data-92966493-29af-4f0b-897d-eb933e09732b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>number_of_data</dd><dt><span>long_name :</span></dt><dd>Number of active time gates</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[ 5 49]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([27, 27, 26, ...,  9, 26, 25])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>resdata</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.701 3.69 1.399 ... 1.794 1.96</div><input id='attrs-ecfa8592-04a0-46a6-8694-b54ab18b6f53' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ecfa8592-04a0-46a6-8694-b54ab18b6f53' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2d0d4839-366a-4d88-9807-38b14d002096' class='xr-var-data-in' type='checkbox'><label for='data-2d0d4839-366a-4d88-9807-38b14d002096' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>data_residual</dd><dt><span>long_name :</span></dt><dd>Error-weighted inversion data misfit (target = 1.0)</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[ 0.2297 22.11  ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([2.701, 3.69 , 1.399, ..., 2.479, 1.794, 1.96 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>restotal</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.208 1.208 1.208 ... 1.012 1.012</div><input id='attrs-96178f01-a5ff-4ad4-b860-f4ddf467bc7c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-96178f01-a5ff-4ad4-b860-f4ddf467bc7c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7ce5c4e6-5138-41b6-9e4b-a6e64de5a615' class='xr-var-data-in' type='checkbox'><label for='data-7ce5c4e6-5138-41b6-9e4b-a6e64de5a615' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_residual</dd><dt><span>long_name :</span></dt><dd>Total inversion residual (data and model regularization)</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0.809 1.208]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([1.208, 1.208, 1.208, ..., 1.012, 1.012, 1.012])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>RHO_I</span></div><div class='xr-var-dims'>(index, layer_depth)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>270.3 255.3 225.6 ... 21.32 30.07</div><input id='attrs-7b393093-d4bd-4d80-ba39-fb8328ae8af2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7b393093-d4bd-4d80-ba39-fb8328ae8af2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ffaeb501-61a2-4ad7-acc8-0a7794b52a0d' class='xr-var-data-in' type='checkbox'><label for='data-ffaeb501-61a2-4ad7-acc8-0a7794b52a0d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>layer_resistivity</dd><dt><span>long_name :</span></dt><dd>Inverted layer resistivity</dd><dt><span>units :</span></dt><dd>Ohm*meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[1.e-01 2.e+04]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[ 270.3 ,  255.3 ,  225.6 , ...,   96.28,  133.6 ,  376.  ],
+       [ 980.9 ,  980.6 ,  986.3 , ...,   63.92,  103.8 ,  157.9 ],
+       [1080.  , 1072.  , 1071.  , ...,   45.2 ,   74.89,   79.35],
+       ...,
+       [ 337.3 ,  322.6 ,  319.1 , ...,   99.19,   98.98,   98.9 ],
+       [  91.51,   91.4 ,   91.26, ...,   24.03,   52.88,   73.6 ],
+       [ 347.4 ,  348.8 ,  349.4 , ...,   15.5 ,   21.32,   30.07]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>RHO_I_STD</span></div><div class='xr-var-dims'>(index, layer_depth)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>3.78 2.32 1.88 ... 0.74 1.33 3.34</div><input id='attrs-6f9255e4-426e-4217-bcd1-765f4ba8091a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6f9255e4-426e-4217-bcd1-765f4ba8091a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d879e0f4-d64a-4d8c-bc22-78641758d510' class='xr-var-data-in' type='checkbox'><label for='data-d879e0f4-d64a-4d8c-bc22-78641758d510' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>layer_resistivity_uncertainty</dd><dt><span>long_name :</span></dt><dd>Uncertainty in inverted layer resistivity</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[3.0e-02 9.8e+01]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[ 3.78,  2.32,  1.88, ...,  3.43,  5.39,  8.25],
+       [ 5.13,  3.28,  2.54, ...,  1.99,  3.15,  4.92],
+       [ 5.08,  3.22,  2.42, ...,  2.37,  3.85,  5.77],
+       ...,
+       [ 3.73,  2.42,  2.12, ..., 98.  , 98.  , 98.  ],
+       [ 2.45,  1.67,  1.73, ...,  0.7 ,  1.27,  2.04],
+       [ 3.1 ,  1.96,  1.83, ...,  0.74,  1.33,  3.34]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>DEP_TOP</span></div><div class='xr-var-dims'>(index, layer_depth)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.75 1.57 ... 227.4 250.1 275.0</div><input id='attrs-984f54a2-4e4e-46ea-88df-4034b75058f0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-984f54a2-4e4e-46ea-88df-4034b75058f0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-27ed14f8-93fc-4d66-a7b2-9388590d24f5' class='xr-var-data-in' type='checkbox'><label for='data-27ed14f8-93fc-4d66-a7b2-9388590d24f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>depth_top</dd><dt><span>long_name :</span></dt><dd>Top of model layers</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  0. 275.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ],
+       [  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ],
+       [  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ],
+       ...,
+       [  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ],
+       [  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ],
+       [  0.  ,   0.75,   1.57, ..., 227.39, 250.1 , 275.  ]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>DEP_BOT</span></div><div class='xr-var-dims'>(index, layer_depth)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.75 1.57 2.47 ... 275.0 412.5</div><input id='attrs-25b3d194-0101-4fed-881f-688c8ec9b44e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-25b3d194-0101-4fed-881f-688c8ec9b44e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6678dee1-2bc0-473e-9dc2-b4a0f906e1d1' class='xr-var-data-in' type='checkbox'><label for='data-6678dee1-2bc0-473e-9dc2-b4a0f906e1d1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>depth_bottom</dd><dt><span>long_name :</span></dt><dd>Bottom of model layers</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  0.75 412.5 ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ],
+       [  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ],
+       [  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ],
+       ...,
+       [  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ],
+       [  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ],
+       [  0.75,   1.57,   2.47, ..., 250.1 , 275.  , 412.5 ]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>doi_conservative</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>168.7 190.7 189.8 ... 228.0 233.6</div><input id='attrs-981eafed-36cb-46c4-b6c0-ba91662549db' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-981eafed-36cb-46c4-b6c0-ba91662549db' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bf7e84c5-3dd4-4175-b1f2-6f26a2b47d3e' class='xr-var-data-in' type='checkbox'><label for='data-bf7e84c5-3dd4-4175-b1f2-6f26a2b47d3e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>depth_of_investigation_conservative</dd><dt><span>long_name :</span></dt><dd>Conservative estimate of depth of investigation (DOI)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  0.75  275.033]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([168.696, 190.686, 189.756, ...,  14.07 , 228.038, 233.56 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>doi_standard</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>186.8 212.1 208.0 ... 254.0 262.3</div><input id='attrs-e33e155f-4fbc-4439-8aa8-3af6afe6639b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e33e155f-4fbc-4439-8aa8-3af6afe6639b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a09f0616-cc6f-4d67-a11e-924f7c6c7420' class='xr-var-data-in' type='checkbox'><label for='data-a09f0616-cc6f-4d67-a11e-924f7c6c7420' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>depth_of_investigation_standard</dd><dt><span>long_name :</span></dt><dd>Standard estimate of depth of investigation (DOI)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[  2.822 275.033]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([186.776, 212.071, 207.962, ...,  26.343, 253.974, 262.286])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>line_no</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>100101 100101 ... 920006 920006</div><input id='attrs-ca539edc-ba6a-42b3-872d-4c73453fe4bd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ca539edc-ba6a-42b3-872d-4c73453fe4bd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9d540cb8-677a-468e-b1f3-eb3ee252221f' class='xr-var-data-in' type='checkbox'><label for='data-9d540cb8-677a-468e-b1f3-eb3ee252221f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>line_number</dd><dt><span>long_name :</span></dt><dd>Line number</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[100101 920006]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([100101, 100101, 100101, ..., 920006, 920006, 920006])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ea6d0025-1793-4188-a71d-bdfc4c714364' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ea6d0025-1793-4188-a71d-bdfc4c714364' class='xr-section-summary' >Attributes: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>content :</span></dt><dd>inverted resistivity models</dd><dt><span>comment :</span></dt><dd>This dataset includes inverted resistivity models derived from processed AEM data produced by USGS</dd><dt><span>type :</span></dt><dd>model</dd><dt><span>structure :</span></dt><dd>tabular</dd><dt><span>mode :</span></dt><dd>airborne</dd><dt><span>method :</span></dt><dd>electromagnetic</dd><dt><span>submethod :</span></dt><dd>time domain</dd><dt><span>instrument :</span></dt><dd>skytem</dd><dt><span>property :</span></dt><dd>electrical resistivity</dd></dl></div></li></ul></div></div>
+</div>
+<br />
+<br /><p>4 - Bedrock Picks -
 Import AEM-based estimated of depth to bedrock from CSV-format.
 Define input data file and associated metadata file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//topDolomite_Blocky_LidarDEM.csv&#39;</span><span class="p">)</span>
 <span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_bedrock_picks_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;depth_to_bedrock&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
+<span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;depth_to_bedrock&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>5 - Derivative Maps -
-Import interpolated bedrock and magnetic maps from TIF-format.
-Define input metadata file (which contains the TIF filenames linked to variable names)</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.yml&#39;</span><span class="p">)</span>
+<div class="output_subarea output_html rendered_html output_result">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1f1f1f;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt; Size: 6MB
+Dimensions:       (index: 82864)
+Coordinates:
+    spatial_ref   float64 8B 0.0
+  * index         (index) int32 331kB 0 1 2 3 4 ... 82860 82861 82862 82863
+    x             (index) float64 663kB 7.243e+05 7.243e+05 ... 6.594e+05
+    y             (index) float64 663kB 4.916e+05 4.916e+05 ... 4e+05 4e+05
+Data variables:
+    id            (index) int64 663kB 1 2 3 4 5 ... 102684 102685 102686 102687
+    e_n83wtm      (index) float64 663kB 7.243e+05 7.243e+05 ... 6.594e+05
+    n_n83wtm      (index) float64 663kB 4.916e+05 4.916e+05 ... 4e+05 4e+05
+    br_elevation  (index) float64 663kB 167.8 178.3 180.2 ... 291.3 291.3 292.7
+    zstd          (index) float64 663kB 1.01 1.01 1.01 1.01 ... 1.11 1.11 1.11
+    origintype    (index) int64 663kB 3 3 3 3 3 3 3 3 3 3 ... 0 0 0 0 0 0 0 0 0
+    editdate      (index) object 663kB &#x27;6/6/2021 21:46&#x27; ... &#x27;7/23/2021 23:22&#x27;
+Attributes:
+    content:     bedrock elevation points
+    comment:     This dataset includes AEM-derived point estimates of the ele...
+    type:        data
+    structure:   tabular
+    mode:
+    method:
+    submethod:
+    instrument:
+    property:    </pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-1e842042-94f6-4d09-ae1c-c39cf2527550' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-1e842042-94f6-4d09-ae1c-c39cf2527550' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%; grid-column: 1 / -1'></div></div></li><li class='xr-section-item'><input id='section-51ee3a5f-40d9-44bf-9ccb-c038ad9e07ff' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-51ee3a5f-40d9-44bf-9ccb-c038ad9e07ff' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>index</span>: 82864</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-22a440a6-ea57-4461-97f2-1af060a7eff8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-22a440a6-ea57-4461-97f2-1af060a7eff8' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-dfd7bf95-7287-470d-8012-14814746e7d0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dfd7bf95-7287-470d-8012-14814746e7d0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-09295c03-a541-4348-8c00-1db4e57147e2' class='xr-var-data-in' type='checkbox'><label for='data-09295c03-a541-4348-8c00-1db4e57147e2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83(HARN)</dd><dt><span>horizontal_datum_name :</span></dt><dd>NAD83 (High Accuracy Reference Network)</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83(HARN) / Wisconsin Transverse Mercator</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-90.0</dd><dt><span>false_easting :</span></dt><dd>520000.0</dd><dt><span>false_northing :</span></dt><dd>-4480000.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>3071</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>index</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>0 1 2 3 ... 82860 82861 82862 82863</div><input id='attrs-dc470d41-3f53-4b48-a481-6a16ff0be10d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dc470d41-3f53-4b48-a481-6a16ff0be10d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8ace1bed-791a-4243-a978-85abeb005740' class='xr-var-data-in' type='checkbox'><label for='data-8ace1bed-791a-4243-a978-85abeb005740' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>index</dd><dt><span>long_name :</span></dt><dd>Index of individual data points</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[    0 82863]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>axis :</span></dt><dd>INDEX</dd></dl></div><div class='xr-var-data'><pre>array([    0,     1,     2, ..., 82861, 82862, 82863], dtype=int32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.243e+05 7.243e+05 ... 6.594e+05</div><input id='attrs-d58f71a4-00f4-4882-9344-11687d39f52c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d58f71a4-00f4-4882-9344-11687d39f52c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-46f9a653-0ea9-4857-85ce-cedf2a1021ad' class='xr-var-data-in' type='checkbox'><label for='data-46f9a653-0ea9-4857-85ce-cedf2a1021ad' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[655129.59 732315.69]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([724288.59, 724267.8 , 724246.9 , ..., 659413.3 , 659300.49,
+       659371.89])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.916e+05 4.916e+05 ... 4e+05 4e+05</div><input id='attrs-f0d5c3d0-1ce9-48f1-8342-cfc92c1db54d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f0d5c3d0-1ce9-48f1-8342-cfc92c1db54d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7ca26501-7ef2-486e-8b96-a66e675a1a98' class='xr-var-data-in' type='checkbox'><label for='data-7ca26501-7ef2-486e-8b96-a66e675a1a98' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[379975.8  492716.09]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([491578.79, 491588.7 , 491598.09, ..., 399972.3 , 400028.89,
+       399992.1 ])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f62a0cb1-64ed-4eda-801c-e16b50850540' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f62a0cb1-64ed-4eda-801c-e16b50850540' class='xr-section-summary'  title='Expand/collapse section'>Inherited coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-602c61dd-8b13-4c51-afba-a097c757abf9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-602c61dd-8b13-4c51-afba-a097c757abf9' class='xr-section-summary' >Data variables: <span>(7)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>id</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1 2 3 4 ... 102685 102686 102687</div><input id='attrs-a143c233-8cd6-4eaf-adfd-ac25f811c6a4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a143c233-8cd6-4eaf-adfd-ac25f811c6a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b53f84f0-3fa8-473a-b2cb-01f343f49166' class='xr-var-data-in' type='checkbox'><label for='data-b53f84f0-3fa8-473a-b2cb-01f343f49166' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>identifier</dd><dt><span>long_name :</span></dt><dd>Unique identifier</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[     1 102687]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([     1,      2,      3, ..., 102685, 102686, 102687])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>e_n83wtm</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.243e+05 7.243e+05 ... 6.594e+05</div><input id='attrs-9f69e59a-4aaf-4eb0-93ca-2fb0b0a88635' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9f69e59a-4aaf-4eb0-93ca-2fb0b0a88635' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-acb3d416-9e06-4685-97f9-8035cc538679' class='xr-var-data-in' type='checkbox'><label for='data-acb3d416-9e06-4685-97f9-8035cc538679' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>easting</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>x</dd><dt><span>valid_range :</span></dt><dd>[655129.59 732315.69]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([724288.59, 724267.8 , 724246.9 , ..., 659413.3 , 659300.49,
+       659371.89])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>n_n83wtm</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.916e+05 4.916e+05 ... 4e+05 4e+05</div><input id='attrs-a1df04cd-4149-4a8b-9fb1-83b36f0ef734' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a1df04cd-4149-4a8b-9fb1-83b36f0ef734' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-daf48190-4013-4de0-ba31-06be03ef8c07' class='xr-var-data-in' type='checkbox'><label for='data-daf48190-4013-4de0-ba31-06be03ef8c07' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>northing</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>y</dd><dt><span>valid_range :</span></dt><dd>[379975.8  492716.09]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([491578.79, 491588.7 , 491598.09, ..., 399972.3 , 400028.89,
+       399992.1 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>br_elevation</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>167.8 178.3 180.2 ... 291.3 292.7</div><input id='attrs-8368005a-1441-4a2a-bd8a-5e8e086bc8c2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8368005a-1441-4a2a-bd8a-5e8e086bc8c2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ead255c0-236b-4c04-b2c2-9a1ef405f7b4' class='xr-var-data-in' type='checkbox'><label for='data-ead255c0-236b-4c04-b2c2-9a1ef405f7b4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>top_bedrock_elevation</dd><dt><span>long_name :</span></dt><dd>Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[136.66 341.88]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([167.82, 178.34, 180.18, ..., 291.3 , 291.3 , 292.7 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>zstd</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.01 1.01 1.01 ... 1.11 1.11 1.11</div><input id='attrs-6a762c72-8f9a-492e-a7ae-17e31ae02ac1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6a762c72-8f9a-492e-a7ae-17e31ae02ac1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2ca4c82b-67ad-4b1c-9da3-24800893fabf' class='xr-var-data-in' type='checkbox'><label for='data-2ca4c82b-67ad-4b1c-9da3-24800893fabf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>elevation_uncertainty</dd><dt><span>long_name :</span></dt><dd>Standard devation of top bedrock elevation</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[ 1. 10.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([1.01, 1.01, 1.01, ..., 1.11, 1.11, 1.11])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>origintype</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>3 3 3 3 3 3 3 3 ... 0 0 0 0 0 0 0 0</div><input id='attrs-bca73bbc-aae2-4470-800a-8e561952adfd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bca73bbc-aae2-4470-800a-8e561952adfd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-64a806a9-983b-443a-9df3-efc0a4164ae0' class='xr-var-data-in' type='checkbox'><label for='data-64a806a9-983b-443a-9df3-efc0a4164ae0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>point_origin</dd><dt><span>long_name :</span></dt><dd>Point origin type; 3 = automated pick from resistivity value; 0 = manual pick</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0 3]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([3, 3, 3, ..., 0, 0, 0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>editdate</span></div><div class='xr-var-dims'>(index)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;6/6/2021 21:46&#x27; ... &#x27;7/23/2021 ...</div><input id='attrs-100f48b9-474b-4d96-bff9-8178b4b5e25a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-100f48b9-474b-4d96-bff9-8178b4b5e25a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e99377b-e3d8-4c0b-b11c-5d650a2fedfc' class='xr-var-data-in' type='checkbox'><label for='data-1e99377b-e3d8-4c0b-b11c-5d650a2fedfc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>edit_date</dd><dt><span>long_name :</span></dt><dd>Date of interpretation point</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>format :</span></dt><dd>M/D/YYYY H:MM</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;6/6/2021 21:46&#x27;, &#x27;6/6/2021 21:46&#x27;, &#x27;6/6/2021 21:46&#x27;, ...,
+       &#x27;7/23/2021 23:22&#x27;, &#x27;7/23/2021 23:22&#x27;, &#x27;7/23/2021 23:22&#x27;],
+      dtype=object)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e221643a-7247-4785-bc2b-130d2d5eb2d4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e221643a-7247-4785-bc2b-130d2d5eb2d4' class='xr-section-summary' >Attributes: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>content :</span></dt><dd>bedrock elevation points</dd><dt><span>comment :</span></dt><dd>This dataset includes AEM-derived point estimates of the elevation of the top of bedrock produced by USGS</dd><dt><span>type :</span></dt><dd>data</dd><dt><span>structure :</span></dt><dd>tabular</dd><dt><span>mode :</span></dt><dd></dd><dt><span>method :</span></dt><dd></dd><dt><span>submethod :</span></dt><dd></dd><dt><span>instrument :</span></dt><dd></dd><dt><span>property :</span></dt><dd></dd></dl></div></li></ul></div></div>
+</div>
+<br />
+<br /><p>5 - Derivative Maps -</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can add arbitrarily named containers to the survey</span>
+<span class="n">derived_products</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_products&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;products derived from other data and models&quot;</span><span class="p">))</span>
+
+<span class="c1"># Import interpolated bedrock and magnetic maps from TIF-format.</span>
+<span class="c1"># Define input metadata file (which contains the TIF filenames linked to variable names)</span>
+<span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_mag_bedrock_grids_md.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the interpolated maps as a raster dataset</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
+<span class="n">derived_products</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Save to NetCDF file</p>
+<div class="output_subarea output_html rendered_html output_result">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1f1f1f;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt; Size: 22MB
+Dimensions:                (x: 799, nv: 2, y: 1155)
+Coordinates:
+    spatial_ref            float64 8B 0.0
+  * x                      (x) float64 6kB 6.551e+05 6.552e+05 ... 7.349e+05
+  * nv                     (nv) int64 16B 0 1
+  * y                      (y) float64 9kB 4.953e+05 4.952e+05 ... 3.799e+05
+Data variables:
+    x_bnds                 (x, nv) float64 13kB 6.55e+05 6.551e+05 ... 7.349e+05
+    y_bnds                 (y, nv) float64 18kB 4.954e+05 ... 3.799e+05
+    magnetic_tmi           (y, x) float64 7MB nan nan nan nan ... nan nan nan
+    magnetic_rmf           (y, x) float64 7MB nan nan nan nan ... nan nan nan
+    bedrock_top_elevation  (y, x) float32 4MB nan nan nan nan ... nan nan nan
+    bedrock_depth          (y, x) float32 4MB nan nan nan nan ... nan nan nan
+Attributes:
+    content:     gridded magnetic and bedrock maps
+    comment:     This dataset includes AEM-derived estimates of the elevation...
+    type:        data
+    structure:   raster
+    mode:        airborne
+    method:      electromagnetic
+    submethod:   time domain
+    instrument:  skytem
+    property:    [&#x27;magnetic&#x27;, &#x27;depth to bedrock&#x27;]</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-0dddfb6d-7bdd-4bc3-bc2b-5684c8591939' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0dddfb6d-7bdd-4bc3-bc2b-5684c8591939' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%; grid-column: 1 / -1'></div></div></li><li class='xr-section-item'><input id='section-b2583794-2c78-4bca-ae67-0796188e2281' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b2583794-2c78-4bca-ae67-0796188e2281' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>x</span>: 799</li><li><span class='xr-has-index'>nv</span>: 2</li><li><span class='xr-has-index'>y</span>: 1155</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-466e62d4-3db0-43e2-94ea-41f56c061e05' class='xr-section-summary-in' type='checkbox'  checked><label for='section-466e62d4-3db0-43e2-94ea-41f56c061e05' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-1290f34f-d341-4d43-b863-65bb670ff0e2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1290f34f-d341-4d43-b863-65bb670ff0e2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-55fbbd26-6735-4e88-a2df-e909c2c212f4' class='xr-var-data-in' type='checkbox'><label for='data-55fbbd26-6735-4e88-a2df-e909c2c212f4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEOGCRS[&quot;NAD83(HARN)&quot;,DATUM[&quot;NAD83 (High Accuracy Reference Network)&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4152]],CONVERSION[&quot;Wisconsin Transverse Mercator 83&quot;,METHOD[&quot;Transverse Mercator&quot;,ID[&quot;EPSG&quot;,9807]],PARAMETER[&quot;Latitude of natural origin&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8801]],PARAMETER[&quot;Longitude of natural origin&quot;,-90,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8802]],PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,SCALEUNIT[&quot;unity&quot;,1],ID[&quot;EPSG&quot;,8805]],PARAMETER[&quot;False easting&quot;,520000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8806]],PARAMETER[&quot;False northing&quot;,-4480000,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8807]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;State-wide spatial data management.&quot;],AREA[&quot;United States (USA) - Wisconsin.&quot;],BBOX[42.48,-92.89,47.31,-86.25]],ID[&quot;EPSG&quot;,3071]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83(HARN)</dd><dt><span>horizontal_datum_name :</span></dt><dd>NAD83 (High Accuracy Reference Network)</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83(HARN) / Wisconsin Transverse Mercator</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-90.0</dd><dt><span>false_easting :</span></dt><dd>520000.0</dd><dt><span>false_northing :</span></dt><dd>-4480000.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>3071</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.551e+05 6.552e+05 ... 7.349e+05</div><input id='attrs-03aed1b5-6899-4059-abe1-cd07f3b90b13' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-03aed1b5-6899-4059-abe1-cd07f3b90b13' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-39e238cc-90bf-4e1c-87b1-8cd5be64b766' class='xr-var-data-in' type='checkbox'><label for='data-39e238cc-90bf-4e1c-87b1-8cd5be64b766' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[655072.0482 734872.0482]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>x_bnds</dd></dl></div><div class='xr-var-data'><pre>array([655072.0482, 655172.0482, 655272.0482, ..., 734672.0482, 734772.0482,
+       734872.0482])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-2df95880-76f4-486c-b207-4fd9de5d5c84' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2df95880-76f4-486c-b207-4fd9de5d5c84' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f9499ee8-15ea-4cae-9406-1b1f2898dc66' class='xr-var-data-in' type='checkbox'><label for='data-f9499ee8-15ea-4cae-9406-1b1f2898dc66' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0 1]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>axis :</span></dt><dd>NV</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.953e+05 4.952e+05 ... 3.799e+05</div><input id='attrs-5af0117d-36e2-4449-ae51-0f10d9b914d9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5af0117d-36e2-4449-ae51-0f10d9b914d9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b2efbcdb-4f11-40d2-8401-ed1c3030eba8' class='xr-var-data-in' type='checkbox'><label for='data-b2efbcdb-4f11-40d2-8401-ed1c3030eba8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[379902.3947 495302.3947]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>y_bnds</dd></dl></div><div class='xr-var-data'><pre>array([495302.3947, 495202.3947, 495102.3947, ..., 380102.3947, 380002.3947,
+       379902.3947])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f5fb3c3b-06f2-4d92-9f29-2db4648fcf06' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f5fb3c3b-06f2-4d92-9f29-2db4648fcf06' class='xr-section-summary'  title='Expand/collapse section'>Inherited coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-ab3c8855-dbaa-44b7-80ab-2b537c0d6a2f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ab3c8855-dbaa-44b7-80ab-2b537c0d6a2f' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>x_bnds</span></div><div class='xr-var-dims'>(x, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.55e+05 6.551e+05 ... 7.349e+05</div><input id='attrs-db8aab43-a9f6-43d6-ada8-9655fd81bd96' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-db8aab43-a9f6-43d6-ada8-9655fd81bd96' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-330e97f4-b3b7-4852-ae2e-b3187dba02de' class='xr-var-data-in' type='checkbox'><label for='data-330e97f4-b3b7-4852-ae2e-b3187dba02de' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83) cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[655022.0482 734922.0482]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[655022.0482, 655122.0482],
+       [655122.0482, 655222.0482],
+       [655222.0482, 655322.0482],
+       ...,
+       [734622.0482, 734722.0482],
+       [734722.0482, 734822.0482],
+       [734822.0482, 734922.0482]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y_bnds</span></div><div class='xr-var-dims'>(y, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>4.954e+05 4.953e+05 ... 3.799e+05</div><input id='attrs-202caece-df98-41ea-b058-b005a6725466' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-202caece-df98-41ea-b058-b005a6725466' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-21f6ed9b-73a1-40c7-ac80-24cd599f91a5' class='xr-var-data-in' type='checkbox'><label for='data-21f6ed9b-73a1-40c7-ac80-24cd599f91a5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83) cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[379852.3947 495352.3947]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[495352.3947, 495252.3947],
+       [495252.3947, 495152.3947],
+       [495152.3947, 495052.3947],
+       ...,
+       [380152.3947, 380052.3947],
+       [380052.3947, 379952.3947],
+       [379952.3947, 379852.3947]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_tmi</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-3eb3f719-5c91-45a0-9ea2-27d04e8b4168' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3eb3f719-5c91-45a0-9ea2-27d04e8b4168' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4c220994-cb46-4cab-9935-80aa1bf13db0' class='xr-var-data-in' type='checkbox'><label for='data-4c220994-cb46-4cab-9935-80aa1bf13db0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_magnetic_intensity</dd><dt><span>long_name :</span></dt><dd>Total magnetic intensity, diurnally corrected and filtered</dd><dt><span>units :</span></dt><dd>nanoTesla</dd><dt><span>null_value :</span></dt><dd>-9999.99</dd><dt><span>valid_range :</span></dt><dd>[53745.6015625  55396.48828125]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_rmf</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-aa5b02cf-5fc5-460e-ad92-448d921d7a86' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-aa5b02cf-5fc5-460e-ad92-448d921d7a86' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5e727d28-cffc-4579-acc6-856584e54b50' class='xr-var-data-in' type='checkbox'><label for='data-5e727d28-cffc-4579-acc6-856584e54b50' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>residual_magnetic_field</dd><dt><span>long_name :</span></dt><dd>Residual magnetic field, IGRF corrected from 2015 model</dd><dt><span>units :</span></dt><dd>nanoTesla</dd><dt><span>null_value :</span></dt><dd>-9999.99</dd><dt><span>valid_range :</span></dt><dd>[-478.36932373  815.26867676]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bedrock_top_elevation</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-338048a1-4226-4a40-9168-3b68b5d73cba' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-338048a1-4226-4a40-9168-3b68b5d73cba' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-09d6681d-d821-4294-95c0-679f62e9c147' class='xr-var-data-in' type='checkbox'><label for='data-09d6681d-d821-4294-95c0-679f62e9c147' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>bedrock_top_elevation</dd><dt><span>long_name :</span></dt><dd>Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)</dd><dt><span>units :</span></dt><dd>foot</dd><dt><span>null_value :</span></dt><dd>-9999.99</dd><dt><span>valid_range :</span></dt><dd>[ 465.18433 1119.9767 ]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bedrock_depth</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-a8b8fbce-7b71-4127-a7b6-86047000c967' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a8b8fbce-7b71-4127-a7b6-86047000c967' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9bd21049-2dfe-4d16-af30-ca5ded33ce8a' class='xr-var-data-in' type='checkbox'><label for='data-9bd21049-2dfe-4d16-af30-ca5ded33ce8a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>bedrock_depth</dd><dt><span>long_name :</span></dt><dd>Depth to bedrock</dd><dt><span>units :</span></dt><dd>foot</dd><dt><span>null_value :</span></dt><dd>-9999.9</dd><dt><span>valid_range :</span></dt><dd>[4.3053017e-04 2.7054633e+02]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       ...,
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan],
+       [nan, nan, nan, ..., nan, nan, nan]], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1205b092-e08a-4e57-8bd1-057ae4a7ec58' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1205b092-e08a-4e57-8bd1-057ae4a7ec58' class='xr-section-summary' >Attributes: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>content :</span></dt><dd>gridded magnetic and bedrock maps</dd><dt><span>comment :</span></dt><dd>This dataset includes AEM-derived estimates of the elevation of the top of bedrock produced by USGS</dd><dt><span>type :</span></dt><dd>data</dd><dt><span>structure :</span></dt><dd>raster</dd><dt><span>mode :</span></dt><dd>airborne</dd><dt><span>method :</span></dt><dd>electromagnetic</dd><dt><span>submethod :</span></dt><dd>time domain</dd><dt><span>instrument :</span></dt><dd>skytem</dd><dt><span>property :</span></dt><dd>[&#x27;magnetic&#x27;, &#x27;depth to bedrock&#x27;]</dd></dl></div></li></ul></div></div>
+</div>
+<br />
+<br /><p>Save to NetCDF file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//WISkyTEM.nc&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">write_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s1">&#39;test_datacontainer.nc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Reading back in</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;survey&#39;&gt;
+Group: /survey
+│   Dimensions:                 ()
+│   Coordinates:
+│       spatial_ref             float64 8B ...
+│   Data variables:
+│       survey_information      float64 8B ...
+│       flightline_information  float64 8B ...
+│       survey_equipment        float64 8B ...
+│   Attributes:
+│       title:        SkyTEM Airborne Electromagnetic (AEM) Survey, Northeast Wis...
+│       institution:  USGS Geology, Geophysics, and Geochemistry Science Center
+│       source:       SkyTEM raw data, USGS processed data and inverted resistivi...
+│       history:      (1) Data acquisition 01/2021 - 02/2021 by SkyTEM Canada Inc...
+│       references:   Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M...
+│       comment:      This dataset includes minimally processed (raw) AEM and raw...
+│       summary:      Airborne electromagnetic (AEM) and magnetic survey data wer...
+│       content:      survey information (group /survey), raw data (group /survey...
+│       created_by:   gspy==2.0.0
+│       conventions:  CF-1.8, GS-2.0
+│       type:         survey
+├── Group: /survey/data
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B ...
+│   │   Attributes:
+│   │       content:  raw and processed data
+│   │       comment:  This is a test
+│   │       type:     container
+│   ├── Group: /survey/data/raw_data
+│   │   │   Dimensions:          (index: 6785, hm_gate_times: 32, lm_gate_times: 28)
+│   │   │   Coordinates:
+│   │   │       spatial_ref      float64 8B ...
+│   │   │     * index            (index) int32 27kB 0 1 2 3 4 5 ... 6780 6781 6782 6783 6784
+│   │   │       x                (index) float64 54kB ...
+│   │   │       y                (index) float64 54kB ...
+│   │   │       z                (index) float64 54kB ...
+│   │   │       t                (index) float64 54kB ...
+│   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
+│   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
+│   │   │   Data variables: (12/34)
+│   │   │       _60hz_intensity  (index) float64 54kB ...
+│   │   │       alt              (index) float64 54kB ...
+│   │   │       anglex           (index) float64 54kB ...
+│   │   │       angley           (index) float64 54kB ...
+│   │   │       base_mag         (index) float64 54kB ...
+│   │   │       curr_hm          (index) float64 54kB ...
+│   │   │       ...               ...
+│   │   │       mag_raw          (index) float64 54kB ...
+│   │   │       n_nad83          (index) float64 54kB ...
+│   │   │       n_wgs84          (index) float64 54kB ...
+│   │   │       rmf              (index) float64 54kB ...
+│   │   │       time             (index) &lt;U8 217kB ...
+│   │   │       tmi              (index) float64 54kB ...
+│   │   │   Attributes:
+│   │   │       content:     raw data
+│   │   │       comment:     This dataset includes minimally processed (raw) AEM and raw/...
+│   │   │       type:        data
+│   │   │       structure:   tabular
+│   │   │       mode:        airborne
+│   │   │       method:      electromagnetic
+│   │   │       submethod:   time domain
+│   │   │       instrument:  skytem
+│   │   │       property:
+│   │   └── Group: /survey/data/raw_data/nominal_system
+│   │           Dimensions:                              (gate_times: 22, nv: 2,
+│   │                                                     lm_gate_times: 28, hm_gate_times: 32,
+│   │                                                     n_transmitters: 2,
+│   │                                                     lm_waveform_time: 21,
+│   │                                                     hm_waveform_time: 36,
+│   │                                                     lm_loop_vertices: 8, xyz: 3,
+│   │                                                     hm_loop_vertices: 8, n_receivers: 2,
+│   │                                                     n_components: 4)
+│   │           Coordinates:
+│   │             * gate_times                           (gate_times) float64 176B 5.636e-05 ...
+│   │             * nv                                   (nv) int64 16B 0 1
+│   │             * n_transmitters                       (n_transmitters) int64 16B 0 1
+│   │             * lm_waveform_time                     (lm_waveform_time) float64 168B -0.0...
+│   │             * hm_waveform_time                     (hm_waveform_time) float64 288B -0.0...
+│   │             * xyz                                  (xyz) int64 24B 0 1 2
+│   │             * lm_loop_vertices                     (lm_loop_vertices) float64 64B 0.0 ....
+│   │             * hm_loop_vertices                     (hm_loop_vertices) float64 64B 0.0 ....
+│   │             * n_receivers                          (n_receivers) int64 16B 0 1
+│   │             * n_components                         (n_components) int64 32B 0 1 2 3
+│   │           Data variables: (12/29)
+│   │               gate_times_bnds                      (gate_times, nv) float64 352B ...
+│   │               lm_gate_times_bnds                   (lm_gate_times, nv) float64 448B ...
+│   │               hm_gate_times_bnds                   (hm_gate_times, nv) float64 512B ...
+│   │               transmitter_label                    (n_transmitters) &lt;U2 16B ...
+│   │               transmitter_area                     (n_transmitters) float64 16B ...
+│   │               transmitter_base_frequency           (n_transmitters) float64 16B ...
+│   │               ...                                   ...
+│   │               component_receivers                  (n_components) &lt;U1 16B ...
+│   │               component_sample_rate                (n_components) float64 32B ...
+│   │               component_txrx_dx                    (n_components) float64 32B ...
+│   │               component_txrx_dy                    (n_components) float64 32B ...
+│   │               component_txrx_dz                    (n_components) float64 32B ...
+│   │               component_gate_times                 (n_components) &lt;U13 208B ...
+│   │           Attributes:
+│   │               type:        system
+│   │               mode:        airborne
+│   │               method:      electromagnetic
+│   │               submethod:   time domain
+│   │               instrument:  skytem 304M
+│   ├── Group: /survey/data/processed_data
+│   │   │   Dimensions:          (index: 4671, lm_gate_times: 27, hm_gate_times: 22)
+│   │   │   Coordinates:
+│   │   │       spatial_ref      float64 8B ...
+│   │   │     * index            (index) int32 19kB 0 1 2 3 4 5 ... 4666 4667 4668 4669 4670
+│   │   │       x                (index) float64 37kB ...
+│   │   │       y                (index) float64 37kB ...
+│   │   │       z                (index) float64 37kB ...
+│   │   │       t                (index) float64 37kB ...
+│   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
+│   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
+│   │   │   Data variables: (12/21)
+│   │   │       pindex           (index) int64 37kB ...
+│   │   │       sline_no         (index) float64 37kB ...
+│   │   │       e_n83wtm         (index) float64 37kB ...
+│   │   │       n_n83wtm         (index) float64 37kB ...
+│   │   │       timestamp        (index) float64 37kB ...
+│   │   │       record           (index) float64 37kB ...
+│   │   │       ...               ...
+│   │   │       rx_altitude      (index) float64 37kB ...
+│   │   │       rx_altitude_std  (index) float64 37kB ...
+│   │   │       txrx_dx          (index) float64 37kB ...
+│   │   │       txrx_dy          (index) float64 37kB ...
+│   │   │       txrx_dz          (index) float64 37kB ...
+│   │   │       line_no          (index) float64 37kB ...
+│   │   │   Attributes:
+│   │   │       content:     processed data
+│   │   │       comment:     This dataset includes processed AEM data produced by USGS
+│   │   │       type:        data
+│   │   │       structure:   tabular
+│   │   │       mode:        airborne
+│   │   │       method:      electromagnetic
+│   │   │       submethod:   time domain
+│   │   │       instrument:  skytem
+│   │   │       property:
+│   │   ├── Group: /survey/data/processed_data/skytem_system
+│   │   │       Dimensions:                              (gate_times: 22, nv: 2,
+│   │   │                                                 lm_gate_times: 27, hm_gate_times: 22,
+│   │   │                                                 n_transmitters: 2,
+│   │   │                                                 lm_waveform_time: 21,
+│   │   │                                                 hm_waveform_time: 36,
+│   │   │                                                 lm_loop_vertices: 8, xyz: 3,
+│   │   │                                                 hm_loop_vertices: 8, n_receivers: 2,
+│   │   │                                                 n_components: 4)
+│   │   │       Coordinates:
+│   │   │         * gate_times                           (gate_times) float64 176B 5.636e-05 ...
+│   │   │         * nv                                   (nv) int64 16B 0 1
+│   │   │         * n_transmitters                       (n_transmitters) int64 16B 0 1
+│   │   │         * lm_waveform_time                     (lm_waveform_time) float64 168B -0.0...
+│   │   │         * hm_waveform_time                     (hm_waveform_time) float64 288B -0.0...
+│   │   │         * xyz                                  (xyz) int64 24B 0 1 2
+│   │   │         * lm_loop_vertices                     (lm_loop_vertices) float64 64B 0.0 ....
+│   │   │         * hm_loop_vertices                     (hm_loop_vertices) float64 64B 0.0 ....
+│   │   │         * n_receivers                          (n_receivers) int64 16B 0 1
+│   │   │         * n_components                         (n_components) int64 32B 0 1 2 3
+│   │   │       Data variables: (12/29)
+│   │   │           gate_times_bnds                      (gate_times, nv) float64 352B ...
+│   │   │           lm_gate_times_bnds                   (lm_gate_times, nv) float64 432B ...
+│   │   │           hm_gate_times_bnds                   (hm_gate_times, nv) float64 352B ...
+│   │   │           transmitter_label                    (n_transmitters) &lt;U2 16B ...
+│   │   │           transmitter_area                     (n_transmitters) float64 16B ...
+│   │   │           transmitter_base_frequency           (n_transmitters) float64 16B ...
+│   │   │           ...                                   ...
+│   │   │           component_receivers                  (n_components) &lt;U1 16B ...
+│   │   │           component_sample_rate                (n_components) float64 32B ...
+│   │   │           component_txrx_dx                    (n_components) float64 32B ...
+│   │   │           component_txrx_dy                    (n_components) float64 32B ...
+│   │   │           component_txrx_dz                    (n_components) float64 32B ...
+│   │   │           component_gate_times                 (n_components) &lt;U13 208B ...
+│   │   │       Attributes:
+│   │   │           type:        system
+│   │   │           mode:        airborne
+│   │   │           method:      electromagnetic
+│   │   │           submethod:   time domain
+│   │   │           instrument:  skytem 304M
+│   │   └── Group: /survey/data/processed_data/magnetic_system
+│   │           Dimensions:        ()
+│   │           Data variables:
+│   │               sample_rate    float64 8B ...
+│   │               resolution     float64 8B ...
+│   │           Attributes:
+│   │               type:        system
+│   │               mode:        airborne
+│   │               method:      magnetic
+│   │               submethod:   total field
+│   │               instrument:  cesium vapour
+│   └── Group: /survey/data/depth_to_bedrock
+│           Dimensions:       (index: 82864)
+│           Coordinates:
+│               spatial_ref   float64 8B ...
+│             * index         (index) int32 331kB 0 1 2 3 4 ... 82860 82861 82862 82863
+│               x             (index) float64 663kB ...
+│               y             (index) float64 663kB ...
+│           Data variables:
+│               id            (index) int64 663kB ...
+│               e_n83wtm      (index) float64 663kB ...
+│               n_n83wtm      (index) float64 663kB ...
+│               br_elevation  (index) float64 663kB ...
+│               zstd          (index) float64 663kB ...
+│               origintype    (index) int64 663kB ...
+│               editdate      (index) &lt;U15 5MB ...
+│           Attributes:
+│               content:     bedrock elevation points
+│               comment:     This dataset includes AEM-derived point estimates of the ele...
+│               type:        data
+│               structure:   tabular
+│               mode:
+│               method:
+│               submethod:
+│               instrument:
+│               property:
+├── Group: /survey/models
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B ...
+│   │   Attributes:
+│   │       content:  Inverted models
+│   │       comment:  This is a test
+│   │       type:     container
+│   └── Group: /survey/models/inverted_models
+│           Dimensions:           (layer_depth: 40, nv: 2, index: 11677)
+│           Coordinates:
+│               spatial_ref       float64 8B ...
+│             * index             (index) int32 47kB 0 1 2 3 4 ... 11673 11674 11675 11676
+│             * layer_depth       (layer_depth) float64 320B 0.375 1.16 2.02 ... 262.6 343.8
+│             * nv                (nv) int64 16B 0 1
+│               x                 (index) float64 93kB ...
+│               y                 (index) float64 93kB ...
+│               z                 (index) float64 93kB ...
+│               t                 (index) float64 93kB ...
+│           Data variables: (12/22)
+│               layer_depth_bnds  (layer_depth, nv) float64 640B ...
+│               pindex            (index) int64 93kB ...
+│               sline_no          (index) int64 93kB ...
+│               e_n83wtm          (index) float64 93kB ...
+│               n_n83wtm          (index) float64 93kB ...
+│               timestamp         (index) float64 93kB ...
+│               ...                ...
+│               RHO_I_STD         (index, layer_depth) float64 4MB ...
+│               DEP_TOP           (index, layer_depth) float64 4MB ...
+│               DEP_BOT           (index, layer_depth) float64 4MB ...
+│               doi_conservative  (index) float64 93kB ...
+│               doi_standard      (index) float64 93kB ...
+│               line_no           (index) int64 93kB ...
+│           Attributes:
+│               content:     inverted resistivity models
+│               comment:     This dataset includes inverted resistivity models derived fr...
+│               type:        model
+│               structure:   tabular
+│               mode:        airborne
+│               method:      electromagnetic
+│               submethod:   time domain
+│               instrument:  skytem
+│               property:    electrical resistivity
+└── Group: /survey/derived_products
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B ...
+    │   Attributes:
+    │       content:  products derived from other data and models
+    │       type:     container
+    └── Group: /survey/derived_products/maps
+            Dimensions:                (x: 799, nv: 2, y: 1155)
+            Coordinates:
+                spatial_ref            float64 8B ...
+              * x                      (x) float64 6kB 6.551e+05 6.552e+05 ... 7.349e+05
+              * nv                     (nv) int64 16B 0 1
+              * y                      (y) float64 9kB 4.953e+05 4.952e+05 ... 3.799e+05
+            Data variables:
+                x_bnds                 (x, nv) float64 13kB ...
+                y_bnds                 (y, nv) float64 18kB ...
+                magnetic_tmi           (y, x) float64 7MB ...
+                magnetic_rmf           (y, x) float64 7MB ...
+                bedrock_top_elevation  (y, x) float32 4MB ...
+                bedrock_depth          (y, x) float32 4MB ...
+            Attributes:
+                content:     gridded magnetic and bedrock maps
+                comment:     This dataset includes AEM-derived estimates of the elevation...
+                type:        data
+                structure:   raster
+                mode:        airborne
+                method:      electromagnetic
+                submethod:   time domain
+                instrument:  skytem
+                property:    [&#39;magnetic&#39;, &#39;depth to bedrock&#39;]
 </pre></div>
 </div>
 <p>Plotting</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
+<span class="n">pd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;processed_data&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;processed_data&#39;</span><span class="p">][</span><span class="s1">&#39;elevation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pd</span><span class="p">[</span><span class="s1">&#39;elevation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
-<span class="c1"># Make a figure of one of the raster data variables, using Xarray&#39;s plotter</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s1">&#39;maps&#39;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span>
-<span class="n">d</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -214,7 +1929,7 @@ Define input metadata file (which contains the TIF filenames linked to variable 
 <li><img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_to_netcdf_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.187 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 8.466 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/126324517196134368a58612b6143418/plot_csv_skytem_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem_to_netcdf.ipynb</span></code></a></p>
@@ -234,7 +1949,7 @@ Define input metadata file (which contains the TIF filenames linked to variable 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="help_I_have_no_variable_metadata.html" class="btn btn-neutral float-left" title="Help! I have no variable metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_csv_loupe_to_netcdf.html" class="btn btn-neutral float-left" title="Multi-dataset Survey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../Interacting_With_GS_Files/plot_xarray_methods.html" class="btn btn-neutral float-right" title="Basic Class Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

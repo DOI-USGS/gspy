@@ -105,12 +105,13 @@ to download the full example code.</p>
 Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">gspy</span>
 <span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 </pre></div>
 </div>
 <p>First open the netcdf GS standard survey file.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">open_netcdf</span><span class="p">(</span><span class="s2">&quot;../../../../example_material/example_2/data/Tempest.nc&quot;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="s2">&quot;../../../../example_material/example_2/data/Tempest.nc&quot;</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <section id="accessing-the-xarray-object">
@@ -118,34 +119,171 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <p>Survey</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The Survey&#39;s metadata is accessed through the xarray property</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey:
-&lt;xarray.Dataset&gt; Size: 40B
-Dimensions:                 ()
-Coordinates:
-    spatial_ref             float64 8B ...
-Data variables:
-    survey_information      float64 8B ...
-    survey_units            float64 8B ...
-    flightline_information  float64 8B ...
-    survey_equipment        float64 8B ...
-Attributes:
-    title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
-    institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
-    source:       Contractor provided ASEG-formatted data
-    history:      &lt;date and time when the data were produced and/or modified&gt;
-    references:   &lt;data release reference&gt;
-    comment:      &lt;additional details or ancillary information&gt;
-    content:      &lt;summary list of file contents, e.g. raw data (/survey/tabu...
-    conventions:  CF-1.8, GS-0.0
-    created_by:   gspy==0.0.1
+&lt;xarray.DataTree &#39;survey&#39;&gt;
+Group: /survey
+│   Dimensions:                 ()
+│   Coordinates:
+│       spatial_ref             float64 8B ...
+│   Data variables:
+│       survey_information      float64 8B ...
+│       survey_units            float64 8B ...
+│       flightline_information  float64 8B ...
+│       survey_equipment        float64 8B ...
+│   Attributes:
+│       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
+│       institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
+│       source:       Contractor provided ASEG-formatted data
+│       history:      &lt;date and time when the data were produced and/or modified&gt;
+│       references:   &lt;data release reference&gt;
+│       comment:      &lt;additional details or ancillary information&gt;
+│       content:      &lt;summary list of file contents, e.g. raw data (/survey/tabu...
+│       conventions:  CF-1.8, GS-0.0
+│       created_by:   gspy==0.0.1
+│       type:         survey
+├── Group: /survey/data
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B ...
+│   │   Attributes:
+│   │       content:  raw and processed data
+│   │       type:     container
+│   ├── Group: /survey/data/raw_data
+│   │   │   Dimensions:          (index: 20701, gate_times: 15)
+│   │   │   Coordinates:
+│   │   │       spatial_ref      float64 8B ...
+│   │   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │   │       x                (index) float64 166kB ...
+│   │   │       y                (index) float64 166kB ...
+│   │   │       z                (index) float64 166kB ...
+│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │   │   Data variables: (12/61)
+│   │   │       line             (index) int32 83kB ...
+│   │   │       flight           (index) int32 83kB ...
+│   │   │       fiducial         (index) float64 166kB ...
+│   │   │       proj_cgg         (index) int32 83kB ...
+│   │   │       proj_client      (index) int32 83kB ...
+│   │   │       date             (index) int32 83kB ...
+│   │   │       ...               ...
+│   │   │       z_primaryfield   (index) float64 166kB ...
+│   │   │       z_vlf1           (index) float64 166kB ...
+│   │   │       z_vlf2           (index) float64 166kB ...
+│   │   │       z_vlf3           (index) float64 166kB ...
+│   │   │       z_vlf4           (index) float64 166kB ...
+│   │   │       z_geofact        (index) float64 166kB ...
+│   │   │   Attributes:
+│   │   │       content:  raw data
+│   │   │       comment:  This dataset includes minimally processed (raw) AEM data
+│   │   ├── Group: /survey/data/raw_data/tempest_system
+│   │   │       Dimensions:                           (gate_times: 15, nv: 2,
+│   │   │                                              n_transmitters: 1, z_waveform_time: 7,
+│   │   │                                              n_receivers: 2, n_components: 2, xyz: 3)
+│   │   │       Coordinates:
+│   │   │         * nv                                (nv) int64 16B 0 1
+│   │   │         * n_transmitters                    (n_transmitters) int64 8B 0
+│   │   │         * z_waveform_time                   (z_waveform_time) float64 56B -0.01667 ...
+│   │   │         * xyz                               (xyz) int64 24B 0 1 2
+│   │   │         * n_receivers                       (n_receivers) int64 16B 0 1
+│   │   │         * n_components                      (n_components) int64 16B 0 1
+│   │   │       Data variables: (12/20)
+│   │   │           gate_times_bnds                   (gate_times, nv) float64 240B ...
+│   │   │           transmitter_label                 (n_transmitters) &lt;U1 4B ...
+│   │   │           transmitter_area                  (n_transmitters) float64 8B ...
+│   │   │           transmitter_base_frequency        (n_transmitters) float64 8B ...
+│   │   │           transmitter_current_scale_factor  (n_transmitters) float64 8B ...
+│   │   │           transmitter_number_of_turns       (n_transmitters) int32 4B ...
+│   │   │           ...                                ...
+│   │   │           component_transmitters            (n_components) &lt;U1 8B ...
+│   │   │           component_receivers               (n_components) &lt;U1 8B ...
+│   │   │           component_txrx_dx                 (n_components) float64 16B ...
+│   │   │           component_txrx_dy                 (n_components) float64 16B ...
+│   │   │           component_txrx_dz                 (n_components) float64 16B ...
+│   │   │           component_gate_times              (n_components) &lt;U10 80B ...
+│   │   │       Attributes:
+│   │   │           type:        system
+│   │   │           mode:        airborne
+│   │   │           method:      electromagnetic
+│   │   │           submethod:   time domain
+│   │   │           instrument:  tempest
+│   │   ├── Group: /survey/data/raw_data/magnetic_system
+│   │   │       Attributes:
+│   │   │           type:        system
+│   │   │           mode:        airborne
+│   │   │           method:      magnetic
+│   │   │           submethod:   not_defined
+│   │   │           instrument:  not_defiend
+│   │   └── Group: /survey/data/raw_data/radiometric_system
+│   │           Attributes:
+│   │               type:        system
+│   │               mode:        airborne
+│   │               method:      radiometric
+│   │               submethod:   not_defined
+│   │               instrument:  not_defined
+│   └── Group: /survey/data/derived_maps
+│       │   Dimensions:      ()
+│       │   Data variables:
+│       │       spatial_ref  float64 8B ...
+│       │   Attributes:
+│       │       content:  derived maps
+│       │       type:     container
+│       └── Group: /survey/data/derived_maps/maps
+│               Dimensions:       (x: 599, nv: 2, y: 1212)
+│               Coordinates:
+│                   spatial_ref   float64 8B ...
+│                 * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+│                 * nv            (nv) int64 16B 0 1
+│                 * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+│               Data variables:
+│                   x_bnds        (x, nv) float64 10kB ...
+│                   y_bnds        (y, nv) float64 19kB ...
+│                   magnetic_tmi  (y, x) float64 6MB ...
+│               Attributes:
+│                   comment:  &lt;additional details or ancillary information&gt;
+│                   content:  gridded magnetic map
+└── Group: /survey/models
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B ...
+    │   Attributes:
+    │       content:  inverted models
+    │       type:     container
+    └── Group: /survey/models/inverted_models
+            Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
+                                          index: 20701)
+            Coordinates:
+                spatial_ref              float64 8B ...
+              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+              * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+              * nv                       (nv) int64 16B 0 1
+              * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+                x                        (index) float64 166kB ...
+                y                        (index) float64 166kB ...
+                z                        (index) float64 166kB ...
+            Data variables: (12/49)
+                layer_depth_bnds         (layer_depth, nv) float64 480B ...
+                gate_times_bnds          (gate_times, nv) float64 240B ...
+                uniqueid                 (index) int32 83kB ...
+                survey                   (index) int32 83kB ...
+                date                     (index) int32 83kB ...
+                flight                   (index) int32 83kB ...
+                ...                       ...
+                phic                     (index) float64 166kB ...
+                phit                     (index) float64 166kB ...
+                phig                     (index) float64 166kB ...
+                phis                     (index) float64 166kB ...
+                lambda                   (index) float64 166kB ...
+                iterations               (index) int32 83kB ...
+            Attributes:
+                content:  inverted resistivity models
+                comment:  This dataset includes inverted resistivity models derived from ...
 </pre></div>
 </div>
 <p>To look just at the attributes</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey Attributes:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey Attributes:
@@ -159,12 +297,13 @@ Attributes:
  &#39;institution&#39;: &#39;USGS Geology, Geophysics, &amp; Geochemistry Science Center&#39;,
  &#39;references&#39;: &#39;&lt;data release reference&gt;&#39;,
  &#39;source&#39;: &#39;Contractor provided ASEG-formatted data&#39;,
- &#39;title&#39;: &#39;Example Tempest Airborne Electromagnetic (AEM) Dataset&#39;}
+ &#39;title&#39;: &#39;Example Tempest Airborne Electromagnetic (AEM) Dataset&#39;,
+ &#39;type&#39;: &#39;survey&#39;}
 </pre></div>
 </div>
 <p>Or expand a specific variable</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey Information:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">xarray</span><span class="p">[</span><span class="s1">&#39;survey_information&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;survey_information&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey Information:
@@ -188,10 +327,165 @@ Attributes:
 </div>
 <p>Datasets
 Get the list of datasets attached to the survey</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;data&#39;, &#39;model&#39;, &#39;maps&#39;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;bound method Mapping.items of &lt;xarray.DataTree &#39;survey&#39;&gt;
+Group: /survey
+│   Dimensions:                 ()
+│   Coordinates:
+│       spatial_ref             float64 8B ...
+│   Data variables:
+│       survey_information      float64 8B ...
+│       survey_units            float64 8B ...
+│       flightline_information  float64 8B ...
+│       survey_equipment        float64 8B ...
+│   Attributes:
+│       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
+│       institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
+│       source:       Contractor provided ASEG-formatted data
+│       history:      &lt;date and time when the data were produced and/or modified&gt;
+│       references:   &lt;data release reference&gt;
+│       comment:      &lt;additional details or ancillary information&gt;
+│       content:      &lt;summary list of file contents, e.g. raw data (/survey/tabu...
+│       conventions:  CF-1.8, GS-0.0
+│       created_by:   gspy==0.0.1
+│       type:         survey
+├── Group: /survey/data
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B ...
+│   │   Attributes:
+│   │       content:  raw and processed data
+│   │       type:     container
+│   ├── Group: /survey/data/raw_data
+│   │   │   Dimensions:          (index: 20701, gate_times: 15)
+│   │   │   Coordinates:
+│   │   │       spatial_ref      float64 8B ...
+│   │   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │   │       x                (index) float64 166kB ...
+│   │   │       y                (index) float64 166kB ...
+│   │   │       z                (index) float64 166kB ...
+│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │   │   Data variables: (12/61)
+│   │   │       line             (index) int32 83kB ...
+│   │   │       flight           (index) int32 83kB ...
+│   │   │       fiducial         (index) float64 166kB ...
+│   │   │       proj_cgg         (index) int32 83kB ...
+│   │   │       proj_client      (index) int32 83kB ...
+│   │   │       date             (index) int32 83kB ...
+│   │   │       ...               ...
+│   │   │       z_primaryfield   (index) float64 166kB ...
+│   │   │       z_vlf1           (index) float64 166kB ...
+│   │   │       z_vlf2           (index) float64 166kB ...
+│   │   │       z_vlf3           (index) float64 166kB ...
+│   │   │       z_vlf4           (index) float64 166kB ...
+│   │   │       z_geofact        (index) float64 166kB ...
+│   │   │   Attributes:
+│   │   │       content:  raw data
+│   │   │       comment:  This dataset includes minimally processed (raw) AEM data
+│   │   ├── Group: /survey/data/raw_data/tempest_system
+│   │   │       Dimensions:                           (gate_times: 15, nv: 2,
+│   │   │                                              n_transmitters: 1, z_waveform_time: 7,
+│   │   │                                              n_receivers: 2, n_components: 2, xyz: 3)
+│   │   │       Coordinates:
+│   │   │         * nv                                (nv) int64 16B 0 1
+│   │   │         * n_transmitters                    (n_transmitters) int64 8B 0
+│   │   │         * z_waveform_time                   (z_waveform_time) float64 56B -0.01667 ...
+│   │   │         * xyz                               (xyz) int64 24B 0 1 2
+│   │   │         * n_receivers                       (n_receivers) int64 16B 0 1
+│   │   │         * n_components                      (n_components) int64 16B 0 1
+│   │   │       Data variables: (12/20)
+│   │   │           gate_times_bnds                   (gate_times, nv) float64 240B ...
+│   │   │           transmitter_label                 (n_transmitters) &lt;U1 4B ...
+│   │   │           transmitter_area                  (n_transmitters) float64 8B ...
+│   │   │           transmitter_base_frequency        (n_transmitters) float64 8B ...
+│   │   │           transmitter_current_scale_factor  (n_transmitters) float64 8B ...
+│   │   │           transmitter_number_of_turns       (n_transmitters) int32 4B ...
+│   │   │           ...                                ...
+│   │   │           component_transmitters            (n_components) &lt;U1 8B ...
+│   │   │           component_receivers               (n_components) &lt;U1 8B ...
+│   │   │           component_txrx_dx                 (n_components) float64 16B ...
+│   │   │           component_txrx_dy                 (n_components) float64 16B ...
+│   │   │           component_txrx_dz                 (n_components) float64 16B ...
+│   │   │           component_gate_times              (n_components) &lt;U10 80B ...
+│   │   │       Attributes:
+│   │   │           type:        system
+│   │   │           mode:        airborne
+│   │   │           method:      electromagnetic
+│   │   │           submethod:   time domain
+│   │   │           instrument:  tempest
+│   │   ├── Group: /survey/data/raw_data/magnetic_system
+│   │   │       Attributes:
+│   │   │           type:        system
+│   │   │           mode:        airborne
+│   │   │           method:      magnetic
+│   │   │           submethod:   not_defined
+│   │   │           instrument:  not_defiend
+│   │   └── Group: /survey/data/raw_data/radiometric_system
+│   │           Attributes:
+│   │               type:        system
+│   │               mode:        airborne
+│   │               method:      radiometric
+│   │               submethod:   not_defined
+│   │               instrument:  not_defined
+│   └── Group: /survey/data/derived_maps
+│       │   Dimensions:      ()
+│       │   Data variables:
+│       │       spatial_ref  float64 8B ...
+│       │   Attributes:
+│       │       content:  derived maps
+│       │       type:     container
+│       └── Group: /survey/data/derived_maps/maps
+│               Dimensions:       (x: 599, nv: 2, y: 1212)
+│               Coordinates:
+│                   spatial_ref   float64 8B ...
+│                 * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+│                 * nv            (nv) int64 16B 0 1
+│                 * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+│               Data variables:
+│                   x_bnds        (x, nv) float64 10kB ...
+│                   y_bnds        (y, nv) float64 19kB ...
+│                   magnetic_tmi  (y, x) float64 6MB ...
+│               Attributes:
+│                   comment:  &lt;additional details or ancillary information&gt;
+│                   content:  gridded magnetic map
+└── Group: /survey/models
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B ...
+    │   Attributes:
+    │       content:  inverted models
+    │       type:     container
+    └── Group: /survey/models/inverted_models
+            Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
+                                          index: 20701)
+            Coordinates:
+                spatial_ref              float64 8B ...
+              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+              * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+              * nv                       (nv) int64 16B 0 1
+              * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+                x                        (index) float64 166kB ...
+                y                        (index) float64 166kB ...
+                z                        (index) float64 166kB ...
+            Data variables: (12/49)
+                layer_depth_bnds         (layer_depth, nv) float64 480B ...
+                gate_times_bnds          (gate_times, nv) float64 240B ...
+                uniqueid                 (index) int32 83kB ...
+                survey                   (index) int32 83kB ...
+                date                     (index) int32 83kB ...
+                flight                   (index) int32 83kB ...
+                ...                       ...
+                phic                     (index) float64 166kB ...
+                phit                     (index) float64 166kB ...
+                phig                     (index) float64 166kB ...
+                phis                     (index) float64 166kB ...
+                lambda                   (index) float64 166kB ...
+                iterations               (index) int32 83kB ...
+            Attributes:
+                content:  inverted resistivity models
+                comment:  This dataset includes inverted resistivity models derived from ...&gt;
 </pre></div>
 </div>
 <p>Datasets are attached to the Survey regardless of their format whether unstructured tabular data or
@@ -202,67 +496,168 @@ image-type raster data</p>
 
 <span class="c1"># Raster</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Raster:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;maps&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Tabular:
 
-&lt;gspy.src.classes.data.GS_Data.GS_Data object at 0x112f44a70&gt;
+&lt;xarray.DataTree &#39;data&#39;&gt;
+Group: /survey/data
+│   Dimensions:      ()
+│   Data variables:
+│       spatial_ref  float64 8B ...
+│   Attributes:
+│       content:  raw and processed data
+│       type:     container
+├── Group: /survey/data/raw_data
+│   │   Dimensions:          (index: 20701, gate_times: 15)
+│   │   Coordinates:
+│   │       spatial_ref      float64 8B ...
+│   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │       x                (index) float64 166kB ...
+│   │       y                (index) float64 166kB ...
+│   │       z                (index) float64 166kB ...
+│   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │   Data variables: (12/61)
+│   │       line             (index) int32 83kB ...
+│   │       flight           (index) int32 83kB ...
+│   │       fiducial         (index) float64 166kB ...
+│   │       proj_cgg         (index) int32 83kB ...
+│   │       proj_client      (index) int32 83kB ...
+│   │       date             (index) int32 83kB ...
+│   │       ...               ...
+│   │       z_primaryfield   (index) float64 166kB ...
+│   │       z_vlf1           (index) float64 166kB ...
+│   │       z_vlf2           (index) float64 166kB ...
+│   │       z_vlf3           (index) float64 166kB ...
+│   │       z_vlf4           (index) float64 166kB ...
+│   │       z_geofact        (index) float64 166kB ...
+│   │   Attributes:
+│   │       content:  raw data
+│   │       comment:  This dataset includes minimally processed (raw) AEM data
+│   ├── Group: /survey/data/raw_data/tempest_system
+│   │       Dimensions:                           (gate_times: 15, nv: 2,
+│   │                                              n_transmitters: 1, z_waveform_time: 7,
+│   │                                              n_receivers: 2, n_components: 2, xyz: 3)
+│   │       Coordinates:
+│   │         * nv                                (nv) int64 16B 0 1
+│   │         * n_transmitters                    (n_transmitters) int64 8B 0
+│   │         * z_waveform_time                   (z_waveform_time) float64 56B -0.01667 ...
+│   │         * xyz                               (xyz) int64 24B 0 1 2
+│   │         * n_receivers                       (n_receivers) int64 16B 0 1
+│   │         * n_components                      (n_components) int64 16B 0 1
+│   │       Data variables: (12/20)
+│   │           gate_times_bnds                   (gate_times, nv) float64 240B ...
+│   │           transmitter_label                 (n_transmitters) &lt;U1 4B ...
+│   │           transmitter_area                  (n_transmitters) float64 8B ...
+│   │           transmitter_base_frequency        (n_transmitters) float64 8B ...
+│   │           transmitter_current_scale_factor  (n_transmitters) float64 8B ...
+│   │           transmitter_number_of_turns       (n_transmitters) int32 4B ...
+│   │           ...                                ...
+│   │           component_transmitters            (n_components) &lt;U1 8B ...
+│   │           component_receivers               (n_components) &lt;U1 8B ...
+│   │           component_txrx_dx                 (n_components) float64 16B ...
+│   │           component_txrx_dy                 (n_components) float64 16B ...
+│   │           component_txrx_dz                 (n_components) float64 16B ...
+│   │           component_gate_times              (n_components) &lt;U10 80B ...
+│   │       Attributes:
+│   │           type:        system
+│   │           mode:        airborne
+│   │           method:      electromagnetic
+│   │           submethod:   time domain
+│   │           instrument:  tempest
+│   ├── Group: /survey/data/raw_data/magnetic_system
+│   │       Attributes:
+│   │           type:        system
+│   │           mode:        airborne
+│   │           method:      magnetic
+│   │           submethod:   not_defined
+│   │           instrument:  not_defiend
+│   └── Group: /survey/data/raw_data/radiometric_system
+│           Attributes:
+│               type:        system
+│               mode:        airborne
+│               method:      radiometric
+│               submethod:   not_defined
+│               instrument:  not_defined
+└── Group: /survey/data/derived_maps
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B ...
+    │   Attributes:
+    │       content:  derived maps
+    │       type:     container
+    └── Group: /survey/data/derived_maps/maps
+            Dimensions:       (x: 599, nv: 2, y: 1212)
+            Coordinates:
+                spatial_ref   float64 8B ...
+              * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+              * nv            (nv) int64 16B 0 1
+              * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+            Data variables:
+                x_bnds        (x, nv) float64 10kB ...
+                y_bnds        (y, nv) float64 19kB ...
+                magnetic_tmi  (y, x) float64 6MB ...
+            Attributes:
+                comment:  &lt;additional details or ancillary information&gt;
+                content:  gridded magnetic map
 
 Raster:
 
-&lt;xarray.Dataset&gt; Size: 6MB
-Dimensions:       (x: 599, nv: 2, y: 1212)
-Coordinates:
-    spatial_ref   float64 8B ...
-  * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
-  * nv            (nv) int64 16B 0 1
-  * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-Data variables:
-    x_bnds        (x, nv) float64 10kB ...
-    y_bnds        (y, nv) float64 19kB ...
-    magnetic_tmi  (y, x) float64 6MB ...
-Attributes:
-    comment:  &lt;additional details or ancillary information&gt;
-    content:  gridded magnetic map
+&lt;xarray.DataTree &#39;maps&#39;&gt;
+Group: /survey/data/derived_maps/maps
+    Dimensions:       (x: 599, nv: 2, y: 1212)
+    Coordinates:
+        spatial_ref   float64 8B ...
+      * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * nv            (nv) int64 16B 0 1
+      * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    Data variables:
+        x_bnds        (x, nv) float64 10kB ...
+        y_bnds        (y, nv) float64 19kB ...
+        magnetic_tmi  (y, x) float64 6MB ...
+    Attributes:
+        comment:  &lt;additional details or ancillary information&gt;
+        content:  gridded magnetic map
 </pre></div>
 </div>
 <p>and the second is located at index 1</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Second Tabular Group:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Second Tabular Group:
 
-&lt;xarray.Dataset&gt; Size: 31MB
-Dimensions:                  (index: 20701, layer_depth: 30, nv: 2,
-                              gate_times: 15)
-Coordinates:
-    spatial_ref              float64 8B ...
-  * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
-  * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
-  * nv                       (nv) int64 16B 0 1
-  * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
-    x                        (index) float64 166kB ...
-    y                        (index) float64 166kB ...
-    z                        (index) float64 166kB ...
-Data variables: (12/49)
-    layer_depth_bnds         (layer_depth, nv) float64 480B ...
-    gate_times_bnds          (gate_times, nv) float64 240B ...
-    uniqueid                 (index) int32 83kB ...
-    survey                   (index) int32 83kB ...
-    date                     (index) int32 83kB ...
-    flight                   (index) int32 83kB ...
-    ...                       ...
-    phic                     (index) float64 166kB ...
-    phit                     (index) float64 166kB ...
-    phig                     (index) float64 166kB ...
-    phis                     (index) float64 166kB ...
-    lambda                   (index) float64 166kB ...
-    iterations               (index) int32 83kB ...
-Attributes:
-    content:  inverted resistivity models
-    comment:  This dataset includes inverted resistivity models derived from ...
+&lt;xarray.DataTree &#39;inverted_models&#39;&gt;
+Group: /survey/models/inverted_models
+    Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
+                                  index: 20701)
+    Coordinates:
+        spatial_ref              float64 8B ...
+      * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+      * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+      * nv                       (nv) int64 16B 0 1
+      * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+        x                        (index) float64 166kB ...
+        y                        (index) float64 166kB ...
+        z                        (index) float64 166kB ...
+    Data variables: (12/49)
+        layer_depth_bnds         (layer_depth, nv) float64 480B ...
+        gate_times_bnds          (gate_times, nv) float64 240B ...
+        uniqueid                 (index) int32 83kB ...
+        survey                   (index) int32 83kB ...
+        date                     (index) int32 83kB ...
+        flight                   (index) int32 83kB ...
+        ...                       ...
+        phic                     (index) float64 166kB ...
+        phit                     (index) float64 166kB ...
+        phig                     (index) float64 166kB ...
+        phis                     (index) float64 166kB ...
+        lambda                   (index) float64 166kB ...
+        iterations               (index) int32 83kB ...
+    Attributes:
+        content:  inverted resistivity models
+        comment:  This dataset includes inverted resistivity models derived from ...
 </pre></div>
 </div>
 </section>
@@ -273,7 +668,7 @@ Attributes:
 <h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading"></a></h3>
 <p>Tabular data are typicaly 1-D or 2-D variables with the primary dimension being <code class="docutils literal notranslate"><span class="pre">index</span></code>, which
 corresponds to the rows of the input text file representing individual measurements.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;index&#39; (index: 20701)&gt; Size: 83kB
@@ -286,20 +681,21 @@ Coordinates:
     z            (index) float64 166kB ...
 Attributes:
     standard_name:  index
-    null_value:     not_defined
-    units:          not_defined
-    grid_mapping:   spatial_ref
-    valid_range:    [    0 20700]
     long_name:      Index of individual data points
+    units:          not_defined
+    null_value:     not_defined
+    valid_range:    [    0 20700]
+    grid_mapping:   spatial_ref
+    axis:           INDEX
 </pre></div>
 </div>
 <p>If a dimension is not discrete, meaning it represents ranges (such as depth layers),
 then the bounds on each dimension value also need to be defined, and are linked
 to the dimension through the “bounds” attribute.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;example non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">corresponding bounds on non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times_bnds&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;gate_times_bnds&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>example non-discrete dimension:
@@ -313,12 +709,12 @@ Coordinates:
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 Attributes:
     standard_name:  gate_times
-    null_value:     not_defined
-    bounds:         gate_times_bnds
-    units:          seconds
-    grid_mapping:   spatial_ref
-    valid_range:    [1.085000e-05 1.337928e-02]
     long_name:      receiver gate times
+    units:          seconds
+    null_value:     not_defined
+    valid_range:    [1.085000e-05 1.337928e-02]
+    grid_mapping:   spatial_ref
+    bounds:         gate_times_bnds
 
 
 corresponding bounds on non-discrete dimension:
@@ -331,10 +727,10 @@ Coordinates:
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 Attributes:
     standard_name:  gate_times_bounds
-    null_value:     not_defined
-    grid_mapping:   spatial_ref
-    valid_range:    [5.430000e-06 1.666171e-02]
     long_name:      receiver gate times cell boundaries
+    null_value:     not_defined
+    valid_range:    [5.430000e-06 1.666171e-02]
+    grid_mapping:   spatial_ref
 </pre></div>
 </div>
 </section>
@@ -349,12 +745,7 @@ such as <code class="docutils literal notranslate"><span class="pre">index</span
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coordinates:
-    spatial_ref  float64 8B ...
-  * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
-    x            (index) float64 166kB ...
-    y            (index) float64 166kB ...
-    z            (index) float64 166kB ...
-  * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+    *empty*
 </pre></div>
 </div>
 <p>Tabular Coordinates</p>
@@ -368,7 +759,7 @@ temporal coordinates of the data points.</p>
 <p>Raster data are gridded, typically representing maps or multi-dimensional models.
 Therefore, Raster data almost always have dimensional coordinates, i.e., the
 data dimensions correspond directly to either spatial or temporal coordinates (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>).</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coordinates:
@@ -393,7 +784,7 @@ for more details.</p>
 information about a dataset group as a whole, such as model inversion parameters
 or other processing descriptions. At a minimum, a <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute should
 contain a brief summary of the contents of the dataset.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset includes inverted resistivity models derived from &#39;
@@ -404,7 +795,7 @@ contain a brief summary of the contents of the dataset.</p>
 <p>Variable attributes</p>
 <p>Each data variable must contain attributes detailing the metadata
 of that individual variable. These follow the <a class="reference external" href="http://cfconventions.org/">Climate and Forecast (CF) metadata conventions</a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">][</span><span class="s1">&#39;conductivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;conductivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;format&#39;: &#39;30e15.6&#39;,
@@ -416,7 +807,7 @@ of that individual variable. These follow the <a class="reference external" href
  &#39;valid_range&#39;: array([1.e-04, 1.e+01])}
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.632 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.437 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>
