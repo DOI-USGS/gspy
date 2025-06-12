@@ -668,7 +668,7 @@ class Dataset:
 
         from geobipy import StatArray, RectilinearMesh2D, Model
 
-        x = subset.gs_tabular.x_axis(kwargs.pop('axis', 'x'))
+        x = subset.gs.x_axis(kwargs.pop('axis', 'x'))
 
         z = subset['layer_depth_bnds'].values
         z = np.hstack([z[:, 0, 0], z[-1, -1, 0]])

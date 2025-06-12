@@ -277,3 +277,6 @@ class Container:
 
     def add_timestamp(self, *args, **kwargs):
         self._obj.to_dataset().gs.add_timestamp(*args, **kwargs)
+
+    def plot_cross_section(self, *args, **kwargs):
+        self._obj.to_dataset().gs.plot_cross_section(*args, **kwargs)

@@ -54,7 +54,7 @@ d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
 # Add the raw AEM data as a tabular dataset
 data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, system=survey.nominal_system)
 
-# print(data_container)
+print(data_container)
 
 #%%
 # 2 - Processed Data -
@@ -68,7 +68,6 @@ system = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:
 
 # Add the processed AEM data as a tabular dataset
 pd = data_container.gs.add(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
-
 
 #%%
 # 3 - Inverted Models -
@@ -108,8 +107,6 @@ m_supp5 = join(data_path, 'data//WI_SkyTEM_mag_bedrock_grids_md.yml')
 # Add the interpolated maps as a raster dataset
 derived_products.gs.add(key='maps', metadata_file=m_supp5)
 
-# print(root.gs.tree)
-
 #%%
 # Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
@@ -120,10 +117,11 @@ survey.gs.to_netcdf(d_out)
 
 data_container.gs.to_netcdf('test_datacontainer.nc')
 
-
 #%%
 # Reading back in
 new_survey = gspy.open_datatree(d_out)['survey']
+
+print(new_survey)
 
 #%%
 # Plotting
