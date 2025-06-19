@@ -4,7 +4,7 @@ from copy import deepcopy
 
 import numpy as np
 import xarray as xr
-import rioxarray
+import rioxarray as rio
 
 from pprint import pprint
 
@@ -117,9 +117,16 @@ class Raster(Dataset):
         files = kwargs.pop('files')
         n_files = len(files)
         values = None
+
+        cached_transform = None
+
         # Read each file in the variables metadata
         for i, file in enumerate(files):
             ds = self.open_rasterio(file)
+            if cached_transform is None:
+                cached_transform = ds.rio.transform()
+            else:
+                assert ds.rio.transform() == cached_transform, ValueError(f"raster file {file} has a mismatching GeoTransform")
 
             shape = ds.shape
             if n_files > 1:
@@ -134,6 +141,9 @@ class Raster(Dataset):
 
             if n_files > 1:
                 values[i, :, :] = ds.values
+
+        # Add the tranform to the spatial ref
+        self._obj.spatial_ref.attrs['GeoTransform'] = cached_transform.to_gdal()
 
         # Add GS metadata to each matching coordinate in the file.
         coordinates = json_metadata['coordinates']
@@ -237,7 +247,7 @@ class Raster(Dataset):
         """
         if isinstance(filename, list):
             filename = filename[0]
-        ds = rioxarray.open_rasterio(filename)
+        ds = rio.open_rasterio(filename)
 
         # clean up
         ds = ds.squeeze().drop('band')
