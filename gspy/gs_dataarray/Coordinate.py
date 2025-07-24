@@ -1,5 +1,6 @@
 from numpy import arange
 from .DataArray import DataArray
+from ..metadata.Metadata import Metadata
 
 class Coordinate(DataArray):
     """Accessor to xarray.DataArray to define a Coordinate.
@@ -14,18 +15,20 @@ class Coordinate(DataArray):
     Coordinate.from_values : For instantiation
 
     """
+    @staticmethod
+    def metadata_template(**kwargs):
 
-    @property
-    def metadata(self):
-        return {"standard_name": "",
-               "long_name": "Can specify centers and/or bounds, or origin/increment/length",
-               "units": "",
-               "null_value": "not_defined",
-               "centers" : [0, 1, 2],
-               "bounds" : [[-0.5, 0.5], [0.5, 1.5], [1.5, 2.5]],
-               "origin " : -0.5,
-               "increment" : 1.0,
-               "length" : 3}
+        template = {"standard_name": "not_defined",
+                    "long_name": "Can specify centers and/or bounds, or origin/increment/length",
+                    "units": "not_defined",
+                    "null_value": "not_defined",
+                    "centers" : [0, 1, 2],
+                    "bounds" : [[-0.5, 0.5], [0.5, 1.5], [1.5, 2.5]],
+                    "origin" : -0.5,
+                    "increment" : 1.0,
+                    "length" : 3}
+
+        return Metadata.merge(template, kwargs)
 
 
     @classmethod

@@ -2,6 +2,7 @@ import warnings
 
 from ..utilities.CRS import CRS
 from xarray import DataArray, register_dataarray_accessor
+from ..metadata.Metadata import Metadata
 
 @register_dataarray_accessor("spatial_ref")
 class Spatial_ref:
@@ -68,6 +69,14 @@ class Spatial_ref:
             out.attrs['wkid'] = crs.to_authority()[1]
 
         return out
+
+    @staticmethod
+    def metadata_template(**kwargs):
+        return Metadata.merge({"wkid":"??",
+                               "crs_wkt":"??",
+                               "proj_string":"??",
+                               "prj_file":"??"}, kwargs)
+
         # self['crs_wkt'] = crs.to_wkt()
         # with warnings.catch_warnings():
         #     warnings.simplefilter('ignore')

@@ -4,8 +4,9 @@ from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray as xr_DataArray
 from xarray import register_dataarray_accessor
+from ..metadata.Metadata import Metadata
 
-default_metadata = ('long_name', 'standard_name', 'units', 'null_value')
+default_metadata = ('standard_name', 'long_name', 'null_value', 'units')
 
 @register_dataarray_accessor("gs")
 class DataArray:
@@ -153,12 +154,10 @@ class DataArray:
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        out = xr_DataArray(values,
+        return xr_DataArray(values,
                 dims=kwargs.pop('dimensions', None),
                 coords=kwargs.pop('coords', None),
                 attrs=kwargs)
-
-        return out
 
     @staticmethod
     def catch_nan(values, name, **kwargs):
@@ -235,45 +234,8 @@ class DataArray:
 
     @property
     def label(self):
-        return '{} [{}]'.format(self._obj.attrs['long_name'], self._obj.attrs['units'])
+        return f'{self._obj.attrs['long_name']} [{self._obj.attrs['units']}]'
 
-
-    @classmethod
-    def from_dict(cls, kwargs):
-
-        from ..survey.CRS import CRS
-
-        if ("wkid" in kwargs) and (kwargs.get("wkid", "None") != "None" and (kwargs.get("wkid", "None")) != ""):
-            val = kwargs["wkid"]
-            if 'EPSG' in str(val):
-                val = val.split(':')[1]
-                auth = 'EPSG'
-            elif ("authority" in kwargs) and (kwargs.get("authority", "None") != "None" and (kwargs.get("authority", "None")) != ""):
-                auth = kwargs["authority"]
-            else:
-                print('WARNING! No authority passed for WKID, DEFAULTING to EPSG')
-
-            if auth == 'EPSG':
-                crs = CRS.from_epsg(val)
-
-        elif ("crs_wkt" in kwargs.keys()) and (kwargs.get("crs_wkt", "None") != "None"):
-            crs = CRS.from_wkt(kwargs["crs_wkt"].replace("'",'"'))
-
-        elif("proj_string" in kwargs.keys()) and (kwargs.get("proj_string", "None") != "None"):
-            crs = CRS.from_proj4(kwargs["proj_string"])
-        else:
-            print('WARNING! No coordinate information imported, DEFAULTING to EPSG:4326')
-            crs = CRS.from_epsg('4326')
-
-        #self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
-        # self = cls(0.0, attrs=tmp)
-
-        out = DataArray(0.0)
-
-        out.attrs = crs.to_cf()
-
-        if crs.to_authority():
-            out.attrs['authority'] = crs.to_authority()[0]
-            out.attrs['wkid'] = crs.to_authority()[1]
-
-        return out
+    @staticmethod
+    def metadata_template(**kwargs):
+        return Metadata.merge({key: "not_defined" for key in default_metadata}, kwargs)
