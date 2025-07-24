@@ -1,5 +1,5 @@
 
-from os import path
+from os import path, sep
 from copy import copy
 from ..metadata.Metadata import Metadata
 from ..gs_dataarray.Spatial_ref import Spatial_ref
@@ -291,3 +291,32 @@ class Container:
             kwargs = self._obj.to_dataset().gs.get_all_attr(attr, path=path, **kwargs)
         return kwargs
 
+    def write_ncml(self, file, indent=0):
+        """ Write an NcML (NetCDF XML) metadata file
+
+        Parameters
+        ----------
+        filename : str
+            Name of the NetCDF file to generate NcML for
+
+        """
+
+        si = "  "*indent
+
+        if isinstance(file, str):
+            base_name = file.split(sep)[-1]
+            file = open(f'{'.'.join(file.split('.')[:-1])}.ncml', 'w')
+
+            file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            file.write(f'<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{base_name}">\n\n')
+
+        # First do my dataset if there is one.
+        self._obj.to_dataset().gs.write_ncml(file, self._obj.name, indent, no_end=True)
+
+        for child in self._obj.children:
+            self._obj[child].gs.write_ncml(file, indent+1)
+        file.write(f'{si}</group>\n')
+
+        if indent == 0:
+            file.write(f'</netcdf>')
+            file.close()

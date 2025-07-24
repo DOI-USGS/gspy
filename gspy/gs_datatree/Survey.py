@@ -1,3 +1,4 @@
+import os
 import xarray as xr
 from .Container import Container
 from ..gs_dataset.Dataset import Dataset
@@ -57,88 +58,6 @@ class Survey(Container):
                     flightline_information = d,
                     survey_equipment = e))
         return out
-
-    # # def write_ncml(self, filename):
-    # #     """ Write an NcML (NetCDF XML) metadata file
-
-    # #     TODO: Re-write this.
-
-    # #     Parameters
-    # #     ----------
-    # #     filename : str
-    # #         Name of the NetCDF file to generate NcML for
-
-    # #     """
-
-    # #     infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
-    # #     f = open(infile, 'w')
-
-    # #     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-    # #     f.write('<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{}">\n\n'.format(filename.split(os.sep)[-1]))
-    # #     f.write('<group name="/survey">\n\n')
-
-    # #     ### Survey Dimensions:
-    # #     for dim in self.xarray.dims:
-    # #         f.write('  <dimension name="%s" length="%s"/>\n' % (dim, self.xarray.dims[dim]))
-    # #     if len(self.xarray.dims) > 0:
-    # #         f.write('\n')
-
-    # #     ### Survey Attributes:
-    # #     for attr in self.xarray.attrs:
-    # #         att_val = self.xarray.attrs[attr]
-    # #         if '"' in str(att_val):
-    # #             att_val = att_val.replace('"',"'")
-    # #         f.write('  <attribute name="%s" value="%s"/>\n' % (attr, att_val))
-    # #     f.write('\n')
-
-    # #     ### Survey Variables:
-    # #     for var in self.xarray.variables:
-    # #         tmpvar = self.xarray.variables[var]
-    # #         dtype = str(tmpvar.dtype).title()[:-2]
-    # #         if var == 'crs' or dtype == 'object':
-    # #             f.write('  <variable name="%s" shape="%s" type="String">\n' % (var, " ".join(tmpvar.dims)))
-    # #         else:
-    # #             f.write('  <variable name="%s" shape="%s" type="%s">\n' % (var, " ".join(tmpvar.dims), dtype))
-    # #         for attr in tmpvar.attrs:
-    # #             att_val = tmpvar.attrs[attr]
-    # #             if '"' in str(att_val):
-    # #                 att_val = att_val.replace('"',"'")
-    # #             f.write('    <attribute name="%s" type="String" value="%s"/>\n' % (attr, att_val))
-    # #         f.write('  </variable>\n\n')
-    # #     f.close()
-
-    # #     # Tabular
-    # #     for i, m in enumerate(self._tabular):
-    # #         f = open(infile, 'a')
-    # #         if i == 0:
-    # #             f.write('  <group name="/tabular">\n\n')
-    # #         f.write('    <group name="/{}">\n\n'.format(i))
-    # #         f.close()
-    # #         m.gs_dataset.write_ncml(filename, group="tabular", index=i)
-    # #         f = open(infile, 'a')
-    # #         f.write('    </group>\n\n')
-    # #         if i == len(self._tabular)-1:
-    # #             f.write('  </group>\n\n')
-    # #         f.close()
-
-    # #     # Raster
-    # #     for i, m in enumerate(self._raster):
-    # #         f = open(infile, 'a')
-    # #         if i == 0:
-    # #             f.write('  <group name="/raster">\n\n')
-    # #         f.write('    <group name="/{}">\n\n'.format(i))
-    # #         f.close()
-    # #         m.gs_dataset.write_ncml(filename, group="raster", index=i)
-    # #         f = open(infile, 'a')
-    # #         f.write('    </group>\n\n')
-    # #         if i == len(self._raster)-1:
-    # #             f.write('  </group>\n\n')
-    # #         f.close()
-
-    # #     f = open(infile, 'a')
-    # #     f.write('</group>\n\n')
-    # #     f.write('</netcdf>')
-    # #     f.close()
 
     # # @property
     # # def contents(self):

@@ -239,3 +239,20 @@ class DataArray:
     @staticmethod
     def metadata_template(**kwargs):
         return Metadata.merge({key: "not_defined" for key in default_metadata}, kwargs)
+
+    def write_ncml(self, file, indent):
+        si = "  "*(indent+1)
+
+        dtype = str(self._obj.dtype).title()[:-2]
+        obj = self._obj
+        if obj.name == 'crs' or obj.dtype == 'object':
+            file.write(f'{si}<variable name="{obj.name}" shape="{" ".join(obj.dims)}" type="String">\n')
+        else:
+            file.write(f'{si}<variable name="{obj.name}" shape="{" ".join(obj.dims)}" type="{dtype}">\n')
+
+        st = "  "*(indent+2)
+        for k, v in obj.attrs.items():
+            if '"' in str(v):
+                v = v.replace('"',"'")
+            file.write(f'{st}<attribute name="{k}" type="String" value="{str(v).strip('\n')}"/>\n')
+        file.write(f'{si}</variable>\n\n')

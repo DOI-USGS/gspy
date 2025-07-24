@@ -532,69 +532,31 @@ class Dataset:
 
         self._obj.to_zarr(filename, mode=mode, group=group, **kwargs)
 
-    def write_ncml(self, filename, group, index):
-        """Write an NCML file
+    def write_ncml(self, file, name, indent, no_end=False):
 
-        Parameters
-        ----------
-        filename : str
-            NCML filename
-        group : str
-            Group name in Netcdf file to generate NCML output for.
-        index : str
-            todo
-        """
+        st = "  "*indent
 
-        infile = f'{'.'.join(filename.split('.')[:-1])}.ncml'
-        if not os.path.isfile(infile):
-            print('original file not found!')
-            singleflag=True
-            sp1, sp2 = '', '  '
-            f = open(infile, 'w')
-            f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-            f.write(f'<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{filename.split(os.sep)[-1]}.nc">\n\n')
-            f.write(f'{sp1}<group name="/{group}">\n\n')
-            f.write(f'{sp2}<group name="/{index}">\n\n')
-            f.close()
-        else:
-            singleflag=False
-            sp1, sp2 = '  ', '    '
+        file.write(f'{st}<group name="/{name}">\n')
+        si = "  "*(indent+1)
 
-        f = open(infile, 'a')
-        ### Dimensions:
-        for dim in self._obj.dims:
-            f.write('%s<dimension name="%s" length="%s"/>\n' % (sp2, dim, self._obj.dims[dim]))
-        f.write('\n')
+        if len(self._obj.dims) > 0:
+            for dim in self._obj.dims:
+                file.write(f'{si}<dimension name="{dim}" length="{self._obj.sizes[dim]}"/>\n')
+            file.write("\n")
 
-        ### Global Attributes:
-        for attr in self._obj.attrs:
-            att_val = self._obj.attrs[attr]
-            if '"' in str(att_val):
-                att_val = att_val.replace('"',"'")
-            f.write('%s<attribute name="%s" value="%s"/>\n' % (sp2, attr, att_val))
-        f.write('\n')
+        if len(self._obj.attrs) > 0:
+            for k, v in self._obj.attrs.items():
+                if '"' in str(v):
+                    v = v.replace('"',"'")
+                file.write(f'{si}<attribute name="{k}" value="{str(v).strip('\n')}"/>\n')
+            file.write('\n')
 
-        ### Variables:
-        for var in self._obj.variables:
-            tmpvar = self._obj.variables[var]
-            dtype = str(tmpvar.dtype).title()[:-2]
-            if var == 'crs' or dtype == 'object':
-                f.write('%s<variable name="%s" shape="%s" type="String">\n' % (sp2, var, " ".join(tmpvar.dims)))
-            else:
-                f.write('%s<variable name="%s" shape="%s" type="%s">\n' % (sp2, var, " ".join(tmpvar.dims), dtype))
-            for attr in tmpvar.attrs:
-                att_val = tmpvar.attrs[attr]
-                if '"' in str(att_val):
-                    att_val = att_val.replace('"',"'")
-                f.write('%s%s<attribute name="%s" type="String" value="%s"/>\n' % (sp1, sp2, attr, att_val))
-            f.write('%s</variable>\n\n' % sp2)
+        if len(self._obj.variables) > 0:
+            for var in self._obj.variables:
+                self._obj[var].gs.write_ncml(file, indent)
 
-        if singleflag:
-            f.write(f'{sp2}</group>\n\n')
-            f.write(f'{sp1}</group>\n\n')
-            f.write('</netcdf>')
-
-        f.close()
+        if not no_end:
+            file.write(f'{st}</group>\n')
 
     @classmethod
     def Survey(cls, **kwargs):

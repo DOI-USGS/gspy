@@ -19,3 +19,11 @@ def open_dataset(*args, **kwargs):
     kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
 
     return xr_open_dataset(*args, **kwargs)
+
+def write_ncml(nc_filename, *args, **kwargs):
+
+    ds = open_datatree(nc_filename, *args, **kwargs)['survey']
+
+    ds.gs.write_ncml(nc_filename)
+
+
