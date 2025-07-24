@@ -363,18 +363,16 @@ class Dataset:
         if x == 'distance':
             x, y = self._obj['x'].values, self._obj['y'].values
             x = np.hstack([0.0, np.sqrt(np.cumsum(np.diff(x))**2.0 + np.cumsum(np.diff(y))**2.0)])
-            xlabel = "Distance ({})".format(self._obj['x'].attrs['units'])
+            xlabel = f"Distance ({self._obj['x'].attrs['units']})"
         else:
             x = self._obj[x]
-            xlabel = 'x\n{}'.format(self._obj['x'].gs.label)
+            xlabel = f'x\n{self._obj['x'].gs.label}'
 
         splot = plt.plot(x, self._obj[hue].values, **kwargs)
 
         plt.xlabel(xlabel)
-        plt.ylabel('y\n{}'.format(self._obj[hue].gs.label))
+        plt.ylabel(f'y\n{self._obj[hue].gs.label}')
 
-        # cb=plt.colorbar()
-        # cb.set_label(r'{}\n{} [{}]'.format(variable, self._obj[variable].attrs['long_name'], self._obj[variable].attrs['units']), rotation=-90, labelpad=30)
         plt.tight_layout()
 
         return ax, splot
@@ -413,11 +411,11 @@ class Dataset:
 
             splot = plt.scatter(x.values, y.values, c=self._obj[hue].values, **kwargs)
 
-            plt.xlabel('x\n{} [{}]'.format(x.attrs['long_name'], x.attrs['units']))
-            plt.ylabel('y\n{} [{}]'.format(y.attrs['long_name'], y.attrs['units']))
+            plt.xlabel(f'x\n{x.attrs['long_name']} [{x.attrs['units']}]')
+            plt.ylabel(f'y\n{y.attrs['long_name']} [{y.attrs['units']}]')
 
             cb=plt.colorbar()
-            cb.set_label('{}\n{} [{}]'.format(hue, self._obj[hue].attrs['long_name'], self._obj[hue].attrs['units']), rotation=-90, labelpad=30)
+            cb.set_label(f'{hue}\n{self._obj[hue].attrs['long_name']} [{self._obj[hue].attrs['units']}]', rotation=-90, labelpad=30)
 
             plt.tight_layout()
 
@@ -549,16 +547,16 @@ class Dataset:
             todo
         """
 
-        infile = '{}.ncml'.format('.'.join(filename.split('.')[:-1]))
+        infile = f'{'.'.join(filename.split('.')[:-1])}.ncml'
         if not os.path.isfile(infile):
             print('original file not found!')
             singleflag=True
             sp1, sp2 = '', '  '
             f = open(infile, 'w')
             f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-            f.write('<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{}.nc">\n\n'.format(filename.split(os.sep)[-1]))
-            f.write('{}<group name="/{}">\n\n'.format(sp1, group))
-            f.write('{}<group name="/{}">\n\n'.format(sp2, index))
+            f.write(f'<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{filename.split(os.sep)[-1]}.nc">\n\n')
+            f.write(f'{sp1}<group name="/{group}">\n\n')
+            f.write(f'{sp2}<group name="/{index}">\n\n')
             f.close()
         else:
             singleflag=False
@@ -594,8 +592,8 @@ class Dataset:
             f.write('%s</variable>\n\n' % sp2)
 
         if singleflag:
-            f.write('{}</group>\n\n'.format(sp2))
-            f.write('{}</group>\n\n'.format(sp1))
+            f.write(f'{sp2}</group>\n\n')
+            f.write(f'{sp1}</group>\n\n')
             f.write('</netcdf>')
 
         f.close()
@@ -618,14 +616,14 @@ class Dataset:
 
         required = ("title", "institution", "source", "history", "references")
         if isinstance(kwargs, xr_Dataset):
-            assert all([x in kwargs.attrs for x in required]), ValueError("Dataset.attrs must contain at least {}".format(required))
+            assert all([x in kwargs.attrs for x in required]), ValueError(f"Dataset.attrs must contain at least {required}")
             xarray = kwargs
         else:
 
             assert isinstance(kwargs, dict), TypeError('metadata must have type dict')
             assert "dataset_attrs" in kwargs, ValueError("Survey metadata must contain entry 'dataset_attrs")
             assert "spatial_ref" in kwargs, ValueError("Survey metadata must contain entry 'spatial_ref")
-            assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError("dataset_attrs must contain at least {}".format(required))
+            assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError(f"dataset_attrs must contain at least {required}")
 
             ds = cls(xr_Dataset(attrs = {}))
 

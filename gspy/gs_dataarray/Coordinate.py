@@ -74,7 +74,7 @@ class Coordinate(DataArray):
             kwargs['values'] = kwargs.pop('centers')
 
         else:
-            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError("Explicit dimension definition {} must have origin, increment, length".format(name))
+            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError(f"Explicit dimension definition {name} must have origin, increment, length")
             x0, dx, nx = kwargs.pop('origin'), kwargs.pop('increment'), kwargs.pop('length')
             kwargs['values'] = (arange(nx) * dx) + x0
 
@@ -178,7 +178,7 @@ class Coordinate(DataArray):
 
         """
         if name in ("x", "y", "z", "t"):
-            assert "axis" in kwargs, ValueError('coordinate definition for {} requires "axis" defined in the variable metadata. e.g. "axis":"X" for x'.format(name))
+            assert "axis" in kwargs, ValueError(f'coordinate definition for {name} requires "axis" defined in the variable metadata. e.g. "axis":"X" for x')
             if name == "z":
                 assert "positive" in kwargs, ValueError('z coordinate definition requires entry "positive" : "up" or "down"')
                 assert "datum" in kwargs, ValueError('z coordinate definition requires entry "datum", e.g. "ground surface"')

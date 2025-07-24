@@ -8,7 +8,7 @@ class Variable_metadata(dict):
 
             missing = [x for x in self.required_keys if not x in kwargs[col]]
             if len(missing) > 0:
-                raise ValueError("Missing {} from {} in {} dict".format(missing, col, self.key))
+                raise ValueError(f"Missing {missing} from {col} in {self.key} dict")
 
             units = kwargs[col]['units']
             if '$' in units:

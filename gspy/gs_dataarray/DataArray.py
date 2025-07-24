@@ -192,8 +192,8 @@ class DataArray:
         nv = kwargs.get('null_value', 'not_defined')
 
         if nv == 'not_defined':
-            assert not npany(isnan(values)), ValueError(("\nThere are NaNs or Empty values in data column {} and no defined null value in the json metadata file.\n"
-                                                         "Define the 'null_value' for {} in the json file").format(name, name))
+            assert not npany(isnan(values)), ValueError((f"\nThere are NaNs or Empty values in data column {name} and no defined null value in the json metadata file.\n"
+                                                         f"Define the 'null_value' for {name} in the json file"))
         else:
             values[isnan(values)] = nv
         return values

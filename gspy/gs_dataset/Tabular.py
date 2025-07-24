@@ -38,7 +38,7 @@ class Tabular(Dataset):
 
     @type.setter
     def type(self, value):
-        assert value in self._allowed_file_types, ValueError('type must be in {}'.format(self._allowed_file_types))
+        assert value in self._allowed_file_types, ValueError(f'type must be in {self._allowed_file_types}')
         self._type = value
 
     @staticmethod
@@ -197,19 +197,19 @@ class Tabular(Dataset):
                     # if variable has multiple columns with [i] increment, to be combined
                     elif (var in column_counts) and (column_counts[var] > 1):
                         try:
-                            values = file.df[["{}[{}]".format(var, i) for i in range(column_counts[var])]].values
+                            values = file.df[[f"{var}[{i}]" for i in range(column_counts[var])]].values
                         except KeyError:
                             try:
-                                values = file.df[["{}_{}".format(var,i) for i in range(column_counts[var])]].values
+                                values = file.df[[f"{var}_{i}" for i in range(column_counts[var])]].values
                             except KeyError:
                                 raise KeyError(f"Column header names for variable '{var}' not found in {var}[0] or {var}_0 format")
 
 
-                    assert values is not None, ValueError(('{} not in data file, double check, '
+                    assert values is not None, ValueError((f'{var} not in data file, double check, '
                                                           'raw_data_columns field required in variables '
-                                                          'if combining unique columns to a new variable without an [i] increment').format(var))
+                                                          'if combining unique columns to a new variable without an [i] increment'))
 
-                    assert 'dimensions' in var_meta, ValueError('No dimensions found for 2+ dimensional variable {}.  Please add "dimensions":[---, ---]'.format(var))
+                    assert 'dimensions' in var_meta, ValueError(f'No dimensions found for 2+ dimensional variable {var}.  Please add "dimensions":[---, ---]')
                     # Check for the dimensions of the variable and try adding from a system class.
 
                     for dim in var_meta['dimensions']:
@@ -219,7 +219,7 @@ class Tabular(Dataset):
                                     if dim.lower() in item.coords:
                                         self._obj = self._obj.assign_coords({dim.lower():item.coords[dim.lower()]})
 
-                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError("Could not match variable dimensions {} with json dimensions {}".format(var_meta['dimensions'], self._obj.dims))
+                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with json dimensions {self._obj.dims}")
 
                     self._obj = self.add_variable_from_values(var, values=values, **var_meta)
 
@@ -242,14 +242,14 @@ class Tabular(Dataset):
             large = np.max(np.abs(values))
             p1 = values.min() < 0.0
 
-            out = "i{}".format(large%10 + p1)
+            out = f"i{large%10 + p1}"
         if dtype == np.float32:
             out = default_f32
         if dtype == np.float64:
             out = default_f64
 
         if values.ndim == 2:
-            out = "{}".format(values.shape[1]) + out
+            out = f"{values.shape[1]}" + out
 
         return out
 

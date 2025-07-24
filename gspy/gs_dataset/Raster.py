@@ -193,13 +193,13 @@ class Raster(Dataset):
         if 'grid_mapping_name' in ds[raster_spatial_reference].attrs.keys():
             raster_spatial_reference_name = ds[raster_spatial_reference].attrs['grid_mapping_name']
             if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
-                raise NotImplementedError("Need to reproject input file to match survey spatial ref, for variable {}".format(name))
+                raise NotImplementedError(f"Need to reproject input file to match survey spatial ref, for variable {name}")
         # elif 'crs_wkt' in ds[raster_spatial_reference].attrs.keys():
         #     raster_spatial_reference_name = ds[raster_spatial_reference].attrs['crs_wkt']
         #     if raster_spatial_reference_name != self.spatial_ref.attrs['crs_wkt']:
-        #         raise NotImplementedError("Need to reproject input file to match survey spatial ref, for variable {}".format(name))
+        #         raise NotImplementedError(f"Need to reproject input file to match survey spatial ref, for variable {name}")
         else:
-            print('WARNING: cannot identify CRS for input [{}] raster, will assume the data matches the survey spatial_ref!'.format(name))
+            print(f'WARNING: cannot identify CRS for input [{name}] raster, will assume the data matches the survey spatial_ref!')
 
         # Reproject if input CRS does not match Survey
         # if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
@@ -302,7 +302,7 @@ class Raster(Dataset):
                 self._obj = self._obj.gs.drop_vars(check_keys[i])
 
         if self.spatial_ref['wkid'] != "None":
-            target_crs = "{}:{}".format(self.spatial_ref['authority'], self.spatial_ref['wkid'])
+            target_crs = f"{self.spatial_ref['authority']}:{self.spatial_ref['wkid']}"
         else:
             target_crs = self.spatial_ref['crs_wkt']
 
@@ -426,6 +426,6 @@ class Raster(Dataset):
                 # if 3D variable, slice along stack dimension
                 if 'stack' in ds.dims:
                     for s in ds['stack'].values:
-                        ds.sel(stack=s).rio.to_raster("{}_{}.tif".format(var, s))
+                        ds.sel(stack=s).rio.to_raster(f"{var}_{s}.tif")
                 else:
-                    ds.rio.to_raster("{}.tif".format(var))
+                    ds.rio.to_raster(f"{var}.tif")

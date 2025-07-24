@@ -79,7 +79,7 @@ class Metadata(dict):
             elif 'yml' in filename:
                 __yaml_dump(self, f)
             else:
-                raise Exception("Unknown extension for metadata file {}, please use json or yml".format(filename))
+                raise Exception(f"Unknown extension for metadata file {filename}, please use json or yml")
 
     def check_key_whitespace(self, flag=False):
         def __check_key_whitespace(this, flag=False):
@@ -87,7 +87,7 @@ class Metadata(dict):
                 return flag
             for key, item in this.items():
                 if ' ' in key:
-                    print('key "{}" contains whitespace. Please remove!'.format(key))
+                    print(f'{key=} contains whitespace. Please remove!')
                     key = key.strip()
                     flag = True
                 flag = __check_key_whitespace(item, flag)
@@ -101,7 +101,7 @@ class Metadata(dict):
             """
             if isinstance(current, dict):
                 for k in current:
-                    new_key = "{0}.{1}".format(key.replace(' ','_'), k.replace(' ','_')) if len(key) > 0 else k
+                    new_key = f"{key.replace(' ','_')}.{k.replace(' ','_')}" if len(key) > 0 else k
                     __flatten(current[k], new_key, result)
             else:
                 result[key] = current
