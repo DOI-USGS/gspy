@@ -53,12 +53,13 @@ class Spatial_ref:
 
         elif("proj_string" in kwargs.keys()) and (kwargs.get("proj_string", "None") != "None"):
             crs = CRS.from_proj4(kwargs["proj_string"])
+
+        elif ("prj_file" in kwargs.keys()) and (kwargs.get("prj_file", "None") != "None"):
+            prj_text = open(kwargs['prj_file'], 'r').read()
+            crs = CRS.from_wkt(prj_text)
         else:
             print('WARNING! No coordinate information imported, DEFAULTING to EPSG:4326')
             crs = CRS.from_epsg('4326')
-
-        #self['wkid'] = ':'.join(crs.to_authority()) if crs.to_authority() else "None"
-        # self = cls(0.0, attrs=tmp)
 
         out = DataArray(0.0)
 
