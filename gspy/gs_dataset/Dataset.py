@@ -333,9 +333,7 @@ class Dataset:
         kwargs['system'] = system
 
         from .Tabular import Tabular
-
         out = Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
-
         out = Metadata.merge(out, system_metadata)
 
         return out
@@ -645,8 +643,8 @@ class Dataset:
 
             return ds._obj
 
-    def subset(self, key, value):
-        return self._obj.where(self._obj[key]==value)
+    def subset(self, key, value, **kwargs):
+        return self._obj.where(self._obj[key]==value, **kwargs)
 
     def interpolate(self, dx, dy, variable, **kwargs):
         from geobipy import Point
@@ -775,4 +773,13 @@ class Dataset:
         self = self.add_variable_from_values(key, values=dt, dimensions='index', **varmeta)
 
         return self._obj
+
+    def get_all_attr(self, attr, path, **kwargs):
+        for key in self._obj.data_vars:
+            attrs = self._obj[key].attrs
+            if attr in attrs:
+                kwargs[path+f"/{key}"] = attrs.get(attr)
+        return kwargs
+
+
 

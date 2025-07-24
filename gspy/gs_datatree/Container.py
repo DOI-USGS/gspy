@@ -280,3 +280,14 @@ class Container:
 
     def plot_cross_section(self, *args, **kwargs):
         self._obj.to_dataset().gs.plot_cross_section(*args, **kwargs)
+
+    def get_all_attr(self, attr, path=None, **kwargs):
+        if path is None:
+            path = self._obj.name
+        if self._obj.attrs['type'] in ('survey', 'container'):
+            for item in self._obj.children:
+                kwargs = self._obj[item].gs.get_all_attr(attr, path=path+f"/{item}", **kwargs)
+        else:
+            kwargs = self._obj.to_dataset().gs.get_all_attr(attr, path=path, **kwargs)
+        return kwargs
+
