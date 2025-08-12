@@ -25,5 +25,3 @@ def write_ncml(nc_filename, *args, **kwargs):
     ds = open_datatree(nc_filename, *args, **kwargs)['survey']
 
     ds.gs.write_ncml(nc_filename)
-
-

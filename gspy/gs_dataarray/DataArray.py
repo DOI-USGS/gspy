@@ -1,4 +1,5 @@
 from copy import deepcopy
+from pprint import pprint
 from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, ndim, r_, std, zeros, nan, min,max
 from numpy import any as npany
 from numpy import dtype as npdtype
