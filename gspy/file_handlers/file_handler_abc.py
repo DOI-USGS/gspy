@@ -17,7 +17,7 @@ class file_handler(ABC):
 
     __slots__ = ()
 
-    _allowed_file_types = ('aseg', 'csv', 'netcdf', 'loupe')
+    _allowed_file_types = ('aseg', 'csv', 'netcdf', 'loupe', 'xyz')
 
     def __init__(self):
 
@@ -172,4 +172,9 @@ class file_handler(ABC):
         #        "Creating a template with filename {}\n"
         #        "Please fill out and add the dictionary to the metadata file.\n").format(filename)
 
-        # raise Exception(s)
+        # raise Exception(s)    @staticmethod
+    @staticmethod
+    def is_workbench(filename):
+        with open(filename, 'r') as f:
+            line = f.readline()
+        return '/INFO' in line

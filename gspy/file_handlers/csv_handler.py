@@ -47,13 +47,13 @@ class csv_handler(file_handler):
 
         # Read the csv file
         self._df = pd.read_csv(filename, na_values=['NaN'], **kwargs)
+
         weird = (self.df.map(type) != self.df.iloc[0].apply(type)).any(axis=0)
         for w in weird.keys():
             if weird[w]:
                 self.df[w] = pd.to_numeric(self.df[w], errors='coerce')
 
         self.metadata = {}
-
         self.combine_metadata(metadata)
 
         return self
