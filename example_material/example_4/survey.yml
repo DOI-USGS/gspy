@@ -1,0 +1,42 @@
+dataset_attrs:
+    title: ??
+    institution: ??
+    source: ??
+    history: ??
+    references: ??
+    comment: ??
+    conventions: CF-1.8
+survey_information:
+    contractor_project_number: ??
+    contractor: ??
+    client: ??
+    survey_type: ??
+    survey_area_name: ??
+    state: ??
+    country: ??
+    acquisition_start: yyyymmdd
+    acquisition_end: yyyymmdd
+    dataset_created: yyyymmdd
+spatial_ref:
+    wkid: 3071
+    authority: EPSG
+    vertical_crs: NAVD88
+flightline_information:
+    traverse_line_spacing: ??
+    traverse_line_direction: ??
+    tie_line_spacing: ??
+    tie_line_direction: ??
+    nominal_line_spacing: ??
+    nominal_terrain_clearance: ??
+    final_line_kilometers: ??
+    traverse_line_numbers: ??
+    tie_line_numbers: ??
+survey_equipment:
+    aircraft: ??
+    magnetometer: ??
+    spectrometer_system: ??
+    radar_altimeter_system: ??
+    radar_altimeter_sample_rate: ??
+    laser_altimeter_system: ??
+    navigation_system: ??
+    acquisition_system: ??
