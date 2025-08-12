@@ -161,18 +161,13 @@ class file_handler(ABC):
         return out
 
 
-    def write_metadata_template(self, filename=None):
+    def write_metadata_template(self, filename=None, **kwargs):
 
         if filename is None:
             filename = f"{Path(self.filename).stem}_metadata_template.yml"
 
-        self.metadata_template.dump(filename)
+        self.metadata_template(**kwargs).dump(filename)
 
-        # s = ("\nVariable metadata values are not defined in the metadata file.\n"
-        #        "Creating a template with filename {}\n"
-        #        "Please fill out and add the dictionary to the metadata file.\n").format(filename)
-
-        # raise Exception(s)    @staticmethod
     @staticmethod
     def is_workbench(filename):
         with open(filename, 'r') as f:

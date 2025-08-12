@@ -21,8 +21,7 @@ class aseg_gdf2_handler(file_handler):
                 out.append(key)
         return out
 
-    @property
-    def metadata_template(self):
+    def metadata_template(self, **kwargs):
 
         out = super().metadata_template
 
