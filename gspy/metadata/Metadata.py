@@ -8,6 +8,9 @@ class Metadata(dict):
     @classmethod
     def read(cls, filename):
 
+        if filename is None:
+            return {}
+
         if isinstance(filename, dict):
             return filename
 
