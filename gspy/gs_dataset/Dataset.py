@@ -243,7 +243,7 @@ class Dataset:
                 dim = kwargs['dimensions'][i]
                 assert good, ValueError(f"Size of data for variable {name} along dimension {dim} is {shp[i]} and does not match xarray dimension with size {tmp[i]}")
 
-            kwargs['coords'] = [self._obj.coords[dim.lower()] for dim in kwargs['dimensions']]
+            kwargs['coords'] = {dim: self._obj.coords[dim.lower()] for dim in kwargs['dimensions']}
 
         self._obj[name] = DataArray.from_values(name, **kwargs)
 
@@ -743,5 +743,17 @@ class Dataset:
                 kwargs[path+f"/{key}"] = attrs.get(attr)
         return kwargs
 
+    # System specific accessors
+    @property
+    def component_labels(self):
+        tx = self._obj['transmitter_label'].values
+        rx = self._obj['receiver_label'].values
+
+        out = []
+        for t in tx:
+            for r in rx:
+                out.append(f"{t}_{r}")
+
+        return out
 
 

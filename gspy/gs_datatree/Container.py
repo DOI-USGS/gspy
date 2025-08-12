@@ -320,3 +320,13 @@ class Container:
         if indent == 0:
             file.write(f'</netcdf>')
             file.close()
+
+    # System specific accessor
+    def get_system_with_method(self, method):
+        sys = None
+        for this in self._obj:
+            if self._obj[this].attrs['method'] == method:
+                sys = self._obj[this].to_dataset()
+        assert not sys is None, ValueError(f"Could not find system with method attrs '{method}'")
+        return sys
+

@@ -2,7 +2,6 @@ import os
 from pprint import pprint
 import numpy as np
 import xarray as xr
-# from ...utilities import dump_metadata_to_file
 from ..metadata.Metadata import Metadata
 from .Dataset import Dataset
 
@@ -180,7 +179,11 @@ class System(Dataset):
         return self
 
     def __add_transmitters(self, **kwargs):
-        n_transmitters = np.size(kwargs.get('transmitter_label'))
+
+        label = kwargs.get('transmitter_label')
+        if isinstance(label, str):
+            label = [label]
+        n_transmitters = np.size(label)
 
         if n_transmitters == 1:
             kwargs = {k:np.atleast_1d(v) for k,v in kwargs.items()}
@@ -343,8 +346,17 @@ class System(Dataset):
 
 
     def __add_receivers(self, **kwargs):
+
+        label = kwargs.get('receiver_label')
+        if isinstance(label, str):
+            label = [label]
+        n_receivers = np.size(label)
+
+        if n_receivers == 1:
+            kwargs = {k:np.atleast_1d(v) for k,v in kwargs.items()}
+
         self._obj = self._obj.gs.add_coordinate_from_values('n_receivers',
-                                                values = np.arange(np.size(kwargs.get('receiver_label'))),
+                                                values = np.arange(np.size(label)),
                                                 is_dimension=True,
                                                 discrete=True,
                                                 **dict(standard_name = 'number_of_receivers',
@@ -353,44 +365,46 @@ class System(Dataset):
                                                         null_value = 'not_defined'))
 
         self._obj = self._obj.gs.add_variable_from_values('receiver_label',
-                                             values = kwargs.pop('receiver_label'),
+                                             values = label,
                                              dimensions = ('n_receivers', ),
                                              **dict(standard_name = 'receiver label',
                                                     long_name = 'Label of the receiver',
                                                     units = 'not_defined',
                                                     null_value = 'not_defined'))
-
-        if "receiver_coil_low_pass_filter" in kwargs:
-            self._obj = self._obj.gs.add_variable_from_values('receiver_coil_low_pass_filter',
-                                                values = np.asarray(kwargs.pop('receiver_coil_low_pass_filter'), dtype=np.float64),
+        key = "receiver_coil_low_pass_filter"
+        if key in kwargs:
+            self._obj = self._obj.gs.add_variable_from_values(key,
+                                                values = np.asarray(kwargs.pop(key), dtype=np.float64),
                                                 dimensions = ('n_receivers', ),
-                                                **dict(standard_name = 'receiver_coil_low_pass_filter',
-                                                        long_name = 'Low pass filter frequencey of the coil',
-                                                        units = 'Hz',
-                                                        null_value = 'not_defined'))
+                                                **dict(standard_name = key,
+                                                       long_name = 'Low pass filter frequencey of the coil',
+                                                       units = 'Hz',
+                                                       null_value = 'not_defined'))
 
-        self._obj = self._obj.gs.add_variable_from_values('receiver_orientation',
+        self._obj = self._obj.gs.add_variable_from_values(key,
                                              values = kwargs.pop('receiver_orientation'),
                                              dimensions = ('n_receivers', ),
-                                             **dict(standard_name = 'receiver_orientation',
+                                             **dict(standard_name = key,
                                                     long_name = 'Orientation of the receiver loop',
                                                     units = 'not_defined',
                                                     null_value = 'not_defined'))
 
-        if "receiver_instrument_low_pass_filter" in kwargs:
-            self._obj = self._obj.gs.add_variable_from_values('receiver_instrument_low_pass_filter',
-                                                values = np.asarray(kwargs.pop('receiver_instrument_low_pass_filter'), dtype=np.float64),
+        key = "receiver_instrument_low_pass_filter"
+        if key in kwargs:
+            self._obj = self._obj.gs.add_variable_from_values(key,
+                                                values = np.asarray(kwargs.pop(key), dtype=np.float64),
                                                 dimensions = ('n_receivers', ),
-                                                **dict(standard_name = 'receiver_instrument_low_pass_filter',
+                                                **dict(standard_name = key,
                                                         long_name = 'Low pass filter frequency of the instrument',
                                                         units = 'Hz',
                                                         null_value = 'not_defined'))
 
-        if "receiver_area" in kwargs:
-            self._obj = self._obj.gs.add_variable_from_values('receiver_area',
-                                                    values = np.asarray(kwargs.pop('receiver_area'), dtype=np.float64),
+        key = "receiver_area"
+        if key in kwargs:
+            self._obj = self._obj.gs.add_variable_from_values(key,
+                                                    values = np.asarray(kwargs.pop(key), dtype=np.float64),
                                                     dimensions = ('n_receivers', ),
-                                                    **dict(standard_name = 'receiver_area',
+                                                    **dict(standard_name = key,
                                                         long_name = 'Area of the receiver loop',
                                                         units = r'm^{2}',
                                                         null_value = 'not_defined'))

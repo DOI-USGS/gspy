@@ -75,7 +75,7 @@ class Tabular(Dataset):
         return out
 
     @classmethod
-    def read(cls, filename, metadata_file=None, spatial_ref=None, system=None, **kwargs):
+    def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
         """Instantiate a Tabular class from tabular data
 
         When reading the metadata and data file, the following are established in order
@@ -212,6 +212,7 @@ class Tabular(Dataset):
                     assert 'dimensions' in var_meta, ValueError(f'No dimensions found for 2+ dimensional variable {var}.  Please add "dimensions":[---, ---]')
                     # Check for the dimensions of the variable and try adding from a system class.
 
+                    system = kwargs.get('system', None)
                     for dim in var_meta['dimensions']:
                         if dim.lower() not in self._obj.dims:
                             if system is not None:
