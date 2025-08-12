@@ -151,6 +151,8 @@ class Tabular(Dataset):
             coord = coordinates[key].strip()
             discrete = key in ('x', 'y', 'z', 't')
 
+            assert coord in file.metadata, ValueError(f"Missing metadata for coordinate {key}")
+
             # Might need to handle already added coords from the dimensions dict.
             self._obj = self.add_coordinate_from_values(key.lower(),
                                             values=file.df[coord].values,
