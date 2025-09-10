@@ -102,7 +102,7 @@ class aseg_gdf2_handler(file_handler):
         return out
 
     @classmethod
-    def read(cls, filename, metadata=None, fixed_format=False):
+    def read(cls, filename, metadata=None, fixed_format=False, **kwargs):
         """Read the contents of an ASEG-GDF2 file.
 
         First, we parse the definition file then use that with Pandas.
