@@ -45,8 +45,10 @@ class csv_handler(file_handler):
 
         self.filename = filename
 
+        kwargs.pop('system')
+
         # Read the csv file
-        self._df = pd.read_csv(filename, na_values=['NaN'], **kwargs)
+        self.df = pd.read_csv(filename, na_values=['NaN'], **kwargs)
 
         weird = (self.df.map(type) != self.df.iloc[0].apply(type)).any(axis=0)
         for w in weird.keys():
