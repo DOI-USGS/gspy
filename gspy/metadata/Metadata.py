@@ -12,7 +12,8 @@ class Metadata(dict):
             return {}
 
         if isinstance(filename, dict):
-            return filename
+            out = cls(filename)._sort_out_list_of_strings()
+            return out
 
         with open(filename) as f:
             filename = filename.replace('yaml', 'yml')
@@ -63,9 +64,6 @@ class Metadata(dict):
         return cls(self)
 
     def dump(self, filename):
-
-        print(Warning(f"Writing metadata to {filename}.  Entries that need filling in are denoted with '??'"))
-
         def __yaml_dump(this, file, indent=0, key=None):
             if isinstance(this, dict):
                 if key is not None:
