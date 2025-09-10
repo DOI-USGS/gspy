@@ -144,7 +144,10 @@ class Tabular(Dataset):
 
         # Write out a template json file when no variable metadata is found
         if not 'variables' in json_md:
-            file.write_metadata_template()
+            md_template = self.metadata_template(**file.metadata_template)
+
+
+            raise Exception(file.write_metadata_template())
 
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
@@ -185,7 +188,7 @@ class Tabular(Dataset):
 
                 # Use a column from the CSV file and add it as a variable
                 if var in all_columns:
-                    self._obj = self.add_variable_from_values(var.lower(),
+                    self._obj = self.add_variable_from_dict(var.lower(),
                                                   values=file.df[var].values,
                                                   dimensions = ["index"],
                                                   **var_meta)
@@ -224,7 +227,7 @@ class Tabular(Dataset):
 
                     assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with json dimensions {self._obj.dims}")
 
-                    self._obj = self.add_variable_from_values(var, values=values, **var_meta)
+                    self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
 
         # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
