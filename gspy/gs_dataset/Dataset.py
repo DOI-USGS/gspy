@@ -130,8 +130,60 @@ class Dataset:
 
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
+        values = kwargs.pop('values', kwargs.pop('centers', None))
+
+        if values is None:
+            return self.add_coordinate_from_dict_np(name, discrete, is_dimension, values=values, **kwargs)
+
+        if not same_length_lists(values): # Assume non 1D is list of lists.
+            assert 'label' in kwargs, ValueError(f"Need label in metadata for coordinate inhomogenous sized lists {name}")
+            for this, label in zip(values, kwargs.pop('label')):
+                kwargs['values'] = this
+                self._obj = self.add_coordinate_from_dict_np(f"{label.lower()}_{name}", discrete, is_dimension, **kwargs)
+        else:
+            self._obj = self.add_coordinate_from_dict_np(name, discrete, is_dimension, values=values, **kwargs)
+
+        return self._obj
+
+
+    def add_coordinate_from_dict_np(self, name, discrete=False, is_dimension=False, **kwargs):
+        """Attach a coordinate/dimension to a Dataset from a dictionary.
+
+        The DataSet is returned with the coordinate attached. Bounds are also added to the Dataset if this
+        coordinate is not discrete.
+
+        Important
+        ---------
+        Make sure you call this method into a return variable
+
+                ``ds = ds.add_coordinate_from_dict``
+
+        Otherwise, the coordinate will not be added correctly.
+
+        Parameters
+        ----------
+        name : str
+            Name of the coordinate
+        discrete : bool, optional
+            Is this coordinate discrete? by default False
+        is_dimension : bool, optional
+            Is this a coordinate-dimension? by default False
+
+        Returns
+        -------
+        Dataset
+            Dataset with added coordinate.
+
+        See Also
+        --------
+        .Coordinate.Coordinate.from_dict : for pertinent Coordinate keywords and metadata
+
+        """
+        bounding_dict = dict(bounds = kwargs.pop('bounds', None))
+        kwargs['is_projected'] = kwargs.pop('is_projected', self.is_projected)
+
         # Add the actual coordinate values
-        self._obj[name] = Coordinate.from_dict(name, self.is_projected, is_dimension=is_dimension, **kwargs)
+        self._obj[name] = Coordinate.from_dict(name, is_dimension=is_dimension, **kwargs)
 
         # Add the bounds of the coordinate
         if not discrete or bounding_dict['bounds'] is not None:
@@ -172,8 +224,6 @@ class Dataset:
         .Coordinate.Coordinate.from_values : for pertinent Coordinate keywords and metadata
 
         """
-
-        # values = kwargs['values']
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
 
         if (not is_dimension) and ('dimensions' in kwargs):
@@ -184,19 +234,71 @@ class Dataset:
 
         return self._obj
 
+    def add_dimensions_from_variables(self, **kwargs):
+        label = kwargs.pop([k for k in kwargs.keys() if 'label' in k][0])
+
+        if isinstance(label, dict):
+            label = label['values']
+
+        if isinstance(label, str):
+            label = [label]
+
+        # Create any dimensions for those referenced in the metadata dims.
+        for variable in list(kwargs.keys()):
+            v = kwargs[variable]
+            if 'dimensions' in v:
+                dimensions = v['dimensions']
+
+                for dimension in dimensions:
+                    if dimension not in self._obj:
+                        assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
+                                                               "but was not defined in either the 'dimensions' section or the 'variable' section"))
+                        dim_to_add = kwargs.pop(dimension, {})
+
+                        self._obj = self.add_coordinate_from_dict(name=dimension,
+                                                                  label=label,
+                                                                  is_dimension=True,
+                                                                  discrete=True,
+                                                                  **dim_to_add)
+
+        return self, kwargs
+
     def assign_coords(self, coord, data_var, discrete=False, **kwargs):
-
         self._obj = self._obj.assign_coords({coord : self._obj[data_var]})
-
         self._obj[coord].attrs.update({'axis':coord.upper()})
-
         # Add the bounds of the coordinate
         if not discrete:
             self._obj = self.add_bounds_to_coordinate(coord, **kwargs)
-
         return self._obj
 
+    @deprecated
     def add_variable_from_values(self, name, **kwargs):
+        return self.add_variable_from_dict(name, **kwargs)
+
+    def add_variable_from_dict(self, name, **kwargs):
+        values = kwargs.pop('values', None)
+
+        if values is None:
+            return self.add_variable_from_dict_np(name, values=values, **kwargs)
+
+        # Catch scalars
+        if not isinstance(values, list):
+            return self.add_variable_from_dict_np(name, values=values, **kwargs)
+
+        # Catch homogenous shape arrays.
+        if same_length_lists(values): # Assume non 1D is list of lists.
+            return self.add_variable_from_dict_np(name, values=values, **kwargs)
+
+        # Catch non-uniform sized lists of array
+        assert 'label' in kwargs, ValueError(f"Need label in metadata for coordinate inhomogenous sized lists {name}")
+        dimensions = kwargs.pop('dimensions')[1]
+        for this, label in zip(values, kwargs.pop('label')):
+            llabel = label.lower()
+            kwargs['values'] = this
+            self._obj = self.add_variable_from_dict_np(f"{llabel}_{name}", dimensions=f"{llabel}_{dimensions}", **kwargs)
+        return self._obj
+
+    def add_variable_from_dict_np(self, name, **kwargs):
         """Add a variable to the Dataset
 
         Automatically maintains coords on the variable given its dims.
@@ -258,15 +360,15 @@ class Dataset:
             _description_
         """
         if not 'nv' in self._obj:
-            self._obj = self._obj.gs.add_coordinate_from_values('nv',
+            self._obj = self._obj.gs.add_coordinate_from_dict('nv',
                                                    values=r_[0, 1],
                                                    is_projected=False,
                                                    is_dimension=True,
                                                    discrete=True,
-                                                   **dict(standard_name = 'number_of_vertices',
-                                                          long_name = 'Number of vertices for bounding variables',
-                                                          units = 'not_defined',
-                                                          null_value = 'not_defined'))
+                                                   standard_name = 'number_of_vertices',
+                                                   long_name = 'Number of vertices for bounding variables',
+                                                   units = 'not_defined',
+                                                   null_value = 'not_defined')
         return self._obj
 
     # def read_metadata(self, filename):
