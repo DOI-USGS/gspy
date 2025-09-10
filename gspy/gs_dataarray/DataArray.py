@@ -156,6 +156,7 @@ class DataArray:
             values = values.astype(kwargs['dtype'])
 
         return xr_DataArray(values,
+                name=name,
                 dims=kwargs.pop('dimensions', None),
                 coords=kwargs.pop('coords', None),
                 attrs=kwargs)
