@@ -19,30 +19,6 @@ tempest_system:
     output_sample_frequency: 5
     digitization_frequency: 92160
 
-    transmitter_label: Z
-    transmitter_area: 155
-    transmitter_waveform_type: square
-    transmitter_waveform_time: [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02]
-    transmitter_waveform_current: [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0]
-    transmitter_scale_factor: 0.5
-    transmitter_peak_current: 560
-    transmitter_peak_moment: 86800
-    transmitter_base_frequency: 30
-    transmitter_orientation: Z
-    transmitter_number_of_turns: 1
-    transmitter_on_time: 0.00833
-    transmitter_off_time: 0.00833
-
-    receiver_label: [z, x]
-    receiver_orientation: [z, x]
-
-    component_transmitters: [z, z]
-    component_receivers: [z, x]
-    component_txrx_dx: [-120, -120]
-    component_txrx_dy: [0, 0]
-    component_txrx_dz: [-52, -52]
-    component_gate_times: [gate_times, gate_times]
-
     dimensions:
         gate_times:
             standard_name: gate_times
@@ -68,6 +44,35 @@ tempest_system:
                 1.410600e-04, 2.278700e-04, 3.689300e-04, 5.859500e-04,
                 9.114800e-04, 1.410630e-03, 2.191900e-03, 3.418070e-03,
                 5.338690e-03, 8.301020e-03, 1.337928e-02]
+
+    transmitter:
+        label: Z
+        area: 155
+        waveform_type: square
+        waveform_time: [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02]
+        waveform_current:
+            values: [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0]
+            dimension: 'waveform_time'
+        scale_factor: 0.5
+        peak_current: 560
+        peak_moment: 86800
+        base_frequency: 30
+        orientation: Z
+        number_of_turns: 1
+        on_time: 0.00833
+        off_time: 0.00833
+
+    receiver:
+        label: [z, x]
+        orientation: [z, x]
+
+    component:
+        transmitters: [z, z]
+        receivers: [z, x]
+        txrx_dx: [-120, -120]
+        txrx_dy: [0, 0]
+        txrx_dz: [-52, -52]
+        gate_times: [gate_times, gate_times]
 
 magnetic_system:
     type: system
