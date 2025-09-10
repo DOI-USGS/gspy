@@ -73,13 +73,15 @@ class Coordinate(DataArray):
         >>> Coordinate.from_dict('depth', **depth_dict)
 
         """
-        if 'centers' in kwargs:
-            kwargs['values'] = kwargs.pop('centers')
+        values = kwargs.pop('values', kwargs.pop('centers', None))
 
-        else:
-            assert all([x in kwargs for x in ['origin', 'increment', 'length']]), ValueError(f"Explicit dimension definition {name} must have origin, increment, length")
-            x0, dx, nx = kwargs.pop('origin'), kwargs.pop('increment'), kwargs.pop('length')
-            kwargs['values'] = (arange(nx) * dx) + x0
+        if values is None:
+            # 'origin', 'increment',
+            assert all([x in kwargs for x in ['length']]), ValueError(f"Explicit dimension definition {name} must have at least length, optionally origin and increment")
+            x0, dx, nx = kwargs.pop('origin', 0), kwargs.pop('increment', 1), kwargs.pop('length')
+            values = (arange(nx) * dx) + x0
+
+        kwargs['values'] = values
 
         # Add a check for units to conform to ARC reading
         if 'units' in kwargs:
