@@ -144,7 +144,7 @@ class DataArray:
             cls.check_metadata(name, **kwargs)
 
             if nd:
-                assert "dimensions" in kwargs, ValueError("dimensions must be specified for array_like variables")
+                assert "dimensions" in kwargs, ValueError(f"dimensions must be specified for variable {name}")
 
         if nd > 0:
             if not isinstance(values[0], str):
