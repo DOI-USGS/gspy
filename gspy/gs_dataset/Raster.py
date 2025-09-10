@@ -185,7 +185,7 @@ class Raster(Dataset):
             #     values = np.swapaxes(values, 0, swap_to)
 
         # Add the variable to the dataset
-        self._obj = self.add_variable_from_values(name, values=values, **kwargs)
+        self._obj = self.add_variable_from_dict(name, values=values, **kwargs)
 
         # Now handle the spatial ref.  This should be done FIRST
         raster_spatial_reference = [coord for coord in ds.coords if coord not in ('x', 'y')][0]

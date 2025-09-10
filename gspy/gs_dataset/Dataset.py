@@ -9,6 +9,7 @@ from datetime import datetime
 from ..gs_dataarray.DataArray import DataArray
 from ..gs_dataarray.Coordinate import Coordinate
 
+from ..utilities import same_length_lists, deprecated
 from ..metadata.Metadata import Metadata
 from ..gs_dataarray.Spatial_ref import Spatial_ref
 
