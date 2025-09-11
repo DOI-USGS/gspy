@@ -236,31 +236,24 @@ class Dataset:
         return self._obj
 
     def add_dimensions_from_variables(self, **kwargs):
-        label = kwargs.pop([k for k in kwargs.keys() if 'label' in k][0])
-
-        if isinstance(label, dict):
-            label = label['values']
-
-        if isinstance(label, str):
-            label = [label]
-
         # Create any dimensions for those referenced in the metadata dims.
         for variable in list(kwargs.keys()):
             v = kwargs[variable]
-            if 'dimensions' in v:
-                dimensions = v['dimensions']
+            if isinstance(v, dict):
+                if 'dimensions' in v:
+                    dimensions = v['dimensions']
 
-                for dimension in dimensions:
-                    if dimension not in self._obj:
-                        assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
-                                                               "but was not defined in either the 'dimensions' section or the 'variable' section"))
-                        dim_to_add = kwargs.pop(dimension, {})
+                    for dimension in dimensions:
+                        if dimension not in self._obj:
+                            assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
+                                                                "but was not defined in either the 'dimensions' section or the 'variable' section"))
+                            dim_to_add = kwargs.pop(dimension, {})
 
-                        self._obj = self.add_coordinate_from_dict(name=dimension,
-                                                                  label=label,
-                                                                  is_dimension=True,
-                                                                  discrete=True,
-                                                                  **dim_to_add)
+                            self._obj = self.add_coordinate_from_dict(name=dimension,
+                                                                    label=kwargs.get('label', None),
+                                                                    is_dimension=True,
+                                                                    discrete=True,
+                                                                    **dim_to_add)
 
         return self, kwargs
 
