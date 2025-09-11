@@ -4,8 +4,10 @@ from numpy import arange, asarray, diff, isnan, mean, median, nanmax, nanmin, nd
 from numpy import any as npany
 from numpy import dtype as npdtype
 from xarray import DataArray as xr_DataArray
+from xarray import DataTree as xr_DataTree
 from xarray import register_dataarray_accessor
 from ..metadata.Metadata import Metadata
+from pandas import Series
 
 default_metadata = ('standard_name', 'long_name', 'null_value', 'units')
 
@@ -258,3 +260,42 @@ class DataArray:
                 v = v.replace('"',"'")
             file.write(f'{st}<attribute name="{k}" type="String" value="{str(v).strip('\n')}"/>\n')
         file.write(f'{si}</variable>\n\n')
+
+    def export_dataarray(self, out_file, export_ncml=False):
+        if self._obj.ndim == 0:
+            print('unable to export 0D variables to csv')
+            return
+
+        if self._obj.ndim > 2:
+            print('unable to export >2D variables to csv')
+            return
+
+        df = self._obj.to_pandas() #turn the variable into a dataframe
+        if isinstance(self._obj, Series):
+            df = df.to_frame(name = self._obj.name)
+
+        #if this is a 2d variable, include the dimension name in the column name
+        if self._obj.ndim == 2:
+            df.columns = [f"{df.columns.name}_{col}" for col in df.columns]
+
+        for c, v in self._obj.coords.items():
+            if c == 'spatial_ref':
+                continue
+            if c == df.index.name:
+                continue
+            if not df.index.name in v.dims:
+                continue
+            if v.ndim != 1:
+                print('can only include 1D coordinates. Consider exporting coordinate separately.')
+                continue
+            left = v.to_pandas().to_frame(name=c)
+            right = df
+            df = left.merge(right, on=df.index.name, how='right')
+        var_out = out_file.replace('.csv', f'_{self._obj.name}.csv')
+        df.to_csv(var_out)
+        print('done exporting', self._obj.name)
+
+        if export_ncml:
+            ncml_file = var_out.replace('.csv', '.ncml')
+            xr_DataTree(self._obj.to_dataset(), name=self._obj.name).gs.write_ncml(out_file)
+            print('done exporting ncml')
