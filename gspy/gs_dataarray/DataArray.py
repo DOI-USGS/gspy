@@ -157,6 +157,9 @@ class DataArray:
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
+        if "dimensions" in kwargs:
+            assert ndim(values) == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
+
         return xr_DataArray(values,
                 name=name,
                 dims=kwargs.pop('dimensions', None),

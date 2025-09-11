@@ -66,6 +66,11 @@ class System(Dataset):
 
                 self, kwargs['variables'] = self.__add_using_prefix(prefix, **kwargs['variables'])
 
+            for key, values in kwargs['variables'].items():
+                if not isinstance(values, dict):
+                    values = dict(values=values)
+                self._obj = self._obj.gs.add_variable_from_dict(name=key, check=False, **values)
+
         return self._obj
 
 
@@ -76,7 +81,7 @@ class System(Dataset):
 
         popped = kwargs.pop(prefix)
 
-        label = popped.get('label', None)
+        label = popped.pop('label', None)
         if isinstance(label, dict):
             label = label['values']
 
@@ -97,13 +102,15 @@ class System(Dataset):
                                                         units = 'not_defined',
                                                         null_value = 'not_defined'))
 
-        self, popped = self.add_dimensions_from_variables(**popped)
+        self, popped = self.add_dimensions_from_variables(prefix=prefix, label=label, **popped)
 
         for key, values in popped.items():
             if not isinstance(values, dict):
+                if not isinstance(values, list):
+                    values = np.full(n_entries, fill_value=values)
                 values = dict(values=values)
             values['dimensions'] = values.pop('dimensions', f'n_{prefix}')
-            self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, **values)
+            self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, prefix=prefix, **values)
 
         return self, kwargs
 

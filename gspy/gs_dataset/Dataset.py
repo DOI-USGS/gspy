@@ -138,9 +138,13 @@ class Dataset:
 
         if not same_length_lists(values): # Assume non 1D is list of lists.
             assert 'label' in kwargs, ValueError(f"Need label in metadata for coordinate inhomogenous sized lists {name}")
+            prefix = kwargs.pop('prefix', None); prefix = "" if prefix is None else f"{prefix}_"
+
             for this, label in zip(values, kwargs.pop('label')):
+                label = f"{prefix}{label}".lower()
+
                 kwargs['values'] = this
-                self._obj = self.add_coordinate_from_dict_np(f"{label.lower()}_{name}", discrete, is_dimension, **kwargs)
+                self._obj = self.add_coordinate_from_dict_np(f"{label}_{name}", discrete, is_dimension, **kwargs)
         else:
             self._obj = self.add_coordinate_from_dict_np(name, discrete, is_dimension, values=values, **kwargs)
 
@@ -182,6 +186,7 @@ class Dataset:
         """
         bounding_dict = dict(bounds = kwargs.pop('bounds', None))
         kwargs['is_projected'] = kwargs.pop('is_projected', self.is_projected)
+        name = name.lower()
 
         # Add the actual coordinate values
         self._obj[name] = Coordinate.from_dict(name, is_dimension=is_dimension, **kwargs)
@@ -251,6 +256,7 @@ class Dataset:
 
                             self._obj = self.add_coordinate_from_dict(name=dimension,
                                                                     label=kwargs.get('label', None),
+                                                                    prefix=kwargs.get('prefix', None),
                                                                     is_dimension=True,
                                                                     discrete=True,
                                                                     **dim_to_add)
@@ -287,9 +293,11 @@ class Dataset:
         assert 'label' in kwargs, ValueError(f"Need label in metadata for coordinate inhomogenous sized lists {name}")
         dimensions = kwargs.pop('dimensions')[1]
         for this, label in zip(values, kwargs.pop('label')):
-            llabel = label.lower()
+            if 'prefix' in kwargs:
+                label = f"{kwargs['prefix']}_{label}".lower()
+
             kwargs['values'] = this
-            self._obj = self.add_variable_from_dict_np(f"{llabel}_{name}", dimensions=f"{llabel}_{dimensions}", **kwargs)
+            self._obj = self.add_variable_from_dict_np(f"{label}_{name}", dimensions=f"{label}_{dimensions}", **kwargs)
         return self._obj
 
     def add_variable_from_dict_np(self, name, **kwargs):
@@ -340,6 +348,9 @@ class Dataset:
                 assert good, ValueError(f"Size of data for variable {name} along dimension {dim} is {shp[i]} and does not match xarray dimension with size {tmp[i]}")
 
             kwargs['coords'] = {dim: self._obj.coords[dim.lower()] for dim in kwargs['dimensions']}
+
+        if 'prefix' in kwargs:
+            name = f"{kwargs['prefix']}_{name}".lower()
 
         self._obj[name] = DataArray.from_values(name, **kwargs)
 
@@ -842,8 +853,8 @@ class Dataset:
     # System specific accessors
     @property
     def component_labels(self):
-        tx = self._obj['transmitter_label'].values
-        rx = self._obj['receiver_label'].values
+        tx = self._obj['component_transmitters'].values
+        rx = self._obj['component_receivers'].values
 
         out = []
         for t in tx:
