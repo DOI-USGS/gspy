@@ -45,7 +45,7 @@ class csv_handler(file_handler):
 
         self.filename = filename
 
-        kwargs.pop('system')
+        kwargs.pop('system', None)
 
         # Read the csv file
         self.df = pd.read_csv(filename, na_values=['NaN'], **kwargs)
