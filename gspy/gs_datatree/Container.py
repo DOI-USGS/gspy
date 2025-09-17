@@ -305,7 +305,7 @@ class Container:
 
         if isinstance(file, str):
             base_name = file.split(sep)[-1]
-            file = open(f'{'.'.join(file.split('.')[:-1])}.ncml', 'w')
+            file = open(f"{'.'.join(file.split('.')[:-1])}.ncml", 'w')
 
             file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
             file.write(f'<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{base_name}">\n\n')
