@@ -2,6 +2,7 @@ import re
 from copy import copy
 import numpy as np
 import chardet
+from os.path import isfile
 from .csv_handler import csv_handler
 from pandas import read_csv, read_fwf, DataFrame, concat, Series
 from pprint import pprint
@@ -86,8 +87,10 @@ class loupe_handler(csv_handler):
                     key_split = key.split('[')[0]
 
                     out_df[f"{c}_{key}"] = df[key].values[component_indices[i]]
-                    desc_metadata[f"{c}_{key_split}"] = copy(desc_metadata[key_split])
-                    desc_metadata[f"{c}_{key_split}"]['standard_name'] = f"{c}_{key_split}".lower()
+
+                    if key_split in desc_metadata:
+                        desc_metadata[f"{c}_{key_split}"] = copy(desc_metadata[key_split])
+                        desc_metadata[f"{c}_{key_split}"]['standard_name'] = f"{c}_{key_split}".lower()
 
         out_df['line'] = line_number
         #TODO: Parse the units from the desc file too.
@@ -113,6 +116,10 @@ class loupe_handler(csv_handler):
         dict
 
         """
+
+        if not isfile(file_name):
+            return {}
+
         lines = open(file_name, 'rb').readlines()
 
         desc_md = {}
