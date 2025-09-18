@@ -162,14 +162,9 @@ class file_handler(ABC):
 
 
     def write_metadata_template(self, filename=None, **kwargs):
-
         if filename is None:
             filename = f"{Path(self.filename).stem}_metadata_template.yml"
 
         self.metadata_template(**kwargs).dump(filename)
 
-    @staticmethod
-    def is_workbench(filename):
-        with open(filename, 'r') as f:
-            line = f.readline()
-        return '/INFO' in line
+        return f"Writing metadata to {filename}.\nEntries that need filling in are denoted with '??'"

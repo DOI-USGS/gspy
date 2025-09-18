@@ -105,7 +105,7 @@ class Tabular(Dataset):
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
 
-        self.file_handler = file_handler(filename)
+        self.file_handler = file_handler(filename, **kwargs)
 
         # Set the spatial ref
         self._obj = self._obj.gs.set_spatial_ref(spatial_ref)
@@ -177,6 +177,7 @@ class Tabular(Dataset):
                         del column_counts[raw_key]
                 column_counts[key] = 'None'
 
+
         # Now we have all dimensions and coordinates defined.
         # Start adding the data variables
         for var in column_counts:
@@ -215,8 +216,8 @@ class Tabular(Dataset):
                                                           'if combining unique columns to a new variable without an [i] increment'))
 
                     assert 'dimensions' in var_meta, ValueError(f'No dimensions found for 2+ dimensional variable {var}.  Please add "dimensions":[---, ---]')
-                    # Check for the dimensions of the variable and try adding from a system class.
 
+                    # Check for the dimensions of the variable and try adding from a system class.
                     system = kwargs.get('system', None)
                     for dim in var_meta['dimensions']:
                         if dim.lower() not in self._obj.dims:

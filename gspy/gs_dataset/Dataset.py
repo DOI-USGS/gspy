@@ -333,6 +333,7 @@ class Dataset:
         """
         values = kwargs['values']
 
+        # Add dimensions from metadata to the Dataset
         if "dimensions" in kwargs:
             if isinstance(kwargs['dimensions'], str):
                 kwargs['dimensions'] = [kwargs['dimensions']]
@@ -857,8 +858,7 @@ class Dataset:
         rx = self._obj['component_receivers'].values
 
         out = []
-        for t in tx:
-            for r in rx:
+        for t, r in zip(tx, rx):
                 out.append(f"{t}_{r}")
 
         return out
