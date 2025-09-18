@@ -183,9 +183,9 @@ class Coordinate(DataArray):
 
         """
         if name in ("x", "y", "z", "t"):
-            assert "axis" in kwargs, ValueError(f'coordinate definition for {name} requires "axis" defined in the variable metadata. e.g. "axis":"X" for x')
+            if 'axis' not in kwargs:
+                kwargs['axis'] = name.upper()
             if name == "z":
-                assert "positive" in kwargs, ValueError('z coordinate definition requires entry "positive" : "up" or "down"')
-                assert "datum" in kwargs, ValueError('z coordinate definition requires entry "datum", e.g. "ground surface"')
+                assert all([x in kwargs for x in ["positive", "datum"]]), ValueError("z coordinate definition requires entries positive: up or down, and datum: ground surface ")
             if name == "t":
-                assert "datum" in kwargs, ValueError('time coordinate definition requires entry for "datum", e.g. "Jan-01-1900"')
+                assert "datum" in kwargs, ValueError("time coordinate definition requires datum entry e.g. datum: Jan-01-1900")
