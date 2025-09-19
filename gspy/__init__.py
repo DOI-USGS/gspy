@@ -1,5 +1,6 @@
 from .gs_datatree.Survey import Survey
 from .gs_dataset.Dataset import Dataset
+from .gs_dataset.System import System
 
 from xarray import open_datatree as xr_open_datatree
 from xarray import open_dataset as xr_open_dataset
