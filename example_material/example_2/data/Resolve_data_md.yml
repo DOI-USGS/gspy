@@ -5,7 +5,6 @@ dataset_attrs:
     method: electromagnetic
     instrument: resolve
 
-
 coordinates:
     x: x_WGS84_Albers
     y: y_WGS84_Albers
@@ -40,20 +39,24 @@ resolve_system:
             origin: 0
             discrete: True
 
-    transmitter_label: [400, 1800, 3300, 8200, 40000, 140000]
-    transmitter_orientation: [z, z, x, z, z, z]
-    transmitter_actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
-    transmitter_moment: [359, 187, 150, 72, 49, 17]
+    variables:
+        transmitter:
+            label: [400, 1800, 3300, 8200, 40000, 140000]
+            orientation: [z, z, x, z, z, z]
+            actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
+            moment: [359, 187, 150, 72, 49, 17]
 
-    receiver_label: [z, z, x, z, z, z]
-    receiver_orientation: [z, z, x, z, z, z]
+        receiver:
+            label: [z, z, x, z, z, z]
+            orientation: [z, z, x, z, z, z]
 
-    component_transmitters: [400, 1800, 3300, 8200, 40000, 140000]
-    component_receivers: [z, z, x, z, z, z]
-    component_txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
-    component_txrx_dy: [0, 0, 0, 0, 0, 0]
-    component_txrx_dz: [0, 0, 0, 0, 0, 0]
-    component_orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
+        component:
+            transmitters: [400, 1800, 3300, 8200, 40000, 140000]
+            receivers: [z, z, x, z, z, z]
+            txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
+            txrx_dy: [0, 0, 0, 0, 0, 0]
+            txrx_dz: [0, 0, 0, 0, 0, 0]
+            orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
 
 magnetic_system:
     type: system

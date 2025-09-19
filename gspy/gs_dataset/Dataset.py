@@ -247,13 +247,15 @@ class Dataset:
             if isinstance(v, dict):
                 if 'dimensions' in v:
                     dimensions = v['dimensions']
+                    if not isinstance(dimensions, list):
+                        dimensions = [dimensions]
 
                     for dimension in dimensions:
                         if dimension not in self._obj:
                             assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
                                                                 "but was not defined in either the 'dimensions' section or the 'variable' section"))
                             dim_to_add = kwargs.pop(dimension, {})
-
+                            assert 'values' in dim_to_add, ValueError("Dimension definitions in the variables section must be nested with values defined")
                             self._obj = self.add_coordinate_from_dict(name=dimension,
                                                                     label=kwargs.get('label', None),
                                                                     prefix=kwargs.get('prefix', None),

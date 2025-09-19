@@ -99,7 +99,6 @@ class DataArray:
 
         """
         missing = [x for x in default_metadata if x not in kwargs.keys()]
-
         assert len(missing) == 0, ValueError(f"Metadata for variable {name} is missing entries {missing}")
 
     @classmethod
@@ -144,7 +143,6 @@ class DataArray:
 
         if kwargs.pop('check', True):
             cls.check_metadata(name, **kwargs)
-
             if nd:
                 assert "dimensions" in kwargs, ValueError(f"dimensions must be specified for variable {name}")
 
@@ -230,10 +228,11 @@ class DataArray:
 
         nv = kwargs.get('null_value', 'not_defined')
 
-        if nv == 'not_defined':
+        if isinstance(nv, str):
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
-            assert not isinstance(nv, str), ValueError(f"Numerical null_value defined as a string in metadata file for variable {kwargs['standard_name']}.\nPlease make it a number. If this number is in scientific notation please use the following format x.xe+10 or x.xe-10.")
+            assert not isinstance(nv, str), ValueError((f"Numerical null_value defined as a string in metadata file for variable {kwargs['standard_name']}.\n"
+                                                       "Please make it a number. If this number is in scientific notation please use the following format x.xe+10 or x.xe-10."))
             tmp = values[values != nv]
             valid_range = asarray([nanmin(tmp), nanmax(tmp)], dtype=kwargs.get('dtype', None))
 

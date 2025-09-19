@@ -242,6 +242,7 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
+
 loupe_system:
     type: system
     mode: ground
@@ -254,42 +255,7 @@ loupe_system:
     digitization_frequency: 504000.0
     stacks: 360
     powerline_frequency: 60.0
-    transmitter_label: z
-    transmitter_number_of_turns: 13
-    transmitter_coordinates: [[0.33, 0.14, 0.0], [0.14, 0.33, 0.0], [-0.14, 0.33, 0.0], [-0.33, 0.14, 0.0], [-0.33, -0.14, 0.0], [-0.14, -0.33, 0.0], [0.14, -0.33, 0.0], [0.33, -0.14, 0.0]]
-    transmitter_area: 0.358
-    transmitter_waveform_type: trapezoid
-    transmitter_waveform_time: [-0.00277778, -0.00276878, 0.0, 9e-06]
-    transmitter_waveform_current: [0.0, 1.0, 1.0, 0.0]
-    transmitter_current_scale_factor: 1.0
-    transmitter_peak_current: 20.0
-    transmitter_moment: 94.42
-    transmitter_base_frequency: 90.0
-    transmitter_on_time: 0.00276878
-    transmitter_off_time: 0.00278678
-    transmitter_orientation: z
-    transmitter_height: 1.0
-    receiver_label: ['x', 'y', 'z']
-    receiver_orientation: ['x', 'y', 'z']
-    receiver_coil_low_pass_filter: [100000.0, 100000.0, 100000.0]
-    receiver_instrument_low_pass_filter: [250000.0, 250000.0, 250000.0]
-    receiver_area: [200.0, 200.0, 200.0]
-    receiver_delay_time: [4.58e-06, 4.58e-06, 4.58e-06]
-    receiver_height: [1.75, 1.75, 1.75]
-    receiver_gain: [10, 10, 10]
-    component_transmitters: ['z', 'z', 'z']
-    component_receivers: ['x', 'y', 'z']
-    component_sample_rate: [1.0, 1.0, 1.0]
-    component_txrx_dx: [-10.0, -10.0, -10.0]
-    component_txrx_dy: [0.0, 0.0, 0.0]
-    component_txrx_dz: [-0.75, -0.75, -0.75]
-    component_data_type: ['dBdt', 'dBdt', 'dBdt', 'dBdt']
-    component_gate_times: ['gate_times', 'gate_times', 'gate_times']
-    variables:
-        sample_rate:
-            units: s
-        transmitter_area:
-            units: m^2
+
     dimensions:
         gate_times:
             standard_name: gate_times
@@ -298,3 +264,47 @@ loupe_system:
             null_value: not_defined
             bounds: [[1.098e-05, 1.495e-05], [1.297e-05, 1.694e-05], [1.495e-05, 1.892e-05], [1.694e-05, 2.09e-05], [1.892e-05, 2.289e-05], [2.09e-05, 2.884e-05], [2.686e-05, 3.479e-05], [3.281e-05, 4.471e-05], [4.075e-05, 5.662e-05], [5.265e-05, 7.249e-05], [6.654e-05, 9.035e-05], [8.638e-05, 0.00011813], [0.00011217, 0.00015583], [0.0001459, 0.00020146], [0.00019154, 0.00026694], [0.00025305, 0.00035225], [0.00033241, 0.00046733], [0.00043956, 0.0006221], [0.00058241, 0.00082249], [0.00077289, 0.00109233], [0.00102487, 0.00144948], [0.00136019, 0.00192567], [0.0018086, 0.00255662]]
             centers: [1.2965e-05, 1.4955e-05, 1.6935e-05, 1.892e-05, 2.0905e-05, 2.487e-05, 3.0825e-05, 3.876e-05, 4.8685e-05, 6.257e-05, 7.8445e-05, 0.00010226, 0.000134, 0.00017368, 0.00022924, 0.00030265, 0.00039987, 0.00053083, 0.00070245, 0.00093261, 0.0012372, 0.0016429, 0.0021826]
+
+    variables:
+        transmitter:
+            label: z
+            number_of_turns: 13
+            coordinates: [[0.33, 0.14, 0.0], [0.14, 0.33, 0.0], [-0.14, 0.33, 0.0], [-0.33, 0.14, 0.0], [-0.33, -0.14, 0.0], [-0.14, -0.33, 0.0], [0.14, -0.33, 0.0], [0.33, -0.14, 0.0]]
+            area: 0.358
+            waveform_type: trapezoid
+            waveform_time: [-0.00277778, -0.00276878, 0.0, 9e-06]
+            waveform_current: [0.0, 1.0, 1.0, 0.0]
+            current_scale_factor: 1.0
+            peak_current: 20.0
+            moment: 94.42
+            base_frequency: 90.0
+            on_time: 0.00276878
+            off_time: 0.00278678
+            orientation: z
+            height: 1.0
+
+        receiver:
+            label: ['x', 'y', 'z']
+            orientation: ['x', 'y', 'z']
+            coil_low_pass_filter: [100000.0, 100000.0, 100000.0]
+            instrument_low_pass_filter: [250000.0, 250000.0, 250000.0]
+            area: [200.0, 200.0, 200.0]
+            delay_time: [4.58e-06, 4.58e-06, 4.58e-06]
+            height: [1.75, 1.75, 1.75]
+            gain: [10, 10, 10]
+
+        component:
+            transmitters: ['z', 'z', 'z']
+            receivers: ['x', 'y', 'z']
+            sample_rate: [1.0, 1.0, 1.0]
+            txrx_dx: [-10.0, -10.0, -10.0]
+            txrx_dy: [0.0, 0.0, 0.0]
+            txrx_dz: [-0.75, -0.75, -0.75]
+            data_type: ['dBdt', 'dBdt', 'dBdt', 'dBdt']
+            gate_times: ['gate_times', 'gate_times', 'gate_times']
+
+        sample_rate:
+            units: s
+        transmitter_area:
+            units: m^2
+
