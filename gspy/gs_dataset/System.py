@@ -65,10 +65,10 @@ class System(Dataset):
             for prefix in prefixes:
                 vars = kwargs['variables']
                 if prefix == 'component' and 'component' in vars:
-                    c = vars['component']
-                    c['label'] = [f"{t}_{r}" for t, r in zip(c['transmitters'], c['receivers'])]
-                    if 'gate_times' in c:
-                        c['gate_times'] = [x.lower() for x in c['gate_times']]
+                    vars['component'] = self.__component_labels(**vars['component'])
+
+                    if 'gate_times' in vars['component']:
+                        vars['component']['gate_times'] = [x.lower() for x in vars['component']['gate_times']]
 
                 self, kwargs['variables'] = self.__add_using_prefix(prefix, **kwargs['variables'])
 
@@ -78,6 +78,13 @@ class System(Dataset):
                 self._obj = self._obj.gs.add_variable_from_dict(name=key, check=False, **values)
 
         return self._obj
+
+    def __component_labels(self, **kwargs):
+        kwargs['label'] = kwargs.get('receivers')
+        if 'transmitters' in kwargs:
+            kwargs['label'] = [f"{a}_{b}" for a, b in zip(kwargs['transmitters'], kwargs['label'])]
+        return kwargs
+
 
 
     def __add_using_prefix(self, prefix, **kwargs):
