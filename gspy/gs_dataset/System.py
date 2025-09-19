@@ -43,6 +43,12 @@ class System(Dataset):
         return required, kwargs
 
     @classmethod
+    def open(cls, filename):
+        md = Metadata.read(filename)
+        out, _ = cls.from_dict(**md)
+        return out
+
+    @classmethod
     def from_dict(cls, name, **kwargs):
         attrs, kwargs = cls.pop_required(**kwargs)
         tmp = xr.Dataset(attrs=attrs)
