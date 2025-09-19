@@ -43,9 +43,9 @@ class System(Dataset):
         return required, kwargs
 
     @classmethod
-    def open(cls, filename):
+    def open(cls, name, filename, **kwargs):
         md = Metadata.read(filename)
-        out, _ = cls.from_dict(**md)
+        out, _ = cls.from_dict(name, **md)
         return out
 
     @classmethod
