@@ -267,7 +267,8 @@ class Dataset:
 
     def assign_coords(self, coord, data_var, discrete=False, **kwargs):
         self._obj = self._obj.assign_coords({coord : self._obj[data_var]})
-        self._obj[coord].attrs.update({'axis':coord.upper()})
+        if coord in ['x','y','z','t']:
+            self._obj[coord].attrs.update({'axis':coord.upper()})
         # Add the bounds of the coordinate
         if not discrete:
             self._obj = self.add_bounds_to_coordinate(coord, **kwargs)
@@ -279,7 +280,6 @@ class Dataset:
 
     def add_variable_from_dict(self, name, **kwargs):
         values = kwargs.pop('values', None)
-
         if values is None:
             return self.add_variable_from_dict_np(name, values=values, **kwargs)
 
@@ -354,6 +354,12 @@ class Dataset:
 
         if 'prefix' in kwargs:
             name = f"{kwargs['prefix']}_{name}".lower()
+
+        # drop label and prefix
+        if 'prefix' in kwargs:
+            kwargs.pop('prefix')
+        if 'label' in kwargs:
+            kwargs.pop('label')
 
         self._obj[name] = DataArray.from_values(name, **kwargs)
 

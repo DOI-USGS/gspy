@@ -43,13 +43,14 @@ class System(Dataset):
         return required, kwargs
 
     @classmethod
-    def open(cls, name, filename, **kwargs):
+    def open(cls, filename, **kwargs):
         md = Metadata.read(filename)
-        out, _ = cls.from_dict(name, **md)
+        for key,item in md.items():
+            out = cls.system_from_dict(**item)
         return out
 
     @classmethod
-    def from_dict(cls, name, **kwargs):
+    def system_from_dict(cls, **kwargs):
         attrs, kwargs = cls.pop_required(**kwargs)
         tmp = xr.Dataset(attrs=attrs)
         self = cls(tmp)
@@ -118,12 +119,13 @@ class System(Dataset):
         self, popped = self.add_dimensions_from_variables(prefix=prefix, label=label, **popped)
 
         for key, values in popped.items():
-            if not isinstance(values, dict):
-                if not isinstance(values, list):
-                    values = np.full(n_entries, fill_value=values)
-                values = dict(values=values)
-            values['dimensions'] = values.pop('dimensions', f'n_{prefix}')
-            self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, prefix=prefix, **values)
+            if key not in ['prefix', 'label']:
+                if not isinstance(values, dict):
+                    if not isinstance(values, list):
+                        values = np.full(n_entries, fill_value=values)
+                    values = dict(values=values)
+                values['dimensions'] = values.pop('dimensions', f'n_{prefix}')
+                self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, prefix=prefix, **values)
 
         return self, kwargs
 

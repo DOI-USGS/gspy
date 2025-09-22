@@ -229,7 +229,7 @@ class Container:
         for key in list(kwargs.keys()):
             if "system" in key:
                 value = kwargs.pop(key)
-                systems[key] = System.from_dict(name=key, **value)
+                systems[key] = System.system_from_dict(name=key, **value)
 
         out = DataTree.from_dict(systems)
 

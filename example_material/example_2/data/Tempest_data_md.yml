@@ -77,7 +77,6 @@ tempest_system:
             txrx_dx: [-120, -120]
             txrx_dy: [0, 0]
             txrx_dz: [-52, -52]
-            gate_times: [gate_times, gate_times]
 
 magnetic_system:
     type: system
