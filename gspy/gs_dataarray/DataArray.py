@@ -155,11 +155,9 @@ class DataArray:
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
         
-        if isinstance(values, int) or isinstance(values, float):
-            values = [values]
-
         if "dimensions" in kwargs:
-            assert ndim(values) == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
+            if nd > 0:
+                assert nd == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
 
         return xr_DataArray(values,
                 name=name,

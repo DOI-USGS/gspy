@@ -353,11 +353,9 @@ class Dataset:
             kwargs['coords'] = {dim: self._obj.coords[dim.lower()] for dim in kwargs['dimensions']}
 
         if 'prefix' in kwargs:
-            name = f"{kwargs['prefix']}_{name}".lower()
+            name = f"{kwargs.pop('prefix')}_{name}".lower()
 
-        # drop label and prefix
-        if 'prefix' in kwargs:
-            kwargs.pop('prefix')
+        # drop label
         if 'label' in kwargs:
             kwargs.pop('label')
 
