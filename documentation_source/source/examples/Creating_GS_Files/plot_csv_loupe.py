@@ -22,7 +22,6 @@ from os.path import join
 import numpy as np
 import gspy
 
-
 #%%
 # Convert the Skytem csv data to NetCDF
 # +++++++++++++++++++++++++++++++++++++
@@ -43,7 +42,7 @@ data_container = survey.gs.add_container('data')
 
 data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//Loupe_data_metadata.yml')
-data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata)
+data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata, file_type='loupe')
 
 #%%
 # Save to NetCDF file
