@@ -27,7 +27,7 @@ dependencies = {file = ["requirements.txt"]}
 [project.optional-dependencies]
 docs = ["sphinx_gallery", "sphinx_rtd_theme"]
 admin = ["build", "twine"]
-plot = ["geobipy@git+https://github.com/DOI-USGS/geobipy@develop"]
+plot = ["geobipy"]
 
 [tool.setuptools.packages.find]
 where = ["."]
