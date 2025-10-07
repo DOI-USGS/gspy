@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gspy"
-version = "2.2.0"
+version = "2.1.1"
 description = "gspy converts commonly used data formats into a netcdf file honoring our GS convention."
 readme = { file = "README.rst", content-type = "text/x-rst" }
 requires-python = ">=3.10"
