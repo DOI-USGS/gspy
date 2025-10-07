@@ -159,7 +159,8 @@ class DataArray:
             values = [values]
 
         if "dimensions" in kwargs:
-            assert ndim(values) == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
+            if nd > 0:
+                assert nd == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
 
         return xr_DataArray(values,
                 name=name,
