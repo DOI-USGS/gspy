@@ -1,20 +1,7 @@
 """
-Multi-dataset Survey
---------------------
+Loupe to NetCDF
+---------------
 
-This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:
-
-1. Minimally processed (raw) AEM data and raw/processed magnetic data provided by SkyTEM
-2. Fully processed AEM data used as input to inversion
-3. Laterally constrained inverted resistivity models
-4. Point-data estimates of bedrock depth derived from the AEM models
-5. Interpolated magnetic and bedrock depth grids
-
-Note:
-To make the size of this example more managable, some of the input datasets have been downsampled relative to the source files in the data release referenced below.
-
-Dataset Reference:
-Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
 """
 #%%
 import matplotlib.pyplot as plt
@@ -23,8 +10,8 @@ import numpy as np
 import gspy
 
 #%%
-# Convert the Skytem csv data to NetCDF
-# +++++++++++++++++++++++++++++++++++++
+# Convert the Loupe csv data to NetCDF
+# ++++++++++++++++++++++++++++++++++++
 
 #%%
 # Initialize the Survey
