@@ -154,7 +154,7 @@ class DataArray:
 
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
-        
+
         if isinstance(values, int) or isinstance(values, float):
             values = [values]
 
@@ -232,6 +232,7 @@ class DataArray:
         nv = kwargs.get('null_value', 'not_defined')
 
         if isinstance(nv, str):
+            values = asarray(values, dtype=kwargs.get('dtype', "float64"))
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
             assert not isinstance(nv, str), ValueError((f"Numerical null_value defined as a string in metadata file for variable {kwargs['standard_name']}.\n"

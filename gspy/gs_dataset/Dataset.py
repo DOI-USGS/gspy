@@ -255,7 +255,7 @@ class Dataset:
                             assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
                                                                 "but was not defined in either the 'dimensions' section or the 'variable' section"))
                             dim_to_add = kwargs.pop(dimension, {})
-                            assert 'values' in dim_to_add, ValueError("Dimension definitions in the variables section must be nested with values defined")
+                            assert 'values' in dim_to_add, ValueError("Dimensions that are defined in the variables section must be nested with values and more metadata defined i.e. long_name, null_value, units")
                             self._obj = self.add_coordinate_from_dict(name=dimension,
                                                                     label=kwargs.get('label', None),
                                                                     prefix=kwargs.get('prefix', None),
@@ -343,6 +343,10 @@ class Dataset:
 
             tmp = tuple([self._obj[vdim.lower()].size for vdim in kwargs['dimensions']])
             shp = np.shape(values)
+
+            if len(tmp) != len(shp):
+                if tmp[0] == 1:
+                    shp = np.r_[1, *shp]
 
             shape_check = [x==y for x, y in zip(shp, tmp)]
 
