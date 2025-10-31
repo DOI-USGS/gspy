@@ -9,7 +9,7 @@ from ..metadata.Variable_metadata import Variable_metadata
 from .Dataset import Dataset
 
 required_keys = ('type',
-                 'structure',
+                #  'structure',
                  'mode',
                  'method',
                  'submethod',
@@ -79,7 +79,13 @@ class System(Dataset):
                     values = dict(values=values)
                 self._obj = self._obj.gs.add_variable_from_dict(name=key, check=False, **values)
             kwargs.pop('variables')
-        
+
+        # Cannot have literal Booleans in the attributes of a netcdf...
+        # Convert to strings...
+        for k, v in kwargs.items():
+            if isinstance(v, bool):
+                kwargs[k] = "True" if v else "False"
+
         self._obj.attrs = self._obj.attrs | kwargs
 
         return self._obj

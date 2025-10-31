@@ -182,6 +182,7 @@ class Tabular(Dataset):
         # Start adding the data variables
         for var in column_counts:
 
+            assert var in file.metadata, ValueError(f"Missing metadata for variable {var}")
             var_meta = file.metadata[var]
 
             if not var in coordinates.keys():

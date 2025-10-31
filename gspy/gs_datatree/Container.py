@@ -252,6 +252,7 @@ class Container:
         """
         kwargs["format"] = kwargs.get("format", "NETCDF4")
         kwargs["engine"] = kwargs.get("engine", "h5netcdf")
+        # kwargs["invalid_netcdf"] = kwargs.get("invalid_netcdf", True)
 
         # If this container is a survey, write out the parent to maintain '/' in the netcdf file
 

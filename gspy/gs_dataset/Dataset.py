@@ -581,7 +581,6 @@ class Dataset:
     def update_attrs(self, key='', **kwargs):
         """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
         """
-        # kwargs = flatten(kwargs, key, {})
         self._obj.attrs.update(Metadata(kwargs).flatten())
 
     def to_netcdf(self, *args, **kwargs):
