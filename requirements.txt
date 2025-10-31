@@ -11,3 +11,4 @@ rioxarray
 pyproj
 pyyaml
 pandas
+pygmt

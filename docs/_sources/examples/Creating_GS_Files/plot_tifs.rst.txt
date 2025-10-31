@@ -128,39 +128,86 @@ Define input metadata file (which contains the TIF filename linked with desired 
     </symbol>
     </defs>
     </svg>
-    <style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
-     *
-     */
+    <style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
     :root {
-      --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-      --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-      --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-      --xr-border-color: var(--jp-border-color2, #e0e0e0);
-      --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-      --xr-background-color: var(--jp-layout-color0, white);
-      --xr-background-color-row-even: var(--jp-layout-color1, white);
-      --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+      --xr-font-color0: var(
+        --jp-content-font-color0,
+        var(--pst-color-text-base rgba(0, 0, 0, 1))
+      );
+      --xr-font-color2: var(
+        --jp-content-font-color2,
+        var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+      );
+      --xr-font-color3: var(
+        --jp-content-font-color3,
+        var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+      );
+      --xr-border-color: var(
+        --jp-border-color2,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+      );
+      --xr-disabled-color: var(
+        --jp-layout-color3,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+      );
+      --xr-background-color: var(
+        --jp-layout-color0,
+        var(--pst-color-on-background, white)
+      );
+      --xr-background-color-row-even: var(
+        --jp-layout-color1,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+      );
+      --xr-background-color-row-odd: var(
+        --jp-layout-color2,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+      );
     }
 
     html[theme="dark"],
     html[data-theme="dark"],
     body[data-theme="dark"],
     body.vscode-dark {
-      --xr-font-color0: rgba(255, 255, 255, 1);
-      --xr-font-color2: rgba(255, 255, 255, 0.54);
-      --xr-font-color3: rgba(255, 255, 255, 0.38);
-      --xr-border-color: #1f1f1f;
-      --xr-disabled-color: #515151;
-      --xr-background-color: #111111;
-      --xr-background-color-row-even: #111111;
-      --xr-background-color-row-odd: #313131;
+      --xr-font-color0: var(
+        --jp-content-font-color0,
+        var(--pst-color-text-base, rgba(255, 255, 255, 1))
+      );
+      --xr-font-color2: var(
+        --jp-content-font-color2,
+        var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+      );
+      --xr-font-color3: var(
+        --jp-content-font-color3,
+        var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+      );
+      --xr-border-color: var(
+        --jp-border-color2,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+      );
+      --xr-disabled-color: var(
+        --jp-layout-color3,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+      );
+      --xr-background-color: var(
+        --jp-layout-color0,
+        var(--pst-color-on-background, #111111)
+      );
+      --xr-background-color-row-even: var(
+        --jp-layout-color1,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+      );
+      --xr-background-color-row-odd: var(
+        --jp-layout-color2,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+      );
     }
 
     .xr-wrap {
       display: block !important;
       min-width: 300px;
       max-width: 700px;
+      line-height: 1.6;
     }
 
     .xr-text-repr-fallback {
@@ -183,11 +230,18 @@ Define input metadata file (which contains the TIF filename linked with desired 
     }
 
     .xr-obj-type,
-    .xr-array-name {
+    .xr-obj-name,
+    .xr-group-name {
       margin-left: 2px;
       margin-right: 10px;
     }
 
+    .xr-group-name::before {
+      content: "📁";
+      padding-right: 0.3em;
+    }
+
+    .xr-group-name,
     .xr-obj-type {
       color: var(--xr-font-color2);
     }
@@ -196,6 +250,8 @@ Define input metadata file (which contains the TIF filename linked with desired 
       padding-left: 0 !important;
       display: grid;
       grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+      margin-block-start: 0;
+      margin-block-end: 0;
     }
 
     .xr-section-item {
@@ -206,10 +262,12 @@ Define input metadata file (which contains the TIF filename linked with desired 
       display: inline-block;
       opacity: 0;
       height: 0;
+      margin: 0;
     }
 
     .xr-section-item input + label {
       color: var(--xr-disabled-color);
+      border: 2px solid transparent !important;
     }
 
     .xr-section-item input:enabled + label {
@@ -218,7 +276,7 @@ Define input metadata file (which contains the TIF filename linked with desired 
     }
 
     .xr-section-item input:focus + label {
-      border: 2px solid var(--xr-font-color0);
+      border: 2px solid var(--xr-font-color0) !important;
     }
 
     .xr-section-item input:enabled + label:hover {
@@ -263,7 +321,6 @@ Define input metadata file (which contains the TIF filename linked with desired 
     .xr-section-summary,
     .xr-section-inline-details {
       padding-top: 4px;
-      padding-bottom: 4px;
     }
 
     .xr-section-inline-details {
@@ -273,11 +330,38 @@ Define input metadata file (which contains the TIF filename linked with desired 
     .xr-section-details {
       display: none;
       grid-column: 1 / -1;
+      margin-top: 4px;
       margin-bottom: 5px;
     }
 
     .xr-section-summary-in:checked ~ .xr-section-details {
       display: contents;
+    }
+
+    .xr-group-box {
+      display: inline-grid;
+      grid-template-columns: 0px 20px auto;
+      width: 100%;
+    }
+
+    .xr-group-box-vline {
+      grid-column-start: 1;
+      border-right: 0.2em solid;
+      border-color: var(--xr-border-color);
+      width: 0px;
+    }
+
+    .xr-group-box-hline {
+      grid-column-start: 2;
+      grid-row-start: 1;
+      height: 1em;
+      width: 20px;
+      border-bottom: 0.2em solid;
+      border-color: var(--xr-border-color);
+    }
+
+    .xr-group-box-contents {
+      grid-column-start: 3;
     }
 
     .xr-array-wrap {
@@ -350,7 +434,9 @@ Define input metadata file (which contains the TIF filename linked with desired 
     .xr-var-item label,
     .xr-var-item > .xr-var-name span {
       background-color: var(--xr-background-color-row-even);
+      border-color: var(--xr-background-color-row-odd);
       margin-bottom: 0;
+      padding-top: 2px;
     }
 
     .xr-var-item > .xr-var-name:hover span {
@@ -361,6 +447,7 @@ Define input metadata file (which contains the TIF filename linked with desired 
     .xr-var-list > li:nth-child(odd) > label,
     .xr-var-list > li:nth-child(odd) > .xr-var-name span {
       background-color: var(--xr-background-color-row-odd);
+      border-color: var(--xr-background-color-row-even);
     }
 
     .xr-var-name {
@@ -410,8 +497,15 @@ Define input metadata file (which contains the TIF filename linked with desired 
     .xr-var-data,
     .xr-index-data {
       display: none;
-      background-color: var(--xr-background-color) !important;
-      padding-bottom: 5px !important;
+      border-top: 2px dotted var(--xr-background-color);
+      padding-bottom: 20px !important;
+      padding-top: 10px !important;
+    }
+
+    .xr-var-attrs-in + label,
+    .xr-var-data-in + label,
+    .xr-index-data-in + label {
+      padding: 0 1px;
     }
 
     .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -422,6 +516,12 @@ Define input metadata file (which contains the TIF filename linked with desired 
 
     .xr-var-data > table {
       float: right;
+    }
+
+    .xr-var-data > pre,
+    .xr-index-data > pre,
+    .xr-var-data > table > tbody > tr {
+      background-color: transparent !important;
     }
 
     .xr-var-name span,
@@ -483,32 +583,42 @@ Define input metadata file (which contains the TIF filename linked with desired 
       stroke: currentColor;
       fill: currentColor;
     }
-    </style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt; Size: 6MB
-    Dimensions:       (x: 599, nv: 2, y: 1212)
-    Coordinates:
-        spatial_ref   float64 8B 0.0
-      * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
-      * nv            (nv) int64 16B 0 1
-      * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-    Data variables:
-        x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
-        y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
-        magnetic_tmi  (y, x) float64 6MB nan nan nan nan nan ... nan nan nan nan nan
-    Attributes:
-        comment:  &lt;additional details or ancillary information&gt;
-        content:  gridded magnetic map</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f6ae3812-c898-4a52-9c17-42eac561753f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f6ae3812-c898-4a52-9c17-42eac561753f' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%; grid-column: 1 / -1'></div></div></li><li class='xr-section-item'><input id='section-3de76368-bab6-4d54-9574-92341f8b9d9b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-3de76368-bab6-4d54-9574-92341f8b9d9b' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>x</span>: 599</li><li><span class='xr-has-index'>nv</span>: 2</li><li><span class='xr-has-index'>y</span>: 1212</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-161f0683-9a42-4e9c-b4ba-5bdb4deb2dab' class='xr-section-summary-in' type='checkbox'  checked><label for='section-161f0683-9a42-4e9c-b4ba-5bdb4deb2dab' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-02cdae47-20d0-4f68-96b9-2893e63b7ebf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-02cdae47-20d0-4f68-96b9-2893e63b7ebf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eda9ae18-1be0-4837-a967-be867517873e' class='xr-var-data-in' type='checkbox'><label for='data-eda9ae18-1be0-4837-a967-be867517873e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83 / Conus Albers&quot;,BASEGEOGCRS[&quot;NAD83&quot;,DATUM[&quot;North American Datum 1983&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4269]],CONVERSION[&quot;Conus Albers&quot;,METHOD[&quot;Albers Equal Area&quot;,ID[&quot;EPSG&quot;,9822]],PARAMETER[&quot;Latitude of false origin&quot;,23,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8821]],PARAMETER[&quot;Longitude of false origin&quot;,-96,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8822]],PARAMETER[&quot;Latitude of 1st standard parallel&quot;,29.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8823]],PARAMETER[&quot;Latitude of 2nd standard parallel&quot;,45.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8824]],PARAMETER[&quot;Easting at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8826]],PARAMETER[&quot;Northing at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8827]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;Data analysis and small scale data presentation for contiguous lower 48 states.&quot;],AREA[&quot;United States (USA) - CONUS onshore - Alabama; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming.&quot;],BBOX[24.41,-124.79,49.38,-66.91]],ID[&quot;EPSG&quot;,5070]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83</dd><dt><span>horizontal_datum_name :</span></dt><dd>North American Datum 1983</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83 / Conus Albers</dd><dt><span>grid_mapping_name :</span></dt><dd>albers_conical_equal_area</dd><dt><span>standard_parallel :</span></dt><dd>(29.5, 45.5)</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>23.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-96.0</dd><dt><span>false_easting :</span></dt><dd>0.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>5070</dd><dt><span>GeoTransform :</span></dt><dd>(292500.0, 600.0, 0.0, 1607100.0, 0.0, -600.0)</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.928e+05 2.934e+05 ... 6.516e+05</div><input id='attrs-f778909e-6759-47a5-a9f2-6b3e81a154f8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f778909e-6759-47a5-a9f2-6b3e81a154f8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-39df0158-110a-4680-b6b0-6ed60be14628' class='xr-var-data-in' type='checkbox'><label for='data-39df0158-110a-4680-b6b0-6ed60be14628' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[292800. 651600.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>x_bnds</dd></dl></div><div class='xr-var-data'><pre>array([292800., 293400., 294000., ..., 650400., 651000., 651600.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-8b526175-157e-48fa-8b85-b83dfea923e4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8b526175-157e-48fa-8b85-b83dfea923e4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-18dfda4f-aab5-4d8b-8483-a78fcab1d1a9' class='xr-var-data-in' type='checkbox'><label for='data-18dfda4f-aab5-4d8b-8483-a78fcab1d1a9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.607e+06 1.606e+06 ... 8.802e+05</div><input id='attrs-777cb3d9-9a7c-484b-a1c8-abdd5d0b2ebc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-777cb3d9-9a7c-484b-a1c8-abdd5d0b2ebc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f19a0623-3e61-4470-90d7-09b3830a3345' class='xr-var-data-in' type='checkbox'><label for='data-f19a0623-3e61-4470-90d7-09b3830a3345' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 880200. 1606800.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>y_bnds</dd></dl></div><div class='xr-var-data'><pre>array([1606800., 1606200., 1605600., ...,  881400.,  880800.,  880200.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cf5cacc2-672f-41c7-8fa8-b07559e0ed5c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cf5cacc2-672f-41c7-8fa8-b07559e0ed5c' class='xr-section-summary'  title='Expand/collapse section'>Inherited coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d2573a9b-84e5-4ce0-bccf-bdcdacabf969' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d2573a9b-84e5-4ce0-bccf-bdcdacabf969' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>x_bnds</span></div><div class='xr-var-dims'>(x, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.925e+05 2.931e+05 ... 6.519e+05</div><input id='attrs-ddbf0bbf-38cc-48d9-b122-950d328bd2ee' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ddbf0bbf-38cc-48d9-b122-950d328bd2ee' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-61f9b8c1-d0cb-482c-8b21-aba006bf5de2' class='xr-var-data-in' type='checkbox'><label for='data-61f9b8c1-d0cb-482c-8b21-aba006bf5de2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Easting cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[292500. 651900.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[292500., 293100.],
+
+    .xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+    .xr-var-data-in:checked + label > .xr-icon-database,
+    .xr-index-data-in:checked + label > .xr-icon-database {
+      color: var(--xr-font-color0);
+      filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+      stroke-width: 0.8px;
+    }
+    </style><pre class='xr-text-repr-fallback'>&lt;xarray.DataTree &#x27;map&#x27;&gt;
+    Group: /survey/derived_products/map
+        Dimensions:       (x: 599, nv: 2, y: 1212)
+        Coordinates:
+          * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+          * nv            (nv) int64 16B 0 1
+          * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+            spatial_ref   float64 8B 0.0
+        Data variables:
+            x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
+            y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
+            magnetic_tmi  (y, x) float64 6MB nan nan nan nan nan ... nan nan nan nan nan
+        Attributes:
+            comment:  &lt;additional details or ancillary information&gt;
+            content:  gridded magnetic map</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div><div class='xr-obj-name'>&#x27;map&#x27;</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9444734e-64db-4e90-a4b3-7832798f2153' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9444734e-64db-4e90-a4b3-7832798f2153' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>x</span>: 599</li><li><span class='xr-has-index'>nv</span>: 2</li><li><span class='xr-has-index'>y</span>: 1212</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-433f4a19-1415-475b-a37d-d68daadf43aa' class='xr-section-summary-in' type='checkbox'  checked><label for='section-433f4a19-1415-475b-a37d-d68daadf43aa' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.928e+05 2.934e+05 ... 6.516e+05</div><input id='attrs-72727072-4b96-4b4a-948b-3e3ed477e7da' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-72727072-4b96-4b4a-948b-3e3ed477e7da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ae7895cb-fea8-4239-94ee-e53e34c50dd5' class='xr-var-data-in' type='checkbox'><label for='data-ae7895cb-fea8-4239-94ee-e53e34c50dd5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[292800. 651600.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>x_bnds</dd></dl></div><div class='xr-var-data'><pre>array([292800., 293400., 294000., ..., 650400., 651000., 651600.], shape=(599,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-6ff15766-5334-4be0-9358-5a6f57dc173f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6ff15766-5334-4be0-9358-5a6f57dc173f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7a2fccad-740d-45ae-aa3b-47fa34b81e62' class='xr-var-data-in' type='checkbox'><label for='data-7a2fccad-740d-45ae-aa3b-47fa34b81e62' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.607e+06 1.606e+06 ... 8.802e+05</div><input id='attrs-567515b2-19ee-4898-9c8c-c8b101310b97' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-567515b2-19ee-4898-9c8c-c8b101310b97' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ed3ee00c-a2d4-4d62-a207-b70754fed14c' class='xr-var-data-in' type='checkbox'><label for='data-ed3ee00c-a2d4-4d62-a207-b70754fed14c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 880200. 1606800.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>y_bnds</dd></dl></div><div class='xr-var-data'><pre>array([1606800., 1606200., 1605600., ...,  881400.,  880800.,  880200.],
+          shape=(1212,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-bfe1f816-1482-49af-8696-1b2a667a008b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bfe1f816-1482-49af-8696-1b2a667a008b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-88cac1b8-9c8c-4db8-b773-60f7a84cf368' class='xr-var-data-in' type='checkbox'><label for='data-88cac1b8-9c8c-4db8-b773-60f7a84cf368' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83 / Conus Albers&quot;,BASEGEOGCRS[&quot;NAD83&quot;,DATUM[&quot;North American Datum 1983&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4269]],CONVERSION[&quot;Conus Albers&quot;,METHOD[&quot;Albers Equal Area&quot;,ID[&quot;EPSG&quot;,9822]],PARAMETER[&quot;Latitude of false origin&quot;,23,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8821]],PARAMETER[&quot;Longitude of false origin&quot;,-96,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8822]],PARAMETER[&quot;Latitude of 1st standard parallel&quot;,29.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8823]],PARAMETER[&quot;Latitude of 2nd standard parallel&quot;,45.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8824]],PARAMETER[&quot;Easting at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8826]],PARAMETER[&quot;Northing at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8827]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;Data analysis and small scale data presentation for contiguous lower 48 states.&quot;],AREA[&quot;United States (USA) - CONUS onshore - Alabama; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming.&quot;],BBOX[24.41,-124.79,49.38,-66.91]],ID[&quot;EPSG&quot;,5070]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83</dd><dt><span>horizontal_datum_name :</span></dt><dd>North American Datum 1983</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83 / Conus Albers</dd><dt><span>grid_mapping_name :</span></dt><dd>albers_conical_equal_area</dd><dt><span>standard_parallel :</span></dt><dd>(29.5, 45.5)</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>23.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-96.0</dd><dt><span>false_easting :</span></dt><dd>0.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>5070</dd><dt><span>GeoTransform :</span></dt><dd>(292500.0, 600.0, 0.0, 1607100.0, 0.0, -600.0)</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-95a1eef1-617c-4d27-8e40-875eb08a30d7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-95a1eef1-617c-4d27-8e40-875eb08a30d7' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>x_bnds</span></div><div class='xr-var-dims'>(x, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.925e+05 2.931e+05 ... 6.519e+05</div><input id='attrs-2a775308-eb11-466f-a949-f20d72ea2e8c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2a775308-eb11-466f-a949-f20d72ea2e8c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7acfb2f8-d5da-405a-b8eb-ce1b2f89f6f9' class='xr-var-data-in' type='checkbox'><label for='data-7acfb2f8-d5da-405a-b8eb-ce1b2f89f6f9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Easting cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[292500. 651900.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[292500., 293100.],
            [293100., 293700.],
            [293700., 294300.],
            ...,
            [650100., 650700.],
            [650700., 651300.],
-           [651300., 651900.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y_bnds</span></div><div class='xr-var-dims'>(y, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.607e+06 1.606e+06 ... 8.799e+05</div><input id='attrs-813d1115-9167-4584-a6b7-be6754a5d782' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-813d1115-9167-4584-a6b7-be6754a5d782' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8d3e3508-86c3-4bd2-bea8-ee9b2d989dcf' class='xr-var-data-in' type='checkbox'><label for='data-8d3e3508-86c3-4bd2-bea8-ee9b2d989dcf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Northing cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 879900. 1607100.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[1607100., 1606500.],
+           [651300., 651900.]], shape=(599, 2))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y_bnds</span></div><div class='xr-var-dims'>(y, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.607e+06 1.606e+06 ... 8.799e+05</div><input id='attrs-c1a02ad3-6a88-4e9c-b665-2d8683d89561' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c1a02ad3-6a88-4e9c-b665-2d8683d89561' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ed11633a-5515-4761-8163-244da39a7241' class='xr-var-data-in' type='checkbox'><label for='data-ed11633a-5515-4761-8163-244da39a7241' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Northing cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 879900. 1607100.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[1607100., 1606500.],
            [1606500., 1605900.],
            [1605900., 1605300.],
            ...,
            [ 881700.,  881100.],
            [ 881100.,  880500.],
-           [ 880500.,  879900.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_tmi</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-dd3f48f9-8059-436b-a33d-521bc659889d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dd3f48f9-8059-436b-a33d-521bc659889d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1628af6e-f909-4481-a313-333cdd481daf' class='xr-var-data-in' type='checkbox'><label for='data-1628af6e-f909-4481-a313-333cdd481daf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_magnetic_intensity</dd><dt><span>long_name :</span></dt><dd>Total magnetic intensity, diurnally corrected and filtered</dd><dt><span>units :</span></dt><dd>nT</dd><dt><span>null_value :</span></dt><dd>1.70141e+38</dd><dt><span>valid_range :</span></dt><dd>[-17504.6640625   11490.32324219]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[          nan,           nan,           nan, ..., -437.66494751,
+           [ 880500.,  879900.]], shape=(1212, 2))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_tmi</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-28a44d09-c3fd-4b52-8363-4e4443dfbbe1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-28a44d09-c3fd-4b52-8363-4e4443dfbbe1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-214d5dfb-5320-4c51-b8a8-1bb9f69478e3' class='xr-var-data-in' type='checkbox'><label for='data-214d5dfb-5320-4c51-b8a8-1bb9f69478e3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_magnetic_intensity</dd><dt><span>long_name :</span></dt><dd>Total magnetic intensity, diurnally corrected and filtered</dd><dt><span>units :</span></dt><dd>nT</dd><dt><span>null_value :</span></dt><dd>1.70141e+38</dd><dt><span>valid_range :</span></dt><dd>[-17504.6640625   11490.32324219]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[          nan,           nan,           nan, ..., -437.66494751,
             -438.0090332 , -435.30517578],
            [          nan,           nan,           nan, ..., -429.26696777,
             -428.53414917, -426.61795044],
@@ -520,7 +630,7 @@ Define input metadata file (which contains the TIF filename linked with desired 
            [          nan,           nan,           nan, ...,           nan,
                       nan,           nan],
            [          nan,           nan,           nan, ...,           nan,
-                      nan,           nan]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-917efbab-6450-4b5d-b4d7-afe4e263ae7f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-917efbab-6450-4b5d-b4d7-afe4e263ae7f' class='xr-section-summary' >Attributes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>&lt;additional details or ancillary information&gt;</dd><dt><span>content :</span></dt><dd>gridded magnetic map</dd></dl></div></li></ul></div></div>
+                      nan,           nan]], shape=(1212, 599))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c9137cf6-f710-42d8-8c0e-319d29c18387' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c9137cf6-f710-42d8-8c0e-319d29c18387' class='xr-section-summary' >Attributes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>&lt;additional details or ancillary information&gt;</dd><dt><span>content :</span></dt><dd>gridded magnetic map</dd></dl></div></li></ul></div></div>
     </div>
     <br />
     <br />
@@ -564,39 +674,86 @@ Create the Second Raster Dataset
     </symbol>
     </defs>
     </svg>
-    <style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
-     *
-     */
+    <style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
     :root {
-      --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-      --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-      --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-      --xr-border-color: var(--jp-border-color2, #e0e0e0);
-      --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-      --xr-background-color: var(--jp-layout-color0, white);
-      --xr-background-color-row-even: var(--jp-layout-color1, white);
-      --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+      --xr-font-color0: var(
+        --jp-content-font-color0,
+        var(--pst-color-text-base rgba(0, 0, 0, 1))
+      );
+      --xr-font-color2: var(
+        --jp-content-font-color2,
+        var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+      );
+      --xr-font-color3: var(
+        --jp-content-font-color3,
+        var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+      );
+      --xr-border-color: var(
+        --jp-border-color2,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+      );
+      --xr-disabled-color: var(
+        --jp-layout-color3,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+      );
+      --xr-background-color: var(
+        --jp-layout-color0,
+        var(--pst-color-on-background, white)
+      );
+      --xr-background-color-row-even: var(
+        --jp-layout-color1,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+      );
+      --xr-background-color-row-odd: var(
+        --jp-layout-color2,
+        hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+      );
     }
 
     html[theme="dark"],
     html[data-theme="dark"],
     body[data-theme="dark"],
     body.vscode-dark {
-      --xr-font-color0: rgba(255, 255, 255, 1);
-      --xr-font-color2: rgba(255, 255, 255, 0.54);
-      --xr-font-color3: rgba(255, 255, 255, 0.38);
-      --xr-border-color: #1f1f1f;
-      --xr-disabled-color: #515151;
-      --xr-background-color: #111111;
-      --xr-background-color-row-even: #111111;
-      --xr-background-color-row-odd: #313131;
+      --xr-font-color0: var(
+        --jp-content-font-color0,
+        var(--pst-color-text-base, rgba(255, 255, 255, 1))
+      );
+      --xr-font-color2: var(
+        --jp-content-font-color2,
+        var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+      );
+      --xr-font-color3: var(
+        --jp-content-font-color3,
+        var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+      );
+      --xr-border-color: var(
+        --jp-border-color2,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+      );
+      --xr-disabled-color: var(
+        --jp-layout-color3,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+      );
+      --xr-background-color: var(
+        --jp-layout-color0,
+        var(--pst-color-on-background, #111111)
+      );
+      --xr-background-color-row-even: var(
+        --jp-layout-color1,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+      );
+      --xr-background-color-row-odd: var(
+        --jp-layout-color2,
+        hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+      );
     }
 
     .xr-wrap {
       display: block !important;
       min-width: 300px;
       max-width: 700px;
+      line-height: 1.6;
     }
 
     .xr-text-repr-fallback {
@@ -619,11 +776,18 @@ Create the Second Raster Dataset
     }
 
     .xr-obj-type,
-    .xr-array-name {
+    .xr-obj-name,
+    .xr-group-name {
       margin-left: 2px;
       margin-right: 10px;
     }
 
+    .xr-group-name::before {
+      content: "📁";
+      padding-right: 0.3em;
+    }
+
+    .xr-group-name,
     .xr-obj-type {
       color: var(--xr-font-color2);
     }
@@ -632,6 +796,8 @@ Create the Second Raster Dataset
       padding-left: 0 !important;
       display: grid;
       grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+      margin-block-start: 0;
+      margin-block-end: 0;
     }
 
     .xr-section-item {
@@ -642,10 +808,12 @@ Create the Second Raster Dataset
       display: inline-block;
       opacity: 0;
       height: 0;
+      margin: 0;
     }
 
     .xr-section-item input + label {
       color: var(--xr-disabled-color);
+      border: 2px solid transparent !important;
     }
 
     .xr-section-item input:enabled + label {
@@ -654,7 +822,7 @@ Create the Second Raster Dataset
     }
 
     .xr-section-item input:focus + label {
-      border: 2px solid var(--xr-font-color0);
+      border: 2px solid var(--xr-font-color0) !important;
     }
 
     .xr-section-item input:enabled + label:hover {
@@ -699,7 +867,6 @@ Create the Second Raster Dataset
     .xr-section-summary,
     .xr-section-inline-details {
       padding-top: 4px;
-      padding-bottom: 4px;
     }
 
     .xr-section-inline-details {
@@ -709,11 +876,38 @@ Create the Second Raster Dataset
     .xr-section-details {
       display: none;
       grid-column: 1 / -1;
+      margin-top: 4px;
       margin-bottom: 5px;
     }
 
     .xr-section-summary-in:checked ~ .xr-section-details {
       display: contents;
+    }
+
+    .xr-group-box {
+      display: inline-grid;
+      grid-template-columns: 0px 20px auto;
+      width: 100%;
+    }
+
+    .xr-group-box-vline {
+      grid-column-start: 1;
+      border-right: 0.2em solid;
+      border-color: var(--xr-border-color);
+      width: 0px;
+    }
+
+    .xr-group-box-hline {
+      grid-column-start: 2;
+      grid-row-start: 1;
+      height: 1em;
+      width: 20px;
+      border-bottom: 0.2em solid;
+      border-color: var(--xr-border-color);
+    }
+
+    .xr-group-box-contents {
+      grid-column-start: 3;
     }
 
     .xr-array-wrap {
@@ -786,7 +980,9 @@ Create the Second Raster Dataset
     .xr-var-item label,
     .xr-var-item > .xr-var-name span {
       background-color: var(--xr-background-color-row-even);
+      border-color: var(--xr-background-color-row-odd);
       margin-bottom: 0;
+      padding-top: 2px;
     }
 
     .xr-var-item > .xr-var-name:hover span {
@@ -797,6 +993,7 @@ Create the Second Raster Dataset
     .xr-var-list > li:nth-child(odd) > label,
     .xr-var-list > li:nth-child(odd) > .xr-var-name span {
       background-color: var(--xr-background-color-row-odd);
+      border-color: var(--xr-background-color-row-even);
     }
 
     .xr-var-name {
@@ -846,8 +1043,15 @@ Create the Second Raster Dataset
     .xr-var-data,
     .xr-index-data {
       display: none;
-      background-color: var(--xr-background-color) !important;
-      padding-bottom: 5px !important;
+      border-top: 2px dotted var(--xr-background-color);
+      padding-bottom: 20px !important;
+      padding-top: 10px !important;
+    }
+
+    .xr-var-attrs-in + label,
+    .xr-var-data-in + label,
+    .xr-index-data-in + label {
+      padding: 0 1px;
     }
 
     .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -858,6 +1062,12 @@ Create the Second Raster Dataset
 
     .xr-var-data > table {
       float: right;
+    }
+
+    .xr-var-data > pre,
+    .xr-index-data > pre,
+    .xr-var-data > table > tbody > tr {
+      background-color: transparent !important;
     }
 
     .xr-var-name span,
@@ -919,27 +1129,37 @@ Create the Second Raster Dataset
       stroke: currentColor;
       fill: currentColor;
     }
-    </style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt; Size: 12MB
-    Dimensions:       (z: 5, nv: 2, x: 363, y: 770)
-    Coordinates:
-        spatial_ref   float64 8B 0.0
-      * z             (z) float64 40B 0.0 5.0 10.0 15.0 20.0
-      * nv            (nv) int64 16B 0 1
-      * x             (x) float64 3kB 2.915e+05 2.925e+05 ... 6.525e+05 6.535e+05
-      * y             (y) float64 6kB 1.648e+06 1.647e+06 ... 8.798e+05 8.788e+05
-    Data variables:
-        z_bnds        (z, nv) float64 80B -2.5 2.5 2.5 7.5 ... 12.5 17.5 17.5 22.5
-        x_bnds        (x, nv) float64 6kB 2.91e+05 2.92e+05 ... 6.53e+05 6.54e+05
-        y_bnds        (y, nv) float64 12kB 1.648e+06 1.647e+06 ... 8.783e+05
-        resistivity   (z, y, x) float64 11MB nan nan nan nan nan ... nan nan nan nan
-        magnetic_tmi  (y, x) float32 1MB nan nan nan nan nan ... nan nan nan nan nan
-    Attributes:
-        comment:  &lt;additional details or ancillary information&gt;
-        content:  interpolated resistivity models (3-D depth grid) and magnetic m...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-be6775fe-0d3c-43d6-a205-0829ef2c6893' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-be6775fe-0d3c-43d6-a205-0829ef2c6893' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%; grid-column: 1 / -1'></div></div></li><li class='xr-section-item'><input id='section-acca3b1d-3818-4ddf-a900-a6854c3fc006' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-acca3b1d-3818-4ddf-a900-a6854c3fc006' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>z</span>: 5</li><li><span class='xr-has-index'>nv</span>: 2</li><li><span class='xr-has-index'>x</span>: 363</li><li><span class='xr-has-index'>y</span>: 770</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6783d094-f15e-4d47-a9e7-5cbf6dfbc2f9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6783d094-f15e-4d47-a9e7-5cbf6dfbc2f9' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-ac19902b-a261-42f5-aef2-c9c96c44bf7f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ac19902b-a261-42f5-aef2-c9c96c44bf7f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7da89ed4-4498-4a82-9df9-8c242fc46811' class='xr-var-data-in' type='checkbox'><label for='data-7da89ed4-4498-4a82-9df9-8c242fc46811' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83 / Conus Albers&quot;,BASEGEOGCRS[&quot;NAD83&quot;,DATUM[&quot;North American Datum 1983&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4269]],CONVERSION[&quot;Conus Albers&quot;,METHOD[&quot;Albers Equal Area&quot;,ID[&quot;EPSG&quot;,9822]],PARAMETER[&quot;Latitude of false origin&quot;,23,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8821]],PARAMETER[&quot;Longitude of false origin&quot;,-96,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8822]],PARAMETER[&quot;Latitude of 1st standard parallel&quot;,29.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8823]],PARAMETER[&quot;Latitude of 2nd standard parallel&quot;,45.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8824]],PARAMETER[&quot;Easting at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8826]],PARAMETER[&quot;Northing at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8827]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;Data analysis and small scale data presentation for contiguous lower 48 states.&quot;],AREA[&quot;United States (USA) - CONUS onshore - Alabama; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming.&quot;],BBOX[24.41,-124.79,49.38,-66.91]],ID[&quot;EPSG&quot;,5070]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83</dd><dt><span>horizontal_datum_name :</span></dt><dd>North American Datum 1983</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83 / Conus Albers</dd><dt><span>grid_mapping_name :</span></dt><dd>albers_conical_equal_area</dd><dt><span>standard_parallel :</span></dt><dd>(29.5, 45.5)</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>23.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-96.0</dd><dt><span>false_easting :</span></dt><dd>0.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>5070</dd><dt><span>GeoTransform :</span></dt><dd>(290955.0, 1000.0, 0.0, 1648285.0, 0.0, -1000.0)</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>z</span></div><div class='xr-var-dims'>(z)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 5.0 10.0 15.0 20.0</div><input id='attrs-1433984e-32b1-49a1-ad83-a9c1a82ea516' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1433984e-32b1-49a1-ad83-a9c1a82ea516' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a070c2bf-ed48-4e2d-b2bc-455866c54c7e' class='xr-var-data-in' type='checkbox'><label for='data-a070c2bf-ed48-4e2d-b2bc-455866c54c7e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.</dd><dt><span>standard_name :</span></dt><dd>z</dd><dt><span>long_name :</span></dt><dd>Depth below earth&#x27;s surface DTM</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>datum :</span></dt><dd>ground surface</dd><dt><span>valid_range :</span></dt><dd>[ 0. 20.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>z_bnds</dd></dl></div><div class='xr-var-data'><pre>array([ 0.,  5., 10., 15., 20.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-76034a6f-94ba-4991-9d8a-948f12ccdcd0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-76034a6f-94ba-4991-9d8a-948f12ccdcd0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4ad630a0-08bf-48cb-8191-36de41bfc227' class='xr-var-data-in' type='checkbox'><label for='data-4ad630a0-08bf-48cb-8191-36de41bfc227' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.915e+05 2.925e+05 ... 6.535e+05</div><input id='attrs-88b77e80-e7f9-4a10-b7e6-33eb7358d29a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-88b77e80-e7f9-4a10-b7e6-33eb7358d29a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-238f9cd9-ea52-4da9-907e-8119a0366d14' class='xr-var-data-in' type='checkbox'><label for='data-238f9cd9-ea52-4da9-907e-8119a0366d14' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[291455. 653455.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>x_bnds</dd></dl></div><div class='xr-var-data'><pre>array([291455., 292455., 293455., ..., 651455., 652455., 653455.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.648e+06 1.647e+06 ... 8.788e+05</div><input id='attrs-3ff7a7cf-4b6c-49a3-8cfd-771becdbc676' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3ff7a7cf-4b6c-49a3-8cfd-771becdbc676' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a3cc05a5-4a67-4218-9967-e75320325652' class='xr-var-data-in' type='checkbox'><label for='data-a3cc05a5-4a67-4218-9967-e75320325652' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 878785. 1647785.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>y_bnds</dd></dl></div><div class='xr-var-data'><pre>array([1647785., 1646785., 1645785., ...,  880785.,  879785.,  878785.])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6bbcacf4-2247-4848-b99e-020e647cae4c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6bbcacf4-2247-4848-b99e-020e647cae4c' class='xr-section-summary'  title='Expand/collapse section'>Inherited coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-8b17366d-0f77-4fe4-930b-aa6cd0be5dba' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8b17366d-0f77-4fe4-930b-aa6cd0be5dba' class='xr-section-summary' >Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>z_bnds</span></div><div class='xr-var-dims'>(z, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-2.5 2.5 2.5 7.5 ... 17.5 17.5 22.5</div><input id='attrs-c249076a-272c-497e-bc56-b6d6bdb7f8fd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c249076a-272c-497e-bc56-b6d6bdb7f8fd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f80937b5-bbea-4630-939e-70ba3686a608' class='xr-var-data-in' type='checkbox'><label for='data-f80937b5-bbea-4630-939e-70ba3686a608' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.</dd><dt><span>standard_name :</span></dt><dd>z_bounds</dd><dt><span>long_name :</span></dt><dd>Depth below earth&#x27;s surface DTM cell boundaries</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>datum :</span></dt><dd>ground surface</dd><dt><span>valid_range :</span></dt><dd>[-2.5 22.5]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[-2.5,  2.5],
+
+    .xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+    .xr-var-data-in:checked + label > .xr-icon-database,
+    .xr-index-data-in:checked + label > .xr-icon-database {
+      color: var(--xr-font-color0);
+      filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+      stroke-width: 0.8px;
+    }
+    </style><pre class='xr-text-repr-fallback'>&lt;xarray.DataTree &#x27;maps&#x27;&gt;
+    Group: /survey/derived_products/maps
+        Dimensions:       (z: 5, nv: 2, x: 363, y: 770)
+        Coordinates:
+          * z             (z) float64 40B 0.0 5.0 10.0 15.0 20.0
+          * nv            (nv) int64 16B 0 1
+          * x             (x) float64 3kB 2.915e+05 2.925e+05 ... 6.525e+05 6.535e+05
+          * y             (y) float64 6kB 1.648e+06 1.647e+06 ... 8.798e+05 8.788e+05
+            spatial_ref   float64 8B 0.0
+        Data variables:
+            z_bnds        (z, nv) float64 80B -2.5 2.5 2.5 7.5 ... 12.5 17.5 17.5 22.5
+            x_bnds        (x, nv) float64 6kB 2.91e+05 2.92e+05 ... 6.53e+05 6.54e+05
+            y_bnds        (y, nv) float64 12kB 1.648e+06 1.647e+06 ... 8.783e+05
+            resistivity   (z, y, x) float64 11MB nan nan nan nan nan ... nan nan nan nan
+            magnetic_tmi  (y, x) float32 1MB nan nan nan nan nan ... nan nan nan nan nan
+        Attributes:
+            comment:  &lt;additional details or ancillary information&gt;
+            content:  interpolated resistivity models (3-D depth grid) and magnetic m...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataTree</div><div class='xr-obj-name'>&#x27;maps&#x27;</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-65007ad9-cff2-463a-8298-375071f6c7cc' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-65007ad9-cff2-463a-8298-375071f6c7cc' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>z</span>: 5</li><li><span class='xr-has-index'>nv</span>: 2</li><li><span class='xr-has-index'>x</span>: 363</li><li><span class='xr-has-index'>y</span>: 770</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-687fe256-03b1-40c2-a038-a8f9919f73bd' class='xr-section-summary-in' type='checkbox'  checked><label for='section-687fe256-03b1-40c2-a038-a8f9919f73bd' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>z</span></div><div class='xr-var-dims'>(z)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 5.0 10.0 15.0 20.0</div><input id='attrs-8725bf48-b642-4662-a7db-79b251e2b193' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8725bf48-b642-4662-a7db-79b251e2b193' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3fcec9e3-a8d5-4c97-b9e3-f5e29d81b3a1' class='xr-var-data-in' type='checkbox'><label for='data-3fcec9e3-a8d5-4c97-b9e3-f5e29d81b3a1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.</dd><dt><span>standard_name :</span></dt><dd>z</dd><dt><span>long_name :</span></dt><dd>Depth below earth&#x27;s surface DTM</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>datum :</span></dt><dd>ground surface</dd><dt><span>valid_range :</span></dt><dd>[ 0. 20.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>z_bnds</dd></dl></div><div class='xr-var-data'><pre>array([ 0.,  5., 10., 15., 20.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>nv</span></div><div class='xr-var-dims'>(nv)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1</div><input id='attrs-036aa227-b55c-49e4-bced-951901194ab5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-036aa227-b55c-49e4-bced-951901194ab5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-38069977-5c14-4b36-b730-f2c131f802c9' class='xr-var-data-in' type='checkbox'><label for='data-38069977-5c14-4b36-b730-f2c131f802c9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>nv</dd><dt><span>long_name :</span></dt><dd>Number of vertices for bounding variables</dd><dt><span>units :</span></dt><dd>not_defined</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([0, 1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.915e+05 2.925e+05 ... 6.535e+05</div><input id='attrs-1514476b-2ed8-4873-a646-639ddae298bd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1514476b-2ed8-4873-a646-639ddae298bd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-41277a62-0d86-4c01-8198-018770c1e4bc' class='xr-var-data-in' type='checkbox'><label for='data-41277a62-0d86-4c01-8198-018770c1e4bc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>Easting</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[291455. 653455.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>x_bnds</dd></dl></div><div class='xr-var-data'><pre>array([291455., 292455., 293455., ..., 651455., 652455., 653455.], shape=(363,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.648e+06 1.647e+06 ... 8.788e+05</div><input id='attrs-e30dd32a-51e0-4300-880f-3b843c1eec10' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e30dd32a-51e0-4300-880f-3b843c1eec10' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-698c5f20-ab88-48f5-8a29-5cbe0e2bfa9d' class='xr-var-data-in' type='checkbox'><label for='data-698c5f20-ab88-48f5-8a29-5cbe0e2bfa9d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>Northing</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 878785. 1647785.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd><dt><span>bounds :</span></dt><dd>y_bnds</dd></dl></div><div class='xr-var-data'><pre>array([1647785., 1646785., 1645785., ...,  880785.,  879785.,  878785.],
+          shape=(770,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-f614138d-03df-40f2-b270-65ce0522cfe1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f614138d-03df-40f2-b270-65ce0522cfe1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8b8a16ba-b018-44f4-b84c-f1ff97350d51' class='xr-var-data-in' type='checkbox'><label for='data-8b8a16ba-b018-44f4-b84c-f1ff97350d51' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCRS[&quot;NAD83 / Conus Albers&quot;,BASEGEOGCRS[&quot;NAD83&quot;,DATUM[&quot;North American Datum 1983&quot;,ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,LENGTHUNIT[&quot;metre&quot;,1]]],PRIMEM[&quot;Greenwich&quot;,0,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],ID[&quot;EPSG&quot;,4269]],CONVERSION[&quot;Conus Albers&quot;,METHOD[&quot;Albers Equal Area&quot;,ID[&quot;EPSG&quot;,9822]],PARAMETER[&quot;Latitude of false origin&quot;,23,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8821]],PARAMETER[&quot;Longitude of false origin&quot;,-96,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8822]],PARAMETER[&quot;Latitude of 1st standard parallel&quot;,29.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8823]],PARAMETER[&quot;Latitude of 2nd standard parallel&quot;,45.5,ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],ID[&quot;EPSG&quot;,8824]],PARAMETER[&quot;Easting at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8826]],PARAMETER[&quot;Northing at false origin&quot;,0,LENGTHUNIT[&quot;metre&quot;,1],ID[&quot;EPSG&quot;,8827]]],CS[Cartesian,2],AXIS[&quot;easting (X)&quot;,east,ORDER[1],LENGTHUNIT[&quot;metre&quot;,1]],AXIS[&quot;northing (Y)&quot;,north,ORDER[2],LENGTHUNIT[&quot;metre&quot;,1]],USAGE[SCOPE[&quot;Data analysis and small scale data presentation for contiguous lower 48 states.&quot;],AREA[&quot;United States (USA) - CONUS onshore - Alabama; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming.&quot;],BBOX[24.41,-124.79,49.38,-66.91]],ID[&quot;EPSG&quot;,5070]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>NAD83</dd><dt><span>horizontal_datum_name :</span></dt><dd>North American Datum 1983</dd><dt><span>projected_crs_name :</span></dt><dd>NAD83 / Conus Albers</dd><dt><span>grid_mapping_name :</span></dt><dd>albers_conical_equal_area</dd><dt><span>standard_parallel :</span></dt><dd>(29.5, 45.5)</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>23.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-96.0</dd><dt><span>false_easting :</span></dt><dd>0.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>authority :</span></dt><dd>EPSG</dd><dt><span>wkid :</span></dt><dd>5070</dd><dt><span>GeoTransform :</span></dt><dd>(290955.0, 1000.0, 0.0, 1648285.0, 0.0, -1000.0)</dd></dl></div><div class='xr-var-data'><pre>array(0.)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-59054723-281e-43bb-a7c1-780ead10cf26' class='xr-section-summary-in' type='checkbox'  checked><label for='section-59054723-281e-43bb-a7c1-780ead10cf26' class='xr-section-summary' >Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>z_bnds</span></div><div class='xr-var-dims'>(z, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-2.5 2.5 2.5 7.5 ... 17.5 17.5 22.5</div><input id='attrs-77d6d19b-847e-4b0b-b4ca-6ec5d26e7289' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-77d6d19b-847e-4b0b-b4ca-6ec5d26e7289' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c5089df6-beb3-40c7-b6ca-e9d711bab03b' class='xr-var-data-in' type='checkbox'><label for='data-c5089df6-beb3-40c7-b6ca-e9d711bab03b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.</dd><dt><span>standard_name :</span></dt><dd>z_bounds</dd><dt><span>long_name :</span></dt><dd>Depth below earth&#x27;s surface DTM cell boundaries</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>datum :</span></dt><dd>ground surface</dd><dt><span>valid_range :</span></dt><dd>[-2.5 22.5]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[-2.5,  2.5],
            [ 2.5,  7.5],
            [ 7.5, 12.5],
            [12.5, 17.5],
-           [17.5, 22.5]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x_bnds</span></div><div class='xr-var-dims'>(x, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.91e+05 2.92e+05 ... 6.54e+05</div><input id='attrs-57b488f4-f87f-4890-97a5-06ec4b9c39a2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-57b488f4-f87f-4890-97a5-06ec4b9c39a2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-da7a6086-540d-4f06-a2cb-4c964c3e9fe2' class='xr-var-data-in' type='checkbox'><label for='data-da7a6086-540d-4f06-a2cb-4c964c3e9fe2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Easting cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[290955. 653955.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[290955., 291955.],
+           [17.5, 22.5]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x_bnds</span></div><div class='xr-var-dims'>(x, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.91e+05 2.92e+05 ... 6.54e+05</div><input id='attrs-f6a048ee-7daf-4a44-8559-56a113b59da2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f6a048ee-7daf-4a44-8559-56a113b59da2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-78958198-7efd-449e-b5b9-52399db9d127' class='xr-var-data-in' type='checkbox'><label for='data-78958198-7efd-449e-b5b9-52399db9d127' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_x_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Easting cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>valid_range :</span></dt><dd>[290955. 653955.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[290955., 291955.],
            [291955., 292955.],
            [292955., 293955.],
            [293955., 294955.],
@@ -979,13 +1199,13 @@ Create the Second Raster Dataset
            [649955., 650955.],
            [650955., 651955.],
            [651955., 652955.],
-           [652955., 653955.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y_bnds</span></div><div class='xr-var-dims'>(y, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.648e+06 1.647e+06 ... 8.783e+05</div><input id='attrs-6d8584d4-d1b2-4fe2-a56a-c45d95fcfb88' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6d8584d4-d1b2-4fe2-a56a-c45d95fcfb88' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-047b34ab-6aec-4461-8184-b4c9d3332337' class='xr-var-data-in' type='checkbox'><label for='data-047b34ab-6aec-4461-8184-b4c9d3332337' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Northing cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 878285. 1648285.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[1648285., 1647285.],
+           [652955., 653955.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>y_bnds</span></div><div class='xr-var-dims'>(y, nv)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.648e+06 1.647e+06 ... 8.783e+05</div><input id='attrs-315d7386-34d8-4716-abf6-611eaf33c520' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-315d7386-34d8-4716-abf6-611eaf33c520' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d423cb78-e369-4796-926a-90810b5af5d8' class='xr-var-data-in' type='checkbox'><label for='data-d423cb78-e369-4796-926a-90810b5af5d8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>projection_y_coordinate_bounds</dd><dt><span>long_name :</span></dt><dd>Northing cell boundaries</dd><dt><span>units :</span></dt><dd>meter</dd><dt><span>null_value :</span></dt><dd>not_defined</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>valid_range :</span></dt><dd>[ 878285. 1648285.]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[1648285., 1647285.],
            [1647285., 1646285.],
            [1646285., 1645285.],
            ...,
            [ 881285.,  880285.],
            [ 880285.,  879285.],
-           [ 879285.,  878285.]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>resistivity</span></div><div class='xr-var-dims'>(z, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-87d9b18d-36a6-4b5c-8608-e20830c892a3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-87d9b18d-36a6-4b5c-8608-e20830c892a3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-69dcfc69-181d-48a2-9ff1-13b3ec4ea86c' class='xr-var-data-in' type='checkbox'><label for='data-69dcfc69-181d-48a2-9ff1-13b3ec4ea86c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>log10_resistivity</dd><dt><span>long_name :</span></dt><dd>Electrical Resistivity on Logarithmic Scale</dd><dt><span>units :</span></dt><dd>log10_ohm_m</dd><dt><span>null_value :</span></dt><dd>-9999.99</dd><dt><span>valid_range :</span></dt><dd>[0.27706546 3.74382997]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
+           [ 879285.,  878285.]], shape=(770, 2))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>resistivity</span></div><div class='xr-var-dims'>(z, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-d1d0dd4f-44ea-4b68-a1db-4be648df4eb7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d1d0dd4f-44ea-4b68-a1db-4be648df4eb7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-01e60931-af18-4961-90a8-ebeb5ce59731' class='xr-var-data-in' type='checkbox'><label for='data-01e60931-af18-4961-90a8-ebeb5ce59731' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>log10_resistivity</dd><dt><span>long_name :</span></dt><dd>Electrical Resistivity on Logarithmic Scale</dd><dt><span>units :</span></dt><dd>log10_ohm_m</dd><dt><span>null_value :</span></dt><dd>-9999.99</dd><dt><span>valid_range :</span></dt><dd>[0.27706546 3.74382997]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
             [nan, nan, nan, ..., nan, nan, nan],
             [nan, nan, nan, ..., nan, nan, nan],
             ...,
@@ -1023,13 +1243,14 @@ Create the Second Raster Dataset
             ...,
             [nan, nan, nan, ..., nan, nan, nan],
             [nan, nan, nan, ..., nan, nan, nan],
-            [nan, nan, nan, ..., nan, nan, nan]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_tmi</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-32bc2d89-7931-48be-9384-4254899c376f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-32bc2d89-7931-48be-9384-4254899c376f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-158e3a84-40a2-47d3-8160-1ec83082627a' class='xr-var-data-in' type='checkbox'><label for='data-158e3a84-40a2-47d3-8160-1ec83082627a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_magnetic_intensity</dd><dt><span>long_name :</span></dt><dd>Total magnetic intensity, diurnally corrected and filtered</dd><dt><span>units :</span></dt><dd>nT</dd><dt><span>null_value :</span></dt><dd>-999999</dd><dt><span>valid_range :</span></dt><dd>[-12772.     11280.377]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
+            [nan, nan, nan, ..., nan, nan, nan]]], shape=(5, 770, 363))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magnetic_tmi</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-6e23e384-ae6a-49e0-851e-c512ee2ff1e5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6e23e384-ae6a-49e0-851e-c512ee2ff1e5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4e621f50-1f33-42e2-9848-345abeed11a4' class='xr-var-data-in' type='checkbox'><label for='data-4e621f50-1f33-42e2-9848-345abeed11a4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>total_magnetic_intensity</dd><dt><span>long_name :</span></dt><dd>Total magnetic intensity, diurnally corrected and filtered</dd><dt><span>units :</span></dt><dd>nT</dd><dt><span>null_value :</span></dt><dd>-999999</dd><dt><span>valid_range :</span></dt><dd>[-12772.     11280.377]</dd><dt><span>grid_mapping :</span></dt><dd>spatial_ref</dd></dl></div><div class='xr-var-data'><pre>array([[nan, nan, nan, ..., nan, nan, nan],
            [nan, nan, nan, ..., nan, nan, nan],
            [nan, nan, nan, ..., nan, nan, nan],
            ...,
            [nan, nan, nan, ..., nan, nan, nan],
            [nan, nan, nan, ..., nan, nan, nan],
-           [nan, nan, nan, ..., nan, nan, nan]], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c71292c5-4b6a-44ef-bb97-37c5f642426e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c71292c5-4b6a-44ef-bb97-37c5f642426e' class='xr-section-summary' >Attributes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>&lt;additional details or ancillary information&gt;</dd><dt><span>content :</span></dt><dd>interpolated resistivity models (3-D depth grid) and magnetic map (2-D)</dd></dl></div></li></ul></div></div>
+           [nan, nan, nan, ..., nan, nan, nan]],
+          shape=(770, 363), dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3ac5de3b-f0df-4f6d-a7ad-b8a6dfc5870b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3ac5de3b-f0df-4f6d-a7ad-b8a6dfc5870b' class='xr-section-summary' >Attributes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>comment :</span></dt><dd>&lt;additional details or ancillary information&gt;</dd><dt><span>content :</span></dt><dd>interpolated resistivity models (3-D depth grid) and magnetic map (2-D)</dd></dl></div></li></ul></div></div>
     </div>
     <br />
     <br />
@@ -1117,7 +1338,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.297 seconds)
+   **Total running time of the script:** (0 minutes 0.585 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_tifs.py:

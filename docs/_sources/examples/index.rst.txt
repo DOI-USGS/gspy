@@ -130,6 +130,23 @@ Creating GS Files
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Workbench to NetCDF">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_xyz_workbench_to_netcdf_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Workbench to NetCDF</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -146,6 +163,7 @@ Creating GS Files
    /examples/Creating_GS_Files/help_I_have_no_variable_metadata
    /examples/Creating_GS_Files/plot_csv_loupe
    /examples/Creating_GS_Files/plot_csv_skytem
+   /examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf
 
 =========================
 Interacting With GS Files

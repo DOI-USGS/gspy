@@ -55,7 +55,6 @@ d_supp1 = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
 # Add the raw AEM data as a tabular dataset
 data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, system=survey.nominal_system)
 
-print(data_container.raw_data.nominal_system.variables)
 #%%
 # 2 - Processed Data -
 # Import processed AEM data from CSV-format.
@@ -112,41 +111,36 @@ derived_products.gs.add(key='maps', metadata_file=m_supp5)
 
 print(survey.gs.tree)
 
-# #%%
-# # Save to NetCDF file
+#%%
+# Save to NetCDF file
 d_out = join(data_path, 'model//WISkyTEM.nc')
-# survey.gs.to_netcdf(d_out)
+survey.gs.to_netcdf(d_out)
 
-# #%%
-# # The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
+#%%
+# The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
 
-# data_container.gs.to_netcdf('test_datacontainer.nc')
+data_container.gs.to_netcdf('test_datacontainer.nc')
 
-# #%%
-# # Reading back in
-# new_survey = gspy.open_datatree(d_out)['survey']
+#%%
+# Reading back in
+new_survey = gspy.open_datatree(d_out)['survey']
 
-# print(new_survey)
+print(new_survey)
 
-# #%%
-# # Plotting
-# plt.figure()
-# new_survey['data']['raw_data']['height'].plot()
-# plt.tight_layout()
+#%%
+# Plotting
+plt.figure()
+new_survey['data']['raw_data']['height'].plot()
+plt.tight_layout()
 
-# pd = new_survey['data']['processed_data']
-# plt.figure()
-# pd['elevation'].plot()
-# plt.tight_layout()
+pd = new_survey['data']['processed_data']
+plt.figure()
+pd['elevation'].plot()
+plt.tight_layout()
 
-# m = new_survey['derived_products']['maps']
-# plt.figure()
-# m['magnetic_tmi'].plot(cmap='jet')
-# plt.tight_layout()
+m = new_survey['derived_products']['maps']
+plt.figure()
+m['magnetic_tmi'].plot(cmap='jet')
+plt.tight_layout()
 
-# plt.show()
-
-
-# from gspy import write_ncml
-
-# write_ncml(d_out)
+plt.show()

@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gs_DataArray &mdash; gspy 2.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Coordinate" href="coordinate.html" />
+    <link rel="prev" title="DataArray Accessors" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            gspy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gs_datatree/index.html">DataTree Accessors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gs_dataset/index.html">Dataset Accessors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">DataArray Accessors</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gs_DataArray</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gspy.gs_dataarray.DataArray.DataArray"><code class="docutils literal notranslate"><span class="pre">DataArray</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="coordinate.html">Coordinate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spatial_ref.html">Spatial ref</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">DataArray Accessors</a></li>
+      <li class="breadcrumb-item active">gs_DataArray</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/content/api/gs_dataarray/dataarray.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gs-dataarray">
+<h1>gs_DataArray<a class="headerlink" href="#gs-dataarray" title="Link to this heading"></a></h1>
+digraph inheritancec3b9358b0c {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;DataArray&quot; [URL=&quot;#gspy.gs_dataarray.DataArray.DataArray&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor for xarray.DataArray.&quot;];
+}
+<dl class="py class" id="module-gspy.gs_dataarray.DataArray">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataarray.DataArray.</span></span><span class="sig-name descname"><span class="pre">DataArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray" title="Link to this definition"></a></dt>
+<dd><p>Accessor for xarray.DataArray.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#gspy.gs_dataarray.DataArray.DataArray.from_values" title="gspy.gs_dataarray.DataArray.DataArray.from_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataArray.from_values</span></code></a></dt><dd><p>for instantiation</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.add_bounds_to_coordinate_dimension">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bounds_to_coordinate_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.add_bounds_to_coordinate_dimension" title="Link to this definition"></a></dt>
+<dd><p>For an existing DataArray, compute its bounds and attach them.</p>
+<p>Automatically modifies any attached metadata keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinate</strong> (<em>xarray.DataArray</em>) – Existing DataArray inside an xarray.Dataset</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Used purely for error messages.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Has shape (size of dimension, 2) defining the bounds of each “cell” in the coordinate</p></li>
+<li><p>if not present, bounds are computed. Otherwise assign them.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.catch_nan">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">catch_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.catch_nan" title="Link to this definition"></a></dt>
+<dd><p>Replace NaNs with the defined null_value in the metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>array_like</em>) – Values to check</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the variable being checked</p></li>
+<li><p><strong>null_value</strong> (<em>str</em><em>, </em><em>optional</em>) – Number that represents unusable data. default is ‘not_defined’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array_like</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>If there are NaNs in the values</strong><strong>, </strong><strong>and no defined null_value in the kwargs</strong><strong>, </strong><strong>notify the user.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.check_metadata">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.check_metadata" title="Link to this definition"></a></dt>
+<dd><p>Check the metadata provided and ensure GS standard compliance, i.e. at least long_name, standard_name, and units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the variable</p></li>
+<li><p><strong>long_name</strong> (<em>str</em><em>, </em><em>optional</em>) – CF convention long name</p></li>
+<li><p><strong>null_value</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Number that represents unusable data. default is ‘not_defined’</p></li>
+<li><p><strong>standard_name</strong> (<em>str</em><em>, </em><em>optional</em>) – CF convention standard name</p></li>
+<li><p><strong>units</strong> (<em>str</em><em>, </em><em>optional</em>) – units of the coordinate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If required metadata is missing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.export_dataarray">
+<span class="sig-name descname"><span class="pre">export_dataarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_ncml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.export_dataarray" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.from_values">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.from_values" title="Link to this definition"></a></dt>
+<dd><p>Generates an xarray.DataArray using an array of values</p>
+<p>Wraps around the xarray.DataArray instantiator and checks for Nans and adds CF convention metadata entries like valid_range, grid_mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the DataArray.</p></li>
+<li><p><strong>values</strong> (<em>array_like</em>) – Values to assign to the DataArray.</p></li>
+<li><p><strong>coords</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of DataArrays along each dimension of this variable</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>optional</em>) – Coerce values into this dtype.</p></li>
+<li><p><strong>dimensions</strong> (<em>list</em><em> of </em><em>str</em>) – names of this variables dimesions</p></li>
+<li><p><strong>grid_mapping</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the grid_mapping. Default is ‘spatial_ref’ and refers to any attached spatial_ref class, handled by gspy</p></li>
+<li><p><strong>long_name</strong> (<em>str</em><em>, </em><em>optional</em>) – CF convention long name</p></li>
+<li><p><strong>null_value</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Number that represents unusable data. default is ‘not_defined’</p></li>
+<li><p><strong>standard_name</strong> (<em>str</em><em>, </em><em>optional</em>) – CF convention standard name</p></li>
+<li><p><strong>units</strong> (<em>str</em><em>, </em><em>optional</em>) – units of the coordinate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.label">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.metadata_template">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.metadata_template" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.valid_range">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valid_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.valid_range" title="Link to this definition"></a></dt>
+<dd><p>Generate a valid range for some values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>array_like</em>) – numerical array</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – name of the variable</p></li>
+<li><p><strong>null_value</strong> (<em>scalar</em><em>, </em><em>optional</em>) – Representation of unusable data values</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>optional</em>) – Coerce the min, max to this dtype default is values.dtype.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[nanmin(values), nanmax(values)]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array_like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataarray.DataArray.DataArray.write_ncml">
+<span class="sig-name descname"><span class="pre">write_ncml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.DataArray.DataArray.write_ncml" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="DataArray Accessors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coordinate.html" class="btn btn-neutral float-right" title="Coordinate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

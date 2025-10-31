@@ -5,4 +5,6 @@ API
 .. toctree::
    :maxdepth: 2
 
-   classes/index
+   gs_datatree/index
+   gs_dataset/index
+   gs_dataarray/index

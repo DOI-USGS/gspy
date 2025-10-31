@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Basic Class Structure &mdash; gspy 2.0.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Coordinate Reference Systems" href="plot_coordinate_reference_systems.html" />
-    <link rel="prev" title="Multi-dataset Survey" href="../Creating_GS_Files/plot_csv_skytem.html" /> 
+    <link rel="prev" title="Workbench to NetCDF" href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -103,11 +103,11 @@ to download the full example code.</p>
 <p>This example uses ASEG-formatted raw AEM data from the Tempest system, and a 2-D GeoTiFF of magnetic data.</p>
 <p>Dataset Reference:
 Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
-<span class="kn">import</span> <span class="nn">gspy</span>
-<span class="kn">from</span> <span class="nn">gspy</span> <span class="kn">import</span> <span class="n">Survey</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Survey</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
 </pre></div>
 </div>
 <p>First open the netcdf GS standard survey file.</p>
@@ -154,12 +154,12 @@ Group: /survey
 │   ├── Group: /survey/data/raw_data
 │   │   │   Dimensions:          (index: 20701, gate_times: 15)
 │   │   │   Coordinates:
-│   │   │       spatial_ref      float64 8B ...
 │   │   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 166kB ...
 │   │   │       y                (index) float64 166kB ...
 │   │   │       z                (index) float64 166kB ...
-│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │   │   │   Data variables: (12/61)
 │   │   │       line             (index) int32 83kB ...
 │   │   │       flight           (index) int32 83kB ...
@@ -187,40 +187,52 @@ Group: /survey
 │   │   │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
 │   │   │         * n_receiver                    (n_receiver) int64 16B 0 1
 │   │   │         * n_component                   (n_component) int64 16B 0 1
-│   │   │       Data variables: (12/18)
+│   │   │       Data variables: (12/21)
 │   │   │           gate_times_bnds               (gate_times, nv) float64 240B ...
+│   │   │           transmitter_label             (n_transmitter) &lt;U1 4B ...
 │   │   │           transmitter_area              (n_transmitter) int64 8B ...
 │   │   │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
 │   │   │           transmitter_waveform_current  (waveform_time) float64 56B ...
 │   │   │           transmitter_scale_factor      (n_transmitter) float64 8B ...
-│   │   │           transmitter_peak_current      (n_transmitter) int64 8B ...
 │   │   │           ...                            ...
-│   │   │           receiver_orientation          (n_receiver) &lt;U1 8B ...
+│   │   │           component_label               (n_component) &lt;U3 24B ...
 │   │   │           component_transmitters        (n_component) &lt;U1 8B ...
 │   │   │           component_receivers           (n_component) &lt;U1 8B ...
 │   │   │           component_txrx_dx             (n_component) int64 16B ...
 │   │   │           component_txrx_dy             (n_component) int64 16B ...
 │   │   │           component_txrx_dz             (n_component) int64 16B ...
 │   │   │       Attributes:
-│   │   │           type:        system
-│   │   │           mode:        airborne
-│   │   │           method:      electromagnetic
-│   │   │           submethod:   time domain
-│   │   │           instrument:  tempest
+│   │   │           type:                     system
+│   │   │           mode:                     airborne
+│   │   │           method:                   electromagnetic
+│   │   │           submethod:                time domain
+│   │   │           instrument:               tempest
+│   │   │           name:                     tempest_system
+│   │   │           structure:                tabular
+│   │   │           data_normalized:          True
+│   │   │           output_data_type:         B
+│   │   │           reference_frame:          right-handed positive up
+│   │   │           output_sample_frequency:  5
+│   │   │           digitization_frequency:   92160
 │   │   ├── Group: /survey/data/raw_data/magnetic_system
 │   │   │       Attributes:
-│   │   │           type:        system
-│   │   │           mode:        airborne
-│   │   │           method:      magnetic
-│   │   │           submethod:   not_defined
-│   │   │           instrument:  not_defiend
+│   │   │           type:              system
+│   │   │           mode:              airborne
+│   │   │           method:            magnetic
+│   │   │           submethod:         not_defined
+│   │   │           instrument:        not_defiend
+│   │   │           name:              magnetic_system
+│   │   │           sample_frequency:  1.0
+│   │   │           resolution:        0.001
 │   │   └── Group: /survey/data/raw_data/radiometric_system
 │   │           Attributes:
-│   │               type:        system
-│   │               mode:        airborne
-│   │               method:      radiometric
-│   │               submethod:   not_defined
-│   │               instrument:  not_defined
+│   │               type:              system
+│   │               mode:              airborne
+│   │               method:            radiometric
+│   │               submethod:         not_defined
+│   │               instrument:        not_defined
+│   │               name:              radiometric_system
+│   │               sample_frequency:  1.0
 │   └── Group: /survey/data/derived_maps
 │       │   Dimensions:      ()
 │       │   Data variables:
@@ -231,10 +243,10 @@ Group: /survey
 │       └── Group: /survey/data/derived_maps/maps
 │               Dimensions:       (x: 599, nv: 2, y: 1212)
 │               Coordinates:
-│                   spatial_ref   float64 8B ...
 │                 * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
 │                 * nv            (nv) int64 16B 0 1
 │                 * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+│                   spatial_ref   float64 8B ...
 │               Data variables:
 │                   x_bnds        (x, nv) float64 10kB ...
 │                   y_bnds        (y, nv) float64 19kB ...
@@ -253,11 +265,11 @@ Group: /survey
             Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
                                           index: 20701)
             Coordinates:
-                spatial_ref              float64 8B ...
-              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
               * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
               * nv                       (nv) int64 16B 0 1
               * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+                spatial_ref              float64 8B ...
                 x                        (index) float64 166kB ...
                 y                        (index) float64 166kB ...
                 z                        (index) float64 166kB ...
@@ -360,12 +372,12 @@ Group: /survey
 │   ├── Group: /survey/data/raw_data
 │   │   │   Dimensions:          (index: 20701, gate_times: 15)
 │   │   │   Coordinates:
-│   │   │       spatial_ref      float64 8B ...
 │   │   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 166kB ...
 │   │   │       y                (index) float64 166kB ...
 │   │   │       z                (index) float64 166kB ...
-│   │   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │   │   │   Data variables: (12/61)
 │   │   │       line             (index) int32 83kB ...
 │   │   │       flight           (index) int32 83kB ...
@@ -393,40 +405,52 @@ Group: /survey
 │   │   │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
 │   │   │         * n_receiver                    (n_receiver) int64 16B 0 1
 │   │   │         * n_component                   (n_component) int64 16B 0 1
-│   │   │       Data variables: (12/18)
+│   │   │       Data variables: (12/21)
 │   │   │           gate_times_bnds               (gate_times, nv) float64 240B ...
+│   │   │           transmitter_label             (n_transmitter) &lt;U1 4B ...
 │   │   │           transmitter_area              (n_transmitter) int64 8B ...
 │   │   │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
 │   │   │           transmitter_waveform_current  (waveform_time) float64 56B ...
 │   │   │           transmitter_scale_factor      (n_transmitter) float64 8B ...
-│   │   │           transmitter_peak_current      (n_transmitter) int64 8B ...
 │   │   │           ...                            ...
-│   │   │           receiver_orientation          (n_receiver) &lt;U1 8B ...
+│   │   │           component_label               (n_component) &lt;U3 24B ...
 │   │   │           component_transmitters        (n_component) &lt;U1 8B ...
 │   │   │           component_receivers           (n_component) &lt;U1 8B ...
 │   │   │           component_txrx_dx             (n_component) int64 16B ...
 │   │   │           component_txrx_dy             (n_component) int64 16B ...
 │   │   │           component_txrx_dz             (n_component) int64 16B ...
 │   │   │       Attributes:
-│   │   │           type:        system
-│   │   │           mode:        airborne
-│   │   │           method:      electromagnetic
-│   │   │           submethod:   time domain
-│   │   │           instrument:  tempest
+│   │   │           type:                     system
+│   │   │           mode:                     airborne
+│   │   │           method:                   electromagnetic
+│   │   │           submethod:                time domain
+│   │   │           instrument:               tempest
+│   │   │           name:                     tempest_system
+│   │   │           structure:                tabular
+│   │   │           data_normalized:          True
+│   │   │           output_data_type:         B
+│   │   │           reference_frame:          right-handed positive up
+│   │   │           output_sample_frequency:  5
+│   │   │           digitization_frequency:   92160
 │   │   ├── Group: /survey/data/raw_data/magnetic_system
 │   │   │       Attributes:
-│   │   │           type:        system
-│   │   │           mode:        airborne
-│   │   │           method:      magnetic
-│   │   │           submethod:   not_defined
-│   │   │           instrument:  not_defiend
+│   │   │           type:              system
+│   │   │           mode:              airborne
+│   │   │           method:            magnetic
+│   │   │           submethod:         not_defined
+│   │   │           instrument:        not_defiend
+│   │   │           name:              magnetic_system
+│   │   │           sample_frequency:  1.0
+│   │   │           resolution:        0.001
 │   │   └── Group: /survey/data/raw_data/radiometric_system
 │   │           Attributes:
-│   │               type:        system
-│   │               mode:        airborne
-│   │               method:      radiometric
-│   │               submethod:   not_defined
-│   │               instrument:  not_defined
+│   │               type:              system
+│   │               mode:              airborne
+│   │               method:            radiometric
+│   │               submethod:         not_defined
+│   │               instrument:        not_defined
+│   │               name:              radiometric_system
+│   │               sample_frequency:  1.0
 │   └── Group: /survey/data/derived_maps
 │       │   Dimensions:      ()
 │       │   Data variables:
@@ -437,10 +461,10 @@ Group: /survey
 │       └── Group: /survey/data/derived_maps/maps
 │               Dimensions:       (x: 599, nv: 2, y: 1212)
 │               Coordinates:
-│                   spatial_ref   float64 8B ...
 │                 * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
 │                 * nv            (nv) int64 16B 0 1
 │                 * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+│                   spatial_ref   float64 8B ...
 │               Data variables:
 │                   x_bnds        (x, nv) float64 10kB ...
 │                   y_bnds        (y, nv) float64 19kB ...
@@ -459,11 +483,11 @@ Group: /survey
             Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
                                           index: 20701)
             Coordinates:
-                spatial_ref              float64 8B ...
-              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
               * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
               * nv                       (nv) int64 16B 0 1
               * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+              * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+                spatial_ref              float64 8B ...
                 x                        (index) float64 166kB ...
                 y                        (index) float64 166kB ...
                 z                        (index) float64 166kB ...
@@ -510,12 +534,12 @@ Group: /survey/data
 ├── Group: /survey/data/raw_data
 │   │   Dimensions:          (index: 20701, gate_times: 15)
 │   │   Coordinates:
-│   │       spatial_ref      float64 8B ...
 │   │     * index            (index) int32 83kB 0 1 2 3 4 ... 20697 20698 20699 20700
+│   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│   │       spatial_ref      float64 8B ...
 │   │       x                (index) float64 166kB ...
 │   │       y                (index) float64 166kB ...
 │   │       z                (index) float64 166kB ...
-│   │     * gate_times       (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │   │   Data variables: (12/61)
 │   │       line             (index) int32 83kB ...
 │   │       flight           (index) int32 83kB ...
@@ -543,40 +567,52 @@ Group: /survey/data
 │   │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
 │   │         * n_receiver                    (n_receiver) int64 16B 0 1
 │   │         * n_component                   (n_component) int64 16B 0 1
-│   │       Data variables: (12/18)
+│   │       Data variables: (12/21)
 │   │           gate_times_bnds               (gate_times, nv) float64 240B ...
+│   │           transmitter_label             (n_transmitter) &lt;U1 4B ...
 │   │           transmitter_area              (n_transmitter) int64 8B ...
 │   │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
 │   │           transmitter_waveform_current  (waveform_time) float64 56B ...
 │   │           transmitter_scale_factor      (n_transmitter) float64 8B ...
-│   │           transmitter_peak_current      (n_transmitter) int64 8B ...
 │   │           ...                            ...
-│   │           receiver_orientation          (n_receiver) &lt;U1 8B ...
+│   │           component_label               (n_component) &lt;U3 24B ...
 │   │           component_transmitters        (n_component) &lt;U1 8B ...
 │   │           component_receivers           (n_component) &lt;U1 8B ...
 │   │           component_txrx_dx             (n_component) int64 16B ...
 │   │           component_txrx_dy             (n_component) int64 16B ...
 │   │           component_txrx_dz             (n_component) int64 16B ...
 │   │       Attributes:
-│   │           type:        system
-│   │           mode:        airborne
-│   │           method:      electromagnetic
-│   │           submethod:   time domain
-│   │           instrument:  tempest
+│   │           type:                     system
+│   │           mode:                     airborne
+│   │           method:                   electromagnetic
+│   │           submethod:                time domain
+│   │           instrument:               tempest
+│   │           name:                     tempest_system
+│   │           structure:                tabular
+│   │           data_normalized:          True
+│   │           output_data_type:         B
+│   │           reference_frame:          right-handed positive up
+│   │           output_sample_frequency:  5
+│   │           digitization_frequency:   92160
 │   ├── Group: /survey/data/raw_data/magnetic_system
 │   │       Attributes:
-│   │           type:        system
-│   │           mode:        airborne
-│   │           method:      magnetic
-│   │           submethod:   not_defined
-│   │           instrument:  not_defiend
+│   │           type:              system
+│   │           mode:              airborne
+│   │           method:            magnetic
+│   │           submethod:         not_defined
+│   │           instrument:        not_defiend
+│   │           name:              magnetic_system
+│   │           sample_frequency:  1.0
+│   │           resolution:        0.001
 │   └── Group: /survey/data/raw_data/radiometric_system
 │           Attributes:
-│               type:        system
-│               mode:        airborne
-│               method:      radiometric
-│               submethod:   not_defined
-│               instrument:  not_defined
+│               type:              system
+│               mode:              airborne
+│               method:            radiometric
+│               submethod:         not_defined
+│               instrument:        not_defined
+│               name:              radiometric_system
+│               sample_frequency:  1.0
 └── Group: /survey/data/derived_maps
     │   Dimensions:      ()
     │   Data variables:
@@ -587,10 +623,10 @@ Group: /survey/data
     └── Group: /survey/data/derived_maps/maps
             Dimensions:       (x: 599, nv: 2, y: 1212)
             Coordinates:
-                spatial_ref   float64 8B ...
               * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
               * nv            (nv) int64 16B 0 1
               * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+                spatial_ref   float64 8B ...
             Data variables:
                 x_bnds        (x, nv) float64 10kB ...
                 y_bnds        (y, nv) float64 19kB ...
@@ -605,10 +641,10 @@ Raster:
 Group: /survey/data/derived_maps/maps
     Dimensions:       (x: 599, nv: 2, y: 1212)
     Coordinates:
-        spatial_ref   float64 8B ...
       * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
       * nv            (nv) int64 16B 0 1
       * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        spatial_ref   float64 8B ...
     Data variables:
         x_bnds        (x, nv) float64 10kB ...
         y_bnds        (y, nv) float64 19kB ...
@@ -630,11 +666,11 @@ Group: /survey/models/inverted_models
     Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
                                   index: 20701)
     Coordinates:
-        spatial_ref              float64 8B ...
-      * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
       * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
       * nv                       (nv) int64 16B 0 1
       * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+      * index                    (index) int32 83kB 0 1 2 3 ... 20698 20699 20700
+        spatial_ref              float64 8B ...
         x                        (index) float64 166kB ...
         y                        (index) float64 166kB ...
         z                        (index) float64 166kB ...
@@ -669,10 +705,11 @@ corresponds to the rows of the input text file representing individual measureme
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;index&#39; (index: 20701)&gt; Size: 83kB
-array([    0,     1,     2, ..., 20698, 20699, 20700], dtype=int32)
+array([    0,     1,     2, ..., 20698, 20699, 20700],
+      shape=(20701,), dtype=int32)
 Coordinates:
-    spatial_ref  float64 8B ...
   * index        (index) int32 83kB 0 1 2 3 4 ... 20696 20697 20698 20699 20700
+    spatial_ref  float64 8B ...
     x            (index) float64 166kB ...
     y            (index) float64 166kB ...
     z            (index) float64 166kB ...
@@ -701,8 +738,8 @@ array([1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05, 1.410600e-04,
        2.278700e-04, 3.689300e-04, 5.859500e-04, 9.114800e-04, 1.410630e-03,
        2.191900e-03, 3.418070e-03, 5.338690e-03, 8.301020e-03, 1.337928e-02])
 Coordinates:
-    spatial_ref  float64 8B ...
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+    spatial_ref  float64 8B ...
 Attributes:
     standard_name:  gate_times
     long_name:      receiver gate times
@@ -718,9 +755,9 @@ corresponding bounds on non-discrete dimension:
 &lt;xarray.DataArray &#39;gate_times_bnds&#39; (gate_times: 15, nv: 2)&gt; Size: 240B
 [30 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B ...
-  * nv           (nv) int64 16B 0 1
   * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+  * nv           (nv) int64 16B 0 1
+    spatial_ref  float64 8B ...
 Attributes:
     standard_name:  gate_times_bounds
     long_name:      receiver gate times cell boundaries
@@ -759,10 +796,10 @@ data dimensions correspond directly to either spatial or temporal coordinates (<
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Coordinates:
-    spatial_ref  float64 8B ...
   * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * nv           (nv) int64 16B 0 1
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    spatial_ref  float64 8B ...
 </pre></div>
 </div>
 <p>The Spatial Reference Coordinate</p>
@@ -803,7 +840,7 @@ of that individual variable. These follow the <a class="reference external" href
  &#39;valid_range&#39;: array([1.e-04, 1.e+01])}
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.633 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.146 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>
@@ -824,7 +861,7 @@ of that individual variable. These follow the <a class="reference external" href
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../Creating_GS_Files/plot_csv_skytem.html" class="btn btn-neutral float-left" title="Multi-dataset Survey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" class="btn btn-neutral float-left" title="Workbench to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="plot_coordinate_reference_systems.html" class="btn btn-neutral float-right" title="Coordinate Reference Systems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

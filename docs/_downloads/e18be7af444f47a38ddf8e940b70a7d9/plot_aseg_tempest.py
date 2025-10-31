@@ -46,8 +46,6 @@ d_supp = join(data_path, 'data//Tempest_data_md.yml')
 # Add the raw AEM data as a tabular dataset
 rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=d_supp)
 
-print(rd['tempest_system'])
-
 #%%
 # 2. Inverted Models
 model_container = survey.gs.add_container('models', **dict(content = "inverted models"))

@@ -365,9 +365,10 @@ sphinx_gallery_conf = {
     'examples_dirs': 'examples',   # path to your example scripts
     'gallery_dirs': 'examples',  # path to where to save gallery generated output
     'filename_pattern': 'plot_',
-    'subsection_order': ExplicitOrder([ 'examples/Creating_GS_Files',
-                                        'examples/Interacting_With_GS_Files'
-                                    ]),
+    # 'ignore_pattern': ["examples/images/"],
+    # 'subsection_order': ExplicitOrder([ 'examples/Creating_GS_Files',
+    #                                     'examples/Interacting_With_GS_Files'
+    #                                 ]),
     "within_subsection_order" : ExampleTitleSortKey,
     "image_scrapers": ('matplotlib'),
     "thumbnail_size": (350, 350),

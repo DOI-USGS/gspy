@@ -61,7 +61,6 @@ fi
 NEW_TAG="$MAJOR.$MINOR.$PATCH"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
-
 # Github stuff
 python update_version.py $NEW_TAG
 git add pyproject.toml

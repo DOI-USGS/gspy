@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raster &mdash; gspy 2.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Tabular" href="tabular.html" />
+    <link rel="prev" title="Dataset" href="dataset.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            gspy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gs_datatree/index.html">DataTree Accessors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Dataset Accessors</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dataset.html">Dataset</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Raster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gspy.gs_dataset.Raster.Raster"><code class="docutils literal notranslate"><span class="pre">Raster</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabular.html">Tabular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system.html">System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gs_dataarray/index.html">DataArray Accessors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Dataset Accessors</a></li>
+      <li class="breadcrumb-item active">Raster</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/content/api/gs_dataset/raster.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="raster">
+<h1>Raster<a class="headerlink" href="#raster" title="Link to this heading"></a></h1>
+digraph inheritance43deddf5fd {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;Dataset&quot; [URL=&quot;dataset.html#gspy.gs_dataset.Dataset.Dataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.&quot;];
+  &quot;Raster&quot; [URL=&quot;#gspy.gs_dataset.Raster.Raster&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Class defining a set of gridded data (2D or 3D).&quot;];
+  &quot;Dataset&quot; -&gt; &quot;Raster&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+<dl class="py class" id="module-gspy.gs_dataset.Raster">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataset.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster" title="Link to this definition"></a></dt>
+<dd><p>Class defining a set of gridded data (2D or 3D).</p>
+<p>The raster class allows for single 2D rasters, or ‘stacks’ of multiple 2D rasters into a 3D block.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Raster.read(metadata_file,</span> <span class="pre">spatial_ref,</span> <span class="pre">**kwargs)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Json file name, by default None</p></li>
+<li><p><strong>spatial_ref</strong> (<em>dict</em><em> or </em><em>gspy.Spatial_ref</em><em> or </em><em>xarray.DataArray</em><em>, </em><em>optional</em>) – Spatial ref object, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.Dataset</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#gspy.gs_dataset.Raster.Raster.read" title="gspy.gs_dataset.Raster.Raster.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Raster.read</span></code></a></dt><dd><p>Class method for reading file into class</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gspy.Spatial_ref</span></code></dt><dd><p>For co-ordinate reference instantiation requirements</p>
+</dd>
+</dl>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.bounds">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.bounds" title="Link to this definition"></a></dt>
+<dd><p>Spatial bounds of the raster</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.is_tif">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_tif</span></span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.is_tif" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.open_rasterio">
+<span class="sig-name descname"><span class="pre">open_rasterio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.open_rasterio" title="Link to this definition"></a></dt>
+<dd><p>Reads GeoTIFF file</p>
+<p>Uses rioxarray to read GeoTIFF file as an xarray Dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Name of GeoTIFF file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ds</strong> – Dataset containing the GeoTIFF variable</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xarray.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.read">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.read" title="Link to this definition"></a></dt>
+<dd><p>Instantiate a Raster class from metadata and data files.</p>
+<p>When reading the metadata and data file, the following are established in order
+* User defined dimensions
+* User defined coordinates
+* X and Y are automatically pulled from the first raster</p>
+<p>Read the metadata and data files and to Raster class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Json file name, by default None</p></li>
+<li><p><strong>spatial_ref</strong> (<em>dict</em><em>, </em><em>gspy.Spatial_ref</em><em>, or </em><em>xarray.DataArray</em><em>, </em><em>optional</em>) – Spatial ref object, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.read_raster_using_metadata">
+<span class="sig-name descname"><span class="pre">read_raster_using_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_metadata</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.read_raster_using_metadata" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.read_var_netcdf">
+<span class="sig-name descname"><span class="pre">read_var_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_meta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.read_var_netcdf" title="Link to this definition"></a></dt>
+<dd><p>Reads variable from NetCDF file and adds to Raster xarray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Name of NetCDF file to read</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – Variable name</p></li>
+<li><p><strong>var_meta</strong> (<em>dict</em>) – Variable attributes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Function is planned but not yet implemented</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.to_tif">
+<span class="sig-name descname"><span class="pre">to_tif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.to_tif" title="Link to this definition"></a></dt>
+<dd><p>Export GeoTIFF files from xarray</p>
+<p>2D variables are exported directly to GeoTIFF files, one for each variable, following
+the naming convention “{variable}.tif”</p>
+<p>3D variables are sliced along the right most dimension and exported to incremented GeoTIFF
+files following the naming convention “{variable}_{i}.tif”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster.write_metadata_template">
+<span class="sig-name descname"><span class="pre">write_metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raster_md.yml'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster.write_metadata_template" title="Link to this definition"></a></dt>
+<dd><p>Write JSON metadata template for a raster dataset</p>
+<p>Outputs a template JSON metadata file needed for adding Raster data. All required
+dictionaries are printed (dataset_attrs, key_mapping, raster_files, variables).
+Additional dictionaries can be optionally added to document more information or
+ancillary metadata relevant to the specific Raster data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – Tells user to specify metadata file when instantiating Raster data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dataset.html" class="btn btn-neutral float-left" title="Dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tabular.html" class="btn btn-neutral float-right" title="Tabular" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

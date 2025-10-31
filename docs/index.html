@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 2.0.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
@@ -117,22 +117,154 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/api/classes/index.html">Classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="content/api/classes/data/index.html">Data classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/xarray_gs/index.html">GS xarray accessor classes</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="content/api/classes/data/xarray_gs/DataArray_gs.html">gs_DataArray</a></li>
-<li class="toctree-l5"><a class="reference internal" href="content/api/classes/data/xarray_gs/Coordinate_gs.html">gs_Coordinate</a></li>
-<li class="toctree-l5"><a class="reference internal" href="content/api/classes/data/xarray_gs/Dataset_gs.html">gs_Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/gs_datatree/index.html">DataTree Accessors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_datatree/survey.html">Survey</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_datatree/survey.html#gspy.gs_datatree.Survey.Survey"><code class="docutils literal notranslate"><span class="pre">Survey</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/survey.html#gspy.gs_datatree.Survey.Survey.from_dict"><code class="docutils literal notranslate"><span class="pre">Survey.from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/survey.html#gspy.gs_datatree.Survey.Survey.metadata_template"><code class="docutils literal notranslate"><span class="pre">Survey.metadata_template()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/tabular.html">Tabular</a></li>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/tabular_csv.html">Tabular_csv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/tabular_aseg.html">Tabular_aseg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/data/raster.html">Raster</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="content/api/classes/survey/index.html">Survey class</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="content/api/classes/survey/survey.html">Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_datatree/container.html">Container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container"><code class="docutils literal notranslate"><span class="pre">Container</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.Data"><code class="docutils literal notranslate"><span class="pre">Container.Data()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.Systems"><code class="docutils literal notranslate"><span class="pre">Container.Systems()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.add"><code class="docutils literal notranslate"><span class="pre">Container.add()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.add_container"><code class="docutils literal notranslate"><span class="pre">Container.add_container()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.add_timestamp"><code class="docutils literal notranslate"><span class="pre">Container.add_timestamp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.from_dict"><code class="docutils literal notranslate"><span class="pre">Container.from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.get_all_attr"><code class="docutils literal notranslate"><span class="pre">Container.get_all_attr()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.get_system_with_method"><code class="docutils literal notranslate"><span class="pre">Container.get_system_with_method()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.metadata_template"><code class="docutils literal notranslate"><span class="pre">Container.metadata_template()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.plot"><code class="docutils literal notranslate"><span class="pre">Container.plot()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.plot_cross_section"><code class="docutils literal notranslate"><span class="pre">Container.plot_cross_section()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.read_metadata"><code class="docutils literal notranslate"><span class="pre">Container.read_metadata()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.scatter"><code class="docutils literal notranslate"><span class="pre">Container.scatter()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.set_spatial_ref"><code class="docutils literal notranslate"><span class="pre">Container.set_spatial_ref()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.subset"><code class="docutils literal notranslate"><span class="pre">Container.subset()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.to_netcdf"><code class="docutils literal notranslate"><span class="pre">Container.to_netcdf()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.tree"><code class="docutils literal notranslate"><span class="pre">Container.tree</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.write_ncml"><code class="docutils literal notranslate"><span class="pre">Container.write_ncml()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/gs_dataset/index.html">Dataset Accessors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataset/dataset.html">Dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.Survey"><code class="docutils literal notranslate"><span class="pre">Dataset.Survey()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_bounds_to_coordinate"><code class="docutils literal notranslate"><span class="pre">Dataset.add_bounds_to_coordinate()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_coordinate_from_dict"><code class="docutils literal notranslate"><span class="pre">Dataset.add_coordinate_from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_coordinate_from_dict_np"><code class="docutils literal notranslate"><span class="pre">Dataset.add_coordinate_from_dict_np()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_coordinate_from_values"><code class="docutils literal notranslate"><span class="pre">Dataset.add_coordinate_from_values()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_dimensions_from_variables"><code class="docutils literal notranslate"><span class="pre">Dataset.add_dimensions_from_variables()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_timestamp"><code class="docutils literal notranslate"><span class="pre">Dataset.add_timestamp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_variable_from_dict"><code class="docutils literal notranslate"><span class="pre">Dataset.add_variable_from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_variable_from_dict_np"><code class="docutils literal notranslate"><span class="pre">Dataset.add_variable_from_dict_np()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_variable_from_values"><code class="docutils literal notranslate"><span class="pre">Dataset.add_variable_from_values()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.assign_coords"><code class="docutils literal notranslate"><span class="pre">Dataset.assign_coords()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.component_labels"><code class="docutils literal notranslate"><span class="pre">Dataset.component_labels</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.distance_along_line"><code class="docutils literal notranslate"><span class="pre">Dataset.distance_along_line</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.get_all_attr"><code class="docutils literal notranslate"><span class="pre">Dataset.get_all_attr()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.interpolate"><code class="docutils literal notranslate"><span class="pre">Dataset.interpolate()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.is_projected"><code class="docutils literal notranslate"><span class="pre">Dataset.is_projected</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.json_metadata"><code class="docutils literal notranslate"><span class="pre">Dataset.json_metadata</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.metadata_template"><code class="docutils literal notranslate"><span class="pre">Dataset.metadata_template()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.plot"><code class="docutils literal notranslate"><span class="pre">Dataset.plot()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.plot_cross_section"><code class="docutils literal notranslate"><span class="pre">Dataset.plot_cross_section()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.scatter"><code class="docutils literal notranslate"><span class="pre">Dataset.scatter()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.set_spatial_ref"><code class="docutils literal notranslate"><span class="pre">Dataset.set_spatial_ref()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.spatial_ref"><code class="docutils literal notranslate"><span class="pre">Dataset.spatial_ref</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.subset"><code class="docutils literal notranslate"><span class="pre">Dataset.subset()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.to_netcdf"><code class="docutils literal notranslate"><span class="pre">Dataset.to_netcdf()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.update_attrs"><code class="docutils literal notranslate"><span class="pre">Dataset.update_attrs()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.write_ncml"><code class="docutils literal notranslate"><span class="pre">Dataset.write_ncml()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.write_zarr"><code class="docutils literal notranslate"><span class="pre">Dataset.write_zarr()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.x_axis"><code class="docutils literal notranslate"><span class="pre">Dataset.x_axis()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataset/raster.html">Raster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster"><code class="docutils literal notranslate"><span class="pre">Raster</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.bounds"><code class="docutils literal notranslate"><span class="pre">Raster.bounds</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.is_tif"><code class="docutils literal notranslate"><span class="pre">Raster.is_tif</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.open_rasterio"><code class="docutils literal notranslate"><span class="pre">Raster.open_rasterio()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.read"><code class="docutils literal notranslate"><span class="pre">Raster.read()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.read_raster_using_metadata"><code class="docutils literal notranslate"><span class="pre">Raster.read_raster_using_metadata()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.read_var_netcdf"><code class="docutils literal notranslate"><span class="pre">Raster.read_var_netcdf()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.to_tif"><code class="docutils literal notranslate"><span class="pre">Raster.to_tif()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.write_metadata_template"><code class="docutils literal notranslate"><span class="pre">Raster.write_metadata_template()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataset/tabular.html">Tabular</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular"><code class="docutils literal notranslate"><span class="pre">Tabular</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.get_fortran_format"><code class="docutils literal notranslate"><span class="pre">Tabular.get_fortran_format()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.is_netcdf"><code class="docutils literal notranslate"><span class="pre">Tabular.is_netcdf</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.metadata_template"><code class="docutils literal notranslate"><span class="pre">Tabular.metadata_template()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.read"><code class="docutils literal notranslate"><span class="pre">Tabular.read()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.to_file"><code class="docutils literal notranslate"><span class="pre">Tabular.to_file()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.type"><code class="docutils literal notranslate"><span class="pre">Tabular.type</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataset/system.html">System</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System"><code class="docutils literal notranslate"><span class="pre">System</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.check_against_data"><code class="docutils literal notranslate"><span class="pre">System.check_against_data()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.check_required"><code class="docutils literal notranslate"><span class="pre">System.check_required()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.from_dict"><code class="docutils literal notranslate"><span class="pre">System.from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.is_projected"><code class="docutils literal notranslate"><span class="pre">System.is_projected</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.open"><code class="docutils literal notranslate"><span class="pre">System.open()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.pop_required"><code class="docutils literal notranslate"><span class="pre">System.pop_required()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_instrument"><code class="docutils literal notranslate"><span class="pre">System.valid_instrument()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_method"><code class="docutils literal notranslate"><span class="pre">System.valid_method()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_model"><code class="docutils literal notranslate"><span class="pre">System.valid_model()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_submethod"><code class="docutils literal notranslate"><span class="pre">System.valid_submethod()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="content/api/gs_dataarray/index.html">DataArray Accessors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html">gs_DataArray</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray"><code class="docutils literal notranslate"><span class="pre">DataArray</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.add_bounds_to_coordinate_dimension"><code class="docutils literal notranslate"><span class="pre">DataArray.add_bounds_to_coordinate_dimension()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.catch_nan"><code class="docutils literal notranslate"><span class="pre">DataArray.catch_nan()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.check_metadata"><code class="docutils literal notranslate"><span class="pre">DataArray.check_metadata()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.export_dataarray"><code class="docutils literal notranslate"><span class="pre">DataArray.export_dataarray()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.from_values"><code class="docutils literal notranslate"><span class="pre">DataArray.from_values()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.label"><code class="docutils literal notranslate"><span class="pre">DataArray.label</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.metadata_template"><code class="docutils literal notranslate"><span class="pre">DataArray.metadata_template()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.valid_range"><code class="docutils literal notranslate"><span class="pre">DataArray.valid_range()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.write_ncml"><code class="docutils literal notranslate"><span class="pre">DataArray.write_ncml()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html">Coordinate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate"><code class="docutils literal notranslate"><span class="pre">Coordinate</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.check_is_projected"><code class="docutils literal notranslate"><span class="pre">Coordinate.check_is_projected()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.check_standard_coordinates"><code class="docutils literal notranslate"><span class="pre">Coordinate.check_standard_coordinates()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.from_dict"><code class="docutils literal notranslate"><span class="pre">Coordinate.from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.from_values"><code class="docutils literal notranslate"><span class="pre">Coordinate.from_values()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.metadata_template"><code class="docutils literal notranslate"><span class="pre">Coordinate.metadata_template()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="content/api/gs_dataarray/spatial_ref.html">Spatial ref</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="content/api/gs_dataarray/spatial_ref.html#gspy.gs_dataarray.Spatial_ref.Spatial_ref"><code class="docutils literal notranslate"><span class="pre">Spatial_ref</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/spatial_ref.html#gspy.gs_dataarray.Spatial_ref.Spatial_ref.from_dict"><code class="docutils literal notranslate"><span class="pre">Spatial_ref.from_dict()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/spatial_ref.html#gspy.gs_dataarray.Spatial_ref.Spatial_ref.metadata_template"><code class="docutils literal notranslate"><span class="pre">Spatial_ref.metadata_template()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
