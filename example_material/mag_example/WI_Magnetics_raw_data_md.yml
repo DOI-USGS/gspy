@@ -1,0 +1,153 @@
+
+dataset_attrs:
+    content: raw data
+    comment: Contains mag data
+    type: data
+    structure: tabular
+    mode: airborne
+    method: magnetic
+    submethod: total field
+    instrument: cesium vapour
+    property: magnetic susceptibility
+
+magnetic_system:
+    type: system
+    mode: airborne
+    method: magnetic
+    submethod: total field
+    instrument: cesium vapour
+    variables:
+        sample_rate:
+            values: 0.1
+        resolution: 0.002
+
+coordinates:
+    x: E_Nad83
+    y: N_Nad83
+    z: DEM
+
+variables:
+    E_Nad83:
+        standard_name: easting_nad83
+        long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
+        units: meter
+        null_value: not_defined
+        axis: x
+
+    N_Nad83:
+        standard_name: northing_nad83
+        long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
+        units: meter
+        null_value: not_defined
+        axis: y
+
+    Alt:
+        standard_name: altitude
+        long_name: DGPS instrument altitude
+        units: meter
+        null_value: not_defined
+
+    Base_Mag:
+        standard_name: base_magnetometer
+        long_name: Raw magnetic base station data
+        units: nanoTesla
+        null_value: -9999.99
+
+    Date:
+        standard_name: date
+        long_name: Date, yyyy/mm/dd
+        units: not_defined
+        null_value: not_defined
+
+    dec:
+        standard_name: decliniation
+        long_name: IGRF declination
+        units: degree
+        null_value: not_defined
+
+    DEM:
+        standard_name: dem
+        long_name: Digital elevation model
+        units: meter
+        null_value: not_defined
+        axis: Z
+        positive: up
+        datum: North American Vertical Datum of 1988 (NAVD88)
+
+    Diurnal:
+        standard_name: magnetic_diurnal
+        long_name: Magnetic base station diurnal variation
+        units: nanoTesla
+        null_value: not_defined
+
+    Fid:
+        standard_name: fiducial
+        long_name: Unique fiducial number
+        units: not_defined
+        null_value: not_defined
+
+    Height:
+        standard_name: instrument_height
+        long_name: Instrument height above ground
+        units: meter
+        null_value: not_defined
+
+    igrf:
+        standard_name: magnetic_igrf_model
+        long_name: Magnetic IGRF value from 2015 model
+        units: nanoTesla
+        null_value: not_defined
+
+    inc:
+        standard_name: inclination
+        long_name: IGRF inclination
+        units: degree
+        null_value: not_defined
+
+    Lat:
+        standard_name: latitude
+        long_name: Latitude, World Geodetic System of 1984 (WGS84)
+        units: degree
+        null_value: not_defined
+
+    Line:
+        standard_name: line
+        long_name: Line number
+        units: not_defined
+        null_value: not_defined
+
+    Lon:
+        standard_name: longitude
+        long_name: Longitude, World Geodetic System of 1984 (WGS84)
+        units: degree
+        null_value: not_defined
+
+    Mag_Filt:
+        standard_name: total_magnetic_intensity_filtered
+        long_name: Filtered total magnetic intensity data
+        units: nanoTesla
+        null_value: not_defined
+
+    Mag_Raw:
+        standard_name: total_magnetic_intensity_raw
+        long_name: Raw total magnetic intensity data
+        units: nanoTesla
+        null_value: not_defined
+
+    RMF:
+        standard_name: residual_magnetic_field
+        long_name: Residual magnetic field, IGRF corrected based on 2015 model
+        units: nanoTesla
+        null_value: not_defined
+
+    Time:
+        standard_name: time_utc
+        long_name: Universal coordinated time (UTC), hh:mm:ss
+        units: not_defined
+        null_value: not_defined
+
+    TMI:
+        standard_name: total_magnetic_intensity
+        long_name: Diurnally corrected filtered total magnetic intensity
+        units: nanoTesla
+        null_value: not_defined
