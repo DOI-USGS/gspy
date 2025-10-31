@@ -9,6 +9,7 @@ coordinates:
 
 tempest_system:
     type: system
+    structure: tabular
     mode: airborne
     method: electromagnetic
     submethod: time domain
