@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raster &mdash; gspy 2.0.0 documentation</title>
+  <title>Raster &mdash; gspy 2.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -18,7 +18,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+      <script src="../../../_static/documentation_options.js?v=16656018"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -96,15 +96,11 @@
              
   <section id="raster">
 <h1>Raster<a class="headerlink" href="#raster" title="Link to this heading"></a></h1>
-digraph inheritance43deddf5fd {
-bgcolor=transparent;
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;Dataset&quot; [URL=&quot;dataset.html#gspy.gs_dataset.Dataset.Dataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.&quot;];
-  &quot;Raster&quot; [URL=&quot;#gspy.gs_dataset.Raster.Raster&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Class defining a set of gridded data (2D or 3D).&quot;];
-  &quot;Dataset&quot; -&gt; &quot;Raster&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-<dl class="py class" id="module-gspy.gs_dataset.Raster">
+<div class="graphviz"><img src="../../../_images/inheritance-c9830d13508a1c9a5d1905e626ca236b42e5275c.png" alt="Inheritance diagram of gspy.gs_dataset.Raster" usemap="#inheritance43deddf5fd" class="inheritance graphviz" /></div>
+<map id="inheritance43deddf5fd" name="inheritance43deddf5fd">
+<area shape="rect" id="node1" href="dataset.html#gspy.gs_dataset.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,32"/>
+<area shape="rect" id="node2" href="#gspy.gs_dataset.Raster.Raster" target="_top" title="Class defining a set of gridded data (2D or 3D)." alt="" coords="125,5,197,32"/>
+</map><dl class="py class" id="module-gspy.gs_dataset.Raster">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Raster.Raster">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataset.Raster.</span></span><span class="sig-name descname"><span class="pre">Raster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Raster.Raster" title="Link to this definition"></a></dt>
 <dd><p>Class defining a set of gridded data (2D or 3D).</p>

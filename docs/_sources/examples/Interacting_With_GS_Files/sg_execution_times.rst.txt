@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:02.379** total execution time for 3 files **from examples/Interacting_With_GS_Files**:
+**00:02.255** total execution time for 3 files **from examples/Interacting_With_GS_Files**:
 
 .. container::
 
@@ -33,10 +33,10 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_cross_section.py` (``plot_cross_section.py``)
-     - 00:02.031
+     - 00:01.906
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``plot_coordinate_reference_systems.py``)
-     - 00:00.202
+     - 00:00.203
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``plot_xarray_methods.py``)
      - 00:00.146
