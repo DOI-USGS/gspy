@@ -199,7 +199,7 @@ class Raster(Dataset):
         #     if raster_spatial_reference_name != self.spatial_ref.attrs['crs_wkt']:
         #         raise NotImplementedError(f"Need to reproject input file to match survey spatial ref, for variable {name}")
         else:
-            print(f'WARNING: cannot identify CRS for input [{name}] raster, will assume the data matches the survey spatial_ref!')
+            print(f"WARNING: cannot identify CRS for input [{name}] raster, will assume the data matches the survey spatial_ref!")
 
         # Reproject if input CRS does not match Survey
         # if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:

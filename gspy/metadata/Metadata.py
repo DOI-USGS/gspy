@@ -88,7 +88,7 @@ class Metadata(dict):
                 return flag
             for key, item in this.items():
                 if ' ' in key:
-                    print(f'{key=} contains whitespace. Please remove!')
+                    print(f"{key=} contains whitespace. Please remove!")
                     key = key.strip()
                     flag = True
                 flag = __check_key_whitespace(item, flag)

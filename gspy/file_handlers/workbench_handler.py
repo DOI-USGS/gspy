@@ -74,7 +74,7 @@ class workbench_handler(xyz_handler):
         # n_duplicate = (df.shape[0] - dfu.shape[0]) / df.shape[0]
 
         # if n_duplicate != 0:
-        #     print(f'There are {n_duplicate:.1%} lines with duplicate date-time')
+        #     print(f"There are {n_duplicate:.1%} lines with duplicate date-time")
 
         dfu = df[base_columns]
 

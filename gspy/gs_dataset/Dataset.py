@@ -482,12 +482,12 @@ class Dataset:
             xlabel = f"Distance ({self._obj['x'].attrs['units']})"
         else:
             x = self._obj[x]
-            xlabel = f'x\n{self._obj['x'].gs.label}'
+            xlabel = f"x\n{self._obj['x'].gs.label}"
 
         splot = plt.plot(x, self._obj[hue].values, **kwargs)
 
         plt.xlabel(xlabel)
-        plt.ylabel(f'y\n{self._obj[hue].gs.label}')
+        plt.ylabel(f"y\n{self._obj[hue].gs.label}")
 
         plt.tight_layout()
 
@@ -527,11 +527,11 @@ class Dataset:
 
             splot = plt.scatter(x.values, y.values, c=self._obj[hue].values, **kwargs)
 
-            plt.xlabel(f'x\n{x.attrs['long_name']} [{x.attrs['units']}]')
-            plt.ylabel(f'y\n{y.attrs['long_name']} [{y.attrs['units']}]')
+            plt.xlabel(f"x\n{x.attrs['long_name']} [{x.attrs['units']}]")
+            plt.ylabel(f"y\n{y.attrs['long_name']} [{y.attrs['units']}]")
 
             cb=plt.colorbar()
-            cb.set_label(f'{hue}\n{self._obj[hue].attrs['long_name']} [{self._obj[hue].attrs['units']}]', rotation=-90, labelpad=30)
+            cb.set_label(f"{hue}\n{self._obj[hue].attrs['long_name']} [{self._obj[hue].attrs['units']}]", rotation=-90, labelpad=30)
 
             plt.tight_layout()
 
@@ -653,27 +653,28 @@ class Dataset:
 
         st = "  "*indent
 
-        file.write(f'{st}<group name="/{name}">\n')
+        file.write(f"{st}<group name='/{name}'>\n")
         si = "  "*(indent+1)
 
         if len(self._obj.dims) > 0:
             for dim in self._obj.dims:
-                file.write(f'{si}<dimension name="{dim}" length="{self._obj.sizes[dim]}"/>\n')
+                file.write(f"{si}<dimension name='{dim}' length='{self._obj.sizes[dim]}'/>\n")
             file.write("\n")
 
         if len(self._obj.attrs) > 0:
             for k, v in self._obj.attrs.items():
                 if '"' in str(v):
                     v = v.replace('"',"'")
-                file.write(f'{si}<attribute name="{k}" value="{str(v).strip('\n')}"/>\n')
-            file.write('\n')
+                vt = str(v).strip("\n")
+                file.write(f"{si}<attribute name='{k}' value='{vt}'/>\n")
+            file.write("\n")
 
         if len(self._obj.variables) > 0:
             for var in self._obj.variables:
                 self._obj[var].gs.write_ncml(file, indent)
 
         if not no_end:
-            file.write(f'{st}</group>\n')
+            file.write(f"{st}</group>\n")
 
     @classmethod
     def Survey(cls, **kwargs):

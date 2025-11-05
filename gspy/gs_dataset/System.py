@@ -117,14 +117,14 @@ class System(Dataset):
 
         n_entries = np.size(label)
 
-        self._obj = self.add_coordinate_from_values(f'n_{prefix}',
+        self._obj = self.add_coordinate_from_values(f"n_{prefix}",
                                                 values=np.arange(n_entries),
                                                 is_dimension=True,
                                                 discrete=True,
-                                                **dict(standard_name = f'number_of_{prefix}s',
-                                                        long_name = f'Number of {prefix}s',
-                                                        units = 'not_defined',
-                                                        null_value = 'not_defined'))
+                                                **dict(standard_name = f"number_of_{prefix}s",
+                                                        long_name = f"Number of {prefix}s",
+                                                        units = "not_defined",
+                                                        null_value = "not_defined"))
 
         self, popped = self.add_dimensions_from_variables(prefix=prefix, label=label, **popped)
         popped.pop('prefix', None)
@@ -133,7 +133,7 @@ class System(Dataset):
                 if not isinstance(values, list):
                     values = np.full(n_entries, fill_value=values)
                 values = dict(values=values)
-            values['dimensions'] = values.pop('dimensions', f'n_{prefix}')
+            values['dimensions'] = values.pop('dimensions', f"n_{prefix}")
             self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, prefix=prefix, **values)
 
         return self, kwargs

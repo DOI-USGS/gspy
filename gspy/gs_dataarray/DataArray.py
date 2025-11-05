@@ -245,7 +245,7 @@ class DataArray:
 
     @property
     def label(self):
-        return f'{self._obj.attrs['long_name']} [{self._obj.attrs['units']}]'
+        return f"{self._obj.attrs['long_name']} [{self._obj.attrs['units']}]"
 
     @staticmethod
     def metadata_template(**kwargs):
@@ -265,7 +265,8 @@ class DataArray:
         for k, v in obj.attrs.items():
             if '"' in str(v):
                 v = v.replace('"',"'")
-            file.write(f'{st}<attribute name="{k}" type="String" value="{str(v).strip('\n')}"/>\n')
+            vt = str(v).strip("\n")
+            file.write(f'{st}<attribute name="{k}" type="String" value="{vt}"/>\n')
         file.write(f'{si}</variable>\n\n')
 
     def export_dataarray(self, out_file, export_ncml=False):
@@ -298,7 +299,7 @@ class DataArray:
             left = v.to_pandas().to_frame(name=c)
             right = df
             df = left.merge(right, on=df.index.name, how='right')
-        var_out = out_file.replace('.csv', f'_{self._obj.name}.csv')
+        var_out = out_file.replace('.csv', f"_{self._obj.name}.csv")
         df.to_csv(var_out)
         print('done exporting', self._obj.name)
 
