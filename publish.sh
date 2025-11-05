@@ -11,7 +11,6 @@
 # ./publish -v major
 # to increment each of those by just 1.
 
-
 VERSION=""
 
 #get parameters
@@ -25,10 +24,6 @@ done
 #Go online and get the latest tag number assoc with a "release"
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
-if [[ $CURRENT_VERSION == '' ]]
-then
-  CURRENT_VERSION='1.0.0'
-fi
 echo "Current Version: $CURRENT_VERSION"
 
 #replace . with space so can split into an array
@@ -57,13 +52,14 @@ else
   exit 1
 fi
 
-#create new tag with the new version number
+# #create new tag with the new version number
 NEW_TAG="$MAJOR.$MINOR.$PATCH"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # Github stuff
 python update_version.py $NEW_TAG
 git add pyproject.toml
+git add documentation_source/source/conf.py
 git commit -m "update version"
 
 cd documentation_source
@@ -83,5 +79,3 @@ gh release create $NEW_TAG --notes-from-tag --verify-tag --title $NEW_TAG
 # Pypi
 python -m build
 twine upload --skip-existing dist/*
-
-exit 0
