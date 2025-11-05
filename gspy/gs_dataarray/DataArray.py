@@ -257,17 +257,17 @@ class DataArray:
         dtype = str(self._obj.dtype).title()[:-2]
         obj = self._obj
         if obj.name == 'crs' or obj.dtype == 'object':
-            file.write(f'{si}<variable name="{obj.name}" shape="{" ".join(obj.dims)}" type="String">\n')
+            file.write(f"{si}<variable name='{obj.name}' shape='{' '.join(obj.dims)}' type='String'>\n")
         else:
-            file.write(f'{si}<variable name="{obj.name}" shape="{" ".join(obj.dims)}" type="{dtype}">\n')
+            file.write(f"{si}<variable name='{obj.name}' shape='{' '.join(obj.dims)}' type='{dtype}'>\n")
 
         st = "  "*(indent+2)
         for k, v in obj.attrs.items():
             if '"' in str(v):
                 v = v.replace('"',"'")
             vt = str(v).strip("\n")
-            file.write(f'{st}<attribute name="{k}" type="String" value="{vt}"/>\n')
-        file.write(f'{si}</variable>\n\n')
+            file.write(f"{st}<attribute name='{k}' type='String' value='{vt}'/>\n")
+        file.write(f"{si}</variable>\n\n")
 
     def export_dataarray(self, out_file, export_ncml=False):
         if self._obj.ndim == 0:
