@@ -24,6 +24,16 @@ class DataArray:
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
 
+    @property
+    def long_name(self):
+        return self._obj.attrs.get('long_name', "")
+    @property
+    def standard_name(self):
+        return self._obj.attrs.get('standard_name', "")
+    @property
+    def units(self):
+        return self._obj.attrs.get('units', "")
+
 
     @classmethod
     def add_bounds_to_coordinate_dimension(cls, coordinate, name, bounds=None, **kwargs):
@@ -245,7 +255,7 @@ class DataArray:
 
     @property
     def label(self):
-        return f"{self._obj.attrs['long_name']} [{self._obj.attrs['units']}]"
+        return f"{self.long_name} [{self.units}]"
 
     @staticmethod
     def metadata_template(**kwargs):
