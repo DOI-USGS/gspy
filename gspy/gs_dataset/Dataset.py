@@ -581,7 +581,9 @@ class Dataset:
     def update_attrs(self, key='', **kwargs):
         """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
         """
-        self._obj.attrs.update(Metadata(kwargs).flatten())
+        _ = kwargs.pop("directory", None)
+        md = Metadata(kwargs).flatten()
+        self._obj.attrs.update(md)
 
     def to_netcdf(self, *args, **kwargs):
         """Write the survey to a netcdf file
@@ -708,7 +710,7 @@ class Dataset:
             ds.update_attrs(**kwargs["dataset_attrs"])
 
             for key in kwargs:
-                if key not in ('spatial_ref', 'dataset_attrs'):
+                if key not in ('spatial_ref', 'dataset_attrs', 'directory'):
                     tmpdict2 = {k: v for k, v in kwargs[key].items() if v}
                     tmpdict2 = Metadata(tmpdict2).flatten()
 

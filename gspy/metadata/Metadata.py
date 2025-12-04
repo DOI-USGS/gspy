@@ -1,3 +1,4 @@
+import os
 from os.path import splitext
 import json
 import yaml
@@ -29,6 +30,7 @@ class Metadata(dict):
                     assert False, ValueError("metadata filename does not end with json or yml")
 
         out = out._sort_out_list_of_strings()
+        out['directory'] = os.path.split(filename)[0]
         return out
 
     @classmethod

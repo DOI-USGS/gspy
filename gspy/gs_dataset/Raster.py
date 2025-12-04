@@ -105,16 +105,19 @@ class Raster(Dataset):
 
         for var in var_meta.keys():
             if 'files' in var_meta[var]:
-                self._obj = self.read_raster_using_metadata(var, json_md, **var_meta[var])
+                self._obj = self.read_raster_using_metadata(var, json_md, directory=json_md['directory'], **var_meta[var])
 
         # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
 
         return self._obj
 
-    def read_raster_using_metadata(self, name, json_metadata, **kwargs):
+    def read_raster_using_metadata(self, name, json_metadata, directory="", **kwargs):
 
         files = kwargs.pop('files')
+        if not isinstance(files, list):
+            files = [files]
+
         n_files = len(files)
         values = None
 
@@ -122,7 +125,7 @@ class Raster(Dataset):
 
         # Read each file in the variables metadata
         for i, file in enumerate(files):
-            ds = self.open_rasterio(file)
+            ds = self.open_rasterio(os.path.join(directory, file))
             if cached_transform is None:
                 cached_transform = ds.rio.transform()
             else:
@@ -245,8 +248,6 @@ class Raster(Dataset):
             Dataset containing the GeoTIFF variable
 
         """
-        if isinstance(filename, list):
-            filename = filename[0]
         ds = rio.open_rasterio(filename)
 
         # clean up

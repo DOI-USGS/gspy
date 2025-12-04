@@ -149,7 +149,10 @@ class Container:
             raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
 
         # reading the data from the file
-        return Metadata.read(filename)
+        out = Metadata.read(filename)
+        out.pop('directory', None)
+
+        return out
 
     def add_container(self, key, **kwargs):
         """Add a container to the survey
