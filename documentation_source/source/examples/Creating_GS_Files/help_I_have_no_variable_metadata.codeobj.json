@@ -1,0 +1,29 @@
+{
+ "Dataset.metadata_template": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.Dataset",
+   "module_short": "gspy.Dataset",
+   "name": "metadata_template"
+  }
+ ],
+ "Survey.metadata_template": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.Survey",
+   "module_short": "gspy.Survey",
+   "name": "metadata_template"
+  }
+ ],
+ "join": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "os.path",
+   "module_short": "os.path",
+   "name": "join"
+  }
+ ]
+}

@@ -1,0 +1,591 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: ??
+    method: ??
+    submethod: ??
+    instrument: ??
+    structure: tabular
+    property: ??
+coordinates:
+    x: x_WGS84_Albers
+    y: y_WGS84_Albers
+    z: DTM
+    t: ??
+dimensions:
+    depth:
+        standard_name: depth
+        long_name: depth below surface
+        units: meters
+        null_value: not_defined
+        length: 31
+        increment: 5.0
+        origin: 2.5
+        axis: Z
+        positive: down
+        datum: ground surface
+    frequency:
+        standard_name: frequency
+        long_name: nominal measurement frequency
+        units: Hz
+        null_value: not_defined
+        centers: [400, 1800, 3300, 8200, 40000, 140000]
+        discrete: True
+    spec_sample:
+        standard_name: spec_sample
+        long_name: radiometric sample
+        units: not_defined
+        null_value: not_defined
+        length: 256
+        increment: 1
+        origin: 0
+        discrete: True
+variables:
+    DTM:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: z
+        positive: ??
+        datum: ??
+    IGRF:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    RMI:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TMI:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    altlas_tx:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    altrad_heli:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    bird_pitch:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    bird_roll:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    bird_yaw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cosmic:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi140k_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi140k_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi1800_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi1800_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi400_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi400_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi40k_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi40k_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi8200_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpi8200_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq140k_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq140k_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq1800_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq1800_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq400_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq400_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq40k_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq40k_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq8200_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpq8200_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cpsp:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxi3300:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxi3300_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxi3300_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxq3300:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxq3300_filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxq3300_phg:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    cxsp:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    date:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ddep140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ddep1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ddep400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ddep40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ddep8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dep140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dep1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dep400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dep40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dep8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    diurnal:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    diurnal_cor:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    doserate:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dres_150_by5m:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    effective_height:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    eth:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    eth_kconc:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    eu:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    eu_eth:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    eu_kconc:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    fiducial:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    flight:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    gpsz_heli:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    gpsz_tx:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    k_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    kconc:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    kpa:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    lat_heli:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    lat_tx:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    line:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    live_time:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    lon_heli:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    lon_tx:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    mag_L:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    mag_LD:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    mag_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    powerline:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    res140k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    res1800:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    res400:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    res40k:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    res8200:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    spec256_down:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    spec256_up:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    tc_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    temp_ext:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    th_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    u_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    u_up_raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    utc_time:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    x_WGS84_Albers:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: x
+    x_WGS84_UTMZ15N:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    y_WGS84_Albers:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: y
+    y_WGS84_UTMZ15N:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined

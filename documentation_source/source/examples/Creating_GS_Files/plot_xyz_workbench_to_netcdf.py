@@ -17,7 +17,7 @@ import gspy
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//..//..//example_material//example_4'
+data_path = '..//data_files/workbench'
 
 # Survey Metadata file
 metadata = join(data_path, "survey.yml")

@@ -35,7 +35,7 @@ template.dump("template_survey_empty.yml")
 #%%
 # Prefilled existing metadata file
 # Path to example files
-data_path = '..//..//..//..//example_material//example_2'
+data_path = '..//data_files//resolve'
 
 # Define the Survey metadata file
 metadata = join(data_path, "data//Resolve_survey_md.yml")
@@ -57,7 +57,7 @@ template = Dataset.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")
 
 #%%
-data_path = '..//..//..//..//example_material//example_1'
+data_path = '..//data_files//skytem_csv'
 
 data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
 metadata = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
@@ -67,7 +67,7 @@ template.dump("template_md_skytem.yml")
 #%%
 # Loupe Data
 
-data_path = '..//..//..//..//example_material//example_3'
+data_path = '..//data_files//loupe'
 
 data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//loupe_data_metadata.yml')

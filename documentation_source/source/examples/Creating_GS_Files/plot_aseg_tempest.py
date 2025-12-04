@@ -26,7 +26,7 @@ import gspy
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//..//..//example_material//example_2'
+data_path = "..//data_files//tempest_aseg"
 
 # Survey Metadata file
 metadata = join(data_path, "data//Tempest_survey_md.yml")
@@ -56,7 +56,7 @@ m_data = join(data_path, 'model//Tempest_model.dat')
 m_supp = join(data_path, 'model//Tempest_model_md.yml')
 
 # Read model data and format as Tabular class object
-model_container.gs.add(key='inverted_models', data_filename=m_data, metadata_file=m_supp)
+mod = model_container.gs.add(key='inverted_models', data_filename=m_data, metadata_file=m_supp, derived_from=rd)
 
 #%%
 # 3. Magnetic Intensity Map
@@ -70,7 +70,7 @@ r_supp = join(data_path, 'data//Tempest_raster_md.yml')
 data_derived.gs.add(key='maps', metadata_file = r_supp)
 
 # Save NetCDF file
-d_out = join(data_path, 'data//Tempest.nc')
+d_out = join(data_path, 'Tempest.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%
@@ -91,4 +91,4 @@ new_survey['data']['raw_data'].gs.scatter(x='x', hue='tx_height', cmap='jet')
 # Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 plt.figure()
 new_survey['data/derived_maps/maps']['magnetic_tmi'].plot(cmap='jet', robust=True)
-plt.show()
+# plt.show()

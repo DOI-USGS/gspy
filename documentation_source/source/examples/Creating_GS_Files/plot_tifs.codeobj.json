@@ -1,0 +1,371 @@
+{
+ "Survey.from_dict": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree.Survey",
+   "module_short": "gspy.gs_datatree.Survey",
+   "name": "Survey.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree",
+   "module_short": "gspy.gs_datatree",
+   "name": "Survey.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Survey.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree.Container",
+   "module_short": "gspy.gs_datatree.Container",
+   "name": "Container.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree",
+   "module_short": "gspy.gs_datatree",
+   "name": "Container.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Container.from_dict"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.Survey",
+   "module_short": "gspy.Survey",
+   "name": "from_dict"
+  }
+ ],
+ "ax": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.axes._axes",
+   "module_short": "matplotlib.axes",
+   "name": "Axes"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.axes",
+   "module_short": "matplotlib.axes",
+   "name": "Axes"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib",
+   "module_short": "matplotlib",
+   "name": "Axes"
+  }
+ ],
+ "container": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.datatree",
+   "module_short": "xarray.core.datatree",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataTree"
+  }
+ ],
+ "container.gs.add": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree.Container",
+   "module_short": "gspy.gs_datatree.Container",
+   "name": "Container.add"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree",
+   "module_short": "gspy.gs_datatree",
+   "name": "Container.add"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Container.add"
+  }
+ ],
+ "d_out": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "d_supp1": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "d_supp2": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "data_path": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "gspy.open_datatree": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "open_datatree"
+  }
+ ],
+ "join": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "os.path",
+   "module_short": "os.path",
+   "name": "join"
+  }
+ ],
+ "metadata": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "str"
+  }
+ ],
+ "new_survey": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.datatree",
+   "module_short": "xarray.core.datatree",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataTree"
+  }
+ ],
+ "plt.figure": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.pyplot",
+   "module_short": "matplotlib.pyplot",
+   "name": "figure"
+  }
+ ],
+ "plt.gca": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.pyplot",
+   "module_short": "matplotlib.pyplot",
+   "name": "gca"
+  }
+ ],
+ "plt.show": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.pyplot",
+   "module_short": "matplotlib.pyplot",
+   "name": "show"
+  }
+ ],
+ "plt.xlim": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.pyplot",
+   "module_short": "matplotlib.pyplot",
+   "name": "xlim"
+  }
+ ],
+ "plt.ylim": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "matplotlib.pyplot",
+   "module_short": "matplotlib.pyplot",
+   "name": "ylim"
+  }
+ ],
+ "survey": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.datatree",
+   "module_short": "xarray.core.datatree",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataTree"
+  }
+ ],
+ "survey.gs.add_container": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree.Container",
+   "module_short": "gspy.gs_datatree.Container",
+   "name": "Container.add_container"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree",
+   "module_short": "gspy.gs_datatree",
+   "name": "Container.add_container"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Container.add_container"
+  }
+ ],
+ "survey.gs.to_netcdf": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree.Container",
+   "module_short": "gspy.gs_datatree.Container",
+   "name": "Container.to_netcdf"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_datatree",
+   "module_short": "gspy.gs_datatree",
+   "name": "Container.to_netcdf"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Container.to_netcdf"
+  }
+ ]
+}

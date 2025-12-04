@@ -20,7 +20,7 @@ from pprint import pprint
 #%%
 # First open the netcdf GS standard survey file.
 
-survey = gspy.open_datatree("../../../../example_material/example_2/data/Tempest.nc")['survey']
+survey = gspy.open_datatree("..//data_files//tempest_aseg//Tempest.nc")['survey']
 
 #%%
 # Accessing the Xarray object

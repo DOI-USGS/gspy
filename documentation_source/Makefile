@@ -28,16 +28,16 @@ clean:
 	find ./source -name "sg_execution_times.rst" -type f -delete
 
 
-	find ./source/examples -name "*.ipynb" -type f -delete
-	find ./source/examples -name "plot_*.rst" -type f -delete
-	find ./source/examples -name "*.h5" -type f -delete
-	find ./source/examples -name "*.vtk" -type f -delete
-	find ./source/examples -name "*.png" -type f -delete
-	find ./source/examples -name "*codeobj*" -type f -delete
-	find ./source/examples -name "*.zip" -type f -delete
-	find ./source/examples -name "index.rst" -type f -delete
-	find ./source/examples/Creating_GS_Files -name "sg_executino_times.rst" -type f -delete
-	find ./source/examples/Interacting_With_GS_Files -name "sg_executino_times.rst" -type f -delete
+# 	find ./source/examples -name "*.ipynb" -type f -delete
+# 	find ./source/examples -name "plot_*.rst" -type f -delete
+# 	find ./source/examples -name "*.h5" -type f -delete
+# 	find ./source/examples -name "*.vtk" -type f -delete
+# 	find ./source/examples -name "*.png" -type f -delete
+# 	find ./source/examples -name "*codeobj*" -type f -delete
+# 	find ./source/examples -name "*.zip" -type f -delete
+# 	find ./source/examples -name "index.rst" -type f -delete
+# 	find ./source/examples/Creating_GS_Files -name "sg_executino_times.rst" -type f -delete
+# 	find ./source/examples/Interacting_With_GS_Files -name "sg_executino_times.rst" -type f -delete
 
 
 cleanGallery:

@@ -34,7 +34,7 @@ from pprint import pprint
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//..//..//example_material//example_1'
+data_path = '..//data_files//skytem_csv'
 
 # Survey metadata file
 metadata = join(data_path, "data//WI_SkyTEM_survey_md.yml")
@@ -113,13 +113,13 @@ print(survey.gs.tree)
 
 #%%
 # Save to NetCDF file
-d_out = join(data_path, 'model//WISkyTEM.nc')
+d_out = join(data_path, 'skytem.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%
 # The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
 
-data_container.gs.to_netcdf('test_datacontainer.nc')
+data_container.gs.to_netcdf(join(data_path, 'test_datacontainer.nc'))
 
 #%%
 # Reading back in

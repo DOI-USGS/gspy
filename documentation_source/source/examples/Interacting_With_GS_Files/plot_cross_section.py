@@ -15,9 +15,7 @@ from pprint import pprint
 # First Create the Survey & Data Objects
 
 # Initialize the Survey
-data_path = '..//..//..//..//example_material//example_2/data'
-
-survey = gspy.open_datatree(join(data_path, "Tempest.nc"))['survey']
+survey = gspy.open_datatree("..//data_files//tempest_aseg//Tempest.nc")['survey']
 
 plt.figure()
 survey['models/inverted_models'].gs.plot_cross_section(line_number=212201,

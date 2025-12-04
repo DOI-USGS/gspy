@@ -1,0 +1,197 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
+    type: data
+    method: electromagnetic
+    submethod: time domain
+    instrument: skytem
+    structure: tabular
+    property: 
+    mode: airborne
+coordinates:
+    x: E_Nad83
+    y: N_Nad83
+    z: DEM
+    t: DateTime
+variables:
+    Alt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    AngleX:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    AngleY:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Base_Mag:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Curr_HM:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Curr_LM:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    DEM:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: z
+        positive: ??
+        datum: ??
+    Date:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    DateTime:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: t
+        datum: ??
+    Diurnal:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    E_Nad83:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: x
+    E_WGS84:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Fid:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Flight:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    GdSpeed:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    HM_X:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    HM_Z:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    Height:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    LM_X:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    LM_Z:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    Lat:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Line:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Lon:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Mag_Filt:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Mag_Raw:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    N_Nad83:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: y
+    N_WGS84:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    RMF:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TMI:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Time:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    _60Hz_Intensity:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    dec:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    igrf:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    inc:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined

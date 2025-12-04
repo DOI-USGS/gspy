@@ -1,0 +1,326 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    method: electromagnetic
+    submethod: ??
+    instrument: loupe
+    structure: tabular
+    property: ??
+coordinates:
+    x: EAST
+    y: NORTH
+    z: HEIGHT
+    t: ??
+variables:
+    ACQ:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ACQ_RDG:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    ACQ_TIME:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    EAST:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: x
+    FID:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    GPS_EAST:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    GPS_HEIGHT:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    GPS_NORTH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    GPS_TIME:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    HEIGHT:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: z
+        positive: ??
+        datum: ??
+    NORTH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        axis: y
+    RX_EAST:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    RX_HEIGHT:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    RX_NORTH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TIME:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TS:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TX_EAST:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TX_HEIGHT:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    TX_NORTH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    VLF_FILTER:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_ADC:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_C:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_CH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    X_DC_OFFSET:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_NOISE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_POWERAMPL:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_POWERPHASE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    X_PRIMARY:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_ADC:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_C:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_CH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    Y_DC_OFFSET:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_NOISE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_POWERAMPL:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_POWERPHASE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Y_PRIMARY:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_ADC:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_C:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_CH:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+        dimensions: ['index', '??']
+    Z_DC_OFFSET:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_NOISE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_POWERAMPL:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_POWERPHASE:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    Z_PRIMARY:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+    line:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: not_defined
+directory:
+    loupe_system:
+        type: system
+        mode: ground
+        method: electromagnetic
+        submethod: time domain
+        instrument: loupe
+        data_normalized: True
+        reference_frame: right-handed positive down
+        sample_rate: 0.1
+        digitization_frequency: 504000.0
+        stacks: 360
+        powerline_frequency: 60.0
+        dimensions:
+            gate_times:
+                standard_name: gate_times
+                long_name: receiver gate times
+                units: seconds
+                null_value: not_defined
+                bounds: [[1.098e-05, 1.495e-05], [1.297e-05, 1.694e-05], [1.495e-05, 1.892e-05], [1.694e-05, 2.09e-05], [1.892e-05, 2.289e-05], [2.09e-05, 2.884e-05], [2.686e-05, 3.479e-05], [3.281e-05, 4.471e-05], [4.075e-05, 5.662e-05], [5.265e-05, 7.249e-05], [6.654e-05, 9.035e-05], [8.638e-05, 0.00011813], [0.00011217, 0.00015583], [0.0001459, 0.00020146], [0.00019154, 0.00026694], [0.00025305, 0.00035225], [0.00033241, 0.00046733], [0.00043956, 0.0006221], [0.00058241, 0.00082249], [0.00077289, 0.00109233], [0.00102487, 0.00144948], [0.00136019, 0.00192567], [0.0018086, 0.00255662]]
+                centers: [1.2965e-05, 1.4955e-05, 1.6935e-05, 1.892e-05, 2.0905e-05, 2.487e-05, 3.0825e-05, 3.876e-05, 4.8685e-05, 6.257e-05, 7.8445e-05, 0.00010226, 0.000134, 0.00017368, 0.00022924, 0.00030265, 0.00039987, 0.00053083, 0.00070245, 0.00093261, 0.0012372, 0.0016429, 0.0021826]
+            n_loop_vertices:
+                standard_name: number_of_loop_vertices
+                long_name: number of loop vertices
+                units: not_defined
+                null_value: not_defined
+                length: 8
+            xyz:
+                standard_name: xyz_coordinates
+                long_name: coordinates of the loop vertices
+                units: not_defined
+                null_value: not_defined
+                length: 3
+        variables:
+            transmitter:
+                number_of_turns: 13
+                coordinates:
+                    values: [[[0.33, 0.14, 0.0], [0.14, 0.33, 0.0], [-0.14, 0.33, 0.0], [-0.33, 0.14, 0.0], [-0.33, -0.14, 0.0], [-0.14, -0.33, 0.0], [0.14, -0.33, 0.0], [0.33, -0.14, 0.0]]]
+                    dimensions: ['n_transmitter', 'n_loop_vertices', 'xyz']
+                area: 0.358
+                waveform_type: trapezoid
+                waveform_time:
+                    values: [-0.00277778, -0.00276878, 0.0, '9e-06']
+                    long_name: waveform time
+                    null_value: not_defined
+                    units: s
+                waveform_current:
+                    values: [0.0, 1.0, 1.0, 0.0]
+                    dimensions: ['waveform_time']
+                current_scale_factor: 1.0
+                peak_current: 20.0
+                moment: 94.42
+                base_frequency: 90.0
+                on_time: 0.00276878
+                off_time: 0.00278678
+                orientation: z
+                height: 1.0
+            receiver:
+                orientation: ['x', 'y', 'z']
+                coil_low_pass_filter: [100000.0, 100000.0, 100000.0]
+                instrument_low_pass_filter: [250000.0, 250000.0, 250000.0]
+                area: [200.0, 200.0, 200.0]
+                delay_time: [4.58e-06, 4.58e-06, 4.58e-06]
+                height: [1.75, 1.75, 1.75]
+                gain: [10, 10, 10]
+            component:
+                transmitters: ['z', 'z', 'z']
+                receivers: ['x', 'y', 'z']
+                sample_rate: [1.0, 1.0, 1.0]
+                txrx_dx: [-10.0, -10.0, -10.0]
+                txrx_dy: [0.0, 0.0, 0.0]
+                txrx_dz: [-0.75, -0.75, -0.75]
+                data_type: ['dBdt', 'dBdt', 'dBdt']
+                gate_times: ['gate_times', 'gate_times', 'gate_times']
+            sample_rate:
+                units: s
+            transmitter_area:
+                units: m^2

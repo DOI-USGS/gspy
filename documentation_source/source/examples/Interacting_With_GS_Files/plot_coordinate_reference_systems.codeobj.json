@@ -1,0 +1,345 @@
+{
+ "Spatial_ref.from_dict": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_dataarray.Spatial_ref",
+   "module_short": "gspy.gs_dataarray.Spatial_ref",
+   "name": "Spatial_ref.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy.gs_dataarray",
+   "module_short": "gspy.gs_dataarray",
+   "name": "Spatial_ref.from_dict"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "Spatial_ref.from_dict"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy.gs_dataarray.Spatial_ref.Spatial_ref",
+   "module_short": "gspy.gs_dataarray.Spatial_ref.Spatial_ref",
+   "name": "from_dict"
+  }
+ ],
+ "gspy.open_datatree": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "gspy",
+   "module_short": "gspy",
+   "name": "open_datatree"
+  }
+ ],
+ "new_crs": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.dataarray",
+   "module_short": "xarray.core.dataarray",
+   "name": "DataArray"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataArray"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArray"
+  }
+ ],
+ "pprint": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "pprint",
+   "module_short": "pprint",
+   "name": "pprint"
+  }
+ ],
+ "survey": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.datatree",
+   "module_short": "xarray.core.datatree",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataTree"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataTree"
+  }
+ ],
+ "survey.spatial_ref": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.dataarray",
+   "module_short": "xarray.core.dataarray",
+   "name": "DataArray"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataArray"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArray"
+  }
+ ],
+ "survey.spatial_ref.attrs": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.dataarray",
+   "module_short": "xarray.core.dataarray",
+   "name": "DataArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.common",
+   "module_short": "xarray.core.common",
+   "name": "AbstractArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "AbstractArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "AbstractArray.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.common",
+   "module_short": "xarray.core.common",
+   "name": "DataWithCoords.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataWithCoords.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataWithCoords.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation.arithmetic",
+   "module_short": "xarray.computation.arithmetic",
+   "name": "DataArrayArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation",
+   "module_short": "xarray.computation",
+   "name": "DataArrayArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArrayArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core._aggregations",
+   "module_short": "xarray.core._aggregations",
+   "name": "DataArrayAggregations.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataArrayAggregations.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArrayAggregations.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.common",
+   "module_short": "xarray.core.common",
+   "name": "AttrAccessMixin.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "AttrAccessMixin.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "AttrAccessMixin.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core.common",
+   "module_short": "xarray.core.common",
+   "name": "ImplementsArrayReduce.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "ImplementsArrayReduce.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "ImplementsArrayReduce.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation.ops",
+   "module_short": "xarray.computation.ops",
+   "name": "IncludeNumpySameMethods.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation",
+   "module_short": "xarray.computation",
+   "name": "IncludeNumpySameMethods.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "IncludeNumpySameMethods.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation.arithmetic",
+   "module_short": "xarray.computation.arithmetic",
+   "name": "SupportsArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.computation",
+   "module_short": "xarray.computation",
+   "name": "SupportsArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "SupportsArithmetic.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core._typed_ops",
+   "module_short": "xarray.core._typed_ops",
+   "name": "DataArrayOpsMixin.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray.core",
+   "module_short": "xarray.core",
+   "name": "DataArrayOpsMixin.attrs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "xarray",
+   "module_short": "xarray",
+   "name": "DataArrayOpsMixin.attrs"
+  }
+ ]
+}

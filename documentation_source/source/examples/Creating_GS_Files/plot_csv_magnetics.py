@@ -25,7 +25,7 @@ from pprint import pprint
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//..//..//example_material//mag_example'
+data_path = '..//data_files//magnetics'
 
 # Survey metadata file
 metadata = join(data_path, "WI_Magnetics_survey_md.yml")
@@ -56,7 +56,7 @@ data_container.gs.add(key='grids', metadata_file=d_supp1)
 
 #%%
 # Save to NetCDF file
-d_out = join(data_path, 'WI_Magnetics.nc')
+d_out = join(data_path, 'magnetics.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%

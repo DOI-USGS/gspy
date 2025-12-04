@@ -24,7 +24,7 @@ import gspy
 # Initialize the Survey
 
 # Path to example files
-data_path = '..//..//..//..//example_material//example_2'
+data_path = '..//data_files//resolve'
 
 # Survey metadata file
 metadata = join(data_path, "data//Resolve_survey_md.yml")
@@ -57,7 +57,7 @@ model_container.gs.add(key="model", data_filename=m_data, metadata_file=m_supp)
 
 #%%
 # Save to NetCDF file
-d_out = join(data_path, 'model//Resolve.nc')
+d_out = join(data_path, 'Resolve.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%

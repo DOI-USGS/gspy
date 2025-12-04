@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 2.2.1 documentation</title>
+  <title>Welcome to GSpy: Geophysical Data Standard in Python &mdash; gspy 2.2.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -18,7 +18,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=16656018"></script>
+      <script src="_static/documentation_options.js?v=85e56e6b"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -136,6 +136,7 @@
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.from_dict"><code class="docutils literal notranslate"><span class="pre">Container.from_dict()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.get_all_attr"><code class="docutils literal notranslate"><span class="pre">Container.get_all_attr()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.get_system_with_method"><code class="docutils literal notranslate"><span class="pre">Container.get_system_with_method()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.is_container"><code class="docutils literal notranslate"><span class="pre">Container.is_container</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.metadata_template"><code class="docutils literal notranslate"><span class="pre">Container.metadata_template()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.plot"><code class="docutils literal notranslate"><span class="pre">Container.plot()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.plot_cross_section"><code class="docutils literal notranslate"><span class="pre">Container.plot_cross_section()</span></code></a></li>
@@ -145,6 +146,7 @@
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.subset"><code class="docutils literal notranslate"><span class="pre">Container.subset()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.to_netcdf"><code class="docutils literal notranslate"><span class="pre">Container.to_netcdf()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.tree"><code class="docutils literal notranslate"><span class="pre">Container.tree</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.uuid"><code class="docutils literal notranslate"><span class="pre">Container.uuid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.write_ncml"><code class="docutils literal notranslate"><span class="pre">Container.write_ncml()</span></code></a></li>
 </ul>
 </li>
@@ -181,6 +183,7 @@
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.subset"><code class="docutils literal notranslate"><span class="pre">Dataset.subset()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.to_netcdf"><code class="docutils literal notranslate"><span class="pre">Dataset.to_netcdf()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.update_attrs"><code class="docutils literal notranslate"><span class="pre">Dataset.update_attrs()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.uuid"><code class="docutils literal notranslate"><span class="pre">Dataset.uuid</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.write_ncml"><code class="docutils literal notranslate"><span class="pre">Dataset.write_ncml()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.write_zarr"><code class="docutils literal notranslate"><span class="pre">Dataset.write_zarr()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.x_axis"><code class="docutils literal notranslate"><span class="pre">Dataset.x_axis()</span></code></a></li>
@@ -241,7 +244,10 @@
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.export_dataarray"><code class="docutils literal notranslate"><span class="pre">DataArray.export_dataarray()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.from_values"><code class="docutils literal notranslate"><span class="pre">DataArray.from_values()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.label"><code class="docutils literal notranslate"><span class="pre">DataArray.label</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.long_name"><code class="docutils literal notranslate"><span class="pre">DataArray.long_name</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.metadata_template"><code class="docutils literal notranslate"><span class="pre">DataArray.metadata_template()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.standard_name"><code class="docutils literal notranslate"><span class="pre">DataArray.standard_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.units"><code class="docutils literal notranslate"><span class="pre">DataArray.units</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.valid_range"><code class="docutils literal notranslate"><span class="pre">DataArray.valid_range()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.write_ncml"><code class="docutils literal notranslate"><span class="pre">DataArray.write_ncml()</span></code></a></li>
 </ul>

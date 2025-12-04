@@ -362,7 +362,7 @@ from sphinx_gallery.sorting import ExplicitOrder
 from sphinx_gallery.sorting import ExampleTitleSortKey
 
 sphinx_gallery_conf = {
-    'examples_dirs': 'examples',   # path to your example scripts
+    'examples_dirs': '..//..//examples',   # path to your example scripts
     'gallery_dirs': 'examples',  # path to where to save gallery generated output
     'filename_pattern': 'plot_',
     # 'ignore_pattern': ["examples/images/"],

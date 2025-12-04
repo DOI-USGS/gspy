@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plotting Cross Sections &mdash; gspy 2.2.1 documentation</title>
+  <title>Plotting Cross Sections &mdash; gspy 2.2.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -18,7 +18,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=16656018"></script>
+      <script src="../../_static/documentation_options.js?v=85e56e6b"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -105,9 +105,7 @@ to download the full example code.</p>
 </div>
 <p>First Create the Survey &amp; Data Objects</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Survey</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//..//..//..//example_material//example_2/data&#39;</span>
-
-<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;Tempest.nc&quot;</span><span class="p">))[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="s2">&quot;..//data_files//tempest_aseg//Tempest.nc&quot;</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot_cross_section</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="mi">212201</span><span class="p">,</span>
@@ -128,7 +126,7 @@ to download the full example code.</p>
 <li><img src="../../_images/sphx_glr_plot_cross_section_001.png" srcset="../../_images/sphx_glr_plot_cross_section_001.png" alt="plot cross section" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_cross_section_002.png" srcset="../../_images/sphx_glr_plot_cross_section_002.png" alt="plot cross section" class = "sphx-glr-multi-img"/></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.906 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.947 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-cross-section-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7a12ca3dda7e55320412fa6f4fa99dc8/plot_cross_section.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_cross_section.ipynb</span></code></a></p>

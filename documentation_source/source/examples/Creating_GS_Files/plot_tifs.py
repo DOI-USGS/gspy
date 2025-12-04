@@ -35,7 +35,7 @@ from pprint import pprint
 # Initialize the Survey
 
 # Path to example files
-data_path = "..//..//..//..//example_material//example_2"
+data_path = "..//data_files//tempest_aseg"
 
 # Survey metadata file
 metadata = join(data_path, "data//Tempest_survey_md.yml")
@@ -69,7 +69,7 @@ container.gs.add(key="maps", metadata_file=d_supp2)
 
 #%%
 # Save to NetCDF file
-d_out = join(data_path, 'data//tifs.nc')
+d_out = join(data_path, 'tifs.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%
