@@ -101,7 +101,7 @@ Survey
     │       flightline_information  float64 8B ...
     │       survey_equipment        float64 8B ...
     │   Attributes:
-    │       uuid:         a303b3d2-a5a1-4da7-af52-685492b47b1d
+    │       uuid:         6475fff9-4236-4c02-897a-df0cc69e4a2a
     │       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
     │       institution:  USGS Geology, Geophysics, & Geochemistry Science Center
     │       source:       Contractor provided ASEG-formatted data
@@ -143,7 +143,7 @@ Survey
     │   │   │       z_vlf4           (index) float64 16kB ...
     │   │   │       z_geofact        (index) float64 16kB ...
     │   │   │   Attributes:
-    │   │   │       uuid:     2414b99c-f336-4d9f-91c9-2868909db160
+    │   │   │       uuid:     fcc5f052-ddc6-4bc9-a6d4-f5dd27e22eae
     │   │   │       content:  raw data
     │   │   │       comment:  This dataset includes minimally processed (raw) AEM data
     │   │   ├── Group: /survey/data/raw_data/tempest_system
@@ -176,7 +176,7 @@ Survey
     │   │   │           method:                   electromagnetic
     │   │   │           submethod:                time domain
     │   │   │           instrument:               tempest
-    │   │   │           uuid:                     204b6f88-bd47-4bed-9687-f46fcd571d15
+    │   │   │           uuid:                     51b3d522-c7af-4c64-867b-65b1bc14358d
     │   │   │           ...                       ...
     │   │   │           structure:                tabular
     │   │   │           data_normalized:          True
@@ -222,7 +222,7 @@ Survey
     │                   y_bnds        (y, nv) float64 19kB ...
     │                   magnetic_tmi  (y, x) float64 6MB ...
     │               Attributes:
-    │                   uuid:     8a416890-5272-4da6-970d-78022bda2457
+    │                   uuid:     497f4feb-ff9f-4a4c-9a2c-3a23b65bef62
     │                   comment:  <additional details or ancillary information>
     │                   content:  gridded magnetic map
     └── Group: /survey/models
@@ -259,7 +259,7 @@ Survey
                     lambda                   (index) float64 16kB ...
                     iterations               (index) int32 8kB ...
                 Attributes:
-                    uuid:     b99f110d-38ae-415f-b098-90d1f0bf3bfb
+                    uuid:     b41252cd-a11d-4d2e-acc5-dffd2b18c237
                     content:  inverted resistivity models
                     comment:  This dataset includes inverted resistivity models derived from ...
 
@@ -298,7 +298,7 @@ To look just at the attributes
      'source': 'Contractor provided ASEG-formatted data',
      'title': 'Example Tempest Airborne Electromagnetic (AEM) Dataset',
      'type': 'survey',
-     'uuid': 'a303b3d2-a5a1-4da7-af52-685492b47b1d'}
+     'uuid': '6475fff9-4236-4c02-897a-df0cc69e4a2a'}
 
 
 
@@ -373,7 +373,7 @@ Get the list of datasets attached to the survey
     │       flightline_information  float64 8B ...
     │       survey_equipment        float64 8B ...
     │   Attributes:
-    │       uuid:         a303b3d2-a5a1-4da7-af52-685492b47b1d
+    │       uuid:         6475fff9-4236-4c02-897a-df0cc69e4a2a
     │       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
     │       institution:  USGS Geology, Geophysics, & Geochemistry Science Center
     │       source:       Contractor provided ASEG-formatted data
@@ -415,7 +415,7 @@ Get the list of datasets attached to the survey
     │   │   │       z_vlf4           (index) float64 16kB ...
     │   │   │       z_geofact        (index) float64 16kB ...
     │   │   │   Attributes:
-    │   │   │       uuid:     2414b99c-f336-4d9f-91c9-2868909db160
+    │   │   │       uuid:     fcc5f052-ddc6-4bc9-a6d4-f5dd27e22eae
     │   │   │       content:  raw data
     │   │   │       comment:  This dataset includes minimally processed (raw) AEM data
     │   │   ├── Group: /survey/data/raw_data/tempest_system
@@ -448,7 +448,7 @@ Get the list of datasets attached to the survey
     │   │   │           method:                   electromagnetic
     │   │   │           submethod:                time domain
     │   │   │           instrument:               tempest
-    │   │   │           uuid:                     204b6f88-bd47-4bed-9687-f46fcd571d15
+    │   │   │           uuid:                     51b3d522-c7af-4c64-867b-65b1bc14358d
     │   │   │           ...                       ...
     │   │   │           structure:                tabular
     │   │   │           data_normalized:          True
@@ -494,7 +494,7 @@ Get the list of datasets attached to the survey
     │                   y_bnds        (y, nv) float64 19kB ...
     │                   magnetic_tmi  (y, x) float64 6MB ...
     │               Attributes:
-    │                   uuid:     8a416890-5272-4da6-970d-78022bda2457
+    │                   uuid:     497f4feb-ff9f-4a4c-9a2c-3a23b65bef62
     │                   comment:  <additional details or ancillary information>
     │                   content:  gridded magnetic map
     └── Group: /survey/models
@@ -531,7 +531,7 @@ Get the list of datasets attached to the survey
                     lambda                   (index) float64 16kB ...
                     iterations               (index) int32 8kB ...
                 Attributes:
-                    uuid:     b99f110d-38ae-415f-b098-90d1f0bf3bfb
+                    uuid:     b41252cd-a11d-4d2e-acc5-dffd2b18c237
                     content:  inverted resistivity models
                     comment:  This dataset includes inverted resistivity models derived from ...>
 
@@ -598,7 +598,7 @@ image-type raster data
     │   │       z_vlf4           (index) float64 16kB ...
     │   │       z_geofact        (index) float64 16kB ...
     │   │   Attributes:
-    │   │       uuid:     2414b99c-f336-4d9f-91c9-2868909db160
+    │   │       uuid:     fcc5f052-ddc6-4bc9-a6d4-f5dd27e22eae
     │   │       content:  raw data
     │   │       comment:  This dataset includes minimally processed (raw) AEM data
     │   ├── Group: /survey/data/raw_data/tempest_system
@@ -631,7 +631,7 @@ image-type raster data
     │   │           method:                   electromagnetic
     │   │           submethod:                time domain
     │   │           instrument:               tempest
-    │   │           uuid:                     204b6f88-bd47-4bed-9687-f46fcd571d15
+    │   │           uuid:                     51b3d522-c7af-4c64-867b-65b1bc14358d
     │   │           ...                       ...
     │   │           structure:                tabular
     │   │           data_normalized:          True
@@ -677,7 +677,7 @@ image-type raster data
                     y_bnds        (y, nv) float64 19kB ...
                     magnetic_tmi  (y, x) float64 6MB ...
                 Attributes:
-                    uuid:     8a416890-5272-4da6-970d-78022bda2457
+                    uuid:     497f4feb-ff9f-4a4c-9a2c-3a23b65bef62
                     comment:  <additional details or ancillary information>
                     content:  gridded magnetic map
 
@@ -696,7 +696,7 @@ image-type raster data
             y_bnds        (y, nv) float64 19kB ...
             magnetic_tmi  (y, x) float64 6MB ...
         Attributes:
-            uuid:     8a416890-5272-4da6-970d-78022bda2457
+            uuid:     497f4feb-ff9f-4a4c-9a2c-3a23b65bef62
             comment:  <additional details or ancillary information>
             content:  gridded magnetic map
 
@@ -752,7 +752,7 @@ and the second is located at index 1
             lambda                   (index) float64 16kB ...
             iterations               (index) int32 8kB ...
         Attributes:
-            uuid:     b99f110d-38ae-415f-b098-90d1f0bf3bfb
+            uuid:     b41252cd-a11d-4d2e-acc5-dffd2b18c237
             content:  inverted resistivity models
             comment:  This dataset includes inverted resistivity models derived from ...
 
@@ -1001,7 +1001,7 @@ contain a brief summary of the contents of the dataset.
     {'comment': 'This dataset includes inverted resistivity models derived from '
                 'processed AEM data produced by USGS',
      'content': 'inverted resistivity models',
-     'uuid': 'b99f110d-38ae-415f-b098-90d1f0bf3bfb'}
+     'uuid': 'b41252cd-a11d-4d2e-acc5-dffd2b18c237'}
 
 
 
