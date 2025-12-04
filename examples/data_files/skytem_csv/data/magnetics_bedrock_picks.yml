@@ -23,7 +23,7 @@ variables:
         long_name: Total magnetic intensity, diurnally corrected and filtered
         units: nanoTesla
         null_value: -9999.99
-        files : [Midwest_Core_MAG_TMI_NAD83.tif]
+        files : [mag_tmi.tif]
         dimensions: [x, y]
 
     magnetic_rmf:
@@ -31,7 +31,7 @@ variables:
         long_name: Residual magnetic field, IGRF corrected from 2015 model
         units: nanoTesla
         null_value: -9999.99
-        files : [Midwest_Core_MAG_RMF_NAD83.tif]
+        files : [mag_rmf.tif]
         dimensions: [x, y]
 
     bedrock_top_elevation:
@@ -39,7 +39,7 @@ variables:
         long_name: Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)
         units: foot
         null_value: -9999.99
-        files : [topBedrock_ft.tif]
+        files : [top_bedrock.tif]
         dimensions: [x, y]
 
     bedrock_depth:
@@ -47,7 +47,7 @@ variables:
         long_name: Depth to bedrock
         units: foot
         null_value: -9999.9
-        files : [BedrockDepth_ft.tif]
+        files : [bedrock_depth.tif]
         dimensions: [x, y]
 
     E_Nad83:
