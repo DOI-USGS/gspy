@@ -168,7 +168,7 @@ the ``spatial_ref`` coordinate variable
      'positive': 'up',
      'standard_name': 'dem',
      'units': 'meter',
-     'valid_range': array([172.52357302, 354.1462611 ])}
+     'valid_range': array([172.52357302, 289.53542244])}
 
 
 
@@ -251,7 +251,7 @@ changed to longitude and latitude.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.227 seconds)
+   **Total running time of the script:** (0 minutes 0.198 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py:

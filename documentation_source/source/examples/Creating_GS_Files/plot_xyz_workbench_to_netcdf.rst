@@ -131,7 +131,7 @@ Initialize the Survey
     │       DBDT_HM_Z        (index, hm_gate_times) float64 100kB nan nan ... nan nan
     │       DBDT_STD_HM_Z    (index, hm_gate_times) float64 100kB nan nan ... nan nan
     │   Attributes:
-    │       uuid:        a2bf2fbc-73dd-4c64-8de3-7113e499a4a7
+    │       uuid:        9df9d3d2-3d4b-420d-875d-c6441bcc70fd
     │       content:     raw data
     │       comment:     ??
     │       type:        data
@@ -180,7 +180,7 @@ Initialize the Survey
                 method:                    electromagnetic
                 submethod:                 time domain
                 instrument:                skytem
-                uuid:                      a21fe387-00e1-4313-b5d8-a4c690bb0e60
+                uuid:                      9428f9e1-580f-496b-a78e-28cc09b8963d
                 name:                      nominal_system
                 data_normalized:           True
                 skytem_skb_gex_available:  True
@@ -194,7 +194,7 @@ Initialize the Survey
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.493 seconds)
+   **Total running time of the script:** (0 minutes 0.078 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py:

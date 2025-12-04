@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:03.052** total execution time for 11 files **from all galleries**:
+**00:02.110** total execution time for 11 files **from all galleries**:
 
 .. container::
 
@@ -33,16 +33,7 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_cross_section.py` (``../../examples/Interacting_With_GS_Files/plot_cross_section.py``)
-     - 00:01.947
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
-     - 00:00.493
-     - 0.0
-   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``../../examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
-     - 00:00.385
-     - 0.0
-   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``../../examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
-     - 00:00.227
+     - 00:02.110
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``../../examples/Creating_GS_Files/help_I_have_no_variable_metadata.py``)
      - 00:00.000
@@ -63,5 +54,14 @@ Computation times
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``../../examples/Creating_GS_Files/plot_tifs.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``../../examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``../../examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
      - 00:00.000
      - 0.0

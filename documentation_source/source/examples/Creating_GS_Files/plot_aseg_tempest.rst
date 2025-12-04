@@ -1699,14 +1699,14 @@ Plotting
  .. code-block:: none
 
 
-    <matplotlib.collections.QuadMesh object at 0x30d9b3770>
+    <matplotlib.collections.QuadMesh object at 0x154da6ff0>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.158 seconds)
+   **Total running time of the script:** (0 minutes 8.123 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest.py:

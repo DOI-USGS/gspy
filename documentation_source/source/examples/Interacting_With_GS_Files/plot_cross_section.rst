@@ -44,7 +44,7 @@ Plotting Cross Sections
 
 First Create the Survey & Data Objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-32
+.. GENERATED FROM PYTHON SOURCE LINES 16-20
 
 .. code-block:: Python
 
@@ -52,37 +52,59 @@ First Create the Survey & Data Objects
     # Initialize the Survey
     survey = gspy.open_datatree("..//data_files//tempest_aseg//Tempest.nc")['survey']
 
-    plt.figure()
-    survey['models/inverted_models'].gs.plot_cross_section(line_number=212201,
-                                                                        variable='conductivity',
-                                                                        hang_from=None,
-                                                                        axis='distance',
-                                                                        equalize=True,
-                                                                        log=10,
-                                                                        cmap='jet',
-                                                                        ylim=[-200, 100.0])
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 21-31
+
+.. code-block:: Python
 
     plt.figure()
-    survey['models/inverted_models'].gs.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+    survey['models/inverted_models'].gs.plot_cross_section(line_number=225401.,
+                                                            variable='conductivity',
+                                                            hang_from=None,
+                                                            axis='distance',
+                                                            equalize=True,
+                                                            log=10,
+                                                            cmap='jet',
+                                                            ylim=[-200, 10.0])
+
+
+
+
+.. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
+   :alt: plot cross section
+   :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
+   :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 32-41
+
+.. code-block:: Python
+
+    plt.figure()
+    survey['models/inverted_models'].gs.plot_cross_section(line_number=225401.,
+                                                           variable='conductivity',
+                                                           hang_from='elevation',
+                                                           axis='distance',
+                                                           equalize=True,
+                                                           log=10,
+                                                           cmap='jet',
+                                                           ylim=[-450, 150.0])
     plt.show()
 
 
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
-         :alt: plot cross section
-         :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_001.png
-         :class: sphx-glr-multi-img
-
-    *
-
-      .. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
-         :alt: plot cross section
-         :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
-         :class: sphx-glr-multi-img
+.. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
+   :alt: plot cross section
+   :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_cross_section_002.png
+   :class: sphx-glr-single-img
 
 
 
@@ -91,7 +113,7 @@ First Create the Survey & Data Objects
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.947 seconds)
+   **Total running time of the script:** (0 minutes 2.110 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_cross_section.py:

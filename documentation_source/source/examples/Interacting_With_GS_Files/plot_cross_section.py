@@ -17,16 +17,25 @@ from pprint import pprint
 # Initialize the Survey
 survey = gspy.open_datatree("..//data_files//tempest_aseg//Tempest.nc")['survey']
 
+#%%
 plt.figure()
-survey['models/inverted_models'].gs.plot_cross_section(line_number=212201,
-                                                                    variable='conductivity',
-                                                                    hang_from=None,
-                                                                    axis='distance',
-                                                                    equalize=True,
-                                                                    log=10,
-                                                                    cmap='jet',
-                                                                    ylim=[-200, 100.0])
+survey['models/inverted_models'].gs.plot_cross_section(line_number=225401.,
+                                                        variable='conductivity',
+                                                        hang_from=None,
+                                                        axis='distance',
+                                                        equalize=True,
+                                                        log=10,
+                                                        cmap='jet',
+                                                        ylim=[-200, 10.0])
 
+#%%
 plt.figure()
-survey['models/inverted_models'].gs.plot_cross_section(line_number=212201, variable='conductivity', hang_from='elevation', axis='distance', equalize=True, log=10, cmap='jet', ylim=[-200, 100.0])
+survey['models/inverted_models'].gs.plot_cross_section(line_number=225401.,
+                                                       variable='conductivity',
+                                                       hang_from='elevation',
+                                                       axis='distance',
+                                                       equalize=True,
+                                                       log=10,
+                                                       cmap='jet',
+                                                       ylim=[-450, 150.0])
 plt.show()

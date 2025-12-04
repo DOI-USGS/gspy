@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.493** total execution time for 8 files **from examples/Creating_GS_Files**:
+**00:11.800** total execution time for 8 files **from examples/Creating_GS_Files**:
 
 .. container::
 
@@ -32,27 +32,27 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``plot_xyz_workbench_to_netcdf.py``)
-     - 00:00.493
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``help_I_have_no_variable_metadata.py``)
-     - 00:00.000
-     - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``plot_aseg_tempest.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_loupe.py` (``plot_csv_loupe.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``plot_csv_magnetics.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
-     - 00:00.000
+     - 00:08.123
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``plot_csv_skytem.py``)
-     - 00:00.000
+     - 00:01.307
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
+     - 00:00.872
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``plot_tifs.py``)
+     - 00:00.612
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``plot_csv_magnetics.py``)
+     - 00:00.472
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_loupe.py` (``plot_csv_loupe.py``)
+     - 00:00.335
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``plot_xyz_workbench_to_netcdf.py``)
+     - 00:00.078
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_help_I_have_no_variable_metadata.py` (``help_I_have_no_variable_metadata.py``)
      - 00:00.000
      - 0.0

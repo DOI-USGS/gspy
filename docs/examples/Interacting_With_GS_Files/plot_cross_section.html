@@ -106,27 +106,32 @@ to download the full example code.</p>
 <p>First Create the Survey &amp; Data Objects</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the Survey</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="s2">&quot;..//data_files//tempest_aseg//Tempest.nc&quot;</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot_cross_section</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="mi">212201</span><span class="p">,</span>
-                                                                    <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;conductivity&#39;</span><span class="p">,</span>
-                                                                    <span class="n">hang_from</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                                                    <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
-                                                                    <span class="n">equalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                                    <span class="n">log</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                                                                    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span>
-                                                                    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot_cross_section</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="mi">212201</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;conductivity&#39;</span><span class="p">,</span> <span class="n">hang_from</span><span class="o">=</span><span class="s1">&#39;elevation&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">equalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot_cross_section</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="mf">225401.</span><span class="p">,</span>
+                                                        <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;conductivity&#39;</span><span class="p">,</span>
+                                                        <span class="n">hang_from</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                        <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+                                                        <span class="n">equalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                        <span class="n">log</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span>
+                                                        <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_cross_section_001.png" srcset="../../_images/sphx_glr_plot_cross_section_001.png" alt="plot cross section" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot_cross_section</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="mf">225401.</span><span class="p">,</span>
+                                                       <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;conductivity&#39;</span><span class="p">,</span>
+                                                       <span class="n">hang_from</span><span class="o">=</span><span class="s1">&#39;elevation&#39;</span><span class="p">,</span>
+                                                       <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+                                                       <span class="n">equalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                       <span class="n">log</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span>
+                                                       <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">450</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img src="../../_images/sphx_glr_plot_cross_section_001.png" srcset="../../_images/sphx_glr_plot_cross_section_001.png" alt="plot cross section" class = "sphx-glr-multi-img"/></li>
-<li><img src="../../_images/sphx_glr_plot_cross_section_002.png" srcset="../../_images/sphx_glr_plot_cross_section_002.png" alt="plot cross section" class = "sphx-glr-multi-img"/></li>
-</ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.947 seconds)</p>
+<img src="../../_images/sphx_glr_plot_cross_section_002.png" srcset="../../_images/sphx_glr_plot_cross_section_002.png" alt="plot cross section" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 2.110 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-cross-section-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7a12ca3dda7e55320412fa6f4fa99dc8/plot_cross_section.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_cross_section.ipynb</span></code></a></p>
