@@ -128,9 +128,6 @@ class Dataset:
         .Coordinate.Coordinate.from_dict : for pertinent Coordinate keywords and metadata
 
         """
-
-        bounding_dict = dict(bounds = kwargs.pop('bounds', None))
-
         values = kwargs.pop('values', kwargs.pop('centers', None))
 
         if values is None:
@@ -874,5 +871,3 @@ class Dataset:
                 out.append(f"{t}_{r}")
 
         return out
-
-
