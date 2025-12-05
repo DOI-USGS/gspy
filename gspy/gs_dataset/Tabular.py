@@ -144,9 +144,7 @@ class Tabular(Dataset):
 
         # Write out a template json file when no variable metadata is found
         if not 'variables' in json_md:
-            md_template = self.metadata_template(**file.metadata_template)
-
-
+            md_template = self.metadata_template(filename, **file.metadata_template(**json_md))
             raise Exception(file.write_metadata_template())
 
         # Add in the spatio-temporal coordinates
