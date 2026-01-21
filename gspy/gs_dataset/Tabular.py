@@ -218,12 +218,15 @@ class Tabular(Dataset):
 
                     # Check for the dimensions of the variable and try adding from a system class.
                     system = kwargs.get('system', None)
+
                     for dim in var_meta['dimensions']:
-                        if dim.lower() not in self._obj.dims:
+                        dl = dim.lower()
+
+                        if dl not in self._obj.dims:
                             if system is not None:
-                                for key, item in system.items():
-                                    if dim.lower() in item.coords:
-                                        self._obj = self._obj.assign_coords({dim.lower():item.coords[dim.lower()]})
+                                for coord in system.coords:
+                                    if dl in system.coords:
+                                        self._obj = self._obj.assign_coords({dl:system[dl]})
 
                     assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with json dimensions {self._obj.dims}")
 
