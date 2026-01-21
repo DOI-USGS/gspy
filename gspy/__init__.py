@@ -5,6 +5,8 @@ from .gs_dataset.System import System
 from xarray import open_datatree as xr_open_datatree
 from xarray import open_dataset as xr_open_dataset
 
+from ._version import __version__
+
 def open_datatree(*args, **kwargs):
     kwargs['decode_times'] = kwargs.get('decode_times', False)
     kwargs['decode_cf'] = kwargs.get('decode_cf', True)

@@ -10,3 +10,4 @@ build/
 documentation_source/build/
 dist/
 todo.txt
+_version.py
