@@ -44,6 +44,12 @@ source_archive = "https://usgs.github.io/gspy/archive/{commit_hash}.zip"
 [tool.hatch.metadata.hooks.requirements_txt]
 files = ["requirements.txt"]
 
+[project.optional-dependencies]
+docs = ["sphinx_gallery",
+        "sphinx_rtd_theme"]
+dev = ["gspy[docs]",
+       "twine"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["gspy"]
 
