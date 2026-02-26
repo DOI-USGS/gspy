@@ -37,15 +37,11 @@ def file_handler(filename, **kwargs):
         elif xyz_handler.is_workbench(filename):
             return workbench_handler
 
-        # return generic_xyz_handler. when we have it.
-
-        assert False, Exception("Unrecognized XYZ file type.")
-
     elif file_extension == '.dat':
         if isfile(file_name+'.dfn'):
             return aseg_gdf2_handler
         elif isfile(file_name+file_extension+'.desc'):
             return loupe_handler
 
-    # Catch all others as a csv i.e. .xyz, .csv
+    # Catch all others as a csv i.e. .xyz, .csv, .txt etc.
     return csv_handler
