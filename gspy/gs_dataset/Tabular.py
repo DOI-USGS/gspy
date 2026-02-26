@@ -224,9 +224,15 @@ class Tabular(Dataset):
 
                         if dl not in self._obj.dims:
                             if system is not None:
-                                for coord in system.coords:
-                                    if dl in system.coords:
-                                        self._obj = self._obj.assign_coords({dl:system[dl]})
+                                if isinstance(system, dict):
+                                    for k, sys in system.items():
+                                        for coord in sys.coords:
+                                            if dl in sys.coords:
+                                                self._obj = self._obj.assign_coords({dl:sys[dl]})
+                                else:
+                                    for coord in system.coords:
+                                        if dl in system.coords:
+                                            self._obj = self._obj.assign_coords({dl:system[dl]})
 
                     assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with json dimensions {self._obj.dims}")
 
