@@ -57,10 +57,6 @@ NEW_TAG="$MAJOR.$MINOR.$PATCH"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # Github stuff
-python update_version.py $NEW_TAG
-git add pyproject.toml
-git add documentation_source/source/conf.py
-git commit -m "update version"
 
 cd documentation_source
 make clean
