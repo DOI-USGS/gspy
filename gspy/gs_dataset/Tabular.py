@@ -18,28 +18,8 @@ class Tabular(Dataset):
     gspy.Spatial_ref : For Spatial reference instantiation.
 
     """
-    # def __init__(self, xarray_obj):
-    #     self._obj = xarray_obj
-
-    @property
-    def is_netcdf(self):
-        return self.type == 'netcdf'
-
-    @property
-    def type(self):
-        """File type of the Tabular class
-
-        Returns
-        -------
-        str
-            File type
-        """
-        return self.file.type
-
-    @type.setter
-    def type(self, value):
-        assert value in self._allowed_file_types, ValueError(f'type must be in {self._allowed_file_types}')
-        self._type = value
+    def __init__(self, xarray_obj):
+        self._obj = xarray_obj
 
     @staticmethod
     def metadata_template(filename,  metadata_file=None, system=None, **kwargs):

@@ -66,12 +66,15 @@ cd ..
 git add docs/
 git commit -m "docs"
 
+# Pypi
+python -m build
+
 git tag $NEW_TAG
 git push --tags
 git push origin master develop
 
 gh release create $NEW_TAG --notes-from-tag --verify-tag --title $NEW_TAG
 
-# Pypi
-python -m build
+
+# Upload to twine for pypi
 twine upload --skip-existing dist/*

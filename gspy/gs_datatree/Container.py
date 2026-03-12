@@ -333,4 +333,3 @@ class Container:
                 sys = self._obj[this].to_dataset()
         assert not sys is None, ValueError(f"Could not find system with method attrs '{method}'")
         return sys
-
