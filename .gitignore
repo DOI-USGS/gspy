@@ -8,6 +8,5 @@ egg-info
 git_push.sh
 build/
 documentation_source/build/
+documentation_source/source/examples/
 dist/
-todo.txt
-_version.py

@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASEG to NetCDF &mdash; gspy 2.2.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CSV to NetCDF" href="plot_resolve_csv.html" />
+    <link rel="prev" title="Examples" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ASEG to NetCDF</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#convert-the-aseg-data-to-netcdf">Convert the ASEG data to NetCDF</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plot_resolve_csv.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_loupe_csv.html">Loupe to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_magnetics_csv.html">Magnetic Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_skytem_csv.html">Multi-dataset Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench to NetCDF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">ASEG to NetCDF</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Creating_GS_Files/plot_tempest_aseg.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-tempest-aseg-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="aseg-to-netcdf">
+<span id="sphx-glr-examples-creating-gs-files-plot-tempest-aseg-py"></span><h1>ASEG to NetCDF<a class="headerlink" href="#aseg-to-netcdf" title="Link to this heading"></a></h1>
+<p>This example demonstrates the workflow for creating a GS file from the <a class="reference external" href="https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf">ASEG</a> file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:</p>
+<ol class="arabic simple">
+<li><p>Raw AEM data, from the Tempest system</p></li>
+<li><p>Inverted resistivity models</p></li>
+<li><p>An interpolated map of total magnetic intensity</p></li>
+</ol>
+<p>Dataset Reference:
+Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
+</pre></div>
+</div>
+<section id="convert-the-aseg-data-to-netcdf">
+<h2>Convert the ASEG data to NetCDF<a class="headerlink" href="#convert-the-aseg-data-to-netcdf" title="Link to this heading"></a></h2>
+<p>Initialize the Survey</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;..//data_files//tempest_aseg&quot;</span>
+
+<span class="c1"># Survey Metadata file</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.yml&quot;</span><span class="p">)</span>
+
+<span class="c1"># Establish survey instance</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Raw Data -</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw and processed data&quot;</span><span class="p">))</span>
+
+<span class="c1"># Import raw AEM data from ASEG-format.</span>
+<span class="c1"># Define input data file and associated metadata file</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.yml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the raw AEM data as a tabular dataset</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Inverted Models</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;inverted models&quot;</span><span class="p">))</span>
+
+<span class="c1"># Import inverted AEM models from ASEG-format.</span>
+<span class="c1"># Define input data file and associated metadata file</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.yml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read model data and format as Tabular class object</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">,</span> <span class="n">derived_from</span><span class="o">=</span><span class="n">rd</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Magnetic Intensity Map</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_derived</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;derived maps&quot;</span><span class="p">))</span>
+
+<span class="c1"># Import the magnetic data from TIF-format.</span>
+<span class="c1"># Define input metadata file (which contains the TIF filenames linked with desired variable names)</span>
+<span class="n">r_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.yml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read data and format as Raster class object</span>
+<span class="n">data_derived</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">r_supp</span><span class="p">)</span>
+
+<span class="c1"># Save NetCDF file</span>
+<span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Tempest.nc&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read back in the NetCDF file</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+
+<span class="c1"># Once the survey is read in, we can access variables like a standard xarray dataset.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
+[725988 values with dtype=float64]
+Coordinates:
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+    spatial_ref  float64 8B ...
+Attributes:
+    standard_name:  total_magnetic_intensity
+    long_name:      Total magnetic intensity, diurnally corrected and filtered
+    units:          nT
+    null_value:     1.70141e+38
+    valid_range:    [-17504.6640625   11490.32324219]
+    grid_mapping:   spatial_ref
+&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
+[725988 values with dtype=float64]
+Coordinates:
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+    spatial_ref  float64 8B ...
+Attributes:
+    standard_name:  total_magnetic_intensity
+    long_name:      Total magnetic intensity, diurnally corrected and filtered
+    units:          nT
+    null_value:     1.70141e+38
+    valid_range:    [-17504.6640625   11490.32324219]
+    grid_mapping:   spatial_ref
+</pre></div>
+</div>
+<p>Plotting</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific tabular variable, using GSPy&#39;s plotter</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;tx_height&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make a 2-D map plot of a specific raster variable, using Xarrays&#39;s plotter</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># plt.show()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../_images/sphx_glr_plot_tempest_aseg_001.png" srcset="../../_images/sphx_glr_plot_tempest_aseg_001.png" alt="plot tempest aseg" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_tempest_aseg_002.png" srcset="../../_images/sphx_glr_plot_tempest_aseg_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh object at 0x3094d9f70&gt;
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 9.548 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-tempest-aseg-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/ee7c7255ea4ae8868a6ae19ba071b29e/plot_tempest_aseg.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tempest_aseg.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/98b75813ffbf63dbd3ea5ee86028ffe3/plot_tempest_aseg.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tempest_aseg.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/3a245e1937e8363df2eb509c541d42f7/plot_tempest_aseg.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_tempest_aseg.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_resolve_csv.html" class="btn btn-neutral float-right" title="CSV to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
