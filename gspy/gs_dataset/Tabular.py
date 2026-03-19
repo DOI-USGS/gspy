@@ -201,8 +201,7 @@ class Tabular(Dataset):
 
                     for dim in var_meta['dimensions']:
                         dl = dim.lower()
-
-                        if dl not in self._obj.dims:
+                        if dl not in list(self._obj.dims):
                             if system is not None:
                                 if isinstance(system, dict):
                                     for k, sys in system.items():
@@ -210,11 +209,17 @@ class Tabular(Dataset):
                                             if dl in sys.coords:
                                                 self._obj = self._obj.assign_coords({dl:sys[dl]})
                                 else:
-                                    for coord in system.coords:
-                                        if dl in system.coords:
-                                            self._obj = self._obj.assign_coords({dl:system[dl]})
+                                    if isinstance(system, xr.DataTree):
+                                        for path,node in system.items():
+                                            for coord in node.coords:
+                                                if dl in node.coords:
+                                                    self._obj = self._obj.assign_coords({dl:node[dl]})
+                                    else:
+                                        for coord in system.coords:
+                                            if dl in system.coords:
+                                                self._obj = self._obj.assign_coords({dl:system[dl]})
 
-                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with json dimensions {self._obj.dims}")
+                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with dimensions in metadata file: {self._obj.dims}")
 
                     self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
 

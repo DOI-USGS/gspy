@@ -11,7 +11,7 @@ Suggested Citations
 
 If you use this software to generate gspy conformant data we suggest citing the software itself.
 
-Foks, N.L., James, S. R., and Minsely, B. J. 2022. GSPy: Geophysical Data Standard in Python. U.S. Geological Survey software release. doi:10.5066/P9XNQVGQ
+Foks, N.L., James, S. R., and Minsley, B. J. 2022. GSPy: Geophysical Data Standard in Python. U.S. Geological Survey software release. doi:10.5066/P9XNQVGQ
 
 The manuscript accompanying this software release defining the standard itself you can also cite the following.
 
@@ -25,20 +25,44 @@ Documentation
 Goals
 ~~~~~
 
-1. Standardize a geophysical data format based on the CF convention and NetCDF.
-2. Restructure raw and processed data, or model, products into a consistent format for release.
-3. Document metadata pertinent to geophysical dataset release.
-4. Develop tools for processing data and preparing data for inversion.
-5. Develop exploratory tools to interrogate data.
+1. Standardize geophysical data into the Geophysical Survey (GS) data standard, based on the netCDF file format and CF metadata conventions.
+2. Restructure various types of geophysical data (e.g., raw and processed data, inverted models, or derivative products) into a consistent format for sharing and archiving.
+3. Document critical metadata pertinent to geophysical analysis and transferability.
+4. Develop tools for generating and exploring standardized datasets, and facilitate handling of complex and diverse data and metadata information to accurately process, invert, and interpret geophysical data.
+5. Develop visualization and exploratory tools to interrogate data.
 
-NetCDF Data Standard
-~~~~~~~~~~~~~~~~~~~~
-Datasets are read from a variety of original formats (CSV, ASEG-GDF, TIF) and reconfigured to follow a NetCDF based data standard, which includes detailed metadata:
+Why netCDF?
+~~~~~~~~~~~
 
-1. All variables have detailed attributes (units, null values, data format).
-2. Contains supporting information on the airborne survey, data collection, and modeling parameters.
-3. Standardized coordinate reference system (CRS) variables for maximum portability to other GIS software (QGIS, ArcGIS, etc).
-4. Inputs with different CRSs are reprojected to be consistent for a given survey.
+   * **Metadata documentation** - detailed metadata is directly attached to the digital data values as variable-specific attributes (e.g., names, units, null values, value ranges) and as dataset attributes.
+   * **Hierarchical structure** - multiple datasets can be organized into a single file within a tiered group structure. The GS standard takes advantage of this to define standardized group types and ordering to create an adaptable framework for organizing complex datasets with critical supporting information such as survey and acquisition details, system configurations, and modeling parameters.
+   * **Portable and accessible format** - netCDF is platform-independent and supports subsetting which keeps large datasets accessible and easy to use.
+   * **Well-established metadata conventions** - the CF convention provides a strong foundation for standardizing metadata and is widely recognized for netCDF files. For example, by following the CF guidelines for coordinate reference system (CRS) variables all GS files are accurately represented in GIS software (QGIS, ArcGIS, etc).
+   * **Space-saving and scalable** - netCDF is a binary format with extra packing and compression options to significantly reduce file sizes, and is immediately scalable for large datasets with efficient read/write and parallel capabilities.
+
+GSPy Workflow
+~~~~~~~~~~~~~
+
+The GSPy package provides tools for reading datasets from a variety of original formats common for geophysical data (e.g., CSV, ASEG-GDF, GeoTIFF), combining with metadata information, and generating standardized GS netCDF files.  
+
+See our examples for detailed demonstrations of the GSPy workflow. In general, the steps for making a GS netCDF file are:
+
+   1. Initiate a Survey
+
+      * pass a metadata file (YAML or JSON) with global information about the survey
+
+   2. Add a Container branch
+   3. Add data to the Container branch
+
+      * pass a data file 
+      * pass a metadata file
+
+   4. (optional) Add Supplementary Stem 
+
+      * this can also be done simultaneous with Step 3 through the data's metadata file
+
+   5. Repeat steps 2-4 for each dataset as needed
+   6. Export to File
 
 Installation
 ~~~~~~~~~~~~
