@@ -20,7 +20,7 @@ James, S. R., Foks, N.L., and Minsely, B. J. 2022. GSPy: A new toolbox and data 
 Documentation
 ~~~~~~~~~~~~~
 
-`Documentation is here! <https://usgs.github.io/gspy/>`_
+`Documentation is here! <https://doi-usgs.github.io/gspy/>`_
 
 Goals
 ~~~~~
