@@ -8,6 +8,7 @@ import numpy as np
 from numpy import arange, int32
 
 from .Dataset import Dataset
+from ..metadata.Metadata import Metadata
 from ..file_handlers import file_handler
 
 class Tabular(Dataset):
@@ -38,7 +39,7 @@ class Tabular(Dataset):
                 json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, metadata=json_md)
+        file = self.file_handler.read(filename, metadata=json_md, system=system)
 
         out = file.metadata_template(**json_md)
         out['dataset_attrs']['structure'] = 'tabular'
@@ -97,7 +98,25 @@ class Tabular(Dataset):
             json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, metadata=json_md.get('variables', {}), **kwargs)
+        file, file_metadata = self.file_handler.read(filename, metadata=json_md.get('variables', {}), **kwargs)
+
+        system = kwargs.get('system', None)
+
+        if file_metadata is not None:
+            for k, v in file_metadata.items():
+                json_md[k] = json_md.get(k, {}) | v
+
+            if 'dimensions' in file_metadata:
+                if system is not None:
+                    for key, values in file_metadata['dimensions'].items():
+                        if isinstance(system, dict):
+                            system = system.gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
+                        else:
+                            if isinstance(system, xr.DataTree):
+                                for path, node in system.items():
+                                    system["/"+path] = node.to_dataset().gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
+                            else: # xr.Dataset
+                                system = system.gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
 
         # Add the index coordinate
         self._obj = self.add_coordinate_from_values('index',
@@ -124,7 +143,7 @@ class Tabular(Dataset):
 
         # Write out a template json file when no variable metadata is found
         if not 'variables' in json_md:
-            md_template = self.metadata_template(filename, **file.metadata_template(**json_md))
+            _ = self.metadata_template(filename, **file.metadata_template(**json_md), **kwargs)
             raise Exception(file.write_metadata_template())
 
         # Add in the spatio-temporal coordinates
@@ -181,53 +200,63 @@ class Tabular(Dataset):
 
                     # if variable has multiple columns with [i] increment, to be combined
                     elif (var in column_counts) and (column_counts[var] > 1):
-                        try:
-                            values = file.df[[f"{var}[{i}]" for i in range(column_counts[var])]].values
-                        except KeyError:
-                            try:
-                                values = file.df[[f"{var}_{i}" for i in range(column_counts[var])]].values
-                            except KeyError:
-                                raise KeyError(f"Column header names for variable '{var}' not found in {var}[0] or {var}_0 format")
 
+                        # Check whether the column header starts with 1 or 0
+                        starts_from_one = not ((f"{var}[0]" in file.df) or (f"{var}_0" in file.df))
+                        # Get which type of header delim is used for multi column variables
+                        delim = "[]" if f"{var}[{starts_from_one}]" in file.df else "_"
 
-                    assert values is not None, ValueError((f'{var} not in data file, double check, '
-                                                          'raw_data_columns field required in variables '
-                                                          'if combining unique columns to a new variable without an [i] increment'))
+                        key = "{0}[{1}]" if delim == "[]" else "{0}_{1}"
+                        values = file.df[[key.format(var, i+starts_from_one) for i in range(column_counts[var])]].values
+                        # # try:
+                        # if delim == "[]":
+                        #     values = file.df[[f"{var}[{i+starts_from_one}]" for i in range(column_counts[var])]].values
+                        # else:
+                        #     values = file.df[[f"{var}_{i+starts_from_one}" for i in range(column_counts[var])]].values
+                        # except KeyError:
+                        #     raise KeyError(f"Column header names for variable '{var}' not found in {var}[0] or {var}_0 format")
 
-                    assert 'dimensions' in var_meta, ValueError(f'No dimensions found for 2+ dimensional variable {var}.  Please add "dimensions":[---, ---]')
+                    if values is not None:
+                        # assert values is not None, ValueError((f'{var} not in data file, double check, '
+                        #                                     'raw_data_columns field required in variables '
+                        #                                     'if combining unique columns to a new variable without an [i] increment'))
 
-                    # Check for the dimensions of the variable and try adding from a system class.
-                    system = kwargs.get('system', None)
+                        assert 'dimensions' in var_meta, ValueError(f'No dimensions found for 2+ dimensional variable {var}.  Please add "dimensions":[---, ---]')
 
-                    for dim in var_meta['dimensions']:
-                        dl = dim.lower()
-                        if dl not in list(self._obj.dims):
-                            if system is not None:
-                                if isinstance(system, dict):
-                                    for k, sys in system.items():
-                                        for coord in sys.coords:
-                                            if dl in sys.coords:
-                                                self._obj = self._obj.assign_coords({dl:sys[dl]})
-                                else:
-                                    if isinstance(system, xr.DataTree):
-                                        for path,node in system.items():
-                                            for coord in node.coords:
-                                                if dl in node.coords:
-                                                    self._obj = self._obj.assign_coords({dl:node[dl]})
+                        # Check for the dimensions of the variable and try adding from a system class.
+                        # system = kwargs.get('system', None)
+
+                        for dim in var_meta['dimensions']:
+                            dl = dim.lower()
+                            if dl not in list(self._obj.dims):
+                                if system is not None:
+                                    if isinstance(system, dict):
+                                        for k, sys in system.items():
+                                            for coord in sys.coords:
+                                                if dl in sys.coords:
+                                                    self._obj = self._obj.assign_coords({dl:sys[dl]})
                                     else:
-                                        for coord in system.coords:
-                                            if dl in system.coords:
-                                                self._obj = self._obj.assign_coords({dl:system[dl]})
+                                        if isinstance(system, xr.DataTree):
+                                            for path,node in system.items():
+                                                for coord in node.coords:
+                                                    if dl in node.coords:
+                                                        self._obj = self._obj.assign_coords({dl:node[dl]})
+                                        else:
+                                            for coord in system.coords:
+                                                if dl in system.coords:
+                                                    self._obj = self._obj.assign_coords({dl:system[dl]})
 
-                    assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match variable dimensions {var_meta['dimensions']} with dimensions in metadata file: {self._obj.dims}")
+                        assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match dimensions for variable {var} with metadata dimensions {var_meta['dimensions']}. Dimensions already attached are: {list(self._obj.dims)}")
 
-                    self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
+                        self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
+
+        json_md["structure"] = "tabular"
 
         # add global attrs to tabular, skip variables and dimensions
-        self.update_attrs(**json_md['dataset_attrs'])
-        self._obj.attrs['structure'] = 'tabular'
+        kwargs = Metadata(json_md['dataset_attrs'])
+        kwargs.check_keys(cls.required_metadata)
 
-        # make sure required keys are present, if not add them
+        self.attrs = kwargs
 
         return self._obj
 
