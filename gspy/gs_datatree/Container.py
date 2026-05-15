@@ -52,8 +52,18 @@ class Container:
     .Spatial_ref : For information on creating a spatial ref
 
     """
+    required_metadata = ('type')
+
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
+
+    @property
+    def attrs(self):
+        return self._obj.attrs
+
+    @attrs.setter
+    def attrs(self, values:dict):
+        self._obj.attrs = self._obj.attrs | values
 
     @property
     def tree(self):
@@ -121,7 +131,7 @@ class Container:
         metadata = cls.read_metadata(metadata) if isinstance(metadata, str) else metadata
 
         self = cls(DataTree.from_dict(collection))
-        self._obj.attrs.update(metadata)
+        self.attrs = metadata
 
         self._obj.attrs['type'] = 'container'
 
@@ -383,10 +393,24 @@ class Container:
 
     # System specific accessor
     def get_system_with_method(self, method):
+
+        # Early exist if this is a single system (but also datatree)
+        if "method" in self._obj.attrs:
+            if self._obj.attrs['method'] == method:
+                return self._obj.to_dataset()
+
+        # Handles multiple attached system types
         sys = None
         for this in self._obj:
-            if self._obj[this].attrs['method'] == method:
+
+            methods = self._obj[this].attrs['method']
+
+            if isinstance(methods, str):
+                methods = [methods]
+
+            if any([method in methods]):
                 sys = self._obj[this].to_dataset()
+
         assert not sys is None, ValueError(f"Could not find system with method attrs '{method}'")
         return sys
 
