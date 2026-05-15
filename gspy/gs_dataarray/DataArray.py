@@ -71,7 +71,8 @@ class DataArray:
             if bounds.shape == (centers.size+1, ):
                 bounds = asarray((bounds[:-1], bounds[1:])).transpose()
             else:
-                assert bounds.shape == (centers.size, 2), ValueError('size of coordinate bounds must be 2D array size of centers, or +1 list size of centers that can be reshaped')
+                bounds = bounds.reshape((-1, 2))
+                assert bounds.shape == (centers.size, 2), ValueError(f'bounds for coordinate {name} must have shape (2, centers)')
 
         attrs = coordinate.attrs.copy()
         attrs['standard_name'] = coordinate.attrs['standard_name'] + '_bounds'
