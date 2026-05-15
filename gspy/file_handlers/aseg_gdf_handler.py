@@ -148,7 +148,7 @@ class aseg_gdf2_handler(file_handler):
 
         self.combine_metadata(metadata)
 
-        return self
+        return self, None
 
     def __parse_dfn_file(self, filename):
         """Parses the ASEG GDF2 definition file but includes fixes.

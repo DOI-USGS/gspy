@@ -12,7 +12,6 @@ class loupe_handler(csv_handler):
     """Handler for Loupe data
     """
 
-
     @property
     def type(self):
         return 'loupe'
@@ -101,7 +100,7 @@ class loupe_handler(csv_handler):
 
         self.combine_metadata(desc_metadata, matched_keys=True)
 
-        return self
+        return self, None
 
     def __parse_desc_file(self, file_name):
         """Parses the ASEG GDF2 definition file but includes fixes.
