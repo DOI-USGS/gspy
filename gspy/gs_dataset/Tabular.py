@@ -225,6 +225,9 @@ class Tabular(Dataset):
 
         # add global attrs to tabular, skip variables and dimensions
         self.update_attrs(**json_md['dataset_attrs'])
+        self._obj.attrs['structure'] = 'tabular'
+
+        # make sure required keys are present, if not add them
 
         return self._obj
 
