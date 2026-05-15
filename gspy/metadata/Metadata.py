@@ -6,6 +6,19 @@ from pprint import pprint
 
 class Metadata(dict):
 
+    def __init__(self, *args, required:tuple=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.required = required
+
+    @property
+    def required(self):
+        return self._required
+
+    @required.setter
+    def required(self, values:tuple):
+        if values is not None:
+            self._required = values
+
     @classmethod
     def read(cls, filename):
 
@@ -132,3 +145,13 @@ class Metadata(dict):
                 if all([isinstance(i, str) for i in item]):
                     self[key] = ','.join(a for a in item)
         return self
+
+    def pop_and_split(self, keys:tuple):
+        assert all([x in self for x in keys]), ValueError(f"System metadata must have entries for {keys}")
+        popped = {}
+        for k in keys:
+            popped[k] = self.pop(k)
+        return popped, self
+
+    def check_keys(self, keys:tuple):
+        assert all([x in self for x in keys]), ValueError(f"metadata must have entries for {keys}")
