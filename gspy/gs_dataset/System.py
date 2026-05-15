@@ -8,13 +8,11 @@ from ..metadata.Variable_metadata import Variable_metadata
 # from ..gs_dataarray.DataArray import DataArray
 from .Dataset import Dataset
 
-required_keys = ('type',
-                #  'structure',
-                 'mode',
-                 'method',
-                 'instrument')
-
 class System(Dataset):
+    required_metadata = ('type',
+                     'mode',
+                     'method',
+                     'instrument')
 
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
@@ -23,23 +21,20 @@ class System(Dataset):
     def is_projected(self):
         return False
 
+    # @property
+    # def attrs(self):
+    #     return self._obj.attrs
+
+    # @attrs.setter
+    # def attrs(self, values:dict):
+    #     assert isinstance(values, dict), TypeError("attrs must have type dict")
+    #     self._obj.attrs = self._obj.attrs | values
+
     def check_against_data(self, dataset):
         """Assert that gate time strings match the coordinates of the attached dataset.
         """
         for gt in self._obj['couplet_gate_times']:
             assert gt in list(dataset.coords.keys()), ValueError(f"Could not match couplet gate times {gt} to dataset coordinates")
-
-    @staticmethod
-    def check_required(**kwargs):
-        assert all([x in kwargs for x in required_keys]), ValueError(f"System metadata must have entries for {required_keys}")
-
-    @staticmethod
-    def pop_required(**kwargs):
-        assert all([x in kwargs for x in required_keys]), ValueError(f"System metadata must have entries for {required_keys}")
-        required = {}
-        for k in required_keys:
-            required[k] = kwargs.pop(k)
-        return required, kwargs
 
     @classmethod
     def open(cls, filename, **kwargs):
@@ -50,16 +45,24 @@ class System(Dataset):
 
     @classmethod
     def from_dict(cls, **kwargs):
-        attrs, kwargs = cls.pop_required(**kwargs)
-        tmp = xr.Dataset(attrs=attrs)
-        self = cls(tmp)
+
+        kwargs = Metadata(kwargs)
+
+        attrs, kwargs = kwargs.pop_and_split(cls.required_metadata)
+
+        self = cls(xr.Dataset(attrs=attrs))
 
         for key, value in kwargs.pop('dimensions', {}).items():
             self._obj = self._obj.gs.add_coordinate_from_dict(key.lower(),
                                                  is_dimension=True,
                                                  **value)
 
-        prefixes =  unique_list_preserve(['transmitter', 'receiver', 'couplet'] + kwargs.pop('prefixes', []))
+        required_prefixes = ['transmitter', 'receiver', 'couplet']
+
+        prefixes =  unique_list_preserve(required_prefixes + kwargs.pop('prefixes', []))
+
+        assert 'variables' in kwargs, ValueError("Missing variables section for system")
+        assert all([x in kwargs['variables'] for x in required_prefixes]), ValueError("transmiter, receiver, couplet must be contained in the variables")
 
         if 'variables' in kwargs:
             for prefix in prefixes:
@@ -93,8 +96,6 @@ class System(Dataset):
         if 'transmitters' in kwargs:
             kwargs['label'] = [f"{a}_{b}" for a, b in zip(kwargs['transmitters'], kwargs['label'])]
         return kwargs
-
-
 
     def __add_using_prefix(self, prefix, **kwargs):
 
