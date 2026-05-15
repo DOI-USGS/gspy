@@ -1,10 +1,12 @@
-
+import numpy as np
 from os import path, sep
+from pathlib import Path
 from copy import copy
 from ..metadata.Metadata import Metadata
 from ..gs_dataarray.Spatial_ref import Spatial_ref
 from pprint import pprint
 from ..gs_dataset.System import System
+from ..gs_dataset.Parameters import Parameters
 from ..gs_dataset.Tabular import Tabular
 from ..gs_dataset.Raster import Raster
 
@@ -189,7 +191,7 @@ class Container:
 
     @classmethod
     def Data(cls, data_filename=None, metadata_file=None, spatial_ref=None, **kwargs):
-
+        
         json_md = Metadata.read(metadata_file)
 
         system = kwargs.get('system', {})
@@ -199,11 +201,9 @@ class Container:
             for key in list(json_md.keys()):
                 if "system" in key:
                     system[key] = json_md.pop(key)
-
             # Systems were found, create a System datatree/dataset
             if len(system) > 0:
                 system, _ = Container.Systems(**system)
-
         # Attach apriori given system dict
         kwargs['system'] = system
 
@@ -224,6 +224,34 @@ class Container:
                 for key in system.children:
                     self._obj[key] = system[key]
 
+        #--------
+        parameters = kwargs.get('parameters', {})
+        # No parameters were passed through, see if any present in metadata
+        if len(parameters) == 0:
+            # loop over metadata keys
+            for key in list(json_md.keys()):
+                # if any metadata key names contain "parameters", grab them
+                if "parameters" in key:
+                    parameters[key] = json_md.pop(key)
+            # parameters were found, create a parameters datatree/dataset
+            if len(parameters) > 0:
+                # TODO test this
+                parameters, _ = Container.Parameters(**parameters)
+        else:
+            # if parameters is a file path, read contents into dictionary
+            if isinstance(parameters, str):
+                parameters = Metadata.read(parameters)    
+            parameters, _ = Container.Parameters(**parameters)
+
+        if isinstance(parameters, dict):
+            if len(parameters) > 0:
+                self._obj.update(parameters)
+        else:
+            if len(parameters.children) == 0:
+                self._obj.update({parameters.name:parameters})
+            else: # This is meant for DataTrees with multiple parameters
+                for key in parameters.children:
+                    self._obj[key] = parameters[key]
         return self._obj
 
     @classmethod
@@ -232,12 +260,25 @@ class Container:
         for key in list(kwargs.keys()):
             if "system" in key:
                 value = kwargs.pop(key)
+                print('here! '+key)
                 systems[key] = System.from_dict(name=key, **value)
 
         out = DataTree.from_dict(systems)
 
         return out, kwargs
 
+    @classmethod
+    def Parameters(cls, **kwargs):
+        parameters = {}
+        for key in list(kwargs.keys()):
+            if "parameters" in key:
+                value = kwargs.pop(key)
+                parameters[key] = Parameters.from_dict(name=key, **value)
+
+        out = DataTree.from_dict(parameters)
+
+        return out, kwargs
+    
     def to_netcdf(self, *args, **kwargs):
         """Write the survey to a netcdf file
 
@@ -266,6 +307,21 @@ class Container:
             out = self._obj.parent
         else:
             out = self._obj
+
+        # # correct objects
+        # for node in out.subtree:
+        #     for name, var in node.variables.items():
+        #         if var.dtype == object:
+        #             node[name] = node[name].astype(str)
+        #         for att in var.attrs:
+        #             if type(var.attrs[att]) == object:
+        #                 print('here I am!!!!!!!!!!!!!!!!!!!')
+        #                 var.attrs[att] = var.attrs[att].astype(str)
+        #     for att in node.attrs:
+        #         #print(type(node.attrs[att]))
+        #         if type(node.attrs[att]) == object:
+        #             print('here I am-----------------')
+        #             node.attrs[att] = node.attrs[att].astype(str)
 
         out.to_netcdf(*args, **kwargs)
 
@@ -333,3 +389,106 @@ class Container:
                 sys = self._obj[this].to_dataset()
         assert not sys is None, ValueError(f"Could not find system with method attrs '{method}'")
         return sys
+
+    def to_tif(self, var=None, slice_dim=None, out_dir=None):
+        """
+        Export GeoTIFF files from xarray.
+
+        - If `var` is provided, export only that variable.
+        - If `var` is None, export all variables.
+        - If `slice_dim` is provided and exists on a variable, export one file per slice along that dim.
+        Otherwise export a single file per variable.
+
+        Parameters
+        ----------
+        var : str | None
+            Name of the variable to export. If None, all variables are exported.
+        slice_dim : str | None
+            Name of the dimension to slice along for 3D variables (e.g., "time" or "band").
+        out_dir : str | Path
+            Output directory for GeoTIFF files
+        """
+        # Ensure we are on a raster structure
+        assert self._obj.attrs.get("structure") == "raster", "structure must be 'raster' to export to tif"
+
+        ds = self._obj
+        
+        if out_dir is not None:
+            out_dir = Path(out_dir)
+
+        if var is None:
+            # Export ALL variables
+            for var_name in ds.data_vars:
+                _write_one_var_to_tif(ds, var_name, slice_dim, out_dir)
+        else:
+            # Export JUST the requested variable
+            _write_one_var_to_tif(ds, var, slice_dim, out_dir)
+
+def _write_one_var_to_tif(ds, var_name, slice_dim=None, out_dir=None):
+    """
+    Write a single variable from ds to GeoTIFF(s).
+    If slice_dim is provided and the variable has that dimension,
+    write one GeoTIFF per slice; otherwise write a single GeoTIFF.
+    """
+    # skip bnds variables
+    if "bnds" in var_name:
+        return
+
+    if var_name not in ds.data_vars:
+        raise KeyError(f"Variable '{var_name}' not found in dataset.")
+
+    da = ds[var_name].copy()
+
+    # --- enforce slice_dim logic for 3D variables -----------------------------
+    if da.ndim == 3 and slice_dim is None:
+        raise ValueError(
+            f"Variable '{var_name}' is 3D with dims {da.dims}. "
+            f"Please provide `slice_dim` (one of {list(da.dims)}) to export slices."
+        )
+
+    # Remove CF 'grid_mapping' attr if present;
+    # rioxarray stores CRS separately (.rio.write_crs / .rio.crs)
+    if "grid_mapping" in da.attrs:
+        del da.attrs["grid_mapping"]
+
+
+    gt = da['spatial_ref'].attrs.get("GeoTransform")
+    if gt is None:
+        raise ValueError(f"No 'GeoTransform' attribute found in spatial_ref")
+
+    # Convert tuple/list/ndarray to a space-separated string
+    if isinstance(gt, (tuple, list, np.ndarray)):
+        da['spatial_ref'].attrs["GeoTransform"] = " ".join(map(str, gt))
+    elif isinstance(gt, str):
+        pass  # already OK
+    else:
+        raise TypeError(f"'GeoTransform' must be str/tuple/list/ndarray, got {type(gt)}")
+
+    # Validate: must parse to 6 values per GDAL geotransform definition
+    arr = np.fromstring(da['spatial_ref'].attrs["GeoTransform"], sep=" ")
+    if arr.size != 6:
+        raise ValueError(f"'GeoTransform' must have six values, got {arr.size}.")
+
+    # Set _FillValue from null_value if present
+    if "null_value" in da.attrs and "_FillValue" not in da.attrs:
+        if "null_value" != "not_defined":
+            da.attrs["_FillValue"] = da.attrs["null_value"]
+
+    # If variable has slice_dim, export per slice
+    if slice_dim is not None and slice_dim in da.dims:
+        for s in da[slice_dim].values:
+            da_sel = da.sel({slice_dim: s})
+            if out_dir is not None:
+                out_path = out_dir / f"{var_name}_{s}.tif"
+            else:
+                out_path = f"{var_name}_{s}.tif"
+            da_sel.rio.to_raster(str(out_path))
+    else:
+        if out_dir is not None:
+            out_path = out_dir / f"{var_name}.tif"
+        else:
+            out_path = f"{var_name}.tif"
+        print(out_path)
+        da.rio.to_raster(str(out_path))
+
+
