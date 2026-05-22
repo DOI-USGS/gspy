@@ -241,7 +241,7 @@ class DataArray:
         """
 
         nv = kwargs.get('null_value', 'not_defined')
-
+        
         if isinstance(nv, str):
             values = asarray(values, dtype=kwargs.get('dtype', "float64"))
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
