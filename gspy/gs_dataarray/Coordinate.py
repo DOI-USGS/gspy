@@ -1,4 +1,4 @@
-from numpy import arange
+import numpy as np
 from .DataArray import DataArray
 from ..metadata.Metadata import Metadata
 
@@ -75,11 +75,17 @@ class Coordinate(DataArray):
         """
         values = kwargs.pop('values', kwargs.pop('centers', None))
 
+        bounds = kwargs.pop('bounds', None)
+
         if values is None:
-            # 'origin', 'increment',
-            assert all([x in kwargs for x in ['length']]), ValueError(f"Explicit dimension definition {name} must have at least length, optionally origin and increment")
-            x0, dx, nx = kwargs.pop('origin', 0), kwargs.pop('increment', 1), kwargs.pop('length')
-            values = (arange(nx) * dx) + x0
+
+            if bounds is None:
+                assert all([x in kwargs for x in ['length']]), ValueError(f"Explicit dimension definition {name} must have at least length, optionally origin and increment")
+                x0, dx, nx = kwargs.pop('origin', 0), kwargs.pop('increment', 1), kwargs.pop('length')
+                values = (np.arange(nx) * dx) + x0
+
+            else:
+                values = 0.5 * np.sum(bounds, axis=0)
 
         kwargs['values'] = values
 
@@ -187,5 +193,7 @@ class Coordinate(DataArray):
                 kwargs['axis'] = name.upper()
             if name == "z":
                 assert all([x in kwargs for x in ["positive", "datum"]]), ValueError("z coordinate definition requires entries positive: up or down, and datum: ground surface ")
+                assert kwargs['positive'] in ['up', 'down']
+                assert kwargs['datum'] in ['ground surface', 'ellipsoid']
             if name == "t":
                 assert "datum" in kwargs, ValueError("time coordinate definition requires datum entry e.g. datum: Jan-01-1900")

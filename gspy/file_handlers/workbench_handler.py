@@ -43,6 +43,10 @@ class workbench_handler(xyz_handler):
                 line = file.readline()
                 if 'Gates for channel' in line:
                     splt = line.split(':')
+                    # key = splt[0].removeprefix('/').strip().replace(" ", "_")
+                    # metadata[key] = np.float64(splt[1].split())
+                    # print(metadata[key].size)
+
                     # metadata[f"channel {int(splt[0][-2])}"] = np.float64(splt[1][1:].split())
                 if 'DUMMY' in line:
                     line = file.readline()
@@ -77,8 +81,6 @@ class workbench_handler(xyz_handler):
         #     print(f"There are {n_duplicate:.1%} lines with duplicate date-time")
 
         dfu = df[base_columns]
-
-        print(mapping)
 
         df_dict = {}
         for key, value in mapping.items():
@@ -125,15 +127,15 @@ class workbench_model_handler(xyz_handler):
     @classmethod
     def read(cls, filename, metadata=None, **kwargs):
 
-        assert 'system' in kwargs, ValueError("Need to pass a system through when reading workbench data")
+        assert 'system' in kwargs, ValueError(f"Need to pass a system through when reading workbench data {filename}")
 
         self = cls()
 
         self.filename = filename
 
-        self.__read(metadata, **kwargs)
+        dimensions = self.__read(metadata, **kwargs)
 
-        return self
+        return self, dimensions
 
     def __read(self, metadata=None, **kwargs):
         # self.metadata, n_header = self.__parse_metadata(self.filename)
@@ -141,13 +143,16 @@ class workbench_model_handler(xyz_handler):
 
         system = kwargs['system'].gs.get_system_with_method('electromagnetic')
 
-        print(system)
-
         mapping = {i+1:c_label for i, c_label in enumerate(system.gs.component_labels)}
 
-        self._df = self.read_data(self.filename, mapping=mapping)
+        self._df, dimensions = self.read_data(self.filename, mapping=mapping)
 
         self.combine_metadata(metadata)
+
+        return dimensions
+
+    def __parse_metadata(self, filename):
+        pass
 
     def read_data(self, filename, **kwargs):
 
@@ -155,19 +160,25 @@ class workbench_model_handler(xyz_handler):
 
         ftypes = ['inv','dat','syn']
 
+        gate_times = None
         for ft in ftypes: # read in syn/dat/inv files and parse header row and gate times
             file = f"{filename[:-8]}_{ft}.xyz"
             with open(file, 'r') as f:
                 # gate_row = None
-                for i, line in enumerate(f):
+                i = 0
+                while (line := f.readline()):
                     # if (ft == 'inv') & ('GATE TIMES' in line):
                     #     gate_row = i + 1
-                    # if gate_row is not None:
-                    #     if i == gate_row:
-                    #         gates = np.float64(line.split()[1:])
+                    if 'GATE TIMES' in line:
+                        nl = f.readline()
+                        i += 1
+                        gate_times = np.float64(nl.removeprefix('/').split())
+
                     if 'LINE_NO' in line:
                         header_row = i
                         break
+                    i += 1
+            assert gate_times is not None, ValueError("Could not read gate_times from workbench model files.")
 
             # put data into dataframe
             df = read_csv(file, header=header_row, sep=r"(?<!/)\s+", engine='python')
@@ -190,6 +201,34 @@ class workbench_model_handler(xyz_handler):
                     colset2 = xprod.columns[~xprod.any()]
 
                     single_moment = np.array_equal(colset1, colset2)
+
+                    col_indices0 = np.asarray([np.int32(x.strip().split('_')[1]) for x in colset1], dtype=np.int32)
+                    col_indices1 = np.asarray([np.int32(x.strip().split('_')[1]) for x in colset2], dtype=np.int32)
+
+                    dimensions = {}
+                    if single_moment:
+                        dimensions["gate_times"] = {"standard_name": "lm_gate_times",
+                                                          "long_name": "calibrated low moment gate times",
+                                                          "units": "seconds",
+                                                          "null_value": "not_defined",
+                                                          "centers": gate_times}
+                        print('Detected gate_time metadata from the workbench files')
+                        pprint(dimensions)
+                    else:
+                        dimensions["lm_gate_times"] = {"standard_name": "lm_gate_times",
+                                                          "long_name": "calibrated low moment gate times",
+                                                          "units": "seconds",
+                                                          "null_value": "not_defined",
+                                                          "centers": gate_times[col_indices0-1]}
+                        dimensions["hm_gate_times"] = {"standard_name": "hm_gate_times",
+                                                          "long_name": "calibrated high moment gate times",
+                                                          "units": "seconds",
+                                                          "null_value": "not_defined",
+                                                          "centers": gate_times[col_indices1-1]}
+                        print('Detected gate_time metadata from the workbench files')
+                        pprint(dimensions)
+                    file_metadata = {'dimensions':dimensions}
+
 
                 # iterate over mapping keys
                 for segment, component in mapping.items():
@@ -229,4 +268,4 @@ class workbench_model_handler(xyz_handler):
                             df_combined = df_combined.merge(component_std[['RECORD',col.replace('DATA','DATASTD')]], how='left', on='RECORD')
                             df_combined = df_combined.rename(columns={col.replace('DATA','DATASTD'): datcol.replace('data','datastd')})
 
-        return df_combined
+        return df_combined, file_metadata

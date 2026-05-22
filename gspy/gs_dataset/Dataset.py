@@ -17,7 +17,6 @@ from xarray import DataArray as xr_DataArray
 from xarray import Dataset as xr_Dataset
 from xarray import register_dataset_accessor
 
-
 @register_dataset_accessor('gs')
 class Dataset:
     """Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.
@@ -29,9 +28,22 @@ class Dataset:
     out : xarray.Dataset
 
     """
+    required_metadata = ('type',
+                     'structure',
+                     'mode',
+                     'method',
+                     'instrument')
 
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
+
+    @property
+    def attrs(self):
+        return self._obj.attrs
+
+    @attrs.setter
+    def attrs(self, values:dict):
+        self._obj.attrs = self._obj.attrs | values
 
     @property
     def is_projected(self):
@@ -181,7 +193,7 @@ class Dataset:
         .Coordinate.Coordinate.from_dict : for pertinent Coordinate keywords and metadata
 
         """
-        bounding_dict = dict(bounds = kwargs.pop('bounds', None))
+        bounding_dict = dict(bounds = kwargs.get('bounds', None))
         kwargs['is_projected'] = kwargs.pop('is_projected', self.is_projected)
         name = name.lower()
 
@@ -575,13 +587,6 @@ class Dataset:
 
         return self._obj
 
-    def update_attrs(self, key='', **kwargs):
-        """Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.
-        """
-        _ = kwargs.pop("directory", None)
-        md = Metadata(kwargs).flatten()
-        self._obj.attrs.update(md)
-
     def to_netcdf(self, *args, **kwargs):
         """Write the survey to a netcdf file
 
@@ -690,7 +695,6 @@ class Dataset:
         ...Survey.Spatial_ref : for more details of creating a Spatial_ref
 
         """
-
         required = ("title", "institution", "source", "history", "references")
         if isinstance(kwargs, xr_Dataset):
             assert all([x in kwargs.attrs for x in required]), ValueError(f"Dataset.attrs must contain at least {required}")
@@ -702,9 +706,9 @@ class Dataset:
             assert "spatial_ref" in kwargs, ValueError("Survey metadata must contain entry 'spatial_ref")
             assert all([x in kwargs["dataset_attrs"] for x in required]), ValueError(f"dataset_attrs must contain at least {required}")
 
-            ds = cls(xr_Dataset(attrs = {}))
+            ds = cls(xr_Dataset(attrs = {"type" : "survey"}))
 
-            ds.update_attrs(**kwargs["dataset_attrs"])
+            ds.attrs = kwargs["dataset_attrs"]
 
             for key in kwargs:
                 if key not in ('spatial_ref', 'dataset_attrs', 'directory'):
