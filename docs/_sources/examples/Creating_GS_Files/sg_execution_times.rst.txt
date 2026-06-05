@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:07.827** total execution time for 8 files **from examples/Creating_GS_Files**:
+**00:00.489** total execution time for 8 files **from examples/Creating_GS_Files**:
 
 .. container::
 
@@ -32,27 +32,27 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``plot_csv_skytem.py``)
-     - 00:01.588
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``plot_xyz_workbench_to_netcdf.py``)
+     - 00:00.489
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``plot_aseg_tempest.py``)
-     - 00:01.571
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
-     - 00:01.414
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``plot_tifs.py``)
-     - 00:00.885
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``plot_help_I_have_no_variable_metadata.py``)
-     - 00:00.698
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``plot_xyz_workbench_to_netcdf.py``)
-     - 00:00.649
+     - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``plot_csv_magnetics.py``)
-     - 00:00.603
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``plot_csv_skytem.py``)
+     - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py` (``plot_dat_loupe.py``)
-     - 00:00.419
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``plot_help_I_have_no_variable_metadata.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``plot_tifs.py``)
+     - 00:00.000
      - 0.0

@@ -19,7 +19,7 @@ from pprint import pprint
 
 #%%
 # Convert the magnetic raster data to NetCDF
-# +++++++++++++++++++++++++++++++++++++++
+# ++++++++++++++++++++++++++++++++++++++++++
 
 #%%
 # Initialize the Survey

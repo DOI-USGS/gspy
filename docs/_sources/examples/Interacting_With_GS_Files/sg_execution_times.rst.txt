@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.518** total execution time for 2 files **from examples/Interacting_With_GS_Files**:
+**00:00.909** total execution time for 2 files **from examples/Interacting_With_GS_Files**:
 
 .. container::
 
@@ -32,9 +32,9 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``plot_coordinate_reference_systems.py``)
-     - 00:00.296
-     - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``plot_xarray_methods.py``)
-     - 00:00.222
+     - 00:00.640
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``plot_coordinate_reference_systems.py``)
+     - 00:00.269
      - 0.0

@@ -127,13 +127,13 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
     │                             layers_minus_1: 39, lm_gate_times: 21,
     │                             hm_gate_times: 30)
     │   Coordinates:
-    │       spatial_ref          float64 8B 0.0
     │     * index                (index) int32 4kB 0 1 2 3 4 5 ... 921 922 923 924 925
     │     * layer_depth          (layer_depth) float64 320B 0.25 0.7788 ... 284.3 375.0
     │     * nv                   (nv) int64 16B 0 1
     │     * layers_minus_1       (layers_minus_1) int64 312B 0 1 2 3 4 ... 35 36 37 38
     │     * lm_gate_times        (lm_gate_times) float64 168B 1.273e-05 ... 0.001394
     │     * hm_gate_times        (hm_gate_times) float64 240B 7.292e-05 ... 0.01044
+    │       spatial_ref          float64 8B 0.0
     │       x                    (index) float64 7kB 4.614e+05 4.614e+05 ... 4.8e+05
     │       y                    (index) float64 7kB 4.333e+06 4.333e+06 ... 4.359e+06
     │       z                    (index) float64 7kB 6.4 5.8 5.2 4.7 ... 0.4 0.4 0.4 0.3
@@ -210,7 +210,7 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.649 seconds)
+   **Total running time of the script:** (0 minutes 0.489 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py:

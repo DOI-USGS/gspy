@@ -6,7 +6,7 @@ Generate Metadata Templates
 
 This example shows how GSPy can help when you are just getting started with no metadata files at all, only partially complete metadata files, or large data files and need to do the tedious task of filling out the variable metadata.
 
-GSPy provides a ``metadata_template`` function to generate a template YAML file either for ``Survey`` for ``Dataset`` metadata. These templates contain placeholder metadata dictionaries with default values of "not_defined" to help users get started filling in their survey or data variable metadata. Below are multiple example scenarios demonstrating how to generate the desired metadata templates. 
+GSPy provides a ``metadata_template`` function to generate a template YAML file either for ``Survey`` for ``Dataset`` metadata. These templates contain placeholder metadata dictionaries with default values of "not_defined" to help users get started filling in their survey or data variable metadata. Below are multiple example scenarios demonstrating how to generate the desired metadata templates.
 
 
 .. figure:: /_static/variable_metadata_template_snippet.png
@@ -54,8 +54,8 @@ template.dump("template_md_survey.yml")
 #%%
 # Zero existing Dataset metadata file, start with making an empty Dataset metadata template
 
-# Pass the data file (in this case a CSV) to make the template variable-specific. 
-# Each column in the CSV file becomes a variable by default. 
+# Pass the data file (in this case a CSV) to make the template variable-specific.
+# Each column in the CSV file becomes a variable by default.
 data = join(data_path, 'data//Resolve.csv')
 template = Dataset.metadata_template(data)
 template.dump("template_md_resolve_empty.yml")
@@ -66,7 +66,7 @@ template.dump("template_md_resolve_empty.yml")
 # Here we have a CSV data file and a partial metadata file (missing the variable attributes)
 metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
-# Generate the template for this CSV dataset by combining the existing 
+# Generate the template for this CSV dataset by combining the existing
 # partial file with an empty template based on the dataset's variables
 template = Dataset.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")

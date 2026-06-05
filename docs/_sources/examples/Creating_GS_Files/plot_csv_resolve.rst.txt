@@ -116,7 +116,7 @@ Point to data CSV file
 
 Point to MULTIPLE metadata files (YAML & CSV)
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-63
+.. GENERATED FROM PYTHON SOURCE LINES 49-62
 
 .. code-block:: Python
 
@@ -128,12 +128,10 @@ Point to MULTIPLE metadata files (YAML & CSV)
     var_meta = join(data_path, 'data//Resolve_DataDictionary_md.csv')
 
     # merge the two metadata and pass it all through for the raw AEM data
-    md = Metadata.merge(Metadata.read(d_supp), Metadata.read(var_meta))
+    md = Metadata.merge(Metadata.read(d_supp), Metadata.read(var_meta, usgs=True))
 
-    # Add the raw AEM data 
-    rd = data_container.gs.add(key='raw_data', data_filename=d_data, 
-                                          metadata_file=md)
-
+    # Add the raw AEM data
+    rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=md)
 
 
 
@@ -141,16 +139,17 @@ Point to MULTIPLE metadata files (YAML & CSV)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-66
+
+.. GENERATED FROM PYTHON SOURCE LINES 63-65
 
 Create a 'models' branch and attach data leaves
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 68-69
+.. GENERATED FROM PYTHON SOURCE LINES 67-68
 
 Import inverted AEM models from CSV-format.
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-71
+.. GENERATED FROM PYTHON SOURCE LINES 68-70
 
 .. code-block:: Python
 
@@ -163,11 +162,11 @@ Import inverted AEM models from CSV-format.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-73
+.. GENERATED FROM PYTHON SOURCE LINES 71-72
 
 Define input model file and associated metadata file
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-76
+.. GENERATED FROM PYTHON SOURCE LINES 72-75
 
 .. code-block:: Python
 
@@ -181,11 +180,11 @@ Define input model file and associated metadata file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-78
+.. GENERATED FROM PYTHON SOURCE LINES 76-77
 
 Add the inverted AEM models as a tabular dataset
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-80
+.. GENERATED FROM PYTHON SOURCE LINES 77-79
 
 .. code-block:: Python
 
@@ -198,16 +197,16 @@ Add the inverted AEM models as a tabular dataset
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-83
+.. GENERATED FROM PYTHON SOURCE LINES 80-82
 
 Inspect the two branches
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
+.. GENERATED FROM PYTHON SOURCE LINES 84-85
 
 Data Branch
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-88
+.. GENERATED FROM PYTHON SOURCE LINES 85-87
 
 .. code-block:: Python
 
@@ -233,15 +232,15 @@ Data Branch
         │   Dimensions:           (index: 2334, layer_depth: 31, nv: 2, spec_sample: 256,
         │                          channel: 2)
         │   Coordinates:
-        │       spatial_ref       float64 8B 0.0
         │     * index             (index) int32 9kB 0 1 2 3 4 5 ... 2329 2330 2331 2332 2333
         │     * layer_depth       (layer_depth) float64 248B 2.5 7.5 12.5 ... 147.5 152.5
         │     * nv                (nv) int64 16B 0 1
+        │     * spec_sample       (spec_sample) int64 2kB 0 1 2 3 4 ... 251 252 253 254 255
+        │     * channel           (channel) <U10 80B 'in-phase' 'quadrature'
+        │       spatial_ref       float64 8B 0.0
         │       x                 (index) float64 19kB 5.351e+05 5.341e+05 ... 5.315e+05
         │       y                 (index) float64 19kB 1.205e+06 1.205e+06 ... 1.205e+06
         │       z                 (index) float64 19kB 42.82 43.96 42.74 ... 42.73 43.3
-        │     * spec_sample       (spec_sample) int64 2kB 0 1 2 3 4 ... 251 252 253 254 255
-        │     * channel           (channel) <U10 80B 'in-phase' 'quadrature'
         │   Data variables: (12/88)
         │       layer_depth_bnds  (layer_depth, nv) float64 496B 0.0 5.0 5.0 ... 150.0 155.0
         │       line              (index) int64 19kB 10010 10010 10010 ... 19020 19020 19020
@@ -268,10 +267,10 @@ Data Branch
         │       Dimensions:                   (n_transmitter: 6, n_receiver: 6, n_couplet: 6,
         │                                      dim_0: 1, frequency: 6)
         │       Coordinates:
-        │         * frequency                 (frequency) int64 48B 400 1800 ... 40000 140000
         │         * n_transmitter             (n_transmitter) int64 48B 0 1 2 3 4 5
         │         * n_receiver                (n_receiver) int64 48B 0 1 2 3 4 5
         │         * n_couplet                 (n_couplet) int64 48B 0 1 2 3 4 5
+        │         * frequency                 (frequency) int64 48B 400 1800 ... 40000 140000
         │       Dimensions without coordinates: dim_0
         │       Data variables: (12/17)
         │           transmitter_label         (n_transmitter) <U7 168B '400Z' ... '140000Z'
@@ -355,11 +354,11 @@ Data Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-90
+.. GENERATED FROM PYTHON SOURCE LINES 88-89
 
 Models Branch
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-92
+.. GENERATED FROM PYTHON SOURCE LINES 89-91
 
 .. code-block:: Python
 
@@ -384,10 +383,10 @@ Models Branch
     └── Group: /survey/models/model
         │   Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
         │   Coordinates:
-        │       spatial_ref       float64 8B 0.0
         │     * index             (index) int32 40kB 0 1 2 3 4 ... 9994 9995 9996 9997 9998
         │     * layer_depth       (layer_depth) float64 240B 0.5 1.55 2.7 ... 119.7 132.5
         │     * nv                (nv) int64 16B 0 1
+        │       spatial_ref       float64 8B 0.0
         │       x                 (index) float64 80kB 5.36e+05 5.36e+05 ... 5.297e+05
         │       y                 (index) float64 80kB 1.205e+06 1.205e+06 ... 1.197e+06
         │       z                 (index) float64 80kB 41.1 41.1 41.1 ... 41.7 41.7 41.5
@@ -401,8 +400,8 @@ Models Branch
         │       ...                ...
         │       resdata           (index) float64 80kB 0.422 0.886 0.813 ... 0.396 0.355
         │       restotal          (index) float64 80kB 0.293 0.293 0.293 ... 0.293 0.293
-        │       RHO_I             (index, layer_depth) float64 2MB 9.74 14.9 ... 15.9 16.6
-        │       RHO_I_STD         (index, layer_depth) float64 2MB 3.14 2.46 ... 10.8 99.0
+        │       rho_i             (index, layer_depth) float64 2MB 9.74 14.9 ... 15.9 16.6
+        │       rho_i_std         (index, layer_depth) float64 2MB 3.14 2.46 ... 10.8 99.0
         │       doi_conservative  (index) float64 80kB 27.8 65.0 65.0 ... 70.1 70.4 70.6
         │       doi_standard      (index) float64 80kB 66.2 78.2 78.2 ... 87.6 87.9 88.0
         │   Attributes:
@@ -428,12 +427,12 @@ Models Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-95
+.. GENERATED FROM PYTHON SOURCE LINES 92-94
 
 Save to NetCDF file
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-99
+.. GENERATED FROM PYTHON SOURCE LINES 94-98
 
 .. code-block:: Python
 
@@ -448,11 +447,11 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-101
+.. GENERATED FROM PYTHON SOURCE LINES 99-100
 
 Reading back in the GS NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-103
+.. GENERATED FROM PYTHON SOURCE LINES 100-102
 
 .. code-block:: Python
 
@@ -465,12 +464,12 @@ Reading back in the GS NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-106
+.. GENERATED FROM PYTHON SOURCE LINES 103-105
 
 Plotting
 ^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-111
+.. GENERATED FROM PYTHON SOURCE LINES 105-110
 
 .. code-block:: Python
 
@@ -491,11 +490,11 @@ Plotting
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-113
+.. GENERATED FROM PYTHON SOURCE LINES 111-112
 
 Subsetting by line number and plot by distance along line
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-118
+.. GENERATED FROM PYTHON SOURCE LINES 112-117
 
 .. code-block:: Python
 
@@ -516,11 +515,11 @@ Subsetting by line number and plot by distance along line
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 119-120
+.. GENERATED FROM PYTHON SOURCE LINES 118-119
 
 Make a scatter plot of a specific model variable, using GSPy's plotter
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-123
+.. GENERATED FROM PYTHON SOURCE LINES 119-122
 
 .. code-block:: Python
 
@@ -542,7 +541,7 @@ Make a scatter plot of a specific model variable, using GSPy's plotter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.414 seconds)
+   **Total running time of the script:** (0 minutes 1.228 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_resolve.py:

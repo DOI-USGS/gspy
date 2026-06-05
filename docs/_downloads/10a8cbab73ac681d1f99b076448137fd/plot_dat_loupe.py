@@ -1,10 +1,10 @@
 """
 Loupe TEM
 ---------
-This example demonstrates conversion of data from Loupe Geophysics' time domain electromagnetic (TEM) backpack system. 
+This example demonstrates conversion of data from Loupe Geophysics' time domain electromagnetic (TEM) backpack system.
 
 Dataset Reference:
-Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release. 
+Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release.
 """
 #%%
 import matplotlib.pyplot as plt
@@ -32,11 +32,11 @@ survey = gspy.Survey.from_dict(metadata)
 data_container = survey.gs.add_container('data')
 
 # Attach raw data with the Loupe EM system
-# descriptive variable names ("long name") are read from DESC file when available, otherwise 
+# descriptive variable names ("long name") are read from DESC file when available, otherwise
 # variable metadata comes from the YAML
 data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//Loupe_data_metadata.yml')
-data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata, file_type='loupe')
+raw_data = data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata, file_type='loupe')
 
 # %%
 # Save to NetCDF file

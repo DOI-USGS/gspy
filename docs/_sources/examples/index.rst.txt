@@ -115,7 +115,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Dataset Reference: Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Dataset Reference: Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release.">
 
 .. only:: html
 
@@ -196,7 +196,7 @@ Interacting With GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into Xarray DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into Xarray DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type.">
 
 .. only:: html
 
