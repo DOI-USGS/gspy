@@ -143,7 +143,7 @@ class workbench_model_handler(xyz_handler):
 
         system = kwargs['system'].gs.get_system_with_method('electromagnetic')
 
-        mapping = {i+1:c_label for i, c_label in enumerate(system.gs.component_labels)}
+        mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
 
         self._df, dimensions = self.read_data(self.filename, mapping=mapping)
 
@@ -231,41 +231,41 @@ class workbench_model_handler(xyz_handler):
 
 
                 # iterate over mapping keys
-                for segment, component in mapping.items():
+                for segment, couplet in mapping.items():
                     if ft == 'dat':
-                        prefix_dat = component + '_data_'
-                        prefix_std = component + '_datastd_'
+                        prefix_dat = couplet + '_data_'
+                        prefix_std = couplet + '_datastd_'
                     elif ft == 'syn':
-                        prefix_dat = component + '_syn_'
+                        prefix_dat = couplet + '_syn_'
 
                     # grab correct columns to merge
                     if single_moment:
-                        component_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
                         if ft == 'dat':
                             colset1std = colset1.str.replace('DATA','DATASTD')
-                            component_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
                         colset=colset1
                     elif (segment == 1) | (segment == 3): #dual moment convention LM
-                        component_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
                         if ft == 'dat':
                             colset1std = colset1.str.replace('DATA','DATASTD')
-                            component_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
                         colset=colset1
                     elif (segment == 2) | (segment == 4): #dual moment convention HM
-                        component_data = df[df['SEGMENTS']==segment][colset2.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset2.insert(0,Index(['RECORD']))]
                         if ft == 'dat':
                             colset2std = colset2.str.replace('DATA','DATASTD')
-                            component_std = df[df['SEGMENTS']==segment][colset2std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset2std.insert(0,Index(['RECORD']))]
                         colset=colset2
 
                     # merge into combined dataframe
                     for i, col in enumerate(colset):
                         datcol = f"{prefix_dat}{i+1}"
                         stdcol = f"{prefix_std}{i+1}"
-                        df_combined = df_combined.merge(component_data[['RECORD',col]], how='left', on='RECORD')
+                        df_combined = df_combined.merge(couplet_data[['RECORD',col]], how='left', on='RECORD')
                         df_combined = df_combined.rename(columns={col: datcol})
                         if ft == 'dat':
-                            df_combined = df_combined.merge(component_std[['RECORD',col.replace('DATA','DATASTD')]], how='left', on='RECORD')
+                            df_combined = df_combined.merge(couplet_std[['RECORD',col.replace('DATA','DATASTD')]], how='left', on='RECORD')
                             df_combined = df_combined.rename(columns={col.replace('DATA','DATASTD'): datcol.replace('data','datastd')})
 
         return df_combined, file_metadata

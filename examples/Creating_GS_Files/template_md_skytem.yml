@@ -2,17 +2,32 @@ dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
     type: data
-    method: electromagnetic
-    submethod: time domain
+    method: electromagnetic, time domain
+    mode: airborne
     instrument: skytem
     structure: tabular
-    property: 
-    mode: airborne
+    property: ?? is there a physical or geophysical property represented? ?
 coordinates:
     x: E_Nad83
     y: N_Nad83
     z: DEM
     t: DateTime
+dimensions:
+    my_dimension_variable_name:
+        standard_name: my_dimension_variable_name
+        long_name: more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.
+        units: units of the dimension
+        null_value: not_defined
+        length: 10
+        increment: 5.0
+        origin: 2.5
+    my_other_dimension_variable_name:
+        standard_name: my_other_dimension_variable_name
+        long_name: A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.
+        units: units of the dimension
+        null_value: not_defined
+        bounds: [[0, 2], [2, 6], [4, 10], [8, 16]]
+        centers: [1, 4, 7, 12]
 variables:
     Alt:
         standard_name: not_defined
@@ -49,9 +64,8 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: z
-        positive: ??
-        datum: ??
+        positive: ?? up or down ??
+        datum: ?? what is the datum ??
     Date:
         standard_name: not_defined
         long_name: not_defined
@@ -62,8 +76,7 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: t
-        datum: ??
+        datum: ?? what is the datum ??
     Diurnal:
         standard_name: not_defined
         long_name: not_defined
@@ -74,7 +87,6 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: x
     E_WGS84:
         standard_name: not_defined
         long_name: not_defined
@@ -154,7 +166,6 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: y
     N_WGS84:
         standard_name: not_defined
         long_name: not_defined

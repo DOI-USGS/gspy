@@ -1,17 +1,33 @@
 dataset_attrs:
-    content: raw data
-    comment: This dataset includes minimally processed (raw) AEM data
-    type: data
-    method: electromagnetic
-    submethod: ??
+    content: raw loupe EM data
+    comment: n/a
+    type: data,
+    method: electromagnetic, time domain
+    mode: ground
     instrument: loupe
     structure: tabular
-    property: ??
+    property: ?? is there a physical or geophysical property represented? ?
 coordinates:
     x: EAST
     y: NORTH
     z: HEIGHT
-    t: ??
+    t: ?? name of the t-axis (temporal) coordinate variable ??
+dimensions:
+    my_dimension_variable_name:
+        standard_name: my_dimension_variable_name
+        long_name: more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.
+        units: units of the dimension
+        null_value: not_defined
+        length: 10
+        increment: 5.0
+        origin: 2.5
+    my_other_dimension_variable_name:
+        standard_name: my_other_dimension_variable_name
+        long_name: A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.
+        units: units of the dimension
+        null_value: not_defined
+        bounds: [[0, 2], [2, 6], [4, 10], [8, 16]]
+        centers: [1, 4, 7, 12]
 variables:
     ACQ:
         standard_name: not_defined
@@ -33,7 +49,6 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: x
     FID:
         standard_name: not_defined
         long_name: not_defined
@@ -64,15 +79,13 @@ variables:
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: z
-        positive: ??
-        datum: ??
+        positive: ?? up or down ??
+        datum: ?? what is the datum ??
     NORTH:
         standard_name: not_defined
         long_name: not_defined
         null_value: not_defined
         units: not_defined
-        axis: y
     RX_EAST:
         standard_name: not_defined
         long_name: not_defined
@@ -250,8 +263,7 @@ directory:
     loupe_system:
         type: system
         mode: ground
-        method: electromagnetic
-        submethod: time domain
+        method: electromagnetic, time domain
         instrument: loupe
         data_normalized: True
         reference_frame: right-handed positive down
@@ -311,7 +323,7 @@ directory:
                 delay_time: [4.58e-06, 4.58e-06, 4.58e-06]
                 height: [1.75, 1.75, 1.75]
                 gain: [10, 10, 10]
-            component:
+            couplet:
                 transmitters: ['z', 'z', 'z']
                 receivers: ['x', 'y', 'z']
                 sample_rate: [1.0, 1.0, 1.0]

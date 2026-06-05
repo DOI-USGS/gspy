@@ -1,0 +1,609 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
+
+coordinates:
+    x: x_WGS84_Albers
+    y: y_WGS84_Albers
+    z: DTM
+
+dimensions:
+    channel:
+        centers: ['in-phase','quadrature']
+        standard_name: frequency_domain_complex_data
+        long_name: complex frequency domain data channel
+        units: not_defined
+        null_value: not_defined
+        discrete: True
+    frequency:
+        standard_name: frequency
+        long_name: nominal measurement frequency
+        units: Hz
+        null_value: not_defined
+        centers: [400, 1800, 3300, 8200, 40000, 140000]
+        discrete: True
+    spec_sample:
+        standard_name: spec_sample
+        long_name: radiometric sample
+        units: not_defined
+        null_value: not_defined
+        length: 256
+        increment: 1
+        origin: 0
+        discrete: True
+    layer_depth:
+        standard_name: layer_depth
+        long_name: layer depth below surface
+        units: meters
+        null_value: not_defined
+        length: 31
+        increment: 5.0
+        origin: 2.5
+        axis: Z
+        positive: down
+        datum: ground surface
+
+variables:
+    line:
+        standard_name: line
+        long_name: Line Number
+        units: '#'
+        null_value: not_defined
+    date:
+        standard_name: date
+        long_name: Date of the survey
+        units: YYYYMMDD
+        null_value: not_defined
+    utc_time:
+        standard_name: utc_time
+        long_name: Time, seconds after midnight UTC
+        units: Seconds (s)
+        null_value: -9999
+    flight:
+        standard_name: flight
+        long_name: Flight numer on which the data were collected
+        units: '#'
+        null_value: not_defined
+    fiducial:
+        standard_name: fiducial
+        long_name: Unique Fiducial Number
+        units: n/a
+        null_value: not_defined
+    temp_ext:
+        standard_name: temp_ext
+        long_name: External temperature
+        units: Degrees Celsius (C)
+        null_value: not_defined
+    kpa:
+        standard_name: kpa
+        long_name: External pressure
+        units: kiloPascals (kPa)
+        null_value: not_defined
+    x_WGS84_Albers:
+        standard_name: x_wgs84_albers
+        long_name: Easting in Albers Equal-Area Conic, World Geodetic Survey of 1984
+            (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    y_WGS84_Albers:
+        standard_name: y_wgs84_albers
+        long_name: Northing in Albers Equal-Area Conic, World Geodetic Survey of 1984
+            (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    x_WGS84_UTMZ15N:
+        standard_name: x_wgs84_utmz15n
+        long_name: Easting in Universal Transverse Mercator (UTM) Zone 15 North, World
+            Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    y_WGS84_UTMZ15N:
+        standard_name: y_wgs84_utmz15n
+        long_name: Northing in Universal Transverse Mercator (UTM) Zone 15 North,
+            World Geodetic Survey of 1984 (WGS84) of EM bird transmitter (Tx)
+        units: Meters (m)
+        null_value: not_defined
+    lat_tx:
+        standard_name: lat_tx
+        long_name: Latitude, WGS84, of EM bird transmitter (Tx)
+        units: Decimal Degrees
+        null_value: not_defined
+    lon_tx:
+        standard_name: lon_tx
+        long_name: Longitude, WGS84, of EM bird transmitter (Tx)
+        units: Decimal Degrees
+        null_value: not_defined
+    lat_heli:
+        standard_name: lat_heli
+        long_name: Latitude, WGS84, of helicopter
+        units: Decimal Degrees
+        null_value: not_defined
+    lon_heli:
+        standard_name: lon_heli
+        long_name: Longitude, WGS84, of helicopter
+        units: Decimal Degrees
+        null_value: not_defined
+    gpsz_tx:
+        standard_name: gpsz_tx
+        long_name: GPS elevation of EM bird transmitter (Tx), referenced to mean sea
+            level - Earth Gravitational Model (EGM96)
+        units: Meters (m)
+        null_value: not_defined
+    gpsz_heli:
+        standard_name: gpsz_heli
+        long_name: GPS elevation of helicopter, referenced to mean sea level - Earth
+            Gravitational Model (EGM96)
+        units: Meters (m)
+        null_value: not_defined
+    altlas_tx:
+        standard_name: altlas_tx
+        long_name: Laser altimeter height of the EM bird transmitter (Tx)
+        units: Meters (m)
+        null_value: not_defined
+    altrad_heli:
+        standard_name: altrad_heli
+        long_name: RADAR altimeter of helicopter
+        units: Meters (m)
+        null_value: not_defined
+    effective_height:
+        standard_name: effective_height
+        long_name: Height of helicopter at standard temperature and pressure
+        units: Meters (m)
+        null_value: not_defined
+    DTM:
+        standard_name: dtm
+        long_name: Digital terrain model (ground surface elevation, referenced to
+            mean sea level - Earth Gravitational Model (EGM96))
+        units: Meters (m)
+        null_value: not_defined
+        positive: up
+        datum: referenced to mean sea level - Earth Gravitational Model (EGM96)
+    bird_pitch:
+        standard_name: bird_pitch
+        long_name: EM bird transmitter (Tx) pitch
+        units: Degrees
+        null_value: not_defined
+    bird_roll:
+        standard_name: bird_roll
+        long_name: EM bird transmitter (Tx) roll
+        units: Degrees
+        null_value: not_defined
+    bird_yaw:
+        standard_name: bird_yaw
+        long_name: EM bird transmitter (Tx) yaw (heading)
+        units: Degrees
+        null_value: not_defined
+    diurnal:
+        standard_name: diurnal
+        long_name: Measured base station ground magnetic intensity
+        units: nanoteslas (nT)
+        null_value: -9999
+    diurnal_cor:
+        standard_name: diurnal_cor
+        long_name: Diurnal correction, base removed
+        units: nanoteslas (nT)
+        null_value: not_defined
+    mag_raw:
+        standard_name: mag_raw
+        long_name: Total magnetic field, de-spiked
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    mag_L:
+        standard_name: mag_l
+        long_name: Total magnetic field, lagged
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    mag_LD:
+        standard_name: mag_ld
+        long_name: Total magnetic field, lagged and diurnally corrected
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    IGRF:
+        standard_name: igrf
+        long_name: International Geomagnetic Reference Field
+        units: nanoteslas (nT)
+        null_value: not_defined
+    TMI:
+        standard_name: tmi
+        long_name: Total magnetic intensity
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    RMI:
+        standard_name: rmi
+        long_name: Final residual magnetic intensity
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    cpsp:
+        standard_name: cpsp
+        long_name: Co-planar spherics monitor
+        units: n/a
+        null_value: not_defined
+    cxsp:
+        standard_name: cxsp
+        long_name: Co-axial spherics monitor
+        units: n/a
+        null_value: not_defined
+    powerline:
+        standard_name: powerline
+        long_name: Co-planar power line monitor
+        units: n/a
+        null_value: not_defined
+        
+    400hz_filtered:
+        standard_name: 400hz_filtered
+        long_name: 400 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400_filt, cpq400_filt]
+        system_couplet: 400Z_400Z
+    
+    1800hz_filtered:
+        standard_name: 1800hz_filtered
+        long_name: 1800 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800_filt, cpq1800_filt]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_filtered:
+        standard_name: 3300hz_filtered
+        long_name: 3300 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300_filt, cxq3300_filt]
+        system_couplet: 3300X_3300X
+    
+    8200hz_filtered:
+        standard_name: 8200hz_filtered
+        long_name: 8200 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200_filt, cpq8200_filt]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_filtered:
+        standard_name: 40k_hz_filtered
+        long_name: 40k Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k_filt, cpq40k_filt]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_filtered:
+        standard_name: 140k_hz_filtered
+        long_name: 140k Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k_filt, cpq140k_filt]
+        system_couplet: 140000Z_140000Z
+
+    400hz_pgadj:
+        standard_name: 400hz_phase_gain_adj
+        long_name: 400 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400_phg, cpq400_phg]
+        system_couplet: 400Z_400Z
+    
+    1800hz_pgadj:
+        standard_name: 1800hz_phase_gain_adj
+        long_name: 1800 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800_phg, cpq1800_phg]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_pgadj:
+        standard_name: 3300hz_phase_gain_adj
+        long_name: 3300 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300_phg, cxq3300_phg]
+        system_couplet: 3300X_3300X
+    
+    8200hz_pgadj:
+        standard_name: 8200hz_phase_gain_adj
+        long_name: 8200 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200_phg, cpq8200_phg]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_pgadj:
+        standard_name: 40k_hz_phase_gain_adj
+        long_name: 40k Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k_phg, cpq40k_phg]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_pgadj:
+        standard_name: 140k_hz_phase_gain_adj
+        long_name: 140k Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k_phg, cpq140k_phg]
+        system_couplet: 140000Z_140000Z
+
+    400hz_final:
+        standard_name: 400hz_final
+        long_name: 400 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400, cpq400]
+        system_couplet: 400Z_400Z
+    
+    1800hz_final:
+        standard_name: 1800hz_final
+        long_name: 1800 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800, cpq1800]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_final:
+        standard_name: 3300hz_final
+        long_name: 3300 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300, cxq3300]
+        system_couplet: 3300X_3300X
+    
+    8200hz_final:
+        standard_name: 8200hz_final
+        long_name: 8200 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200, cpq8200]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_final:
+        standard_name: 40k_hz_final
+        long_name: 40k Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k, cpq40k]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_final:
+        standard_name: 140k_hz_final
+        long_name: 140k Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k, cpq140k]
+        system_couplet: 140000Z_140000Z
+    ddep140k:
+        standard_name: ddep140k
+        long_name: Differential depth 140,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep40k:
+        standard_name: ddep40k
+        long_name: Differential depth 40,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep8200:
+        standard_name: ddep8200
+        long_name: Differential depth 8,200 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep1800:
+        standard_name: ddep1800
+        long_name: Differential depth 1,800 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep400:
+        standard_name: ddep400
+        long_name: Differential depth 400 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep140k:
+        standard_name: dep140k
+        long_name: Apparent depth 140,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep40k:
+        standard_name: dep40k
+        long_name: Apparent depth 40,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep8200:
+        standard_name: dep8200
+        long_name: Apparent depth 8,200 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep1800:
+        standard_name: dep1800
+        long_name: Apparent depth 1,800 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep400:
+        standard_name: dep400
+        long_name: Apparent depth 400 MHz
+        units: Meters (m)
+        null_value: -9999
+    dres140k:
+        standard_name: dres140k
+        long_name: Differential resistivity 140,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres40k:
+        standard_name: dres40k
+        long_name: Differential resistivity 40,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres8200:
+        standard_name: dres8200
+        long_name: Differential resistivity 8,200 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres1800:
+        standard_name: dres1800
+        long_name: Differential resistivity 1,800 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres400:
+        standard_name: dres400
+        long_name: Differential resistivity 400 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres_150_by5m:
+        standard_name: dres_150by5m
+        long_name: Differental resistivity from surface to a depth of 150m by 5m intervals,
+            i represents each interval from 1 to 31
+        units: Ohm-meters (ohm-m)
+        null_value: -9999
+        dimensions: [index, layer_depth]
+    res140k:
+        standard_name: res140k
+        long_name: Apparent resistivity 140,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res40k:
+        standard_name: res40k
+        long_name: Apparent resistivity 40,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res8200:
+        standard_name: res8200
+        long_name: Apparent resistivity 8,200 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res1800:
+        standard_name: res1800
+        long_name: Apparent resistivity 1,800 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res400:
+        standard_name: res400
+        long_name: Apparent resistivity 400 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    cosmic:
+        standard_name: cosmic
+        long_name: Cosmic, uncorrected
+        units: n/a
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    doserate:
+        standard_name: doserate
+        long_name: Total gamma dose rate
+        units: nanoGray/hour (nGy/h)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    live_time:
+        standard_name: live_time
+        long_name: relative period of time spectrometer registers new pulses per sample
+            interval
+        units: Milliseconds (ms)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    spec256_down:
+        standard_name: spec256_down
+        long_name: Full downward-looking radiometric spectrum; i represents sample
+            1 to 256
+        units: Counts/second (cps)
+        null_value: -9999
+        dimensions: [index, spec_sample]
+        system_couplet: passive_gamma_spectrometer
+    spec256_up:
+        standard_name: spec256_up
+        long_name: Full upward-looking radiometric spectrum; i represents sample 1
+            to 256
+        units: Counts/second (cps)
+        null_value: -9999
+        dimensions: [index, spec_sample]
+        system_couplet: passive_gamma_spectrometer
+    tc_raw:
+        standard_name: tc_raw
+        long_name: Total radiometric count, uncorrrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    th_raw:
+        standard_name: th_raw
+        long_name: Thorium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    u_raw:
+        standard_name: u_raw
+        long_name: Uranium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    u_up_raw:
+        standard_name: u_up_raw
+        long_name: Upward-looking uranium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    k_raw:
+        standard_name: k_raw
+        long_name: Potassium concentration, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eth:
+        standard_name: eth
+        long_name: Equivalent thorium concentration
+        units: Parts per million (ppm)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu:
+        standard_name: eu
+        long_name: Equivalent uranium concentration
+        units: Parts per million (ppm)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    kconc:
+        standard_name: kconc
+        long_name: Potassium concentration
+        units: Percentage (%)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eth_kconc:
+        standard_name: eth_kconc
+        long_name: Equivalent thorium over potassium concentration
+        units: ppm/%
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu_eth:
+        standard_name: eu_eth
+        long_name: Equivalent uranium over equivalent thorium
+        units: ppm/ppm
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu_kconc:
+        standard_name: eu_kconc
+        long_name: Equivalent uranium over potassium concentration
+        units: ppm/%
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer

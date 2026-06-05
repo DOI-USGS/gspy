@@ -1,0 +1,88 @@
+
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
+    type: data
+    structure: tabular
+    mode: airborne
+    method: electromagnetic, time domain
+    instrument: skytem
+    property: ''
+
+coordinates:
+    x: E_Nad83
+    y: N_Nad83
+    z: DEM
+    t: DateTime
+
+dimensions:
+    layer_depth:
+        standard_name: layer_depth
+        long_name: layer depth below surface
+        units: meters
+        null_value: not_defined
+        length: 31
+        increment: 5.0
+        origin: 2.5
+        axis: Z
+        positive: down
+        datum: ground surface
+
+variables:
+    E_Nad83:
+        standard_name: easting_nad83
+        long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
+        units: meter
+        null_value: not_defined
+
+    N_Nad83:
+        standard_name: northing_nad83
+        long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
+        units: meter
+        null_value: not_defined
+
+    DateTime:
+        standard_name: time
+        long_name: Time, decimal days
+        units: day
+        null_value: not_defined
+        datum: January 1, 1900
+
+    DEM:
+        standard_name: dem
+        long_name: Digital elevation model
+        units: meter
+        null_value: not_defined
+        axis: Z
+        positive: up
+        datum: North American Vertical Datum of 1988 (NAVD88)
+
+    Fid:
+        standard_name: fiducial
+        long_name: Unique fiducial number
+        units: not_defined
+        null_value: not_defined
+
+    Flight:
+        standard_name: flight_number
+        long_name: Flight name, yyyymmdd.ff
+        units: not_defined
+        null_value: not_defined
+
+    RMF:
+        standard_name: residual_magnetic_field
+        long_name: Residual magnetic field, IGRF corrected based on 2015 model
+        units: nanoTesla
+        null_value: not_defined
+
+    Time:
+        standard_name: time_utc
+        long_name: Universal coordinated time (UTC), hh:mm:ss
+        units: not_defined
+        null_value: not_defined
+
+    TMI:
+        standard_name: total_magnetic_intensity
+        long_name: Diurnally corrected filtered total magnetic intensity
+        units: nanoTesla
+        null_value: not_defined

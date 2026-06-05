@@ -48,7 +48,7 @@ print('crs_wkt: '+survey.spatial_ref.attrs['crs_wkt'])
 ################################################################################
 # Then, each data variable should have an attribute ``grid_mapping`` that references
 # the ``spatial_ref`` coordinate variable
-pprint(survey['data']['raw_data']['dem'].attrs)
+pprint(survey['data']['raw_data']['z'].attrs)
 
 #%%
 # Making a new Spatial Ref

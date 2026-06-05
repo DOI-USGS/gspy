@@ -1,5 +1,5 @@
 ***************
-Installing GSpy
+Installing GSPy
 ***************
 
 pip install gspy

@@ -58,7 +58,7 @@ class csv_handler(file_handler):
         self.metadata = {}
         self.combine_metadata(metadata)
 
-        return self, None
+        return self, {}
 
     def to_file(self, xr_dataset, filename):
 

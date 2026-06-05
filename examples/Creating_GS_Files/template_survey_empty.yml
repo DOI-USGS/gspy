@@ -5,7 +5,8 @@ dataset_attrs:
     history: ??
     references: ??
     comment: ??
-    conventions: CF-1.8
+    conventions: GS 2.0
+    type: survey
 survey_information:
     contractor_project_number: ??
     contractor: ??

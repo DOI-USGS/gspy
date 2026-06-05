@@ -1,0 +1,91 @@
+variable_name,standard_name,long_name,units,null_value,dtype,raw_data_columns,dimensions,datum,positive,system_couplet
+line,,Line Number,#,,,,,,,
+date,,Date of the survey,YYYYMMDD,,,,,,,
+utc_time,,"Time, seconds after midnight UTC",Seconds (s),-9999,,,,,,
+flight,,Flight numer on which the data were collected,#,,,,,,,
+fiducial,,Unique Fiducial Number,n/a,,,,,,,
+temp_ext,,External temperature,Degrees Celsius (C),,,,,,,
+kpa,,External pressure,kiloPascals (kPa),,,,,,,
+x_WGS84_Albers,,"Easting in Albers Equal-Area Conic, World Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)",Meters (m),,,,,,,
+y_WGS84_Albers,,"Northing in Albers Equal-Area Conic, World Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)",Meters (m),,,,,,,
+x_WGS84_UTMZ15N,,"Easting in Universal Transverse Mercator (UTM) Zone 15 North, World Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)",Meters (m),,,,,,,
+y_WGS84_UTMZ15N,,"Northing in Universal Transverse Mercator (UTM) Zone 15 North, World Geodetic Survey of 1984 (WGS84) of EM bird transmitter (Tx)",Meters (m),,,,,,,
+lat_tx,,"Latitude, WGS84, of EM bird transmitter (Tx)",Decimal Degrees,,,,,,,
+lon_tx,,"Longitude, WGS84, of EM bird transmitter (Tx)",Decimal Degrees,,,,,,,
+lat_heli,,"Latitude, WGS84, of helicopter",Decimal Degrees,,,,,,,
+lon_heli,,"Longitude, WGS84, of helicopter",Decimal Degrees,,,,,,,
+gpsz_tx,,"GPS elevation of EM bird transmitter (Tx), referenced to mean sea level - Earth Gravitational Model (EGM96)",Meters (m),,,,,,,
+gpsz_heli,,"GPS elevation of helicopter, referenced to mean sea level - Earth Gravitational Model (EGM96)",Meters (m),,,,,,,
+altlas_tx,,Laser altimeter height of the EM bird transmitter (Tx),Meters (m),,,,,,,
+altrad_heli,,RADAR altimeter of helicopter,Meters (m),,,,,,,
+effective_height,,Height of helicopter at standard temperature and pressure,Meters (m),,,,,,,
+DTM,,"Digital terrain model (ground surface elevation, referenced to mean sea level - Earth Gravitational Model (EGM96))",Meters (m),,,,,referenced to mean sea level - Earth Gravitational Model (EGM96),up,
+bird_pitch,,EM bird transmitter (Tx) pitch,Degrees,,,,,,,
+bird_roll,,EM bird transmitter (Tx) roll,Degrees,,,,,,,
+bird_yaw,,EM bird transmitter (Tx) yaw (heading),Degrees,,,,,,,
+diurnal,,Measured base station ground magnetic intensity,nanoteslas (nT),-9999,,,,,,
+diurnal_cor,,"Diurnal correction, base removed",nanoteslas (nT),,,,,,,
+mag_raw,,"Total magnetic field, de-spiked",nanoteslas (nT),,,,,,,passive_scalar_magnetometer
+mag_L,,"Total magnetic field, lagged",nanoteslas (nT),,,,,,,passive_scalar_magnetometer
+mag_LD,,"Total magnetic field, lagged and diurnally corrected",nanoteslas (nT),,,,,,,passive_scalar_magnetometer
+IGRF,,International Geomagnetic Reference Field,nanoteslas (nT),,,,,,,
+TMI,,Total magnetic intensity,nanoteslas (nT),,,,,,,passive_scalar_magnetometer
+RMI,,Final residual magnetic intensity,nanoteslas (nT),,,,,,,passive_scalar_magnetometer
+cpsp,,Co-planar spherics monitor,n/a,,,,,,,
+cxsp,,Co-axial spherics monitor,n/a,,,,,,,
+powerline,,Co-planar power line monitor,n/a,,,,,,,
+400hz_filtered,,"400 Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cpi400_filt, cpq400_filt]","[index, channel]",,,400Z_400Z
+1800hz_filtered,,"1800 Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cpi1800_filt, cpq1800_filt]","[index, channel]",,,1800Z_1800Z
+3300hz_filtered,,"3300 Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cxi3300_filt, cxq3300_filt]","[index, channel]",,,3300X_3300X
+8200hz_filtered,,"8200 Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cpi8200_filt, cpq8200_filt]","[index, channel]",,,8200Z_8200Z
+40k_hz_filtered,,"40k Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cpi40k_filt, cpq40k_filt]","[index, channel]",,,40000Z_40000Z
+140k_hz_filtered,,"140k Hz EM frequency data, spherics rejected",parts per million (ppm),,,"[cpi140k_filt, cpq140k_filt]","[index, channel]",,,140000Z_140000Z
+400hz_pgadj,400hz_phase_gain_adj,"400 Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cpi400_phg, cpq400_phg]","[index, channel]",,,400Z_400Z
+1800hz_pgadj,1800hz_phase_gain_adj,"1800 Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cpi1800_phg, cpq1800_phg]","[index, channel]",,,1800Z_1800Z
+3300hz_pgadj,3300hz_phase_gain_adj,"3300 Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cxi3300_phg, cxq3300_phg]","[index, channel]",,,3300X_3300X
+8200hz_pgadj,8200hz_phase_gain_adj,"8200 Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cpi8200_phg, cpq8200_phg]","[index, channel]",,,8200Z_8200Z
+40k_hz_pgadj,400hz_phase_gain_adj,"40k Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cpi40k_phg, cpq40k_phg]","[index, channel]",,,40000Z_40000Z
+140k_hz_pgadj,140k_hz_phase_gain_adj,"140k Hz EM frequency data, phase and gain adjusted",parts per million (ppm),,,"[cpi140k_phg, cpq140k_phg]","[index, channel]",,,140000Z_140000Z
+400hz_final,,"400 Hz EM frequency data, final levelled",parts per million (ppm),,,"[cpi400, cpq400]","[index, channel]",,,400Z_400Z
+1800hz_final,,"1800 Hz EM frequency data, final levelled",parts per million (ppm),,,"[cpi1800, cpq1800]","[index, channel]",,,1800Z_1800Z
+3300hz_final,,"3300 Hz EM frequency data, final levelled",parts per million (ppm),,,"[cxi3300, cxq3300]","[index, channel]",,,3300X_3300X
+8200hz_final,,"8200 Hz EM frequency data, final levelled",parts per million (ppm),,,"[cpi8200, cpq8200]","[index, channel]",,,8200Z_8200Z
+40k_hz_final,,"40k Hz EM frequency data, final levelled",parts per million (ppm),,,"[cpi40k, cpq40k]","[index, channel]",,,40000Z_40000Z
+140k_hz_final,,"140k Hz EM frequency data, final levelled",parts per million (ppm),,,"[cpi140k, cpq140k]","[index, channel]",,,140000Z_140000Z
+ddep140k,,"Differential depth 140,000 MHz",Meters (m),,,,,,,
+ddep40k,,"Differential depth 40,000 MHz",Meters (m),,,,,,,
+ddep8200,,"Differential depth 8,200 MHz",Meters (m),,,,,,,
+ddep1800,,"Differential depth 1,800 MHz",Meters (m),,,,,,,
+ddep400,,Differential depth 400 MHz,Meters (m),,,,,,,
+dep140k,,"Apparent depth 140,000 MHz",Meters (m),,,,,,,
+dep40k,,"Apparent depth 40,000 MHz",Meters (m),,,,,,,
+dep8200,,"Apparent depth 8,200 MHz",Meters (m),,,,,,,
+dep1800,,"Apparent depth 1,800 MHz",Meters (m),,,,,,,
+dep400,,Apparent depth 400 MHz,Meters (m),-9999,,,,,,
+dres140k,,"Differential resistivity 140,000 MHz",Ohm-meters (ohm-m),,,,,,,
+dres40k,,"Differential resistivity 40,000 MHz",Ohm-meters (ohm-m),,,,,,,
+dres8200,,"Differential resistivity 8,200 MHz",Ohm-meters (ohm-m),,,,,,,
+dres1800,,"Differential resistivity 1,800 MHz",Ohm-meters (ohm-m),,,,,,,
+dres400,,Differential resistivity 400 MHz,Ohm-meters (ohm-m),,,,,,,
+dres_150_by5m,,Differental resistivity from surface to a depth of 150m by 5m intervals,Ohm-meters (ohm-m),-9999,,,"[index,layer_depth]",,,
+res140k,,"Apparent resistivity 140,000 MHz",Ohm-meters (ohm-m),,,,,,,
+res40k,,"Apparent resistivity 40,000 MHz",Ohm-meters (ohm-m),,,,,,,
+res8200,,"Apparent resistivity 8,200 MHz",Ohm-meters (ohm-m),,,,,,,
+res1800,,"Apparent resistivity 1,800 MHz",Ohm-meters (ohm-m),,,,,,,
+res400,,Apparent resistivity 400 MHz,Ohm-meters (ohm-m),,,,,,,
+cosmic,,"Cosmic, uncorrected",n/a,-9999,,,,,,passive_gamma_spectrometer
+doserate,,Total gamma dose rate,nanoGray/hour (nGy/h),-9999,,,,,,passive_gamma_spectrometer
+live_time,,relative period of time spectrometer registers new pulses per sample interval,Milliseconds (ms),-9999,,,,,,passive_gamma_spectrometer
+spec256_down,,Full downward-looking radiometric spectrum,Counts/second (cps),-9999,,,"[index, spec_sample]",,,passive_gamma_spectrometer
+spec256_up,,Full upward-looking radiometric spectrum,Counts/second (cps),-9999,,,"[index, spec_sample]",,,passive_gamma_spectrometer
+tc_raw,,"Total radiometric count, uncorrrected",Counts/second (cps),-9999,,,,,,passive_gamma_spectrometer
+th_raw,,"Thorium, uncorrected",Counts/second (cps),-9999,,,,,,passive_gamma_spectrometer
+u_raw,,"Uranium, uncorrected",Counts/second (cps),-9999,,,,,,passive_gamma_spectrometer
+u_up_raw,,"Upward-looking uranium, uncorrected",Counts/second (cps),-9999,,,,,,passive_gamma_spectrometer
+k_raw,,"Potassium concentration, uncorrected",Counts/second (cps),-9999,,,,,,passive_gamma_spectrometer
+eth,,Equivalent thorium concentration,Parts per million (ppm),-9999,,,,,,passive_gamma_spectrometer
+eu,,Equivalent uranium concentration,Parts per million (ppm),-9999,,,,,,passive_gamma_spectrometer
+kconc,,Potassium concentration,Percentage,-9999,,,,,,passive_gamma_spectrometer
+eth_kconc,,Equivalent thorium over potassium concentration,ppm / percent,-9999,,,,,,passive_gamma_spectrometer
+eu_eth,,Equivalent uranium over equivalent thorium,ppm/ppm,-9999,,,,,,passive_gamma_spectrometer
+eu_kconc,,Equivalent uranium over potassium concentration,ppm / percent,-9999,,,,,,passive_gamma_spectrometer

@@ -2,18 +2,22 @@
 Help! I have no metadata
 ------------------------
 
-This example shows how GSPy can help when you have a large data file and need to do the
-tedious task of filling out the variable metadata.
+Generate Metadata Templates
 
-By doing a first-pass through GSPy with a data json file that is *missing* the ``variable_metadata`` dictionary,
-the code will break, but will generate a template file containing placeholder metadata dictionaries for all
-variables from the data file (in this case the column headers of the CSV data file). The user can then fill in
-this template and then add it to the data json file.
+This example shows how GSPy can help when you are just getting started with no metadata files at all, only partially complete metadata files, or large data files and need to do the tedious task of filling out the variable metadata.
 
-This image shows a snippet of what the output template json file contains. Each variable is given a dictionary
-of attributes with the default values of "not_defined" which the user can then go through and update.
+GSPy provides a ``metadata_template`` function to generate a template YAML file either for ``Survey`` for ``Dataset`` metadata. These templates contain placeholder metadata dictionaries with default values of "not_defined" to help users get started filling in their survey or data variable metadata. Below are multiple example scenarios demonstrating how to generate the desired metadata templates. 
+
+
+.. figure:: /_static/variable_metadata_template_snippet.png
+   :width: 50%
+   :align: center
+
+   Example snippet of what the output template YAML file contains. For a dataset's metadata template, each variable in the data file (e.g. columns in a CSV file) is given a dictionary of attributes with the default values of "not_defined" that the user can then go through and update.
 
 """
+# sphinx_gallery_thumbnail_path = "_static/variable_metadata_template_snippet.png"
+
 #%%
 
 from os.path import join
@@ -22,45 +26,57 @@ import matplotlib.pyplot as plt
 from matplotlib import image as img
 
 #%%
-# Generate the Variable Metadata Template for My Dataset
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Generate the Survey Metadata Template
+# +++++++++++++++++++++++++++++++++++++
 
 #%%
-# Zero existing metadata
-# Initialize the Survey
+# No existing Survey metadata, start with making a generic Survey template
 template = Survey.metadata_template()
 template.dump("template_survey_empty.yml")
 
-
 #%%
-# Prefilled existing metadata file
+# Partial existing Survey metadata file, generate a combined template to see what might be missing
+
 # Path to example files
 data_path = '..//data_files//resolve'
 
-# Define the Survey metadata file
+# Pre-existing Survey metadata file
 metadata = join(data_path, "data//Resolve_survey_md.yml")
 
-# Initialize the Survey
+# Generate the template, passing the pre-existing file
 template = Survey.metadata_template(metadata)
 template.dump("template_md_survey.yml")
 
 #%%
-# Define input data file (CSV format) and the
-# associated metadata file (without the variable_metadata dictionary)
-data = join(data_path, 'data//Resolve.csv')
-metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+# Generate the Variable Metadata Template for My Dataset
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+#%%
+# Zero existing Dataset metadata file, start with making an empty Dataset metadata template
+
+# Pass the data file (in this case a CSV) to make the template variable-specific. 
+# Each column in the CSV file becomes a variable by default. 
+data = join(data_path, 'data//Resolve.csv')
 template = Dataset.metadata_template(data)
 template.dump("template_md_resolve_empty.yml")
 
+#%%
+# Combine with a partial existing Dataset metadata file
+
+# Here we have a CSV data file and a partial metadata file (missing the variable attributes)
+metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+
+# Generate the template for this CSV dataset by combining the existing 
+# partial file with an empty template based on the dataset's variables
 template = Dataset.metadata_template(data, metadata)
 template.dump("template_md_resolve.yml")
 
 #%%
+# Another CSV example ?
 data_path = '..//data_files//skytem_csv'
 
-data = join(data_path, 'data//WI_SkyTEM_2021_ContractorData.csv')
-metadata = join(data_path, 'data//WI_SkyTEM_raw_data_md.yml')
+data = join(data_path, 'data//skytem_contractor_data.csv')
+metadata = join(data_path, 'data//skytem_contractor_data.yml')
 template = Dataset.metadata_template(data, metadata)
 template.dump("template_md_skytem.yml")
 

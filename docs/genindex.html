@@ -5,9 +5,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; gspy 2.2.4 documentation</title>
+  <title>Index &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -17,9 +17,9 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/documentation_options.js?v=91cf44be"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -46,9 +46,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/metadata/index.html">Metadata Handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
         </div>
@@ -117,10 +119,10 @@
 </li>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_coordinate_from_values">add_coordinate_from_values() (gspy.gs_dataset.Dataset.Dataset method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_dimensions_from_variables">add_dimensions_from_variables() (gspy.gs_dataset.Dataset.Dataset method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.add_timestamp">add_timestamp() (gspy.gs_dataset.Dataset.Dataset method)</a>
 
       <ul>
@@ -135,6 +137,12 @@
 </li>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.assign_coords">assign_coords() (gspy.gs_dataset.Dataset.Dataset method)</a>
 </li>
+      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.attrs">attrs (gspy.gs_dataset.Dataset.Dataset property)</a>
+
+      <ul>
+        <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.attrs">(gspy.gs_datatree.Container.Container property)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -159,15 +167,15 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.check_required">check_required() (gspy.gs_dataset.System.System static method)</a>
-</li>
       <li><a href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate.check_standard_coordinates">check_standard_coordinates() (gspy.gs_dataarray.Coordinate.Coordinate static method)</a>
-</li>
-      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.component_labels">component_labels (gspy.gs_dataset.Dataset.Dataset property)</a>
 </li>
       <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container">Container (class in gspy.gs_datatree.Container)</a>
 </li>
+      <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.content">content (gspy.gs_datatree.Container.Container property)</a>
+</li>
       <li><a href="content/api/gs_dataarray/coordinate.html#gspy.gs_dataarray.Coordinate.Coordinate">Coordinate (class in gspy.gs_dataarray.Coordinate)</a>
+</li>
+      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.couplet_labels">couplet_labels (gspy.gs_dataset.Dataset.Dataset property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -308,18 +316,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.interpolate">interpolate() (gspy.gs_dataset.Dataset.Dataset method)</a>
 </li>
-      <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.is_container">is_container (gspy.gs_datatree.Container.Container property)</a>
-</li>
-      <li><a href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.is_netcdf">is_netcdf (gspy.gs_dataset.Tabular.Tabular property)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.is_projected">is_projected (gspy.gs_dataset.Dataset.Dataset property)</a>
 
       <ul>
         <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.is_projected">(gspy.gs_dataset.System.System property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.is_tif">is_tif (gspy.gs_dataset.Raster.Raster property)</a>
 </li>
   </ul></td>
@@ -405,6 +409,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.Parameters">Parameters() (gspy.gs_datatree.Container.Container class method)</a>
+</li>
       <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.plot">plot() (gspy.gs_dataset.Dataset.Dataset method)</a>
 
       <ul>
@@ -419,8 +425,6 @@
         <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.plot_cross_section">(gspy.gs_datatree.Container.Container method)</a>
 </li>
       </ul></li>
-      <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.pop_required">pop_required() (gspy.gs_dataset.System.System static method)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -435,14 +439,22 @@
         <li><a href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.read">(gspy.gs_dataset.Tabular.Tabular class method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.read_metadata">read_metadata() (gspy.gs_datatree.Container.Container static method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.read_raster_using_metadata">read_raster_using_metadata() (gspy.gs_dataset.Raster.Raster method)</a>
 </li>
       <li><a href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.read_var_netcdf">read_var_netcdf() (gspy.gs_dataset.Raster.Raster method)</a>
 </li>
+      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.required_metadata">required_metadata (gspy.gs_dataset.Dataset.Dataset attribute)</a>
+
+      <ul>
+        <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.required_metadata">(gspy.gs_dataset.System.System attribute)</a>
+</li>
+        <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.required_metadata">(gspy.gs_datatree.Container.Container attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -501,11 +513,9 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/gs_dataset/raster.html#gspy.gs_dataset.Raster.Raster.to_tif">to_tif() (gspy.gs_dataset.Raster.Raster method)</a>
+      <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.to_tif">to_tif() (gspy.gs_datatree.Container.Container method)</a>
 </li>
       <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.tree">tree (gspy.gs_datatree.Container.Container property)</a>
-</li>
-      <li><a href="content/api/gs_dataset/tabular.html#gspy.gs_dataset.Tabular.Tabular.type">type (gspy.gs_dataset.Tabular.Tabular property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -515,16 +525,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.units">units (gspy.gs_dataarray.DataArray.DataArray property)</a>
 </li>
-      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.update_attrs">update_attrs() (gspy.gs_dataset.Dataset.Dataset method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/gs_dataset/dataset.html#gspy.gs_dataset.Dataset.Dataset.uuid">uuid (gspy.gs_dataset.Dataset.Dataset property)</a>
-
-      <ul>
-        <li><a href="content/api/gs_datatree/container.html#gspy.gs_datatree.Container.Container.uuid">(gspy.gs_datatree.Container.Container property)</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -540,8 +540,6 @@
       <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_model">valid_model() (gspy.gs_dataset.System.System class method)</a>
 </li>
       <li><a href="content/api/gs_dataarray/dataarray.html#gspy.gs_dataarray.DataArray.DataArray.valid_range">valid_range() (gspy.gs_dataarray.DataArray.DataArray static method)</a>
-</li>
-      <li><a href="content/api/gs_dataset/system.html#gspy.gs_dataset.System.System.valid_submethod">valid_submethod() (gspy.gs_dataset.System.System class method)</a>
 </li>
   </ul></td>
 </tr></table>

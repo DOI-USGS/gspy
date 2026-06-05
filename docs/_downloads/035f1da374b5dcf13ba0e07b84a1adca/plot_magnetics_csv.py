@@ -44,7 +44,7 @@ d_data1 = join(data_path, 'WI_Magnetics.csv')
 d_supp1 = join(data_path, 'WI_Magnetics_raw_data_md.yml')
 
 # Add the raw AEM data as a tabular dataset
-data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1)
+data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1, sep=r'[\s,]+', engine='python')
 
 #%%
 # 1 - Gridded Data -

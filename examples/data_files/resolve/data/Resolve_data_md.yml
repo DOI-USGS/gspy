@@ -2,8 +2,9 @@ dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM data
     type: data
-    method: electromagnetic
-    instrument: resolve
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
 
 coordinates:
     x: x_WGS84_Albers
@@ -13,15 +14,17 @@ coordinates:
 resolve_system:
     type: system
     mode: airborne
-    method: electromagnetic
-    submethod: frequency domain
-    instrument: resolve
-    data_normalized: True
-    output_data_type: ppm
-    reference_frame: right-handed positive up
-    output_sample_frequency: 10
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
 
     dimensions:
+        channel:
+            centers: ['in-phase','quadrature']
+            standard_name: frequency_domain_complex_data
+            long_name: complex frequency domain data channel
+            units: not_defined
+            null_value: not_defined
+            discrete: True
         frequency:
             standard_name: frequency
             long_name: nominal measurement frequency
@@ -29,6 +32,125 @@ resolve_system:
             null_value: not_defined
             centers: [400, 1800, 3300, 8200, 40000, 140000]
             discrete: True
+
+    variables:
+        data_normalized: True
+        output_data_type: ppm
+        reference_frame: right-handed positive up
+        output_sample_frequency: 10
+
+        transmitter:
+            label: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            orientation: [z, z, x, z, z, z]
+            
+        receiver:
+            label: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            orientation: [z, z, x, z, z, z]
+
+        couplet:
+            transmitters: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            receivers: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
+            txrx_dy: [0, 0, 0, 0, 0, 0]
+            txrx_dz: [0, 0, 0, 0, 0, 0]
+            orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
+            actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
+            moment: [359, 187, 150, 72, 49, 17]
+
+magnetic_system:
+    type: system
+    mode: airborne
+    method: magnetic
+    instrument: Scintrex CS-3 cesium-vapor magnetometer
+
+    prefixes: ['base_magnetometer']
+
+    variables:
+
+        transmitter:
+            label: passive
+            description: "No artificial transmitter was used; the magnetic system measures the Earth's natural field (passive field)."
+
+        receiver:
+            label: scalar_magnetometer
+            sensor_type: cesium_vapor
+            sensor_model: CS-3  
+            sensor_manufacturer: Scintrex
+            description:  Scalar cesium-vapor magnetometer mounted in the RESOLVE EM bird towed beneath an AS350 B2 helicopter. Digital acquisition via CGG HeliDAS; positioning with NovAtel OEM4 GPS on helicopter and bird.  
+            coordinates: not_defined 
+            orientation: em-bird mounted 
+            acquisition_system: CGG HeliDAS survey computer; NovAtel OEM4 GPS (WAAS-enabled) for navigation and synchronization; EM bird GPS OEM4 for positional data. 
+            sample_frequency:
+                values: 10.0
+                units: Hz  
+            sensitivity:
+                values: 0.001
+                units: nT   
+            accuracy:
+                values: 0.002
+                units: nT   
+            typical_noise:
+                values: 1.0
+                units: nT   
+            sensor_height:
+                values: 42
+                units: m    
+            lag_factor:
+                values: 1.8
+                units: s    
+            fom_pitch: not_defined
+            fom_roll:  not_defined
+            fom_yaw:   not_defined
+            fom_sum:   not_defined 
+
+        couplet:
+            transmitters: [passive]
+            receivers: [scalar_magnetometer]
+            description: Passive Earth-field transmitter paired with single scalar magnetometer receiver mounted in the RESOLVE EM bird.  
+
+        base_magnetometer:
+            label: base_magnetometer
+            description: Ground magnetic base stations were set-up to measure the total intensity of the earth's magnetic field. The base stations were placed in a magnetically quiet area, away from power lines and moving metallic objects. The contracted specification for the collected ground magnetic data was the non-linear variations in the magnetic data were not to exceed 5 nT per 5 minute period. Pulsations having periods of 5 minutes or less shall not exceed 2 nT, pulsations having periods between 5 and 10 minutes shall not exceed 4 nT, and pulsations having periods between 10 and 20 minutes shall not exceed 8 nT.
+            sensor_type: CGG CF1 using Scintrex cesium vapour sensor with Marconi GPS card and antenna for measurement synchronization to GPS
+            sample_frequency:
+                values: 1
+                units: s  
+            secondary_sensor_model: GEM GSM-19
+            secondary_sensor_sample_frequency: 0.33 per sec
+            secondary_sensor_accuracy: 0.2 nT
+            secondary_sensor_precision: 0.01 nT  
+            location_names: Greenwood, MS
+            setup_dates: 2018-02-20 to 2018-03-05
+            latitude:
+                values: "33 29 50.6815N"
+                units: degrees minutes seconds
+            longitude:
+                values: "90 04 44.7918 W"
+                units: degrees minutes seconds
+            ellipsoidal_height:
+                values: 20.643
+                units: m
+
+        dynamic_compensation: Heading test performed with passes in magnetic N,S,E,W; heading errors within acceptable limits (e.g., N-S ~0.2-0.8 nT; E-W up to ~0.5-1.0 nT), indicating low aircraft-induced magnetic noise.  
+        diurnal_correction: Diurnal variation extracted from base station records (1 Hz), filtered (51 s median + 51 s Hanning), interpolated to 10 Hz, and applied to airborne TMF; a local regional field value of 49,405 nT (from first day's average) was removed prior to RMI calculation. 
+        microlevelling: Microlevelling applied after tie-line levelling
+        lag_correction: Lag of 1.8 s applied to TMF based on lag test 
+        igrf_model_location: "Greenwood, Mississippi (survey area)" 
+        igrf_model_date: "2018-11-15/2019-02-18"  
+        igrf_model_height: sensor altitude 42 m above ground level
+        igrf_removed_model_epoch: "2015.0"
+        tieline_levelling: Magnetic data were levelled using tie/traverse intercepts, manual adjustments where needed, and microlevelling applied to produce final RMI/TMI products.  
+        altitude_correction: none
+        deliverables: Total Magnetic Intensity (TMI), Residual Magnetic Intensity (RMI), and Calculated Vertical Magnetic Gradient (CVG), provided with ancillary EM & terrain data.
+
+        
+radiometric_system:
+    type: system
+    mode: airborne
+    method: gamma spectrometry
+    instrument: Radiation Solutions RS-500 gamma-ray spectrometer  
+
+    dimensions:
         spec_sample:
             standard_name: spec_sample
             long_name: radiometric sample
@@ -40,43 +162,117 @@ resolve_system:
             discrete: True
 
     variables:
+
         transmitter:
-            label: [400, 1800, 3300, 8200, 40000, 140000]
-            orientation: [z, z, x, z, z, z]
-            actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
-            moment: [359, 187, 150, 72, 49, 17]
+            label: passive
+            description: No artificial radiation source was used; the system measures naturally occurring gamma radiation from potassium-40, uranium and thorium decay series, and total count.  
 
         receiver:
-            label: [z, z, x, z, z, z]
-            orientation: [z, z, x, z, z, z]
+            label: gamma_spectrometer
+            sensor_type: NaI(Tl) scintillation crystals
+            sensor_model: RS-500
+            sensor_manufacturer: Radiation Solutions Inc.
+            description: Airborne gamma-ray spectrometer consisting of one downward-looking NaI(Tl) detector pack (16.8 liters) and one upward-looking detector (4.2 liters), mounted in the helicopter cabin. Measures total count, potassium, uranium, thorium, and upward-uranium windows. Includes embedded live-time electronics for dead-time correction. 
+            crystal_type: NaI(Tl) 
+            operating_range:
+                values: "0 to 100000"
+                units: counts_per_second  
+            operating_limits:
+                values: "-20 to +50"  
+                units: temperature, degrees Celsius
+            sample_frequency:
+                values: 1.0
+                units: Hz 
+            downward_volume:
+                values: 16.8
+                units: liters 
+            upward_volume:
+                values: 4.2
+                units: liters  
+            spectrometer_TC_win: not_defined     
+            spectrometer_K_win: not_defined      
+            spectrometer_Th_win: not_defined     
+            spectrometer_U_win: not_defined      
+            spectrometer_cosmic_win: not_defined
+            K_index_start: not_defined
+            K_index_end: not_defined
+            Th_index_start: not_defined
+            Th_index_end: not_defined
+            U_index_start: not_defined
+            U_index_end: not_defined
+            TC_index_start: not_defined
+            TC_index_end: not_defined
+            cosmic_index_start: not_defined
+            cosmic_index_end: not_defined
+            UU_index_start: not_defined
+            UU_index_end: not_defined
 
-        component:
-            transmitters: [400, 1800, 3300, 8200, 40000, 140000]
-            receivers: [z, z, x, z, z, z]
-            txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
-            txrx_dy: [0, 0, 0, 0, 0, 0]
-            txrx_dz: [0, 0, 0, 0, 0, 0]
-            orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
+        couplet:
+            transmitters: [passive]
+            receivers: [gamma_spectrometer]
+            description: Passive gamma-ray field paired with dual-detector RS-500 spectrometer for downward and upward radiation measurements.
+        
+        down_livetime_or_deadtime_corrected: livetime
+        up_livetime_or_deadtime_corrected:   livetime
+        lowpass_filtering: Hanning smoothing; cosmic=9-pt, radar/temp/pressure=3-pt; upward-U=51-pt (radon processing)
+        lowpass_filtering_fid_cutoff_cosmic: 9
 
-magnetic_system:
-    type: system
-    mode: airborne
-    method: magnetic
-    submethod: total field
-    instrument: cesium vapour
-    sample_frequency: 10.0
-    sensitivity: 0.001
+        lowpass_filtering_fid_cutoff_TC: not_defined      
+        lowpass_filtering_fid_cutoff_K:  not_defined      
+        lowpass_filtering_fid_cutoff_Th: not_defined      
+        lowpass_filtering_fid_cutoff_U:  not_defined      
+        lowpass_filtering_fid_cutoff_altimeter: 3 
 
-radiometric_system:
-    type: system
-    mode: airborne
-    method: radiometric
-    submethod: not_defined
-    instrument: not_defined
-    crystal_type: NaI
-    sample_frequency: 1.0
-    downward_volume: 16.8
-    upward_volume: 4.2
+        background_parameter_aircraft_TC: 19.43
+        background_parameter_aircraft_K:  2.61
+        background_parameter_aircraft_Th: -0.48
+        background_parameter_aircraft_U:  -1.94
+        background_parameter_aircraft_UU: 0.50        
+
+        background_parameter_cosmic_TC: 1.2442
+        background_parameter_cosmic_K:  0.0744
+        background_parameter_cosmic_Th: 0.0656
+        background_parameter_cosmic_U:  0.0528
+        background_parameter_cosmic_UU: 0.0140       
+
+        radon_background_correction_method: "Upward Detector Method (hover site calibration)"
+        radon_background_correction_up_method_A1: not_defined 
+        radon_background_correction_up_method_A2: not_defined           
+
+        compton_stripping_ratio_alpha: 0.2820
+        compton_stripping_ratio_beta:  0.4090
+        compton_stripping_ratio_gamma: 0.7680
+        compton_stripping_ratio_a:     0.0460   
+        compton_stripping_ratio_b:     0.0040   
+        compton_stripping_ratio_g:     0.0070   
+        compton_stripping_nominal_altitude: 
+            values: 60
+            units: m  
+
+        height_attenuation_coefficient_TC: -0.008250
+        height_attenuation_coefficient_K:  -0.012530
+        height_attenuation_coefficient_U:  -0.004400
+        height_attenuation_coefficient_Th: -0.007170  
+
+        source_sensitivity_factor_TC: not_defined        
+        source_sensitivity_factor_K:  81.1              
+        source_sensitivity_factor_Th: 4.9               
+        source_sensitivity_factor_U:  8.0 
+
+        air_absorbed_dose_rate: 25.42
+        natural_dose_rate_components: "13.07, 5.675, 2.494"
+
+        corrections: Radiometric corrections include cosmic and aircraft background stripping, radon-background removal, altitude attenuation correction to 60 m nominal, Compton stripping, and conversion to ground concentrations. Live time measured electronically (in ms) and applied to correct all radiometric windows (TC, K, U, Th, UpU) to true count rates using the relationship C_lt = (1000 * C_raw) / L.
+        calibration_pads: Stripping ratios and coefficients determined by Radiation Solutions using RS-500 calibration pads prior to survey start. 
+        cosmic_calibration: High-altitude passes (7,500-10,000 ft AGL at 500 ft intervals) collected to determine cosmic and aircraft background coefficients. 
+        height_attenuation: Calibration lines flown at 30-150 m above ground on a repeat test line used to determine attenuation coefficients for each window.  
+        radon_correction: Upward-looking detector smoothed (51-pt Hanning) to derive radon component; radon stripped from downward uranium then propagated to other windows.  
+        prefiltering: Radar altimeter, pressure, temperature smoothed with 3-pt Hanning; cosmic channel smoothed with 9-pt Hanning before corrections applied.  
+        compton_stripping: Height-corrected Compton coefficients (alpha, beta, gamma) applied for inter-window spectral overlap using altitude-dependent adjustments.  
+        altitude_attenuation_correction: "nominal_height 60 m"
+        conversion_to_concentrations: Corrected K, U, Th windows converted to apparent concentrations using system sensitivities (S-factors), and dose rate computed from K, eU, eTh using reported coefficients.  
+        radiometric_ratios: Ratios (eU/eTh, eU/K, eTh/K) calculated following IAEA TR-323 guidelines, using summed neighborhood windows to stabilize low-count data. 
+        deliverables: Total Count, Potassium (%K), Equivalent Uranium (eU ppm), Equivalent Thorium (eTh ppm), Air Absorbed Dose Rate (nGy/h), upward-looking spectrum, downward-looking spectrum, and derived radiometric ratios.  
 
 dimensions:
     layer_depth:
@@ -92,492 +288,562 @@ dimensions:
         datum: ground surface
 
 variables:
-        line:
-            standard_name: line
-            long_name: Line Number
-            units: not_defined
-            null_value: -9999
-            dtype: int32
-
-        date:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        utc_time:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        flight:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        fiducial:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        temp_ext:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        kpa:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        x_WGS84_Albers:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-            axis: x
-
-        y_WGS84_Albers:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-            axis: y
-
-        x_WGS84_UTMZ15N:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        y_WGS84_UTMZ15N:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        lat_tx:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        lon_tx:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        lat_heli:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        lon_heli:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        gpsz_tx:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        gpsz_heli:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        altlas_tx:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        altrad_heli:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        effective_height:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        DTM:
-            standard_name: dtm,
-            long_name: Digital terrain model, ground surface elevation
-            units: meters
-            null_value: not_defined
-            axis: z
-            positive: up
-            datum: referenced to mean sea level - Earth Gravitational Model (EGM96)
-
-        bird_pitch:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        bird_roll:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        bird_yaw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        diurnal:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        diurnal_cor:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        mag_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        mag_L:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        mag_LD:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        IGRF:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        TMI:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        RMI:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        cpsp:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        cxsp:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        powerline:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        ip_filtered:
-            standard_name: in_phase_filtered
-            long_name: In-phase frequency data, spherics rejected
-            units: Parts per million (ppm)
-            null_value: not_defined
-            dimensions: [index, frequency]
-            raw_data_columns: [cpi400_filt, cpi1800_filt, cxi3300_filt, cpi8200_filt, cpi40k_filt, cpi140k_filt]
-
-        qd_filtered:
-            standard_name: quadrature_filtered
-            long_name: Quadrature frequency data, spherics rejected
-            units: Parts per million (ppm)
-            null_value: not_defined
-            dimensions: [index, frequency]
-            raw_data_columns: [cpq400_filt, cpq1800_filt, cxq3300_filt, cpq8200_filt, cpq40k_filt, cpq140k_filt]
-
-        ip_pgadj:
-            standard_name: in_phase_phase_gain_adj
-            long_name: In-phase frequency data, phase and gain adjusted
-            units: Parts per million (ppm)
-            null_value: not_defined
-            dimensions: [index, frequency]
-            raw_data_columns: [cpi400_phg, cpi1800_phg, cxi3300_phg, cpi8200_phg, cpi40k_phg, cpi140k_phg]
-
-        qd_pgadj:
-            standard_name: quadrature_phase_gain_adj
-            long_name: Quadrature frequency data, phase and gain adjusted
-            units: Parts per million (ppm)
-            null_value: not_defined
-            dimensions: [index, frequency]
-            raw_data_columns: [cpq400_phg, cpq1800_phg, cxq3300_phg, cpq8200_phg, cpq40k_phg, cpq140k_phg]
-
-        ip_final:
-            standard_name: in_phase_final
-            long_name: In-phase frequency data, final levelled
-            units: Parts per million (ppm)
-            null_value: -9999.0
-            dimensions: [index, frequency]
-            raw_data_columns: [cpi400, cpi1800, cxi3300, cpi8200, cpi40k, cpi140k]
-
-        qd_final:
-            standard_name: quadrature_final
-            long_name: Quadrature frequency data, final levelled
-            units: Parts per million (ppm)
-            null_value: -9999.0
-            dimensions: [index, frequency]
-            raw_data_columns: [cpq400, cpq1800, cxq3300, cpq8200, cpq40k, cpq140k]
-
-        ddep140k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        ddep40k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        ddep8200:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        ddep1800:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        ddep400:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dep140k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dep40k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dep8200:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dep1800:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dep400:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dres140k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dres40k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dres8200:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dres1800:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        dres400:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        res140k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        res40k:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        res8200:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        res1800:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        res400:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        cosmic:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        doserate:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        live_time:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        tc_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        th_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        u_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        u_up_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        k_raw:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        eth:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        eu:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        kconc:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        eth_kconc:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        eu_eth:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-
-        eu_kconc:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: -9999.0
-
-        dres_150_by5m:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-            dimensions: [index, layer_depth]
-
-        spec256_down:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: -9999.0
-            dimensions: [index, spec_sample]
-
-
-        spec256_up:
-            standard_name: not_defined
-            long_name: not_defined
-            units: not_defined
-            null_value: not_defined
-            dimensions: [index, spec_sample]
+    line:
+        standard_name: line
+        long_name: Line Number
+        units: '#'
+        null_value: not_defined
+    date:
+        standard_name: date
+        long_name: Date of the survey
+        units: YYYYMMDD
+        null_value: not_defined
+    utc_time:
+        standard_name: utc_time
+        long_name: Time, seconds after midnight UTC
+        units: Seconds (s)
+        null_value: -9999
+    flight:
+        standard_name: flight
+        long_name: Flight numer on which the data were collected
+        units: '#'
+        null_value: not_defined
+    fiducial:
+        standard_name: fiducial
+        long_name: Unique Fiducial Number
+        units: n/a
+        null_value: not_defined
+    temp_ext:
+        standard_name: temp_ext
+        long_name: External temperature
+        units: Degrees Celsius (C)
+        null_value: not_defined
+    kpa:
+        standard_name: kpa
+        long_name: External pressure
+        units: kiloPascals (kPa)
+        null_value: not_defined
+    x_WGS84_Albers:
+        standard_name: x_wgs84_albers
+        long_name: Easting in Albers Equal-Area Conic, World Geodetic Survey of 1984
+            (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    y_WGS84_Albers:
+        standard_name: y_wgs84_albers
+        long_name: Northing in Albers Equal-Area Conic, World Geodetic Survey of 1984
+            (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    x_WGS84_UTMZ15N:
+        standard_name: x_wgs84_utmz15n
+        long_name: Easting in Universal Transverse Mercator (UTM) Zone 15 North, World
+            Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)
+        units: Meters (m)
+        null_value: not_defined
+    y_WGS84_UTMZ15N:
+        standard_name: y_wgs84_utmz15n
+        long_name: Northing in Universal Transverse Mercator (UTM) Zone 15 North,
+            World Geodetic Survey of 1984 (WGS84) of EM bird transmitter (Tx)
+        units: Meters (m)
+        null_value: not_defined
+    lat_tx:
+        standard_name: lat_tx
+        long_name: Latitude, WGS84, of EM bird transmitter (Tx)
+        units: Decimal Degrees
+        null_value: not_defined
+    lon_tx:
+        standard_name: lon_tx
+        long_name: Longitude, WGS84, of EM bird transmitter (Tx)
+        units: Decimal Degrees
+        null_value: not_defined
+    lat_heli:
+        standard_name: lat_heli
+        long_name: Latitude, WGS84, of helicopter
+        units: Decimal Degrees
+        null_value: not_defined
+    lon_heli:
+        standard_name: lon_heli
+        long_name: Longitude, WGS84, of helicopter
+        units: Decimal Degrees
+        null_value: not_defined
+    gpsz_tx:
+        standard_name: gpsz_tx
+        long_name: GPS elevation of EM bird transmitter (Tx), referenced to mean sea
+            level - Earth Gravitational Model (EGM96)
+        units: Meters (m)
+        null_value: not_defined
+    gpsz_heli:
+        standard_name: gpsz_heli
+        long_name: GPS elevation of helicopter, referenced to mean sea level - Earth
+            Gravitational Model (EGM96)
+        units: Meters (m)
+        null_value: not_defined
+    altlas_tx:
+        standard_name: altlas_tx
+        long_name: Laser altimeter height of the EM bird transmitter (Tx)
+        units: Meters (m)
+        null_value: not_defined
+    altrad_heli:
+        standard_name: altrad_heli
+        long_name: RADAR altimeter of helicopter
+        units: Meters (m)
+        null_value: not_defined
+    effective_height:
+        standard_name: effective_height
+        long_name: Height of helicopter at standard temperature and pressure
+        units: Meters (m)
+        null_value: not_defined
+    DTM:
+        standard_name: dtm
+        long_name: Digital terrain model (ground surface elevation, referenced to
+            mean sea level - Earth Gravitational Model (EGM96))
+        units: Meters (m)
+        null_value: not_defined
+        positive: up
+        datum: referenced to mean sea level - Earth Gravitational Model (EGM96)
+    bird_pitch:
+        standard_name: bird_pitch
+        long_name: EM bird transmitter (Tx) pitch
+        units: Degrees
+        null_value: not_defined
+    bird_roll:
+        standard_name: bird_roll
+        long_name: EM bird transmitter (Tx) roll
+        units: Degrees
+        null_value: not_defined
+    bird_yaw:
+        standard_name: bird_yaw
+        long_name: EM bird transmitter (Tx) yaw (heading)
+        units: Degrees
+        null_value: not_defined
+    diurnal:
+        standard_name: diurnal
+        long_name: Measured base station ground magnetic intensity
+        units: nanoteslas (nT)
+        null_value: -9999
+    diurnal_cor:
+        standard_name: diurnal_cor
+        long_name: Diurnal correction, base removed
+        units: nanoteslas (nT)
+        null_value: not_defined
+    mag_raw:
+        standard_name: mag_raw
+        long_name: Total magnetic field, de-spiked
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    mag_L:
+        standard_name: mag_l
+        long_name: Total magnetic field, lagged
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    mag_LD:
+        standard_name: mag_ld
+        long_name: Total magnetic field, lagged and diurnally corrected
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    IGRF:
+        standard_name: igrf
+        long_name: International Geomagnetic Reference Field
+        units: nanoteslas (nT)
+        null_value: not_defined
+    TMI:
+        standard_name: tmi
+        long_name: Total magnetic intensity
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    RMI:
+        standard_name: rmi
+        long_name: Final residual magnetic intensity
+        units: nanoteslas (nT)
+        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
+    cpsp:
+        standard_name: cpsp
+        long_name: Co-planar spherics monitor
+        units: n/a
+        null_value: not_defined
+    cxsp:
+        standard_name: cxsp
+        long_name: Co-axial spherics monitor
+        units: n/a
+        null_value: not_defined
+    powerline:
+        standard_name: powerline
+        long_name: Co-planar power line monitor
+        units: n/a
+        null_value: not_defined
+        
+    400hz_filtered:
+        standard_name: 400hz_filtered
+        long_name: 400 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400_filt, cpq400_filt]
+        system_couplet: 400Z_400Z
+    
+    1800hz_filtered:
+        standard_name: 1800hz_filtered
+        long_name: 1800 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800_filt, cpq1800_filt]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_filtered:
+        standard_name: 3300hz_filtered
+        long_name: 3300 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300_filt, cxq3300_filt]
+        system_couplet: 3300X_3300X
+    
+    8200hz_filtered:
+        standard_name: 8200hz_filtered
+        long_name: 8200 Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200_filt, cpq8200_filt]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_filtered:
+        standard_name: 40k_hz_filtered
+        long_name: 40k Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k_filt, cpq40k_filt]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_filtered:
+        standard_name: 140k_hz_filtered
+        long_name: 140k Hz EM frequency data, spherics rejected
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k_filt, cpq140k_filt]
+        system_couplet: 140000Z_140000Z
+
+    400hz_pgadj:
+        standard_name: 400hz_phase_gain_adj
+        long_name: 400 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400_phg, cpq400_phg]
+        system_couplet: 400Z_400Z
+    
+    1800hz_pgadj:
+        standard_name: 1800hz_phase_gain_adj
+        long_name: 1800 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800_phg, cpq1800_phg]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_pgadj:
+        standard_name: 3300hz_phase_gain_adj
+        long_name: 3300 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300_phg, cxq3300_phg]
+        system_couplet: 3300X_3300X
+    
+    8200hz_pgadj:
+        standard_name: 8200hz_phase_gain_adj
+        long_name: 8200 Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200_phg, cpq8200_phg]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_pgadj:
+        standard_name: 40k_hz_phase_gain_adj
+        long_name: 40k Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k_phg, cpq40k_phg]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_pgadj:
+        standard_name: 140k_hz_phase_gain_adj
+        long_name: 140k Hz EM frequency data, phase and gain adjusted
+        units: Parts per million (ppm)
+        null_value: not_defined
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k_phg, cpq140k_phg]
+        system_couplet: 140000Z_140000Z
+
+    400hz_final:
+        standard_name: 400hz_final
+        long_name: 400 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi400, cpq400]
+        system_couplet: 400Z_400Z
+    
+    1800hz_final:
+        standard_name: 1800hz_final
+        long_name: 1800 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi1800, cpq1800]
+        system_couplet: 1800Z_1800Z
+
+    3300hz_final:
+        standard_name: 3300hz_final
+        long_name: 3300 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cxi3300, cxq3300]
+        system_couplet: 3300X_3300X
+    
+    8200hz_final:
+        standard_name: 8200hz_final
+        long_name: 8200 Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi8200, cpq8200]
+        system_couplet: 8200Z_8200Z
+
+    40k_hz_final:
+        standard_name: 40k_hz_final
+        long_name: 40k Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi40k, cpq40k]
+        system_couplet: 40000Z_40000Z
+    
+    140k_hz_final:
+        standard_name: 140k_hz_final
+        long_name: 140k Hz EM frequency data, final levelled
+        units: Parts per million (ppm)
+        null_value: -9999.0
+        dimensions: [index, channel]
+        raw_data_columns: [cpi140k, cpq140k]
+        system_couplet: 140000Z_140000Z
+    ddep140k:
+        standard_name: ddep140k
+        long_name: Differential depth 140,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep40k:
+        standard_name: ddep40k
+        long_name: Differential depth 40,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep8200:
+        standard_name: ddep8200
+        long_name: Differential depth 8,200 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep1800:
+        standard_name: ddep1800
+        long_name: Differential depth 1,800 MHz
+        units: Meters (m)
+        null_value: not_defined
+    ddep400:
+        standard_name: ddep400
+        long_name: Differential depth 400 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep140k:
+        standard_name: dep140k
+        long_name: Apparent depth 140,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep40k:
+        standard_name: dep40k
+        long_name: Apparent depth 40,000 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep8200:
+        standard_name: dep8200
+        long_name: Apparent depth 8,200 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep1800:
+        standard_name: dep1800
+        long_name: Apparent depth 1,800 MHz
+        units: Meters (m)
+        null_value: not_defined
+    dep400:
+        standard_name: dep400
+        long_name: Apparent depth 400 MHz
+        units: Meters (m)
+        null_value: -9999
+    dres140k:
+        standard_name: dres140k
+        long_name: Differential resistivity 140,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres40k:
+        standard_name: dres40k
+        long_name: Differential resistivity 40,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres8200:
+        standard_name: dres8200
+        long_name: Differential resistivity 8,200 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres1800:
+        standard_name: dres1800
+        long_name: Differential resistivity 1,800 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres400:
+        standard_name: dres400
+        long_name: Differential resistivity 400 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    dres_150_by5m:
+        standard_name: dres_150by5m
+        long_name: Differental resistivity from surface to a depth of 150m by 5m intervals,
+            i represents each interval from 1 to 31
+        units: Ohm-meters (ohm-m)
+        null_value: -9999
+        dimensions: [index, layer_depth]
+    res140k:
+        standard_name: res140k
+        long_name: Apparent resistivity 140,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res40k:
+        standard_name: res40k
+        long_name: Apparent resistivity 40,000 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res8200:
+        standard_name: res8200
+        long_name: Apparent resistivity 8,200 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res1800:
+        standard_name: res1800
+        long_name: Apparent resistivity 1,800 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    res400:
+        standard_name: res400
+        long_name: Apparent resistivity 400 MHz
+        units: Ohm-meters (ohm-m)
+        null_value: not_defined
+    cosmic:
+        standard_name: cosmic
+        long_name: Cosmic, uncorrected
+        units: n/a
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    doserate:
+        standard_name: doserate
+        long_name: Total gamma dose rate
+        units: nanoGray/hour (nGy/h)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    live_time:
+        standard_name: live_time
+        long_name: relative period of time spectrometer registers new pulses per sample
+            interval
+        units: Milliseconds (ms)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    spec256_down:
+        standard_name: spec256_down
+        long_name: Full downward-looking radiometric spectrum; i represents sample
+            1 to 256
+        units: Counts/second (cps)
+        null_value: -9999
+        dimensions: [index, spec_sample]
+        system_couplet: passive_gamma_spectrometer
+    spec256_up:
+        standard_name: spec256_up
+        long_name: Full upward-looking radiometric spectrum; i represents sample 1
+            to 256
+        units: Counts/second (cps)
+        null_value: -9999
+        dimensions: [index, spec_sample]
+        system_couplet: passive_gamma_spectrometer
+    tc_raw:
+        standard_name: tc_raw
+        long_name: Total radiometric count, uncorrrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    th_raw:
+        standard_name: th_raw
+        long_name: Thorium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    u_raw:
+        standard_name: u_raw
+        long_name: Uranium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    u_up_raw:
+        standard_name: u_up_raw
+        long_name: Upward-looking uranium, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    k_raw:
+        standard_name: k_raw
+        long_name: Potassium concentration, uncorrected
+        units: Counts/second (cps)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eth:
+        standard_name: eth
+        long_name: Equivalent thorium concentration
+        units: Parts per million (ppm)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu:
+        standard_name: eu
+        long_name: Equivalent uranium concentration
+        units: Parts per million (ppm)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    kconc:
+        standard_name: kconc
+        long_name: Potassium concentration
+        units: Percentage (%)
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eth_kconc:
+        standard_name: eth_kconc
+        long_name: Equivalent thorium over potassium concentration
+        units: ppm/%
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu_eth:
+        standard_name: eu_eth
+        long_name: Equivalent uranium over equivalent thorium
+        units: ppm/ppm
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer
+    eu_kconc:
+        standard_name: eu_kconc
+        long_name: Equivalent uranium over potassium concentration
+        units: ppm/%
+        null_value: -9999
+        system_couplet: passive_gamma_spectrometer

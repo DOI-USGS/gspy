@@ -107,9 +107,8 @@ class Raster(Dataset):
             if 'files' in var_meta[var]:
                 self._obj = self.read_raster_using_metadata(var, json_md, directory=json_md['directory'], **var_meta[var])
 
-        json_md["structure"] = "raster"
-
         kwargs = Metadata(json_md['dataset_attrs'])
+        kwargs["structure"] = "raster"
         kwargs.check_keys(cls.required_metadata)
 
         self.attrs = kwargs
@@ -336,7 +335,13 @@ class Raster(Dataset):
         out = {}
         out["dataset_attrs"] = {
             "content": "<summary statement of what the dataset contains>",
-            "comment": "<additional details or ancillary information>"
+            "comment": "<additional details or ancillary information>",
+            "type": "<data or model>",
+            "method": "<geophysical method>",
+            "instrument": "<geophysical instrument name>",
+            "mode": "<ground, airborne, borehole, etc.>",
+            "property": "<OPTIONAL, physical property represented in the data>",
+            "structure": "raster"
             }
 
         out["coordinates"] = {
@@ -402,35 +407,8 @@ class Raster(Dataset):
                 }
             }
 
-        dump_metadata_to_file(out, filename)
+        Metadata.dump(out, filename)
 
-    def to_tif(self):
-        """ Export GeoTIFF files from xarray
 
-        2D variables are exported directly to GeoTIFF files, one for each variable, following
-        the naming convention "{variable}.tif"
 
-        3D variables are sliced along the right most dimension and exported to incremented GeoTIFF
-        files following the naming convention "{variable}_{i}.tif".
 
-        """
-        raise Exception("Needs fixing")
-
-        for var in self.data_vars:
-            # skip bnds variables
-            if 'bnds' not in var:
-                ds = deepcopy(self[var])
-
-                # remove grid_mapping
-                if 'grid_mapping' in ds.attrs.keys():
-                    del ds.attrs['grid_mapping']
-
-                # set _FillValue
-                ds.attrs['_FillValue'] = ds.attrs['null_value']
-
-                # if 3D variable, slice along stack dimension
-                if 'stack' in ds.dims:
-                    for s in ds['stack'].values:
-                        ds.sel(stack=s).rio.to_raster(f"{var}_{s}.tif")
-                else:
-                    ds.rio.to_raster(f"{var}.tif")

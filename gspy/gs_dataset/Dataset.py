@@ -866,10 +866,9 @@ class Dataset:
 
     # System specific accessors
     @property
-    def component_labels(self):
-
-        tx = self._obj['component_transmitters'].values
-        rx = self._obj['component_receivers'].values
+    def couplet_labels(self):
+        tx = self._obj['couplet_transmitters'].values
+        rx = self._obj['couplet_receivers'].values
 
         out = []
         for t, r in zip(tx, rx):

@@ -6,9 +6,9 @@ dataset_attrs:
     references: Minsley, Burke J., ???, 2024, Ground-based electromagnetic survey data, Kankakee surface water-groundwater interaction site, 2023, U.S. Geological Survey data release, https://doi.org/10.5066/xxxxxxx.
     comment: This dataset includes minimally processed (raw) and fully processed LoupeEM data used as input to inversion, and laterally constrained inverted resistivity models.
     summary: Ground-based electromagnetic data were collected in August 2023 at the Kankakee surface water-groundwater interaction site, and adjacent Turkey Foot park, in northwest Indiana. These data were collected in support of the USGS Illinois River Basin (ILRB) Next Generation Water Observing System (NGWOS) project, and were included as part of a larger training course on geophysical methods at the site. Data were acquired with the two-person backpack LoupeEM instrument. Electromagnetic data were inverted to produce models of electrical resistivity along survey lines, with typical depth of investigation up to about 100 m and 2 - 3 m near-surface resolution.
-    content: survey information (group /survey), raw data (group /survey/raw_data), processed data (group /survey/processed_data), inverted resistivity models (group /survey/inverted_models)
+    content: survey information
     created_by: gspy==2.0.0
-    conventions: CF-1.8, GS-2.0
+    conventions: CF-1.12, GS-2.0
 
 survey_information:
     survey_type: electromagnetic

@@ -1,13 +1,14 @@
-**********************************************
-Importing aseg-gdf2 files into the GSPy Survey
-**********************************************
+*************************
+Notes for ASEG-GDF2 Files
+*************************
 
 You can directly import aseg-gdf2 files with a .dat and .dfn file.
+
 Pratt, D. A. (2003). ASEG-GDF2 A Standard for Point Located Data Exchange.
 Australian Society of Exploration Geophysicists, 4(0), 1-34.
 https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf
 
-We do not handle importing .des or .met files that seem to be deprecated.
+We do not handle importing .des or .met files.
 
 Mapping the DFN to the CF metadata convention
 =============================================

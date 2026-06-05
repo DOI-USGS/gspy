@@ -11,31 +11,51 @@
         :class: sphx-glr-download-link-note
 
         :ref:`Go to the end <sphx_glr_download_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py>`
-        to download the full example code
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py:
 
 
-Help! I have no variable metadata
----------------------------------
+Help! I have no metadata
+------------------------
 
-This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata.
+Generate Metadata Templates
 
-By doing a first-pass through GSPy with a data json file that is *missing* the ``variable_metadata`` dictionary, the code will break, but will generate a template file containing placeholder metadata dictionaries for all variables from the data file (in this case the column headers of the CSV data file). The user can then fill in this template and then add it to the data json file.
+This example shows how GSPy can help when you are just getting started with no metadata files at all, only partially complete metadata files, or large data files and need to do the tedious task of filling out the variable metadata.
 
-.. image:: ..//..//img//variable_metadata_template_snippet.png
-   :scale: 50 %
+GSPy provides a ``metadata_template`` function to generate a template YAML file either for ``Survey`` for ``Dataset`` metadata. These templates contain placeholder metadata dictionaries with default values of "not_defined" to help users get started filling in their survey or data variable metadata. Below are multiple example scenarios demonstrating how to generate the desired metadata templates. 
+
+
+.. figure:: /_static/variable_metadata_template_snippet.png
+   :width: 50%
    :align: center
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-19
+   Example snippet of what the output template YAML file contains. For a dataset's metadata template, each variable in the data file (e.g. columns in a CSV file) is given a dictionary of attributes with the default values of "not_defined" that the user can then go through and update.
 
-.. code-block:: default
+.. GENERATED FROM PYTHON SOURCE LINES 19-20
+
+.. code-block:: Python
+   :dedent: 1
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 22-28
+
+.. code-block:: Python
 
 
     from os.path import join
-    from gspy import Survey
+    from gspy import Survey, Dataset
+    import matplotlib.pyplot as plt
+    from matplotlib import image as img
 
 
 
@@ -44,64 +64,145 @@ By doing a first-pass through GSPy with a data json file that is *missing* the `
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-23
+.. GENERATED FROM PYTHON SOURCE LINES 29-31
+
+Generate the Survey Metadata Template
++++++++++++++++++++++++++++++++++++++
+
+.. GENERATED FROM PYTHON SOURCE LINES 33-34
+
+No existing Survey metadata, start with making a generic Survey template
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-37
+
+.. code-block:: Python
+
+    template = Survey.metadata_template()
+    template.dump("template_survey_empty.yml")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
+
+Partial existing Survey metadata file, generate a combined template to see what might be missing
+
+.. GENERATED FROM PYTHON SOURCE LINES 39-50
+
+.. code-block:: Python
+
+
+    # Path to example files
+    data_path = '..//data_files//resolve'
+
+    # Pre-existing Survey metadata file
+    metadata = join(data_path, "data//Resolve_survey_md.yml")
+
+    # Generate the template, passing the pre-existing file
+    template = Survey.metadata_template(metadata)
+    template.dump("template_md_survey.yml")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 Generate the Variable Metadata Template for My Dataset
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-33
+.. GENERATED FROM PYTHON SOURCE LINES 55-56
 
-.. code-block:: default
+Zero existing Dataset metadata file, start with making an empty Dataset metadata template
 
+.. GENERATED FROM PYTHON SOURCE LINES 56-63
 
-    # Path to example files
-    data_path = '..//..//supplemental'
-
-    # Define the Survey metadata file
-    metadata = join(data_path, "region//MAP//data//Resolve_survey_md.json")
-
-    # Initialize the Survey
-    survey = Survey(metadata)
+.. code-block:: Python
 
 
-
+    # Pass the data file (in this case a CSV) to make the template variable-specific. 
+    # Each column in the CSV file becomes a variable by default. 
+    data = join(data_path, 'data//Resolve.csv')
+    template = Dataset.metadata_template(data)
+    template.dump("template_md_resolve_empty.yml")
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-43
-
-.. code-block:: default
 
 
-    # Define input data file (CSV format) and the
-    # associated metadata file (without the variable_metadata dictionary)
-    d_data = join(data_path, 'region//MAP//data//Resolve.csv')
-    d_supp = join(data_path, 'region//MAP//data//Resolve_data_md_without_variables.json')
 
-    # Attempt to add the raw AEM data from CSV-format
-    # This will trigger an error message when no variable metadata is found, however the error will
-    # output a template json file with this dataset's variable names, to then be filled in by the user
-    survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
+.. GENERATED FROM PYTHON SOURCE LINES 64-65
 
-.. rst-class:: sphx-glr-script-out
+Combine with a partial existing Dataset metadata file
 
-.. code-block:: pytb
+.. GENERATED FROM PYTHON SOURCE LINES 65-74
 
-    Traceback (most recent call last):
-      File "documentation_source/source/examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata.py", line 43, in <module>
-        survey.add_tabular(type='csv', data_filename=d_data, metadata_file=d_supp)
-      File "gspy/src/classes/survey/Survey.py", line 133, in add_tabular
-        out = tabular_csv.Tabular_csv.read(data_filename, metadata_file=metadata_file, spatial_ref=self.spatial_ref, **kwargs)
-      File "gspy/src/classes/data/Tabular.py", line 141, in read
-        cls._create_variable_metadata_template(filename, file.df.columns)
-      File "gspy/src/classes/data/tabular_csv.py", line 185, in _create_variable_metadata_template
-        raise Exception(s)
-    Exception: 
-    Variable metadata values are not defined in the metadata file.
-    Creating a template with filename variable_metadata_template_Resolve.json
-    Please fill out and add the dictionary to the metadata file.
+.. code-block:: Python
+
+
+    # Here we have a CSV data file and a partial metadata file (missing the variable attributes)
+    metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+
+    # Generate the template for this CSV dataset by combining the existing 
+    # partial file with an empty template based on the dataset's variables
+    template = Dataset.metadata_template(data, metadata)
+    template.dump("template_md_resolve.yml")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 75-76
+
+Another CSV example ?
+
+.. GENERATED FROM PYTHON SOURCE LINES 76-83
+
+.. code-block:: Python
+
+    data_path = '..//data_files//skytem_csv'
+
+    data = join(data_path, 'data//skytem_contractor_data.csv')
+    metadata = join(data_path, 'data//skytem_contractor_data.yml')
+    template = Dataset.metadata_template(data, metadata)
+    template.dump("template_md_skytem.yml")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 84-85
+
+Loupe Data
+
+.. GENERATED FROM PYTHON SOURCE LINES 85-92
+
+.. code-block:: Python
+
+
+    data_path = '..//data_files//loupe'
+
+    data = join(data_path, 'data//Kankakee.dat')
+    metadata = join(data_path, 'data//loupe_data_metadata.yml')
+
+    template = Dataset.metadata_template(data_filename=data, metadata_file=metadata)
+    template.dump("template_md_loupe.yml")
+
 
 
 
@@ -110,7 +211,7 @@ Generate the Variable Metadata Template for My Dataset
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.178 seconds)
+   **Total running time of the script:** (0 minutes 0.698 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py:
@@ -119,16 +220,17 @@ Generate the Variable Metadata Template for My Dataset
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
+      :download:`Download Jupyter notebook: plot_help_I_have_no_variable_metadata.ipynb <plot_help_I_have_no_variable_metadata.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: plot_help_I_have_no_variable_metadata.py <plot_help_I_have_no_variable_metadata.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: plot_help_I_have_no_variable_metadata.ipynb <plot_help_I_have_no_variable_metadata.ipynb>`
+      :download:`Download zipped: plot_help_I_have_no_variable_metadata.zip <plot_help_I_have_no_variable_metadata.zip>`
 
 
 .. only:: html

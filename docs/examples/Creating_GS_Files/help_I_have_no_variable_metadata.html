@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help! I have no metadata &mdash; gspy 2.2.4 documentation</title>
+  <title>Help! I have no metadata &mdash; gspy 2.2.8.post1.dev0+g5d80961a9.d20260316 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,14 +18,12 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=9fe011ec"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Loupe to NetCDF" href="plot_csv_loupe.html" />
-    <link rel="prev" title="GeoTIFFs to NetCDF" href="plot_tifs.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,28 +45,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/metadata/index.html">Metadata Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest.html">ASEG to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs to NetCDF</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Help! I have no metadata</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#generate-the-variable-metadata-template-for-my-dataset">Generate the Variable Metadata Template for My Dataset</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_loupe.html">Loupe to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">Multi-dataset Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench to NetCDF</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -85,7 +68,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
       <li class="breadcrumb-item active">Help! I have no metadata</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/Creating_GS_Files/help_I_have_no_variable_metadata.rst.txt" rel="nofollow"> View page source</a>
@@ -103,56 +85,70 @@ to download the full example code.</p>
 </div>
 <section class="sphx-glr-example-title" id="help-i-have-no-metadata">
 <span id="sphx-glr-examples-creating-gs-files-help-i-have-no-variable-metadata-py"></span><h1>Help! I have no metadata<a class="headerlink" href="#help-i-have-no-metadata" title="Link to this heading"></a></h1>
-<p>This example shows how GSPy can help when you have a large data file and need to do the
-tedious task of filling out the variable metadata.</p>
-<p>By doing a first-pass through GSPy with a data json file that is <em>missing</em> the <code class="docutils literal notranslate"><span class="pre">variable_metadata</span></code> dictionary,
-the code will break, but will generate a template file containing placeholder metadata dictionaries for all
-variables from the data file (in this case the column headers of the CSV data file). The user can then fill in
-this template and then add it to the data json file.</p>
-<p>This image shows a snippet of what the output template json file contains. Each variable is given a dictionary
-of attributes with the default values of “not_defined” which the user can then go through and update.</p>
+<p>Generate Metadata Templates</p>
+<p>This example shows how GSPy can help when you are just getting started with no metadata files at all, only partially complete metadata files, or large data files and need to do the tedious task of filling out the variable metadata.</p>
+<p>GSPy provides a <code class="docutils literal notranslate"><span class="pre">metadata_template</span></code> function to generate a template YAML file either for <code class="docutils literal notranslate"><span class="pre">Survey</span></code> for <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> metadata. These templates contain placeholder metadata dictionaries with default values of “not_defined” to help users get started filling in their survey or data variable metadata. Below are multiple example scenarios demonstrating how to generate the desired metadata templates.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/variable_metadata_template_snippet.png"><img alt="../../_images/variable_metadata_template_snippet.png" src="../../_images/variable_metadata_template_snippet.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Example snippet of what the output template YAML file contains. For a dataset’s metadata template, each variable in the data file (e.g. columns in a CSV file) is given a dictionary of attributes with the default values of “not_defined” that the user can then go through and update.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Survey</span><span class="p">,</span> <span class="n">Dataset</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">image</span> <span class="k">as</span> <span class="n">img</span>
 </pre></div>
 </div>
-<section id="generate-the-variable-metadata-template-for-my-dataset">
-<h2>Generate the Variable Metadata Template for My Dataset<a class="headerlink" href="#generate-the-variable-metadata-template-for-my-dataset" title="Link to this heading"></a></h2>
-<p>Zero existing metadata
-Initialize the Survey</p>
+<section id="generate-the-survey-metadata-template">
+<h2>Generate the Survey Metadata Template<a class="headerlink" href="#generate-the-survey-metadata-template" title="Link to this heading"></a></h2>
+<p>No existing Survey metadata, start with making a generic Survey template</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">()</span>
 <span class="n">template</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">&quot;template_survey_empty.yml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Prefilled existing metadata file
-Path to example files</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//data_files//resolve&#39;</span>
+<p>Partial existing Survey metadata file, generate a combined template to see what might be missing</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//data_files//resolve&#39;</span>
 
-<span class="c1"># Define the Survey metadata file</span>
+<span class="c1"># Pre-existing Survey metadata file</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Resolve_survey_md.yml&quot;</span><span class="p">)</span>
 
-<span class="c1"># Initialize the Survey</span>
+<span class="c1"># Generate the template, passing the pre-existing file</span>
 <span class="n">template</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 <span class="n">template</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">&quot;template_md_survey.yml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Define input data file (CSV format) and the
-associated metadata file (without the variable_metadata dictionary)</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve_data_md_without_variables.yml&#39;</span><span class="p">)</span>
-
+</section>
+<section id="generate-the-variable-metadata-template-for-my-dataset">
+<h2>Generate the Variable Metadata Template for My Dataset<a class="headerlink" href="#generate-the-variable-metadata-template-for-my-dataset" title="Link to this heading"></a></h2>
+<p>Zero existing Dataset metadata file, start with making an empty Dataset metadata template</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pass the data file (in this case a CSV) to make the template variable-specific.</span>
+<span class="c1"># Each column in the CSV file becomes a variable by default.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve.csv&#39;</span><span class="p">)</span>
 <span class="n">template</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">template</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">&quot;template_md_resolve_empty.yml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Combine with a partial existing Dataset metadata file</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we have a CSV data file and a partial metadata file (missing the variable attributes)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Resolve_data_md_without_variables.yml&#39;</span><span class="p">)</span>
 
+<span class="c1"># Generate the template for this CSV dataset by combining the existing</span>
+<span class="c1"># partial file with an empty template based on the dataset&#39;s variables</span>
 <span class="n">template</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
 <span class="n">template</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">&quot;template_md_resolve.yml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Another CSV example ?</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//data_files//skytem_csv&#39;</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_2021_ContractorData.csv&#39;</span><span class="p">)</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//WI_SkyTEM_raw_data_md.yml&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_contractor_data.csv&#39;</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_contractor_data.yml&#39;</span><span class="p">)</span>
 <span class="n">template</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
 <span class="n">template</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">&quot;template_md_skytem.yml&quot;</span><span class="p">)</span>
 </pre></div>
@@ -185,10 +181,7 @@ associated metadata file (without the variable_metadata dictionary)</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_tifs.html" class="btn btn-neutral float-left" title="GeoTIFFs to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_csv_loupe.html" class="btn btn-neutral float-right" title="Loupe to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

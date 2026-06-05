@@ -1,6 +1,11 @@
 dataset_attrs:
-    comment: <additional details or ancillary information>
-    content: interpolated resistivity models (3-D depth grid) and magnetic map (2-D)
+    comment: USGS-derived product
+    content: interpolated resistivity models (3-D depth grid) and total magnetic intensity map (2-D)
+    type: data, models
+    method: ["electromagnetic, time domain","magnetic"]
+    instrument: 30Hz Tempest
+    mode: airborne
+    property: electrical resistivity, total magnetic intensity
 
 coordinates:
     comment: Coordinates map variables in space and time x y z t

@@ -5,9 +5,10 @@ dataset_attrs:
     history: <date and time when the data were produced and/or modified>
     references: <data release reference>
     comment: <additional details or ancillary information>
-    conventions: CF-1.8, GS-0.0.1
+    conventions: CF-1.13, GS-2.0
+    type: survey
     content: raw data, processed data
-    created_by: gspy==0.0.1
+    created_by: gspy==2.2.8
 survey_information:
     contractor_project_number: 603756RWA
     contractor: CGG Canada Services Ltd.

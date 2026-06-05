@@ -1,19 +1,33 @@
 dataset_attrs:
     content: inverted resistivity models
     comment: This dataset includes inverted resistivity models derived from processed AEM data produced by USGS
+    type: model
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
 
 coordinates:
     x: X_WGS84_Albers
     y: Y_WGS84_Albers
     z: DEM
 
-inversion:
-    model_file: Resolve_model_0.csv
-    inversion_software: Aarhus Workbench
-    software_version: Aarhus Workbench version 5.5.0
-    date: 20181101
-    comment: Vertical and lateral constraints on resistivity were run with values of 5.0 and 2.0 and a homogeneous half-space with resistivity values of 40 ohm-meters for the prior model.  Sensor altitude was treated as a free parameter with an a-priori standard deviation of 0.5 m and a lateral constraint standard deviation factor of 1.30.
-    data_file: Resolve.csv
+
+inversion_parameters:
+    dataset_attrs:
+        type: parameters
+        method: electromagnetic, frequency domain
+        instrument: RESOLVE
+        mode: airborne
+        property: electrical resistivity
+
+    variables:
+        parameters:
+            model_file: Resolve_model_0.csv
+            inversion_software: Aarhus Workbench
+            software_version: Aarhus Workbench version 5.5.0
+            date: 20181101
+            description: Vertical and lateral constraints on resistivity were run with values of 5.0 and 2.0 and a homogeneous half-space with resistivity values of 40 ohm-meters for the prior model.  Sensor altitude was treated as a free parameter with an a-priori standard deviation of 0.5 m and a lateral constraint standard deviation factor of 1.30.
+            data_file: Resolve.csv
 
 dimensions:
     layer_depth:

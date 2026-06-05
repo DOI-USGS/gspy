@@ -3,11 +3,9 @@ dataset_attrs:
     comment: This dataset includes AEM-derived point estimates of the elevation of the top of bedrock produced by USGS
     type: data
     structure: tabular
-    mode: ''
-    method: ''
-    submethod: ''
-    instrument: ''
-    property: ''
+    mode: airborne
+    method: electromagnetic
+    instrument: skytem
 
 coordinates:
     x: E_N83WTM

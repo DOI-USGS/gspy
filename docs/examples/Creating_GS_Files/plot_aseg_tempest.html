@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASEG to NetCDF &mdash; gspy 2.2.4 documentation</title>
+  <title>ASEG-GDF (Tempest AEM) &amp; Magnetic Raster &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,13 +18,13 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CSV to NetCDF" href="plot_csv_resolve.html" />
+    <link rel="next" title="CSV &amp; Rasters: Multi-dataset Survey with Derivative Products" href="plot_csv_skytem.html" />
     <link rel="prev" title="Examples" href="../index.html" /> 
 </head>
 
@@ -49,26 +49,32 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/metadata/index.html">Metadata Handling</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ASEG to NetCDF</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convert-the-aseg-data-to-netcdf">Convert the ASEG data to NetCDF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ASEG-GDF (Tempest AEM) &amp; Magnetic Raster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialize-the-survey">Initialize the Survey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attach-leaves-to-the-data-branch">Attach leaves to the data branch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-the-data-tree">View the Data Tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-netcdf-file">Save NetCDF file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plotting-examples">Plotting Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">CSV &amp; Rasters: Multi-dataset Survey with Derivative Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF (RESOLVE AEM)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_loupe.html">Loupe to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">Multi-dataset Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_dat_loupe.html">Loupe TEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench to NetCDF</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -86,7 +92,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
-      <li class="breadcrumb-item active">ASEG to NetCDF</li>
+      <li class="breadcrumb-item active">ASEG-GDF (Tempest AEM) &amp; Magnetic Raster</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/Creating_GS_Files/plot_aseg_tempest.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,24 +107,22 @@
 <p><a class="reference internal" href="#sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="aseg-to-netcdf">
-<span id="sphx-glr-examples-creating-gs-files-plot-aseg-tempest-py"></span><h1>ASEG to NetCDF<a class="headerlink" href="#aseg-to-netcdf" title="Link to this heading"></a></h1>
-<p>This example demonstrates the workflow for creating a GS file from the <a class="reference external" href="https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf">ASEG</a> file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:</p>
+<section class="sphx-glr-example-title" id="aseg-gdf-tempest-aem-magnetic-raster">
+<span id="sphx-glr-examples-creating-gs-files-plot-aseg-tempest-py"></span><h1>ASEG-GDF (Tempest AEM) &amp; Magnetic Raster<a class="headerlink" href="#aseg-gdf-tempest-aem-magnetic-raster" title="Link to this heading"></a></h1>
+<p>This example demonstrates the workflow for creating a GS file from the <a class="reference external" href="https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf">ASEG</a> file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:</p>
 <ol class="arabic simple">
 <li><p>Raw AEM data, from the Tempest system</p></li>
 <li><p>Inverted resistivity models</p></li>
 <li><p>An interpolated map of total magnetic intensity</p></li>
 </ol>
-<p>Dataset Reference:
-Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<p>Dataset Reference: <cite>Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.</cite></p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
 </pre></div>
 </div>
-<section id="convert-the-aseg-data-to-netcdf">
-<h2>Convert the ASEG data to NetCDF<a class="headerlink" href="#convert-the-aseg-data-to-netcdf" title="Link to this heading"></a></h2>
-<p>Initialize the Survey</p>
+<section id="initialize-the-survey">
+<h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;..//data_files//tempest_aseg&quot;</span>
 
@@ -129,1527 +133,287 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Create the first branch (container) called “data”</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw data&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="attach-leaves-to-the-data-branch">
+<h2>Attach leaves to the data branch<a class="headerlink" href="#attach-leaves-to-the-data-branch" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>Raw Data -</p></li>
+<li><p>Raw Data</p></li>
 </ol>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw and processed data&quot;</span><span class="p">))</span>
-
-<span class="c1"># Import raw AEM data from ASEG-format.</span>
-<span class="c1"># Define input data file and associated metadata file</span>
+<p>Import raw AEM data from ASEG-GDF2 format.
+Define input data file and associated metadata file. Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In this example, multiple systems are defined in the Tempest_data_md.yml metadata file</span>
 <span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest.dat&#39;</span><span class="p">)</span>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_data_md.yml&#39;</span><span class="p">)</span>
 
-<span class="c1"># Add the raw AEM data as a tabular dataset</span>
-<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<span class="c1"># Add the raw AEM data to the data branch</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span>
+                           <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span>
+                           <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>Inverted Models</p></li>
 </ol>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;inverted models&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;inverted 1-D electrical resistivity models&quot;</span><span class="p">))</span>
 
-<span class="c1"># Import inverted AEM models from ASEG-format.</span>
-<span class="c1"># Define input data file and associated metadata file</span>
+<span class="c1"># Define Path to inverted AEM models and corresponding metadata file</span>
 <span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model.dat&#39;</span><span class="p">)</span>
 <span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//Tempest_model_md.yml&#39;</span><span class="p">)</span>
 
-<span class="c1"># Read model data and format as Tabular class object</span>
-<span class="n">mod</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">,</span> <span class="n">derived_from</span><span class="o">=</span><span class="n">rd</span><span class="p">)</span>
+<span class="c1"># Add models to the model container, note this example contains a &quot;parameters&quot; group that</span>
+<span class="c1"># is added as a leaflet below the model group.</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span>
+                             <span class="n">data_filename</span><span class="o">=</span><span class="n">m_data</span><span class="p">,</span>
+                             <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp</span><span class="p">,</span>
+                             <span class="n">derived_from</span><span class="o">=</span><span class="n">rd</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
 <li><p>Magnetic Intensity Map</p></li>
 </ol>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_derived</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;derived maps&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new branch for the contractor-derived total magnetic intensity map</span>
+<span class="n">map_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;derived maps&quot;</span><span class="p">))</span>
 
 <span class="c1"># Import the magnetic data from TIF-format.</span>
-<span class="c1"># Define input metadata file (which contains the TIF filenames linked with desired variable names)</span>
-<span class="n">r_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.yml&#39;</span><span class="p">)</span>
+<span class="c1"># Note: raster data files are defined within the metadata file</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.yml&#39;</span><span class="p">)</span>
 
-<span class="c1"># Read data and format as Raster class object</span>
-<span class="n">data_derived</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">r_supp</span><span class="p">)</span>
-
-<span class="c1"># Save NetCDF file</span>
-<span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Tempest.nc&#39;</span><span class="p">)</span>
-<span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
+<span class="c1"># Add the magnetic map to the data</span>
+<span class="n">maps</span> <span class="o">=</span> <span class="n">map_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>uuid
-title
-institution
-source
-history
-references
-comment
-content
-conventions
-created_by
-type
-_FillValue
-contractor_project_number
-contractor
-client
-survey_type
-survey_area_name
-state
-country
-acquisition_start
-acquisition_end
-dataset_created
-coordinates
-_FillValue
-time
-area
-current
-frequency
-electromagnetic_moment
-magnetometer_b_field
-electromagnetic_b_field
-coordinates
-_FillValue
-traverse_line_spacing
-traverse_line_direction
-nominal_terrain_clearance
-final_line_kilometers
-TRAVERSE LINE NUMBERS
-REPEAT LINE NUMBERS
-PRE ZERO LINE NUMBERS
-POST ZERO LINE NUMBERS
-coordinates
-_FillValue
-aircraft
-aircraft_registration
-magnetometer
-magnetometer_installation
-electromagnetic_system
-electromagnetic_installation
-electromagnetic_coil_orientations
-spectrometer_system
-spectrometer_installation
-radar_altimeter_system
-radar_altimeter_sample_rate
-laser_altimeter_system
-laser_altimeter_sample_rate
-navigation_system
-navigation_sample_rate
-acquisition_system
-coordinates
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-content
-type
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-content
-type
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-uuid
-content
-comment
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-positive
-datum
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-em_system_components
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-em_system_components
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-em_system_components
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-em_system_components
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-positive
-datum
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-bounds
-content
-type
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-uuid
-content
-comment
-_FillValue
-standard_name
-long_name
-null_value
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-null_value
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-positive
-datum
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-standard_name
-long_name
-units
-null_value
-format
-valid_range
-grid_mapping
-coordinates
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-bounds
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-bounds
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-format
-axis
-positive
-datum
-valid_range
-grid_mapping
-type
-mode
-method
-submethod
-instrument
-uuid
-name
-structure
-data_normalized
-output_data_type
-reference_frame
-output_sample_frequency
-digitization_frequency
-_FillValue
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-grid_mapping
-valid_range
-grid_mapping
-grid_mapping
-_FillValue
-valid_range
-grid_mapping
-_FillValue
-valid_range
-grid_mapping
-valid_range
-grid_mapping
-valid_range
-grid_mapping
-valid_range
-grid_mapping
-grid_mapping
-valid_range
-grid_mapping
-_FillValue
-valid_range
-grid_mapping
-_FillValue
-valid_range
-grid_mapping
-grid_mapping
-grid_mapping
-grid_mapping
-grid_mapping
-grid_mapping
-valid_range
-grid_mapping
-valid_range
-grid_mapping
-valid_range
-grid_mapping
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-_FillValue
-label
-prefix
-long_name
-null_value
-units
-standard_name
-valid_range
-grid_mapping
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-type
-mode
-method
-submethod
-instrument
-name
-sample_frequency
-resolution
-type
-mode
-method
-submethod
-instrument
-name
-sample_frequency
-uuid
-comment
-content
-_FillValue
-standard_name
-long_name
-null_value
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-null_value
-valid_range
-grid_mapping
-coordinates
-_FillValue
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-coordinates
-_FillValue
-crs_wkt
-semi_major_axis
-semi_minor_axis
-inverse_flattening
-reference_ellipsoid_name
-longitude_of_prime_meridian
-prime_meridian_name
-geographic_crs_name
-horizontal_datum_name
-projected_crs_name
-grid_mapping_name
-standard_parallel
-latitude_of_projection_origin
-longitude_of_central_meridian
-false_easting
-false_northing
-authority
-wkid
-GeoTransform
-_FillValue
-standard_name
-long_name
-units
-null_value
-axis
-valid_range
-grid_mapping
-bounds
-standard_name
-long_name
-units
-null_value
-valid_range
-grid_mapping
-_FillValue
-standard_name
-long_name
-units
-null_value
-axis
-valid_range
-grid_mapping
-bounds
+</section>
+<section id="view-the-data-tree">
+<h2>View the Data Tree<a class="headerlink" href="#view-the-data-tree" title="Link to this heading"></a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;survey&#39;&gt;
+Group: /survey
+│   Dimensions:                 ()
+│   Coordinates:
+│       spatial_ref             float64 8B 0.0
+│   Data variables:
+│       survey_information      float64 8B nan
+│       survey_units            float64 8B nan
+│       flightline_information  float64 8B nan
+│       survey_equipment        float64 8B nan
+│   Attributes:
+│       type:         survey
+│       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
+│       institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
+│       source:       Contractor provided ASEG-GDF2 formatted data
+│       history:      This example dataset includes the raw AEM data and gridded ...
+│       references:   Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Ho...
+│       comment:      This dataset is incomplete and has been downsampled for the...
+│       content:      data branch containing raw AEM data (survey/data/raw_data) ...
+│       conventions:  CF-1.12, GS-2.0
+├── Group: /survey/data
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B 0.0
+│   │   Attributes:
+│   │       content:  raw data
+│   │       type:     container
+│   └── Group: /survey/data/raw_data
+│       │   Dimensions:         (index: 2001, gate_times: 15)
+│       │   Coordinates:
+│       │       spatial_ref     float64 8B 0.0
+│       │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
+│       │       x               (index) float64 16kB 3.579e+05 3.579e+05 ... 4.637e+05
+│       │       y               (index) float64 16kB 1.211e+06 1.211e+06 ... 1.211e+06
+│       │       z               (index) float64 16kB 45.83 46.61 46.95 ... 43.22 43.14 43.03
+│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│       │   Data variables: (12/58)
+│       │       line            (index) int32 8kB 225401 225401 225401 ... 225401 225401
+│       │       flight          (index) int32 8kB 10 10 10 10 10 10 10 ... 10 10 10 10 10 10
+│       │       fiducial        (index) float64 16kB 7.836e+03 7.836e+03 ... 9.835e+03
+│       │       proj_cgg        (index) int32 8kB 603756 603756 603756 ... 603756 603756
+│       │       proj_client     (index) int32 8kB 9999 9999 9999 9999 ... 9999 9999 9999
+│       │       date            (index) int32 8kB 20191128 20191128 ... 20191128 20191128
+│       │       ...              ...
+│       │       z_primaryfield  (index) float64 16kB 14.69 14.53 15.06 ... 14.29 13.33 13.83
+│       │       z_vlf1          (index) float64 16kB 3.696 3.733 3.729 ... 3.754 3.717 3.73
+│       │       z_vlf2          (index) float64 16kB 3.684 3.711 3.705 ... 3.728 3.692 3.721
+│       │       z_vlf3          (index) float64 16kB 3.637 3.607 3.623 ... 3.623 3.578 3.604
+│       │       z_vlf4          (index) float64 16kB 3.567 3.576 3.621 ... 3.585 3.572 3.605
+│       │       z_geofact       (index) float64 16kB 0.9969 0.9862 1.022 ... 0.9085 0.9425
+│       │   Attributes:
+│       │       content:     raw data
+│       │       comment:     This dataset includes minimally processed (raw) AEM data
+│       │       type:        data
+│       │       mode:        airborne
+│       │       method:      magnetic, radiometric, electromagnetic, time domain
+│       │       instrument:  30Hz Tempest
+│       │       structure:   tabular
+│       └── Group: /survey/data/raw_data/tempest_system
+│               Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
+│                                                  waveform_time: 7, n_receiver: 2,
+│                                                  n_couplet: 2, dim_0: 1)
+│               Coordinates:
+│                 * nv                            (nv) int64 16B 0 1
+│                 * n_transmitter                 (n_transmitter) int64 8B 0
+│                 * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
+│                 * n_receiver                    (n_receiver) int64 16B 0 1
+│                 * n_couplet                     (n_couplet) int64 16B 0 1
+│               Dimensions without coordinates: dim_0
+│               Data variables: (12/26)
+│                   gate_times_bnds               (gate_times, nv) float64 240B 5.43e-06 ... ...
+│                   transmitter_label             (n_transmitter) &lt;U1 4B &#39;Z&#39;
+│                   transmitter_area              (n_transmitter) int64 8B 155
+│                   transmitter_waveform_type     (n_transmitter) &lt;U6 24B &#39;square&#39;
+│                   transmitter_waveform_current  (waveform_time) float64 56B 0.0 1.0 ... 0.0
+│                   transmitter_scale_factor      (n_transmitter) float64 8B 0.5
+│                   ...                            ...
+│                   couplet_txrx_dz               (n_couplet) int64 16B -52 -52
+│                   data_normalized               (dim_0) bool 1B True
+│                   output_data_type              &lt;U1 4B &#39;B&#39;
+│                   reference_frame               &lt;U24 96B &#39;right-handed positive up&#39;
+│                   output_sample_frequency       (dim_0) int64 8B 5
+│                   digitization_frequency        (dim_0) int64 8B 92160
+│               Attributes:
+│                   type:        system
+│                   mode:        airborne
+│                   method:      electromagnetic, time domain
+│                   instrument:  30Hz Tempest
+│                   name:        tempest_system
+├── Group: /survey/models
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B 0.0
+│   │   Attributes:
+│   │       content:  inverted 1-D electrical resistivity models
+│   │       type:     container
+│   └── Group: /survey/models/inverted_models
+│       │   Dimensions:                  (index: 2001, layer_depth: 30, nv: 2,
+│       │                                 gate_times: 15)
+│       │   Coordinates:
+│       │       spatial_ref              float64 8B 0.0
+│       │     * index                    (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
+│       │     * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+│       │     * nv                       (nv) int64 16B 0 1
+│       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+│       │       x                        (index) float64 16kB 3.579e+05 ... 4.637e+05
+│       │       y                        (index) float64 16kB 1.211e+06 ... 1.211e+06
+│       │       z                        (index) float64 16kB 45.83 46.61 ... 43.14 43.03
+│       │   Data variables: (12/46)
+│       │       layer_depth_bnds         (layer_depth, nv) float64 480B 0.0 3.0 ... 489.1
+│       │       gate_times_bnds          (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
+│       │       uniqueid                 (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
+│       │       survey                   (index) int32 8kB 9999 9999 9999 ... 9999 9999 9999
+│       │       date                     (index) int32 8kB 20191128 20191128 ... 20191128
+│       │       flight                   (index) int32 8kB 10 10 10 10 10 ... 10 10 10 10 10
+│       │       ...                       ...
+│       │       phic                     (index) float64 16kB 0.4491 0.4759 ... 0.03086
+│       │       phit                     (index) float64 16kB 0.0 0.0 0.0 ... 0.0 0.0 0.0
+│       │       phig                     (index) float64 16kB 0.9652 0.6608 ... 0.4684 2.68
+│       │       phis                     (index) float64 16kB 0.1158 0.1392 ... 0.03632
+│       │       lambda                   (index) float64 16kB 0.5968 0.5487 ... 1.129 3.481
+│       │       iterations               (index) int32 8kB 20 19 25 25 25 ... 19 23 23 22 30
+│       │   Attributes:
+│       │       content:     inverted resistivity models
+│       │       comment:     This dataset includes inverted resistivity models derived fr...
+│       │       type:        model
+│       │       method:      electromagnetic, time domain
+│       │       instrument:  30Hz Tempest
+│       │       mode:        airborne
+│       │       property:    electrical conductivity
+│       │       structure:   tabular
+│       └── Group: /survey/models/inverted_models/inversion_parameters
+│               Dimensions:      ()
+│               Data variables:
+│                   parameters   object 8B None
+│               Attributes:
+│                   type:        parameters
+│                   method:      electromagnetic, time domain
+│                   instrument:  30Hz Tempest
+│                   mode:        airborne
+│                   property:    electrical conductivity
+│                   name:        inversion_parameters
+└── Group: /survey/derived_maps
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B 0.0
+    │   Attributes:
+    │       content:  derived maps
+    │       type:     container
+    └── Group: /survey/derived_maps/maps
+        │   Dimensions:       (x: 599, nv: 2, y: 1212)
+        │   Coordinates:
+        │       spatial_ref   float64 8B 0.0
+        │     * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+        │     * nv            (nv) int64 16B 0 1
+        │     * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        │   Data variables:
+        │       x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
+        │       y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
+        │       magnetic_tmi  (y, x) float64 6MB nan nan nan nan nan ... nan nan nan nan nan
+        │   Attributes:
+        │       comment:     contractor-derived product
+        │       content:     gridded map of total magnetic intensity
+        │       type:        data
+        │       mode:        airborne
+        │       method:      magnetic
+        │       instrument:  Scintrex CS-3 cesium vapor magnetometer
+        │       structure:   raster
+        └── Group: /survey/derived_maps/maps/magnetic_system
+                Dimensions:                             (base_mag_locations: 6, nv: 2,
+                                                         n_transmitter: 1, n_receiver: 1,
+                                                         n_couplet: 1, n_base_magnetometer: 1)
+                Coordinates:
+                  * base_mag_locations                  (base_mag_locations) int64 48B 1 2 ... 6
+                  * n_transmitter                       (n_transmitter) int64 8B 0
+                  * n_receiver                          (n_receiver) int64 8B 0
+                  * n_couplet                           (n_couplet) int64 8B 0
+                  * n_base_magnetometer                 (n_base_magnetometer) int64 8B 0
+                Data variables: (12/35)
+                    base_mag_locations_bnds             (base_mag_locations, nv) float64 96B ...
+                    transmitter_label                   (n_transmitter) &lt;U7 28B &#39;passive&#39;
+                    transmitter_description             (n_transmitter) &lt;U107 428B &quot;No artifi...
+                    receiver_label                      (n_receiver) &lt;U19 76B &#39;scalar_magneto...
+                    receiver_sensor_type                (n_receiver) &lt;U12 48B &#39;cesium_vapor&#39;
+                    receiver_sensor_model               (n_receiver) &lt;U4 16B &#39;CS-3&#39;
+                    ...                                  ...
+                    diurnal_correction                  &lt;U142 568B &#39;Diurnal base values appli...
+                    igrf_model_date                     &lt;U10 40B &#39;2019-12-01&#39;
+                    igrf_model_height                   &lt;U7 28B &#39;167.9 m&#39;
+                    igrf_removed_model_epoch            &lt;U6 24B &#39;2015.0&#39;
+                    tieline_levelling                   &lt;U137 548B &#39;RMI levelled to prior RES...
+                    deliverables                        &lt;U63 252B &#39;Total Magnetic Intensity (...
+                Attributes:
+                    type:        system
+                    mode:        airborne
+                    method:      magnetic
+                    instrument:  Scintrex CS-3 c cesium-vapor magnetometer
+                    name:        magnetic_system
+</pre></div>
+</div>
+</section>
+<section id="save-netcdf-file">
+<h2>Save NetCDF file<a class="headerlink" href="#save-netcdf-file" title="Link to this heading"></a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Tempest.nc&#39;</span><span class="p">)</span>
+<span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Read back in the NetCDF file</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
-
-<span class="c1"># Once the survey is read in, we can access variables like a standard xarray dataset.</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Once the survey is read in, we can access variables like a standard xarray dataset.</p>
+<p>Option A:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps/maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
     spatial_ref  float64 8B ...
-Attributes:
-    standard_name:  total_magnetic_intensity
-    long_name:      Total magnetic intensity, diurnally corrected and filtered
-    units:          nT
-    null_value:     1.70141e+38
-    valid_range:    [-17504.6640625   11490.32324219]
-    grid_mapping:   spatial_ref
-&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
-[725988 values with dtype=float64]
-Coordinates:
-  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
   * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
-    spatial_ref  float64 8B ...
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 Attributes:
     standard_name:  total_magnetic_intensity
     long_name:      Total magnetic intensity, diurnally corrected and filtered
@@ -1659,25 +423,41 @@ Attributes:
     grid_mapping:   spatial_ref
 </pre></div>
 </div>
-<p>Plotting</p>
+<p>Option B:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
+[725988 values with dtype=float64]
+Coordinates:
+    spatial_ref  float64 8B ...
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+Attributes:
+    standard_name:  total_magnetic_intensity
+    long_name:      Total magnetic intensity, diurnally corrected and filtered
+    units:          nT
+    null_value:     1.70141e+38
+    valid_range:    [-17504.6640625   11490.32324219]
+    grid_mapping:   spatial_ref
+</pre></div>
+</div>
+</section>
+<section id="plotting-examples">
+<h2>Plotting Examples<a class="headerlink" href="#plotting-examples" title="Link to this heading"></a></h2>
+<p>demonstrating different ways to access and plot variables</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific tabular variable, using GSPy&#39;s plotter</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;tx_height&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
-
-<span class="c1"># Make a 2-D map plot of a specific raster variable, using Xarrays&#39;s plotter</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># plt.show()</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img src="../../_images/sphx_glr_plot_aseg_tempest_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_001.png" alt="plot aseg tempest" class = "sphx-glr-multi-img"/></li>
-<li><img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
-</ul>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh object at 0x15980c6b0&gt;
+<img src="../../_images/sphx_glr_plot_aseg_tempest_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_001.png" alt="plot aseg tempest" class = "sphx-glr-single-img"/><p>Make a 2-D map plot of a specific raster variable, using Xarrays’s plotter</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.286 seconds)</p>
+<img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.571 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f4ba3c5b4e1b387ce8109a435ed7d940/plot_aseg_tempest.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_aseg_tempest.ipynb</span></code></a></p>
@@ -1698,7 +478,7 @@ Attributes:
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_csv_resolve.html" class="btn btn-neutral float-right" title="CSV to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_csv_skytem.html" class="btn btn-neutral float-right" title="CSV &amp; Rasters: Multi-dataset Survey with Derivative Products" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

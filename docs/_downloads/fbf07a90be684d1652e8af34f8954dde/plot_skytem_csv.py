@@ -65,6 +65,9 @@ d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
 system = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], hm_gate_times=np.s_[10:]),
           "magnetic_system" : survey["magnetic_system"]}
 
+sys =  system["skytem_system"].to_dataset()
+print(sys.isel({"n_receiver": 0}))
+
 # Add the processed AEM data as a tabular dataset
 pd = data_container.gs.add(key='processed_data', data_filename=d_data2, metadata_file=d_supp2, system=system)
 

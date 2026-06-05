@@ -33,9 +33,8 @@ class System(Dataset):
     def check_against_data(self, dataset):
         """Assert that gate time strings match the coordinates of the attached dataset.
         """
-        for gt in self._obj['component_gate_times']:
-            assert gt in list(dataset.coords.keys()), ValueError(f"Could not match component gate times {gt} to dataset coordinates")
-
+        for gt in self._obj['couplet_gate_times']:
+            assert gt in list(dataset.coords.keys()), ValueError(f"Could not match couplet gate times {gt} to dataset coordinates")
 
     @classmethod
     def open(cls, filename, **kwargs):
@@ -58,21 +57,21 @@ class System(Dataset):
                                                  is_dimension=True,
                                                  **value)
 
-        required_prefixes = ['transmitter', 'receiver', 'component']
+        required_prefixes = ['transmitter', 'receiver', 'couplet']
 
         prefixes =  unique_list_preserve(required_prefixes + kwargs.pop('prefixes', []))
 
         assert 'variables' in kwargs, ValueError("Missing variables section for system")
-        assert all([x in kwargs['variables'] for x in required_prefixes]), ValueError("transmiter, receiver, component must be contained in the variables")
+        assert all([x in kwargs['variables'] for x in required_prefixes]), ValueError("transmiter, receiver, couplet must be contained in the variables")
 
         if 'variables' in kwargs:
             for prefix in prefixes:
                 vars = kwargs['variables']
-                if prefix == 'component' and 'component' in vars:
-                    vars['component'] = self.__component_labels(**vars['component'])
-
-                    if 'gate_times' in vars['component']:
-                        vars['component']['gate_times'] = [x.lower() for x in vars['component']['gate_times']]
+                if prefix == 'couplet' and 'couplet' in vars:
+                    if 'label' not in vars['couplet'].keys():
+                        vars['couplet'] = self.__couplet_labels(**vars['couplet'])
+                    if 'gate_times' in vars['couplet']:
+                        vars['couplet']['gate_times'] = [x.lower() for x in vars['couplet']['gate_times']]
 
                 self, kwargs['variables'] = self.__add_using_prefix(prefix, **kwargs['variables'])
 
@@ -92,7 +91,7 @@ class System(Dataset):
 
         return self._obj
 
-    def __component_labels(self, **kwargs):
+    def __couplet_labels(self, **kwargs):
         kwargs['label'] = kwargs.get('receivers')
         if 'transmitters' in kwargs:
             kwargs['label'] = [f"{a}_{b}" for a, b in zip(kwargs['transmitters'], kwargs['label'])]
@@ -145,10 +144,6 @@ class System(Dataset):
     @classmethod
     def valid_method(cls, **kwargs):
         return kwargs["method"] in ("electromagnetic", "magnetic", "gravity", "galvanic", "nmr")
-
-    @classmethod
-    def valid_submethod(cls, **kwargs):
-        return kwargs["submethod"] in ("frequency domain", "time domain", "direct current", "induced polarization", "total field", "gradiometry", "absolute")
 
     @classmethod
     def valid_instrument(cls, **kwargs):

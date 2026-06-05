@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# GSpy documentation build configuration file, created by
+# GSPy documentation build configuration file, created by
 # sphinx-quickstart on Mon Jan 16 22:27:38 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -376,4 +376,5 @@ sphinx_gallery_conf = {
     'abort_on_example_error': True,
     'remove_config_comments': True,
     'nested_sections': False
+    #'copyfile_regex' : r'.*/help_.*\.py$'
 }

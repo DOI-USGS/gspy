@@ -6,8 +6,8 @@ dataset_attrs:
     references: <data release reference>
     comment: <additional details or ancillary information>
     content: raw data, processed data
-    conventions: CF-1.8, GS-0.0.1
-    created_by: gspy==0.0.1
+    conventions: CF-1.13, GS-2.0
+    created_by: gspy==2.2.8
 
 survey_information:
     contractor_project_number: 603756RWA
