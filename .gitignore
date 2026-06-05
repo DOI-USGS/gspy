@@ -11,3 +11,4 @@ documentation_source/build/
 documentation_source/source/examples/
 dist/
 _version.py
+.DS_Store

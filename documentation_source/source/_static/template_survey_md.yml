@@ -1,0 +1,43 @@
+dataset_attrs:
+    title: descriptive title for the survey and its data
+    institution: who owns and produced this data
+    source:  where did the data come from
+    history: summarized history of the process steps
+    references: citation
+    comment: miscellaneous information 
+    summary: abstract
+    content: brief summary of file contents (list all the groups and what they contain)
+    created_by: gspy==2.2.8
+    conventions: CF-1.13, GS-2.0
+
+spatial_ref:
+    wkid: well-known id number, such as 4326
+    authority: authority for the wkid, such as EPSG
+    crs_wkt: coordinate reference system well-known text
+    proj_string: projection string
+    prj_file: full path to projection file
+    vertical_crs: optional, vertical reference system
+
+survey_information:
+    contractor_project_number: 20022
+    contractor: SkyTEM Canada Inc
+    client: U.S. Geological Survey
+    survey_type: EM/Mag
+    survey_area_name: Northeast Wisconsin Bedrock Mapping
+    state: WI
+    country: USA
+    acquisition_start: 20210117
+    acquisition_end: 20210207
+    survey_attributes_units: SI
+
+survey_equipment:
+    aircraft: Eurocopter Astar 350 B3
+    magnetometer: Geometrics G822A, Kroum KMAG4 counter
+    magnetometer_installation: Front of transmitter frame
+    electromagnetic_system: SkyTEM 304M
+    electromagnetic_installation: Rigid transmitter frame 40m beneath helicopter, Receiver coils at rear of transmitter frame 2m vertical offset
+    laser_altimeter_system: MDL ILM 300R (2)
+    laser_altimeter_sample_rate: 0.033 s
+    navigation_system: Real-time differential GPS Trimble Bullet III
+    navigation_sample_rate: 1.0 s
+    acquisition_system: skytem

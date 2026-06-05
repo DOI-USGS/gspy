@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workbench to NetCDF &mdash; gspy 2.2.4 documentation</title>
+  <title>Workbench to NetCDF &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,14 +18,14 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Basic Class Structure" href="../Interacting_With_GS_Files/plot_xarray_methods.html" />
-    <link rel="prev" title="Multi-dataset Survey" href="plot_csv_skytem.html" /> 
+    <link rel="next" title="Basic Functionality" href="../Interacting_With_GS_Files/plot_xarray_methods.html" />
+    <link rel="prev" title="Magnetic Raster Dataset" href="plot_csv_magnetics.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,16 +49,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/metadata/index.html">Metadata Handling</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest.html">ASEG to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest.html">ASEG-GDF (Tempest AEM) &amp; Magnetic Raster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">CSV &amp; Rasters: Multi-dataset Survey with Derivative Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF (RESOLVE AEM)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_loupe.html">Loupe to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">Multi-dataset Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_dat_loupe.html">Loupe TEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Workbench to NetCDF</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-aseg-data-to-netcdf">Convert the ASEG data to NetCDF</a></li>
 </ul>
@@ -68,7 +68,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -122,110 +124,123 @@ to download the full example code.</p>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Raw Data -</p></li>
-</ol>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw and processed data&quot;</span><span class="p">))</span>
+<p>1. Raw Data -
+data_container = survey.gs.add_container(‘data’, <a href="#id1"><span class="problematic" id="id2">**</span></a>dict(content = “raw and processed data”))</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Import workbench data files</span>
+<span class="c1"># # Define input data file and associated metadata file</span>
+<span class="c1"># d_data = join(data_path, &#39;data//prod_726_729raw_RAW_export.xyz&#39;)</span>
+<span class="c1"># d_supp = join(data_path, &#39;data//raw_data.yml&#39;)</span>
 
-<span class="c1"># Import workbench data files</span>
-<span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//prod_726_729raw_RAW_export.xyz&#39;</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//raw_data.yml&#39;</span><span class="p">)</span>
+<span class="c1"># # Add the raw AEM data as a tabular dataset</span>
+<span class="c1"># rd = data_container.gs.add(key=&#39;raw_data&#39;, data_filename=d_data, metadata_file=d_supp)</span>
 
-<span class="c1"># Add the raw AEM data as a tabular dataset</span>
-<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<span class="c1"># 2. Inversion results</span>
+<span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;inverse models&#39;</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">rd</span><span class="p">)</span>
+<span class="c1"># Import workbench inversion results</span>
+<span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//prod_726_729_LBv2_bky_MOD_dat.xyz&#39;</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//models.yml&#39;</span><span class="p">)</span>
 
-<span class="c1"># # 2. Inversion results</span>
-<span class="c1"># model_container = survey.gs.add_container(&#39;models&#39;, **dict(content=&#39;inverse models&#39;))</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 
-<span class="c1"># # Import workbench inversion results</span>
-<span class="c1"># d_data = join(data_path, &#39;model//prod_726_729_LBv2_bky_MOD_dat.xyz&#39;)</span>
-<span class="c1"># d_supp = join(data_path, &#39;model//models.yml&#39;)</span>
-<span class="c1"># md = model_container.gs.add(key=&#39;inversion&#39;, data_filename=d_data, metadata_file=d_supp)</span>
-
-<span class="c1"># print(md)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{1: &#39;lm_z&#39;, 2: &#39;hm_z&#39;}
-&lt;xarray.DataTree &#39;raw_data&#39;&gt;
-Group: /survey/data/raw_data
-│   Dimensions:          (index: 338, lm_gate_times: 28, hm_gate_times: 37)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Detected gate_time metadata from the workbench files
+{&#39;hm_gate_times&#39;: {&#39;centers&#39;: array([7.292e-05, 7.641e-05, 8.091e-05, 8.641e-05, 9.342e-05, 1.024e-04,
+       1.139e-04, 1.284e-04, 1.464e-04, 1.689e-04, 1.969e-04, 2.324e-04,
+       2.779e-04, 3.349e-04, 4.069e-04, 4.979e-04, 6.119e-04, 7.559e-04,
+       9.374e-04, 1.166e-03, 1.454e-03, 1.818e-03, 2.277e-03, 2.855e-03,
+       3.574e-03, 4.454e-03, 5.531e-03, 6.849e-03, 8.463e-03, 1.044e-02]),
+                   &#39;long_name&#39;: &#39;calibrated high moment gate times&#39;,
+                   &#39;null_value&#39;: &#39;not_defined&#39;,
+                   &#39;standard_name&#39;: &#39;hm_gate_times&#39;,
+                   &#39;units&#39;: &#39;seconds&#39;},
+ &#39;lm_gate_times&#39;: {&#39;centers&#39;: array([1.273e-05, 1.622e-05, 2.072e-05, 2.622e-05, 3.323e-05, 4.222e-05,
+       5.372e-05, 6.822e-05, 8.622e-05, 1.087e-04, 1.367e-04, 1.722e-04,
+       2.177e-04, 2.747e-04, 3.467e-04, 4.377e-04, 5.517e-04, 6.957e-04,
+       8.772e-04, 1.106e-03, 1.394e-03]),
+                   &#39;long_name&#39;: &#39;calibrated low moment gate times&#39;,
+                   &#39;null_value&#39;: &#39;not_defined&#39;,
+                   &#39;standard_name&#39;: &#39;lm_gate_times&#39;,
+                   &#39;units&#39;: &#39;seconds&#39;}}
+&lt;xarray.DataTree &#39;inversion&#39;&gt;
+Group: /survey/models/inversion
+│   Dimensions:              (index: 926, layer_depth: 40, nv: 2,
+│                             layers_minus_1: 39, lm_gate_times: 21,
+│                             hm_gate_times: 30)
 │   Coordinates:
-│     * index            (index) int32 1kB 0 1 2 3 4 5 6 ... 332 333 334 335 336 337
-│     * lm_gate_times    (lm_gate_times) float64 224B 1e-07 2.25e-07 ... 0.001394
-│     * hm_gate_times    (hm_gate_times) float64 296B 5.892e-05 ... 0.01044
-│       spatial_ref      float64 8B 0.0
-│       x                (index) float64 3kB 1.746e+06 1.746e+06 ... 1.745e+06
-│       y                (index) float64 3kB 1.981e+06 1.981e+06 ... 1.983e+06
-│       z                (index) float64 3kB 4.82 5.19 5.31 5.66 ... 5.44 5.26 5.21
-│   Data variables: (12/18)
-│       date             (index) object 3kB &#39;2022-07-26&#39; ... &#39;2022-07-26&#39;
-│       time             (index) object 3kB &#39;12:36:24.002&#39; ... &#39;12:42:21.342&#39;
-│       line_no          (index) int64 3kB 101201 101201 101201 ... 200801 200801
-│       utmx             (index) float64 3kB 1.746e+06 1.746e+06 ... 1.745e+06
-│       utmy             (index) float64 3kB 1.981e+06 1.981e+06 ... 1.983e+06
-│       elevation        (index) float64 3kB 4.82 5.19 5.31 5.66 ... 5.44 5.26 5.21
-│       ...               ...
-│       tilt_y           (index) float64 3kB 3.8 3.3 3.3 3.0 2.8 ... 2.0 1.9 1.1 0.9
-│       tilt_y_std       (index) float64 3kB 1.004 1.004 1.004 ... 1.004 1.004 1.004
-│       DBDT_LM_Z        (index, lm_gate_times) float64 76kB 9.999e+03 ... 9.999e+03
-│       DBDT_STD_LM_Z    (index, lm_gate_times) float64 76kB 9.999e+03 ... 9.999e+03
-│       DBDT_HM_Z        (index, hm_gate_times) float64 100kB nan nan ... nan nan
-│       DBDT_STD_HM_Z    (index, hm_gate_times) float64 100kB nan nan ... nan nan
+│       spatial_ref          float64 8B 0.0
+│     * index                (index) int32 4kB 0 1 2 3 4 5 ... 921 922 923 924 925
+│     * layer_depth          (layer_depth) float64 320B 0.25 0.7788 ... 284.3 375.0
+│     * nv                   (nv) int64 16B 0 1
+│     * layers_minus_1       (layers_minus_1) int64 312B 0 1 2 3 4 ... 35 36 37 38
+│     * lm_gate_times        (lm_gate_times) float64 168B 1.273e-05 ... 0.001394
+│     * hm_gate_times        (hm_gate_times) float64 240B 7.292e-05 ... 0.01044
+│       x                    (index) float64 7kB 4.614e+05 4.614e+05 ... 4.8e+05
+│       y                    (index) float64 7kB 4.333e+06 4.333e+06 ... 4.359e+06
+│       z                    (index) float64 7kB 6.4 5.8 5.2 4.7 ... 0.4 0.4 0.4 0.3
+│   Data variables: (12/28)
+│       layer_depth_bnds     (layer_depth, nv) float64 640B 0.0 0.5 ... 300.0 450.0
+│       layers_minus_1_bnds  (layers_minus_1, nv) float64 624B -0.5 0.5 ... 38.5
+│       lm_gate_times_bnds   (lm_gate_times, nv) float64 336B -3.145e-06 ... 0.00141
+│       hm_gate_times_bnds   (hm_gate_times, nv) float64 480B 2.742e-05 ... 0.01049
+│       line_no              (index) int64 7kB 101201 101201 ... 103801 103801
+│       date                 (index) object 7kB &#39;2022-07-26&#39; ... &#39;2022-07-26&#39;
+│       ...                   ...
+│       lm_z_data            (index, lm_gate_times) float64 156kB 3.208e-09 ... 9...
+│       lm_z_datastd         (index, lm_gate_times) float64 156kB 1.03 ... 9.999e+03
+│       hm_z_data            (index, hm_gate_times) float64 222kB nan ... 9.999e+03
+│       hm_z_datastd         (index, hm_gate_times) float64 222kB nan ... 9.999e+03
+│       lm_z_syn             (index, lm_gate_times) float64 156kB 3.274e-09 ... 9...
+│       hm_z_syn             (index, hm_gate_times) float64 222kB nan ... 9.999e+03
 │   Attributes:
-│       uuid:        9e3330ba-0aaa-448a-ac82-9990ea399e13
 │       content:     raw data
 │       comment:     ??
-│       type:        data
+│       type:        model
 │       structure:   tabular
 │       mode:        airborne
 │       method:      electromagnetic
 │       submethod:   time domain
 │       instrument:  skytem
 │       property:
-└── Group: /survey/data/raw_data/nominal_system
-        Dimensions:                                      (gate_times: 22, nv: 2,
-                                                          lm_gate_times: 28,
-                                                          hm_gate_times: 37,
+└── Group: /survey/models/inversion/nominal_system
+        Dimensions:                                      (lm_gate_times: 21, nv: 2,
+                                                          hm_gate_times: 30,
                                                           n_loop_vertices: 8, xyz: 3,
                                                           n_transmitter: 2,
                                                           transmitter_lm_waveform_time: 21,
                                                           transmitter_hm_waveform_time: 36,
-                                                          n_receiver: 1, n_component: 2)
+                                                          n_receiver: 1, n_couplet: 2)
         Coordinates:
-          * gate_times                                   (gate_times) float64 176B 5....
-          * nv                                           (nv) int64 16B 0 1
           * n_loop_vertices                              (n_loop_vertices) int64 64B ...
           * xyz                                          (xyz) int64 24B 0 1 2
           * n_transmitter                                (n_transmitter) int64 16B 0 1
           * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
           * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
           * n_receiver                                   (n_receiver) int64 8B 0
-          * n_component                                  (n_component) int64 16B 0 1
-        Data variables: (12/32)
-            gate_times_bnds                              (gate_times, nv) float64 352B ...
-            lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
-            hm_gate_times_bnds                           (hm_gate_times, nv) float64 592B ...
+          * n_couplet                                    (n_couplet) int64 16B 0 1
+        Data variables: (12/33)
+            lm_gate_times_bnds                           (lm_gate_times, nv) float64 336B ...
+            hm_gate_times_bnds                           (hm_gate_times, nv) float64 480B ...
             n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
             xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
             transmitter_label                            (n_transmitter) &lt;U2 16B &#39;lm&#39;...
+            transmitter_number_of_turns                  (n_transmitter) int64 16B 1 4
             ...                                           ...
-            component_sample_rate                        (n_component) float64 16B 0....
-            component_txrx_dx                            (n_component) float64 16B -1...
-            component_txrx_dy                            (n_component) float64 16B 0....
-            component_txrx_dz                            (n_component) float64 16B -2...
-            component_data_type                          (n_component) &lt;U4 32B &#39;dBdt&#39;...
-            component_gate_times                         (n_component) &lt;U13 104B &#39;lm_...
+            couplet_sample_rate                          (n_couplet) float64 16B 0.1 0.1
+            couplet_txrx_dx                              (n_couplet) float64 16B -13....
+            couplet_txrx_dy                              (n_couplet) float64 16B 0.0 0.0
+            couplet_txrx_dz                              (n_couplet) float64 16B -2.0...
+            couplet_data_type                            (n_couplet) &lt;U4 32B &#39;dBdt&#39; &#39;...
+            couplet_gate_times                           (n_couplet) &lt;U13 104B &#39;lm_ga...
         Attributes:
             type:                      system
             mode:                      airborne
             method:                    electromagnetic
-            submethod:                 time domain
             instrument:                skytem
-            uuid:                      c9718fcd-cdc2-48be-a014-c693b4af673f
             name:                      nominal_system
+            submethod:                 time domain
             data_normalized:           True
             skytem_skb_gex_available:  True
             reference_frame:           right-handed positive down
@@ -233,7 +248,7 @@ Group: /survey/data/raw_data
             sample_rate:               0.1
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.061 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.649 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/80fa00703aec9cd579f2311600850f2c/plot_xyz_workbench_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xyz_workbench_to_netcdf.ipynb</span></code></a></p>
@@ -253,8 +268,8 @@ Group: /survey/data/raw_data
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_csv_skytem.html" class="btn btn-neutral float-left" title="Multi-dataset Survey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Interacting_With_GS_Files/plot_xarray_methods.html" class="btn btn-neutral float-right" title="Basic Class Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_csv_magnetics.html" class="btn btn-neutral float-left" title="Magnetic Raster Dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Interacting_With_GS_Files/plot_xarray_methods.html" class="btn btn-neutral float-right" title="Basic Functionality" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

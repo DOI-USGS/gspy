@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dataset &mdash; gspy 2.2.4 documentation</title>
+  <title>Dataset &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,9 +18,9 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -49,6 +49,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata/index.html">Metadata Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../gs_datatree/index.html">DataTree Accessors</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Dataset Accessors</a><ul class="current">
@@ -64,8 +67,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../gs_dataarray/index.html">DataArray Accessors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -96,12 +98,15 @@
              
   <section id="dataset">
 <h1>Dataset<a class="headerlink" href="#dataset" title="Link to this heading"></a></h1>
-<div class="graphviz"><img src="../../../_images/inheritance-c8bd12e799cebd3aa597acd45b092e64b1de88b5.png" alt="Inheritance diagram of gspy.gs_dataset.Dataset" usemap="#inheritancea5ca1214b4" class="inheritance graphviz" /></div>
-<map id="inheritancea5ca1214b4" name="inheritancea5ca1214b4">
-<area shape="rect" id="node1" href="#gspy.gs_dataset.Dataset.Dataset" target="_top" title="Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention." alt="" coords="5,5,77,32"/>
-</map><dl class="py class" id="module-gspy.gs_dataset.Dataset">
+digraph inheritancea5ca1214b4 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;Dataset&quot; [URL=&quot;#gspy.gs_dataset.Dataset.Dataset&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.&quot;];
+}
+<dl class="py class" id="module-gspy.gs_dataset.Dataset">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataset.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataset.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset" title="Link to this definition"></a></dt>
 <dd><p>Accessor to xarray.Dataset to better handle coordinates/dimensions and variables that honour the CF convention.</p>
 <p>Checks necessary metadata to satisfy the CF convention, and allows use with GIS software.</p>
 <dl class="field-list simple">
@@ -114,7 +119,7 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.Survey">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.Survey" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.Survey" title="Link to this definition"></a></dt>
 <dd><p>Attach an xarray.Dataset containing GS metadata or create one from a dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -349,13 +354,18 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.component_labels">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">component_labels</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.component_labels" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.attrs">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">attrs</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.attrs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.couplet_labels">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">couplet_labels</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.couplet_labels" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.distance_along_line">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance_along_line</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.distance_along_line" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">distance_along_line</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.distance_along_line" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -370,7 +380,7 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.is_projected">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.is_projected" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.is_projected" title="Link to this definition"></a></dt>
 <dd><p>Does the dataset have a projected spatial reference</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -384,12 +394,12 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.json_metadata">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.json_metadata" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">json_metadata</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.json_metadata" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.metadata_template">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.metadata_template" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.metadata_template" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -413,6 +423,11 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.plot_cross_section">
 <span class="sig-name descname"><span class="pre">plot_cross_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hang_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'elevation'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.plot_cross_section" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.required_metadata">
+<span class="sig-name descname"><span class="pre">required_metadata</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('type',</span> <span class="pre">'structure',</span> <span class="pre">'mode',</span> <span class="pre">'method',</span> <span class="pre">'instrument')</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.required_metadata" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -472,7 +487,7 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.spatial_ref">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.spatial_ref" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">spatial_ref</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.spatial_ref" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -496,17 +511,6 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.update_attrs">
-<span class="sig-name descname"><span class="pre">update_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.update_attrs" title="Link to this definition"></a></dt>
-<dd><p>Adds metadata from Json with keys flattened. This is the only way to add nested metadata as dicts into xarray attrs.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.uuid">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uuid</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.uuid" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.write_ncml">

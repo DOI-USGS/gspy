@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASEG to NetCDF &mdash; gspy 2.2.4 documentation</title>
+  <title>ASEG to NetCDF &mdash; gspy 2.2.8.post1.dev0+g5d80961a9.d20260316 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,13 +18,13 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=9fe011ec"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CSV to NetCDF" href="plot_resolve_csv.html" />
+    <link rel="next" title="ASEG to NetCDF" href="plot_aseg_tempest.html" />
     <link rel="prev" title="Examples" href="../index.html" /> 
 </head>
 
@@ -49,26 +49,31 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ASEG to NetCDF</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#convert-the-aseg-data-to-netcdf">Convert the ASEG data to NetCDF</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="plot_aseg_tempest.html">ASEG to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_resolve_csv.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_resolve.html">CSV to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs to NetCDF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_loupe_csv.html">Loupe to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_loupe.html">Loupe to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Survey</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_magnetics_csv.html">Magnetic Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_csv_skytem.html">Multi-dataset Survey</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_skytem_csv.html">Multi-dataset Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench to NetCDF</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -182,12 +187,16 @@ Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and B
 <span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data/derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><env> RuntimeWarning: Engine &#39;gmt&#39; loading failed:
+Error loading GMT shared library at &#39;libgmt.dylib&#39;.
+dlopen(libgmt.dylib, 0x0006): tried: &#39;libgmt.dylib&#39; (no such file), &#39;/System/Volumes/Preboot/Cryptexes/OSlibgmt.dylib&#39; (no such file), &#39;<env>&#39; (no such file), &#39;<env>&#39; (no such file), &#39;/usr/lib/libgmt.dylib&#39; (no such file, not in dyld cache), &#39;libgmt.dylib&#39; (no such file), &#39;/usr/local/lib/libgmt.dylib&#39; (no such file), &#39;/usr/lib/libgmt.dylib&#39; (no such file, not in dyld cache)
+  external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
+&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
     spatial_ref  float64 8B ...
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 Attributes:
     standard_name:  total_magnetic_intensity
     long_name:      Total magnetic intensity, diurnally corrected and filtered
@@ -198,9 +207,9 @@ Attributes:
 &lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
     spatial_ref  float64 8B ...
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
 Attributes:
     standard_name:  total_magnetic_intensity
     long_name:      Total magnetic intensity, diurnally corrected and filtered
@@ -225,10 +234,10 @@ Attributes:
 <li><img src="../../_images/sphx_glr_plot_tempest_aseg_001.png" srcset="../../_images/sphx_glr_plot_tempest_aseg_001.png" alt="plot tempest aseg" class = "sphx-glr-multi-img"/></li>
 <li><img src="../../_images/sphx_glr_plot_tempest_aseg_002.png" srcset="../../_images/sphx_glr_plot_tempest_aseg_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
 </ul>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh object at 0x3094d9f70&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh object at 0x16d459090&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 9.548 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.196 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-tempest-aseg-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/ee7c7255ea4ae8868a6ae19ba071b29e/plot_tempest_aseg.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tempest_aseg.ipynb</span></code></a></p>
@@ -249,7 +258,7 @@ Attributes:
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_resolve_csv.html" class="btn btn-neutral float-right" title="CSV to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_aseg_tempest.html" class="btn btn-neutral float-right" title="ASEG to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

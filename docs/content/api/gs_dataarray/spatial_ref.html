@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spatial ref &mdash; gspy 2.2.4 documentation</title>
+  <title>Spatial ref &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,13 +18,13 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Examples" href="../../../examples/index.html" />
+    <link rel="next" title="References" href="../../../references.html" />
     <link rel="prev" title="Coordinate" href="coordinate.html" /> 
 </head>
 
@@ -49,6 +49,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metadata/index.html">Metadata Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../gs_datatree/index.html">DataTree Accessors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gs_dataset/index.html">Dataset Accessors</a></li>
@@ -63,8 +66,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -95,12 +97,15 @@
              
   <section id="spatial-ref">
 <h1>Spatial ref<a class="headerlink" href="#spatial-ref" title="Link to this heading"></a></h1>
-<div class="graphviz"><img src="../../../_images/inheritance-2f40c8d050ea54333c02f22a3d7325d2c966c2fc.png" alt="Inheritance diagram of gspy.gs_dataarray.Spatial_ref" usemap="#inheritancecac4133790" class="inheritance graphviz" /></div>
-<map id="inheritancecac4133790" name="inheritancecac4133790">
-<area shape="rect" id="node1" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref" target="_top" title="Class to handle spatial reference formats" alt="" coords="5,5,89,32"/>
-</map><dl class="py class" id="module-gspy.gs_dataarray.Spatial_ref">
+digraph inheritancecac4133790 {
+bgcolor=transparent;
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;Spatial_ref&quot; [URL=&quot;#gspy.gs_dataarray.Spatial_ref.Spatial_ref&quot;,fillcolor=white,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5),filled&quot;,target=&quot;_top&quot;,tooltip=&quot;Class to handle spatial reference formats&quot;];
+}
+<dl class="py class" id="module-gspy.gs_dataarray.Spatial_ref">
 <dt class="sig sig-object py" id="gspy.gs_dataarray.Spatial_ref.Spatial_ref">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataarray.Spatial_ref.</span></span><span class="sig-name descname"><span class="pre">Spatial_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gspy.gs_dataarray.Spatial_ref.</span></span><span class="sig-name descname"><span class="pre">Spatial_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xarray_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref" title="Link to this definition"></a></dt>
 <dd><p>Class to handle spatial reference formats</p>
 <p>Allows instantiation by any of the following; wkid, EPSG, crs_wkt or proj4 strings.
 Handles non standard and custom spatial references that may not be defined by a single EPSG.
@@ -124,12 +129,12 @@ Regardless of input option, the spatial ref contains a CF convention set of meta
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataarray.Spatial_ref.Spatial_ref.from_dict">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref.from_dict" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref.from_dict" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataarray.Spatial_ref.Spatial_ref.metadata_template">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref.metadata_template" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataarray.Spatial_ref.Spatial_ref.metadata_template" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -141,7 +146,7 @@ Regardless of input option, the spatial ref contains a CF convention set of meta
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="coordinate.html" class="btn btn-neutral float-left" title="Coordinate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../../examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../../references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

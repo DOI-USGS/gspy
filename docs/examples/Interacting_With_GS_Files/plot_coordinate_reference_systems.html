@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coordinate Reference Systems &mdash; gspy 2.2.4 documentation</title>
+  <title>Coordinate Reference Systems &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,14 +18,14 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Plotting Cross Sections" href="plot_cross_section.html" />
-    <link rel="prev" title="Basic Class Structure" href="plot_xarray_methods.html" /> 
+    <link rel="next" title="GS Convention" href="../../gspy_convention_requirements.html" />
+    <link rel="prev" title="Basic Functionality" href="plot_xarray_methods.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,22 +49,23 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/metadata/index.html">Metadata Handling</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_xarray_methods.html">Basic Class Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_xarray_methods.html">Basic Functionality</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Coordinate Reference Systems</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#grid-mapping">Grid Mapping</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#making-a-new-spatial-ref">Making a new Spatial Ref</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_cross_section.html">Plotting Cross Sections</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
         </div>
@@ -158,7 +159,7 @@ crs_wkt: PROJCRS[&quot;NAD83(HARN) / Wisconsin Transverse Mercator&quot;,BASEGEO
 </div>
 <p>Then, each data variable should have an attribute <code class="docutils literal notranslate"><span class="pre">grid_mapping</span></code> that references
 the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> coordinate variable</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;dem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;axis&#39;: &#39;Z&#39;,
@@ -167,7 +168,7 @@ the <code class="docutils literal notranslate"><span class="pre">spatial_ref</sp
  &#39;long_name&#39;: &#39;Digital elevation model&#39;,
  &#39;null_value&#39;: &#39;not_defined&#39;,
  &#39;positive&#39;: &#39;up&#39;,
- &#39;standard_name&#39;: &#39;dem&#39;,
+ &#39;standard_name&#39;: &#39;z&#39;,
  &#39;units&#39;: &#39;meter&#39;,
  &#39;valid_range&#39;: array([172.52357302, 289.53542244])}
 </pre></div>
@@ -213,7 +214,7 @@ groups are also updated to match and all coordinate variables (particularly
 projected coordinate system with easting and northing coordinates to a geographic
 coordinate system, then the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinate variables need to be
 changed to longitude and latitude.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.196 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.296 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/331b093053e93b2a1bdc64c996d05bde/plot_coordinate_reference_systems.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_coordinate_reference_systems.ipynb</span></code></a></p>
@@ -233,8 +234,8 @@ changed to longitude and latitude.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_xarray_methods.html" class="btn btn-neutral float-left" title="Basic Class Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plot_cross_section.html" class="btn btn-neutral float-right" title="Plotting Cross Sections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_xarray_methods.html" class="btn btn-neutral float-left" title="Basic Functionality" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

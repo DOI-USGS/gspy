@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Examples &mdash; gspy 2.2.4 documentation</title>
+  <title>Examples &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
@@ -18,14 +18,14 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=4e6cfea6"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ASEG to NetCDF" href="Creating_GS_Files/plot_aseg_tempest.html" />
-    <link rel="prev" title="Spatial ref" href="../content/api/gs_dataarray/spatial_ref.html" /> 
+    <link rel="next" title="ASEG-GDF (Tempest AEM) &amp; Magnetic Raster" href="Creating_GS_Files/plot_aseg_tempest.html" />
+    <link rel="prev" title="Parameter File" href="../content/metadata/parameters_md.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,28 +49,29 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../content/getting_started/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/metadata/index.html">Metadata Handling</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#creating-gs-files">Creating GS Files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest.html">ASEG to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve.html">CSV to NetCDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest.html">ASEG-GDF (Tempest AEM) &amp; Magnetic Raster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem.html">CSV &amp; Rasters: Multi-dataset Survey with Derivative Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve.html">CSV to NetCDF (RESOLVE AEM)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_tifs.html">GeoTIFFs to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_loupe.html">Loupe to NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html">Magnetic Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem.html">Multi-dataset Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_dat_loupe.html">Loupe TEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_xyz_workbench_to_netcdf.html">Workbench to NetCDF</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#interacting-with-gs-files">Interacting With GS Files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html">Basic Class Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html">Basic Functionality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_coordinate_reference_systems.html">Coordinate Reference Systems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Interacting_With_GS_Files/plot_cross_section.html">Plotting Cross Sections</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../gspy_convention_requirements.html">GS Convention Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
         </div>
@@ -101,44 +102,41 @@
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
 <div class="sphx-glr-thumbnails"></div><section id="creating-gs-files">
 <h2>Creating GS Files<a class="headerlink" href="#creating-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey (e.g., Tabular and Raster groups). Specifically, this AEM survey contains the following datasets:"><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest.html#sphx-glr-examples-creating-gs-files-plot-aseg-tempest-py"><span class="std std-ref">ASEG to NetCDF</span></a></p>
-  <div class="sphx-glr-thumbnail-title">ASEG to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:"><img alt="" src="../_images/sphx_glr_plot_csv_resolve_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve.html#sphx-glr-examples-creating-gs-files-plot-csv-resolve-py"><span class="std std-ref">CSV to NetCDF</span></a></p>
-  <div class="sphx-glr-thumbnail-title">CSV to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrates the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension."><img alt="" src="../_images/sphx_glr_plot_tifs_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_tifs.html#sphx-glr-examples-creating-gs-files-plot-tifs-py"><span class="std std-ref">GeoTIFFs to NetCDF</span></a></p>
-  <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how GSPy can help when you have a large data file and need to do the tedious task of filling out the variable metadata."><img alt="" src="../_images/sphx_glr_help_I_have_no_variable_metadata_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/help_I_have_no_variable_metadata.html#sphx-glr-examples-creating-gs-files-help-i-have-no-variable-metadata-py"><span class="std std-ref">Help! I have no metadata</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Help! I have no metadata</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Loupe to NetCDF"><img alt="" src="../_images/sphx_glr_plot_csv_loupe_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_csv_loupe.html#sphx-glr-examples-creating-gs-files-plot-csv-loupe-py"><span class="std std-ref">Loupe to NetCDF</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Loupe to NetCDF</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin Skytem example in this repository"><img alt="" src="../_images/sphx_glr_plot_csv_magnetics_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html#sphx-glr-examples-creating-gs-files-plot-csv-magnetics-py"><span class="std std-ref">Magnetic Survey</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Magnetic Survey</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:"><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest.html"><span class="doc">ASEG-GDF (Tempest AEM) &amp; Magnetic Raster</span></a></p>
+  <div class="sphx-glr-thumbnail-title">ASEG-GDF (Tempest AEM) & Magnetic Raster</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:"><img alt="" src="../_images/sphx_glr_plot_csv_skytem_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem.html#sphx-glr-examples-creating-gs-files-plot-csv-skytem-py"><span class="std std-ref">Multi-dataset Survey</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Multi-dataset Survey</div>
+<p><a class="reference internal" href="Creating_GS_Files/plot_csv_skytem.html"><span class="doc">CSV &amp; Rasters: Multi-dataset Survey with Derivative Products</span></a></p>
+  <div class="sphx-glr-thumbnail-title">CSV & Rasters: Multi-dataset Survey with Derivative Products</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to convert comma-separated values (CSV) data to the GS NetCDF format. Specifically this example includes:"><img alt="" src="../_images/sphx_glr_plot_csv_resolve_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_csv_resolve.html"><span class="doc">CSV to NetCDF (RESOLVE AEM)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">CSV to NetCDF (RESOLVE AEM)</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the workflow for creating a GS file from the GeoTIFF (.tif/.tiff) file format. This includes adding individual TIF files as single 2-D variables, as well as how to create a 3-D variable by stacking multiple TIF files along a specified dimension."><img alt="" src="../_images/sphx_glr_plot_tifs_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_tifs.html"><span class="doc">GeoTIFFs to NetCDF</span></a></p>
+  <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Generate Metadata Templates"><img alt="" src="../_images/sphx_glr_plot_help_I_have_no_variable_metadata_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_help_I_have_no_variable_metadata.html"><span class="doc">Help! I have no metadata</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Help! I have no metadata</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Dataset Reference: Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release. "><img alt="" src="../_images/sphx_glr_plot_dat_loupe_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_dat_loupe.html"><span class="doc">Loupe TEM</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Loupe TEM</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. "><img alt="" src="../_images/sphx_glr_plot_csv_magnetics_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html"><span class="doc">Magnetic Raster Dataset</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Magnetic Raster Dataset</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Workbench to NetCDF"><img alt="" src="../_images/sphx_glr_plot_xyz_workbench_to_netcdf_thumb.png" />
-<p><a class="reference internal" href="Creating_GS_Files/plot_xyz_workbench_to_netcdf.html#sphx-glr-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py"><span class="std std-ref">Workbench to NetCDF</span></a></p>
+<p><a class="reference internal" href="Creating_GS_Files/plot_xyz_workbench_to_netcdf.html"><span class="doc">Workbench to NetCDF</span></a></p>
   <div class="sphx-glr-thumbnail-title">Workbench to NetCDF</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 </section>
 <section id="interacting-with-gs-files">
 <h2>Interacting With GS Files<a class="headerlink" href="#interacting-with-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The three primary classes (Survey, Tabular, and Raster) all contain data and metadata within Xarray Datasets. This example demonstrates how to access the xarray object for each class, and methods for exploring the data and metadata."><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
-<p><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html#sphx-glr-examples-interacting-with-gs-files-plot-xarray-methods-py"><span class="std std-ref">Basic Class Structure</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Basic Class Structure</div>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into Xarray DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type. "><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
+<p><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html"><span class="doc">Basic Functionality</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Basic Functionality</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the Survey adhere to the same CRS."><img alt="" src="../_images/sphx_glr_plot_coordinate_reference_systems_thumb.png" />
-<p><a class="reference internal" href="Interacting_With_GS_Files/plot_coordinate_reference_systems.html#sphx-glr-examples-interacting-with-gs-files-plot-coordinate-reference-systems-py"><span class="std std-ref">Coordinate Reference Systems</span></a></p>
+<p><a class="reference internal" href="Interacting_With_GS_Files/plot_coordinate_reference_systems.html"><span class="doc">Coordinate Reference Systems</span></a></p>
   <div class="sphx-glr-thumbnail-title">Coordinate Reference Systems</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Plotting Cross Sections"><img alt="" src="../_images/sphx_glr_plot_cross_section_thumb.png" />
-<p><a class="reference internal" href="Interacting_With_GS_Files/plot_cross_section.html#sphx-glr-examples-interacting-with-gs-files-plot-cross-section-py"><span class="std std-ref">Plotting Cross Sections</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Plotting Cross Sections</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-footer sphx-glr-footer-gallery docutils container">
@@ -157,8 +155,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../content/api/gs_dataarray/spatial_ref.html" class="btn btn-neutral float-left" title="Spatial ref" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Creating_GS_Files/plot_aseg_tempest.html" class="btn btn-neutral float-right" title="ASEG to NetCDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../content/metadata/parameters_md.html" class="btn btn-neutral float-left" title="Parameter File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Creating_GS_Files/plot_aseg_tempest.html" class="btn btn-neutral float-right" title="ASEG-GDF (Tempest AEM) &amp; Magnetic Raster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

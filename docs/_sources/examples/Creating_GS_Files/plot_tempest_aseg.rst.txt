@@ -175,12 +175,16 @@ Read back in the NetCDF file
 
  .. code-block:: none
 
+    <env> RuntimeWarning: Engine 'gmt' loading failed:
+    Error loading GMT shared library at 'libgmt.dylib'.
+    dlopen(libgmt.dylib, 0x0006): tried: 'libgmt.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibgmt.dylib' (no such file), '<env>' (no such file), '<env>' (no such file), '/usr/lib/libgmt.dylib' (no such file, not in dyld cache), 'libgmt.dylib' (no such file), '/usr/local/lib/libgmt.dylib' (no such file), '/usr/lib/libgmt.dylib' (no such file, not in dyld cache)
+      external_backend_entrypoints = backends_dict_from_pkg(entrypoints_unique)
     <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
-      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
         standard_name:  total_magnetic_intensity
         long_name:      Total magnetic intensity, diurnally corrected and filtered
@@ -191,9 +195,9 @@ Read back in the NetCDF file
     <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
-      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
         standard_name:  total_magnetic_intensity
         long_name:      Total magnetic intensity, diurnally corrected and filtered
@@ -247,14 +251,14 @@ Plotting
  .. code-block:: none
 
 
-    <matplotlib.collections.QuadMesh object at 0x3094d9f70>
+    <matplotlib.collections.QuadMesh object at 0x16d459090>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 9.548 seconds)
+   **Total running time of the script:** (0 minutes 1.196 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_tempest_aseg.py:

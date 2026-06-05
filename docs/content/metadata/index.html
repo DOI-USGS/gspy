@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metadata Handling &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Survey Metadata" href="survey_md.html" />
+    <link rel="prev" title="Notes for ASEG-GDF2 Files" href="../getting_started/converting_aseg_gdf2_files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Metadata Handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="survey_md.html">Survey Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_md.html">Data Metadata File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_md.html">System File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters_md.html">Parameter File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-group-attributes">Required Group Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#survey">Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gs-group-attributes">GS Group Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-leaves-supplementary-leaflets">Data Leaves &amp; Supplementary Leaflets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#required-variable-attributes">Required Variable Attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metadata Handling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/content/metadata/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metadata-handling">
+<span id="metadata-requirements"></span><h1>Metadata Handling<a class="headerlink" href="#metadata-handling" title="Link to this heading"></a></h1>
+<p>GSPy uses metadata files (YAML or JSON) to ingest required and ancillary information and build the GS Data Tree. Information is read from these files into a Metadata dictionary object. When adding a dataset to the GS Data Tree, typically a user would pass a YAML or JSON file, however GSPy has the flexibility to accept a dictionary passed directly as well.</p>
+<p>The contents GSPy expects in the metadata files vary depending on its purpose. See the specific types of metadata linked here for more detail and examples:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="survey_md.html">Survey Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_md.html">Data Metadata File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_md.html">System File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters_md.html">Parameter File</a></li>
+</ul>
+</div>
+<p>Below are summary tables for required attributes per the GS data standard.</p>
+<section id="required-group-attributes">
+<h2>Required Group Attributes<a class="headerlink" href="#required-group-attributes" title="Link to this heading"></a></h2>
+<p>Attributes are attached at both the group (dataset) and variable levels. A set of global attributes is required in the Survey group (see next section) and the GS standard further requires specific attributes for identification and searchability.</p>
+<p>By setting strict requirements on these attributes, the GS Data Tree framework can remain flexible in other areas (i.e., the names and number of groups are free to vary). The required GS attributes ensure all groups within the file can be identified and filtered for efficient data handling. See the example PLACEHOLDER for a demonstration of how to employ group keys to search and filter a GS Data Tree and find specific content.</p>
+<section id="survey">
+<h3>Survey<a class="headerlink" href="#survey" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Survey</span></code> group requires the following fields providing general information about the file and its contents:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Survey Group Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>title</strong></p></td>
+<td><p>A brief description of the dataset collection</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>history</strong></p></td>
+<td><p>Summarized audit trail for how the data have
+been modified and processed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>institution</strong></p></td>
+<td><p>Who or what organization produced the data</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>source</strong></p></td>
+<td><p>How the data or datasets within the file
+were produced. If the data where observed,
+measured, recorded, or modeled and a brief
+description of how</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>comment</strong></p></td>
+<td><p>Miscellaneous information and notes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>references</strong></p></td>
+<td><p>All relevant citations</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>content</strong></p></td>
+<td><p>A list of all groups in the file and what
+they contain</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>conventions</strong></p></td>
+<td><p>The GS and CF convention versions followed</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gs-group-attributes">
+<h3>GS Group Attributes<a class="headerlink" href="#gs-group-attributes" title="Link to this heading"></a></h3>
+<p>The GS standard requires additional attributes at the group level based on what Data Tree element the group is (survey root, branch node, data leaf, supplemental stem).</p>
+<p>The attribute <code class="docutils literal notranslate"><span class="pre">type</span></code> is required for all groups within a GS file, the value of which is determined by what type of GS Data Tree Element the group represents. The attribute <code class="docutils literal notranslate"><span class="pre">structure</span></code> is also required for data leaf groups to capture the geometry of the data, i.e., tabluar is unstructured point data, raster is structured on a rectalinear grid, and mesh is structured on a non-rectalinear grid.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>GS Data Tree Element</p></th>
+<th class="head"><p><strong>type</strong></p></th>
+<th class="head"><p><strong>structure</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>survey root</strong></p></td>
+<td><p>survey</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>branch nodes</strong></p></td>
+<td><p>container</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>data leaves</strong></p></td>
+<td><p>data, model</p></td>
+<td><p>tabular, raster, mesh</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>supplementary leaflets</strong></p></td>
+<td><p>system, parameter</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="data-leaves-supplementary-leaflets">
+<h4>Data Leaves &amp; Supplementary Leaflets<a class="headerlink" href="#data-leaves-supplementary-leaflets" title="Link to this heading"></a></h4>
+<p>The attributes <code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code> and <code class="docutils literal notranslate"><span class="pre">instrument</span></code> are required for the Data Leaves and Supplementary Leaflets but have free (uncontrolled) values. The attribute <code class="docutils literal notranslate"><span class="pre">property</span></code> is recommended, when applicable, and is meant to capture the physical or geophysical property being measured or modeled:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>GS Data Tree Element</p></th>
+<th class="head"><p>required</p></th>
+<th class="head"><p>recommended (optional)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>data leaves</strong></p></td>
+<td><p>mode, method, instrument</p></td>
+<td><p>property</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>supplementary stems</strong></p></td>
+<td><p>mode, method, instrument</p></td>
+<td><p>property</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">mode</span></code> attribute captures the nature of how the data were acquired (e.g., on land, over water, in the air, underground):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>mode</strong></p></td>
+<td><p>airborne</p></td>
+<td><p>waterborne</p></td>
+<td><p>ground</p></td>
+<td><p>borehole</p></td>
+<td><p>ocean bottom</p></td>
+</tr>
+</tbody>
+</table>
+<p>Values for the <code class="docutils literal notranslate"><span class="pre">method</span></code> field require, at a minimum, one of the primary methods in the table below. Additional submethods can be appended as a comma separated list. If more than one primary method applies, then the method field becomes a 1-D list of values. For example, in increasing complexity:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">method</span><span class="p">:</span> <span class="n">electromagnetic</span>
+<span class="n">method</span><span class="p">:</span> <span class="n">electromagnetic</span><span class="p">,</span> <span class="n">time</span> <span class="n">domain</span>
+<span class="n">method</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;electromagnetic, time domain&quot;</span><span class="p">,</span> <span class="s2">&quot;magnetic, total field&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Below are some example <code class="docutils literal notranslate"><span class="pre">method</span></code> values with common submethod variants. Values for these fields follows the GS standard guidelines, with lower case text and no abbreviations:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>primary method</strong></p></th>
+<th class="head"><p><strong>submethod (A)</strong></p></th>
+<th class="head"><p><strong>submethod (B)</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>electromagnetic</p></td>
+<td><p>frequency domain</p></td>
+<td><p>time domain</p></td>
+</tr>
+<tr class="row-odd"><td><p>electrical</p></td>
+<td><p>electrical resistivity tomography</p></td>
+<td><p>induced polarization</p></td>
+</tr>
+<tr class="row-even"><td><p>gravity</p></td>
+<td><p>absolute</p></td>
+<td><p>gravity gradiometry</p></td>
+</tr>
+<tr class="row-odd"><td><p>magnetic</p></td>
+<td><p>total field</p></td>
+<td><p>gradient</p></td>
+</tr>
+<tr class="row-even"><td><p>radiometric</p></td>
+<td><p>gamma-ray spectrometry</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nuclear</p></td>
+<td><p>neutron</p></td>
+<td><p>natural gamma</p></td>
+</tr>
+<tr class="row-even"><td><p>nuclear magnetic resonance</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>seismic</p></td>
+<td><p>refraction
+tomography</p></td>
+<td><p>horizontal-vertical
+spectral ratios</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> attribute contains the name of the instrument used to acquire the data. Here are some examples, and note that captitalization may be necessary here to accurately represent instrument names. This field can also be used to capture serial numbers to convey an individual instrument. For example, if an agency owns multiples of the same instrument it can often be helpful to track data collected from each one in case unqiue behaviors or quirks arise.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>instrument</strong></p></td>
+<td><p>SkyTEM 304M</p></td>
+<td><p>30Hz TEMPEST</p></td>
+<td><p>AGI SuperSting</p></td>
+<td><p>ABEM WalkTEM</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">property</span></code> attribute is meant to represent the central physical or geophysical property captured by the data:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>property</strong></p></td>
+<td><p>electrical resistivity</p></td>
+<td><p>residual magnetic intensity</p></td>
+<td><p>density</p></td>
+<td><p>volumetric water content</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="required-variable-attributes">
+<h2>Required Variable Attributes<a class="headerlink" href="#required-variable-attributes" title="Link to this heading"></a></h2>
+<p>The GS standard requires the following attributes on all variables:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>standard_name</p></li>
+<li><p>long_name</p></li>
+<li><p>units</p></li>
+</ul>
+</div></blockquote>
+<p>All numeric variables require additional attributes to document any null or missing values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>_FillValue</p></li>
+<li><p>valid_range</p></li>
+</ul>
+</div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>standard_name</strong></p></td>
+<td><p>Succint variable name, containing no whitespace and is case sensitive</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>long_name</strong></p></td>
+<td><p>Descriptive variable name, can have whitespace and is not case sensitive</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>units</strong></p></td>
+<td><p>Measurement system or physical scale of the variable, may also be nondimensional</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>_FillValue</strong></p></td>
+<td><p>Value of same type as the variable representing undefined or missing data</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_range</strong></p></td>
+<td><p>Minimum and maximum valid values of the variable</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../getting_started/converting_aseg_gdf2_files.html" class="btn btn-neutral float-left" title="Notes for ASEG-GDF2 Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="survey_md.html" class="btn btn-neutral float-right" title="Survey Metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
