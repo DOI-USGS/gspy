@@ -12,7 +12,7 @@ This example also shows how to handle Raster data that have differing x-y grids.
     2a. 2-D magnetic grid, aligned to match the x-y dimensions of the resistivity layers (1000 m cell size)
     2b. 3-D resistivity grid
 
-Lastly, GSPy provides a "to_tif()" method to export raster data as GeoTIFF. This example demonstrates how to use this method for both 2D and 3D variables. 
+Lastly, GSPy provides a "to_tif()" method to export raster data as GeoTIFF. This example demonstrates how to use this method for both 2D and 3D variables.
 
 Dataset References:
 
@@ -45,8 +45,8 @@ metadata = join(data_path, "data//Tempest_survey_md.yml")
 survey = Survey.from_dict(metadata)
 
 # Create the container branch
-container = survey.gs.add_container('derived_products', 
-                                    **dict(content = "gridded maps of magnetic and electrical resistivity values", 
+container = survey.gs.add_container('derived_products',
+                                    **dict(content = "gridded maps of magnetic and electrical resistivity values",
                                            comment = "Magnetic map is contractor-derived, resistivity maps are USGS-derived"))
 
 #%%
@@ -83,7 +83,7 @@ survey['derived_products']["all_maps"].gs.to_tif('magnetic_tmi')
 
 # Option 2: Export all the variables by NOT passing any variable names,
 # but need to specify a slice dimension for the 3D resistivity variable.
-# Can optionally pass a directory path to export tiffs to. 
+# Can optionally pass a directory path to export tiffs to.
 survey['derived_products']["all_maps"].gs.to_tif(slice_dim='z', out_dir=data_path)
 
 #%%

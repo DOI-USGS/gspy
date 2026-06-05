@@ -72,7 +72,7 @@ class Container:
             out += node.attrs.get('content', '') + ' ' + node.path + '; '
             #out += node.path + '\n'
         return out
-    
+
     @property
     def tree(self):
         out = ''
@@ -209,7 +209,7 @@ class Container:
 
     @classmethod
     def Data(cls, data_filename=None, metadata_file=None, spatial_ref=None, **kwargs):
-        
+
         json_md = Metadata.read(metadata_file)
 
         system = kwargs.get('system', {})
@@ -258,7 +258,7 @@ class Container:
         else:
             # if parameters is a file path, read contents into dictionary
             if isinstance(parameters, str):
-                parameters = Metadata.read(parameters)    
+                parameters = Metadata.read(parameters)
             parameters, _ = Container.Parameters(**parameters)
 
         if isinstance(parameters, dict):
@@ -295,7 +295,7 @@ class Container:
         out = DataTree.from_dict(parameters)
 
         return out, kwargs
-    
+
     def to_netcdf(self, *args, **kwargs):
         """Write the survey to a netcdf file
 
@@ -344,20 +344,20 @@ class Container:
         out.to_netcdf(*args, **kwargs)
 
     def plot(self, *args, **kwargs):
-        self._obj.to_dataset().gs.plot(*args, **kwargs)
+        self._obj.dataset.gs.plot(*args, **kwargs)
 
     def scatter(self, *args, **kwargs):
-        self._obj.to_dataset().gs.scatter(*args, **kwargs)
+        self._obj.dataset.gs.scatter(*args, **kwargs)
 
     def subset(self, key, value):
-        out = self._obj.to_dataset()
+        out = self._obj.dataset
         return out.where(out[key]==value, drop=True)
 
     def add_timestamp(self, *args, **kwargs):
-        self._obj.to_dataset().gs.add_timestamp(*args, **kwargs)
+        self._obj.dataset.gs.add_timestamp(*args, **kwargs)
 
     def plot_cross_section(self, *args, **kwargs):
-        self._obj.to_dataset().gs.plot_cross_section(*args, **kwargs)
+        self._obj.dataset.gs.plot_cross_section(*args, **kwargs)
 
     def get_all_attr(self, attr, path=None, **kwargs):
         if path is None:
@@ -366,7 +366,7 @@ class Container:
             for item in self._obj.children:
                 kwargs = self._obj[item].gs.get_all_attr(attr, path=path+f"/{item}", **kwargs)
         else:
-            kwargs = self._obj.to_dataset().gs.get_all_attr(attr, path=path, **kwargs)
+            kwargs = self._obj.dataset.gs.get_all_attr(attr, path=path, **kwargs)
         return kwargs
 
     def write_ncml(self, file, indent=0):
@@ -389,7 +389,7 @@ class Container:
             file.write(f'<netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="{base_name}">\n\n')
 
         # First do my dataset if there is one.
-        self._obj.to_dataset().gs.write_ncml(file, self._obj.name, indent, no_end=True)
+        self._obj.dataset.gs.write_ncml(file, self._obj.name, indent, no_end=True)
 
         for child in self._obj.children:
             self._obj[child].gs.write_ncml(file, indent+1)
@@ -444,7 +444,7 @@ class Container:
         assert self._obj.attrs.get("structure") == "raster", "structure must be 'raster' to export to tif"
 
         ds = self._obj
-        
+
         if out_dir is not None:
             out_dir = Path(out_dir)
 

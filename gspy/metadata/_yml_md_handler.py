@@ -5,7 +5,7 @@ def read_yml(filename):
         out = yaml.safe_load(f)
     return out
 
-def to_yml(dict, filename, **kwargs):
+def to_yml(this, filename, **kwargs):
 
     def __yaml_dump(this, file, indent=0, key=None):
         if isinstance(this, dict):
@@ -18,4 +18,4 @@ def to_yml(dict, filename, **kwargs):
             file.write(f"{'    '*indent}{key}: {this}\n")
 
     with open(filename, "w") as f:
-        __yaml_dump(dict, f)
+        __yaml_dump(this, f)

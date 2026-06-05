@@ -22,7 +22,7 @@ class Metadata(dict):
             self._required = values
 
     @classmethod
-    def read(cls, filename):
+    def read(cls, filename, **kwargs):
 
         if filename is None:
             return {}
@@ -35,15 +35,15 @@ class Metadata(dict):
 
         match extension:
             case '.json':
-                out = read_json(filename)
+                out = read_json(filename, **kwargs)
             case '.yml':
-                out = read_yml(filename)
+                out = read_yml(filename, **kwargs)
             case '.yaml':
-                out = read_yml(filename)
+                out = read_yml(filename, **kwargs)
             case '.xlsx':
-                out = read_excel(filename)
+                out = read_excel(filename, **kwargs)
             case '.csv':
-                out = read_csv(filename)
+                out = read_csv(filename, **kwargs)
             case _:
                 assert False, ValueError("metadata filename does not end with json or yml")
 

@@ -54,11 +54,10 @@ d_supp = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 var_meta = join(data_path, 'data//Resolve_DataDictionary_md.csv')
 
 # merge the two metadata and pass it all through for the raw AEM data
-md = Metadata.merge(Metadata.read(d_supp), Metadata.read(var_meta))
+md = Metadata.merge(Metadata.read(d_supp), Metadata.read(var_meta, usgs=True))
 
-# Add the raw AEM data 
-rd = data_container.gs.add(key='raw_data', data_filename=d_data, 
-                                      metadata_file=md)
+# Add the raw AEM data
+rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=md)
 
 #%%
 # Create a 'models' branch and attach data leaves
@@ -81,7 +80,7 @@ mod_branch = model_container.gs.add(key="model", data_filename=m_data, metadata_
 # Inspect the two branches
 # ^^^^^^^^^^^^^^^^^^^^^^^^
 
-#%% 
+#%%
 # Data Branch
 print(survey['data'])
 
