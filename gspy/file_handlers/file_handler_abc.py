@@ -139,24 +139,42 @@ class file_handler(ABC):
 
         template = {"content": "<summary statement of what the dataset contains>",
                     "comment": "<additional details or ancillary information>",
-                    "type" : "??",
-                    "method" : "??",
-                    "submethod" : "??",
-                    "instrument" : "??",
-                    "structure" : "??",
-                    "property" : "??",
+                    "type" : "?? data or models ??",
+                    "method" : "?? what geophysical method(s) are represented by this dataset ??",
+                    "mode" : "?? ground or airborne or borehole or ... ??",
+                    "instrument" : "?? what is the instrument ??",
+                    "structure" : "?? tabular or raster ??",
+                    "property" : "?? is there a physical or geophysical property represented? ?",
                     }
         out["dataset_attrs"] = Metadata.merge(template, kwargs.get('dataset_attrs', {}))
 
-        template = {"x" : "??",
-                    "y" : "??",
-                    "z" : "??",
-                    "t" : "??"}
+        template = {"x" : "?? name of the x-axis coordinate variable ??",
+                    "y" : "?? name of the y-axis coordinate variable ??",
+                    "z" : "?? name of the z-axis (vertical) coordinate variable ??",
+                    "t" : "?? name of the t-axis (temporal) coordinate variable ??"}
         out["coordinates"] = Metadata.merge(template, kwargs.get('coordinates', {}))
 
-        if 'dimensions' in kwargs:
-            template = {}
-            out["dimensions"] = Metadata.merge(template, kwargs.get('dimensions', {}))
+        template =  {'my_dimension_variable_name':
+                                   {'standard_name': 'my_dimension_variable_name',
+                                    'long_name': 'more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.',
+                                    'units': 'units of the dimension',
+                                    'null_value': 'not_defined',
+                                    'length': 10,
+                                    'increment': 5.0,
+                                    'origin': 2.5},
+                    'my_other_dimension_variable_name':
+                                   {'standard_name': 'my_other_dimension_variable_name',
+                                    'long_name': 'A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.',
+                                    'units': 'units of the dimension',
+                                    'null_value': 'not_defined',
+                                    'bounds': [[0,2],[2,6],[4,10],[8,16]],
+                                    'centers': [1,4,7,12]}}
+        
+        out["dimensions"] = Metadata.merge(template, kwargs.get('dimensions', {}))
+        
+        # if 'dimensions' in kwargs:
+        #     template = {}
+        #     out["dimensions"] = Metadata.merge(template, kwargs.get('dimensions', {}))
 
         return out
 

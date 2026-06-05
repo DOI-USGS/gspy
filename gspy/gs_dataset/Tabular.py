@@ -2,7 +2,7 @@ import os
 import json
 import matplotlib.pyplot as plt
 from pprint import pprint
-
+import re
 import xarray as xr
 import numpy as np
 from numpy import arange, int32
@@ -39,22 +39,21 @@ class Tabular(Dataset):
                 json_md = metadata_file
 
         # Read in the data using the respective file type handler
-        file = self.file_handler.read(filename, metadata=json_md, system=system)
-
+        file, _ = self.file_handler.read(filename, metadata=json_md, system=system)
+        
         out = file.metadata_template(**json_md)
         out['dataset_attrs']['structure'] = 'tabular'
 
         if 'coordinates' in json_md:
             for k, v in json_md['coordinates'].items():
                 entry = out['variables'][v]
-                entry['axis'] = entry.get('axis', k)
                 if k == 'z':
-                    entry["positive"] = entry.get('positive', "??")
+                    entry["positive"] = entry.get('positive', "?? up or down ??")
                 if k in ('z', 't'):
-                    entry["datum"] = entry.get("datum", "??")
+                    entry["datum"] = entry.get("datum", "?? what is the datum ??")
 
         return out
-
+                            
     @classmethod
     def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
         """Instantiate a Tabular class from tabular data
@@ -83,6 +82,9 @@ class Tabular(Dataset):
         ..survey.Spatial_ref : For information on creating a spatial ref
 
         """
+        def column_matches(pattern, cols):
+            return [(c, int(pattern.match(c).group(1))) for c in cols if pattern.match(c)]
+    
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
 
@@ -101,7 +103,7 @@ class Tabular(Dataset):
         file, file_metadata = self.file_handler.read(filename, metadata=json_md.get('variables', {}), **kwargs)
 
         system = kwargs.get('system', None)
-
+        
         if file_metadata is not None:
             for k, v in file_metadata.items():
                 json_md[k] = json_md.get(k, {}) | v
@@ -146,13 +148,18 @@ class Tabular(Dataset):
             _ = self.metadata_template(filename, **file.metadata_template(**json_md), **kwargs)
             raise Exception(file.write_metadata_template())
 
+        column_counts = file.column_header_counts
+
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
             coord = coordinates[key].strip()
             discrete = key in ('x', 'y', 'z', 't')
-
+            
             assert coord in file.metadata, ValueError(f"Missing metadata for coordinate {key}")
 
+            # remove the coord from column counts & metadata, so doesn't get added again later
+            column_counts.pop(coord, None)
+            coord_meta, _ = file.metadata.pop_and_split((coord,))
             # Might need to handle already added coords from the dimensions dict.
             self._obj = self.add_coordinate_from_values(key.lower(),
                                             values=file.df[coord].values,
@@ -160,9 +167,8 @@ class Tabular(Dataset):
                                             discrete = discrete,
                                             is_projected = self.is_projected,
                                             is_dimension=False,
-                                            **file.metadata[coord])
-
-        column_counts = file.column_header_counts
+                                            **coord_meta[coord])
+            
 
         # Combine the column headers in the file with keys from the json metadata
         # If there is a variable with raw columns specified, we need to remove those individual columns
@@ -174,7 +180,8 @@ class Tabular(Dataset):
                         del column_counts[raw_key]
                 column_counts[key] = 'None'
 
-
+        # print('here')
+        # print(type(system))
         # Now we have all dimensions and coordinates defined.
         # Start adding the data variables
         for var in column_counts:
@@ -182,6 +189,13 @@ class Tabular(Dataset):
             assert var in file.metadata, ValueError(f"Missing metadata for variable {var}")
             var_meta = file.metadata[var]
 
+            # check system couplet labels
+            if "system_couplet" in var_meta:
+                assert type(system) is not dict, ValueError(f"A system couplet exists for variable {var} but no system is passed")
+                couplet_labels = []
+                for path, node in system.items():
+                    couplet_labels = couplet_labels + list(node['couplet_label'].values)
+                assert var_meta["system_couplet"] in couplet_labels, ValueError(f"variable {var} has a system_couplet value that does not match any couplet labels: {couplet_labels}")
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
 
@@ -200,14 +214,37 @@ class Tabular(Dataset):
 
                     # if variable has multiple columns with [i] increment, to be combined
                     elif (var in column_counts) and (column_counts[var] > 1):
+                        
+                        # # Check whether the column header starts with 1 or 0
+                        # starts_from_one = not ((f"{var}[0]" in file.df) or (f"{var}_0" in file.df))
+                        
+                        # # Get which type of header delim is used for multi column variables
+                        # delim = "[]" if f"{var}[{starts_from_one}]" in file.df else "_"
 
-                        # Check whether the column header starts with 1 or 0
-                        starts_from_one = not ((f"{var}[0]" in file.df) or (f"{var}_0" in file.df))
-                        # Get which type of header delim is used for multi column variables
-                        delim = "[]" if f"{var}[{starts_from_one}]" in file.df else "_"
+                        # key = "{0}[{1}]" if delim == "[]" else "{0}_{1}"
+                        # values = file.df[[key.format(var, i+starts_from_one) for i in range(column_counts[var])]].values
 
-                        key = "{0}[{1}]" if delim == "[]" else "{0}_{1}"
-                        values = file.df[[key.format(var, i+starts_from_one) for i in range(column_counts[var])]].values
+                        # {variable}_[0], {variable}_[1], {variable}_[2], ...
+                        bracket_pat = re.compile(rf"^{re.escape(var)}\[(\d+)\]$")
+                        bracket_matches = column_matches(bracket_pat, file.df.columns)
+
+                        # {variable}_0, {variable}_1, {variable}_2, ...
+                        underscore_pat = re.compile(rf"^{re.escape(var)}_(\d+)$")
+                        underscore_matches = column_matches(underscore_pat, file.df.columns)
+
+                        # Decide the format, assert if neither format is present
+                        if bracket_matches:
+                            matches = bracket_matches
+                        elif underscore_matches:
+                            matches = underscore_matches
+                        else:
+                            raise AssertionError(f"No columns found for '{var}' in either '{var}[i]' or '{var}_i' format.")
+
+                        # ensure columns are sorted numerically and find start/end
+                        matches.sort(key=lambda x: x[1])          # sort by captured integer
+                        matches = [label for label, idx in matches]
+                        values = file.df[matches].values
+
                         # # try:
                         # if delim == "[]":
                         #     values = file.df[[f"{var}[{i+starts_from_one}]" for i in range(column_counts[var])]].values
@@ -250,10 +287,11 @@ class Tabular(Dataset):
 
                         self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
 
-        json_md["structure"] = "tabular"
+        
 
         # add global attrs to tabular, skip variables and dimensions
         kwargs = Metadata(json_md['dataset_attrs'])
+        kwargs["structure"] = "tabular"
         kwargs.check_keys(cls.required_metadata)
 
         self.attrs = kwargs

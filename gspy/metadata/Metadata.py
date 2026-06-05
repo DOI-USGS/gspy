@@ -3,6 +3,8 @@ from os.path import splitext
 import json
 import yaml
 from pprint import pprint
+import csv
+from .Variable_metadata import Variable_metadata
 
 class Metadata(dict):
 
@@ -29,18 +31,20 @@ class Metadata(dict):
             out = cls(filename)._sort_out_list_of_strings()
             return out
 
-        with open(filename) as f:
-            filename = filename.replace('yaml', 'yml')
+        normalized = filename.replace(".yaml", ".yml")
+        base, extension = splitext(normalized)
 
-            base, extension = splitext(filename)
-
-            match extension:
-                case '.json':
-                    out = cls(json.loads(f.read()))
-                case '.yml':
-                    out =  cls(yaml.safe_load(f))
-                case _:
-                    assert False, ValueError("metadata filename does not end with json or yml")
+        if extension == ".csv":
+            out = cls()
+            out['variables'] = Variable_metadata.read_csv(filename)
+        
+        else:
+            with open(filename) as f:
+                match extension:
+                    case '.json':
+                        out = cls(json.loads(f.read()))
+                    case '.yml':
+                        out =  cls(yaml.safe_load(f))
 
         out = out._sort_out_list_of_strings()
         out['directory'] = os.path.split(filename)[0]

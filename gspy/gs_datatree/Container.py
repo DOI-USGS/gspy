@@ -66,6 +66,14 @@ class Container:
         self._obj.attrs = self._obj.attrs | values
 
     @property
+    def content(self):
+        out = ''
+        for node in self._obj.subtree:
+            out += node.attrs.get('content', '') + ' ' + node.path + '; '
+            #out += node.path + '\n'
+        return out
+    
+    @property
     def tree(self):
         out = ''
         for node in self._obj.subtree:
@@ -270,7 +278,6 @@ class Container:
         for key in list(kwargs.keys()):
             if "system" in key:
                 value = kwargs.pop(key)
-                print('here! '+key)
                 systems[key] = System.from_dict(name=key, **value)
 
         out = DataTree.from_dict(systems)
@@ -311,6 +318,7 @@ class Container:
         # If this container is a survey, write out the parent to maintain '/' in the netcdf file
 
         if self._obj.attrs['type'] == 'survey':
+            self._obj.attrs['content'] = self.content
             for item in list(self._obj):
                 if self._obj[item].attrs.get('type', '') == 'system':
                     del self._obj[item]
@@ -343,7 +351,7 @@ class Container:
 
     def subset(self, key, value):
         out = self._obj.to_dataset()
-        return out.where(out[key]==value)
+        return out.where(out[key]==value, drop=True)
 
     def add_timestamp(self, *args, **kwargs):
         self._obj.to_dataset().gs.add_timestamp(*args, **kwargs)

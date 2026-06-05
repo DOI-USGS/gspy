@@ -1,18 +1,17 @@
 import os
-from pprint import pprint
 import numpy as np
 import xarray as xr
-from ..utilities import unique_list_preserve, same_length_lists
 from ..metadata.Metadata import Metadata
-from ..metadata.Variable_metadata import Variable_metadata
 # from ..gs_dataarray.DataArray import DataArray
 from .Dataset import Dataset
 
-class System(Dataset):
-    required_metadata = ('type',
-                     'mode',
-                     'method',
-                     'instrument')
+required_keys = ('type',
+                #  'structure',
+                 'mode',
+                 'method',
+                 'instrument')
+
+class Parameters(Dataset):
 
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
@@ -21,58 +20,44 @@ class System(Dataset):
     def is_projected(self):
         return False
 
-    # @property
-    # def attrs(self):
-    #     return self._obj.attrs
-
-    # @attrs.setter
-    # def attrs(self, values:dict):
-    #     assert isinstance(values, dict), TypeError("attrs must have type dict")
-    #     self._obj.attrs = self._obj.attrs | values
-
-    def check_against_data(self, dataset):
-        """Assert that gate time strings match the coordinates of the attached dataset.
-        """
-        for gt in self._obj['couplet_gate_times']:
-            assert gt in list(dataset.coords.keys()), ValueError(f"Could not match couplet gate times {gt} to dataset coordinates")
+    @staticmethod
+    def pop_required(**kwargs):
+        required = {}
+        for k in required_keys:
+            required[k] = kwargs.pop(k)
+        return required, kwargs
 
     @classmethod
     def open(cls, filename, **kwargs):
         md = Metadata.read(filename)
-        for key,item in md.items():
-            out = cls.from_dict(**item)
+        #print(md)
+        #for key,item in md.items():
+            # print('in open')
+            # print(key, item)
+            #if key == 'dataset_attrs':
+            #    assert all([x in item.keys() for x in required_keys]), ValueError(f"Parameters metadata must have entries for {required_keys}")
+            
+        out = cls.from_dict(**md)
         return out
 
     @classmethod
     def from_dict(cls, **kwargs):
-
-        kwargs = Metadata(kwargs)
-
-        attrs, kwargs = kwargs.pop_and_split(cls.required_metadata)
-
-        self = cls(xr.Dataset(attrs=attrs))
+        
+        #attrs, kwargs = cls.pop_required(**kwargs)
+        dattrs = kwargs.pop('dataset_attrs', {})
+        assert all([x in dattrs.keys() for x in required_keys]), ValueError(f"Parameters metadata must have entries for {required_keys} in dataset_attrs")
+        tmp = xr.Dataset(attrs=dattrs)
+        self = cls(tmp)
 
         for key, value in kwargs.pop('dimensions', {}).items():
             self._obj = self._obj.gs.add_coordinate_from_dict(key.lower(),
                                                  is_dimension=True,
                                                  **value)
 
-        required_prefixes = ['transmitter', 'receiver', 'couplet']
-
-        prefixes =  unique_list_preserve(required_prefixes + kwargs.pop('prefixes', []))
-
-        assert 'variables' in kwargs, ValueError("Missing variables section for system")
-        assert all([x in kwargs['variables'] for x in required_prefixes]), ValueError("transmiter, receiver, couplet must be contained in the variables")
+        prefixes =  kwargs.pop('prefixes', [])
 
         if 'variables' in kwargs:
             for prefix in prefixes:
-                vars = kwargs['variables']
-                if prefix == 'couplet' and 'couplet' in vars:
-                    if 'label' not in vars['couplet'].keys():
-                        vars['couplet'] = self.__couplet_labels(**vars['couplet'])
-                    if 'gate_times' in vars['couplet']:
-                        vars['couplet']['gate_times'] = [x.lower() for x in vars['couplet']['gate_times']]
-
                 self, kwargs['variables'] = self.__add_using_prefix(prefix, **kwargs['variables'])
 
             for key, values in kwargs['variables'].items():
@@ -88,14 +73,8 @@ class System(Dataset):
                 kwargs[k] = "True" if v else "False"
 
         self._obj.attrs = self._obj.attrs | kwargs
-
         return self._obj
 
-    def __couplet_labels(self, **kwargs):
-        kwargs['label'] = kwargs.get('receivers')
-        if 'transmitters' in kwargs:
-            kwargs['label'] = [f"{a}_{b}" for a, b in zip(kwargs['transmitters'], kwargs['label'])]
-        return kwargs
 
     def __add_using_prefix(self, prefix, **kwargs):
 
@@ -136,15 +115,3 @@ class System(Dataset):
             self._obj = self._obj.gs.add_variable_from_dict(name=key, label=label, check=False, prefix=prefix, **values)
 
         return self, kwargs
-
-    @classmethod
-    def valid_model(cls, **kwargs):
-        return kwargs["mode"] in ("airborne", "waterborne", "ground", "borehole")
-
-    @classmethod
-    def valid_method(cls, **kwargs):
-        return kwargs["method"] in ("electromagnetic", "magnetic", "gravity", "galvanic", "nmr")
-
-    @classmethod
-    def valid_instrument(cls, **kwargs):
-        return any(x in kwargs["instrument"] for x in ('resolve', 'skytem', 'tempest', 'cesium vapour'))

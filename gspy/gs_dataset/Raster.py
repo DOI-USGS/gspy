@@ -108,11 +108,11 @@ class Raster(Dataset):
                 self._obj = self.read_raster_using_metadata(var, json_md, directory=json_md['directory'], **var_meta[var])
 
         kwargs = Metadata(json_md['dataset_attrs'])
+        kwargs["structure"] = "raster"
         kwargs.check_keys(cls.required_metadata)
 
         self.attrs = kwargs
-        self._obj.attrs['structure'] = 'raster'
-        
+
         return self._obj
 
     def read_raster_using_metadata(self, name, json_metadata, directory="", **kwargs):

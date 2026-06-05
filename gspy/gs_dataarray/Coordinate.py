@@ -192,8 +192,8 @@ class Coordinate(DataArray):
             if 'axis' not in kwargs:
                 kwargs['axis'] = name.upper()
             if name == "z":
-                assert all([x in kwargs for x in ["positive", "datum"]]), ValueError("z coordinate definition requires entries positive: up or down, and datum: ground surface ")
+                assert all([x in kwargs for x in ["positive", "datum"]]), ValueError("z coordinate definition requires entries positive: up or down, and datum: e.g. ground surface")
                 assert kwargs['positive'] in ['up', 'down']
-                assert kwargs['datum'] in ['ground surface', 'ellipsoid']
+                #assert kwargs['datum'] in ['ground surface', 'ellipsoid']
             if name == "t":
                 assert "datum" in kwargs, ValueError("time coordinate definition requires datum entry e.g. datum: Jan-01-1900")

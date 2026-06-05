@@ -5,7 +5,7 @@ from ..gs_dataset.Dataset import Dataset
 from ..metadata.Metadata import Metadata
 
 class Survey(Container):
-
+    
     @classmethod
     def from_dict(cls, metadata):
 
@@ -30,7 +30,7 @@ class Survey(Container):
         md = Survey.read_metadata(metadata) if isinstance(metadata, str) else metadata
 
         a = Metadata.merge(dict(title = "??", institution = "??", source = "??", history = "??",
-                        references = "??", comment = "??", conventions = "CF-1.8"),
+                        references = "??", comment = "??", conventions = "GS 2.0", type = "survey"),
                         md.get('dataset_attrs', {}))
 
         b = Metadata.merge(dict(contractor_project_number = "??", contractor = "??", client = "??",
