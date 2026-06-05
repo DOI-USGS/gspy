@@ -49,6 +49,7 @@ docs = ["sphinx_gallery",
         "sphinx_rtd_theme"]
 dev = ["gspy[docs]",
        "twine"]
+excel = ["openpyxl"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["gspy"]
