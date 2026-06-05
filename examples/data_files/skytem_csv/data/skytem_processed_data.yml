@@ -5,10 +5,8 @@ dataset_attrs:
     type: data
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
+    method: electromagnetic, time domain
     instrument: skytem
-    property: ''
 
 coordinates:
     x: E_N83WTM
@@ -99,21 +97,18 @@ variables:
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         null_value: not_defined
-        axis: x
 
     N_N83WTM:
         standard_name: northing_nad83
         long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         null_value: not_defined
-        axis: y
 
     TIMESTAMP:
         standard_name: timestamp
         long_name: Time, decimal days
         units: day
         null_value: not_defined
-        axis: t
         datum: January 1, 1900
 
     RECORD:
@@ -127,7 +122,6 @@ variables:
         long_name: Digital elevation model
         units: meter
         null_value: not_defined
-        axis: z
         positive: up
         datum: North American Vertical Datum of 1988 (NAVD88)
 
@@ -148,7 +142,7 @@ variables:
         long_name: EM data, low moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 0
+        system_couplets: 0
         dimensions: [index, lm_gate_times]
 
     LM_DataSTD:
@@ -163,7 +157,7 @@ variables:
         long_name: EM data, high moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 2
+        system_couplets: 2
         dimensions: [index, hm_gate_times]
 
     HM_DataSTD:

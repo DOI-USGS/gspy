@@ -114,7 +114,7 @@ nominal_system:
         instrument_low_pass_filter: 500000.0
         area: 105.0
 
-      component:
+      couplet:
         transmitters: [lm, hm]
         receivers: [z, z]
         labels: ['lm_z', 'hm_z']

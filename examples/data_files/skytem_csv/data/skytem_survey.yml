@@ -2,12 +2,12 @@ dataset_attrs:
     title: SkyTEM Airborne Electromagnetic (AEM) Survey, Northeast Wisconsin Bedrock Mapping
     institution: USGS Geology, Geophysics, and Geochemistry Science Center
     source:  SkyTEM raw data, USGS processed data and inverted resistivity models, and depth to bedrock surface
-    history: (1) Data acquisition 01/2021 - 02/2021 by SkyTEM Canada Inc.; (2) AEM and magnetic data processing by SkyTEM Canada Inc. 02/2021 - 03/2021; raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 03/2021; Minimally processed AEM data exported to netCDF /tabular/0 group 11/2021; (3) Minimally processed binary data and system response information received from the contractor were imported into the Aarhus Workbench software (v 6.0.1.0) where data were processed by USGS 03/2021 - 06/2021. Processed AEM data exported to netCDF /tabular/1 group 11/2021; (4) Processed data were inverted in Aarhus Workbench software using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models exported to netCDF /tabular/2 group 11/2021. (5) Resistivity models were imported into the Geoscene3D software (v. 12.0.0.680) and points were generated at the first depth where resistivity exceeded 325 ohm-meters. These points were visually inspected and manually adjusted in selected areas to produce an AEM-derived estmiate of the elevation of the top of bedrock by USGS together with WGNHS 06/2021 - 07/2021. Points were exported to netCDF /tabular/3 group 11/2021. (6) Bedrock elevation points were interpolated using kriging in Geoscene3D software to produce a regular bedrock elevation grid 07/2021. (7) A bedrock depth grid was calculated in QGIS software (v. 3.14.1-Pi) by subtracting the bedrock elevation from land surface elevation. (8) Bedrock elevation, bedrock depth, and SkyTEM-provided magnetic grids were aligned to a common 100m x 100m grid and exported to netCDF /raster/0 group 11/2021.
+    history: (1) Data acquisition 01/2021 - 02/2021 by SkyTEM Canada Inc.; (2) AEM and magnetic data processing by SkyTEM Canada Inc. 02/2021 - 03/2021; raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 03/2021; Minimally processed AEM data exported to netCDF group /survey/data/raw_data group; (3) Minimally processed binary data and system response information received from the contractor were imported into the Aarhus Workbench software (v 6.0.1.0) where data were processed by USGS 03/2021 - 06/2021. Processed AEM data exported to netCDF group /survey/data/processed_data; (4) Processed data were inverted in Aarhus Workbench software using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models exported to netCDF group /survey/models/inverted_models. (5) Resistivity models were imported into the Geoscene3D software (v. 12.0.0.680) and points were generated at the first depth where resistivity exceeded 325 ohm-meters. These points were visually inspected and manually adjusted in selected areas to produce an AEM-derived estmiate of the elevation of the top of bedrock by USGS together with WGNHS 06/2021 - 07/2021. Points were exported to netCDF group /survey/data/depth_to_bedrock. (6) Bedrock elevation points were interpolated using kriging in Geoscene3D software to produce a regular bedrock elevation grid 07/2021. (7) A bedrock depth grid was calculated in QGIS software (v. 3.14.1-Pi) by subtracting the bedrock elevation from land surface elevation. (8) Bedrock elevation, bedrock depth, and SkyTEM-provided magnetic grids were aligned to a common 100m x 100m grid and exported to netCDF group /survey/derived_products/maps.
     references: Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M.A. Muldoon, E.K. Stewart, R.J. Hunt, S.R. James, N.L. Foks, and M.J. Komiskey, 2021, Airborne electromagnetic and magnetic survey data, northeast Wisconsin, 2021, U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM, fully processed data used as input to inversion, laterally constrained inverted resistivity models, and derived estimates of bedrock depth.
     summary: Airborne electromagnetic (AEM) and magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.
-    content: survey information (group /survey), raw data (group /survey/tabular/0), processed data (group /survey/tabular/1), inverted resistivity models (group /survey/tabular/2), bedrock elevation points (group /survey/tabular/3), gridded magnetic and bedrock maps (group /survey/raster/0)
-    created_by: gspy==2.0.0
+    content: survey information (group /survey), raw data (group /survey/data/raw_data), processed data (group /survey/data/processed_data), inverted resistivity models (group /survey/models/inverted_models), bedrock elevation points (group /survey/data/depth_to_bedrock), gridded magnetic and bedrock maps (group /survey/derived_products/maps)
+    created_by: gspy==2.2.8
     conventions: CF-1.8, GS-2.0
 
 survey_information:
@@ -61,13 +61,8 @@ survey_equipment:
 nominal_system:
     type: system
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem 304M
-    data_normalized: True
-    skytem_skb_gex_available: True
-    reference_frame: right-handed positive down
-    coil_orientations: X, Z
+    method: electromagnetic, time domain
+    instrument: SkyTEM 304M
 
     dimensions:
         gate_times:
@@ -165,6 +160,12 @@ nominal_system:
             length: 3
 
     variables:
+
+        data_normalized: True
+        skytem_skb_gex_available: True
+        reference_frame: right-handed positive down
+        coil_orientations: X, Z
+
         transmitter:
             label: [LM, HM]
             number_of_turns: [1, 4]
@@ -200,7 +201,7 @@ nominal_system:
                 values: [105.0, 115.0]
                 units: m^2
 
-        component:
+        couplet:
             transmitters: [LM, HM, LM, HM]
             receivers: [z, z, x, x]
             txrx_dx: [-13.25, -13.25, -14.65, -14.65]
@@ -209,13 +210,82 @@ nominal_system:
             data_type: [dBdt, dBdt, dBdt, dBdt]
             gate_times: [LM_gate_times, HM_gate_times, LM_gate_times, HM_gate_times]
 
+
 magnetic_system:
     type: system
     mode: airborne
     method: magnetic
-    submethod: total field
-    instrument: cesium vapour
-    variables:
-        sample_rate:
-            values: 0.1
-        resolution: 0.002
+    instrument: Geometrics G-822A cesium‑vapor magnetometer 
+
+    prefixes: ['base_magnetometer']
+
+    dimensions:
+        base_mag_locations:
+            standard_name: base_mag_locations
+            long_name: Base Magnetometer Location Index Numbers
+            units: not_defined
+            null_value: not_defined
+            centers: [1, 2]
+            discrete: True
+
+    variables: 
+
+        transmitter:
+            label: passive
+            description: No artificial magnetic transmitter was used. The system measures the scalar Larmor precession frequency induced by the Earth's magnetic field.
+
+        receiver:
+            label: scalar_magnetometer
+            sensor_type: cesium-vapor split-beam
+            sensor_model: G-822A
+            sensor_manufacturer: Geometrics
+            description: Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger. Measures total magnetic field through Larmor precession frequency.
+            orientation: Tail-stinger mounted; scalar measurement independent of orientation.
+            coordinates: not_reported   
+            lag_correction: Lag was negligible and no lag correction was applied
+            heading_correction: Heading was negligible and no heading correction was applied
+
+        couplet:
+            passive_scalar_pair:
+            transmitters: [passive]
+            receivers: [scalar_magnetometer]
+            description: The magnetic measurement system consists of the Earth's field as a passive transmitter and a single scalar magnetometer mounted in the tail stinger.
+
+        base_magnetometer: 
+            label: base_magnetometer
+            description: The base station magnetometer was placed in a location of low magnetic gradient, away from electrical transmission lines and moving metallic objects, such as motor vehicles and aircrafts. 
+
+            location_names:
+                values: ["Door County", "Manitowoc"]
+                dimensions: 'base_mag_locations'
+
+            values:
+                values: [54538, 54194.7]
+                units: nT
+                dimensions: 'base_mag_locations'
+
+            latitude:
+                values: [44.849335, 44.127998]
+                long_name: Latitude in WGS84
+                units: decial degrees
+                dimensions: 'base_mag_locations'
+
+            longitude:
+                values: [87.422440, 87.685524]
+                long_name: Longitude in WGS84
+                units: decial degrees
+                dimensions: 'base_mag_locations'
+            
+            elevation:
+                values: [178.1, 164.4]
+                long_name: Elevation
+                datum: WGS84
+                units: m
+                dimensions: 'base_mag_locations'
+
+        diurnal_correction: Diurnal signal removed using 3 second Fraser low-pass filter and subtracting base-station magnetometer values.
+        tieline_levelling: No tie line-leveling were applied
+        microlevelling: No micro-levelling were applied 
+        igrf_model_date: "2015, 15th generation" 
+        igrf_model_location: variable according to GPS WGS84 longitude and latitude
+        igrf_model_height: variable according to magnetic sensor altitude derived from DGPS data      

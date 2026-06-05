@@ -1,0 +1,842 @@
+dataset_attrs:
+    content: raw data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
+
+coordinates:
+    x: x_WGS84_Albers
+    y: y_WGS84_Albers
+    z: DTM
+
+resolve_system:
+    type: system
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
+
+    dimensions:
+        channel:
+            centers: ['in-phase','quadrature']
+            standard_name: frequency_domain_complex_data
+            long_name: complex frequency domain data channel
+            units: not_defined
+            null_value: not_defined
+            discrete: True
+        frequency:
+            standard_name: frequency
+            long_name: nominal measurement frequency
+            units: Hz
+            null_value: not_defined
+            centers: [400, 1800, 3300, 8200, 40000, 140000]
+            discrete: True
+
+    variables:
+        data_normalized: True
+        output_data_type: ppm
+        reference_frame: right-handed positive up
+        output_sample_frequency: 10
+
+        transmitter:
+            label: [400, 1800, 3300, 8200, 40000, 140000]
+            orientation: [z, z, x, z, z, z]
+            actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
+            moment: [359, 187, 150, 72, 49, 17]
+
+        receiver:
+            label: [z, z, x, z, z, z]
+            orientation: [z, z, x, z, z, z]
+
+        couplet:
+            transmitters: [400, 1800, 3300, 8200, 40000, 140000]
+            receivers: [z, z, x, z, z, z]
+            txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
+            txrx_dy: [0, 0, 0, 0, 0, 0]
+            txrx_dz: [0, 0, 0, 0, 0, 0]
+            orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
+
+magnetic_system:
+    type: system
+    mode: airborne
+    method: magnetic
+    instrument: Scintrex CS-3 cesium-vapor magnetometer
+
+    prefixes: ['base_magnetometer']
+
+    dimensions:
+        base_mag_locations:
+            standard_name: base_mag_locations
+            long_name: Base Magnetometer Location Index Numbers
+            units: not_defined
+            null_value: not_defined
+            length: 6   
+            increment: 1
+            origin: 1
+            discrete: True
+
+    variables:
+
+        transmitter:
+            label: passive
+            description: "No artificial transmitter was used; the magnetic system measures the Earth's natural field (passive field)."
+
+        receiver:
+            label: scalar_magnetometer
+            sensor_type: cesium_vapor
+            sensor_model: CS-3  
+            sensor_manufacturer: Scintrex
+            description:  Scalar cesium-vapor magnetometer mounted in the RESOLVE EM bird towed beneath an AS350 B2 helicopter. Digital acquisition via CGG HeliDAS; positioning with NovAtel OEM4 GPS on helicopter and bird.  
+            orientation: em-bird mounted 
+            acquisition_system: CGG HeliDAS survey computer; NovAtel OEM4 GPS (WAAS-enabled) for navigation and synchronization; EM bird GPS OEM4 for positional data. 
+            sample_frequency:
+                values: 10.0
+                units: Hz  
+            sensitivity:
+                values: 0.001
+                units: nT   
+            accuracy:
+                values: 0.002
+                units: nT   
+            typical_noise:
+                values: 1.0
+                units: nT   
+            sensor_height:
+                values: 43
+                units: m    
+            parallax:
+                values: 1.9
+                units: s    
+
+        base_magnetometer:
+            label: base_magnetometer
+            description: "Ground magnetic base stations established at magnetically quiet sites. Primary system: CGG CF1 with Scintrex cesium vapor sensor and Marconi GPS synchronization at 1 s sampling. Secondary system: GEM Systems GSM-19 for redundancy. Base data were filtered (51 s median + 51 s Hanning), spikes removed, and diurnal variation extracted for airborne correction." 
+            sensor_type: CGG CF1 (Scintrex cesium vapor)  
+            sample_frequency:
+                values: 1
+                units: s  
+            tolerances: "Non-linear variations ≤ 5 nT per 5 min; pulsations ≤ 2 nT (≤5 min),
+                ≤ 4 nT (5-10 min), ≤ 8 nT (10-20 min)."
+            secondary_sensor_model: GEM GSM-19
+            secondary_sensor_sample_frequency: 0.33 per sec
+            secondary_sensor_accuracy: 0.2 nT
+            secondary_sensor_precision: 0.01 nT  
+            location_names:
+                values: ["Greenwood, MS", "Monroe, LA", "Saline, AR", "Memphis, TN", "Blytheville, AR", "Sikeston, MO"]
+                dimensions: 'base_mag_locations'   
+
+            setup_dates:
+                values: ["2018-11-13", "2018-12-13", "2018-12-31", "2019-01-17", "2019-02-01", "2019-02-14"]
+                dimensions: 'base_mag_locations'   
+
+            latitude:
+                values: ["33 30 00.0846N","32 30 52.3791N","34 35 12.0969N", "35 08 04.7327N", "35 56 50.0527N", "36 53 15.0031N"]
+                units: degrees minutes seconds
+                dimensions: 'base_mag_locations'
+            longitude:
+                values: ["90 04 40.1067W", "92 02 38.7503W", "92 29 02.3482W","90 13 55.1625W","89 49 54.4791W","89 33 58.9664W"]
+                units: degrees minutes seconds
+                dimensions: 'base_mag_locations'
+            ellipsoidal_height:
+                values: [20.392, -0.741, 91.476, 37.861, 50.492, 67.374]
+                dimensions: 'base_mag_locations'   
+
+        dynamic_compensation: Heading test performed November 16, 2018 with passes in magnetic N,S,E,W; heading errors within acceptable limits (e.g., N–S ~0.2–0.4 nT; E–W up to ~1.9 nT), indicating low aircraft-induced magnetic noise.  
+        diurnal_correction: Diurnal variation extracted from base station records (1 Hz), filtered (51 s median + 51 s Hanning), interpolated to 10 Hz, and applied to airborne TMF; a local regional field value of 49,405 nT (from first day’s average) was removed prior to RMI calculation. 
+        igrf_model_date: "2018-11-15/2019-02-18"  
+        igrf_model_height: "sensor altitude ~43 m AGL" 
+        igrf_removed_model_epoch: "2015.0"
+        tieline_levelling: Magnetic data were levelled using tie/traverse intercepts, manual adjustments where needed, and microlevelling applied to produce final RMI/TMI products.  
+        deliverables: Total Magnetic Intensity (TMI), Residual Magnetic Intensity (RMI), and Calculated Vertical Magnetic Gradient (CVG), provided with ancillary EM & terrain data.  
+
+        couplet:
+            transmitters: [passive]
+            receivers: [scalar_magnetometer]
+            description: Passive Earth-field transmitter paired with single scalar magnetometer receiver mounted in the RESOLVE EM bird.  
+
+radiometric_system:
+    type: system
+    mode: airborne
+    method: gamma_spectrometry
+    instrument: Radiation Solutions RS-500 gamma-ray spectrometer  
+    prefixes: ['radiometric']
+
+    dimensions:
+        spec_sample:
+            standard_name: spec_sample
+            long_name: radiometric sample
+            units: not_defined
+            null_value: not_defined
+            length: 256
+            increment: 1
+            origin: 0
+            discrete: True
+
+    variables:
+
+        transmitter:
+            label: passive
+            description: No artificial radiation source was used; the system measures naturally occurring gamma radiation from potassium-40, uranium and thorium decay series, and total count.  
+
+        receiver:
+            label: gamma_spectrometer
+            sensor_type: NaI(Tl) scintillation crystals
+            sensor_model: RS-500
+            sensor_manufacturer: Radiation Solutions Inc.
+            description: Airborne gamma-ray spectrometer consisting of one downward-looking NaI(Tl) detector pack (16.8 liters) and one upward-looking detector (4.2 liters), mounted in the helicopter cabin. Measures total count, potassium, uranium, thorium, and upward-uranium windows. Includes embedded live-time electronics for dead-time correction.  
+            operating_range:
+                values: "0-100,000"
+                units: counts_per_second  
+            operating_limits:
+                temperature: "-20 to +50"  
+                units: degrees Celsius
+            sample_frequency:
+                values: 1.0
+                units: Hz 
+            downward_crystal_volume:
+                values: 16.8
+                units: liters 
+            upward_crystal_volume:
+                values: 4.2
+                units: liters  
+        
+        couplet:
+            transmitters: [passive]
+            receivers: [gamma_spectrometer]
+            description: Passive gamma-ray field paired with dual-detector RS-500 spectrometer for downward and upward radiation measurements.
+
+        corrections: Radiometric corrections include cosmic and aircraft background stripping, radon-background removal, altitude attenuation correction to 60 m nominal, Compton stripping, and conversion to ground concentrations. Live time measured electronically (in ms) and applied to correct all radiometric windows (TC, K, U, Th, UpU) to true count rates using the relationship C_lt = (1000 * C_raw) / L.
+        calibration_pads: Stripping ratios and coefficients determined by Radiation Solutions using RS-500 calibration pads prior to survey start. 
+        cosmic_calibration: High-altitude passes (7,500-10,000 ft AGL at 500 ft intervals) collected to determine cosmic and aircraft background coefficients. 
+        height_attenuation: Calibration lines flown at 30-150 m above ground on a repeat test line used to determine attenuation coefficients for each window.  
+        radon_correction: Upward-looking detector smoothed (51-pt Hanning) to derive radon component; radon stripped from downward uranium then propagated to other windows.  
+        prefiltering: Radar altimeter, pressure, temperature smoothed with 3-pt Hanning; cosmic channel smoothed with 9-pt Hanning before corrections applied.  
+        compton_stripping: Height-corrected Compton coefficients (alpha, beta, gamma) applied for inter-window spectral overlap using altitude-dependent adjustments.  
+        altitude_attenuation_correction: "nominal_height 60 m"
+        conversion_to_concentrations: Corrected K, U, Th windows converted to apparent concentrations using system sensitivities (S-factors), and dose rate computed from K, eU, eTh using reported coefficients.  
+        radiometric_ratios: Ratios (eU/eTh, eU/K, eTh/K) calculated following IAEA TR-323 guidelines, using summed neighborhood windows to stabilize low-count data. 
+        nominal_survey_altitude:
+            values: 69
+            units: m
+            description: Helicopter radar altitude typically ~69 m above ground level during radiometric acquisition.  
+
+        deliverables: Total Count, Potassium (%K), Equivalent Uranium (eU ppm), Equivalent Thorium (eTh ppm), Air Absorbed Dose Rate (nGy/h), upward-looking spectrum, downward-looking spectrum, and derived radiometric ratios.  
+
+dimensions:
+    layer_depth:
+        standard_name: layer_depth
+        long_name: layer depth below surface
+        units: meters
+        null_value: not_defined
+        length: 31
+        increment: 5.0
+        origin: 2.5
+        axis: Z
+        positive: down
+        datum: ground surface
+
+variables:
+        line:
+            standard_name: line
+            long_name: Line Number
+            units: not_defined
+            null_value: -9999
+            dtype: int32
+
+        date:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        utc_time:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        flight:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        fiducial:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        temp_ext:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        kpa:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        x_WGS84_Albers:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+            axis: x
+
+        y_WGS84_Albers:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+            axis: y
+
+        x_WGS84_UTMZ15N:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        y_WGS84_UTMZ15N:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        lat_tx:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        lon_tx:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        lat_heli:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        lon_heli:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        gpsz_tx:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        gpsz_heli:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        altlas_tx:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        altrad_heli:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        effective_height:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        DTM:
+            standard_name: dtm,
+            long_name: Digital terrain model, ground surface elevation
+            units: meters
+            null_value: not_defined
+            axis: z
+            positive: up
+            datum: referenced to mean sea level - Earth Gravitational Model (EGM96)
+
+        bird_pitch:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        bird_roll:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        bird_yaw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        diurnal:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        diurnal_cor:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        mag_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        mag_L:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        mag_LD:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        IGRF:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        TMI:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        RMI:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        cpsp:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        cxsp:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        powerline:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        400hz_filtered:
+            standard_name: 400hz_filtered
+            long_name: 400 Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi400_filt, cpq400_filt]
+            system_couplet: 0
+        
+        1800hz_filtered:
+            standard_name: 1800hz_filtered
+            long_name: 1800 Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi1800_filt, cpq1800_filt]
+            system_couplet: 1
+
+        3300hz_filtered:
+            standard_name: 3300hz_filtered
+            long_name: 3300 Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cxi3300_filt, cxq3300_filt]
+            system_couplet: 2
+        
+        8200hz_filtered:
+            standard_name: 8200hz_filtered
+            long_name: 8200 Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi8200_filt, cpq8200_filt]
+            system_couplet: 3
+
+        40k_hz_filtered:
+            standard_name: 400hz_filtered
+            long_name: 40k Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi40k_filt, cpq40k_filt]
+            system_couplet: 4
+        
+        140k_hz_filtered:
+            standard_name: 140k_hz_filtered
+            long_name: 140k Hz EM frequency data, spherics rejected
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi140k_filt, cpq140k_filt]
+            system_couplet: 5
+
+        400hz_pgadj:
+            standard_name: 400hz_phase_gain_adj
+            long_name: 400 Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi400_phg, cpq400_phg]
+            system_couplet: 0
+        
+        1800hz_pgadj:
+            standard_name: 1800hz_phase_gain_adj
+            long_name: 1800 Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi1800_phg, cpq1800_phg]
+            system_couplet: 1
+
+        3300hz_pgadj:
+            standard_name: 3300hz_phase_gain_adj
+            long_name: 3300 Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cxi3300_phg, cxq3300_phg]
+            system_couplet: 2
+        
+        8200hz_pgadj:
+            standard_name: 8200hz_phase_gain_adj
+            long_name: 8200 Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi8200_phg, cpq8200_phg]
+            system_couplet: 3
+
+        40k_hz_pgadj:
+            standard_name: 400hz_phase_gain_adj
+            long_name: 40k Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi40k_phg, cpq40k_phg]
+            system_couplet: 4
+        
+        140k_hz_pgadj:
+            standard_name: 140k_hz_phase_gain_adj
+            long_name: 140k Hz EM frequency data, phase and gain adjusted
+            units: Parts per million (ppm)
+            null_value: not_defined
+            dimensions: [index, channel]
+            raw_data_columns: [cpi140k_phg, cpq140k_phg]
+            system_couplet: 5
+
+        400hz_final:
+            standard_name: 400hz_final
+            long_name: 400 Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cpi400, cpq400]
+            system_couplet: 0
+        
+        1800hz_final:
+            standard_name: 1800hz_final
+            long_name: 1800 Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cpi1800, cpq1800]
+            system_couplet: 1
+
+        3300hz_final:
+            standard_name: 3300hz_final
+            long_name: 3300 Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cxi3300, cxq3300]
+            system_couplet: 2
+        
+        8200hz_final:
+            standard_name: 8200hz_final
+            long_name: 8200 Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cpi8200, cpq8200]
+            system_couplet: 3
+
+        40k_hz_final:
+            standard_name: 400hz_final
+            long_name: 40k Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cpi40k, cpq40k]
+            system_couplet: 4
+        
+        140k_hz_final:
+            standard_name: 140k_hz_final
+            long_name: 140k Hz EM frequency data, final levelled
+            units: Parts per million (ppm)
+            null_value: -9999.0
+            dimensions: [index, channel]
+            raw_data_columns: [cpi140k, cpq140k]
+            system_couplet: 5
+
+        ddep140k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        ddep40k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        ddep8200:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        ddep1800:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        ddep400:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dep140k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dep40k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dep8200:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dep1800:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dep400:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dres140k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dres40k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dres8200:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dres1800:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        dres400:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        res140k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        res40k:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        res8200:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        res1800:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        res400:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        cosmic:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        doserate:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        live_time:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        tc_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        th_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        u_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        u_up_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        k_raw:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        eth:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        eu:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        kconc:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        eth_kconc:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        eu_eth:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+
+        eu_kconc:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: -9999.0
+
+        dres_150_by5m:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+            dimensions: [index, layer_depth]
+
+        spec256_down:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: -9999.0
+            dimensions: [index, spec_sample]
+
+
+        spec256_up:
+            standard_name: not_defined
+            long_name: not_defined
+            units: not_defined
+            null_value: not_defined
+            dimensions: [index, spec_sample]

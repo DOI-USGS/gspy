@@ -1,6 +1,10 @@
 dataset_attrs:
     content: raw data
     comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    mode: airborne
+    method: magnetic, radiometric, electromagnetic, time domain
+    instrument: 30Hz Tempest
 
 coordinates:
     x: Easting_Albers
@@ -9,16 +13,9 @@ coordinates:
 
 tempest_system:
     type: system
-    structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: tempest
-    data_normalized: True
-    output_data_type: B
-    reference_frame: right-handed positive up
-    output_sample_frequency: 5
-    digitization_frequency: 92160
+    method: electromagnetic, time domain
+    instrument: 30Hz Tempest
 
     dimensions:
         gate_times:
@@ -47,6 +44,13 @@ tempest_system:
                 5.338690e-03, 8.301020e-03, 1.337928e-02]
 
     variables:
+
+        data_normalized: True
+        output_data_type: B
+        reference_frame: right-handed positive up
+        output_sample_frequency: 5
+        digitization_frequency: 92160
+        
         transmitter:
             label: Z
             area: 155
@@ -72,48 +76,30 @@ tempest_system:
             label: [z, x]
             orientation: [z, x]
 
-        component:
+        couplet:
             transmitters: [z, z]
             receivers: [z, x]
             txrx_dx: [-120, -120]
             txrx_dy: [0, 0]
             txrx_dz: [-52, -52]
 
-magnetic_system:
-    type: system
-    mode: airborne
-    method: magnetic
-    submethod: not_defined
-    instrument: not_defiend
-    sample_frequency: 1.0
-    resolution: 0.001
-
-radiometric_system:
-    type: system
-    mode: airborne
-    method: radiometric
-    submethod: not_defined
-    instrument: not_defined
-    sample_frequency: 1.0
-
 variables:
     Easting_Albers:
-        axis: X
+        long_name: Easting_Albers:PROJECTION=WGS84/Albers
     Northing_Albers:
-        axis: Y
+        long_name: Northing_Albers:PROJECTION=WGS84/Albers
     DTM:
-        axis: Z
         positive: up
         datum: NAD88
     EMX_NonHPRG:
-        em_system_components: 1
+        system_couplet: 'z_x'
         dimensions: [index, gate_times]
     EMX_HPRG:
-        em_system_components: 1
+        system_couplet: 'z_x'
         dimensions: [index, gate_times]
     EMZ_NonHPRG:
-        em_system_components: 0
+        system_couplet: 'z_z'
         dimensions: [index, gate_times]
     EMZ_HPRG:
-        em_system_components: 0
+        system_couplet: 'z_z'
         dimensions: [index, gate_times]

@@ -1,11 +1,10 @@
 dataset_attrs :
     content : gridded magnetic maps
-    comment: This dataset includes AEM-derived estimates of the elevation of the top of bedrock produced by USGS
+    comment: contractor-derived maps
     type: data
     structure: raster
     mode: airborne
-    method: magnetic
-    submethod: total field
+    method: magnetic, total magnetic field
     instrument: cesium vapour
     property: magnetic
 

@@ -5,10 +5,8 @@ dataset_attrs:
     type: data
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
+    method: electromagnetic, time domain
     instrument: skytem
-    property: ''
 
 coordinates:
     x: E_Nad83
@@ -36,7 +34,7 @@ variables:
         long_name: EM data, low moment x-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 1
+        system_couplets: 1
         dimensions: [index, lm_gate_times]
 
     LM_Z:
@@ -44,7 +42,7 @@ variables:
         long_name: EM data, low moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 0
+        system_couplets: 0
         dimensions: [index, lm_gate_times]
 
     HM_X:
@@ -52,7 +50,7 @@ variables:
         long_name: EM data, high moment x-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 3
+        system_couplets: 3
         dimensions: [index, hm_gate_times]
 
     HM_Z:
@@ -60,7 +58,7 @@ variables:
         long_name: EM data, high moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        em_system_components: 2
+        system_couplets: 2
         dimensions: [index, hm_gate_times]
 
     _60Hz_Intensity:

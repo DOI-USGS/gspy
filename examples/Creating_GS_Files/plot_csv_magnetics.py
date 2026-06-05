@@ -1,8 +1,8 @@
 """
-Magnetic Survey
----------------
+Magnetic Raster Dataset
+-----------------------
 
-These magnetic data channels were pulled from the Wisconsin Skytem example in this repository
+These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. 
 
 Dataset Reference:
 Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
@@ -18,8 +18,8 @@ from pprint import pprint
 
 
 #%%
-# Convert the magnetic csv data to NetCDF
-# +++++++++++++++++++++++++++++++++++++++
+# Convert the magnetic raster data to NetCDF
+# ++++++++++++++++++++++++++++++++++++++++++
 
 #%%
 # Initialize the Survey
@@ -33,8 +33,7 @@ metadata = join(data_path, "WI_Magnetics_survey_md.yml")
 # Establish the Survey
 survey = Survey.from_dict(metadata)
 
-data_container = survey.gs.add_container('data', **dict(content = "raw and gridded data",
-                                                        comment = "This is a test"))
+data_container = survey.gs.add_container('data', **dict(content = "raw flightline and gridded magnetic data", comment = "grids were contractor-derived"))
 
 #%%
 # 1 - Raw Data -
@@ -49,9 +48,10 @@ data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_sup
 #%%
 # 1 - Gridded Data -
 # Import a tif of gridded mag data.
+# Define path to metadata file, which contains paths to the raster files
 d_supp1 = join(data_path, 'WI_Magnetics_grids_md.yml')
 
-# Add the raw AEM data as a tabular dataset
+# Add the mag grids as a raster dataset
 data_container.gs.add(key='grids', metadata_file=d_supp1)
 
 #%%

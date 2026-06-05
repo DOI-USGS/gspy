@@ -1,13 +1,12 @@
 dataset_attrs:
     title: Example Tempest Airborne Electromagnetic (AEM) Dataset
     institution: USGS Geology, Geophysics, & Geochemistry Science Center
-    source:  Contractor provided ASEG-formatted data
-    history: <date and time when the data were produced and/or modified>
-    references: <data release reference>
-    comment: <additional details or ancillary information>
-    content: <summary list of file contents, e.g. raw data (/survey/tabular/0), processed data (/survey/tabular/1)>
-    conventions: CF-1.8, GS-0.0
-    created_by: gspy==0.0.1
+    source:  Contractor provided ASEG-GDF2 formatted data
+    history: This example dataset includes the raw AEM data and gridded magnetic data as provided by the contractor, CGG Canada Services, Ltd, as well as 1-D resistivity models inverted by the USGS using the GALEISBSTDEM time-domain deterministic inversion software (Brodie 2015, Geoscience Australia, Release-20160606). 
+    references: "Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ."
+    comment: This dataset is incomplete and has been downsampled for the purposes of this example. 
+    content: data branch containing raw AEM data (survey/data/raw_data) and a sub-branch for derived maps containing the total magnetic intensity map (survey/data/derived_maps/maps); model branch containing inverted 1-D resistivity models (survey/models/inverted_models)
+    conventions: CF-1.12, GS-2.0
 
 spatial_ref:
     wkid: 5070
@@ -19,7 +18,7 @@ survey_information:
     client: U.S. Geological Survey
     survey_type: electromagneticmagneticradiometric
     survey_area_name: Mississippi Alluvial Plain (MAP)
-    state: MOARTNMSLAILKY
+    state: MO,AR,TN,MS,LA,IL,KY
     country: USA
     acquisition_start: 20191120
     acquisition_end: 20200307
