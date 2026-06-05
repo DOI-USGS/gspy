@@ -1,8 +1,10 @@
 import os
 from os.path import splitext
-import json
-import yaml
-from pprint import pprint
+from ._json_md_handler import read_json, to_json
+from ._yml_md_handler import read_yml, to_yml
+from ._xl_md_handler import read_excel, to_excel
+from ._csv_md_handler import read_csv, to_csv
+import pprint
 
 class Metadata(dict):
 
@@ -29,18 +31,23 @@ class Metadata(dict):
             out = cls(filename)._sort_out_list_of_strings()
             return out
 
-        with open(filename) as f:
-            filename = filename.replace('yaml', 'yml')
+        base, extension = splitext(filename)
 
-            base, extension = splitext(filename)
+        match extension:
+            case '.json':
+                out = read_json(filename)
+            case '.yml':
+                out = read_yml(filename)
+            case '.yaml':
+                out = read_yml(filename)
+            case '.xlsx':
+                out = read_excel(filename)
+            case '.csv':
+                out = read_csv(filename)
+            case _:
+                assert False, ValueError("metadata filename does not end with json or yml")
 
-            match extension:
-                case '.json':
-                    out = cls(json.loads(f.read()))
-                case '.yml':
-                    out =  cls(yaml.safe_load(f))
-                case _:
-                    assert False, ValueError("metadata filename does not end with json or yml")
+        out = cls(out)
 
         out = out._sort_out_list_of_strings()
         out['directory'] = os.path.split(filename)[0]
@@ -78,24 +85,28 @@ class Metadata(dict):
 
         return cls(self)
 
-    def dump(self, filename):
-        def __yaml_dump(this, file, indent=0, key=None):
-            if isinstance(this, dict):
-                if key is not None:
-                    file.write(f"{'    '*indent}{key}:\n")
-                    indent += 1
-                for key, value in this.items():
-                    __yaml_dump(value, file, indent=indent, key=key)
-            else:
-                file.write(f"{'    '*indent}{key}: {this}\n")
+    def dump(self, filename, **kwargs):
+        self.pop('directory', None)
 
-        with open(filename, "w") as f:
-            if 'json' in filename:
-                json.dump(self, f, indent=4)
-            elif 'yml' in filename:
-                __yaml_dump(self, f)
-            else:
-                raise Exception(f"Unknown extension for metadata file {filename}, please use json or yml")
+        print(self.pop('directory', ""))
+
+
+        base, extension = splitext(filename)
+
+        match extension:
+            case ".json":
+                to_json(self, filename, **kwargs)
+            case ".yml":
+                to_yml(self, filename, **kwargs)
+            case ".yaml":
+                to_yml(self, filename, **kwargs)
+            case ".xlsx":
+                to_excel(self, filename, **kwargs)
+            case ".csv":
+                to_csv(self, filename, **kwargs)
+            case _:
+                raise Exception(f"Unknown extension for metadata file {filename}. Available types (json, yml, csv, xlsx)")
+
 
     def check_key_whitespace(self, flag=False):
         def __check_key_whitespace(this, flag=False):
@@ -136,8 +147,11 @@ class Metadata(dict):
                 out[key] = item
         return out
 
+    def __str__(self):
+        return pprint.pformat(self)
+
     def print(self):
-        pprint(self)
+        pprint.pprint(self)
 
     def _sort_out_list_of_strings(self):
         for key, item in self.items():
