@@ -285,7 +285,7 @@ class Tabular(Dataset):
 
                         assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match dimensions for variable {var} with metadata dimensions {var_meta['dimensions']}. Dimensions already attached are: {list(self._obj.dims)}")
 
-                        self._obj = self.add_variable_from_dict(var, values=values, **var_meta)
+                        self._obj = self.add_variable_from_dict(var.lower(), values=values, **var_meta)
 
 
 
