@@ -6,9 +6,7 @@ dataset_attrs:
     references: Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M.A. Muldoon, E.K. Stewart, R.J. Hunt, S.R. James, N.L. Foks, and M.J. Komiskey, 2021, Airborne electromagnetic and magnetic survey data, northeast Wisconsin, 2021, U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM, fully processed data used as input to inversion, laterally constrained inverted resistivity models, and derived estimates of bedrock depth.
     summary: Airborne electromagnetic (AEM) and magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.
-    content: survey information (group /survey), raw data (group /survey/data/raw_data), processed data (group /survey/data/processed_data), inverted resistivity models (group /survey/models/inverted_models), bedrock elevation points (group /survey/data/depth_to_bedrock), gridded magnetic and bedrock maps (group /survey/derived_products/maps)
-    created_by: gspy==2.2.8
-    conventions: CF-1.8, GS-2.0
+    content: Wisconsin SkyTEM survey information 
 
 survey_information:
     contractor_project_number: 20022
@@ -202,7 +200,7 @@ nominal_system:
                 units: m^2
 
         couplet:
-            transmitters: [LM, HM, LM, HM]
+            transmitters: [lm, hm, lm, hm]
             receivers: [z, z, x, x]
             txrx_dx: [-13.25, -13.25, -14.65, -14.65]
             txrx_dy: [0.0, 0.0, 0.0, 0.0]
@@ -246,7 +244,6 @@ magnetic_system:
             heading_correction: Heading was negligible and no heading correction was applied
 
         couplet:
-            passive_scalar_pair:
             transmitters: [passive]
             receivers: [scalar_magnetometer]
             description: The magnetic measurement system consists of the Earth's field as a passive transmitter and a single scalar magnetometer mounted in the tail stinger.

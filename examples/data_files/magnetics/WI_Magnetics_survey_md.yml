@@ -6,9 +6,7 @@ dataset_attrs:
     references: Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, M.A. Muldoon, E.K. Stewart, R.J. Hunt, S.R. James, N.L. Foks, and M.J. Komiskey, 2021, Airborne electromagnetic and magnetic survey data, northeast Wisconsin, 2021, U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
     comment: This dataset includes minimally processed (raw) AEM and raw/processed magnetic data provided by SkyTEM
     summary: Magnetic survey data were collected during January and February 2021 over a distance of 3,170 line kilometers in northeast Wisconsin. These data were collected in support of an effort to improve estimates of depth to bedrock through a collaborative project between the U.S. Geological Survey (USGS), Wisconsin Department of Agriculture, Trade, and Consumer Protection (DATCP), and Wisconsin Geological and Natural History Survey (WGNHS). Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines oriented northwest-southeast with nominal line spacing of 0.5 miles (800 m). AEM data were inverted to produce models of electrical resistivity along flight paths, with typical depth of investigation up to about 300 m and 1 - 2 m near-surface resolution. Shallow resistivity transitions were used to estimate depth to bedrock across the survey area.
-    content: Data
-    created_by: gspy==2.0.0
-    conventions: CF-1.8, GS-2.0
+    content: Wisconsin SkyTEM survey information
 
 survey_information:
     contractor_project_number: 20022

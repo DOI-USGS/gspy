@@ -35,17 +35,43 @@ template = Survey.metadata_template()
 template.dump("template_survey_empty.yml")
 
 #%%
+#
+# .. literalinclude:: /../../examples/Creating_GS_Files/template_survey_empty.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Empty Survey YAML file
+#
+
+#%%
 # Partial existing Survey metadata file, generate a combined template to see what might be missing
 
 # Path to example files
-data_path = '..//data_files//resolve'
+data_path = '..//data_files//'
 
 # Pre-existing Survey metadata file
-metadata = join(data_path, "data//Resolve_survey_md.yml")
+metadata = join(data_path, "documents//Resolve_survey_incomplete_md.yml")
 
+#%%
 # Generate the template, passing the pre-existing file
+
 template = Survey.metadata_template(metadata)
-template.dump("template_md_survey.yml")
+template.dump("template_md_partial_survey.yml")
+
+#%%
+#
+# .. literalinclude:: /../../examples/data_files/documents/Resolve_survey_incomplete_md.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Partial incoming Survey YAML file
+#
+
+#%%
+#
+# .. literalinclude:: /../../examples/Creating_GS_Files/template_md_partial_survey.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Template with Partial Survey YAML file
+#
 
 #%%
 # Generate the Variable Metadata Template for My Dataset
@@ -54,39 +80,42 @@ template.dump("template_md_survey.yml")
 #%%
 # Zero existing Dataset metadata file, start with making an empty Dataset metadata template
 
+#%%
 # Pass the data file (in this case a CSV) to make the template variable-specific.
 # Each column in the CSV file becomes a variable by default.
+data_path = '..//data_files//resolve'
 data = join(data_path, 'data//Resolve.csv')
 template = Dataset.metadata_template(data)
 template.dump("template_md_resolve_empty.yml")
 
 #%%
+#
+# .. literalinclude:: /../../examples/Creating_GS_Files/template_md_resolve_empty.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Empty Data YAML file
+#
+
+#%%
 # Combine with a partial existing Dataset metadata file
 
+#%%
 # Here we have a CSV data file and a partial metadata file (missing the variable attributes)
+
 metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
+#%%
 # Generate the template for this CSV dataset by combining the existing
 # partial file with an empty template based on the dataset's variables
+
 template = Dataset.metadata_template(data, metadata)
-template.dump("template_md_resolve.yml")
+template.dump("template_md_resolve_partial.yml")
 
 #%%
-# Another CSV example ?
-data_path = '..//data_files//skytem_csv'
+#
+# .. literalinclude:: /../../examples/Creating_GS_Files/template_md_resolve_partial.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Partial Data YAML file
+#
 
-data = join(data_path, 'data//skytem_contractor_data.csv')
-metadata = join(data_path, 'data//skytem_contractor_data.yml')
-template = Dataset.metadata_template(data, metadata)
-template.dump("template_md_skytem.yml")
-
-#%%
-# Loupe Data
-
-data_path = '..//data_files//loupe'
-
-data = join(data_path, 'data//Kankakee.dat')
-metadata = join(data_path, 'data//loupe_data_metadata.yml')
-
-template = Dataset.metadata_template(data_filename=data, metadata_file=metadata)
-template.dump("template_md_loupe.yml")

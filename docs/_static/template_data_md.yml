@@ -24,7 +24,6 @@ dimensions:
         length: 31
         increment: 5.0
         origin: 2.5
-        axis: Z
         positive: down
         datum: ground surface
 
@@ -53,7 +52,6 @@ variables:
         long_name: Digital elevation model
         units: meter
         null_value: not_defined
-        axis: Z
         positive: up
         datum: North American Vertical Datum of 1988 (NAVD88)
 
@@ -69,20 +67,48 @@ variables:
         units: not_defined
         null_value: not_defined
 
+    LM_X:
+        standard_name: em_data_lmx
+        long_name: EM data, low moment x-component
+        units: picoVolt per Ampere per meter^4
+        null_value: -9999.99
+        system_couplet: lm_x
+        dimensions: [index, lm_gate_times]
+
+    LM_Z:
+        standard_name: em_data_lmz
+        long_name: EM data, low moment z-component
+        units: picoVolt per Ampere per meter^4
+        null_value: -9999.99
+        system_couplet: lm_z
+        dimensions: [index, lm_gate_times]
+
+    HM_X:
+        standard_name: em_data_hmx
+        long_name: EM data, high moment x-component
+        units: picoVolt per Ampere per meter^4
+        null_value: -9999.99
+        system_couplet: hm_x
+        dimensions: [index, hm_gate_times]
+
+    HM_Z:
+        standard_name: em_data_hmz
+        long_name: EM data, high moment z-component
+        units: picoVolt per Ampere per meter^4
+        null_value: -9999.99
+        system_couplet: hm_z
+        dimensions: [index, hm_gate_times]
+
     RMF:
         standard_name: residual_magnetic_field
         long_name: Residual magnetic field, IGRF corrected based on 2015 model
         units: nanoTesla
         null_value: not_defined
-
-    Time:
-        standard_name: time_utc
-        long_name: Universal coordinated time (UTC), hh:mm:ss
-        units: not_defined
-        null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
 
     TMI:
         standard_name: total_magnetic_intensity
         long_name: Diurnally corrected filtered total magnetic intensity
         units: nanoTesla
         null_value: not_defined
+        system_couplet: passive_scalar_magnetometer

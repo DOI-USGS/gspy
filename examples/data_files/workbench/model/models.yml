@@ -1,13 +1,30 @@
 dataset_attrs:
-    content: raw data
-    comment: ??
-    type: model
+    content: inverted resistivity models with input data and synthetic responses
+    comment: This dataset includes AEM inverted models produced by USGS using Aarhus Workbench. Included with models are data input into the inversion and synthetic forward responses.
+    type: model, data
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem
-    property: ''
+    method: electromagnetic, time domain
+    instrument: skyTEM 304M
+    property: electrical resistivity
+
+inversion_parameters:
+    dataset_attrs:
+        type: parameters
+        method: electromagnetic, time domain
+        instrument: skyTEM 304M
+        mode: airborne
+        property: electrical resistivity
+
+    variables:
+        model_file: prod_726_729_LBv2_bky_MOD_inv.xyz
+        inversion_software: Workbench, Aarhus Geosoftware, Aarhus, Denmark
+        software_version: Aarhus Workbench version 6 2024.2
+        date: 2024
+        number_of_layers: 40
+        constraints: laterally constrained
+        description: Deterministic inversion of the processed AEM data was implemented in Aarhus Workbench software. Inversion parameters were selected by running a series of test models with varying starting model resistivity values, layer discretization, vertical/lateral constraints, and other inversion parameters. Laterally constrained blocky inversion models were developed using a 40-layer domain with layer top depths ranging between 1 and 300 meters and layer thickness increasing with depth. Inversions were run with vertical and lateral constraints of values of 4.0 and 2.0, respectively, and a spatially varying, data-dependent homogenous half-space starting model.  Sensor altitude was treated as a free parameter after the 8th iteration. Depth of investigation was constrained to depths between 5 and 400 meters.
+        data_file: prod_726_729raw_RAW_export.xyz
 
 coordinates:
     x: UTMX
@@ -15,29 +32,28 @@ coordinates:
     z: ELEVATION
 
 dimensions:
-  layer_depth:
-    standard_name: layer_depth
-    long_name: Depth to model layer
-    units: meters
-    null_value: not_defined
-    bounds: [[0.00000E+00, 0.50000E+00, 1.05760E+00, 1.67940E+00,  2.37270E+00,  3.14580E+00,  4.00790E+00,  4.96930E+00,  6.04130E+00,  7.23730E+00,  8.57030E+00,  1.00573E+01,  1.17153E+01,  1.35643E+01,  1.56253E+01,  1.79243E+01,  2.04873E+01,  2.33453E+01,  2.65323E+01,  3.00863E+01,  3.40493E+01,  3.84693E+01,  4.33983E+01,  4.88943E+01,  5.50233E+01,  6.18573E+01,  6.94783E+01,  7.79763E+01,  8.74533E+01,  9.80233E+01,  1.09803E+02,  1.22943E+02,  1.37593E+02,  1.53933E+02,  1.72153E+02,  1.92473E+02,  2.15133E+02,  2.40403E+02,  2.68583E+02,  3.00003E+02],
-             [0.50000E+00, 1.05760E+00, 1.67940E+00, 2.37270E+00,  3.14580E+00,  4.00790E+00,  4.96930E+00,  6.04130E+00,  7.23730E+00,  8.57030E+00,  1.00573E+01,  1.17153E+01,  1.35643E+01,  1.56253E+01,  1.79243E+01,  2.04873E+01,  2.33453E+01,  2.65323E+01,  3.00863E+01,  3.40493E+01,  3.84693E+01,  4.33983E+01,  4.88943E+01,  5.50233E+01,  6.18573E+01,  6.94783E+01,  7.79763E+01,  8.74533E+01,  9.80233E+01,  1.09803E+02,  1.22943E+02,  1.37593E+02,  1.53933E+02,  1.72153E+02,  1.92473E+02,  2.15133E+02,  2.40403E+02,  2.68583E+02,  3.00003E+02, 4.50005E+02]]
+    layer_depth:
+        standard_name: layer_depth
+        long_name: Depth to model layer
+        units: meters
+        null_value: not_defined
+        bounds: [[0.00000E+00, 0.50000E+00, 1.05760E+00, 1.67940E+00,  2.37270E+00,  3.14580E+00,  4.00790E+00,  4.96930E+00,  6.04130E+00,  7.23730E+00,  8.57030E+00,  1.00573E+01,  1.17153E+01,  1.35643E+01,  1.56253E+01,  1.79243E+01,  2.04873E+01,  2.33453E+01,  2.65323E+01,  3.00863E+01,  3.40493E+01,  3.84693E+01,  4.33983E+01,  4.88943E+01,  5.50233E+01,  6.18573E+01,  6.94783E+01,  7.79763E+01,  8.74533E+01,  9.80233E+01,  1.09803E+02,  1.22943E+02,  1.37593E+02,  1.53933E+02,  1.72153E+02,  1.92473E+02,  2.15133E+02,  2.40403E+02,  2.68583E+02,  3.00003E+02],
+                [0.50000E+00, 1.05760E+00, 1.67940E+00, 2.37270E+00,  3.14580E+00,  4.00790E+00,  4.96930E+00,  6.04130E+00,  7.23730E+00,  8.57030E+00,  1.00573E+01,  1.17153E+01,  1.35643E+01,  1.56253E+01,  1.79243E+01,  2.04873E+01,  2.33453E+01,  2.65323E+01,  3.00863E+01,  3.40493E+01,  3.84693E+01,  4.33983E+01,  4.88943E+01,  5.50233E+01,  6.18573E+01,  6.94783E+01,  7.79763E+01,  8.74533E+01,  9.80233E+01,  1.09803E+02,  1.22943E+02,  1.37593E+02,  1.53933E+02,  1.72153E+02,  1.92473E+02,  2.15133E+02,  2.40403E+02,  2.68583E+02,  3.00003E+02, 4.50005E+02]]
 
-  layers_minus_1:
-    standard_name: layers_upper_lower_index
-    long_name: not defined
-    units: meters
-    null_value: not_defined
-    origin: 0
-    increment: 1
-    length: 39
+    layers_minus_1:
+        standard_name: layers_upper_lower_index
+        long_name: not defined
+        units: meters
+        null_value: not_defined
+        origin: 0
+        increment: 1
+        length: 39
 
 nominal_system:
     type: system
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem
+    method: electromagnetic, time domain
+    instrument: skyTEM 304M
     data_normalized: True
     skytem_skb_gex_available: True
     reference_frame: right-handed positive down
@@ -45,256 +61,257 @@ nominal_system:
     sample_rate: 0.1
 
     dimensions:
-    #   gate_times:
-    #     standard_name: raw_gate_times
-    #     long_name: raw gate times
-    #     units: seconds
-    #     null_value: not_defined
-    #     centers: [5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
 
-      lm_gate_times:
-        standard_name: lm_gate_times
-        long_name: calibrated low moment gate times
-        units: seconds
-        null_value: not_defined
-        centers: [1.000E-07, 2.250E-07, 2.225E-06, 4.225E-06, 6.225E-06, 8.230E-06, 1.022E-05, 1.273E-05, 1.622E-05, 2.072E-05, 2.622E-05, 3.323E-05, 4.222E-05, 5.372E-05, 6.822E-05, 8.622E-05, 1.087E-04, 1.367E-04, 1.722E-04, 2.177E-04, 2.747E-04]
+        lm_gate_times:
+            standard_name: lm_gate_times
+            long_name: calibrated low moment gate times
+            units: seconds
+            null_value: not_defined
+            centers: [1.000E-07, 2.250E-07, 2.225E-06, 4.225E-06, 6.225E-06, 8.230E-06, 1.022E-05, 1.273E-05, 1.622E-05, 2.072E-05, 2.622E-05, 3.323E-05, 4.222E-05, 5.372E-05, 6.822E-05, 8.622E-05, 1.087E-04, 1.367E-04, 1.722E-04, 2.177E-04, 2.747E-04]
 
-      hm_gate_times:
-        standard_name: hm_gate_times
-        long_name: calibrated high moment gate times
-        units: seconds
-        null_value: not_defined
-        centers: [5.892E-05, 6.041E-05, 6.241E-05, 6.441E-05, 6.641E-05, 6.842E-05, 7.041E-05, 7.292E-05, 7.641E-05, 8.091E-05, 8.641E-05, 9.342E-05, 1.024E-04, 1.139E-04, 1.284E-04, 1.464E-04, 1.689E-04, 1.969E-04, 2.324E-04, 2.779E-04, 3.349E-04, 4.069E-04, 4.979E-04, 6.119E-04, 7.559E-04, 9.374E-04, 1.166E-03, 1.454E-03, 1.818E-03, 2.277E-03]
+        hm_gate_times:
+            standard_name: hm_gate_times
+            long_name: calibrated high moment gate times
+            units: seconds
+            null_value: not_defined
+            centers: [5.892E-05, 6.041E-05, 6.241E-05, 6.441E-05, 6.641E-05, 6.842E-05, 7.041E-05, 7.292E-05, 7.641E-05, 8.091E-05, 8.641E-05, 9.342E-05, 1.024E-04, 1.139E-04, 1.284E-04, 1.464E-04, 1.689E-04, 1.969E-04, 2.324E-04, 2.779E-04, 3.349E-04, 4.069E-04, 4.979E-04, 6.119E-04, 7.559E-04, 9.374E-04, 1.166E-03, 1.454E-03, 1.818E-03, 2.277E-03]
 
-      n_loop_vertices:
-        standard_name: number_of_loop_vertices
-        long_name: number of loop vertices
-        units: not_defined
-        null_value: not_defined
-        length: 8
+        n_loop_vertices:
+            standard_name: number_of_loop_vertices
+            long_name: number of loop vertices
+            units: not_defined
+            null_value: not_defined
+            length: 8
 
-      xyz:
-        standard_name: xyz_coordinates
-        long_name: coordinates of the loop vertices
-        units: not_defined
-        null_value: not_defined
-        length: 3
+        xyz:
+            standard_name: xyz_coordinates
+            long_name: coordinates of the loop vertices
+            units: not_defined
+            null_value: not_defined
+            length: 3
 
     variables:
-      transmitter:
-        label: [lm, hm]
-        number_of_turns: [1, 4]
-        coordinates:
-                    values: [[[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]],
-                             [[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]]]
-                    dimensions: ['n_transmitter', 'n_loop_vertices', 'xyz']
-        area: [342, 342]
-        waveform_type: [trapezoid, trapezoid]
-        waveform_time:
-                    values: [[-3.1810E-003, -3.1019E-003, -2.9844E-003, -2.3810E-003, -2.3781E-003, -2.3779E-003, -2.3776E-003, -2.3763E-003, -8.0000E-004, -7.2093E-004, -6.0345E-004, 0.0000E+000, 3.0000E-008, 7.0000E-008, 2.7200E-006, 2.8000E-006, 2.9000E-006, 3.0100E-006, 3.1300E-006, 3.4100E-006, 4.7400E-006],
-                             [-6.9167E-02, -6.9157E-02, -6.9153E-02, -6.9150E-02, -6.9143E-02, -6.9122E-02, -6.9118E-02, -6.9114E-02, -6.9107E-02, -6.9083E-02, -6.8159E-02, -6.6667E-02, -6.6627E-02, -6.6626E-02, -6.6622E-02, -2.5000E-03, -2.4899E-03, -2.4862E-03, -2.4830E-03, -2.4767E-03, -2.4637E-03, -2.4547E-03, -2.4510E-03, -2.4475E-03, -2.4442E-03, -2.4406E-03, -2.4159E-03, -2.2328E-03, -1.4913E-03, 0.0000E+00, 6.4270E-07, 8.9870E-07, 1.4267E-05, 4.0291E-05, 4.1331E-05, 4.4539E-05]]
-                    long_name: waveform time
-                    null_value: not_defined
-                    units: s
-        waveform_current:
-                    values: [[-0.0000E+000, -1.4067E-001, -3.0174E-001, -1.0000E+000, -7.5094E-003, 2.2879E-002, 3.7669E-002, -0.0000E+000, 0.0000E+000, 1.4063E-001, 3.0168E-001, 1.0000E+000, 9.9851E-001, 9.8817E-001, 5.9260E-002, 3.2392E-002, 7.5094E-003, -1.2284E-002, -2.6411E-002, -3.8086E-002, 0.0000E+000],
-                             [-0.0000E+00, -3.3580E-02, -6.8755E-02, -1.0992E-01, -2.4885E-01, -7.3516E-01, -8.1234E-01, -8.6553E-01, -9.0296E-01, -9.2188E-01, -9.6364E-01, -1.0000E+00, -8.2124E-03, 7.2510E-03, -0.0000E+00, 0.0000E+00, 3.3780E-02, 6.5400E-02, 1.0996E-01, 2.3303E-01, 5.4048E-01, 7.4152E-01, 8.1301E-01, 8.6142E-01, 8.8900E-01, 9.0249E-01, 9.2195E-01, 9.3742E-01, 9.6367E-01, 1.0000E+00, 9.9562E-01, 9.8391E-01, 6.4740E-01, 9.9177E-04, -1.1094E-02, 0.0000E+00]]
-                    dimensions: ['n_transmitter', 'waveform_time']
-        current_scale_factor: [1.0, 1.0]
-        peak_current: [9.0, 110.0]
-        base_frequency: [210.0, 75.0]
-        on_time: [800E-06, 2500e-6]
-        off_time: [1581E-06, 4167e-6]
-        orientation: [z, x]
+        transmitter:
+            label: [lm, hm]
+            number_of_turns: [1, 4]
+            coordinates:
+                        values: [[[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]],
+                                    [[-12.64,-2.10,0.00],[-6.14,-8.58,0.00],[6.14,-8.58,0.00],[11.41,-3.31,0.00],[11.41,3.31,0.00],[6.14,8.58,0.00],[-6.14,8.58,0.00],[-12.64,2.10,0.00]]]
+                        dimensions: ['n_transmitter', 'n_loop_vertices', 'xyz']
+            area: [342, 342]
+            waveform_type: [trapezoid, trapezoid]
+            waveform_time:
+                        values: [[-3.1810E-003, -3.1019E-003, -2.9844E-003, -2.3810E-003, -2.3781E-003, -2.3779E-003, -2.3776E-003, -2.3763E-003, -8.0000E-004, -7.2093E-004, -6.0345E-004, 0.0000E+000, 3.0000E-008, 7.0000E-008, 2.7200E-006, 2.8000E-006, 2.9000E-006, 3.0100E-006, 3.1300E-006, 3.4100E-006, 4.7400E-006],
+                                    [-6.9167E-02, -6.9157E-02, -6.9153E-02, -6.9150E-02, -6.9143E-02, -6.9122E-02, -6.9118E-02, -6.9114E-02, -6.9107E-02, -6.9083E-02, -6.8159E-02, -6.6667E-02, -6.6627E-02, -6.6626E-02, -6.6622E-02, -2.5000E-03, -2.4899E-03, -2.4862E-03, -2.4830E-03, -2.4767E-03, -2.4637E-03, -2.4547E-03, -2.4510E-03, -2.4475E-03, -2.4442E-03, -2.4406E-03, -2.4159E-03, -2.2328E-03, -1.4913E-03, 0.0000E+00, 6.4270E-07, 8.9870E-07, 1.4267E-05, 4.0291E-05, 4.1331E-05, 4.4539E-05]]
+                        long_name: waveform time
+                        null_value: not_defined
+                        units: s
+            waveform_current:
+                        values: [[-0.0000E+000, -1.4067E-001, -3.0174E-001, -1.0000E+000, -7.5094E-003, 2.2879E-002, 3.7669E-002, -0.0000E+000, 0.0000E+000, 1.4063E-001, 3.0168E-001, 1.0000E+000, 9.9851E-001, 9.8817E-001, 5.9260E-002, 3.2392E-002, 7.5094E-003, -1.2284E-002, -2.6411E-002, -3.8086E-002, 0.0000E+000],
+                                    [-0.0000E+00, -3.3580E-02, -6.8755E-02, -1.0992E-01, -2.4885E-01, -7.3516E-01, -8.1234E-01, -8.6553E-01, -9.0296E-01, -9.2188E-01, -9.6364E-01, -1.0000E+00, -8.2124E-03, 7.2510E-03, -0.0000E+00, 0.0000E+00, 3.3780E-02, 6.5400E-02, 1.0996E-01, 2.3303E-01, 5.4048E-01, 7.4152E-01, 8.1301E-01, 8.6142E-01, 8.8900E-01, 9.0249E-01, 9.2195E-01, 9.3742E-01, 9.6367E-01, 1.0000E+00, 9.9562E-01, 9.8391E-01, 6.4740E-01, 9.9177E-04, -1.1094E-02, 0.0000E+00]]
+                        dimensions: ['n_transmitter', 'waveform_time']
+            current_scale_factor: [1.0, 1.0]
+            peak_current: [9.0, 110.0]
+            base_frequency: [210.0, 75.0]
+            on_time: [800E-06, 2500e-6]
+            off_time: [1581E-06, 4167e-6]
+            orientation: [z, x]
 
-      receiver:
-        label: z
-        orientation: z
-        coil_low_pass_filter: 628000.0
-        instrument_low_pass_filter: 500000.0
-        area: 105.0
+        receiver:
+            label: z
+            orientation: z
+            coil_low_pass_filter: 628000.0
+            instrument_low_pass_filter: 500000.0
+            area: 105.0
 
-      couplet:
-        transmitters: [lm, hm]
-        receivers: [z, z]
-        labels: ['lm_z', 'hm_z']
-        segment: [1, 3]
-        sample_rate: [0.1, 0.1]
-        txrx_dx: [-13.25, -13.25]
-        txrx_dy: [0.0, 0.0]
-        txrx_dz: [-2.0, 0.0]
-        data_type: [dBdt, dBdt]
-        gate_times: [lm_gate_times, hm_gate_times]
+        couplet:
+            transmitters: [lm, hm]
+            receivers: [z, z]
+            labels: ['lm_z', 'hm_z']
+            segment: [1, 3]
+            sample_rate: [0.1, 0.1]
+            txrx_dx: [-13.25, -13.25]
+            txrx_dy: [0.0, 0.0]
+            txrx_dz: [-2.0, 0.0]
+            data_type: [dBdt, dBdt]
+            gate_times: [lm_gate_times, hm_gate_times]
 
 variables:
     ALTITUDE_:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: altitude
+        long_name: Inverted transmitter altitude
         null_value: not_defined
-        units: not_defined
+        units: m
     ALTITUDE_A-PRIORI_:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: altitude_a_priori
+        long_name: A priori altitude used for inversion
         null_value: not_defined
-        units: not_defined
+        units: m
     ALTITUDE_A-PRIORI_STD_:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: altitude_a_priori_std
+        long_name: A priori std factor used for inversion
         null_value: not_defined
-        units: not_defined
+        units: m
     ALTITUDE_STD_:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: altitude_std
+        long_name: Altitude std factor output from inversion
         null_value: not_defined
-        units: not_defined
+        units: m
     DATE:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: date
+        long_name: Date
         null_value: not_defined
-        units: not_defined
+        units: yyyy/mm/dd
     DEP_BOT:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: depth_bottom
+        long_name: Depth to bottom of model layer
         null_value: not_defined
-        units: not_defined
+        units: m
         dimensions: ['index', 'layer_depth']
     DEP_BOT_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: depth_bottom_std
+        long_name: Standard deviation of depth to bottom of model layers
         null_value: not_defined
-        units: not_defined
+        units: m
         dimensions: ['index', 'layers_minus_1']
     DEP_TOP:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: depth_top
+        long_name: Depth to top of model layer
         null_value: not_defined
-        units: not_defined
+        units: m
         dimensions: ['index', 'layer_depth']
     DOI_CONSERVATIVE:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: doi_conservative
+        long_name: Conservative depth of investigation
         null_value: not_defined
-        units: not_defined
+        units: m
     DOI_STANDARD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: doi_standard
+        long_name: Standard depth of investigation
         null_value: not_defined
-        units: not_defined
+        units: m
     ELEVATION:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: elevation
+        long_name: Modified digital elevation model that incorporates water surface elevation with CONED land elevation
+        description : A modified digital elevation model was developed using the Coastal National Elevation Dataset (CoNED) as a the primary land-surface reference.  Within 1-km of the bay shore, the contractor-developed digital elevation model was substituted where above the CoNED surface to account for the water surface elevation over the bay and tidal areas at the time of data collection.
+        null_value: -9999.0
+        units: m
         positive: up
-        datum: ground surface
+        datum: North American Vertical Datum of 1988 (NAVD88)
     LINE_NO:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: line_no
+        long_name: Flight line number
         null_value: not_defined
         units: not_defined
     NUMDATA:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: numdata
+        long_name: Number of non-null data values for location
         null_value: not_defined
         units: not_defined
     RECORD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: record
+        long_name: Record number for sounding
         null_value: not_defined
         units: not_defined
     RESDATA:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: resdata
+        long_name: Inversion residual for data misfit
         null_value: not_defined
         units: not_defined
     RESTOTAL:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: restotal
+        long_name: Inversion residual for total objective function
         null_value: not_defined
         units: not_defined
     RHO:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: resistivity
+        long_name: Layer electrical resistivity
         null_value: not_defined
-        units: not_defined
+        units: ohm meter
         dimensions: ['index', 'layer_depth']
     RHO_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: rho_std
+        long_name: Standard deviation factor for inverted resistivitity
         null_value: not_defined
-        units: not_defined
+        units: ohm meter
         dimensions: ['index', 'layer_depth']
     SEGMENTS:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: segments
+        long_name: Data segments used for inversion
         null_value: not_defined
         units: not_defined
     SIGMA:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: sigma
+        long_name: Electrical conductivity (1 / resistivity)
         null_value: not_defined
-        units: not_defined
+        units: milli-Siemens per meter (mS/m) 
         dimensions: ['index', 'layer_depth']
     THK:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: thk
+        long_name: Model layer thicknesses
         null_value: not_defined
-        units: not_defined
+        units: m
         dimensions: ['index', 'layer_depth']
     THK_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: thk_std
+        long_name: Model layer thickness standard deviation
         null_value: not_defined
-        units: not_defined
+        units: m
         dimensions: ['index', 'layers_minus_1']
     TIME:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: time
+        long_name: Universal coordinated time (UTC)
         null_value: not_defined
-        units: not_defined
+        units: hh:mm:ss
     UTMX:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: utmx
+        long_name: Easting, Universal Transverse Mercator (UTM) Zone 18N, WGS84 Datum
         null_value: not_defined
-        units: not_defined
+        units: m
     UTMY:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: utmy
+        long_name: Northing, Universal Transverse Mercator (UTM) Zone 18N, WGS84 Datum
         null_value: not_defined
-        units: not_defined
+        units: m
     hm_z_data:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: hm_z_data
+        long_name: Observed EM data, high moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'hm_gate_times']
+        system_couplet: hm_z
     hm_z_datastd:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: hm_z_datastd
+        long_name: EM data, high moment z-component standard deviation factor
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'hm_gate_times']
+        system_couplet: hm_z
     hm_z_syn:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: hm_z_syn
+        long_name: Inversion synthetic EM response, high moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'hm_gate_times']
+        system_couplet: hm_z
     lm_z_data:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: lm_z_data
+        long_name: Observed EM data, low moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'lm_gate_times']
+        system_couplet: lm_z
     lm_z_datastd:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: lm_z_datastd
+        long_name: EM data, low moment z-component standard deviation factor
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'lm_gate_times']
+        system_couplet: lm_z
     lm_z_syn:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: lm_z_syn
+        long_name: Inversion synthetic EM response, low moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'lm_gate_times']
+        system_couplet: lm_z

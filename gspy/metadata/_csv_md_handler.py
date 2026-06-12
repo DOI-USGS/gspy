@@ -5,10 +5,10 @@ from .md_file_handler import __cell, _parse_cell, _parse_dict
 
 EMPTY = object()
 
-def read_csv(filename, usgs=True, **kwargs):
+def read_csv(filename, table=True, **kwargs):
 
-    if usgs:
-        return read_legacy_usgs_data_dictionary(filename, **kwargs)
+    if table:
+        return read_variable_table(filename, **kwargs)
 
     with open(filename, newline="") as f:
         rows = list(csv.reader(f, **kwargs))
@@ -70,12 +70,7 @@ def to_csv(metadata, filename):
     with open(filename, "w", newline="", encoding="utf-8") as f:
         csv.writer(f).writerows(rows)
 
-def read_legacy_usgs_data_dictionary(filename, **kwargs):
-
-    number_pattern = re.compile(r"[-+]?\d+(?:\.\d+)?")
-    def _to_number(s):
-        # Convert numeric text to int if possible, else float
-        return int(s) if re.fullmatch(r"[-+]?\d+", s) else float(s)
+def read_variable_table(filename, **kwargs):
 
     if filename is None:
         return {'variables':{}}

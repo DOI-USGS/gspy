@@ -4,7 +4,7 @@
 Metadata Handling
 #################
 
-GSPy uses metadata files (YAML or JSON) to ingest required and ancillary information and build the GS Data Tree. Information is read from these files into a Metadata dictionary object. When adding a dataset to the GS Data Tree, typically a user would pass a YAML or JSON file, however GSPy has the flexibility to accept a dictionary passed directly as well. 
+GSPy uses metadata files (primarily YAML or JSON, but EXCEL and CSV options are in development) to ingest required and ancillary information and build the GS Data Tree. Information is read from these files into a Metadata dictionary object. When adding a dataset to the GS Data Tree, typically a user would pass a YAML or JSON file, however GSPy has the flexibility to accept a dictionary passed directly as well. 
 
 The contents GSPy expects in the metadata files vary depending on its purpose. See the specific types of metadata linked here for more detail and examples: 
 
@@ -23,7 +23,7 @@ Required Group Attributes
 
 Attributes are attached at both the group (dataset) and variable levels. A set of global attributes is required in the Survey group (see next section) and the GS standard further requires specific attributes for identification and searchability. 
 
-By setting strict requirements on these attributes, the GS Data Tree framework can remain flexible in other areas (i.e., the names and number of groups are free to vary). The required GS attributes ensure all groups within the file can be identified and filtered for efficient data handling. See the example PLACEHOLDER for a demonstration of how to employ group keys to search and filter a GS Data Tree and find specific content. 
+By setting strict requirements on these attributes, the GS Data Tree framework can remain flexible in other areas (i.e., the names and number of groups are free to vary). The required GS attributes ensure all groups within the file can be identified and filtered for efficient data handling. See the example :doc:`Basic Functionality <../../examples/Interacting_With_GS_Files/plot_xarray_methods>` for a demonstration of how to employ group keys to search and filter a GS Data Tree and find specific content. 
 
 Survey
 ~~~~~~
@@ -62,17 +62,25 @@ The GS standard requires additional attributes at the group level based on what 
 
 The attribute ``type`` is required for all groups within a GS file, the value of which is determined by what type of GS Data Tree Element the group represents. The attribute ``structure`` is also required for data leaf groups to capture the geometry of the data, i.e., tabluar is unstructured point data, raster is structured on a rectalinear grid, and mesh is structured on a non-rectalinear grid.
 
-+---------------------------+-------------------+-----------------------+
-| GS Data Tree Element      |  **type**         | **structure**         | 
-+===========================+===================+=======================+
-| **survey root**           | survey            |                       | 
-+---------------------------+-------------------+-----------------------+
-| **branch nodes**          | container         |                       | 
-+---------------------------+-------------------+-----------------------+
-| **data leaves**           | data, model       | tabular, raster, mesh | 
-+---------------------------+-------------------+-----------------------+
-| **supplementary leaflets**| system, parameter |                       | 
-+---------------------------+-------------------+-----------------------+
+.. list-table:: GS Group Attributes
+   :header-rows: 1
+   :widths: 30 15 20
+
+   * - **GS Data Tree Element**
+     - **type**
+     - **structure**
+   * - **survey root**
+     - survey
+     - 
+   * - **branch nodes**
+     - container
+     - 
+   * - **data leaves**
+     - data, model
+     - tabular, raster, mesh
+   * - **supplementary leaflets**
+     - system, parameter
+     -
 
 Data Leaves & Supplementary Leaflets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +153,7 @@ The GS standard requires the following attributes on all variables:
     
 All numeric variables require additional attributes to document any null or missing values:
     
-    * _FillValue
+    * null_value
     * valid_range
 
 +----------------------+----------------------------------------------------------------------------------+
@@ -157,7 +165,7 @@ All numeric variables require additional attributes to document any null or miss
 +----------------------+----------------------------------------------------------------------------------+
 | **units**            | Measurement system or physical scale of the variable, may also be nondimensional |
 +----------------------+----------------------------------------------------------------------------------+
-| **_FillValue**       | Value of same type as the variable representing undefined or missing data        |
+| **null_value**       | Value of same type as the variable representing undefined or missing data        |
 +----------------------+----------------------------------------------------------------------------------+
 | **valid_range**      | Minimum and maximum valid values of the variable                                 |
 +----------------------+----------------------------------------------------------------------------------+

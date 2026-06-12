@@ -1,0 +1,311 @@
+dataset_attrs:
+    content: inverted resistivity models with input data and synthetic responses
+    comment: This dataset includes resistivity models produced by USGS using Aarhus Workbench. Included with models are data input into the inversion and synthetic forward responses.
+    type: model, data
+    structure: tabular
+    mode: ground
+    method: electromagnetic, time domain
+    instrument: LoupeEM
+    property: electrical resistivity
+
+inversion_parameters:
+    dataset_attrs:
+        type: parameters
+        method: electromagnetic, time domain
+        instrument: LoupeEM
+        mode: ground
+        property: electrical resistivity
+
+    variables:
+        model_file: Kankakee_MOD_inv.xyz
+        inversion_software: Workbench, Aarhus Geosoftware, Aarhus, Denmark
+        software_version: Aarhus Workbench version 6 2024.2
+        date: 2025
+        number_of_layers: 20
+        description: Deterministic blocky inversion of the processed LoupeEM data was implemented in Aarhus Workbench software. 
+
+coordinates:
+    x: UTMX
+    y: UTMY
+    z: ELEVATION
+
+dimensions:
+    layer_depth:
+        standard_name: layer_depth
+        long_name: Depth to model layer
+        units: meters
+        null_value: not_defined
+        bounds: [[0.00,2.00,4.20,6.61,9.25,12.16,15.35,18.85,22.69,26.91,31.55,36.63,42.22,48.35,55.08,62.47,70.58,79.49,89.27,100.00],
+                [2.00,4.20,6.61,9.25,12.16,15.35,18.85,22.69,26.91,31.55,36.63,42.22,48.35,55.08,62.47,70.58,79.49,89.27,100.00,149.99]]
+
+    layers_minus_1:
+        standard_name: layers_upper_lower_index
+        long_name: not defined
+        units: meters
+        null_value: not_defined
+        origin: 0
+        increment: 1
+        length: 19
+
+loupe_system:
+    type: system
+    mode: ground
+    method: electromagnetic, time domain
+    instrument: LoupeEM
+    data_normalized: True
+    reference_frame: right-handed positive down
+    sample_rate: 0.1
+    digitization_frequency: 504000.0
+    stacks: 360
+    powerline_frequency: 60.0
+
+    dimensions:
+        gate_times:
+            standard_name: gate_times
+            long_name: receiver gate times
+            units: seconds
+            null_value: not_defined
+            bounds: [[1.297e-05, 1.694e-05], [1.495e-05, 1.892e-05], [1.694e-05, 2.09e-05], [1.892e-05, 2.289e-05], [2.09e-05, 2.884e-05], [2.686e-05, 3.479e-05], [3.281e-05, 4.471e-05], [4.075e-05, 5.662e-05], [5.265e-05, 7.249e-05], [6.654e-05, 9.035e-05], [8.638e-05, 0.00011813], [0.00011217, 0.00015583], [0.0001459, 0.00020146], [0.00019154, 0.00026694], [0.00025305, 0.00035225], [0.00033241, 0.00046733], [0.00043956, 0.0006221], [0.00058241, 0.00082249], [0.00077289, 0.00109233], [0.00102487, 0.00144948], [0.00136019, 0.00192567]]
+            centers: [1.4955e-05, 1.6935e-05, 1.892e-05, 2.0905e-05, 2.487e-05, 3.0825e-05, 3.876e-05, 4.8685e-05, 6.257e-05, 7.8445e-05, 0.00010226, 0.000134, 0.00017368, 0.00022924, 0.00030265, 0.00039987, 0.00053083, 0.00070245, 0.00093261, 0.0012372, 0.0016429]
+
+        n_loop_vertices:
+            standard_name: number_of_loop_vertices
+            long_name: number of loop vertices
+            units: not_defined
+            null_value: not_defined
+            length: 8
+
+        xyz:
+            standard_name: xyz_coordinates
+            long_name: coordinates of the loop vertices
+            units: not_defined
+            null_value: not_defined
+            length: 3
+
+    variables:
+        transmitter:
+            label: z
+            number_of_turns: 13
+            coordinates:
+                values: [[[0.33, 0.14, 0.0], [0.14, 0.33, 0.0], [-0.14, 0.33, 0.0], [-0.33, 0.14, 0.0], [-0.33, -0.14, 0.0], [-0.14, -0.33, 0.0], [0.14, -0.33, 0.0], [0.33, -0.14, 0.0]]]
+                dimensions: ['n_transmitter', 'n_loop_vertices', 'xyz']
+            area: 0.358
+            waveform_type: trapezoid
+            waveform_time:
+                values: [-0.00277778, -0.00276878, 0.0, 9e-06]
+                long_name: waveform time
+                null_value: not_defined
+                units: s
+            waveform_current:
+                values: [0.0, 1.0, 1.0, 0.0]
+                dimensions: ['waveform_time']
+            current_scale_factor: 1.0
+            peak_current: 20.0
+            moment: 94.42
+            base_frequency: 90.0
+            on_time: 0.00276878
+            off_time: 0.00278678
+            orientation: z
+            height: 1.0
+
+        receiver:
+            label: ['x', 'y', 'z']
+            orientation: ['x', 'y', 'z']
+            coil_low_pass_filter: [100000.0, 100000.0, 100000.0]
+            instrument_low_pass_filter: [250000.0, 250000.0, 250000.0]
+            area: [200.0, 200.0, 200.0]
+            delay_time: [4.58e-06, 4.58e-06, 4.58e-06]
+            height: [1.75, 1.75, 1.75]
+            gain: [10, 10, 10]
+
+        couplet:
+            transmitters: ['z', 'z', 'z']
+            receivers: ['x', 'y', 'z']
+            sample_rate: [1.0, 1.0, 1.0]
+            txrx_dx: [-10.0, -10.0, -10.0]
+            txrx_dy: [0.0, 0.0, 0.0]
+            txrx_dz: [-0.75, -0.75, -0.75]
+            data_type: ['dBdt', 'dBdt', 'dBdt']
+            gate_times: ['gate_times', 'gate_times', 'gate_times']
+
+        sample_rate:
+            units: s
+        transmitter_area:
+            units: m^2
+
+variables:
+    UTMX:
+        standard_name: utmx 
+        long_name: Easting, WGS 84 UTM zone 16N (epsg:32616)
+        null_value: not_defined
+        units: m
+    UTMY:
+        standard_name: utmy
+        long_name: Northing, WGS 84 UTM zone 16N (epsg:32616)
+        null_value: not_defined
+        units: m
+    ELEVATION:
+        standard_name: elevation
+        long_name: elevation
+        null_value: -9999.0
+        units: m
+        positive: up
+        datum: North American Vertical Datum of 1988 (NAVD88)
+    THK:
+        standard_name: thk
+        long_name: Model layer thicknesses
+        null_value: not_defined
+        units: m
+        dimensions: ['index', 'layer_depth']
+    z_x_data:
+        standard_name: z_x_data
+        long_name: Observed EM data, X-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_x'
+    z_x_datastd:
+        standard_name: z_x_datastd
+        long_name: Observed EM data, X-component standard deviation factor
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_x'
+    z_x_syn:
+        standard_name: z_x_syn
+        long_name: Inversion synthetic EM response, X-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+    z_y_data:
+        standard_name: z_y_data
+        long_name: Observed EM data, Y-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_y'
+    z_y_datastd:
+        standard_name: z_y_datastd
+        long_name: Observed EM data, Y-component standard deviation factor
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_y'
+    z_y_syn:
+        standard_name: z_y_syn
+        long_name: Inversion synthetic EM response, Y-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+    z_z_data:
+        standard_name: z_z_data
+        long_name: Observed EM data, Z-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_z'
+    z_z_datastd:
+        standard_name: z_z_datastd
+        long_name: Observed EM data, Z-component standard deviation factor
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+        system_couplet: 'z_z'
+    z_z_syn:
+        standard_name: z_z_syn
+        long_name: Inversion synthetic EM response, Z-component
+        null_value: not_defined
+        units: Volt per Ampere per meter^4
+        dimensions: ['index', 'gate_times']
+    DEP_BOT:
+        standard_name: depth_bottom
+        long_name: Depth to bottom of model layer
+        null_value: not_defined
+        units: m
+        dimensions: ['index', 'layer_depth']
+    DEP_BOT_STD:
+        standard_name: depth_bottom_std
+        long_name: Standard deviation of depth to bottom of model layers
+        null_value: not_defined
+        units: m
+        dimensions: ['index', 'layers_minus_1']
+    DEP_TOP:
+        standard_name: depth_top
+        long_name: Depth to top of model layer
+        null_value: not_defined
+        units: m
+        dimensions: ['index', 'layer_depth']
+    DOI_CONSERVATIVE:
+        standard_name: doi_conservative
+        long_name: Conservative depth of investigation
+        null_value: not_defined
+        units: m
+    DOI_STANDARD:
+        standard_name: doi_standard
+        long_name: Standard depth of investigation
+        null_value: not_defined
+        units: m
+    DATE:
+        standard_name: date
+        long_name: Date
+        null_value: not_defined
+        units: yyyy/mm/dd
+    LINE_NO:
+        standard_name: line_no
+        long_name: Flight line number
+        null_value: not_defined
+        units: not_defined
+    NUMDATA:
+        standard_name: numdata
+        long_name: Number of non-null data values for location
+        null_value: not_defined
+        units: not_defined
+    RECORD:
+        standard_name: record
+        long_name: Record number for sounding
+        null_value: not_defined
+        units: not_defined
+    RESDATA:
+        standard_name: resdata
+        long_name: Inversion residual for data misfit
+        null_value: not_defined
+        units: not_defined
+    RESTOTAL:
+        standard_name: restotal
+        long_name: Inversion residual for total objective function
+        null_value: not_defined
+        units: not_defined
+    RHO:
+        standard_name: resistivity
+        long_name: Layer electrical resistivity
+        null_value: not_defined
+        units: ohm meter
+        dimensions: ['index', 'layer_depth']
+    RHO_STD:
+        standard_name: rho_std
+        long_name: Standard deviation factor for inverted resistivitity
+        null_value: not_defined
+        units: ohm meter
+        dimensions: ['index', 'layer_depth']
+    SEGMENTS:
+        standard_name: segments
+        long_name: Data segments used for inversion
+        null_value: not_defined
+        units: not_defined
+    SIGMA:
+        standard_name: sigma
+        long_name: Electrical conductivity (1 / resistivity)
+        null_value: not_defined
+        units: milli-Siemens per meter (mS/m) 
+        dimensions: ['index', 'layer_depth']
+    THK_STD:
+        standard_name: thk_std
+        long_name: Model layer thickness standard deviation
+        null_value: not_defined
+        units: m
+        dimensions: ['index', 'layers_minus_1']
+    TIME:
+        standard_name: time
+        long_name: Universal coordinated time (UTC)
+        null_value: not_defined
+        units: hh:mm:ss

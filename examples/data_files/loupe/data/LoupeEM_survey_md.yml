@@ -3,12 +3,10 @@ dataset_attrs:
     institution: USGS Geology, Geophysics, and Geochemistry Science Center
     source:  USGS raw and processed data, and inverted resistivity models
     history: (1) Data acquisition 20230808 - 20230809 by USGS Illinois River Basin NGWOS training class (2) Raw data exported from LoupeEM instrument and converted to ascii using dsQC (ver. 1.1.25.57710) 08/2023; Raw data exported to netCDF 'raw_data' group 11/2024; (3) Raw data and system information were imported into the Aarhus Workbench software (v 6.9.0.0) where data were manually processed by USGS 11/2024. Processed LoupeEM data exported to netCDF 'processed_data' group 11/2024; (4) Processed data were inverted in Aarhus Workbench software using laterally constrained inversion to recover 20-layer fixed depth blocky resistivity models by USGS 11/2024; Inverted resistivity models exported to netCDF 'inverted_models' group 11/2024.
-    references: Minsley, Burke J., ???, 2024, Ground-based electromagnetic survey data, Kankakee surface water-groundwater interaction site, 2023, U.S. Geological Survey data release, https://doi.org/10.5066/xxxxxxx.
+    references: Minsley, Burke J., et al., in preparation, Ground-based electromagnetic survey data, Kankakee surface water-groundwater interaction site, 2023, U.S. Geological Survey data release, https://doi.org/10.5066/xxxxxxx.
     comment: This dataset includes minimally processed (raw) and fully processed LoupeEM data used as input to inversion, and laterally constrained inverted resistivity models.
     summary: Ground-based electromagnetic data were collected in August 2023 at the Kankakee surface water-groundwater interaction site, and adjacent Turkey Foot park, in northwest Indiana. These data were collected in support of the USGS Illinois River Basin (ILRB) Next Generation Water Observing System (NGWOS) project, and were included as part of a larger training course on geophysical methods at the site. Data were acquired with the two-person backpack LoupeEM instrument. Electromagnetic data were inverted to produce models of electrical resistivity along survey lines, with typical depth of investigation up to about 100 m and 2 - 3 m near-surface resolution.
-    content: survey information
-    created_by: gspy==2.0.0
-    conventions: CF-1.12, GS-2.0
+    content: Kankakee LoupeEM survey information
 
 survey_information:
     survey_type: electromagnetic

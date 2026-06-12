@@ -18,14 +18,15 @@
 .. _sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py:
 
 
-Loupe TEM
----------
+DAT & XYZ (Loupe TEM)
+---------------------
 This example demonstrates conversion of data from Loupe Geophysics' time domain electromagnetic (TEM) backpack system.
 
-Dataset Reference:
-Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release.
+The raw data is in .dat format as exported by the Loupe. The inverted resistivity models come as a set of syn/dat/inv .XYZ files exported by Aarhus Workbench.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-15
+Source Reference: Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release.
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-19
 
 .. code-block:: Python
 
@@ -33,6 +34,8 @@ Minsley et al., in preparation, LoupeEM data and resistivity models from the Kan
     from os.path import join
     import numpy as np
     import gspy
+    import warnings
+    warnings.filterwarnings('ignore')
 
 
 
@@ -41,16 +44,12 @@ Minsley et al., in preparation, LoupeEM data and resistivity models from the Kan
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-18
-
-Convert the Loupe data and metadata from .dat and .desc files to NetCDF
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. GENERATED FROM PYTHON SOURCE LINES 20-21
+.. GENERATED FROM PYTHON SOURCE LINES 20-22
 
 Initialize the Survey
+^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-41
+.. GENERATED FROM PYTHON SOURCE LINES 22-29
 
 .. code-block:: Python
 
@@ -61,18 +60,6 @@ Initialize the Survey
     # Survey metadata file
     metadata = join(data_path, "data//LoupeEM_survey_md.yml")
 
-    # Establish the Survey
-    survey = gspy.Survey.from_dict(metadata)
-
-    # Make a data branch
-    data_container = survey.gs.add_container('data')
-
-    # Attach raw data with the Loupe EM system
-    # descriptive variable names ("long name") are read from DESC file when available, otherwise
-    # variable metadata comes from the YAML
-    data = join(data_path, 'data//Kankakee.dat')
-    metadata = join(data_path, 'data//Loupe_data_metadata.yml')
-    raw_data = data_container.gs.add(key='raw_data', data_filename=data, metadata_file=metadata, file_type='loupe')
 
 
 
@@ -80,14 +67,181 @@ Initialize the Survey
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 30-31
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-43
+Establish the Survey
 
-Save to NetCDF file
-
-.. GENERATED FROM PYTHON SOURCE LINES 43-46
+.. GENERATED FROM PYTHON SOURCE LINES 31-33
 
 .. code-block:: Python
+
+    survey = gspy.Survey.from_dict(metadata)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-39
+
+.. literalinclude:: /../../examples/data_files/loupe/data/LoupeEM_survey_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Survey YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-44
+
+Create a 'data' branch and attach data leaves
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 44-47
+
+.. code-block:: Python
+
+
+    data_container = survey.gs.add_container('data', **dict(content='data container'))
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 48-49
+
+Attach raw data with the Loupe EM system
+
+.. GENERATED FROM PYTHON SOURCE LINES 49-53
+
+.. code-block:: Python
+
+
+    data = join(data_path, 'data//Kankakee.dat')
+    metadata = join(data_path, 'data//Loupe_data_metadata.yml')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 54-57
+
+.. code-block:: Python
+
+    raw_data = data_container.gs.add(key='raw_data', data_filename=data, 
+                                     metadata_file=metadata, file_type='loupe')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-63
+
+.. literalinclude:: /../../examples/data_files/loupe/data/Loupe_data_metadata.yml
+   :language: yaml
+   :linenos:
+   :caption: Raw Data YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 66-68
+
+Create a 'models' branch and attach data leaves
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 70-71
+
+Make the branch
+
+.. GENERATED FROM PYTHON SOURCE LINES 71-73
+
+.. code-block:: Python
+
+    model_container = survey.gs.add_container('models', **dict(content='models container'))
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 74-75
+
+Import Workbench XYZ inversion results (syn/dat/inv)
+
+.. GENERATED FROM PYTHON SOURCE LINES 77-79
+
+GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
+one of the three files need to be passed to provide the base filename
+
+.. GENERATED FROM PYTHON SOURCE LINES 79-83
+
+.. code-block:: Python
+
+
+    d_data = join(data_path, 'model//Kankakee_MOD_dat.xyz')
+    d_supp = join(data_path, 'model//models.yml')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 84-86
+
+.. code-block:: Python
+
+    md = model_container.gs.add(key='inversion', data_filename=d_data, metadata_file=d_supp)
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Detected gate_time metadata from the workbench files
+    {'gate_times': {'centers': array([1.495e-05, 1.693e-05, 1.892e-05, 2.091e-05, 2.487e-05, 3.082e-05,
+           3.876e-05, 4.868e-05, 6.257e-05, 7.844e-05, 1.023e-04, 1.340e-04,
+           1.737e-04, 2.292e-04, 3.027e-04, 3.999e-04, 5.308e-04, 7.024e-04,
+           9.326e-04, 1.237e-03, 1.643e-03]),
+                    'long_name': 'calibrated gate times',
+                    'null_value': 'not_defined',
+                    'standard_name': 'gate_times',
+                    'units': 'seconds'}}
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 87-92
+
+.. literalinclude:: /../../examples/data_files/loupe/model/models.yml
+   :language: yaml
+   :linenos:
+   :caption: Inverted Models YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 95-97
+
+Save to NetCDF file
+^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 97-101
+
+.. code-block:: Python
+
 
     d_out = join(data_path, 'Loupe.nc')
     survey.gs.to_netcdf(d_out)
@@ -99,18 +253,34 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-48
+.. GENERATED FROM PYTHON SOURCE LINES 102-103
 
-Reading back in
+Reading back in the GS NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-52
+.. GENERATED FROM PYTHON SOURCE LINES 103-105
 
 .. code-block:: Python
 
     new_survey = gspy.open_datatree(d_out)['survey']
 
-    # Inspect the data tree
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 106-108
+
+Inspect the data tree
+^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 108-110
+
+.. code-block:: Python
+
     print(new_survey)
+
 
 
 
@@ -128,104 +298,205 @@ Reading back in
     │       survey_information  float64 8B ...
     │       survey_equipment    float64 8B ...
     │   Attributes:
-    │       type:         survey
-    │       title:        LoupeEM ground-based electromagnetic survey, Kankakee, Indi...
-    │       institution:  USGS Geology, Geophysics, and Geochemistry Science Center
-    │       source:       USGS raw and processed data, and inverted resistivity models
-    │       history:      (1) Data acquisition 20230808 - 20230809 by USGS Illinois R...
-    │       references:   Minsley, Burke J., ???, 2024, Ground-based electromagnetic ...
-    │       comment:      This dataset includes minimally processed (raw) and fully p...
-    │       summary:      Ground-based electromagnetic data were collected in August ...
-    │       content:      survey information /survey;  /survey/data; raw loupe EM dat...
-    │       created_by:   gspy==2.0.0
-    │       conventions:  CF-1.12, GS-2.0
-    └── Group: /survey/data
+    │       type:          survey
+    │       title:         LoupeEM ground-based electromagnetic survey, Kankakee, Ind...
+    │       institution:   USGS Geology, Geophysics, and Geochemistry Science Center
+    │       source:        USGS raw and processed data, and inverted resistivity models
+    │       history:       (1) Data acquisition 20230808 - 20230809 by USGS Illinois ...
+    │       references:    Minsley, Burke J., et al., in preparation, Ground-based el...
+    │       comment:       This dataset includes minimally processed (raw) and fully ...
+    │       summary:       Ground-based electromagnetic data were collected in August...
+    │       content:       Kankakee LoupeEM survey information /survey; data containe...
+    │       gspy_version:  2.2.8
+    │       conventions:   GS-2.0, CF-1.13
+    ├── Group: /survey/data
+    │   │   Dimensions:      ()
+    │   │   Data variables:
+    │   │       spatial_ref  float64 8B ...
+    │   │   Attributes:
+    │   │       content:  data container
+    │   │       type:     container
+    │   └── Group: /survey/data/raw_data
+    │       │   Dimensions:       (index: 2474, gate_times: 23)
+    │       │   Coordinates:
+    │       │       spatial_ref   float64 8B ...
+    │       │     * index         (index) int32 10kB 0 1 2 3 4 5 ... 2469 2470 2471 2472 2473
+    │       │       x             (index) float64 20kB ...
+    │       │       y             (index) float64 20kB ...
+    │       │       z             (index) float64 20kB ...
+    │       │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
+    │       │   Data variables: (12/42)
+    │       │       fid           (index) <U4 40kB ...
+    │       │       acq           (index) float64 20kB ...
+    │       │       acq_rdg       (index) float64 20kB ...
+    │       │       acq_time      (index) <U26 257kB ...
+    │       │       time          (index) <U26 257kB ...
+    │       │       ts            (index) float64 20kB ...
+    │       │       ...            ...
+    │       │       y_powerphase  (index) float64 20kB ...
+    │       │       z_powerphase  (index) float64 20kB ...
+    │       │       x_ch          (index, gate_times) float64 455kB ...
+    │       │       y_ch          (index, gate_times) float64 455kB ...
+    │       │       z_ch          (index, gate_times) float64 455kB ...
+    │       │       line          (index) int64 20kB ...
+    │       │   Attributes:
+    │       │       content:     raw loupe EM data
+    │       │       comment:     n/a
+    │       │       type:        data,
+    │       │       mode:        ground
+    │       │       method:      electromagnetic, time domain
+    │       │       instrument:  LoupeEM
+    │       │       structure:   tabular
+    │       └── Group: /survey/data/raw_data/loupe_system
+    │               Dimensions:                              (gate_times: 23, nv: 2,
+    │                                                         n_loop_vertices: 8, xyz: 3,
+    │                                                         n_transmitter: 1, waveform_time: 4,
+    │                                                         n_receiver: 3, n_couplet: 3)
+    │               Coordinates:
+    │                 * nv                                   (nv) int64 16B 0 1
+    │                 * n_loop_vertices                      (n_loop_vertices) int64 64B 0 1 ... 6 7
+    │                 * xyz                                  (xyz) int64 24B 0 1 2
+    │                 * n_transmitter                        (n_transmitter) int64 8B 0
+    │                 * waveform_time                        (waveform_time) <U11 176B '-0.002777...
+    │                 * n_receiver                           (n_receiver) int64 24B 0 1 2
+    │                 * n_couplet                            (n_couplet) int64 24B 0 1 2
+    │               Data variables: (12/35)
+    │                   gate_times_bnds                      (gate_times, nv) float64 368B ...
+    │                   n_loop_vertices_bnds                 (n_loop_vertices, nv) float64 128B ...
+    │                   xyz_bnds                             (xyz, nv) float64 48B ...
+    │                   transmitter_label                    (n_transmitter) <U1 4B ...
+    │                   transmitter_number_of_turns          (n_transmitter) int64 8B ...
+    │                   transmitter_coordinates              (n_transmitter, n_loop_vertices, xyz) float64 192B ...
+    │                   ...                                   ...
+    │                   couplet_txrx_dx                      (n_couplet) float64 24B ...
+    │                   couplet_txrx_dy                      (n_couplet) float64 24B ...
+    │                   couplet_txrx_dz                      (n_couplet) float64 24B ...
+    │                   couplet_data_type                    (n_couplet) <U4 48B ...
+    │                   couplet_gate_times                   (n_couplet) <U10 120B ...
+    │                   sample_rate                          float64 8B ...
+    │               Attributes:
+    │                   type:                    system
+    │                   mode:                    ground
+    │                   method:                  electromagnetic, time domain
+    │                   instrument:              LoupeEM
+    │                   name:                    loupe_system
+    │                   data_normalized:         True
+    │                   reference_frame:         right-handed positive down
+    │                   sample_rate:             0.1
+    │                   digitization_frequency:  504000.0
+    │                   stacks:                  360
+    │                   powerline_frequency:     60.0
+    └── Group: /survey/models
         │   Dimensions:      ()
         │   Data variables:
         │       spatial_ref  float64 8B ...
         │   Attributes:
+        │       content:  models container
         │       type:     container
-        └── Group: /survey/data/raw_data
-            │   Dimensions:       (index: 2474, gate_times: 23)
+        └── Group: /survey/models/inversion
+            │   Dimensions:              (layer_depth: 20, nv: 2, layers_minus_1: 19,
+            │                             gate_times: 21, index: 5547)
             │   Coordinates:
-            │     * index         (index) int32 10kB 0 1 2 3 4 5 ... 2469 2470 2471 2472 2473
-            │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
-            │       spatial_ref   float64 8B ...
-            │       x             (index) float64 20kB ...
-            │       y             (index) float64 20kB ...
-            │       z             (index) float64 20kB ...
-            │   Data variables: (12/42)
-            │       fid           (index) <U4 40kB ...
-            │       acq           (index) float64 20kB ...
-            │       acq_rdg       (index) float64 20kB ...
-            │       acq_time      (index) <U26 257kB ...
-            │       time          (index) <U26 257kB ...
-            │       ts            (index) float64 20kB ...
-            │       ...            ...
-            │       y_powerphase  (index) float64 20kB ...
-            │       z_powerphase  (index) float64 20kB ...
-            │       x_ch          (index, gate_times) float64 455kB ...
-            │       y_ch          (index, gate_times) float64 455kB ...
-            │       z_ch          (index, gate_times) float64 455kB ...
-            │       line          (index) int64 20kB ...
+            │       spatial_ref          float64 8B ...
+            │     * index                (index) int32 22kB 0 1 2 3 4 ... 5543 5544 5545 5546
+            │     * layer_depth          (layer_depth) float64 160B 1.0 3.1 ... 94.63 125.0
+            │     * nv                   (nv) int64 16B 0 1
+            │     * layers_minus_1       (layers_minus_1) int64 152B 0 1 2 3 4 ... 15 16 17 18
+            │     * gate_times           (gate_times) float64 168B 1.495e-05 ... 0.001643
+            │       x                    (index) float64 44kB ...
+            │       y                    (index) float64 44kB ...
+            │       z                    (index) float64 44kB ...
+            │   Data variables: (12/30)
+            │       layer_depth_bnds     (layer_depth, nv) float64 320B ...
+            │       layers_minus_1_bnds  (layers_minus_1, nv) float64 304B ...
+            │       gate_times_bnds      (gate_times, nv) float64 336B ...
+            │       line_no              (index) int64 44kB ...
+            │       date                 (index) <U10 222kB ...
+            │       time                 (index) <U12 266kB ...
+            │       ...                   ...
+            │       z_y_datastd          (index, gate_times) float64 932kB ...
+            │       z_z_data             (index, gate_times) float64 932kB ...
+            │       z_z_datastd          (index, gate_times) float64 932kB ...
+            │       z_x_syn              (index, gate_times) float64 932kB ...
+            │       z_y_syn              (index, gate_times) float64 932kB ...
+            │       z_z_syn              (index, gate_times) float64 932kB ...
             │   Attributes:
-            │       content:     raw loupe EM data
-            │       comment:     n/a
-            │       type:        data,
+            │       content:     inverted resistivity models with input data and synthetic re...
+            │       comment:     This dataset includes resistivity models produced by USGS us...
+            │       type:        model, data
+            │       structure:   tabular
             │       mode:        ground
             │       method:      electromagnetic, time domain
-            │       instrument:  loupe
-            │       structure:   tabular
-            └── Group: /survey/data/raw_data/loupe_system
-                    Dimensions:                              (gate_times: 23, nv: 2,
-                                                              n_loop_vertices: 8, xyz: 3,
-                                                              n_transmitter: 1, waveform_time: 4,
-                                                              n_receiver: 3, n_couplet: 3)
-                    Coordinates:
-                      * nv                                   (nv) int64 16B 0 1
-                      * n_loop_vertices                      (n_loop_vertices) int64 64B 0 1 ... 6 7
-                      * xyz                                  (xyz) int64 24B 0 1 2
-                      * n_transmitter                        (n_transmitter) int64 8B 0
-                      * waveform_time                        (waveform_time) <U11 176B '-0.002777...
-                      * n_receiver                           (n_receiver) int64 24B 0 1 2
-                      * n_couplet                            (n_couplet) int64 24B 0 1 2
-                    Data variables: (12/35)
-                        gate_times_bnds                      (gate_times, nv) float64 368B ...
-                        n_loop_vertices_bnds                 (n_loop_vertices, nv) float64 128B ...
-                        xyz_bnds                             (xyz, nv) float64 48B ...
-                        transmitter_label                    (n_transmitter) <U1 4B ...
-                        transmitter_number_of_turns          (n_transmitter) int64 8B ...
-                        transmitter_coordinates              (n_transmitter, n_loop_vertices, xyz) float64 192B ...
-                        ...                                   ...
-                        couplet_txrx_dx                      (n_couplet) float64 24B ...
-                        couplet_txrx_dy                      (n_couplet) float64 24B ...
-                        couplet_txrx_dz                      (n_couplet) float64 24B ...
-                        couplet_data_type                    (n_couplet) <U4 48B ...
-                        couplet_gate_times                   (n_couplet) <U10 120B ...
-                        sample_rate                          float64 8B ...
+            │       instrument:  LoupeEM
+            │       property:    electrical resistivity
+            ├── Group: /survey/models/inversion/loupe_system
+            │       Dimensions:                              (gate_times: 21, nv: 2,
+            │                                                 n_loop_vertices: 8, xyz: 3,
+            │                                                 n_transmitter: 1, waveform_time: 4,
+            │                                                 n_receiver: 3, n_couplet: 3)
+            │       Coordinates:
+            │         * n_loop_vertices                      (n_loop_vertices) int64 64B 0 1 ... 6 7
+            │         * xyz                                  (xyz) int64 24B 0 1 2
+            │         * n_transmitter                        (n_transmitter) int64 8B 0
+            │         * waveform_time                        (waveform_time) <U11 176B '-0.002777...
+            │         * n_receiver                           (n_receiver) int64 24B 0 1 2
+            │         * n_couplet                            (n_couplet) int64 24B 0 1 2
+            │       Data variables: (12/35)
+            │           gate_times_bnds                      (gate_times, nv) float64 336B ...
+            │           n_loop_vertices_bnds                 (n_loop_vertices, nv) float64 128B ...
+            │           xyz_bnds                             (xyz, nv) float64 48B ...
+            │           transmitter_label                    (n_transmitter) <U1 4B ...
+            │           transmitter_number_of_turns          (n_transmitter) int64 8B ...
+            │           transmitter_coordinates              (n_transmitter, n_loop_vertices, xyz) float64 192B ...
+            │           ...                                   ...
+            │           couplet_txrx_dx                      (n_couplet) float64 24B ...
+            │           couplet_txrx_dy                      (n_couplet) float64 24B ...
+            │           couplet_txrx_dz                      (n_couplet) float64 24B ...
+            │           couplet_data_type                    (n_couplet) <U4 48B ...
+            │           couplet_gate_times                   (n_couplet) <U10 120B ...
+            │           sample_rate                          float64 8B ...
+            │       Attributes:
+            │           type:                    system
+            │           mode:                    ground
+            │           method:                  electromagnetic, time domain
+            │           instrument:              LoupeEM
+            │           name:                    loupe_system
+            │           data_normalized:         True
+            │           reference_frame:         right-handed positive down
+            │           sample_rate:             0.1
+            │           digitization_frequency:  504000.0
+            │           stacks:                  360
+            │           powerline_frequency:     60.0
+            └── Group: /survey/models/inversion/inversion_parameters
+                    Dimensions:             (dim_0: 1)
+                    Dimensions without coordinates: dim_0
+                    Data variables:
+                        model_file          <U20 80B ...
+                        inversion_software  <U46 184B ...
+                        software_version    <U33 132B ...
+                        date                (dim_0) int64 8B ...
+                        number_of_layers    (dim_0) int64 8B ...
+                        description         <U106 424B ...
                     Attributes:
-                        type:                    system
-                        mode:                    ground
-                        method:                  electromagnetic, time domain
-                        instrument:              loupe
-                        name:                    loupe_system
-                        data_normalized:         True
-                        reference_frame:         right-handed positive down
-                        sample_rate:             0.1
-                        digitization_frequency:  504000.0
-                        stacks:                  360
-                        powerline_frequency:     60.0
+                        type:        parameters
+                        method:      electromagnetic, time domain
+                        instrument:  LoupeEM
+                        mode:        ground
+                        property:    electrical resistivity
+                        name:        inversion_parameters
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 111-113
 
 Plotting
+^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-61
+.. GENERATED FROM PYTHON SOURCE LINES 113-121
 
 .. code-block:: Python
+
 
     plt.figure()
     new_survey['data/raw_data']['gps_height'].plot(label='gps_height')
@@ -249,7 +520,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.370 seconds)
+   **Total running time of the script:** (0 minutes 1.880 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_dat_loupe.py:

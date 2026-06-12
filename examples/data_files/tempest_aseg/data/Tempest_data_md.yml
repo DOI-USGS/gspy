@@ -1,9 +1,9 @@
 dataset_attrs:
-    content: raw data
+    content: raw AEM data
     comment: This dataset includes minimally processed (raw) AEM data
     type: data
     mode: airborne
-    method: magnetic, radiometric, electromagnetic, time domain
+    method: [magnetic, radiometric, "electromagnetic, time domain"]
     instrument: 30Hz Tempest
 
 coordinates:
@@ -92,14 +92,14 @@ variables:
         positive: up
         datum: NAD88
     EMX_NonHPRG:
-        system_couplet: 'z_x'
+        system_couplet: z_x
         dimensions: [index, gate_times]
     EMX_HPRG:
-        system_couplet: 'z_x'
+        system_couplet: z_x
         dimensions: [index, gate_times]
     EMZ_NonHPRG:
-        system_couplet: 'z_z'
+        system_couplet: z_z
         dimensions: [index, gate_times]
     EMZ_HPRG:
-        system_couplet: 'z_z'
+        system_couplet: z_z
         dimensions: [index, gate_times]

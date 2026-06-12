@@ -1,13 +1,11 @@
 dataset_attrs:
     content: raw data
-    comment: ??
+    comment: example raw data imported from XYZ format
     type: data
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem
-    property: ''
+    method: electromagnetic, time domain
+    instrument: skyTEM 304M
 
 coordinates:
     x: UTMX
@@ -17,9 +15,8 @@ coordinates:
 nominal_system:
     type: system
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem
+    method: electromagnetic, time domain
+    instrument: skyTEM 304M
     data_normalized: True
     skytem_skb_gex_available: True
     reference_frame: right-handed positive down
@@ -109,101 +106,102 @@ nominal_system:
 
 variables:
     DATE:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: date
+        long_name: Date
         null_value: not_defined
-        units: not_defined
+        units: yyyy/mm/dd
     DBDT_HM_Z:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: dbdt_hm_z
+        long_name: Observed EM data, high moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'hm_gate_times']
+        system_couplet: hm_z
     DBDT_LM_Z:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: dbdt_lm_z
+        long_name: Observed EM data, low moment z-component
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'lm_gate_times']
+        system_couplet: lm_z
     DBDT_STD_HM_Z:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: dbdt_std_hm_z
+        long_name: EM data, high moment z-component standard deviation factor
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'hm_gate_times']
+        system_couplet: hm_z
     DBDT_STD_LM_Z:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: not_defined
+        standard_name: dbdt_std_lm_z
+        long_name: EM data, low moment z-component standard deviation factor
+        null_value: -9999.0
+        units: Volt per Ampere per meter^4
         dimensions: ['index', 'lm_gate_times']
+        system_couplet: lm_z
     ELEVATION:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: elevation
+        long_name: Ground surface elevation
         null_value: not_defined
-        units: not_defined
-        axis: Z
+        units: m
         positive: up
-        datum: ground surface
+        datum: North American Vertical Datum of 1988 (NAVD88)
     LINE_NO:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: line_no
+        long_name: Line number
         null_value: not_defined
         units: not_defined
     RX_ALTITUDE:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: rx_altitude
+        long_name: Receiver Altitude
         null_value: not_defined
-        units: not_defined
+        units: m
     RX_ALTITUDE_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: rx_altitude_std
+        long_name: Standard deviation on measured receiver altitude
         null_value: not_defined
-        units: not_defined
+        units: m
     TILT_X:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tilt_x
+        long_name: Instrument tilt angle in flight direction (positive up)
         null_value: not_defined
-        units: not_defined
+        units: degrees
     TILT_X_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tilt_x_std
+        long_name: Standard deviation in tilt x direction
         null_value: not_defined
-        units: not_defined
+        units: degrees
     TILT_Y:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tilt_y
+        long_name: Instrument tilt angle perpindicular to flight direction (positive when left side of frame is up)
         null_value: not_defined
-        units: not_defined
+        units: degrees
     TILT_Y_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tilt_y_std
+        long_name: Standard deviation in tilt y direction
         null_value: not_defined
-        units: not_defined
+        units: degrees
     TIME:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: time
+        long_name: Universal coordinated time (UTC)
         null_value: not_defined
-        units: not_defined
+        units: hh:mm:ss
     TX_ALTITUDE:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tx_altitude
+        long_name: Transmitter altitude
         null_value: not_defined
-        units: not_defined
+        units: m
     TX_ALTITUDE_STD:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: tx_altitude_std
+        long_name: Standard deviation on transmitter altitude
         null_value: not_defined
-        units: not_defined
+        units: m
     UTMX:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: utmx
+        long_name: Easting, Universal Transverse Mercator (UTM) Zone 18N, WGS84 Datum
         null_value: not_defined
-        units: not_defined
-        axis: x
+        units: m
     UTMY:
-        standard_name: not_defined
-        long_name: not_defined
+        standard_name: utmy
+        long_name: Northing, Universal Transverse Mercator (UTM) Zone 18N, WGS84 Datum
         null_value: not_defined
-        units: not_defined
-        axis: y
+        units: m

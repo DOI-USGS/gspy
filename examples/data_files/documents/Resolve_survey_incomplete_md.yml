@@ -1,0 +1,15 @@
+dataset_attrs:
+    title: Example Resolve Airborne Electromagnetic (AEM) Raw Data
+    comment: This dataset includes electromagnetic, radiometric, and magnetic data
+    content: raw data, processed data
+    conventions: CF-1.13, GS-2.0
+
+survey_information:
+    contractor_project_number: 603756RWA
+    contractor: CGG Canada Services Ltd.
+    client: U.S. Geological Survey
+    survey_type: electromagnetic
+    survey_area_name: Mississippi Alluvial Plain (MAP) Shellmound
+    acquisition_start: 20180220
+    acquisition_end: 20180304
+

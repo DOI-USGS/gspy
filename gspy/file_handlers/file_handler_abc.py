@@ -137,8 +137,8 @@ class file_handler(ABC):
     def metadata_template(self, **kwargs):
         out = Metadata()
 
-        template = {"content": "<summary statement of what the dataset contains>",
-                    "comment": "<additional details or ancillary information>",
+        template = {"content": "?? summary statement of what the dataset contains ??",
+                    "comment": "?? additional details or ancillary information ??",
                     "type" : "?? data or models ??",
                     "method" : "?? what geophysical method(s) are represented by this dataset ??",
                     "mode" : "?? ground or airborne or borehole or ... ??",

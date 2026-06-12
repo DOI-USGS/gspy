@@ -34,7 +34,7 @@ variables:
         long_name: EM data, low moment x-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        system_couplets: 1
+        system_couplet: lm_x
         dimensions: [index, lm_gate_times]
 
     LM_Z:
@@ -42,7 +42,7 @@ variables:
         long_name: EM data, low moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        system_couplets: 0
+        system_couplet: lm_z
         dimensions: [index, lm_gate_times]
 
     HM_X:
@@ -50,7 +50,7 @@ variables:
         long_name: EM data, high moment x-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        system_couplets: 3
+        system_couplet: hm_x
         dimensions: [index, hm_gate_times]
 
     HM_Z:
@@ -58,7 +58,7 @@ variables:
         long_name: EM data, high moment z-component
         units: picoVolt per Ampere per meter^4
         null_value: -9999.99
-        system_couplets: 2
+        system_couplet: hm_z
         dimensions: [index, hm_gate_times]
 
     _60Hz_Intensity:
@@ -108,6 +108,7 @@ variables:
         long_name: Date, yyyy/mm/dd
         units: not_defined
         null_value: not_defined
+        dtype: str
 
     DateTime:
         standard_name: time
@@ -128,7 +129,6 @@ variables:
         long_name: Digital elevation model
         units: meter
         null_value: not_defined
-        axis: Z
         positive: up
         datum: North American Vertical Datum of 1988 (NAVD88)
 
@@ -203,12 +203,14 @@ variables:
         long_name: Filtered total magnetic intensity data
         units: nanoTesla
         null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
 
     Mag_Raw:
         standard_name: total_magnetic_intensity_raw
         long_name: Raw total magnetic intensity data
         units: nanoTesla
         null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
 
     N_WGS84:
         standard_name: northing_wgs84
@@ -216,21 +218,23 @@ variables:
         units: meter
         null_value: not_defined
 
-
     RMF:
         standard_name: residual_magnetic_field
         long_name: Residual magnetic field, IGRF corrected based on 2015 model
         units: nanoTesla
         null_value: not_defined
+        system_couplet: passive_scalar_magnetometer
 
     Time:
         standard_name: time_utc
         long_name: Universal coordinated time (UTC), hh:mm:ss
         units: not_defined
         null_value: not_defined
+        dtype: str
 
     TMI:
         standard_name: total_magnetic_intensity
         long_name: Diurnally corrected filtered total magnetic intensity
         units: nanoTesla
         null_value: not_defined
+        system_couplet: passive_scalar_magnetometer

@@ -108,6 +108,7 @@ dimensions:
 variables:
     magnetic_tmi:
         dimensions: [x, y]
+        system_couplet: passive_scalar_magnetometer
         standard_name: total_magnetic_intensity
         long_name: Total magnetic intensity, diurnally corrected and filtered
         units: nT
@@ -119,13 +120,11 @@ variables:
         long_name: Easting
         units: meter
         null_value: not_defined
-        axis: x
-
+        
     Northing_Albers:
         standard_name: northing_albers
         long_name: Northing
         units: meter
         null_value: not_defined
-        axis: y
 
 

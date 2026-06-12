@@ -1,6 +1,6 @@
 """
-ASEG-GDF (Tempest AEM) & Magnetic Raster
-----------------------------------------
+ASEG-GDF (Tempest AEM)
+----------------------
 
 This example demonstrates the workflow for creating a GS file from the `ASEG <https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf>`_ file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:
 
@@ -8,7 +8,7 @@ This example demonstrates the workflow for creating a GS file from the `ASEG <ht
 2. Inverted resistivity models
 3. An interpolated map of total magnetic intensity
 
-Dataset Reference: `Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.`
+Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
 
 """
 
@@ -31,21 +31,27 @@ metadata = join(data_path, "data//Tempest_survey_md.yml")
 survey = gspy.Survey.from_dict(metadata)
 
 #%%
-# Create the first branch (container) called "data"
-data_container = survey.gs.add_container('data', **dict(content = "raw data"))
+#
+# .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_survey_md.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Survey YAML file
+#
 
 #%%
-# Attach leaves to the data branch
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# Create a branch and attach data leaves
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#%%
+# Create the first branch (container) called "data"
+data_container = survey.gs.add_container('data', **dict(content = "raw data"))
 
 #%%
 # 1. Raw Data
 
 #%%
 # Import raw AEM data from ASEG-GDF2 format.
-# Define input data file and associated metadata file. Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML. 
 
-# In this example, multiple systems are defined in the Tempest_data_md.yml metadata file
 d_data = join(data_path, 'data//Tempest.dat')
 d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
@@ -55,7 +61,23 @@ rd = data_container.gs.add(key='raw_data',
                            metadata_file=d_supp)
 
 #%%
-# 2. Inverted Models
+# Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML. 
+
+#%%
+# In this example, multiple systems are defined in the Tempest_data_md.yml metadata file:
+
+#%%
+#
+# .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_data_md.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Raw Data YAML file
+#
+
+#%%
+# Create a 2nd branch and attach model data leaves
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 model_container = survey.gs.add_container('models', **dict(content = "inverted 1-D electrical resistivity models"))
 
 # Define Path to inverted AEM models and corresponding metadata file
@@ -67,25 +89,40 @@ m_supp = join(data_path, 'model//Tempest_model_md.yml')
 mod = model_container.gs.add(key='inverted_models', 
                              data_filename=m_data, 
                              metadata_file=m_supp, 
+                             system=rd.tempest_system,
                              derived_from=rd)
 
 #%%
-# 3. Magnetic Intensity Map
+#
+# .. literalinclude:: /../../examples/data_files/tempest_aseg/model/Tempest_model_md.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Inverted Model YAML file
+#
+
+#%%
+# Create a 3rd branch for the magnetic intensity map
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # Create a new branch for the contractor-derived total magnetic intensity map
 map_container = survey.gs.add_container('derived_maps', **dict(content = "derived maps"))
 
 # Import the magnetic data from TIF-format.
-# Note: raster data files are defined within the metadata file
 d_supp = join(data_path, 'data//Tempest_raster_md.yml')
 
 # Add the magnetic map to the data
 maps = map_container.gs.add(key='maps', metadata_file = d_supp)
 
 #%%
-# View the Data Tree
-# ^^^^^^^^^^^^^^^^^^
-print(survey)
+# Note: raster data files are defined within the metadata file
+
+#%%
+#
+# .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_raster_md.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Magnetic Raster Map YAML file
+#
 
 #%%
 # Save NetCDF file
@@ -99,6 +136,11 @@ survey.gs.to_netcdf(d_out)
 new_survey = gspy.open_datatree(d_out)['survey']
 
 #%%
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+print(new_survey)
+
+#%%
 # Once the survey is read in, we can access variables like a standard xarray dataset.
 
 #%%
@@ -107,6 +149,10 @@ print(new_survey['derived_maps/maps'].magnetic_tmi)
 #%%
 # Option B:
 print(new_survey['derived_maps/maps']['magnetic_tmi'])
+
+#%%
+# Option C:
+print(new_survey['derived_maps']['maps']['magnetic_tmi'])
 
 # %%
 # Plotting Examples

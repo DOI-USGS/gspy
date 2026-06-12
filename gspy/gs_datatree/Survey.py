@@ -39,7 +39,7 @@ class Survey(Container):
                                 dataset_created = "yyyymmdd"),
                                 md.get('survey_information', {}))
 
-        c = Metadata.merge(dict(datum = "??", projection = "??", utm_zone = "??", epsg = "??"),
+        c = Metadata.merge(dict(wkid = "??", authority = "??", crs_wkt = "??", vertical_crs = "??"),
                            md.get('spatial_ref', {}))
 
         d = Metadata.merge(dict(traverse_line_spacing = "??", traverse_line_direction = "??", tie_line_spacing = "??",

@@ -41,7 +41,7 @@ Creating GS Files
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">ASEG-GDF (Tempest AEM) & Magnetic Raster</div>
+      <div class="sphx-glr-thumbnail-title">ASEG-GDF (Tempest AEM)</div>
     </div>
 
 
@@ -75,7 +75,24 @@ Creating GS Files
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">CSV to NetCDF (RESOLVE AEM)</div>
+      <div class="sphx-glr-thumbnail-title">CSV (Resolve AEM)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The raw data is in .dat format as exported by the Loupe. The inverted resistivity models come as a set of syn/dat/inv .XYZ files exported by Aarhus Workbench.">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_dat_loupe_thumb.png
+    :alt:
+
+  :doc:`/examples/Creating_GS_Files/plot_dat_loupe`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">DAT & XYZ (Loupe TEM)</div>
     </div>
 
 
@@ -92,7 +109,7 @@ Creating GS Files
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">GeoTIFFs to NetCDF</div>
+      <div class="sphx-glr-thumbnail-title">GeoTIFFs (2D & 3D)</div>
     </div>
 
 
@@ -115,23 +132,6 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Dataset Reference: Minsley et al., in preparation, LoupeEM data and resistivity models from the Kankakee River groundwater-surface water interaction site, U.S. Geological Survey data release.">
-
-.. only:: html
-
-  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_dat_loupe_thumb.png
-    :alt:
-
-  :doc:`/examples/Creating_GS_Files/plot_dat_loupe`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Loupe TEM</div>
-    </div>
-
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. ">
 
 .. only:: html
@@ -149,7 +149,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Workbench to NetCDF">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example supports data and models read from Aarhus Workbench XYZ files. What&#x27;s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times. ">
 
 .. only:: html
 
@@ -160,7 +160,7 @@ Creating GS Files
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Workbench to NetCDF</div>
+      <div class="sphx-glr-thumbnail-title">Workbench XYZ</div>
     </div>
 
 
@@ -177,9 +177,9 @@ Creating GS Files
    /examples/Creating_GS_Files/plot_aseg_tempest
    /examples/Creating_GS_Files/plot_csv_skytem
    /examples/Creating_GS_Files/plot_csv_resolve
+   /examples/Creating_GS_Files/plot_dat_loupe
    /examples/Creating_GS_Files/plot_tifs
    /examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata
-   /examples/Creating_GS_Files/plot_dat_loupe
    /examples/Creating_GS_Files/plot_csv_magnetics
    /examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf
 

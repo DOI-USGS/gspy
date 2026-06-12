@@ -33,7 +33,7 @@ These four coordinates have specific attributes and standard names required for 
 
 A GS-standard file should have no more than one of each of these spatiotemporal coordinates per group. 
 
-The GS standard follows CF conventions in defining a special coordinate variable for the coordinate reference system (CRS) of the data, and goes further by standardizing the name as "spatial_ref". GSPy will create the complete ``spatial_ref`` variable using minimal :doc:`user input <../metadata/survey>`.
+The GS standard follows CF conventions in defining a special coordinate variable for the coordinate reference system (CRS) of the data, and goes further by standardizing the name as "spatial_ref". GSPy will create the complete ``spatial_ref`` variable using minimal :doc:`user input <../metadata/survey_md>`.
 
 Dimensions
 ~~~~~~~~~~

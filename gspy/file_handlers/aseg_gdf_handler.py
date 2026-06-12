@@ -23,8 +23,8 @@ class aseg_gdf2_handler(file_handler):
 
     def metadata_template(self, **kwargs):
 
-        out = super().metadata_template
-
+        out = super().metadata_template(**kwargs)
+        
         coords = self.metadata['coordinates']
         if 'x' in coords:
             out[coords['x']] = {"axis" : "X"}

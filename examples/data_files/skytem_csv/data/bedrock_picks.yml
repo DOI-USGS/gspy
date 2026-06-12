@@ -56,3 +56,4 @@ variables:
         units: not_defined
         format: M/D/YYYY H:MM
         null_value: not_defined
+        dtype: str

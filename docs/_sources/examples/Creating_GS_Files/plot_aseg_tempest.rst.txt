@@ -18,8 +18,8 @@
 .. _sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py:
 
 
-ASEG-GDF (Tempest AEM) & Magnetic Raster
-----------------------------------------
+ASEG-GDF (Tempest AEM)
+----------------------
 
 This example demonstrates the workflow for creating a GS file from the `ASEG <https://www.aseg.org.au/sites/default/files/pdf/ASEG-GDF2-REV4.pdf>`_ file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:
 
@@ -27,7 +27,7 @@ This example demonstrates the workflow for creating a GS file from the `ASEG <ht
 2. Inverted resistivity models
 3. An interpolated map of total magnetic intensity
 
-Dataset Reference: `Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.`
+Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
 
 .. GENERATED FROM PYTHON SOURCE LINES 16-20
 
@@ -70,11 +70,24 @@ Initialize the Survey
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-35
+.. GENERATED FROM PYTHON SOURCE LINES 34-39
+
+.. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_survey_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Survey YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-44
+
+Create a branch and attach data leaves
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
 
 Create the first branch (container) called "data"
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-37
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 .. code-block:: Python
 
@@ -87,26 +100,19 @@ Create the first branch (container) called "data"
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-40
-
-Attach leaves to the data branch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. GENERATED FROM PYTHON SOURCE LINES 42-43
+.. GENERATED FROM PYTHON SOURCE LINES 50-51
 
 1. Raw Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-47
+.. GENERATED FROM PYTHON SOURCE LINES 53-54
 
 Import raw AEM data from ASEG-GDF2 format.
-Define input data file and associated metadata file. Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-57
+.. GENERATED FROM PYTHON SOURCE LINES 54-63
 
 .. code-block:: Python
 
 
-    # In this example, multiple systems are defined in the Tempest_data_md.yml metadata file
     d_data = join(data_path, 'data//Tempest.dat')
     d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
@@ -122,13 +128,31 @@ Define input data file and associated metadata file. Note for ASEG-GDF2 files, v
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-59
+.. GENERATED FROM PYTHON SOURCE LINES 64-65
 
-2. Inverted Models
+Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-72
+.. GENERATED FROM PYTHON SOURCE LINES 67-68
+
+In this example, multiple systems are defined in the Tempest_data_md.yml metadata file:
+
+.. GENERATED FROM PYTHON SOURCE LINES 70-75
+
+.. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_data_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Raw Data YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 78-80
+
+Create a 2nd branch and attach model data leaves
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 80-95
 
 .. code-block:: Python
+
 
     model_container = survey.gs.add_container('models', **dict(content = "inverted 1-D electrical resistivity models"))
 
@@ -141,6 +165,7 @@ Define input data file and associated metadata file. Note for ASEG-GDF2 files, v
     mod = model_container.gs.add(key='inverted_models', 
                                  data_filename=m_data, 
                                  metadata_file=m_supp, 
+                                 system=rd.tempest_system,
                                  derived_from=rd)
 
 
@@ -150,11 +175,20 @@ Define input data file and associated metadata file. Note for ASEG-GDF2 files, v
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-74
+.. GENERATED FROM PYTHON SOURCE LINES 96-101
 
-3. Magnetic Intensity Map
+.. literalinclude:: /../../examples/data_files/tempest_aseg/model/Tempest_model_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Inverted Model YAML file
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-85
+
+.. GENERATED FROM PYTHON SOURCE LINES 104-106
+
+Create a 3rd branch for the magnetic intensity map
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 106-116
 
 .. code-block:: Python
 
@@ -163,7 +197,6 @@ Define input data file and associated metadata file. Note for ASEG-GDF2 files, v
     map_container = survey.gs.add_container('derived_maps', **dict(content = "derived maps"))
 
     # Import the magnetic data from TIF-format.
-    # Note: raster data files are defined within the metadata file
     d_supp = join(data_path, 'data//Tempest_raster_md.yml')
 
     # Add the magnetic map to the data
@@ -176,16 +209,65 @@ Define input data file and associated metadata file. Note for ASEG-GDF2 files, v
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-88
+.. GENERATED FROM PYTHON SOURCE LINES 117-118
+
+Note: raster data files are defined within the metadata file
+
+.. GENERATED FROM PYTHON SOURCE LINES 120-125
+
+.. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_raster_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Magnetic Raster Map YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 128-130
+
+Save NetCDF file
+^^^^^^^^^^^^^^^^
+
+.. GENERATED FROM PYTHON SOURCE LINES 130-134
+
+.. code-block:: Python
+
+
+    d_out = join(data_path, 'Tempest.nc')
+    survey.gs.to_netcdf(d_out)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 135-136
+
+Read back in the NetCDF file
+
+.. GENERATED FROM PYTHON SOURCE LINES 136-138
+
+.. code-block:: Python
+
+    new_survey = gspy.open_datatree(d_out)['survey']
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 139-141
 
 View the Data Tree
 ^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-90
+.. GENERATED FROM PYTHON SOURCE LINES 141-143
 
 .. code-block:: Python
 
-    print(survey)
+    print(new_survey)
 
 
 
@@ -199,58 +281,59 @@ View the Data Tree
     Group: /survey
     │   Dimensions:                 ()
     │   Coordinates:
-    │       spatial_ref             float64 8B 0.0
+    │       spatial_ref             float64 8B ...
     │   Data variables:
-    │       survey_information      float64 8B nan
-    │       survey_units            float64 8B nan
-    │       flightline_information  float64 8B nan
-    │       survey_equipment        float64 8B nan
+    │       survey_information      float64 8B ...
+    │       survey_units            float64 8B ...
+    │       flightline_information  float64 8B ...
+    │       survey_equipment        float64 8B ...
     │   Attributes:
-    │       type:         survey
-    │       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
-    │       institution:  USGS Geology, Geophysics, & Geochemistry Science Center
-    │       source:       Contractor provided ASEG-GDF2 formatted data
-    │       history:      This example dataset includes the raw AEM data and gridded ...
-    │       references:   Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Ho...
-    │       comment:      This dataset is incomplete and has been downsampled for the...
-    │       content:      data branch containing raw AEM data (survey/data/raw_data) ...
-    │       conventions:  CF-1.12, GS-2.0
+    │       type:          survey
+    │       title:         Example Tempest Airborne Electromagnetic (AEM) Dataset
+    │       institution:   USGS Geology, Geophysics, & Geochemistry Science Center
+    │       source:        Contractor provided ASEG-GDF2 formatted data
+    │       history:       This example dataset includes the raw AEM data and gridded...
+    │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
+    │       comment:       This dataset is incomplete and has been downsampled for th...
+    │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
+    │       gspy_version:  2.2.8
+    │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
     │   │   Data variables:
-    │   │       spatial_ref  float64 8B 0.0
+    │   │       spatial_ref  float64 8B ...
     │   │   Attributes:
     │   │       content:  raw data
     │   │       type:     container
     │   └── Group: /survey/data/raw_data
     │       │   Dimensions:         (index: 2001, gate_times: 15)
     │       │   Coordinates:
+    │       │       spatial_ref     float64 8B ...
     │       │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
+    │       │       x               (index) float64 16kB ...
+    │       │       y               (index) float64 16kB ...
+    │       │       z               (index) float64 16kB ...
     │       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-    │       │       spatial_ref     float64 8B 0.0
-    │       │       x               (index) float64 16kB 3.579e+05 3.579e+05 ... 4.637e+05
-    │       │       y               (index) float64 16kB 1.211e+06 1.211e+06 ... 1.211e+06
-    │       │       z               (index) float64 16kB 45.83 46.61 46.95 ... 43.22 43.14 43.03
     │       │   Data variables: (12/58)
-    │       │       line            (index) int32 8kB 225401 225401 225401 ... 225401 225401
-    │       │       flight          (index) int32 8kB 10 10 10 10 10 10 10 ... 10 10 10 10 10 10
-    │       │       fiducial        (index) float64 16kB 7.836e+03 7.836e+03 ... 9.835e+03
-    │       │       proj_cgg        (index) int32 8kB 603756 603756 603756 ... 603756 603756
-    │       │       proj_client     (index) int32 8kB 9999 9999 9999 9999 ... 9999 9999 9999
-    │       │       date            (index) int32 8kB 20191128 20191128 ... 20191128 20191128
+    │       │       line            (index) int32 8kB ...
+    │       │       flight          (index) int32 8kB ...
+    │       │       fiducial        (index) float64 16kB ...
+    │       │       proj_cgg        (index) int32 8kB ...
+    │       │       proj_client     (index) int32 8kB ...
+    │       │       date            (index) int32 8kB ...
     │       │       ...              ...
-    │       │       z_primaryfield  (index) float64 16kB 14.69 14.53 15.06 ... 14.29 13.33 13.83
-    │       │       z_vlf1          (index) float64 16kB 3.696 3.733 3.729 ... 3.754 3.717 3.73
-    │       │       z_vlf2          (index) float64 16kB 3.684 3.711 3.705 ... 3.728 3.692 3.721
-    │       │       z_vlf3          (index) float64 16kB 3.637 3.607 3.623 ... 3.623 3.578 3.604
-    │       │       z_vlf4          (index) float64 16kB 3.567 3.576 3.621 ... 3.585 3.572 3.605
-    │       │       z_geofact       (index) float64 16kB 0.9969 0.9862 1.022 ... 0.9085 0.9425
+    │       │       z_primaryfield  (index) float64 16kB ...
+    │       │       z_vlf1          (index) float64 16kB ...
+    │       │       z_vlf2          (index) float64 16kB ...
+    │       │       z_vlf3          (index) float64 16kB ...
+    │       │       z_vlf4          (index) float64 16kB ...
+    │       │       z_geofact       (index) float64 16kB ...
     │       │   Attributes:
-    │       │       content:     raw data
+    │       │       content:     raw AEM data
     │       │       comment:     This dataset includes minimally processed (raw) AEM data
     │       │       type:        data
     │       │       mode:        airborne
-    │       │       method:      magnetic, radiometric, electromagnetic, time domain
+    │       │       method:      ['magnetic', 'radiometric', 'electromagnetic, time domain']
     │       │       instrument:  30Hz Tempest
     │       │       structure:   tabular
     │       └── Group: /survey/data/raw_data/tempest_system
@@ -265,19 +348,19 @@ View the Data Tree
     │                 * n_couplet                     (n_couplet) int64 16B 0 1
     │               Dimensions without coordinates: dim_0
     │               Data variables: (12/26)
-    │                   gate_times_bnds               (gate_times, nv) float64 240B 5.43e-06 ... ...
-    │                   transmitter_label             (n_transmitter) <U1 4B 'Z'
-    │                   transmitter_area              (n_transmitter) int64 8B 155
-    │                   transmitter_waveform_type     (n_transmitter) <U6 24B 'square'
-    │                   transmitter_waveform_current  (waveform_time) float64 56B 0.0 1.0 ... 0.0
-    │                   transmitter_scale_factor      (n_transmitter) float64 8B 0.5
+    │                   gate_times_bnds               (gate_times, nv) float64 240B ...
+    │                   transmitter_label             (n_transmitter) <U1 4B ...
+    │                   transmitter_area              (n_transmitter) int64 8B ...
+    │                   transmitter_waveform_type     (n_transmitter) <U6 24B ...
+    │                   transmitter_waveform_current  (waveform_time) float64 56B ...
+    │                   transmitter_scale_factor      (n_transmitter) float64 8B ...
     │                   ...                            ...
-    │                   couplet_txrx_dz               (n_couplet) int64 16B -52 -52
-    │                   data_normalized               (dim_0) bool 1B True
-    │                   output_data_type              <U1 4B 'B'
-    │                   reference_frame               <U24 96B 'right-handed positive up'
-    │                   output_sample_frequency       (dim_0) int64 8B 5
-    │                   digitization_frequency        (dim_0) int64 8B 92160
+    │                   couplet_txrx_dz               (n_couplet) int64 16B ...
+    │                   data_normalized               (dim_0) bool 1B ...
+    │                   output_data_type              <U1 4B ...
+    │                   reference_frame               <U24 96B ...
+    │                   output_sample_frequency       (dim_0) int64 8B ...
+    │                   digitization_frequency        (dim_0) int64 8B ...
     │               Attributes:
     │                   type:        system
     │                   mode:        airborne
@@ -287,36 +370,36 @@ View the Data Tree
     ├── Group: /survey/models
     │   │   Dimensions:      ()
     │   │   Data variables:
-    │   │       spatial_ref  float64 8B 0.0
+    │   │       spatial_ref  float64 8B ...
     │   │   Attributes:
     │   │       content:  inverted 1-D electrical resistivity models
     │   │       type:     container
     │   └── Group: /survey/models/inverted_models
-    │       │   Dimensions:                  (index: 2001, layer_depth: 30, nv: 2,
-    │       │                                 gate_times: 15)
+    │       │   Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
+    │       │                                 index: 2001)
     │       │   Coordinates:
+    │       │       spatial_ref              float64 8B ...
     │       │     * index                    (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
     │       │     * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
     │       │     * nv                       (nv) int64 16B 0 1
     │       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
-    │       │       spatial_ref              float64 8B 0.0
-    │       │       x                        (index) float64 16kB 3.579e+05 ... 4.637e+05
-    │       │       y                        (index) float64 16kB 1.211e+06 ... 1.211e+06
-    │       │       z                        (index) float64 16kB 45.83 46.61 ... 43.14 43.03
+    │       │       x                        (index) float64 16kB ...
+    │       │       y                        (index) float64 16kB ...
+    │       │       z                        (index) float64 16kB ...
     │       │   Data variables: (12/46)
-    │       │       layer_depth_bnds         (layer_depth, nv) float64 480B 0.0 3.0 ... 489.1
-    │       │       gate_times_bnds          (gate_times, nv) float64 240B 5.43e-06 ... 0.01666
-    │       │       uniqueid                 (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
-    │       │       survey                   (index) int32 8kB 9999 9999 9999 ... 9999 9999 9999
-    │       │       date                     (index) int32 8kB 20191128 20191128 ... 20191128
-    │       │       flight                   (index) int32 8kB 10 10 10 10 10 ... 10 10 10 10 10
+    │       │       layer_depth_bnds         (layer_depth, nv) float64 480B ...
+    │       │       gate_times_bnds          (gate_times, nv) float64 240B ...
+    │       │       uniqueid                 (index) int32 8kB ...
+    │       │       survey                   (index) int32 8kB ...
+    │       │       date                     (index) int32 8kB ...
+    │       │       flight                   (index) int32 8kB ...
     │       │       ...                       ...
-    │       │       phic                     (index) float64 16kB 0.4491 0.4759 ... 0.03086
-    │       │       phit                     (index) float64 16kB 0.0 0.0 0.0 ... 0.0 0.0 0.0
-    │       │       phig                     (index) float64 16kB 0.9652 0.6608 ... 0.4684 2.68
-    │       │       phis                     (index) float64 16kB 0.1158 0.1392 ... 0.03632
-    │       │       lambda                   (index) float64 16kB 0.5968 0.5487 ... 1.129 3.481
-    │       │       iterations               (index) int32 8kB 20 19 25 25 25 ... 19 23 23 22 30
+    │       │       phic                     (index) float64 16kB ...
+    │       │       phit                     (index) float64 16kB ...
+    │       │       phig                     (index) float64 16kB ...
+    │       │       phis                     (index) float64 16kB ...
+    │       │       lambda                   (index) float64 16kB ...
+    │       │       iterations               (index) int32 8kB ...
     │       │   Attributes:
     │       │       content:     inverted resistivity models
     │       │       comment:     This dataset includes inverted resistivity models derived fr...
@@ -326,10 +409,44 @@ View the Data Tree
     │       │       mode:        airborne
     │       │       property:    electrical conductivity
     │       │       structure:   tabular
+    │       ├── Group: /survey/models/inverted_models/tempest_system
+    │       │       Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
+    │       │                                          waveform_time: 7, n_receiver: 2,
+    │       │                                          n_couplet: 2, dim_0: 1)
+    │       │       Coordinates:
+    │       │         * n_transmitter                 (n_transmitter) int64 8B 0
+    │       │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
+    │       │         * n_receiver                    (n_receiver) int64 16B 0 1
+    │       │         * n_couplet                     (n_couplet) int64 16B 0 1
+    │       │       Dimensions without coordinates: dim_0
+    │       │       Data variables: (12/26)
+    │       │           gate_times_bnds               (gate_times, nv) float64 240B ...
+    │       │           transmitter_label             (n_transmitter) <U1 4B ...
+    │       │           transmitter_area              (n_transmitter) int64 8B ...
+    │       │           transmitter_waveform_type     (n_transmitter) <U6 24B ...
+    │       │           transmitter_waveform_current  (waveform_time) float64 56B ...
+    │       │           transmitter_scale_factor      (n_transmitter) float64 8B ...
+    │       │           ...                            ...
+    │       │           couplet_txrx_dz               (n_couplet) int64 16B ...
+    │       │           data_normalized               (dim_0) bool 1B ...
+    │       │           output_data_type              <U1 4B ...
+    │       │           reference_frame               <U24 96B ...
+    │       │           output_sample_frequency       (dim_0) int64 8B ...
+    │       │           digitization_frequency        (dim_0) int64 8B ...
+    │       │       Attributes:
+    │       │           type:        system
+    │       │           mode:        airborne
+    │       │           method:      electromagnetic, time domain
+    │       │           instrument:  30Hz Tempest
+    │       │           name:        tempest_system
     │       └── Group: /survey/models/inverted_models/inversion_parameters
-    │               Dimensions:      ()
+    │               Dimensions:             ()
     │               Data variables:
-    │                   parameters   object 8B None
+    │                   software            <U61 244B ...
+    │                   software_reference  <U298 1kB ...
+    │                   description         <U1402 6kB ...
+    │                   doi_calculation     <U592 2kB ...
+    │                   phid_cut            <U256 1kB ...
     │               Attributes:
     │                   type:        parameters
     │                   method:      electromagnetic, time domain
@@ -340,21 +457,21 @@ View the Data Tree
     └── Group: /survey/derived_maps
         │   Dimensions:      ()
         │   Data variables:
-        │       spatial_ref  float64 8B 0.0
+        │       spatial_ref  float64 8B ...
         │   Attributes:
         │       content:  derived maps
         │       type:     container
         └── Group: /survey/derived_maps/maps
             │   Dimensions:       (x: 599, nv: 2, y: 1212)
             │   Coordinates:
+            │       spatial_ref   float64 8B ...
             │     * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
             │     * nv            (nv) int64 16B 0 1
             │     * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-            │       spatial_ref   float64 8B 0.0
             │   Data variables:
-            │       x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
-            │       y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
-            │       magnetic_tmi  (y, x) float64 6MB nan nan nan nan nan ... nan nan nan nan nan
+            │       x_bnds        (x, nv) float64 10kB ...
+            │       y_bnds        (y, nv) float64 19kB ...
+            │       magnetic_tmi  (y, x) float64 6MB ...
             │   Attributes:
             │       comment:     contractor-derived product
             │       content:     gridded map of total magnetic intensity
@@ -375,18 +492,18 @@ View the Data Tree
                       * n_base_magnetometer                 (n_base_magnetometer) int64 8B 0
                     Data variables: (12/35)
                         base_mag_locations_bnds             (base_mag_locations, nv) float64 96B ...
-                        transmitter_label                   (n_transmitter) <U7 28B 'passive'
-                        transmitter_description             (n_transmitter) <U107 428B "No artifi...
-                        receiver_label                      (n_receiver) <U19 76B 'scalar_magneto...
-                        receiver_sensor_type                (n_receiver) <U12 48B 'cesium_vapor'
-                        receiver_sensor_model               (n_receiver) <U4 16B 'CS-3'
+                        transmitter_label                   (n_transmitter) <U7 28B ...
+                        transmitter_description             (n_transmitter) <U107 428B ...
+                        receiver_label                      (n_receiver) <U19 76B ...
+                        receiver_sensor_type                (n_receiver) <U12 48B ...
+                        receiver_sensor_model               (n_receiver) <U4 16B ...
                         ...                                  ...
-                        diurnal_correction                  <U142 568B 'Diurnal base values appli...
-                        igrf_model_date                     <U10 40B '2019-12-01'
-                        igrf_model_height                   <U7 28B '167.9 m'
-                        igrf_removed_model_epoch            <U6 24B '2015.0'
-                        tieline_levelling                   <U137 548B 'RMI levelled to prior RES...
-                        deliverables                        <U63 252B 'Total Magnetic Intensity (...
+                        diurnal_correction                  <U142 568B ...
+                        igrf_model_date                     <U10 40B ...
+                        igrf_model_height                   <U7 28B ...
+                        igrf_removed_model_epoch            <U6 24B ...
+                        tieline_levelling                   <U137 548B ...
+                        deliverables                        <U63 252B ...
                     Attributes:
                         type:        system
                         mode:        airborne
@@ -397,52 +514,15 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-93
-
-Save NetCDF file
-^^^^^^^^^^^^^^^^
-
-.. GENERATED FROM PYTHON SOURCE LINES 93-97
-
-.. code-block:: Python
-
-
-    d_out = join(data_path, 'Tempest.nc')
-    survey.gs.to_netcdf(d_out)
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 98-99
-
-Read back in the NetCDF file
-
-.. GENERATED FROM PYTHON SOURCE LINES 99-101
-
-.. code-block:: Python
-
-    new_survey = gspy.open_datatree(d_out)['survey']
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 102-103
+.. GENERATED FROM PYTHON SOURCE LINES 144-145
 
 Once the survey is read in, we can access variables like a standard xarray dataset.
 
-.. GENERATED FROM PYTHON SOURCE LINES 105-106
+.. GENERATED FROM PYTHON SOURCE LINES 147-148
 
 Option A:
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-107
+.. GENERATED FROM PYTHON SOURCE LINES 148-149
 
 .. code-block:: Python
 
@@ -458,25 +538,26 @@ Option A:
     <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
-      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
-        standard_name:  total_magnetic_intensity
-        long_name:      Total magnetic intensity, diurnally corrected and filtered
-        units:          nT
-        null_value:     1.70141e+38
-        valid_range:    [-17504.6640625   11490.32324219]
-        grid_mapping:   spatial_ref
+        system_couplet:  passive_scalar_magnetometer
+        standard_name:   total_magnetic_intensity
+        long_name:       Total magnetic intensity, diurnally corrected and filtered
+        units:           nT
+        null_value:      1.70141e+38
+        valid_range:     [-17504.6640625   11490.32324219]
+        grid_mapping:    spatial_ref
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-109
+.. GENERATED FROM PYTHON SOURCE LINES 150-151
 
 Option B:
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-111
+.. GENERATED FROM PYTHON SOURCE LINES 151-153
 
 .. code-block:: Python
 
@@ -493,27 +574,64 @@ Option B:
     <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
     [725988 values with dtype=float64]
     Coordinates:
-      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
     Attributes:
-        standard_name:  total_magnetic_intensity
-        long_name:      Total magnetic intensity, diurnally corrected and filtered
-        units:          nT
-        null_value:     1.70141e+38
-        valid_range:    [-17504.6640625   11490.32324219]
-        grid_mapping:   spatial_ref
+        system_couplet:  passive_scalar_magnetometer
+        standard_name:   total_magnetic_intensity
+        long_name:       Total magnetic intensity, diurnally corrected and filtered
+        units:           nT
+        null_value:      1.70141e+38
+        valid_range:     [-17504.6640625   11490.32324219]
+        grid_mapping:    spatial_ref
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-115
+.. GENERATED FROM PYTHON SOURCE LINES 154-155
+
+Option C:
+
+.. GENERATED FROM PYTHON SOURCE LINES 155-157
+
+.. code-block:: Python
+
+    print(new_survey['derived_maps']['maps']['magnetic_tmi'])
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    <xarray.DataArray 'magnetic_tmi' (y: 1212, x: 599)> Size: 6MB
+    [725988 values with dtype=float64]
+    Coordinates:
+        spatial_ref  float64 8B ...
+      * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+      * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    Attributes:
+        system_couplet:  passive_scalar_magnetometer
+        standard_name:   total_magnetic_intensity
+        long_name:       Total magnetic intensity, diurnally corrected and filtered
+        units:           nT
+        null_value:      1.70141e+38
+        valid_range:     [-17504.6640625   11490.32324219]
+        grid_mapping:    spatial_ref
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 158-161
 
 Plotting Examples
 ^^^^^^^^^^^^^^^^^
 demonstrating different ways to access and plot variables
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-120
+.. GENERATED FROM PYTHON SOURCE LINES 161-166
 
 .. code-block:: Python
 
@@ -534,11 +652,11 @@ demonstrating different ways to access and plot variables
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 121-122
+.. GENERATED FROM PYTHON SOURCE LINES 167-168
 
 Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 
-.. GENERATED FROM PYTHON SOURCE LINES 122-124
+.. GENERATED FROM PYTHON SOURCE LINES 168-170
 
 .. code-block:: Python
 
@@ -559,7 +677,7 @@ Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.324 seconds)
+   **Total running time of the script:** (0 minutes 4.106 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest.py:

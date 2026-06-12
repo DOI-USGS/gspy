@@ -5,8 +5,8 @@ DEFN 3 ST=RECD,RT=; date : I12 : Date number
 DEFN 4 ST=RECD,RT=; flight : I12 : Flight number, FlightNumber
 DEFN 5 ST=RECD,RT=; line : I12 : Line number, LineNumber
 DEFN 6 ST=RECD,RT=; fiducial : F12.2 : Fiducial number, Fiducial
-DEFN 7 ST=RECD,RT=; easting : F10.1 : UNITS = m , X
-DEFN 8 ST=RECD,RT=; northing : F10.1 : UNITS = m , Y
+DEFN 7 ST=RECD,RT=; easting : F10.1 : UNITS = m , Easting
+DEFN 8 ST=RECD,RT=; northing : F10.1 : UNITS = m , Northing
 DEFN 9 ST=RECD,RT=; elevation : F10.2 : UNITS = m , Ground elevation relative to sea-level
 DEFN 10 ST=RECD,RT=; tx_height : F9.2 : UNITS = m , Input Tx height above ground level
 DEFN 11 ST=RECD,RT=; tx_roll : F9.2 : UNITS = degrees , Input Tx roll - left side up + ve

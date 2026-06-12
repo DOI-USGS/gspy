@@ -1,6 +1,7 @@
 import numpy as np
 from os import path, sep
 from pathlib import Path
+import re
 from copy import copy
 from ..metadata.Metadata import Metadata
 from ..gs_dataarray.Spatial_ref import Spatial_ref
@@ -222,7 +223,11 @@ class Container:
             # Systems were found, create a System datatree/dataset
             if len(system) > 0:
                 system, _ = Container.Systems(**system)
-        # Attach apriori given system dict
+        else:
+            if isinstance(system, dict):
+                system, _ = Container.Systems(**system)
+
+        # Attach systems (datatree at this point) otherwise empty dict
         kwargs['system'] = system
 
         if data_filename is None:
@@ -278,7 +283,12 @@ class Container:
         for key in list(kwargs.keys()):
             if "system" in key:
                 value = kwargs.pop(key)
-                systems[key] = System.from_dict(name=key, **value)
+                if isinstance(value, dict):
+                    value = System.from_dict(name=key, **value)
+                else:
+                    if isinstance(value, DataTree):
+                        value = value.to_dataset()
+                systems[key] = value
 
         out = DataTree.from_dict(systems)
 
@@ -319,6 +329,16 @@ class Container:
 
         if self._obj.attrs['type'] == 'survey':
             self._obj.attrs['content'] = self.content
+
+            from importlib.metadata import version, PackageNotFoundError  
+            try:
+                __version__ = version("gspy")  # distribution name as installed by pip
+            except PackageNotFoundError:
+                __version__ = "unknown"
+            
+            self._obj.attrs['gspy_version'] = __version__.split('.post')[0]
+            self._obj.attrs['conventions'] = "GS-2.0, CF-1.13"
+
             for item in list(self._obj):
                 if self._obj[item].attrs.get('type', '') == 'system':
                     del self._obj[item]
@@ -404,7 +424,9 @@ class Container:
 
         # Early exist if this is a single system (but also datatree)
         if "method" in self._obj.attrs:
-            if self._obj.attrs['method'] == method:
+            #if self._obj.attrs['method'] == method:
+
+            if re.search(rf'\b{re.escape(method)}\b', self._obj.attrs['method']):
                 return self._obj.to_dataset()
 
         # Handles multiple attached system types
@@ -416,8 +438,11 @@ class Container:
             if isinstance(methods, str):
                 methods = [methods]
 
-            if any([method in methods]):
+            pattern = re.compile(rf"\b{re.escape(method)}\b", re.IGNORECASE)
+            # Check each string in the methods list
+            if any(pattern.search(m) for m in methods):
                 sys = self._obj[this].to_dataset()
+
 
         assert not sys is None, ValueError(f"Could not find system with method attrs '{method}'")
         return sys
@@ -514,6 +539,7 @@ def _write_one_var_to_tif(ds, var_name, slice_dim=None, out_dir=None):
                 out_path = out_dir / f"{var_name}_{s}.tif"
             else:
                 out_path = f"{var_name}_{s}.tif"
+            print(out_path)
             da_sel.rio.to_raster(str(out_path))
     else:
         if out_dir is not None:

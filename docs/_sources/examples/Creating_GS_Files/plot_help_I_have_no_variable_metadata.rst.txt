@@ -87,24 +87,28 @@ No existing Survey metadata, start with making a generic Survey template
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-39
+.. GENERATED FROM PYTHON SOURCE LINES 38-43
+
+.. literalinclude:: /../../examples/Creating_GS_Files/template_survey_empty.yml
+   :language: yaml
+   :linenos:
+   :caption: Empty Survey YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
 
 Partial existing Survey metadata file, generate a combined template to see what might be missing
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-50
+.. GENERATED FROM PYTHON SOURCE LINES 47-54
 
 .. code-block:: Python
 
 
     # Path to example files
-    data_path = '..//data_files//resolve'
+    data_path = '..//data_files//'
 
     # Pre-existing Survey metadata file
-    metadata = join(data_path, "data//Resolve_survey_md.yml")
-
-    # Generate the template, passing the pre-existing file
-    template = Survey.metadata_template(metadata)
-    template.dump("template_md_survey.yml")
+    metadata = join(data_path, "documents//Resolve_survey_incomplete_md.yml")
 
 
 
@@ -112,23 +116,61 @@ Partial existing Survey metadata file, generate a combined template to see what 
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 51-53
-
-Generate the Variable Metadata Template for My Dataset
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. GENERATED FROM PYTHON SOURCE LINES 55-56
 
-Zero existing Dataset metadata file, start with making an empty Dataset metadata template
+Generate the template, passing the pre-existing file
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-63
+.. GENERATED FROM PYTHON SOURCE LINES 56-60
 
 .. code-block:: Python
 
 
-    # Pass the data file (in this case a CSV) to make the template variable-specific.
-    # Each column in the CSV file becomes a variable by default.
+    template = Survey.metadata_template(metadata)
+    template.dump("template_md_partial_survey.yml")
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 61-66
+
+.. literalinclude:: /../../examples/data_files/documents/Resolve_survey_incomplete_md.yml
+   :language: yaml
+   :linenos:
+   :caption: Partial incoming Survey YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 69-74
+
+.. literalinclude:: /../../examples/Creating_GS_Files/template_md_partial_survey.yml
+   :language: yaml
+   :linenos:
+   :caption: Template with Partial Survey YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 77-79
+
+Generate the Variable Metadata Template for My Dataset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. GENERATED FROM PYTHON SOURCE LINES 81-82
+
+Zero existing Dataset metadata file, start with making an empty Dataset metadata template
+
+.. GENERATED FROM PYTHON SOURCE LINES 84-86
+
+Pass the data file (in this case a CSV) to make the template variable-specific.
+Each column in the CSV file becomes a variable by default.
+
+.. GENERATED FROM PYTHON SOURCE LINES 86-91
+
+.. code-block:: Python
+
+    data_path = '..//data_files//resolve'
     data = join(data_path, 'data//Resolve.csv')
     template = Dataset.metadata_template(data)
     template.dump("template_md_resolve_empty.yml")
@@ -140,22 +182,29 @@ Zero existing Dataset metadata file, start with making an empty Dataset metadata
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-65
+.. GENERATED FROM PYTHON SOURCE LINES 92-97
+
+.. literalinclude:: /../../examples/Creating_GS_Files/template_md_resolve_empty.yml
+   :language: yaml
+   :linenos:
+   :caption: Empty Data YAML file
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 100-101
 
 Combine with a partial existing Dataset metadata file
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-74
+.. GENERATED FROM PYTHON SOURCE LINES 103-104
+
+Here we have a CSV data file and a partial metadata file (missing the variable attributes)
+
+.. GENERATED FROM PYTHON SOURCE LINES 104-107
 
 .. code-block:: Python
 
 
-    # Here we have a CSV data file and a partial metadata file (missing the variable attributes)
     metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
 
-    # Generate the template for this CSV dataset by combining the existing
-    # partial file with an empty template based on the dataset's variables
-    template = Dataset.metadata_template(data, metadata)
-    template.dump("template_md_resolve.yml")
 
 
 
@@ -163,55 +212,38 @@ Combine with a partial existing Dataset metadata file
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 108-110
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-76
+Generate the template for this CSV dataset by combining the existing
+partial file with an empty template based on the dataset's variables
 
-Another CSV example ?
-
-.. GENERATED FROM PYTHON SOURCE LINES 76-83
-
-.. code-block:: Python
-
-    data_path = '..//data_files//skytem_csv'
-
-    data = join(data_path, 'data//skytem_contractor_data.csv')
-    metadata = join(data_path, 'data//skytem_contractor_data.yml')
-    template = Dataset.metadata_template(data, metadata)
-    template.dump("template_md_skytem.yml")
-
-
-
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 84-85
-
-Loupe Data
-
-.. GENERATED FROM PYTHON SOURCE LINES 85-92
+.. GENERATED FROM PYTHON SOURCE LINES 110-114
 
 .. code-block:: Python
 
 
-    data_path = '..//data_files//loupe'
-
-    data = join(data_path, 'data//Kankakee.dat')
-    metadata = join(data_path, 'data//loupe_data_metadata.yml')
-
-    template = Dataset.metadata_template(data_filename=data, metadata_file=metadata)
-    template.dump("template_md_loupe.yml")
+    template = Dataset.metadata_template(data, metadata)
+    template.dump("template_md_resolve_partial.yml")
 
 
 
 
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 115-120
+
+.. literalinclude:: /../../examples/Creating_GS_Files/template_md_resolve_partial.yml
+   :language: yaml
+   :linenos:
+   :caption: Partial Data YAML file
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.580 seconds)
+   **Total running time of the script:** (0 minutes 0.510 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py:

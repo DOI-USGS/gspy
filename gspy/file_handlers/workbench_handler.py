@@ -18,17 +18,17 @@ class workbench_handler(xyz_handler):
 
         self.__read(metadata, **kwargs)
 
-        return self
+        return self, self.metadata
 
     def __read(self, metadata=None, **kwargs):
         self.metadata, n_header = self.__parse_metadata(self.filename)
 
         system = kwargs['system'].gs.get_system_with_method('electromagnetic')
 
-        mapping = {i+1:c_label for i, c_label in enumerate(system.gs.component_labels)}
+        mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
 
         self._df = self.read_data(self.filename, header=n_header, mapping=mapping)
-
+        
         self.combine_metadata(metadata)
 
     def __parse_metadata(self, filename):
@@ -200,15 +200,18 @@ class workbench_model_handler(xyz_handler):
                     colset1 = xprod.columns[xprod.any()]
                     colset2 = xprod.columns[~xprod.any()]
 
-                    single_moment = np.array_equal(colset1, colset2)
+                    if np.array_equal(colset1, colset2) or (colset1.empty or colset2.empty):
+                        single_moment = True
+                    else:
+                        single_moment = False
 
                     col_indices0 = np.asarray([np.int32(x.strip().split('_')[1]) for x in colset1], dtype=np.int32)
                     col_indices1 = np.asarray([np.int32(x.strip().split('_')[1]) for x in colset2], dtype=np.int32)
 
                     dimensions = {}
                     if single_moment:
-                        dimensions["gate_times"] = {"standard_name": "lm_gate_times",
-                                                          "long_name": "calibrated low moment gate times",
+                        dimensions["gate_times"] = {"standard_name": "gate_times",
+                                                          "long_name": "calibrated gate times",
                                                           "units": "seconds",
                                                           "null_value": "not_defined",
                                                           "centers": gate_times}

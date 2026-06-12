@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Functionality &mdash; gspy 2.2.8 documentation</title>
+  <title>Basic Functionality &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -14,18 +14,19 @@
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/scroll_and_wrap.css?v=de27d25c" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Coordinate Reference Systems" href="plot_coordinate_reference_systems.html" />
-    <link rel="prev" title="Workbench to NetCDF" href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" /> 
+    <link rel="prev" title="Workbench XYZ" href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,8 +55,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Basic Functionality</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#accessing-the-xarray-object">Accessing the Xarray object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-the-groups-within-the-tree">Accessing the groups within the tree</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#coordinates-dimensions-and-attributes">Coordinates, Dimensions, and Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtering-searching">Filtering &amp; Searching</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_coordinate_reference_systems.html">Coordinate Reference Systems</a></li>
@@ -102,7 +104,7 @@ to download the full example code.</p>
 <span id="sphx-glr-examples-interacting-with-gs-files-plot-xarray-methods-py"></span><h1>Basic Functionality<a class="headerlink" href="#basic-functionality" title="Link to this heading"></a></h1>
 <p>The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a> DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type.</p>
 <p>This example uses the TEMPEST AEM survey as a basis for demonstration.</p>
-<p>Dataset Reference: <cite>Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.</cite></p>
+<p>Source Reference: <cite>Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.</cite></p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span><span class="p">,</span> <span class="n">isfile</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
@@ -119,8 +121,8 @@ to download the full example code.</p>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<section id="accessing-the-xarray-object">
-<h2>Accessing the Xarray object<a class="headerlink" href="#accessing-the-xarray-object" title="Link to this heading"></a></h2>
+<section id="accessing-the-groups-within-the-tree">
+<h2>Accessing the groups within the tree<a class="headerlink" href="#accessing-the-groups-within-the-tree" title="Link to this heading"></a></h2>
 <p>Survey</p>
 <p>the <code class="docutils literal notranslate"><span class="pre">survey</span></code> object here is a DataTree, printing it will show the entire contents
 of the DataTree</p>
@@ -141,15 +143,16 @@ Group: /survey
 │       flightline_information  float64 8B ...
 │       survey_equipment        float64 8B ...
 │   Attributes:
-│       type:         survey
-│       title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
-│       institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
-│       source:       Contractor provided ASEG-GDF2 formatted data
-│       history:      This example dataset includes the raw AEM data and gridded ...
-│       references:   Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Ho...
-│       comment:      This dataset is incomplete and has been downsampled for the...
-│       content:      data branch containing raw AEM data (survey/data/raw_data) ...
-│       conventions:  CF-1.12, GS-2.0
+│       type:          survey
+│       title:         Example Tempest Airborne Electromagnetic (AEM) Dataset
+│       institution:   USGS Geology, Geophysics, &amp; Geochemistry Science Center
+│       source:        Contractor provided ASEG-GDF2 formatted data
+│       history:       This example dataset includes the raw AEM data and gridded...
+│       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
+│       comment:       This dataset is incomplete and has been downsampled for th...
+│       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
+│       gspy_version:  2.2.8
+│       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
 │   │   Data variables:
@@ -160,12 +163,12 @@ Group: /survey
 │   └── Group: /survey/data/raw_data
 │       │   Dimensions:         (index: 2001, gate_times: 15)
 │       │   Coordinates:
-│       │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
-│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │       │       spatial_ref     float64 8B ...
+│       │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
 │       │       x               (index) float64 16kB ...
 │       │       y               (index) float64 16kB ...
 │       │       z               (index) float64 16kB ...
+│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │       │   Data variables: (12/58)
 │       │       line            (index) int32 8kB ...
 │       │       flight          (index) int32 8kB ...
@@ -181,11 +184,11 @@ Group: /survey
 │       │       z_vlf4          (index) float64 16kB ...
 │       │       z_geofact       (index) float64 16kB ...
 │       │   Attributes:
-│       │       content:     raw data
+│       │       content:     raw AEM data
 │       │       comment:     This dataset includes minimally processed (raw) AEM data
 │       │       type:        data
 │       │       mode:        airborne
-│       │       method:      magnetic, radiometric, electromagnetic, time domain
+│       │       method:      [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
 │       │       instrument:  30Hz Tempest
 │       │       structure:   tabular
 │       └── Group: /survey/data/raw_data/tempest_system
@@ -230,11 +233,11 @@ Group: /survey
 │       │   Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
 │       │                                 index: 2001)
 │       │   Coordinates:
+│       │       spatial_ref              float64 8B ...
+│       │     * index                    (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
 │       │     * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
 │       │     * nv                       (nv) int64 16B 0 1
 │       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
-│       │     * index                    (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
-│       │       spatial_ref              float64 8B ...
 │       │       x                        (index) float64 16kB ...
 │       │       y                        (index) float64 16kB ...
 │       │       z                        (index) float64 16kB ...
@@ -261,10 +264,44 @@ Group: /survey
 │       │       mode:        airborne
 │       │       property:    electrical conductivity
 │       │       structure:   tabular
+│       ├── Group: /survey/models/inverted_models/tempest_system
+│       │       Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
+│       │                                          waveform_time: 7, n_receiver: 2,
+│       │                                          n_couplet: 2, dim_0: 1)
+│       │       Coordinates:
+│       │         * n_transmitter                 (n_transmitter) int64 8B 0
+│       │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
+│       │         * n_receiver                    (n_receiver) int64 16B 0 1
+│       │         * n_couplet                     (n_couplet) int64 16B 0 1
+│       │       Dimensions without coordinates: dim_0
+│       │       Data variables: (12/26)
+│       │           gate_times_bnds               (gate_times, nv) float64 240B ...
+│       │           transmitter_label             (n_transmitter) &lt;U1 4B ...
+│       │           transmitter_area              (n_transmitter) int64 8B ...
+│       │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
+│       │           transmitter_waveform_current  (waveform_time) float64 56B ...
+│       │           transmitter_scale_factor      (n_transmitter) float64 8B ...
+│       │           ...                            ...
+│       │           couplet_txrx_dz               (n_couplet) int64 16B ...
+│       │           data_normalized               (dim_0) bool 1B ...
+│       │           output_data_type              &lt;U1 4B ...
+│       │           reference_frame               &lt;U24 96B ...
+│       │           output_sample_frequency       (dim_0) int64 8B ...
+│       │           digitization_frequency        (dim_0) int64 8B ...
+│       │       Attributes:
+│       │           type:        system
+│       │           mode:        airborne
+│       │           method:      electromagnetic, time domain
+│       │           instrument:  30Hz Tempest
+│       │           name:        tempest_system
 │       └── Group: /survey/models/inverted_models/inversion_parameters
-│               Dimensions:      ()
+│               Dimensions:             ()
 │               Data variables:
-│                   parameters   float64 8B ...
+│                   software            &lt;U61 244B ...
+│                   software_reference  &lt;U298 1kB ...
+│                   description         &lt;U1402 6kB ...
+│                   doi_calculation     &lt;U592 2kB ...
+│                   phid_cut            &lt;U256 1kB ...
 │               Attributes:
 │                   type:        parameters
 │                   method:      electromagnetic, time domain
@@ -282,10 +319,10 @@ Group: /survey
     └── Group: /survey/derived_maps/maps
         │   Dimensions:       (x: 599, nv: 2, y: 1212)
         │   Coordinates:
+        │       spatial_ref   float64 8B ...
         │     * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         │     * nv            (nv) int64 16B 0 1
         │     * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-        │       spatial_ref   float64 8B ...
         │   Data variables:
         │       x_bnds        (x, nv) float64 10kB ...
         │       y_bnds        (y, nv) float64 19kB ...
@@ -348,15 +385,16 @@ Data variables:
     flightline_information  float64 8B ...
     survey_equipment        float64 8B ...
 Attributes:
-    type:         survey
-    title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
-    institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
-    source:       Contractor provided ASEG-GDF2 formatted data
-    history:      This example dataset includes the raw AEM data and gridded ...
-    references:   Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Ho...
-    comment:      This dataset is incomplete and has been downsampled for the...
-    content:      data branch containing raw AEM data (survey/data/raw_data) ...
-    conventions:  CF-1.12, GS-2.0
+    type:          survey
+    title:         Example Tempest Airborne Electromagnetic (AEM) Dataset
+    institution:   USGS Geology, Geophysics, &amp; Geochemistry Science Center
+    source:        Contractor provided ASEG-GDF2 formatted data
+    history:       This example dataset includes the raw AEM data and gridded...
+    references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
+    comment:       This dataset is incomplete and has been downsampled for th...
+    content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
+    gspy_version:  2.2.8
+    conventions:   GS-2.0, CF-1.13
 </pre></div>
 </div>
 <p>or Option 2) use the path to the group and then retrieve the DataSet</p>
@@ -376,15 +414,16 @@ Data variables:
     flightline_information  float64 8B ...
     survey_equipment        float64 8B ...
 Attributes:
-    type:         survey
-    title:        Example Tempest Airborne Electromagnetic (AEM) Dataset
-    institution:  USGS Geology, Geophysics, &amp; Geochemistry Science Center
-    source:       Contractor provided ASEG-GDF2 formatted data
-    history:      This example dataset includes the raw AEM data and gridded ...
-    references:   Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Ho...
-    comment:      This dataset is incomplete and has been downsampled for the...
-    content:      data branch containing raw AEM data (survey/data/raw_data) ...
-    conventions:  CF-1.12, GS-2.0
+    type:          survey
+    title:         Example Tempest Airborne Electromagnetic (AEM) Dataset
+    institution:   USGS Geology, Geophysics, &amp; Geochemistry Science Center
+    source:        Contractor provided ASEG-GDF2 formatted data
+    history:       This example dataset includes the raw AEM data and gridded...
+    references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
+    comment:       This dataset is incomplete and has been downsampled for th...
+    content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
+    gspy_version:  2.2.8
+    conventions:   GS-2.0, CF-1.13
 </pre></div>
 </div>
 <p>To look just at the attributes of the Survey, once again it can be accessed
@@ -395,20 +434,18 @@ either directly or by using the group path</p>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset is incomplete and has been downsampled for the &#39;
             &#39;purposes of this example.&#39;,
- &#39;content&#39;: &#39;data branch containing raw AEM data (survey/data/raw_data) and a &#39;
-            &#39;sub-branch for derived maps containing the total magnetic &#39;
-            &#39;intensity map (survey/data/derived_maps/maps); model branch &#39;
-            &#39;containing inverted 1-D resistivity models &#39;
-            &#39;(survey/models/inverted_models) /survey; raw data /survey/data; &#39;
-            &#39;inverted 1-D electrical resistivity models /survey/models; &#39;
-            &#39;derived maps /survey/derived_maps; raw data &#39;
+ &#39;content&#39;: &#39;Tempest AEM Survey from the Mississippi Alluvial Plain /survey; &#39;
+            &#39;raw data /survey/data; inverted 1-D electrical resistivity models &#39;
+            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
             &#39;/survey/data/raw_data; inverted resistivity models &#39;
             &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
             &#39;intensity /survey/derived_maps/maps;  &#39;
             &#39;/survey/data/raw_data/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
             &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
- &#39;conventions&#39;: &#39;CF-1.12, GS-2.0&#39;,
+ &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
+ &#39;gspy_version&#39;: &#39;2.2.8&#39;,
  &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
             &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
             &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
@@ -432,20 +469,18 @@ either directly or by using the group path</p>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset is incomplete and has been downsampled for the &#39;
             &#39;purposes of this example.&#39;,
- &#39;content&#39;: &#39;data branch containing raw AEM data (survey/data/raw_data) and a &#39;
-            &#39;sub-branch for derived maps containing the total magnetic &#39;
-            &#39;intensity map (survey/data/derived_maps/maps); model branch &#39;
-            &#39;containing inverted 1-D resistivity models &#39;
-            &#39;(survey/models/inverted_models) /survey; raw data /survey/data; &#39;
-            &#39;inverted 1-D electrical resistivity models /survey/models; &#39;
-            &#39;derived maps /survey/derived_maps; raw data &#39;
+ &#39;content&#39;: &#39;Tempest AEM Survey from the Mississippi Alluvial Plain /survey; &#39;
+            &#39;raw data /survey/data; inverted 1-D electrical resistivity models &#39;
+            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
             &#39;/survey/data/raw_data; inverted resistivity models &#39;
             &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
             &#39;intensity /survey/derived_maps/maps;  &#39;
             &#39;/survey/data/raw_data/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
             &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
- &#39;conventions&#39;: &#39;CF-1.12, GS-2.0&#39;,
+ &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
+ &#39;gspy_version&#39;: &#39;2.2.8&#39;,
  &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
             &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
             &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
@@ -531,12 +566,12 @@ Group: /survey/data
 └── Group: /survey/data/raw_data
     │   Dimensions:         (index: 2001, gate_times: 15)
     │   Coordinates:
-    │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
-    │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     │       spatial_ref     float64 8B ...
+    │     * index           (index) int32 8kB 0 1 2 3 4 5 ... 1996 1997 1998 1999 2000
     │       x               (index) float64 16kB ...
     │       y               (index) float64 16kB ...
     │       z               (index) float64 16kB ...
+    │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     │   Data variables: (12/58)
     │       line            (index) int32 8kB ...
     │       flight          (index) int32 8kB ...
@@ -552,11 +587,11 @@ Group: /survey/data
     │       z_vlf4          (index) float64 16kB ...
     │       z_geofact       (index) float64 16kB ...
     │   Attributes:
-    │       content:     raw data
+    │       content:     raw AEM data
     │       comment:     This dataset includes minimally processed (raw) AEM data
     │       type:        data
     │       mode:        airborne
-    │       method:      magnetic, radiometric, electromagnetic, time domain
+    │       method:      [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
     │       instrument:  30Hz Tempest
     │       structure:   tabular
     └── Group: /survey/data/raw_data/tempest_system
@@ -651,13 +686,13 @@ Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
                                    waveform_time: 7, n_receiver: 2,
                                    n_couplet: 2, dim_0: 1, index: 2001)
 Coordinates:
+  * index                         (index) int32 8kB 0 1 2 3 ... 1998 1999 2000
   * gate_times                    (gate_times) float64 120B 1.085e-05 ... 0.0...
   * nv                            (nv) int64 16B 0 1
   * n_transmitter                 (n_transmitter) int64 8B 0
   * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
   * n_receiver                    (n_receiver) int64 16B 0 1
   * n_couplet                     (n_couplet) int64 16B 0 1
-  * index                         (index) int32 8kB 0 1 2 3 ... 1998 1999 2000
 Dimensions without coordinates: dim_0
 Data variables: (12/26)
     gate_times_bnds               (gate_times, nv) float64 240B ...
@@ -737,8 +772,8 @@ file representing individual measurements.</p>
 &lt;xarray.DataArray &#39;index&#39; (index: 2001)&gt; Size: 8kB
 array([   0,    1,    2, ..., 1998, 1999, 2000], shape=(2001,), dtype=int32)
 Coordinates:
-  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
     spatial_ref  float64 8B ...
+  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
     x            (index) float64 16kB ...
     y            (index) float64 16kB ...
     z            (index) float64 16kB ...
@@ -766,8 +801,8 @@ array([  1.5  ,   4.65 ,   8.115,  11.925,  16.115,  20.725,  25.795,  31.375,
        114.73 , 129.2  , 145.12 , 162.63 , 181.89 , 203.08 , 226.39 , 252.03 ,
        280.235, 311.26 , 345.385, 382.925, 424.22 , 467.48 ])
 Coordinates:
-  * layer_depth  (layer_depth) float64 240B 1.5 4.65 8.115 ... 382.9 424.2 467.5
     spatial_ref  float64 8B ...
+  * layer_depth  (layer_depth) float64 240B 1.5 4.65 8.115 ... 382.9 424.2 467.5
 Attributes:
     standard_name:  layer_depth
     long_name:      inverted model layer depth
@@ -789,9 +824,9 @@ in this case of length 2:</p>
 &lt;xarray.DataArray &#39;layer_depth_bnds&#39; (layer_depth: 30, nv: 2)&gt; Size: 480B
 [60 values with dtype=float64]
 Coordinates:
+    spatial_ref  float64 8B ...
   * layer_depth  (layer_depth) float64 240B 1.5 4.65 8.115 ... 382.9 424.2 467.5
   * nv           (nv) int64 16B 0 1
-    spatial_ref  float64 8B ...
 Attributes:
     standard_name:  layer_depth_bounds
     long_name:      inverted model layer depth cell boundaries
@@ -854,12 +889,12 @@ the xarray, such as <code class="docutils literal notranslate"><span class="pre"
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Inspect the coordinates of a tabular dataset:
 
 Coordinates:
-  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
-  * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
     spatial_ref  float64 8B ...
+  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
     x            (index) float64 16kB ...
     y            (index) float64 16kB ...
     z            (index) float64 16kB ...
+  * gate_times   (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 </pre></div>
 </div>
 <p>Tabular Coordinates</p>
@@ -881,8 +916,8 @@ these requirements for users.</p>
 &lt;xarray.DataArray &#39;x&#39; (index: 2001)&gt; Size: 16kB
 [2001 values with dtype=float64]
 Coordinates:
-  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
     spatial_ref  float64 8B ...
+  * index        (index) int32 8kB 0 1 2 3 4 5 ... 1995 1996 1997 1998 1999 2000
     x            (index) float64 16kB ...
     y            (index) float64 16kB ...
     z            (index) float64 16kB ...
@@ -911,10 +946,10 @@ coordinates (<code class="docutils literal notranslate"><span class="pre">x</spa
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Inspect the coordinates of a raster dataset:
 
 Coordinates:
+    spatial_ref  float64 8B ...
   * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * nv           (nv) int64 16B 0 1
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
-    spatial_ref  float64 8B ...
 </pre></div>
 </div>
 <p>The Spatial Reference Coordinate</p>
@@ -993,7 +1028,231 @@ of that individual variable. These follow the <a class="reference external" href
  &#39;valid_range&#39;: array([1.456164e-04, 1.000000e+01])}
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.640 seconds)</p>
+</section>
+</section>
+<section id="filtering-searching">
+<h2>Filtering &amp; Searching<a class="headerlink" href="#filtering-searching" title="Link to this heading"></a></h2>
+<p>The required keys can be used to search through a tree and
+find groups of interest</p>
+<p>Here’s a simply function using native netCDF and xarray methods to search
+through a file and identify groups based on their attributes</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_groups_by_attrs</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="n">find_attr</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">find_value</span><span class="p">:</span>
+                        <span class="n">cur_value</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cur_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                            <span class="k">for</span> <span class="n">ind_value</span> <span class="ow">in</span> <span class="n">cur_value</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">ind_value</span> <span class="o">==</span> <span class="n">find_value</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">cur_value</span> <span class="o">==</span> <span class="n">find_value</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Recurse into subgroups</span>
+            <span class="k">for</span> <span class="n">gname</span><span class="p">,</span> <span class="n">subg</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">walk</span><span class="p">(</span><span class="n">subg</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">gname</span><span class="p">)</span>
+        <span class="n">walk</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>see all the groups and their types</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey
+        type = &#39;survey&#39;
+Group: /survey/data
+        type = &#39;container&#39;
+Group: /survey/data/raw_data
+        type = &#39;data&#39;
+Group: /survey/data/raw_data/tempest_system
+        type = &#39;system&#39;
+Group: /survey/models
+        type = &#39;container&#39;
+Group: /survey/models/inverted_models
+        type = &#39;model&#39;
+Group: /survey/models/inverted_models/tempest_system
+        type = &#39;system&#39;
+Group: /survey/models/inverted_models/inversion_parameters
+        type = &#39;parameters&#39;
+Group: /survey/derived_maps
+        type = &#39;container&#39;
+Group: /survey/derived_maps/maps
+        type = &#39;data&#39;
+Group: /survey/derived_maps/maps/magnetic_system
+        type = &#39;system&#39;
+</pre></div>
+</div>
+<p>find just the system type groups</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/data/raw_data/tempest_system
+        type = &#39;system&#39;
+Group: /survey/models/inverted_models/tempest_system
+        type = &#39;system&#39;
+Group: /survey/derived_maps/maps/magnetic_system
+        type = &#39;system&#39;
+</pre></div>
+</div>
+<p>find just the model type groups</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/models/inverted_models
+        type = &#39;model&#39;
+</pre></div>
+</div>
+<p>find every group related to the ‘magnetic’ method</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;magnetic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/data/raw_data
+        method = [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
+Group: /survey/derived_maps/maps
+        method = &#39;magnetic&#39;
+Group: /survey/derived_maps/maps/magnetic_system
+        method = &#39;magnetic&#39;
+</pre></div>
+</div>
+<p>Then if you want to open one of these groups now that you see the path,
+without GSPy just native xarray. Notice this opens just that single group,
+you do not have access to the rest of the datatree here:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;/survey/derived_maps/maps&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt; Size: 6MB
+Dimensions:       (x: 599, nv: 2, y: 1212)
+Coordinates:
+    spatial_ref   float64 8B ...
+  * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+  * nv            (nv) int64 16B 0 1
+  * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+Data variables:
+    x_bnds        (x, nv) float64 10kB ...
+    y_bnds        (y, nv) float64 19kB ...
+    magnetic_tmi  (y, x) float64 6MB ...
+Attributes:
+    comment:     contractor-derived product
+    content:     gridded map of total magnetic intensity
+    type:        data
+    mode:        airborne
+    method:      magnetic
+    instrument:  Scintrex CS-3 cesium vapor magnetometer
+    structure:   raster
+</pre></div>
+</div>
+<p>If you want to open a datatree, point the group to where you want to start
+the tree, can be ‘/survey’ for the entire tree, or in this case we load
+just the models branch:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;/survey/models&#39;</span><span class="p">,</span>
+                      <span class="n">decode_timedelta</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree&gt;
+Group: /
+│   Dimensions:      ()
+│   Data variables:
+│       spatial_ref  float64 8B ...
+│   Attributes:
+│       content:  inverted 1-D electrical resistivity models
+│       type:     container
+└── Group: /inverted_models
+    │   Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
+    │                                 index: 2001)
+    │   Coordinates:
+    │       spatial_ref              float64 8B ...
+    │     * index                    (index) int32 8kB 0 1 2 3 4 ... 1997 1998 1999 2000
+    │     * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
+    │     * nv                       (nv) int64 16B 0 1
+    │     * gate_times               (gate_times) timedelta64[ns] 120B 00:00:00.00001...
+    │       x                        (index) float64 16kB ...
+    │       y                        (index) float64 16kB ...
+    │       z                        (index) float64 16kB ...
+    │   Data variables: (12/46)
+    │       layer_depth_bnds         (layer_depth, nv) float64 480B ...
+    │       gate_times_bnds          (gate_times, nv) float64 240B ...
+    │       uniqueid                 (index) int32 8kB ...
+    │       survey                   (index) int32 8kB ...
+    │       date                     (index) int32 8kB ...
+    │       flight                   (index) int32 8kB ...
+    │       ...                       ...
+    │       phic                     (index) float64 16kB ...
+    │       phit                     (index) float64 16kB ...
+    │       phig                     (index) float64 16kB ...
+    │       phis                     (index) float64 16kB ...
+    │       lambda                   (index) float64 16kB ...
+    │       iterations               (index) int32 8kB ...
+    │   Attributes:
+    │       content:     inverted resistivity models
+    │       comment:     This dataset includes inverted resistivity models derived fr...
+    │       type:        model
+    │       method:      electromagnetic, time domain
+    │       instrument:  30Hz Tempest
+    │       mode:        airborne
+    │       property:    electrical conductivity
+    │       structure:   tabular
+    ├── Group: /inverted_models/tempest_system
+    │       Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
+    │                                          waveform_time: 7, n_receiver: 2,
+    │                                          n_couplet: 2, dim_0: 1)
+    │       Coordinates:
+    │         * n_transmitter                 (n_transmitter) int64 8B 0
+    │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
+    │         * n_receiver                    (n_receiver) int64 16B 0 1
+    │         * n_couplet                     (n_couplet) int64 16B 0 1
+    │       Dimensions without coordinates: dim_0
+    │       Data variables: (12/26)
+    │           gate_times_bnds               (gate_times, nv) timedelta64[ns] 240B ...
+    │           transmitter_label             (n_transmitter) &lt;U1 4B ...
+    │           transmitter_area              (n_transmitter) int64 8B ...
+    │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
+    │           transmitter_waveform_current  (waveform_time) float64 56B ...
+    │           transmitter_scale_factor      (n_transmitter) float64 8B ...
+    │           ...                            ...
+    │           couplet_txrx_dz               (n_couplet) int64 16B ...
+    │           data_normalized               (dim_0) bool 1B ...
+    │           output_data_type              &lt;U1 4B ...
+    │           reference_frame               &lt;U24 96B ...
+    │           output_sample_frequency       (dim_0) int64 8B ...
+    │           digitization_frequency        (dim_0) int64 8B ...
+    │       Attributes:
+    │           type:        system
+    │           mode:        airborne
+    │           method:      electromagnetic, time domain
+    │           instrument:  30Hz Tempest
+    │           name:        tempest_system
+    └── Group: /inverted_models/inversion_parameters
+            Dimensions:             ()
+            Data variables:
+                software            &lt;U61 244B ...
+                software_reference  &lt;U298 1kB ...
+                description         &lt;U1402 6kB ...
+                doi_calculation     &lt;U592 2kB ...
+                phid_cut            &lt;U256 1kB ...
+            Attributes:
+                type:        parameters
+                method:      electromagnetic, time domain
+                instrument:  30Hz Tempest
+                mode:        airborne
+                property:    electrical conductivity
+                name:        inversion_parameters
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.449 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>
@@ -1008,13 +1267,12 @@ of that individual variable. These follow the <a class="reference external" href
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </section>
 </section>
-</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" class="btn btn-neutral float-left" title="Workbench to NetCDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Creating_GS_Files/plot_xyz_workbench_to_netcdf.html" class="btn btn-neutral float-left" title="Workbench XYZ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="plot_coordinate_reference_systems.html" class="btn btn-neutral float-right" title="Coordinate Reference Systems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

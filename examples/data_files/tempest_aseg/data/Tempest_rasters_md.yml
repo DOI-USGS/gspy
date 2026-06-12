@@ -1,5 +1,5 @@
 dataset_attrs:
-    comment: USGS-derived product
+    comment: resistivity models are USGS-derived, the total magnetic intensity map is contractor-derived
     content: interpolated resistivity models (3-D depth grid) and total magnetic intensity map (2-D)
     type: data, models
     method: ["electromagnetic, time domain","magnetic"]
@@ -8,17 +8,16 @@ dataset_attrs:
     property: electrical resistivity, total magnetic intensity
 
 coordinates:
-    comment: Coordinates map variables in space and time x y z t
     x: Easting_Albers
     y: Northing_Albers
     z: depth
 
 dimensions:
-    comment: Define the actual values along each axis or dimension of the variables. If these are defined inside the data file (such as x and y), it's a string. Otherwise, an explicit definition is needed here.
-    x: easting_albers
-    y: northing_albers
+    x: Easting_Albers
+    y: Northing_Albers
+    
     depth:
-        comment: depth is defined here inside our json file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.
+        comment: depth is defined here inside our yaml file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.
         standard_name: depth
         long_name: Depth below earth's surface DTM
         units: m
@@ -26,7 +25,6 @@ dimensions:
         length: 5
         increment: 5.0
         origin: 0.0
-        axis: z
         positive: down
         datum: ground surface
 
@@ -36,14 +34,12 @@ variables:
         long_name: Easting
         units: meter
         null_value: not_defined
-        axis: x
 
     Northing_Albers:
         standard_name: northing_albers
         long_name: Northing
         units: meter
         null_value: not_defined
-        axis: y
 
     resistivity:
         dimensions: [x, y, z]

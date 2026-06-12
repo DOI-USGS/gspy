@@ -1,42 +1,69 @@
 dataset_attrs:
-    title: ??
-    institution: ??
-    source: ??
-    history: ??
-    references: ??
-    comment: ??
-    conventions: CF-1.8
+    title: Airborne electromagnetic and magnetic survey of Delaware Bay and surrounding regions of New Jersey and Delaware, 2022
+    institution: USGS Geology, Geophysics, and Geochemistry Science Center
+    source: SkyTEM provided raw data, USGS generated inverted resistivity models
+    history: Data acquisition 07/15/2022 - 08/03/2022 by SkyTEM Canada Inc. AEM and magnetic data processing by SkyTEM Canada Inc. 08/2022 - 10/2022. Raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 10/2022. Minimally processed AEM data were exported to netCDF using GSPy version 1.0.1 11/2023. Minimally processed binary data received from the contractor were imported into the Aarhus Workbench software (v 6 - 2024.2, Aarhus Geosoftware, Aarhus, Denmark) and processed. Filters were applied to inclinometer and spatial positioning data to smooth raw data and remove sensor dropouts. Altimeter data were filtered, smoothed, and manually edited to correct false altitudes associated with trees, open water, and other obstacles, resulting in processed altitude representative of the distance between the AEM sensor airframe and bare earth. Raw electromagnetic data were visually examined for couplings and noise associated with infrastructure and considered in the context of the locations of known or suspected infrastructure (power lines, pipelines, etc...) and magnetic anomalies; impacted data were manually removed. Some infrastructure-impacted data may remain in the processed dataset. Culled electromagnetic data were spatially averaged using a sounding distance of 1.5 seconds and  trapezoidal filter widths of 1.5, 3, and 6 seconds at gate times 1e-5, 5e-4, and 1e-3 seconds (low-moment data) and 3, 3, and 6 seconds at 1e-4, 1e-3, and 1e-2 seconds (high-moment data). Low-signal data were removed from the averaged data through a combination of filters and manual culling. Deterministic inversion of the processed AEM data was implemented in Aarhus Workbench software (v 6 - 2024.2, Aarhus Geosoftware, Aarhus, Denmark) by USGS. Inversion parameters were selected by running a series of test models with varying starting model resistivity values, layer discretization, vertical/lateral constraints, and other inversion parameters. Laterally constrained blocky inversion models were developed using a 40-layer domain with layer top depths ranging between 1 and 300 meters and layer thickness increasing with depth. Inversions were run with vertical and lateral constraints of values of 4.0 and 2.0, respectively, and a spatially varying, data-dependent homogenous half-space starting model.  Sensor altitude was treated as a free parameter after the 8th iteration. Depth of investigation was constrained to depths between 5 and 400 meters.
+    references: "U.S. Geological Survey, 2024, Airborne electromagnetic and magnetic survey of Delaware Bay and surrounding regions of New Jersey and Delaware, 2022 (ver 2.0, April 2025): U.S. Geological Survey data release, https://doi.org/10.5066/F7J96592."
+    comment: These data are a subset from the referenced data release, included here for demonstration purposes only
+    content: Delaware Bay SkyTEM survey information
+    summary: Airborne electromagnetic (AEM) and magnetic survey data were collected during July and August 2022 over a distance of 3,588.5 line kilometers covering Delaware Bay and surrounding regions in New Jersey and Delaware. Data were collected as part of the USGS Delaware River Basin Next Generation Water Observing Systems (NGWOS) project to improve understanding of groundwater salinity distributions near Delaware Bay. The survey was primarily funded by the USGS, with partial support through collaboration with the University of Delaware to extend data collection to parts of Rehoboth Bay and Indian River Bay. Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines primarily oriented southwest-northeast and with nominal line spacing of 500 m over land and nearshore, and 3000 m over open-water parts of Delaware Bay. Several irregular flightlines were acquired along, and perpendicular to, nearby rivers to capture salinity patterns along these hydrologic flowpaths. Version 2.0 includes additional processed AEM data and inverted resistivity models.
+
 survey_information:
-    contractor_project_number: ??
-    contractor: ??
-    client: ??
-    survey_type: ??
-    survey_area_name: ??
-    state: ??
-    country: ??
-    acquisition_start: yyyymmdd
-    acquisition_end: yyyymmdd
-    dataset_created: yyyymmdd
+    contractor_project_number: 20048
+    contractor: SkyTEM Canada Inc
+    client: U.S. Geological Survey
+    survey_type: ['electromagnetic', 'magnetic']
+    survey_area_name: Delaware Bay
+    state: DE, NJ
+    country: USA
+    acquisition_start: 20220715
+    acquisition_end: 20220803
+    dataset_created: 20231108
+
+survey_units:
+    time: seconds [s]
+    area: square meters [m^2]
+    current: Amperes [A]
+    frequency: Hertz [Hz]
+    angle: Degree [deg]
+    electromagnetic_moment: Ampere square meters [Am^2]
+    magnetometer_b_field: nanoTesla [nT]
+    electromagnetic_dbdt: picoVolt per Ampere per meters to the power 4 [pV/(Am^4)]
+
 spatial_ref:
-    wkid: 3071
+    wkid: 32618
     authority: EPSG
     vertical_crs: NAVD88
+
 flightline_information:
-    traverse_line_spacing: ??
-    traverse_line_direction: ??
-    tie_line_spacing: ??
-    tie_line_direction: ??
-    nominal_line_spacing: ??
-    nominal_terrain_clearance: ??
-    final_line_kilometers: ??
-    traverse_line_numbers: ??
-    tie_line_numbers: ??
+    traverse_line_spacing: [ 500 3000]
+    traverse_line_direction: ['sw-ne', 'variable']
+    tie_line_spacing: n/a
+    tie_line_direction: n/a
+    nominal_terrain_clearance: 30 - 40 m
+    final_line_kilometers: 3588.5
+    traverse_line_numbers: 100101 - 104201, 200101 - 202401, 300101 - 306301, 400101 - 415103, 500101 - 509201
+    repeat_line_numbers: 900101 - 900106
+    pre_zero_line_numbers: n/a
+    post_zero_line_numbers: n/a
+
 survey_equipment:
-    aircraft: ??
-    magnetometer: ??
-    spectrometer_system: ??
-    radar_altimeter_system: ??
-    radar_altimeter_sample_rate: ??
-    laser_altimeter_system: ??
-    navigation_system: ??
-    acquisition_system: ??
+    aircraft: Eurocopter Astar 350 B3
+    magnetometer: Geometrics G822A, Kroum KMAG4 counter
+    magnetometer_installation: Front of transmitter frame
+    electromagnetic_system: SkyTEM 304M
+    electromagnetic_installation: Rigid transmitter frame 40m beneath helicopter, Receiver coils at rear of transmitter frame
+    spectrometer_system: n/a
+    spectrometer_installation: n/a
+    radar_altimeter_system: n/a
+    radar_altimeter_installation: n/a
+    laser_altimeter_system: MDL ILM300R (2)
+    laser_altimiter_installation: Two laser units mounted on transmitter frame
+    laser_altimiter_information: sample frequency = 30 Hz; uncertainty = 10-30 cm; min/max range = 0.2-200 m
+    inclinometer_system: Bjerre Technology inclinometers (2)
+    inclinometer_installation: Two inclinometers rear of frame near z coil.
+    inclinometer_information: x-angle is parallel to flight direction and positive when front of frame is above horizontal. y-angle is perpendicular to flight direction and negative when the right side of the frame is above horizontal
+    gps_system: Real-time differential GPS Trimble Bullet III (2)
+    gps_installation: Two DGPS sensors on transmitter frame
+    gps_information: position uncertainty = 1m; gps sample frequency = 1 Hz
+    acquisition_system: skytem

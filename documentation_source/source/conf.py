@@ -248,6 +248,10 @@ html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 
 #
 # html_search_scorer = 'scorer.js'
 
+html_css_files = [
+    'scroll_and_wrap.css',
+]
+
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'gspydoc'
 

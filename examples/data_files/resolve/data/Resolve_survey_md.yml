@@ -2,12 +2,10 @@ dataset_attrs:
     title: Example Resolve Airborne Electromagnetic (AEM) Raw Data
     institution: USGS Geology, Geophysics, & Geochemistry Science Center
     source:  Comma-separated text file exported from Geosoft
-    history: <date and time when the data were produced and/or modified>
-    references: <data release reference>
-    comment: <additional details or ancillary information>
-    content: raw data, processed data
-    conventions: CF-1.13, GS-2.0
-    created_by: gspy==2.2.8
+    history: see data release for full details
+    references: "Burton, B.L., Minsley, B.J., Bloss, B.R., Rigby, J.R., Kress, W.H., and Smith, B.D., 2019, Airborne electromagnetic, magnetic, and radiometric survey, Shellmound, Mississippi, March 2018 (ver. 2.0, March 2024): U.S. Geological Survey data release, https://doi.org/10.5066/P9D4EA9W."
+    comment: This dataset includes electromagnetic, radiometric, and magnetic data
+    content: Resolve survey information
 
 survey_information:
     contractor_project_number: 603756RWA

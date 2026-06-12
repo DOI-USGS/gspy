@@ -1,0 +1,62 @@
+/* ================================================================
+   GLOBAL CODE BLOCK SCROLLING (literalinclude, code-block, YAML, CSV-as-text)
+   ================================================================ */
+div.highlight, pre, code {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ================================================================
+   CSV TABLE WRAPPING (text wraps inside cells)
+   ================================================================ */
+table.docutils td,
+table.docutils th {
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Allow natural sizing (not forced fixed layout) */
+table.docutils {
+  table-layout: auto !important;
+  width: 100%;
+}
+
+/* ================================================================
+   SCROLLABLE TABLE WRAPPER (RTD theme)
+   ================================================================ */
+
+/* Restore horizontal overflow by letting tables size to content */
+.wy-table-responsive table,
+table.docutils {
+  width: max-content !important;      /* allow natural width > wrapper when needed */
+  table-layout: auto !important;      /* natural column sizing */
+}
+
+/* Keep wrapping so long strings don't force huge columns */
+.wy-table-responsive table th,
+.wy-table-responsive table td,
+table.docutils th,
+table.docutils td {
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Make sure the wrapper scrolls */
+.wy-table-responsive {
+  max-height: 400px;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;  /* nicer scroll on iOS */
+}
+
+/* ================================================================
+   OPTIONAL: Left-align captions for tables with :class: leftcap
+   ================================================================ */
+table.leftcap caption {
+    text-align: left !important;
+}

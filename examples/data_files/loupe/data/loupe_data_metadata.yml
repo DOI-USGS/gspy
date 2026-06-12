@@ -4,251 +4,18 @@ dataset_attrs:
     type: data,
     mode: ground
     method: electromagnetic, time domain
-    instrument: loupe
+    instrument: LoupeEM
+
 coordinates:
     x: EAST
     y: NORTH
     z: HEIGHT
-variables:
-    ACQ:
-        standard_name: acq
-        long_name: Acquire index, this is incremented each time the user presses the acquire button
-        null_value: not_defined
-        units: not_defined
-    ACQ_RDG:
-        standard_name: acq_rdg
-        long_name: Reading index, for a particular acquire, reset to 0 for each acquire
-        null_value: not_defined
-        units: not_defined
-    ACQ_TIME:
-        standard_name: acq_time
-        long_name: Time for when the raw data started to be acquired, matches raw file name
-        null_value: not_defined
-        units: UTC ISO-8601
-    EAST:
-        standard_name: east
-        long_name: Calculated reading position easting
-        null_value: not_defined
-        units: meter
-        axis: x
-    FID:
-        standard_name: fid
-        long_name: Unique reading identifier
-        null_value: not_defined
-        units: not_defined
-    GPS_EAST:
-        standard_name: gps_east
-        long_name: GPS antenna position easting
-        null_value: not_defined
-        units: meter
-    GPS_HEIGHT:
-        standard_name: gps_height
-        long_name: GPS antenna position height above MSL, WGS84 ellipsoid
-        null_value: not_defined
-        units: meter
-    GPS_NORTH:
-        standard_name: gps_north
-        long_name: GPS antenna position northing
-        null_value: not_defined
-        units: meter
-    GPS_TIME:
-        standard_name: not_defined
-        long_name: not_defined
-        null_value: not_defined
-        units: UTC ISO-8601
-    HEIGHT:
-        standard_name: height
-        long_name: Calculated reading position height above MSL, WGS84 ellipsoid
-        null_value: not_defined
-        units: meter
-        axis: z
-        positive: up
-        datum: WGS84 ellipsoid
-    NORTH:
-        standard_name: north
-        long_name: Calculated reading position northing
-        null_value: not_defined
-        units: meter
-        axis: y
-    RX_EAST:
-        standard_name: rx_east
-        long_name: Calculated RX centre position easting
-        null_value: not_defined
-        units: meter
-    RX_HEIGHT:
-        standard_name: rx_height
-        long_name: Calculated RX centre position height above MSL, WGS84 ellipsoid
-        null_value: not_defined
-        units: meter
-    RX_NORTH:
-        standard_name: rx_north
-        long_name: Calculated RX centre position northing
-        null_value: not_defined
-        units: meter
-    TIME:
-        standard_name: time
-        long_name: Time of the first sample in the stack
-        null_value: not_defined
-        units: UTC ISO-8601
-    TS:
-        standard_name: ts
-        long_name: Time of the first sample in the stack
-        null_value: not_defined
-        units: UTC Linux
-    TX_EAST:
-        standard_name: tx_east
-        long_name: Calculated TX centre position easting
-        null_value: not_defined
-        units: meter
-    TX_HEIGHT:
-        standard_name: tx_height
-        long_name: Calculated TX centre position height above MSL, WGS84 ellipsoid
-        null_value: not_defined
-        units: meter
-    TX_NORTH:
-        standard_name: tx_north
-        long_name: Calculated TX centre position northing
-        null_value: not_defined
-        units: meter
-    VLF_FILTER:
-        standard_name: vlf_filter
-        long_name: List of VLF filters applied to the data
-        null_value: not_defined
-        units: not_defined
-    X_ADC:
-        standard_name: x_adc
-        long_name: X receiver hardware channel identification
-        null_value: not_defined
-        units: not_defined
-    X_C:
-        standard_name: x_c
-        long_name: X sensor axis component
-        null_value: not_defined
-        units: not_defined
-    X_CH:
-        standard_name: x_ch
-        long_name: X time channel windows data
-        null_value: not_defined
-        units: nV/Am4
-        dimensions: ['index', 'gate_times']
-    X_DC_OFFSET:
-        standard_name: x_dc_offset
-        long_name: X measured DC voltage offset of the receiver hardware channel
-        null_value: not_defined
-        units: volt
-    X_NOISE:
-        standard_name: x_noise
-        long_name: X calculated offtime standard deviation amplitude
-        null_value: not_defined
-        units: nV/Am4
-    X_POWERAMPL:
-        standard_name: x_powerampl
-        long_name: X calculated power line amplitude
-        null_value: not_defined
-        units: nV/Am4
-    X_POWERPHASE:
-        standard_name: x_powerphase
-        long_name: X calculated power line phase
-        null_value: not_defined
-        units: radian
-    X_PRIMARY:
-        standard_name: x_primary
-        long_name: X calculated primary field from the stack
-        null_value: not_defined
-        units: nV/Am4
-    Y_ADC:
-        standard_name: y_adc
-        long_name: Y receiver hardware channel identification
-        null_value: not_defined
-        units: not_defined
-    Y_C:
-        standard_name: y_c
-        long_name: Y sensor axis component
-        null_value: not_defined
-        units: not_defined
-    Y_CH:
-        standard_name: y_ch
-        long_name: Y time channel windows data
-        null_value: not_defined
-        units: nV/Am4
-        dimensions: ['index', 'gate_times']
-    Y_DC_OFFSET:
-        standard_name: y_dc_offset
-        long_name: Y measured DC voltage offset of the receiver hardware channel
-        null_value: not_defined
-        units: volt
-    Y_NOISE:
-        standard_name: y_noise
-        long_name: Y calculated offtime standard deviation amplitude
-        null_value: not_defined
-        units: nV/Am4
-    Y_POWERAMPL:
-        standard_name: y_powerampl
-        long_name: Y calculated power line amplitude
-        null_value: not_defined
-        units: nV/Am4
-    Y_POWERPHASE:
-        standard_name: y_powerphase
-        long_name: Y calculated power line phase
-        null_value: not_defined
-        units: radian
-    Y_PRIMARY:
-        standard_name: y_primary
-        long_name: Y calculated primary field from the stackined
-        null_value: not_defined
-        units: nV/Am4
-    Z_ADC:
-        standard_name: z_adc
-        long_name: Z receiver hardware channel identification
-        null_value: not_defined
-        units: not_defined
-    Z_C:
-        standard_name: z_c
-        long_name: Z sensor axis component
-        null_value: not_defined
-        units: not_defined
-    Z_CH:
-        standard_name: z_ch
-        long_name: Z time channel windows data
-        null_value: not_defined
-        units: nV/Am4
-        dimensions: ['index', 'gate_times']
-    Z_DC_OFFSET:
-        standard_name: z_dc_offset
-        long_name: Z measured DC voltage offset of the receiver hardware channel
-        null_value: not_defined
-        units: volt
-    Z_NOISE:
-        standard_name: z_noise
-        long_name: Z calculated offtime standard deviation amplitude
-        null_value: not_defined
-        units: nV/Am4
-    Z_POWERAMPL:
-        standard_name: z_powerampl
-        long_name: Z calculated power line amplitude
-        null_value: not_defined
-        units: nV/Am4
-    Z_POWERPHASE:
-        standard_name: z_powerphase
-        long_name: Z calculated power line phase
-        null_value: not_defined
-        units: radian
-    Z_PRIMARY:
-        standard_name: z_primary
-        long_name: Z calculated primary field from the stackined
-        null_value: not_defined
-        units: nV/Am4
-    line:
-        standard_name: line
-        long_name: line number
-        null_value: not_defined
-        units: not_defined
 
 loupe_system:
     type: system
     mode: ground
     method: electromagnetic, time domain
-    instrument: loupe
+    instrument: LoupeEM
     data_normalized: True
     reference_frame: right-handed positive down
     sample_rate: 0.1
@@ -329,4 +96,240 @@ loupe_system:
             units: s
         transmitter_area:
             units: m^2
+
+variables:
+    X_CH:
+        standard_name: x_ch
+        long_name: X time channel windows data
+        null_value: not_defined
+        units: nV/Am4
+        dimensions: ['index', 'gate_times']
+        system_couplet: z_x
+    Y_CH:
+        standard_name: y_ch
+        long_name: Y time channel windows data
+        null_value: not_defined
+        units: nV/Am4
+        dimensions: ['index', 'gate_times']
+        system_couplet: z_y
+    Z_CH:
+        standard_name: z_ch
+        long_name: Z time channel windows data
+        null_value: not_defined
+        units: nV/Am4
+        dimensions: ['index', 'gate_times']
+        system_couplet: z_z
+    HEIGHT:
+        standard_name: height
+        long_name: Calculated reading position height above MSL, WGS84 ellipsoid
+        null_value: not_defined
+        units: meter
+        positive: up
+        datum: WGS84 ellipsoid
+    NORTH:
+        standard_name: north
+        long_name: Calculated reading position northing
+        null_value: not_defined
+        units: meter
+    EAST:
+        standard_name: east
+        long_name: Calculated reading position easting
+        null_value: not_defined
+        units: meter
+    ACQ:
+        standard_name: acq
+        long_name: Acquire index, this is incremented each time the user presses the acquire button
+        null_value: not_defined
+        units: not_defined
+    ACQ_RDG:
+        standard_name: acq_rdg
+        long_name: Reading index, for a particular acquire, reset to 0 for each acquire
+        null_value: not_defined
+        units: not_defined
+    ACQ_TIME:
+        standard_name: acq_time
+        long_name: Time for when the raw data started to be acquired, matches raw file name
+        null_value: not_defined
+        units: UTC ISO-8601
+    FID:
+        standard_name: fid
+        long_name: Unique reading identifier
+        null_value: not_defined
+        units: not_defined
+    GPS_EAST:
+        standard_name: gps_east
+        long_name: GPS antenna position easting
+        null_value: not_defined
+        units: meter
+    GPS_HEIGHT:
+        standard_name: gps_height
+        long_name: GPS antenna position height above MSL, WGS84 ellipsoid
+        null_value: not_defined
+        units: meter
+    GPS_NORTH:
+        standard_name: gps_north
+        long_name: GPS antenna position northing
+        null_value: not_defined
+        units: meter
+    GPS_TIME:
+        standard_name: not_defined
+        long_name: not_defined
+        null_value: not_defined
+        units: UTC ISO-8601
+    RX_EAST:
+        standard_name: rx_east
+        long_name: Calculated RX centre position easting
+        null_value: not_defined
+        units: meter
+    RX_HEIGHT:
+        standard_name: rx_height
+        long_name: Calculated RX centre position height above MSL, WGS84 ellipsoid
+        null_value: not_defined
+        units: meter
+    RX_NORTH:
+        standard_name: rx_north
+        long_name: Calculated RX centre position northing
+        null_value: not_defined
+        units: meter
+    TIME:
+        standard_name: time
+        long_name: Time of the first sample in the stack
+        null_value: not_defined
+        units: UTC ISO-8601
+    TS:
+        standard_name: ts
+        long_name: Time of the first sample in the stack
+        null_value: not_defined
+        units: UTC Linux
+    TX_EAST:
+        standard_name: tx_east
+        long_name: Calculated TX centre position easting
+        null_value: not_defined
+        units: meter
+    TX_HEIGHT:
+        standard_name: tx_height
+        long_name: Calculated TX centre position height above MSL, WGS84 ellipsoid
+        null_value: not_defined
+        units: meter
+    TX_NORTH:
+        standard_name: tx_north
+        long_name: Calculated TX centre position northing
+        null_value: not_defined
+        units: meter
+    VLF_FILTER:
+        standard_name: vlf_filter
+        long_name: List of VLF filters applied to the data
+        null_value: not_defined
+        units: not_defined
+    X_ADC:
+        standard_name: x_adc
+        long_name: X receiver hardware channel identification
+        null_value: not_defined
+        units: not_defined
+    X_C:
+        standard_name: x_c
+        long_name: X sensor axis component
+        null_value: not_defined
+        units: not_defined
+    X_DC_OFFSET:
+        standard_name: x_dc_offset
+        long_name: X measured DC voltage offset of the receiver hardware channel
+        null_value: not_defined
+        units: volt
+    X_NOISE:
+        standard_name: x_noise
+        long_name: X calculated offtime standard deviation amplitude
+        null_value: not_defined
+        units: nV/Am4
+    X_POWERAMPL:
+        standard_name: x_powerampl
+        long_name: X calculated power line amplitude
+        null_value: not_defined
+        units: nV/Am4
+    X_POWERPHASE:
+        standard_name: x_powerphase
+        long_name: X calculated power line phase
+        null_value: not_defined
+        units: radian
+    X_PRIMARY:
+        standard_name: x_primary
+        long_name: X calculated primary field from the stack
+        null_value: not_defined
+        units: nV/Am4
+    Y_ADC:
+        standard_name: y_adc
+        long_name: Y receiver hardware channel identification
+        null_value: not_defined
+        units: not_defined
+    Y_C:
+        standard_name: y_c
+        long_name: Y sensor axis component
+        null_value: not_defined
+        units: not_defined
+    Y_DC_OFFSET:
+        standard_name: y_dc_offset
+        long_name: Y measured DC voltage offset of the receiver hardware channel
+        null_value: not_defined
+        units: volt
+    Y_NOISE:
+        standard_name: y_noise
+        long_name: Y calculated offtime standard deviation amplitude
+        null_value: not_defined
+        units: nV/Am4
+    Y_POWERAMPL:
+        standard_name: y_powerampl
+        long_name: Y calculated power line amplitude
+        null_value: not_defined
+        units: nV/Am4
+    Y_POWERPHASE:
+        standard_name: y_powerphase
+        long_name: Y calculated power line phase
+        null_value: not_defined
+        units: radian
+    Y_PRIMARY:
+        standard_name: y_primary
+        long_name: Y calculated primary field from the stack
+        null_value: not_defined
+        units: nV/Am4
+    Z_ADC:
+        standard_name: z_adc
+        long_name: Z receiver hardware channel identification
+        null_value: not_defined
+        units: not_defined
+    Z_C:
+        standard_name: z_c
+        long_name: Z sensor axis component
+        null_value: not_defined
+        units: not_defined
+    Z_DC_OFFSET:
+        standard_name: z_dc_offset
+        long_name: Z measured DC voltage offset of the receiver hardware channel
+        null_value: not_defined
+        units: volt
+    Z_NOISE:
+        standard_name: z_noise
+        long_name: Z calculated offtime standard deviation amplitude
+        null_value: not_defined
+        units: nV/Am4
+    Z_POWERAMPL:
+        standard_name: z_powerampl
+        long_name: Z calculated power line amplitude
+        null_value: not_defined
+        units: nV/Am4
+    Z_POWERPHASE:
+        standard_name: z_powerphase
+        long_name: Z calculated power line phase
+        null_value: not_defined
+        units: radian
+    Z_PRIMARY:
+        standard_name: z_primary
+        long_name: Z calculated primary field from the stack
+        null_value: not_defined
+        units: nV/Am4
+    line:
+        standard_name: line
+        long_name: line number
+        null_value: not_defined
+        units: not_defined
+
 

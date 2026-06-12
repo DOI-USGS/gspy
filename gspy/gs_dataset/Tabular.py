@@ -1,7 +1,3 @@
-import os
-import json
-import matplotlib.pyplot as plt
-from pprint import pprint
 import re
 import xarray as xr
 import numpy as np
@@ -93,7 +89,7 @@ class Tabular(Dataset):
         # Set the spatial ref
         self._obj = self._obj.gs.set_spatial_ref(spatial_ref)
 
-        # Read the GSPy json file.
+        # Read the GSPy metadata file.
         if isinstance(metadata_file, str):
             json_md = self.read_metadata(metadata_file)
         else:
@@ -178,10 +174,8 @@ class Tabular(Dataset):
                 if 'raw_data_columns' in item:
                     for raw_key in item['raw_data_columns']:
                         del column_counts[raw_key]
-                column_counts[key] = 'None'
+                column_counts[key] = 0
 
-        # print('here')
-        # print(type(system))
         # Now we have all dimensions and coordinates defined.
         # Start adding the data variables
         for var in column_counts:
@@ -193,9 +187,12 @@ class Tabular(Dataset):
             if "system_couplet" in var_meta:
                 assert type(system) is not dict, ValueError(f"A system couplet exists for variable {var} but no system is passed")
                 couplet_labels = []
-                for path, node in system.items():
-                    couplet_labels = couplet_labels + list(node['couplet_label'].values)
+                for node in system.subtree:
+                    node_type = (node.attrs.get("type") or "").lower()
+                    if node_type == "system":
+                        couplet_labels = couplet_labels + list(node['couplet_label'].values)
                 assert var_meta["system_couplet"] in couplet_labels, ValueError(f"variable {var} has a system_couplet value that does not match any couplet labels: {couplet_labels}")
+            
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
 
@@ -208,10 +205,11 @@ class Tabular(Dataset):
 
                 else: # The CSV column header is a 2D variable with [x] in the column name
                     values = None
+                    
                     # check for raw_data_columns to combine
                     if 'raw_data_columns' in var_meta:
                         values = file.df[var_meta['raw_data_columns']].values
-
+                    
                     # if variable has multiple columns with [i] increment, to be combined
                     elif (var in column_counts) and (column_counts[var] > 1):
 

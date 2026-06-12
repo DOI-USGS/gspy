@@ -4,18 +4,25 @@ dataset_attrs:
     type: model
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    submethod: time domain
-    instrument: skytem
+    method: electromagnetic, time domain
+    instrument: SkyTEM 304M
     property: electrical resistivity
 
-inversion:
-    model_file: WI_SkyTEM_2021_InvertedModels.csv
-    inversion_software: Aarhus Workbench
-    software_version: v 6.0.1.0
-    date: 03/2021 - 06/2021
-    comment: Processed data were inverted in Aarhus Workbench software (v 6.0.1.0) using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models were exported to netCDF 11/2021.
-    data_file: WI_SkyTEM_2021_ProcessedData.csv
+inversion_parameters:
+    dataset_attrs:
+        type: parameters
+        method: electromagnetic, time domain
+        instrument: RESOSkyTEM 304MLVE
+        mode: airborne
+        property: electrical resistivity
+
+    variables:
+        model_file: WI_SkyTEM_2021_InvertedModels.csv
+        inversion_software: Aarhus Workbench
+        software_version: "v 6.0.1.0"
+        date: "03/2021 - 06/2021"
+        comment: "Processed data were inverted in Aarhus Workbench software (v 6.0.1.0) using laterally constrained inversion to recover 40-layer fixed depth blocky resistivity models by USGS 03/2021 - 06/2021; Inverted resistivity models were exported to netCDF 11/2021."
+        data_file: WI_SkyTEM_2021_ProcessedData.csv
 
 coordinates:
     x: E_N83WTM

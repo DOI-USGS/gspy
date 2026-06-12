@@ -13,7 +13,7 @@ This example demonstrates the typical workflow for creating a GS file for an AEM
 Note:
 To make the size of this example more managable, some of the input datasets have been downsampled relative to the source files in the data release referenced below.
 
-Dataset Reference: `Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.`
+Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
 """
 
 #%%
@@ -41,6 +41,14 @@ metadata = join(data_path, "data//skytem_survey.yml")
 survey = Survey.from_dict(metadata)
 
 #%%
+#
+# .. literalinclude:: /../../examples/data_files/skytem_csv/data/skytem_survey.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Survey YAML file
+#
+
+#%%
 # Create a Data Branch
 # ^^^^^^^^^^^^^^^^^^^^
 
@@ -58,10 +66,13 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
 d_data1 = join(data_path, 'data//skytem_contractor_data.csv')
 d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
 
+raw_systems = {"skytem_system" : survey["nominal_system"],
+          "magnetic_system" : survey["magnetic_system"]}
+
 # Add the raw AEM data as a tabular dataset,
 # pass the EM system from the survey
 rd = data_container.gs.add(key='raw_data', data_filename=d_data1, 
-                           metadata_file=d_supp1, system=survey.nominal_system)
+                           metadata_file=d_supp1, system=raw_systems)
 
 #%%
 # 2. Processed Data
@@ -73,14 +84,22 @@ d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
 
 #%%
 # Example of how systems can be selected and modified to accurately match the processed data
-system = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], 
+proc_systems = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], 
                                                           hm_gate_times=np.s_[10:]),
           "magnetic_system" : survey["magnetic_system"]}
 
 #%%
 # Add the processed AEM data as a tabular dataset, passing the updated systems
 pd = data_container.gs.add(key='processed_data', data_filename=d_data2, 
-                           metadata_file=d_supp2, system=system)
+                           metadata_file=d_supp2, system=proc_systems)
+
+#%%
+#
+# .. literalinclude:: /../../examples/data_files/skytem_csv/data/skytem_processed_data.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Processed Data YAML file
+#
 
 #%%
 # Create a Models Branch
@@ -102,6 +121,14 @@ mods = model_container.gs.add(key='inverted_models', data_filename=m_data3,
                               metadata_file=m_supp3)
 
 #%%
+#
+# .. literalinclude:: /../../examples/data_files/skytem_csv/model/skytem_inverted_models.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Inverted Models YAML file
+#
+
+#%%
 # Derivative Products
 # ^^^^^^^^^^^^^^^^^^^
 
@@ -121,6 +148,14 @@ bedrock = data_container.gs.add(key='depth_to_bedrock', data_filename=d_data4,
                                 metadata_file=d_supp4)
 
 #%%
+#
+# .. literalinclude:: /../../examples/data_files/skytem_csv/data/bedrock_picks.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Bedrock Picks YAML file
+#
+
+#%%
 # 5. Raster Maps
 
 #%%
@@ -136,13 +171,12 @@ m_supp5 = join(data_path, 'data//magnetics_bedrock_picks.yml')
 maps = derived_maps.gs.add(key='maps', metadata_file=m_supp5)
 
 #%%
-# View the Data Tree
-# ^^^^^^^^^^^^^^^^^^
-
-print(survey.gs.tree)
-
-#%%
-print(survey)
+#
+# .. literalinclude:: /../../examples/data_files/skytem_csv/data/magnetics_bedrock_picks.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Gridded Maps YAML file
+#
 
 #%%
 # Save to NetCDF file
@@ -166,6 +200,14 @@ data_container.gs.to_netcdf(join(data_path, 'test_datacontainer.nc'))
 # ^^^^^^^^^^^^^^^^^^^
 new_survey = gspy.open_datatree(d_out)['survey']
 
+#%%
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+
+print(new_survey.gs.tree)
+
+#%%
+print(new_survey)
 
 # %%
 # Plotting Examples

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parameter File &mdash; gspy 2.2.8 documentation</title>
+  <title>Parameters &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -14,18 +14,19 @@
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/scroll_and_wrap.css?v=de27d25c" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
+      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Examples" href="../../examples/index.html" />
-    <link rel="prev" title="System File" href="system_md.html" /> 
+    <link rel="prev" title="Systems" href="system_md.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,10 +51,10 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Metadata Handling</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="survey_md.html">Survey Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_md.html">Data Metadata File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_md.html">System File</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Parameter File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="survey_md.html">Survey Metadata File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_md.html">Data Leaf Metadata File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_md.html">Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#required-group-attributes">Required Group Attributes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#required-variable-attributes">Required Variable Attributes</a></li>
 </ul>
@@ -79,7 +80,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Metadata Handling</a></li>
-      <li class="breadcrumb-item active">Parameter File</li>
+      <li class="breadcrumb-item active">Parameters</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/content/metadata/parameters_md.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,9 +90,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="parameter-file">
-<h1>Parameter File<a class="headerlink" href="#parameter-file" title="Link to this heading"></a></h1>
-<p>text here</p>
+  <section id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h1>
+<p>The Supplementary Leaflet group of <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">parameters</span></code> provides a dedicated place for additional critical metadata related to processing and inversion. For example, an inverted models group may need information about the inversion such as the software, settings used, parameter values, and any post-processing applied.</p>
+<p>The “parameters” group can take on whatever shape and content the user desires, as long as the <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">parameters</span></code> attribute is included.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">inversion_parameters</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="nt">dataset_attrs</span><span class="p">:</span>
 <span class="linenos"> 3</span><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters</span>
@@ -101,12 +103,11 @@
 <span class="linenos"> 7</span><span class="w">        </span><span class="nt">property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electrical conductivity</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos">10</span><span class="w">        </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="linenos">11</span><span class="w">            </span><span class="nt">software</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GALEISBSTDEM 1-D time-domain deterministic inversion software</span>
-<span class="linenos">12</span><span class="w">            </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Brodie,</span><span class="nv"> </span><span class="s">R.</span><span class="nv"> </span><span class="s">C.,</span><span class="nv"> </span><span class="s">2015,</span><span class="nv"> </span><span class="s">GALEISBSTDEM:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">deterministic</span><span class="nv"> </span><span class="s">algorithm</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">1D</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">time-domain</span><span class="nv"> </span><span class="s">AEM</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">–</span><span class="nv"> </span><span class="s">theoretical</span><span class="nv"> </span><span class="s">details,</span><span class="nv"> </span><span class="s">accessed</span><span class="nv"> </span><span class="s">May</span><span class="nv"> </span><span class="s">1,</span><span class="nv"> </span><span class="s">2020,</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">https://github.com/GeoscienceAustralia/ga-aem/blob/master/docs/GALEISBSTDEM%20Inversion%20Algorithm%20Theoretical%20Details%20.pdf.&quot;</span>
-<span class="linenos">13</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inversions were done using a multilayered smooth model formulation in which 30 layer thicknesses were fixed and layer conductivities were solved for. Horizontal (X) and vertical (Z) components of the data were inverted separately. A vertical conductivity smoothing constraint, alpha_s = 1000, was applied. The inversion reference model used a half-space conductivity of 0.04 Siemens per meter (S/m) with a standard deviation of 1 S/m. The relative importance of the reference conductivity model, alpha_c, was set to 1.0. The horizontal and vertical separation between transmitter and receiver was given a lateral and vertical standard deviation constraint of 0.5 meters (m) in the reference model. The receiver pitch was also included with a 0.5 m standard deviation. These steps were repeated using the same inversion parameters but for reference models of higher (0.2 S/m) and lower (0.008 S/m) conductivity representing lower (5 Ohm-m) and higher (125) resistivity, respectively. A number of inversions were conducted with various homogenous prior model values, and constraints on resistivity. The final model parameters described above were selected because they best represent the physical understanding of the system and minimized data misfit. Final inverted resistivity values for each layer, layer thicknesses, and the uncertainty associated with these values can be found in the model dataset.</span>
-<span class="linenos">14</span><span class="w">            </span><span class="nt">doi_calculation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The depth of investigation (DOI) for each model location was calculated using the difference between the low and high reference conductivity model results. Using the approach from Oldenburg and Li (1999), models from the low and high reference inversions were divided and rescaled producing a metric of their similarity. Models were similar where constrained by the data (shallow depths) and diverge back to their distinct reference model values when no longer constrained by the data. Therefore, the DOI was calculated as the threshold below which models were no longer informed by the data.</span>
-<span class="linenos">15</span><span class="w">            </span><span class="nt">phid_cut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Individual models with a data misfit, &quot;PhiD&quot;, less than or equal to 1.5 were accepted for final outputs and products. A new channel, &quot;ACCEPT_FLAG&quot; was added to the data file representing this misfit cutoff, with 0 = rejected models and 1 = accepted models.</span>
+<span class="linenos">10</span><span class="w">        </span><span class="nt">software</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GALEISBSTDEM 1-D time-domain deterministic inversion software</span>
+<span class="linenos">11</span><span class="w">        </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Brodie,</span><span class="nv"> </span><span class="s">R.</span><span class="nv"> </span><span class="s">C.,</span><span class="nv"> </span><span class="s">2015,</span><span class="nv"> </span><span class="s">GALEISBSTDEM:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">deterministic</span><span class="nv"> </span><span class="s">algorithm</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">1D</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">time-domain</span><span class="nv"> </span><span class="s">AEM</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">–</span><span class="nv"> </span><span class="s">theoretical</span><span class="nv"> </span><span class="s">details,</span><span class="nv"> </span><span class="s">accessed</span><span class="nv"> </span><span class="s">May</span><span class="nv"> </span><span class="s">1,</span><span class="nv"> </span><span class="s">2020,</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">https://github.com/GeoscienceAustralia/ga-aem/blob/master/docs/GALEISBSTDEM%20Inversion%20Algorithm%20Theoretical%20Details%20.pdf.&quot;</span>
+<span class="linenos">12</span><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inversions were done using a multilayered smooth model formulation in which 30 layer thicknesses were fixed and layer conductivities were solved for. Horizontal (X) and vertical (Z) components of the data were inverted separately. A vertical conductivity smoothing constraint, alpha_s = 1000, was applied. The inversion reference model used a half-space conductivity of 0.04 Siemens per meter (S/m) with a standard deviation of 1 S/m. The relative importance of the reference conductivity model, alpha_c, was set to 1.0. The horizontal and vertical separation between transmitter and receiver was given a lateral and vertical standard deviation constraint of 0.5 meters (m) in the reference model. The receiver pitch was also included with a 0.5 m standard deviation. These steps were repeated using the same inversion parameters but for reference models of higher (0.2 S/m) and lower (0.008 S/m) conductivity representing lower (5 Ohm-m) and higher (125) resistivity, respectively. A number of inversions were conducted with various homogenous prior model values, and constraints on resistivity. The final model parameters described above were selected because they best represent the physical understanding of the system and minimized data misfit. Final inverted resistivity values for each layer, layer thicknesses, and the uncertainty associated with these values can be found in the model dataset.</span>
+<span class="linenos">13</span><span class="w">        </span><span class="nt">doi_calculation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The depth of investigation (DOI) for each model location was calculated using the difference between the low and high reference conductivity model results. Using the approach from Oldenburg and Li (1999), models from the low and high reference inversions were divided and rescaled producing a metric of their similarity. Models were similar where constrained by the data (shallow depths) and diverge back to their distinct reference model values when no longer constrained by the data. Therefore, the DOI was calculated as the threshold below which models were no longer informed by the data.</span>
+<span class="linenos">14</span><span class="w">        </span><span class="nt">phid_cut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Individual models with a data misfit, &quot;PhiD&quot;, less than or equal to 1.5 were accepted for final outputs and products. A new channel, &quot;ACCEPT_FLAG&quot; was added to the data file representing this misfit cutoff, with 0 = rejected models and 1 = accepted models.</span>
 </pre></div>
 </div>
 </section>
@@ -115,7 +116,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="system_md.html" class="btn btn-neutral float-left" title="System File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="system_md.html" class="btn btn-neutral float-left" title="Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../../examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
