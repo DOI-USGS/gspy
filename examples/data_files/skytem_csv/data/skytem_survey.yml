@@ -67,14 +67,14 @@ nominal_system:
             standard_name: raw_gate_times
             long_name: raw gate times
             units: seconds
-            null_value: not_defined
+            missing_value: not_defined
             centers: [5.636500E-05, 6.336500E-05, 7.236500E-05, 8.386500E-05, 9.836500E-05, 1.163650E-04, 1.388650E-04, 1.668650E-04, 2.023650E-04, 2.478650E-04, 3.048650E-04, 3.768650E-04, 4.678650E-04, 5.818650E-04, 7.258650E-04, 9.073650E-04, 1.135865E-03, 1.424365E-03, 1.788365E-03, 2.246865E-03, 2.825365E-03, 3.544365E-03]
 
         lm_gate_times:
             standard_name: lm_gate_times
             long_name: calibrated low moment gate times
             units: seconds
-            null_value: not_defined
+            missing_value: not_defined
             bounds: [[-1.420000e-06, -8.500000e-07],
                     [-4.200000e-07,  1.150000e-06],
                     [ 1.580000e-06,  3.150000e-06],
@@ -108,7 +108,7 @@ nominal_system:
             standard_name: hm_gate_times
             long_name: calibrated high moment gate times
             units: seconds
-            null_value: not_defined
+            missing_value: not_defined
             bounds: [[2.85800e-05, 2.91500e-05],
                     [2.95800e-05, 3.11500e-05],
                     [3.15800e-05, 3.31500e-05],
@@ -147,14 +147,14 @@ nominal_system:
             standard_name: number_of_loop_vertices
             long_name: number of loop vertices
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             length: 8
 
         xyz:
             standard_name: xyz_coordinates
             long_name: coordinates of the loop vertices
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             length: 3
 
     variables:
@@ -177,7 +177,7 @@ nominal_system:
                 values: [[-3.1810E-003, -3.1019E-003, -2.9844E-003, -2.3810E-003, -2.3781E-003, -2.3779E-003, -2.3776E-003, -2.3763E-003, -8.0000E-004, -7.2093E-004, -6.0345E-004, 0.0000E+000, 3.0000E-008, 7.0000E-008, 2.7200E-006, 2.8000E-006, 2.9000E-006, 3.0100E-006, 3.1300E-006, 3.4100E-006, 4.7400E-006],
                          [-6.9167E-02, -6.9157E-02, -6.9153E-02, -6.9150E-02, -6.9143E-02, -6.9122E-02, -6.9118E-02, -6.9114E-02, -6.9107E-02, -6.9083E-02, -6.8159E-02, -6.6667E-02, -6.6627E-02, -6.6626E-02, -6.6622E-02, -2.5000E-03, -2.4899E-03, -2.4862E-03, -2.4830E-03, -2.4767E-03, -2.4637E-03, -2.4547E-03, -2.4510E-03, -2.4475E-03, -2.4442E-03, -2.4406E-03, -2.4159E-03, -2.2328E-03, -1.4913E-03, 0.0000E+00, 6.4270E-07, 8.9870E-07, 1.4267E-05, 4.0291E-05, 4.1331E-05, 4.4539E-05]]
                 long_name: waveform time
-                null_value: not_defined
+                missing_value: not_defined
                 units: s
             waveform_current:
                 values: [[-0.0000E+000, -1.4067E-001, -3.0174E-001, -1.0000E+000, -7.5094E-003, 2.2879E-002, 3.7669E-002, -0.0000E+000, 0.0000E+000, 1.4063E-001, 3.0168E-001, 1.0000E+000, 9.9851E-001, 9.8817E-001, 5.9260E-002, 3.2392E-002, 7.5094E-003, -1.2284E-002, -2.6411E-002, -3.8086E-002, 0.0000E+000],
@@ -222,7 +222,7 @@ magnetic_system:
             standard_name: base_mag_locations
             long_name: Base Magnetometer Location Index Numbers
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             centers: [1, 2]
             discrete: True
 

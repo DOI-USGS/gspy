@@ -16,10 +16,10 @@ The following is an example of a dfn metadata entry
 
 DEFN  9 ST=RECD,RT=;Latitude:f12.7:UNIT=deg:NULL=-99.9999999,NAME=Latitude
 
-which we map to the CF metadata attributes standard_name, long_name, units, and null_value as follows.
+which we map to the CF metadata attributes standard_name, long_name, units, and missing_value as follows.
 
 Latitude becomes the standard_name, and is converted to all lower case.
-UNIT becomes units, NULL becomes null_value.
+UNIT becomes units, NULL becomes missing_value.
 NAME becomes the longer description call long_name
 
 The dfn file also contains a fortran format entry, e.g, f12.7, i5, a16, etc.

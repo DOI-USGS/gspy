@@ -35,7 +35,7 @@ dimensions:
         standard_name: layer_depth
         long_name: Depth to model layer
         units: meters
-        null_value: not_defined
+        missing_value: not_defined
         centers: [0.375,   1.16 ,   2.02 ,
                     2.965,   4.005,   5.145,
                     6.39 , 7.755,   9.255,
@@ -95,33 +95,33 @@ variables:
         standard_name: processing_index
         long_name: Unique index number for processing
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     sLINE_NO:
         standard_name: master_line
         long_name: Master line number
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     E_N83WTM:
         standard_name: easting_nad83
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         axis: x
 
     N_N83WTM:
         standard_name: northing_nad83
         long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         axis: y
 
     TIMESTAMP:
         standard_name: timestamp
         long_name: Time, decimal days since January 1, 1900
         units: day
-        null_value: not_defined
+        missing_value: not_defined
         axis: t
         datum: January 1, 1900
 
@@ -129,13 +129,13 @@ variables:
         standard_name: record
         long_name: Workbench record number
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     ELEVATION:
         standard_name: elevation
         long_name: Digital elevation model
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         axis: z
         positive: up
         datum: North American Vertical Datum of 1988 (NAVD88)
@@ -144,88 +144,88 @@ variables:
         standard_name: altitude
         long_name: DGPS instrument altitude
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     INVALT:
         standard_name: inverted_altitude
         long_name: Inverted instrument altitude
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     INVALTSTD:
         standard_name: inverted_altitude_uncertainty
         long_name: Standard deviation of inverted instrument altitude
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     DELTAALT:
         standard_name: inverted_altitude_difference
         long_name: Measured minus inverted altitude
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     NUMDATA:
         standard_name: number_of_data
         long_name: Number of active time gates
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     RESDATA:
         standard_name: data_residual
         long_name: Error-weighted inversion data misfit (target = 1.0)
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     RESTOTAL:
         standard_name: total_residual
         long_name: Total inversion residual (data and model regularization)
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
     RHO_I:
         standard_name: layer_resistivity
         long_name: Inverted layer resistivity
         units: Ohm*meter
-        null_value: not_defined
+        missing_value: not_defined
         dimensions: [index, layer_depth]
 
     RHO_I_STD:
         standard_name: layer_resistivity_uncertainty
         long_name: Uncertainty in inverted layer resistivity
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
         dimensions: [index, layer_depth]
 
     DOI_CONSERVATIVE:
         standard_name: depth_of_investigation_conservative
         long_name: Conservative estimate of depth of investigation (DOI)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     DOI_STANDARD:
         standard_name: depth_of_investigation_standard
         long_name: Standard estimate of depth of investigation (DOI)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     DEP_TOP:
         standard_name: depth_top
         long_name: Top of model layers
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         dimensions: [index, layer_depth]
 
     DEP_BOT:
         standard_name: depth_bottom
         long_name: Bottom of model layers
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         dimensions: [index, layer_depth]
 
     LINE_NO:
         standard_name: line_number
         long_name: Line number
         units: not_defined
-        null_value: not_defined
+        missing_value: not_defined
 
 

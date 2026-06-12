@@ -1,4 +1,4 @@
-variable_name,standard_name,long_name,units,null_value,dtype,raw_data_columns,dimensions,datum,positive,system_couplet
+variable_name,standard_name,long_name,units,missing_value,dtype,raw_data_columns,dimensions,datum,positive,system_couplet
 LINE,,Line Number,#,,,,,,,
 LAT_WGS84_dd,latitude,"Latitude, World Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)",Decimal degrees,,,,,,,
 LON_WGS84_dd,longitude,"Longitude, World Geodetic Survey of 1984 (WGS84) of EM Bird Transmitter (TX)",Decimal degrees,,,,,,,

@@ -153,7 +153,7 @@ The GS standard requires the following attributes on all variables:
     
 All numeric variables require additional attributes to document any null or missing values:
     
-    * null_value
+    * missing_value
     * valid_range
 
 +----------------------+----------------------------------------------------------------------------------+
@@ -165,7 +165,7 @@ All numeric variables require additional attributes to document any null or miss
 +----------------------+----------------------------------------------------------------------------------+
 | **units**            | Measurement system or physical scale of the variable, may also be nondimensional |
 +----------------------+----------------------------------------------------------------------------------+
-| **null_value**       | Value of same type as the variable representing undefined or missing data        |
+| **missing_value**    | Value of same type as the variable representing undefined or missing data        |
 +----------------------+----------------------------------------------------------------------------------+
 | **valid_range**      | Minimum and maximum valid values of the variable                                 |
 +----------------------+----------------------------------------------------------------------------------+

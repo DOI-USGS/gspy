@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:12.589** total execution time for 10 files **from all galleries**:
+**00:12.941** total execution time for 10 files **from all galleries**:
 
 .. container::
 
@@ -33,32 +33,32 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``../../examples/Creating_GS_Files/plot_aseg_tempest.py``)
-     - 00:04.106
+     - 00:04.021
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py` (``../../examples/Creating_GS_Files/plot_dat_loupe.py``)
-     - 00:01.880
+     - 00:01.950
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``../../examples/Creating_GS_Files/plot_csv_skytem.py``)
-     - 00:01.592
+     - 00:01.693
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``../../examples/Creating_GS_Files/plot_csv_resolve.py``)
-     - 00:01.410
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
-     - 00:00.866
+     - 00:01.458
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``../../examples/Creating_GS_Files/plot_tifs.py``)
-     - 00:00.854
+     - 00:00.923
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
+     - 00:00.909
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``../../examples/Creating_GS_Files/plot_csv_magnetics.py``)
-     - 00:00.592
+     - 00:00.639
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``../../examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata.py``)
-     - 00:00.510
+     - 00:00.548
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``../../examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
-     - 00:00.449
+     - 00:00.470
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``../../examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
-     - 00:00.331
+     - 00:00.329
      - 0.0

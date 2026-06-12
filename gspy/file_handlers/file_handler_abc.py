@@ -98,7 +98,7 @@ class file_handler(ABC):
         self.metadata = Metadata.merge(self.metadata, new, **kwargs)
 
         # for key, item in self.metadata.items():
-        #     assert all([x in item for x in ('long_name', 'standard_name', 'null_value', 'units')]), ValueError(f"Variable {key} Must have at least 'long_name', 'standard_name', 'null_value', 'units'")
+        #     assert all([x in item for x in ('long_name', 'standard_name', 'missing_value', 'units')]), ValueError(f"Variable {key} Must have at least 'long_name', 'standard_name', 'missing_value', 'units'")
 
     @property
     def column_header_counts(self):
@@ -158,7 +158,7 @@ class file_handler(ABC):
                                    {'standard_name': 'my_dimension_variable_name',
                                     'long_name': 'more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.',
                                     'units': 'units of the dimension',
-                                    'null_value': 'not_defined',
+                                    'missing_value': 'not_defined',
                                     'length': 10,
                                     'increment': 5.0,
                                     'origin': 2.5},
@@ -166,7 +166,7 @@ class file_handler(ABC):
                                    {'standard_name': 'my_other_dimension_variable_name',
                                     'long_name': 'A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.',
                                     'units': 'units of the dimension',
-                                    'null_value': 'not_defined',
+                                    'missing_value': 'not_defined',
                                     'bounds': [[0,2],[2,6],[4,10],[8,16]],
                                     'centers': [1,4,7,12]}}
         

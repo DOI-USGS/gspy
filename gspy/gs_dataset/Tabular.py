@@ -124,7 +124,7 @@ class Tabular(Dataset):
                                          **{'standard_name' : 'index',
                                             'long_name'     : 'Index of individual data points',
                                             'units'         : 'not_defined',
-                                            'null_value'    : 'not_defined'})
+                                            'missing_value'    : 'not_defined'})
 
         # Add the user defined coordinates-dimensions from the json file
         dimensions = json_md.pop('dimensions', None)

@@ -1,4 +1,4 @@
-variable_name,standard_name,long_name,units,null_value,dtype,raw_data_columns,dimensions,datum,positive,system_couplet
+variable_name,standard_name,long_name,units,missing_value,dtype,raw_data_columns,dimensions,datum,positive,system_couplet
 line,,Line Number,#,,,,,,,
 date,,Date of the survey,YYYYMMDD,,,,,,,
 utc_time,,"Time, seconds after midnight UTC",Seconds (s),-9999,,,,,,

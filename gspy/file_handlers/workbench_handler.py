@@ -213,7 +213,7 @@ class workbench_model_handler(xyz_handler):
                         dimensions["gate_times"] = {"standard_name": "gate_times",
                                                           "long_name": "calibrated gate times",
                                                           "units": "seconds",
-                                                          "null_value": "not_defined",
+                                                          "missing_value": "not_defined",
                                                           "centers": gate_times}
                         print('Detected gate_time metadata from the workbench files')
                         pprint(dimensions)
@@ -221,12 +221,12 @@ class workbench_model_handler(xyz_handler):
                         dimensions["lm_gate_times"] = {"standard_name": "lm_gate_times",
                                                           "long_name": "calibrated low moment gate times",
                                                           "units": "seconds",
-                                                          "null_value": "not_defined",
+                                                          "missing_value": "not_defined",
                                                           "centers": gate_times[col_indices0-1]}
                         dimensions["hm_gate_times"] = {"standard_name": "hm_gate_times",
                                                           "long_name": "calibrated high moment gate times",
                                                           "units": "seconds",
-                                                          "null_value": "not_defined",
+                                                          "missing_value": "not_defined",
                                                           "centers": gate_times[col_indices1-1]}
                         print('Detected gate_time metadata from the workbench files')
                         pprint(dimensions)

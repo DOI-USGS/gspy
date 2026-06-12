@@ -526,10 +526,10 @@ def _write_one_var_to_tif(ds, var_name, slice_dim=None, out_dir=None):
     if arr.size != 6:
         raise ValueError(f"'GeoTransform' must have six values, got {arr.size}.")
 
-    # Set _FillValue from null_value if present
-    if "null_value" in da.attrs and "_FillValue" not in da.attrs:
-        if "null_value" != "not_defined":
-            da.attrs["_FillValue"] = da.attrs["null_value"]
+    # Set _FillValue from missing_value if present
+    if "missing_value" in da.attrs and "_FillValue" not in da.attrs:
+        if "missing_value" != "not_defined":
+            da.attrs["_FillValue"] = da.attrs["missing_value"]
 
     # If variable has slice_dim, export per slice
     if slice_dim is not None and slice_dim in da.dims:

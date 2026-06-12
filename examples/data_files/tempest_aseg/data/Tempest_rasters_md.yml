@@ -21,7 +21,7 @@ dimensions:
         standard_name: depth
         long_name: Depth below earth's surface DTM
         units: m
-        null_value: not_defined
+        missing_value: not_defined
         length: 5
         increment: 5.0
         origin: 0.0
@@ -33,20 +33,20 @@ variables:
         standard_name: easting_albers
         long_name: Easting
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     Northing_Albers:
         standard_name: northing_albers
         long_name: Northing
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
 
     resistivity:
         dimensions: [x, y, z]
         standard_name: log10_resistivity
         long_name: Electrical Resistivity on Logarithmic Scale
         units: log10_ohm_m
-        null_value: -9999.99
+        missing_value: -9999.99
         files: [resistivity_0_5m.tif,
                 resistivity_5_10m.tif,
                 resistivity_10_15m.tif,
@@ -58,5 +58,5 @@ variables:
         standard_name: total_magnetic_intensity
         long_name: Total magnetic intensity, diurnally corrected and filtered
         units: nT
-        null_value: -999999
+        missing_value: -999999
         files: [mag_aligned.tif]

@@ -21,7 +21,7 @@ class xyz_handler(file_handler):
 
         template = {"standard_name": "not_defined",
                     "long_name": "not_defined",
-                    "null_value": "not_defined",
+                    "missing_value": "not_defined",
                     "units": "not_defined"}
 
         columns_counts = self.column_header_counts

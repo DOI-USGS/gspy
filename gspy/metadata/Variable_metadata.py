@@ -34,5 +34,5 @@ class Variable_metadata(dict):
         return ('units',
                 'standard_name',
                 'long_name',
-                'null_value'
+                'missing_value'
                 )

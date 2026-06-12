@@ -234,7 +234,7 @@ class aseg_gdf2_handler(file_handler):
         metadata = {'standard_name' : standard_name.strip().lower(),
                     'long_name' : "not_defined",
                     'units' : "not_defined",
-                    'null_value' : "not_defined",
+                    'missing_value' : "not_defined",
                     'format' : format.strip().lower()
                     }
 
@@ -247,7 +247,7 @@ class aseg_gdf2_handler(file_handler):
 
             if 'NULL=' in attr or 'null=' in attr:
                 attr = attr.replace(" ", "")
-                metadata['null_value'] = converter(re.split("=", attr)[-1])
+                metadata['missing_value'] = converter(re.split("=", attr)[-1])
 
             elif 'UNIT=' in attr or 'unit=' in attr or 'UNITS=' in attr or 'units=' in attr:
                 attr = attr.replace(" ", "")
@@ -310,8 +310,8 @@ class aseg_gdf2_handler(file_handler):
 
                 # Grab the null value
                 null = ""
-                if attrs['null_value'] != "not_defined":
-                    null = "NULL={},".format(attrs['null_value'])
+                if attrs['missing_value'] != "not_defined":
+                    null = "NULL={},".format(attrs['missing_value'])
                 # Grab the units
                 units = ""
                 if 'units' in attrs:

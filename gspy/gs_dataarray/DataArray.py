@@ -9,7 +9,7 @@ from xarray import register_dataarray_accessor
 from ..metadata.Metadata import Metadata
 from pandas import Series
 
-default_metadata = ('standard_name', 'long_name', 'null_value', 'units')
+default_metadata = ('standard_name', 'long_name', 'missing_value', 'units')
 
 @register_dataarray_accessor("gs")
 class DataArray:
@@ -96,7 +96,7 @@ class DataArray:
             Name of the variable
         long_name : str, optional
             CF convention long name
-        null_value : int or float, optional
+        missing_value : int or float, optional
             Number that represents unusable data. default is 'not_defined'
         standard_name : str, optional
             CF convention standard name
@@ -137,7 +137,7 @@ class DataArray:
             Name of the grid_mapping. Default is 'spatial_ref' and refers to any attached spatial_ref class, handled by gspy
         long_name : str, optional
             CF convention long name
-        null_value : int or float, optional
+        missing_value : int or float, optional
             Number that represents unusable data. default is 'not_defined'
         standard_name : str, optional
             CF convention standard name
@@ -181,7 +181,7 @@ class DataArray:
 
     @staticmethod
     def catch_nan(values, name, **kwargs):
-        """Replace NaNs with the defined null_value in the metadata.
+        """Replace NaNs with the defined missing_value in the metadata.
 
         Parameters
         ----------
@@ -192,7 +192,7 @@ class DataArray:
 
         Other Parameters
         ----------------
-        null_value : str, optional
+        missing_value : str, optional
             Number that represents unusable data. default is 'not_defined'
 
         Returns
@@ -201,18 +201,18 @@ class DataArray:
 
         Raises
         ------
-        If there are NaNs in the values, and no defined null_value in the kwargs, notify the user.
+        If there are NaNs in the values, and no defined missing_value in the kwargs, notify the user.
 
         """
 
         if isinstance(values[0], str):
             return values
 
-        nv = kwargs.get('null_value', 'not_defined')
+        nv = kwargs.get('missing_value', 'not_defined')
 
         if nv == 'not_defined':
-            assert not npany(isnan(values)), ValueError((f"\nThere are NaNs or Empty values in data column {name} and no defined null value in the json metadata file.\n"
-                                                         f"Define the 'null_value' for {name} in the json file"))
+            assert not npany(isnan(values)), ValueError((f"\nThere are NaNs or Empty values in data column {name} and no defined missing value in the json metadata file.\n"
+                                                         f"Define the 'missing_value' for {name} in the json file"))
         else:
             values[isnan(values)] = nv
         return values
@@ -230,7 +230,7 @@ class DataArray:
 
         Other Parameters
         ----------------
-        null_value : scalar, optional
+        missing_value : scalar, optional
             Representation of unusable data values
         dtype : dtype, optional
             Coerce the min, max to this dtype default is values.dtype.
@@ -241,13 +241,13 @@ class DataArray:
             [nanmin(values), nanmax(values)]
         """
 
-        nv = kwargs.get('null_value', 'not_defined')
+        nv = kwargs.get('missing_value', 'not_defined')
 
         if isinstance(nv, str):
             values = asarray(values, dtype=kwargs.get('dtype', "float64"))
             valid_range = asarray([nanmin(values), nanmax(values)], dtype=kwargs.get('dtype', None))
         else:
-            assert not isinstance(nv, str), ValueError((f"Numerical null_value defined as a string in metadata file for variable {kwargs['standard_name']}.\n"
+            assert not isinstance(nv, str), ValueError((f"Numerical missing_value defined as a string in metadata file for variable {kwargs['standard_name']}.\n"
                                                        "Please make it a number. If this number is in scientific notation please use the following format x.xe+10 or x.xe-10."))
             tmp = values[values != nv]
             valid_range = asarray([nanmin(tmp), nanmax(tmp)], dtype=kwargs.get('dtype', None))

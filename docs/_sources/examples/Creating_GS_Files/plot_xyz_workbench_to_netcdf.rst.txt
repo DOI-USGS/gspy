@@ -202,7 +202,7 @@ one of the three files need to be passed to provide the base filename
            9.374e-04, 1.166e-03, 1.454e-03, 1.818e-03, 2.277e-03, 2.855e-03,
            3.574e-03, 4.454e-03, 5.531e-03, 6.849e-03, 8.463e-03, 1.044e-02]),
                        'long_name': 'calibrated high moment gate times',
-                       'null_value': 'not_defined',
+                       'missing_value': 'not_defined',
                        'standard_name': 'hm_gate_times',
                        'units': 'seconds'},
      'lm_gate_times': {'centers': array([1.273e-05, 1.622e-05, 2.072e-05, 2.622e-05, 3.323e-05, 4.222e-05,
@@ -210,7 +210,7 @@ one of the three files need to be passed to provide the base filename
            2.177e-04, 2.747e-04, 3.467e-04, 4.377e-04, 5.517e-04, 6.957e-04,
            8.772e-04, 1.106e-03, 1.394e-03]),
                        'long_name': 'calibrated low moment gate times',
-                       'null_value': 'not_defined',
+                       'missing_value': 'not_defined',
                        'standard_name': 'lm_gate_times',
                        'units': 'seconds'}}
 
@@ -523,7 +523,7 @@ Models Branch
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.866 seconds)
+   **Total running time of the script:** (0 minutes 0.909 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py:

@@ -21,7 +21,7 @@ class Coordinate(DataArray):
         template = {"standard_name": "not_defined",
                     "long_name": "Can specify centers and/or bounds, or origin/increment/length",
                     "units": "not_defined",
-                    "null_value": "not_defined",
+                    "missing_value": "not_defined",
                     "centers" : [0, 1, 2],
                     "bounds" : [[-0.5, 0.5], [0.5, 1.5], [1.5, 2.5]],
                     "origin" : -0.5,
@@ -68,7 +68,7 @@ class Coordinate(DataArray):
         >>> depth_dict = {"standard_name": "depth",
         >>>               "long_name": "Depth below earth's surface DTM",
         >>>               "units": "m",
-        >>>               "null_value": "not_defined",
+        >>>               "missing_value": "not_defined",
         >>>               "centers" : [2.5, 7.5, 20.0]}
         >>> Coordinate.from_dict('depth', **depth_dict)
 
@@ -131,7 +131,7 @@ class Coordinate(DataArray):
         >>> depth_dict = {"standard_name": "depth",
         >>>               "long_name": "Depth below earth's surface DTM",
         >>>               "units": "m",
-        >>>               "null_value": "not_defined",
+        >>>               "missing_value": "not_defined",
         >>>               "centers" : [2.5, 7.5, 20.0]}
         >>> Coordinate.from_dict('depth', np.r_[2.5, 7.5, 20.0], **depth_dict)
 

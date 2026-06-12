@@ -22,7 +22,7 @@ tempest_system:
             standard_name: gate_times
             long_name: receiver gate times
             units: seconds
-            null_value: not_defined
+            missing_value: not_defined
             bounds: [[5.430000e-06, 1.628000e-05],
                         [2.713000e-05, 3.798000e-05],
                         [4.883000e-05, 5.968000e-05],
@@ -58,7 +58,7 @@ tempest_system:
             waveform_time:
                 values: [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02]
                 long_name: not_defined
-                null_value: not_defined
+                missing_value: not_defined
                 units: s
             waveform_current:
                 values: [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0]

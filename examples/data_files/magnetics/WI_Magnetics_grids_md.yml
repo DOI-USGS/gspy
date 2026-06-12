@@ -21,7 +21,7 @@ variables:
         standard_name: total_magnetic_intensity
         long_name: Total magnetic intensity, diurnally corrected and filtered
         units: nanoTesla
-        null_value: -9999.99
+        missing_value: -9999.99
         files : Midwest_Core_MAG_TMI_NAD83.tif
         dimensions: [x, y]
 
@@ -29,7 +29,7 @@ variables:
         standard_name: residual_magnetic_field
         long_name: Residual magnetic field, IGRF corrected from 2015 model
         units: nanoTesla
-        null_value: -9999.99
+        missing_value: -9999.99
         files : Midwest_Core_MAG_RMF_NAD83.tif
         dimensions: [x, y]
 
@@ -37,12 +37,12 @@ variables:
         standard_name: easting_nad83
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         axis : x
 
     N_Nad83:
         standard_name: northing_nad83
         long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
-        null_value: not_defined
+        missing_value: not_defined
         axis : y

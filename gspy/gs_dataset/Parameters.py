@@ -102,7 +102,7 @@ class Parameters(Dataset):
                                                 **dict(standard_name = f"number_of_{prefix}s",
                                                         long_name = f"Number of {prefix}s",
                                                         units = "not_defined",
-                                                        null_value = "not_defined"))
+                                                        missing_value = "not_defined"))
 
         self, popped = self.add_dimensions_from_variables(prefix=prefix, label=label, **popped)
         popped.pop('prefix', None)

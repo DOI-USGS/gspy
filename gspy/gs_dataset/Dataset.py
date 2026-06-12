@@ -264,7 +264,7 @@ class Dataset:
                             assert dimension in kwargs, ValueError((f"dimension {dimension} specified in metadata for {variable}"
                                                                 "but was not defined in either the 'dimensions' section or the 'variable' section"))
                             dim_to_add = kwargs.pop(dimension, {})
-                            assert 'values' in dim_to_add, ValueError("Dimensions that are defined in the variables section must be nested with values and more metadata defined i.e. long_name, null_value, units")
+                            assert 'values' in dim_to_add, ValueError("Dimensions that are defined in the variables section must be nested with values and more metadata defined i.e. long_name, missing_value, units")
                             self._obj = self.add_coordinate_from_dict(name=dimension,
                                                                     label=kwargs.get('label', None),
                                                                     prefix=kwargs.get('prefix', None),
@@ -393,7 +393,7 @@ class Dataset:
                                                    standard_name = 'number_of_vertices',
                                                    long_name = 'Number of vertices for bounding variables',
                                                    units = 'not_defined',
-                                                   null_value = 'not_defined')
+                                                   missing_value = 'not_defined')
         return self._obj
 
     # def read_metadata(self, filename):
@@ -622,8 +622,8 @@ class Dataset:
     #     mode = 'a' if os.path.isfile(filename) else 'w'
     #     if 'raster' in group:
     #         for var in self._obj.data_vars:
-    #             if self._obj[var].attrs['null_value'] != 'not_defined':
-    #                 self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
+    #             if self._obj[var].attrs['missing_value'] != 'not_defined':
+    #                 self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['missing_value']
     #             # if 'grid_mapping' in self._obj[var].attrs:
     #             #     del self._obj[var].attrs['grid_mapping']
 
@@ -646,8 +646,8 @@ class Dataset:
         mode = 'a' if os.path.isfile(filename) else 'w'
         if 'raster' in group:
             for var in self._obj.data_vars:
-                if self._obj[var].attrs['null_value'] != 'not_defined':
-                    self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['null_value']
+                if self._obj[var].attrs['missing_value'] != 'not_defined':
+                    self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['missing_value']
                 if 'grid_mapping' in self._obj[var].attrs:
                     del self._obj[var].attrs['grid_mapping']
 
@@ -850,7 +850,7 @@ class Dataset:
         varmeta = {"standard_name": key,
                    "long_name":"Time, decimal days",
                    "units":"day",
-                   "null_value":"not_defined",
+                   "missing_value":"not_defined",
                    "datum":datum}
 
         self = self.add_variable_from_values(key, values=dt, dimensions='index', **varmeta)

@@ -223,9 +223,9 @@ class Raster(Dataset):
         #         nodata = None
 
         #     # supersede fill value from file with variable metadata value, if present
-        #     if 'null_value' in json_metadata['variables'][name]:
-        #         if json_metadata['variables'][name]['null_value'] != 'not_defined':
-        #             nodata = json_metadata['variables'][name]['null_value']
+        #     if 'missing_value' in json_metadata['variables'][name]:
+        #         if json_metadata['variables'][name]['missing_value'] != 'not_defined':
+        #             nodata = json_metadata['variables'][name]['missing_value']
 
         #     # reproject, accounting for nodata value if present
         #     if nodata is None:
@@ -257,7 +257,7 @@ class Raster(Dataset):
         ds = ds.squeeze().drop('band')
         if '_FillValue' in ds.attrs:
             ds.values[ds.values == ds.attrs['_FillValue']] = np.nan
-            #ds.attrs['null_value'] = ds.attrs['_FillValue']
+            #ds.attrs['missing_value'] = ds.attrs['_FillValue']
 
         return ds
 
@@ -357,7 +357,7 @@ class Raster(Dataset):
                 "standard_name": "depth",
                 "long_name": "Depth below earth's surface DTM",
                 "units": "m",
-                "null_value": "not_defined",
+                "missing_value": "not_defined",
                 "length" : 3,
                 "increment" : 5.0,
                 "origin" : 0.0,
@@ -372,21 +372,21 @@ class Raster(Dataset):
                 "standard_name": "",
                 "long_name": "",
                 "units": "",
-                "null_value": "",
+                "missing_value": "",
                 "axis" : "x"
                 },
             "lon": {
                 "standard_name": "",
                 "long_name": "",
                 "units": "",
-                "null_value": "",
+                "missing_value": "",
                 "axis" : "y"
                 },
             "elev": {
                 "standard_name": "",
                 "long_name": "",
                 "units": "",
-                "null_value": "",
+                "missing_value": "",
                 "axis" : "z"
                 },
             "map_in_xy": {
@@ -394,7 +394,7 @@ class Raster(Dataset):
                 "standard_name": "",
                 "long_name": "",
                 "units": "",
-                "null_value": "",
+                "missing_value": "",
                 "files" : "map.tif"
                 },
             "depth_slice_maps": {
@@ -402,7 +402,7 @@ class Raster(Dataset):
                 "standard_name": "",
                 "long_name": "",
                 "units": "",
-                "null_value": "",
+                "missing_value": "",
                 "files" : ["slice_0.tif", "slice_1.tif", "slice_2.tif"]
                 }
             }

@@ -75,7 +75,7 @@ def read_variable_table(filename, **kwargs):
     if filename is None:
         return {'variables':{}}
 
-    required_keys = ['variable_name','standard_name','long_name','units','null_value']
+    required_keys = ['variable_name','standard_name','long_name','units','missing_value']
     with open(filename, mode="r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:

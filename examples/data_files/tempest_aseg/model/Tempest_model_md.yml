@@ -18,7 +18,7 @@ dimensions:
         standard_name: layer_depth
         long_name: inverted model layer depth
         units: m
-        null_value: not_defined
+        missing_value: not_defined
         bounds: [[  0.0  ,   3.0  ],
                     [  3.0  ,   6.3 ],
                     [  6.3 ,   9.93],
@@ -59,7 +59,7 @@ dimensions:
         standard_name: gate_times
         long_name: receiver gate times
         units: seconds
-        null_value: not_defined
+        missing_value: not_defined
         bounds: [[5.430000e-06, 1.628000e-05],
                     [2.713000e-05, 3.798000e-05],
                     [4.883000e-05, 5.968000e-05],

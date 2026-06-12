@@ -23,13 +23,13 @@ resolve_system:
             standard_name: frequency_domain_complex_data
             long_name: complex frequency domain data channel
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             discrete: True
         frequency:
             standard_name: frequency
             long_name: nominal measurement frequency
             units: Hz
-            null_value: not_defined
+            missing_value: not_defined
             centers: [400, 1800, 3300, 8200, 40000, 140000]
             discrete: True
 
@@ -70,7 +70,7 @@ magnetic_system:
             standard_name: base_mag_locations
             long_name: Base Magnetometer Location Index Numbers
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             length: 6   
             increment: 1
             origin: 1
@@ -167,7 +167,7 @@ radiometric_system:
             standard_name: spec_sample
             long_name: radiometric sample
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             length: 256
             increment: 1
             origin: 0
@@ -228,7 +228,7 @@ dimensions:
         standard_name: layer_depth
         long_name: layer depth below surface
         units: meters
-        null_value: not_defined
+        missing_value: not_defined
         length: 31
         increment: 5.0
         origin: 2.5
@@ -241,130 +241,130 @@ variables:
             standard_name: line
             long_name: Line Number
             units: not_defined
-            null_value: -9999
+            missing_value: -9999
             dtype: int32
 
         date:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         utc_time:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         flight:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         fiducial:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         temp_ext:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         kpa:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         x_WGS84_Albers:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             axis: x
 
         y_WGS84_Albers:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             axis: y
 
         x_WGS84_UTMZ15N:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         y_WGS84_UTMZ15N:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         lat_tx:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         lon_tx:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         lat_heli:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         lon_heli:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         gpsz_tx:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         gpsz_heli:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         altlas_tx:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         altrad_heli:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         effective_height:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         DTM:
             standard_name: dtm,
             long_name: Digital terrain model, ground surface elevation
             units: meters
-            null_value: not_defined
+            missing_value: not_defined
             axis: z
             positive: up
             datum: referenced to mean sea level - Earth Gravitational Model (EGM96)
@@ -373,91 +373,91 @@ variables:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         bird_roll:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         bird_yaw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         diurnal:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         diurnal_cor:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         mag_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         mag_L:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         mag_LD:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         IGRF:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         TMI:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         RMI:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         cpsp:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         cxsp:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         powerline:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         400hz_filtered:
             standard_name: 400hz_filtered
             long_name: 400 Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi400_filt, cpq400_filt]
             system_couplet: 0
@@ -466,7 +466,7 @@ variables:
             standard_name: 1800hz_filtered
             long_name: 1800 Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi1800_filt, cpq1800_filt]
             system_couplet: 1
@@ -475,7 +475,7 @@ variables:
             standard_name: 3300hz_filtered
             long_name: 3300 Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cxi3300_filt, cxq3300_filt]
             system_couplet: 2
@@ -484,7 +484,7 @@ variables:
             standard_name: 8200hz_filtered
             long_name: 8200 Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi8200_filt, cpq8200_filt]
             system_couplet: 3
@@ -493,7 +493,7 @@ variables:
             standard_name: 400hz_filtered
             long_name: 40k Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi40k_filt, cpq40k_filt]
             system_couplet: 4
@@ -502,7 +502,7 @@ variables:
             standard_name: 140k_hz_filtered
             long_name: 140k Hz EM frequency data, spherics rejected
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi140k_filt, cpq140k_filt]
             system_couplet: 5
@@ -511,7 +511,7 @@ variables:
             standard_name: 400hz_phase_gain_adj
             long_name: 400 Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi400_phg, cpq400_phg]
             system_couplet: 0
@@ -520,7 +520,7 @@ variables:
             standard_name: 1800hz_phase_gain_adj
             long_name: 1800 Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi1800_phg, cpq1800_phg]
             system_couplet: 1
@@ -529,7 +529,7 @@ variables:
             standard_name: 3300hz_phase_gain_adj
             long_name: 3300 Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cxi3300_phg, cxq3300_phg]
             system_couplet: 2
@@ -538,7 +538,7 @@ variables:
             standard_name: 8200hz_phase_gain_adj
             long_name: 8200 Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi8200_phg, cpq8200_phg]
             system_couplet: 3
@@ -547,7 +547,7 @@ variables:
             standard_name: 400hz_phase_gain_adj
             long_name: 40k Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi40k_phg, cpq40k_phg]
             system_couplet: 4
@@ -556,7 +556,7 @@ variables:
             standard_name: 140k_hz_phase_gain_adj
             long_name: 140k Hz EM frequency data, phase and gain adjusted
             units: Parts per million (ppm)
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, channel]
             raw_data_columns: [cpi140k_phg, cpq140k_phg]
             system_couplet: 5
@@ -565,7 +565,7 @@ variables:
             standard_name: 400hz_final
             long_name: 400 Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cpi400, cpq400]
             system_couplet: 0
@@ -574,7 +574,7 @@ variables:
             standard_name: 1800hz_final
             long_name: 1800 Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cpi1800, cpq1800]
             system_couplet: 1
@@ -583,7 +583,7 @@ variables:
             standard_name: 3300hz_final
             long_name: 3300 Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cxi3300, cxq3300]
             system_couplet: 2
@@ -592,7 +592,7 @@ variables:
             standard_name: 8200hz_final
             long_name: 8200 Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cpi8200, cpq8200]
             system_couplet: 3
@@ -601,7 +601,7 @@ variables:
             standard_name: 400hz_final
             long_name: 40k Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cpi40k, cpq40k]
             system_couplet: 4
@@ -610,7 +610,7 @@ variables:
             standard_name: 140k_hz_final
             long_name: 140k Hz EM frequency data, final levelled
             units: Parts per million (ppm)
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, channel]
             raw_data_columns: [cpi140k, cpq140k]
             system_couplet: 5
@@ -619,218 +619,218 @@ variables:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         ddep40k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         ddep8200:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         ddep1800:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         ddep400:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dep140k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dep40k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dep8200:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dep1800:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dep400:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dres140k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dres40k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dres8200:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dres1800:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         dres400:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         res140k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         res40k:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         res8200:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         res1800:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         res400:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         cosmic:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         doserate:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         live_time:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         tc_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         th_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         u_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         u_up_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         k_raw:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         eth:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         eu:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         kconc:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         eth_kconc:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         eu_eth:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
 
         eu_kconc:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: -9999.0
+            missing_value: -9999.0
 
         dres_150_by5m:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, layer_depth]
 
         spec256_down:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: -9999.0
+            missing_value: -9999.0
             dimensions: [index, spec_sample]
 
 
@@ -838,5 +838,5 @@ variables:
             standard_name: not_defined
             long_name: not_defined
             units: not_defined
-            null_value: not_defined
+            missing_value: not_defined
             dimensions: [index, spec_sample]

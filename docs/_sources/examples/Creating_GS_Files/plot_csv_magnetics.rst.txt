@@ -263,13 +263,13 @@ View the Data Tree
         │   │   Dimensions:      (index: 6785)
         │   │   Coordinates:
         │   │       spatial_ref  float64 8B ...
-        │   │     * index        (index) int32 27kB 0 1 2 3 4 5 ... 6780 6781 6782 6783 6784
+        │   │     * index        (index) float64 54kB 0.0 1.0 2.0 ... 6.783e+03 6.784e+03
         │   │       x            (index) float64 54kB ...
         │   │       y            (index) float64 54kB ...
         │   │       z            (index) float64 54kB ...
         │   │   Data variables: (12/17)
         │   │       fid          (index) float64 54kB ...
-        │   │       line         (index) int64 54kB ...
+        │   │       line         (index) float64 54kB ...
         │   │       lon          (index) float64 54kB ...
         │   │       lat          (index) float64 54kB ...
         │   │       alt          (index) float64 54kB ...
@@ -294,11 +294,11 @@ View the Data Tree
         │                                                  n_couplet: 1, n_base_magnetometer: 1,
         │                                                  base_mag_locations: 2)
         │           Coordinates:
-        │             * base_mag_locations                (base_mag_locations) int64 16B 1 2
-        │             * n_transmitter                     (n_transmitter) int64 8B 0
-        │             * n_receiver                        (n_receiver) int64 8B 0
-        │             * n_couplet                         (n_couplet) int64 8B 0
-        │             * n_base_magnetometer               (n_base_magnetometer) int64 8B 0
+        │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
+        │             * n_transmitter                     (n_transmitter) float64 8B 0.0
+        │             * n_receiver                        (n_receiver) float64 8B 0.0
+        │             * n_couplet                         (n_couplet) float64 8B 0.0
+        │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
         │           Data variables: (12/29)
         │               transmitter_label                 (n_transmitter) <U7 28B ...
         │               transmitter_description           (n_transmitter) <U142 568B ...
@@ -324,7 +324,7 @@ View the Data Tree
                 Coordinates:
                     spatial_ref   float64 8B ...
                   * x             (x) float64 6kB 6.551e+05 6.552e+05 ... 7.348e+05 7.349e+05
-                  * nv            (nv) int64 16B 0 1
+                  * nv            (nv) float64 16B 0.0 1.0
                   * y             (y) float64 9kB 4.953e+05 4.952e+05 ... 3.8e+05 3.799e+05
                 Data variables:
                     x_bnds        (x, nv) float64 13kB ...
@@ -419,7 +419,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.592 seconds)
+   **Total running time of the script:** (0 minutes 0.639 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_magnetics.py:
