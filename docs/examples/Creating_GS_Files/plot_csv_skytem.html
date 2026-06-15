@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -1127,7 +1127,7 @@ Group: /survey
 │       comment:       This dataset includes minimally processed (raw) AEM and ra...
 │       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
 │       content:       Wisconsin SkyTEM survey information /survey;  /survey/nomi...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.4
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -1140,14 +1140,14 @@ Group: /survey
 │   ├── Group: /survey/data/raw_data
 │   │   │   Dimensions:          (index: 2000, hm_gate_times: 32, lm_gate_times: 28)
 │   │   │   Coordinates:
-│   │   │       spatial_ref      float64 8B ...
 │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
+│   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
+│   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
+│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 16kB ...
 │   │   │       y                (index) float64 16kB ...
 │   │   │       z                (index) float64 16kB ...
 │   │   │       t                (index) float64 16kB ...
-│   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
-│   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
 │   │   │   Data variables: (12/30)
 │   │   │       _60hz_intensity  (index) float64 16kB ...
 │   │   │       alt              (index) float64 16kB ...
@@ -1216,11 +1216,11 @@ Group: /survey
 │   │                                                  n_couplet: 1, n_base_magnetometer: 1,
 │   │                                                  base_mag_locations: 2)
 │   │           Coordinates:
-│   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │             * n_transmitter                     (n_transmitter) float64 8B 0.0
 │   │             * n_receiver                        (n_receiver) float64 8B 0.0
 │   │             * n_couplet                         (n_couplet) float64 8B 0.0
 │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
+│   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │           Data variables: (12/28)
 │   │               transmitter_label                 (n_transmitter) &lt;U7 28B ...
 │   │               transmitter_description           (n_transmitter) &lt;U142 568B ...
@@ -1244,14 +1244,14 @@ Group: /survey
 │   ├── Group: /survey/data/processed_data
 │   │   │   Dimensions:          (index: 2000, lm_gate_times: 27, hm_gate_times: 22)
 │   │   │   Coordinates:
-│   │   │       spatial_ref      float64 8B ...
 │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
+│   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
+│   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
+│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 16kB ...
 │   │   │       y                (index) float64 16kB ...
 │   │   │       z                (index) float64 16kB ...
 │   │   │       t                (index) float64 16kB ...
-│   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
-│   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
 │   │   │   Data variables: (12/17)
 │   │   │       pindex           (index) float64 16kB ...
 │   │   │       sline_no         (index) float64 16kB ...
@@ -1320,11 +1320,11 @@ Group: /survey
 │   │                                                  n_couplet: 1, n_base_magnetometer: 1,
 │   │                                                  base_mag_locations: 2)
 │   │           Coordinates:
-│   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │             * n_transmitter                     (n_transmitter) float64 8B 0.0
 │   │             * n_receiver                        (n_receiver) float64 8B 0.0
 │   │             * n_couplet                         (n_couplet) float64 8B 0.0
 │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
+│   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │           Data variables: (12/28)
 │   │               transmitter_label                 (n_transmitter) &lt;U7 28B ...
 │   │               transmitter_description           (n_transmitter) &lt;U142 568B ...
@@ -1348,8 +1348,8 @@ Group: /survey
 │   └── Group: /survey/data/depth_to_bedrock
 │           Dimensions:       (index: 82864)
 │           Coordinates:
-│               spatial_ref   float64 8B ...
 │             * index         (index) float64 663kB 0.0 1.0 2.0 ... 8.286e+04 8.286e+04
+│               spatial_ref   float64 8B ...
 │               x             (index) float64 663kB ...
 │               y             (index) float64 663kB ...
 │           Data variables:
@@ -1377,10 +1377,10 @@ Group: /survey
 │   └── Group: /survey/models/inverted_models
 │       │   Dimensions:           (layer_depth: 40, nv: 2, index: 2000)
 │       │   Coordinates:
-│       │       spatial_ref       float64 8B ...
-│       │     * index             (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
 │       │     * layer_depth       (layer_depth) float64 320B 0.375 1.16 2.02 ... 262.6 343.8
 │       │     * nv                (nv) float64 16B 0.0 1.0
+│       │     * index             (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
+│       │       spatial_ref       float64 8B ...
 │       │       x                 (index) float64 16kB ...
 │       │       y                 (index) float64 16kB ...
 │       │       z                 (index) float64 16kB ...
@@ -1434,10 +1434,10 @@ Group: /survey
     └── Group: /survey/derived_maps/maps
             Dimensions:                (x: 799, nv: 2, y: 1155)
             Coordinates:
-                spatial_ref            float64 8B ...
               * x                      (x) float64 6kB 6.551e+05 6.552e+05 ... 7.349e+05
               * nv                     (nv) float64 16B 0.0 1.0
               * y                      (y) float64 9kB 4.953e+05 4.952e+05 ... 3.799e+05
+                spatial_ref            float64 8B ...
             Data variables:
                 x_bnds                 (x, nv) float64 13kB ...
                 y_bnds                 (y, nv) float64 18kB ...
@@ -1478,7 +1478,7 @@ Group: /survey
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.693 seconds)</p>
+<img src="../../_images/sphx_glr_plot_csv_skytem_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.498 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/034773591e391e260ea9931ac31bd124/plot_csv_skytem.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem.ipynb</span></code></a></p>

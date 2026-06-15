@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workbench XYZ &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>Workbench XYZ &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -291,7 +291,7 @@ Attributes:
     comment:       These data are a subset from the referenced data release, ...
     content:       Delaware Bay SkyTEM survey information /survey; raw data /...
     summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
-    gspy_version:  2.2.8
+    gspy_version:  2.2.4
     conventions:   GS-2.0, CF-1.13
 </pre></div>
 </div>
@@ -313,13 +313,13 @@ Group: /survey/data
 └── Group: /survey/data/raw_data
     │   Dimensions:          (index: 338, lm_gate_times: 28, hm_gate_times: 37)
     │   Coordinates:
-    │       spatial_ref      float64 8B 0.0
     │     * index            (index) int32 1kB 0 1 2 3 4 5 6 ... 332 333 334 335 336 337
+    │     * lm_gate_times    (lm_gate_times) float64 224B 1e-07 2.25e-07 ... 0.001394
+    │     * hm_gate_times    (hm_gate_times) float64 296B 5.892e-05 ... 0.01044
+    │       spatial_ref      float64 8B 0.0
     │       x                (index) float64 3kB 1.746e+06 1.746e+06 ... 1.745e+06
     │       y                (index) float64 3kB 1.981e+06 1.981e+06 ... 1.983e+06
     │       z                (index) float64 3kB 4.82 5.19 5.31 5.66 ... 5.44 5.26 5.21
-    │     * lm_gate_times    (lm_gate_times) float64 224B 1e-07 2.25e-07 ... 0.001394
-    │     * hm_gate_times    (hm_gate_times) float64 296B 5.892e-05 ... 0.01044
     │   Data variables: (12/15)
     │       date             (index) object 3kB &#39;2022-07-26&#39; ... &#39;2022-07-26&#39;
     │       time             (index) object 3kB &#39;12:36:24.002&#39; ... &#39;12:42:21.342&#39;
@@ -405,13 +405,13 @@ Group: /survey/models
     │                             layers_minus_1: 39, lm_gate_times: 21,
     │                             hm_gate_times: 30)
     │   Coordinates:
-    │       spatial_ref          float64 8B 0.0
     │     * index                (index) int32 4kB 0 1 2 3 4 5 ... 921 922 923 924 925
     │     * layer_depth          (layer_depth) float64 320B 0.25 0.7788 ... 284.3 375.0
     │     * nv                   (nv) int64 16B 0 1
     │     * layers_minus_1       (layers_minus_1) int64 312B 0 1 2 3 4 ... 35 36 37 38
     │     * lm_gate_times        (lm_gate_times) float64 168B 1.273e-05 ... 0.001394
     │     * hm_gate_times        (hm_gate_times) float64 240B 7.292e-05 ... 0.01044
+    │       spatial_ref          float64 8B 0.0
     │       x                    (index) float64 7kB 4.614e+05 4.614e+05 ... 4.8e+05
     │       y                    (index) float64 7kB 4.333e+06 4.333e+06 ... 4.359e+06
     │       z                    (index) float64 7kB 6.4 5.8 5.2 4.7 ... 0.4 0.4 0.4 0.3
@@ -500,7 +500,7 @@ Group: /survey/models
                 name:        inversion_parameters
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.909 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.824 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/80fa00703aec9cd579f2311600850f2c/plot_xyz_workbench_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xyz_workbench_to_netcdf.ipynb</span></code></a></p>

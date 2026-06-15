@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GeoTIFFs (2D &amp; 3D) &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>GeoTIFFs (2D &amp; 3D) &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -486,10 +486,10 @@ Group: /survey
     ├── Group: /survey/derived_products/mag_map
     │   │   Dimensions:       (x: 599, nv: 2, y: 1212)
     │   │   Coordinates:
-    │   │       spatial_ref   float64 8B 0.0
     │   │     * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
     │   │     * nv            (nv) int64 16B 0 1
     │   │     * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+    │   │       spatial_ref   float64 8B 0.0
     │   │   Data variables:
     │   │       x_bnds        (x, nv) float64 10kB 2.925e+05 2.931e+05 ... 6.519e+05
     │   │       y_bnds        (y, nv) float64 19kB 1.607e+06 1.606e+06 ... 8.799e+05
@@ -535,11 +535,11 @@ Group: /survey
     └── Group: /survey/derived_products/all_maps
             Dimensions:       (z: 5, nv: 2, x: 363, y: 770)
             Coordinates:
-                spatial_ref   float64 8B 0.0
               * z             (z) float64 40B 0.0 5.0 10.0 15.0 20.0
               * nv            (nv) int64 16B 0 1
               * x             (x) float64 3kB 2.915e+05 2.925e+05 ... 6.525e+05 6.535e+05
               * y             (y) float64 6kB 1.648e+06 1.647e+06 ... 8.798e+05 8.788e+05
+                spatial_ref   float64 8B 0.0
             Data variables:
                 z_bnds        (z, nv) float64 80B -2.5 2.5 2.5 7.5 ... 12.5 17.5 17.5 22.5
                 x_bnds        (x, nv) float64 6kB 2.91e+05 2.92e+05 ... 6.53e+05 6.54e+05
@@ -607,7 +607,7 @@ In this case, we slice the 3-D resistivity variable along the depth dimension</p
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_tifs_002.png" srcset="../../_images/sphx_glr_plot_tifs_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.923 seconds)</p>
+<img src="../../_images/sphx_glr_plot_tifs_002.png" srcset="../../_images/sphx_glr_plot_tifs_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.768 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-tifs-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/175bf204395e779631ee198c3c84e445/plot_tifs.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tifs.ipynb</span></code></a></p>

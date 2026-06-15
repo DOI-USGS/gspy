@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASEG-GDF (Tempest AEM) &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>ASEG-GDF (Tempest AEM) &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -670,7 +670,7 @@ Group: /survey
 │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
 │       comment:       This dataset is incomplete and has been downsampled for th...
 │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.4
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -682,12 +682,12 @@ Group: /survey
 │   └── Group: /survey/data/raw_data
 │       │   Dimensions:         (index: 2001, gate_times: 15)
 │       │   Coordinates:
-│       │       spatial_ref     float64 8B ...
 │       │     * index           (index) float64 16kB 0.0 1.0 2.0 ... 1.999e+03 2e+03
+│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│       │       spatial_ref     float64 8B ...
 │       │       x               (index) float64 16kB ...
 │       │       y               (index) float64 16kB ...
 │       │       z               (index) float64 16kB ...
-│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
 │       │   Data variables: (12/58)
 │       │       line            (index) float64 16kB ...
 │       │       flight          (index) float64 16kB ...
@@ -752,11 +752,11 @@ Group: /survey
 │       │   Dimensions:                  (layer_depth: 30, nv: 2, gate_times: 15,
 │       │                                 index: 2001)
 │       │   Coordinates:
-│       │       spatial_ref              float64 8B ...
-│       │     * index                    (index) float64 16kB 0.0 1.0 ... 1.999e+03 2e+03
 │       │     * layer_depth              (layer_depth) float64 240B 1.5 4.65 ... 424.2 467.5
 │       │     * nv                       (nv) float64 16B 0.0 1.0
 │       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
+│       │     * index                    (index) float64 16kB 0.0 1.0 ... 1.999e+03 2e+03
+│       │       spatial_ref              float64 8B ...
 │       │       x                        (index) float64 16kB ...
 │       │       y                        (index) float64 16kB ...
 │       │       z                        (index) float64 16kB ...
@@ -838,10 +838,10 @@ Group: /survey
     └── Group: /survey/derived_maps/maps
         │   Dimensions:       (x: 599, nv: 2, y: 1212)
         │   Coordinates:
-        │       spatial_ref   float64 8B ...
         │     * x             (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
         │     * nv            (nv) float64 16B 0.0 1.0
         │     * y             (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+        │       spatial_ref   float64 8B ...
         │   Data variables:
         │       x_bnds        (x, nv) float64 10kB ...
         │       y_bnds        (y, nv) float64 19kB ...
@@ -894,9 +894,9 @@ Group: /survey
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B ...
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+    spatial_ref  float64 8B ...
 Attributes:
     system_couplet:  passive_scalar_magnetometer
     standard_name:   total_magnetic_intensity
@@ -913,9 +913,9 @@ Attributes:
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B ...
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+    spatial_ref  float64 8B ...
 Attributes:
     system_couplet:  passive_scalar_magnetometer
     standard_name:   total_magnetic_intensity
@@ -932,9 +932,9 @@ Attributes:
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;magnetic_tmi&#39; (y: 1212, x: 599)&gt; Size: 6MB
 [725988 values with dtype=float64]
 Coordinates:
-    spatial_ref  float64 8B ...
-  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
   * y            (y) float64 10kB 1.607e+06 1.606e+06 ... 8.808e+05 8.802e+05
+  * x            (x) float64 5kB 2.928e+05 2.934e+05 ... 6.51e+05 6.516e+05
+    spatial_ref  float64 8B ...
 Attributes:
     system_couplet:  passive_scalar_magnetometer
     standard_name:   total_magnetic_intensity
@@ -959,7 +959,7 @@ Attributes:
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.021 seconds)</p>
+<img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.706 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f4ba3c5b4e1b387ce8109a435ed7d940/plot_aseg_tempest.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_aseg_tempest.ipynb</span></code></a></p>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DAT &amp; XYZ (Loupe TEM) &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>DAT &amp; XYZ (Loupe TEM) &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -905,7 +905,7 @@ Group: /survey
 │       comment:       This dataset includes minimally processed (raw) and fully ...
 │       summary:       Ground-based electromagnetic data were collected in August...
 │       content:       Kankakee LoupeEM survey information /survey; data containe...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.4
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -917,12 +917,12 @@ Group: /survey
 │   └── Group: /survey/data/raw_data
 │       │   Dimensions:       (index: 2474, gate_times: 23)
 │       │   Coordinates:
-│       │       spatial_ref   float64 8B ...
 │       │     * index         (index) float64 20kB 0.0 1.0 2.0 ... 2.472e+03 2.473e+03
+│       │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
+│       │       spatial_ref   float64 8B ...
 │       │       x             (index) float64 20kB ...
 │       │       y             (index) float64 20kB ...
 │       │       z             (index) float64 20kB ...
-│       │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
 │       │   Data variables: (12/42)
 │       │       fid           (index) object 20kB ...
 │       │       acq           (index) float64 20kB ...
@@ -995,12 +995,12 @@ Group: /survey
         │   Dimensions:              (layer_depth: 20, nv: 2, layers_minus_1: 19,
         │                             gate_times: 21, index: 5547)
         │   Coordinates:
-        │       spatial_ref          float64 8B ...
-        │     * index                (index) float64 44kB 0.0 1.0 ... 5.545e+03 5.546e+03
         │     * layer_depth          (layer_depth) float64 160B 1.0 3.1 ... 94.63 125.0
         │     * nv                   (nv) float64 16B 0.0 1.0
         │     * layers_minus_1       (layers_minus_1) float64 152B 0.0 1.0 2.0 ... 17.0 18.0
         │     * gate_times           (gate_times) float64 168B 1.495e-05 ... 0.001643
+        │     * index                (index) float64 44kB 0.0 1.0 ... 5.545e+03 5.546e+03
+        │       spatial_ref          float64 8B ...
         │       x                    (index) float64 44kB ...
         │       y                    (index) float64 44kB ...
         │       z                    (index) float64 44kB ...
@@ -1097,7 +1097,7 @@ Group: /survey
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_dat_loupe_001.png" srcset="../../_images/sphx_glr_plot_dat_loupe_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.950 seconds)</p>
+<img src="../../_images/sphx_glr_plot_dat_loupe_001.png" srcset="../../_images/sphx_glr_plot_dat_loupe_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.870 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-dat-loupe-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/66dd79b444190004dc9df3df3d72d569/plot_dat_loupe.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_dat_loupe.ipynb</span></code></a></p>

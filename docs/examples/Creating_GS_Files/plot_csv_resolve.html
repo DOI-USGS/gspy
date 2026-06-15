@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV (Resolve AEM) &mdash; gspy 2.2.8.post1.dev2+g166db3b47.d20260506 documentation</title>
+  <title>CSV (Resolve AEM) &mdash; gspy 2.2.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=91cf44be"></script>
+      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -4537,15 +4537,15 @@ Group: /survey/data
     │   Dimensions:           (index: 2334, layer_depth: 31, nv: 2, spec_sample: 256,
     │                          channel: 2)
     │   Coordinates:
-    │       spatial_ref       float64 8B 0.0
     │     * index             (index) int32 9kB 0 1 2 3 4 5 ... 2329 2330 2331 2332 2333
     │     * layer_depth       (layer_depth) float64 248B 2.5 7.5 12.5 ... 147.5 152.5
     │     * nv                (nv) int64 16B 0 1
+    │     * spec_sample       (spec_sample) int64 2kB 0 1 2 3 4 ... 251 252 253 254 255
+    │     * channel           (channel) &lt;U10 80B &#39;in-phase&#39; &#39;quadrature&#39;
+    │       spatial_ref       float64 8B 0.0
     │       x                 (index) float64 19kB 5.351e+05 5.341e+05 ... 5.315e+05
     │       y                 (index) float64 19kB 1.205e+06 1.205e+06 ... 1.205e+06
     │       z                 (index) float64 19kB 42.82 43.96 42.74 ... 42.73 43.3
-    │     * spec_sample       (spec_sample) int64 2kB 0 1 2 3 4 ... 251 252 253 254 255
-    │     * channel           (channel) &lt;U10 80B &#39;in-phase&#39; &#39;quadrature&#39;
     │   Data variables: (12/88)
     │       layer_depth_bnds  (layer_depth, nv) float64 496B 0.0 5.0 5.0 ... 150.0 155.0
     │       line              (index) int64 19kB 10010 10010 10010 ... 19020 19020 19020
@@ -4572,10 +4572,10 @@ Group: /survey/data
     │       Dimensions:                   (n_transmitter: 6, n_receiver: 6, n_couplet: 6,
     │                                      dim_0: 1, frequency: 6)
     │       Coordinates:
-    │         * frequency                 (frequency) int64 48B 400 1800 ... 40000 140000
     │         * n_transmitter             (n_transmitter) int64 48B 0 1 2 3 4 5
     │         * n_receiver                (n_receiver) int64 48B 0 1 2 3 4 5
     │         * n_couplet                 (n_couplet) int64 48B 0 1 2 3 4 5
+    │         * frequency                 (frequency) int64 48B 400 1800 ... 40000 140000
     │       Dimensions without coordinates: dim_0
     │       Data variables: (12/17)
     │           transmitter_label         (n_transmitter) &lt;U7 168B &#39;400Z&#39; ... &#39;140000Z&#39;
@@ -4672,10 +4672,10 @@ Group: /survey/models
 └── Group: /survey/models/inverted_models
     │   Dimensions:           (index: 9999, layer_depth: 30, nv: 2)
     │   Coordinates:
-    │       spatial_ref       float64 8B 0.0
     │     * index             (index) int32 40kB 0 1 2 3 4 ... 9994 9995 9996 9997 9998
     │     * layer_depth       (layer_depth) float64 240B 0.5 1.55 2.7 ... 119.7 132.5
     │     * nv                (nv) int64 16B 0 1
+    │       spatial_ref       float64 8B 0.0
     │       x                 (index) float64 80kB 5.36e+05 5.36e+05 ... 5.297e+05
     │       y                 (index) float64 80kB 1.205e+06 1.205e+06 ... 1.197e+06
     │       z                 (index) float64 80kB 41.1 41.1 41.1 ... 41.7 41.7 41.5
@@ -4753,7 +4753,7 @@ Group: /survey/models
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_resolve_003.png" srcset="../../_images/sphx_glr_plot_csv_resolve_003.png" alt="plot csv resolve" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.458 seconds)</p>
+<img src="../../_images/sphx_glr_plot_csv_resolve_003.png" srcset="../../_images/sphx_glr_plot_csv_resolve_003.png" alt="plot csv resolve" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.256 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-resolve-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/dfa2b280ba9f29d236330c01d857527e/plot_csv_resolve.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_resolve.ipynb</span></code></a></p>
