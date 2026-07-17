@@ -68,3 +68,22 @@ Installation
 ~~~~~~~~~~~~
 pip install gspy
 
+Development
+~~~~~~~~~~~
+
+This repository uses `pre-commit <https://pre-commit.com/>`_ to block machine-specific
+absolute paths (e.g. ``/Users/<name>``, ``/home/<name>/``, ``C:\Users\<name>``) from being
+committed. Sphinx bakes these into generated docs, so the check guards everything under
+``docs/``. After cloning, install the hook once::
+
+    pip install pre-commit
+    pre-commit install
+
+The check then runs automatically on every ``git commit``. To scan the whole tree on demand::
+
+    pre-commit run --all-files
+
+The same logic can be run directly without pre-commit::
+
+    python scripts/check_absolute_paths.py <files...>
+

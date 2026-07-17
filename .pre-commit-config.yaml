@@ -1,0 +1,24 @@
+# Pre-commit hooks for gspy. Runs locally on `git commit`; nothing server-side.
+#
+# One-time setup per clone:
+#     pip install pre-commit
+#     pre-commit install
+#
+# After that, the checks below run automatically on every commit against the
+# staged files. Run against everything on demand with:
+#     pre-commit run --all-files
+repos:
+  - repo: local
+    hooks:
+      - id: no-absolute-paths
+        name: Block machine-specific absolute paths
+        description: >-
+          Reject /Users/<name>, /home/<name>/, and Windows <drive>:\Users\
+          paths that Sphinx bakes into generated docs.
+        entry: python scripts/check_absolute_paths.py
+        # `language: python` lets pre-commit provide the interpreter, so the
+        # `python` executable exists on every OS (macOS/Linux often lack a bare
+        # `python`; Windows lacks `python3`). No third-party deps are needed.
+        language: python
+        # Skip binary artifacts the scanner would ignore anyway.
+        exclude: '\.(zip|h5|nc|png|jpe?g|gif|pdf|tiff?|ico|woff2?|ttf|eot)$'
