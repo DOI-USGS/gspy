@@ -43,7 +43,7 @@ Why netCDF?
 GSPy Workflow
 ~~~~~~~~~~~~~
 
-The GSPy package provides tools for reading datasets from a variety of original formats common for geophysical data (e.g., CSV, ASEG-GDF, GeoTIFF), combining with metadata information, and generating standardized GS netCDF files.  
+The GSPy package provides tools for reading datasets from a variety of original formats common for geophysical data (e.g., CSV, ASEG-GDF, GeoTIFF), combining with metadata information, and generating standardized GS netCDF files.
 
 See our examples for detailed demonstrations of the GSPy workflow. In general, the steps for making a GS netCDF file are:
 
@@ -54,10 +54,10 @@ See our examples for detailed demonstrations of the GSPy workflow. In general, t
    2. Add a Container branch
    3. Add data to the Container branch
 
-      * pass a data file 
+      * pass a data file
       * pass a metadata file
 
-   4. (optional) Add Supplementary Stem 
+   4. (optional) Add Supplementary Stem
 
       * this can also be done simultaneous with Step 3 through the data's metadata file
 
@@ -71,10 +71,9 @@ pip install gspy
 Development
 ~~~~~~~~~~~
 
-This repository uses `pre-commit <https://pre-commit.com/>`_ to block machine-specific
-absolute paths (e.g. ``/Users/<name>``, ``/home/<name>/``, ``C:\Users\<name>``) from being
-committed. Sphinx bakes these into generated docs, so the check guards everything under
-``docs/``. After cloning, install the hook once::
+This repository uses `pre-commit <https://pre-commit.com/>`_ to enforce release
+hygiene before code is committed.
+After cloning, install the hook once::
 
     pip install pre-commit
     pre-commit install
@@ -85,5 +84,5 @@ The check then runs automatically on every ``git commit``. To scan the whole tre
 
 The same logic can be run directly without pre-commit::
 
-    python scripts/check_absolute_paths.py <files...>
+    python scripts/hygiene.py <files...>
 
