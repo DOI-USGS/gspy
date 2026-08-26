@@ -10,9 +10,25 @@ class aseg_gdf2_handler(file_handler):
     """Handler for aseg gdf2 files
     """
     @property
+    def dfn_columns(self):
+        """Entries in self.metadata that describe a column in the data file.
+
+        Once a GSPy metadata file has been combined with the DFN definitions,
+        self.metadata also holds entries like 'coordinates' and 'dataset_attrs'.
+        Only the DFN definitions carry a fortran 'format'.
+
+        Returns
+        -------
+        dict
+
+        """
+        return {key : value for key, value in self.metadata.items()
+                if isinstance(value, dict) and 'format' in value}
+
+    @property
     def columns(self):
         out = []
-        for key, value in self.metadata.items():
+        for key, value in self.dfn_columns.items():
             test = re.split('es|e|f|i|g|d|a', value['format'])
             if test[0] != '':
                 for i in range(np.int32(test[0])):
@@ -24,19 +40,42 @@ class aseg_gdf2_handler(file_handler):
     def metadata_template(self, **kwargs):
 
         out = super().metadata_template(**kwargs)
-        
-        coords = self.metadata['coordinates']
-        if 'x' in coords:
-            out[coords['x']] = {"axis" : "X"}
-        if 'y' in coords:
-            out[coords['y']] = {"axis" : "Y"}
-        if 'z' in coords:
-            out[coords['z']] = {"axis" : "Z",
-                                    "positive" : "up or down?",
-                                    "datum" : "not_defined"}
-        if 't' in coords:
-            out[coords['t']] = {"axis" : "T",
-                                    "datum" : "not_defined"}
+
+        template = {"standard_name": "not_defined",
+                    "long_name": "not_defined",
+                    "missing_value": "not_defined",
+                    "units": "not_defined"}
+
+        # The DFN file already defines standard_name, long_name, units and
+        # missing_value for every column, so use those as the starting point
+        # rather than a template of "not_defined" entries.
+        dfn = self.dfn_columns
+        existing_variables = kwargs.get('variables', {})
+
+        columns_counts = self.column_header_counts
+        variables = {}
+        for var in sorted(columns_counts.keys()):
+            from_dfn = {k : v for k, v in dfn.get(var, {}).items() if k != 'format'}
+            tmp = Metadata.merge(template, from_dfn)
+            tmp = Metadata.merge(tmp, existing_variables.get(var, {}))
+            if columns_counts[var] > 1:
+                tmp['dimensions'] = tmp.get('dimensions', ['index', '??'])
+            variables[var] = tmp
+
+        out['variables'] = variables
+
+        coords = kwargs.get('coordinates', self.metadata.get('coordinates', {}))
+        axes = {'x' : {"axis" : "X"},
+                'y' : {"axis" : "Y"},
+                'z' : {"axis" : "Z",
+                       "positive" : "?? up or down ??",
+                       "datum" : "not_defined"},
+                't' : {"axis" : "T",
+                       "datum" : "not_defined"}}
+        for axis, entry in axes.items():
+            name = coords.get(axis, None)
+            if name in out['variables']:
+                out['variables'][name] = Metadata.merge(out['variables'][name], entry)
 
         return out
 
