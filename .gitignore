@@ -16,3 +16,4 @@ resistivity_*.tif
 resistivity.tif
 template_*.yml
 magnetic_tmi.tif
+../examples/data_files/tempest_aseg/resistivity*

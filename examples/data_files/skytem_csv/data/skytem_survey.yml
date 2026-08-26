@@ -16,8 +16,8 @@ survey_information:
     survey_area_name: Northeast Wisconsin Bedrock Mapping
     state: WI
     country: USA
-    acquisition_start: 20210117
-    acquisition_end: 20210207
+    acquisition_start: "20210117"
+    acquisition_end: "20210207"
     survey_attributes_units: SI
 
 spatial_ref:
@@ -27,34 +27,32 @@ spatial_ref:
 
 flightline_information:
     traverse_line_spacing: 800 m
-    traverse_line_direction: nw-se
-    tie_line_spacing: n/a
-    tie_line_direction: n/a
+    traverse_line_direction: north-west to south-east, 114 degrees / 294 degrees
+    tie_line_spacing: No tie lines were flown in this survey
     nominal_terrain_clearance: 30 m
     final_line_kilometers: 3170 km
     traverse_line_numbers: 100101 - 115201
     repeat_line_numbers: 920001 - 920006
-    pre_zero_line_numbers: n/a
-    post_zero_line_numbers: n/a
+    zero_line_numbers: No high altitude lines were flown in this survey
 
 survey_equipment:
     aircraft: Eurocopter Astar 350 B3
     magnetometer: Geometrics G822A, Kroum KMAG4 counter
-    magnetometer_installation: Front of transmitter frame
-    electromagnetic_system: SkyTEM 304M
-    electromagnetic_installation: Rigid transmitter frame 40m beneath helicopter, Receiver coils at rear of transmitter frame 2m vertical offset
+    magnetometer_installation: front of EM transmitter frame
+    electromagnetic_system: SkyTEM304M time‑domain electromagnetic system
+    electromagnetic_installation: Rigid transmitter frame 40 m beneath helicopter, Receiver coils at rear of transmitter frame 2 m vertical offset
     spectrometer_system: n/a
-    spectrometer_installation: n/a
-    spectrometer_sample_rate: n/a
     radar_altimeter_system: n/a
-    radar_altimeter_sample_rate: n/a
-    laser_altimeter_system: MDL ILM 300R (2)
-    laser_altimeter_sample_rate: 0.033 s
-    inclinometer_system: n/a
-    inclinometer_sample_rate: n/a
-    navigation_system: Real-time differential GPS Trimble Bullet III
-    navigation_sample_rate: 1.0 s
-    acquisition_system: skytem
+    laser_altimeter_system: Two MDL ILM 300R laser altimeters
+    laser_altimeter_installation: both laser altimeters were mounted on the suspended EM frame
+    laser_altimeter_information: Sampling rate 30 Hz, range 0.2 to 200 m and uncertainty 10 to 30 cm. 
+    inclinometer_system: Two Bjerre Technology inclinometers
+    inclinometer_installation: Both inclinometers were installed on the rear of the EM frame near the Z coil. 
+    inclinometer_information: Measured x and y tilt at 2 Hz sampling rate.  The x angle is parallel to flight direction (positive when front is above horizontal); y angle is perpendicular to flight direction (negative when right side is above horizontal).
+    gsp_system: Differential GPS using OEMV1-L1 chipset and Trimble Bullet III antennas. Two DGPS units recorded by EM system; a third GPS recorded by the magnetic system.
+    gps_installation:  DGPS antenna mounted on top of the boom in front of the frame
+    gps_information: Sampling rate 1 Hz. The uncertainty in the xyz-directions is 1 m after processing. 
+    acquisition_system: SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses. 
 
 nominal_system:
     type: system
@@ -264,13 +262,13 @@ magnetic_system:
             latitude:
                 values: [44.849335, 44.127998]
                 long_name: Latitude in WGS84
-                units: decial degrees
+                units: decimal degrees
                 dimensions: 'base_mag_locations'
 
             longitude:
                 values: [87.422440, 87.685524]
                 long_name: Longitude in WGS84
-                units: decial degrees
+                units: decimal degrees
                 dimensions: 'base_mag_locations'
             
             elevation:

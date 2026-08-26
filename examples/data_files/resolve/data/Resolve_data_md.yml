@@ -151,9 +151,9 @@ radiometric_system:
     instrument: Radiation Solutions RS-500 gamma-ray spectrometer  
 
     dimensions:
-        spec_sample:
-            standard_name: spec_sample
-            long_name: radiometric sample
+        spectra:
+            standard_name: spectra
+            long_name: radiometric spectra sample
             units: not_defined
             missing_value: not_defined
             length: 256
@@ -771,7 +771,7 @@ variables:
             1 to 256
         units: Counts/second (cps)
         missing_value: -9999
-        dimensions: [index, spec_sample]
+        dimensions: [index, spectra]
         system_couplet: passive_gamma_spectrometer
     spec256_up:
         standard_name: spec256_up
@@ -779,7 +779,7 @@ variables:
             to 256
         units: Counts/second (cps)
         missing_value: -9999
-        dimensions: [index, spec_sample]
+        dimensions: [index, spectra]
         system_couplet: passive_gamma_spectrometer
     tc_raw:
         standard_name: tc_raw

@@ -249,7 +249,7 @@ View the Data Tree
     │       comment:       This dataset includes minimally processed (raw) AEM and ra...
     │       summary:       Magnetic survey data were collected during January and Feb...
     │       content:       Wisconsin SkyTEM survey information /survey; raw flightlin...
-    │       gspy_version:  2.2.4
+    │       gspy_version:  2.2.8
     │       conventions:   GS-2.0, CF-1.13
     └── Group: /survey/magnetic_data
         │   Dimensions:      ()
@@ -419,7 +419,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.531 seconds)
+   **Total running time of the script:** (0 minutes 0.534 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_magnetics.py:

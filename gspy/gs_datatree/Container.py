@@ -330,36 +330,22 @@ class Container:
         if self._obj.attrs['type'] == 'survey':
             self._obj.attrs['content'] = self.content
 
-            from importlib.metadata import version, PackageNotFoundError  
+            from importlib.metadata import version, PackageNotFoundError
             try:
                 __version__ = version("gspy")  # distribution name as installed by pip
             except PackageNotFoundError:
                 __version__ = "unknown"
-            
+
             self._obj.attrs['gspy_version'] = __version__.split('.post')[0]
             self._obj.attrs['conventions'] = "GS-2.0, CF-1.13"
 
             for item in list(self._obj):
                 if self._obj[item].attrs.get('type', '') == 'system':
                     del self._obj[item]
+            self._obj.attrs['content'] = self.content
             out = self._obj.parent
         else:
             out = self._obj
-
-        # # correct objects
-        # for node in out.subtree:
-        #     for name, var in node.variables.items():
-        #         if var.dtype == object:
-        #             node[name] = node[name].astype(str)
-        #         for att in var.attrs:
-        #             if type(var.attrs[att]) == object:
-        #                 print('here I am!!!!!!!!!!!!!!!!!!!')
-        #                 var.attrs[att] = var.attrs[att].astype(str)
-        #     for att in node.attrs:
-        #         #print(type(node.attrs[att]))
-        #         if type(node.attrs[att]) == object:
-        #             print('here I am-----------------')
-        #             node.attrs[att] = node.attrs[att].astype(str)
 
         out.to_netcdf(*args, **kwargs)
 

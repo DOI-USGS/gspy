@@ -4,8 +4,8 @@ dataset_attrs:
     type: data
     structure: tabular
     mode: airborne
-    method: electromagnetic
-    instrument: skytem
+    method: electromagnetic, time domain
+    instrument: SkyTEM 304M
 
 coordinates:
     x: E_N83WTM
@@ -23,14 +23,12 @@ variables:
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         missing_value: not_defined
-        axis: x
 
     N_N83WTM:
         standard_name: northing
         long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         missing_value: not_defined
-        axis: y
 
     BR_ELEVATION:
         standard_name: top_bedrock_elevation

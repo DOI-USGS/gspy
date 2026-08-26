@@ -4,7 +4,7 @@ dataset_attrs :
     type: data
     structure: raster
     mode: airborne
-    method: electromagnetic, time domain
+    method: ["electromagnetic, time domain", "magnetic, total field"]
     instrument: skytem
     property: [total magnetic intensity, depth to bedrock]
 

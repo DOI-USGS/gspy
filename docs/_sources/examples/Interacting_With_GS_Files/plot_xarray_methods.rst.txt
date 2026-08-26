@@ -116,7 +116,7 @@ of the DataTree
     │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
     │       comment:       This dataset is incomplete and has been downsampled for th...
     │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-    │       gspy_version:  2.2.4
+    │       gspy_version:  2.2.8
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
@@ -379,7 +379,7 @@ Option 1) directly form the DataTree object ``survey``
         references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
         comment:       This dataset is incomplete and has been downsampled for th...
         content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-        gspy_version:  2.2.4
+        gspy_version:  2.2.8
         conventions:   GS-2.0, CF-1.13
 
 
@@ -426,7 +426,7 @@ or Option 2) use the path to the group and then retrieve the DataSet
         references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
         comment:       This dataset is incomplete and has been downsampled for th...
         content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-        gspy_version:  2.2.4
+        gspy_version:  2.2.8
         conventions:   GS-2.0, CF-1.13
 
 
@@ -466,9 +466,18 @@ Survey Attributes Option 1:
                 '/survey/data/raw_data/tempest_system;  '
                 '/survey/models/inverted_models/tempest_system;  '
                 '/survey/models/inverted_models/inversion_parameters;  '
+                '/survey/derived_maps/maps/magnetic_system;  /survey; raw data '
+                '/survey/data; inverted 1-D electrical resistivity models '
+                '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+                '/survey/data/raw_data; inverted resistivity models '
+                '/survey/models/inverted_models; gridded map of total magnetic '
+                'intensity /survey/derived_maps/maps;  '
+                '/survey/data/raw_data/tempest_system;  '
+                '/survey/models/inverted_models/tempest_system;  '
+                '/survey/models/inverted_models/inversion_parameters;  '
                 '/survey/derived_maps/maps/magnetic_system; ',
      'conventions': 'GS-2.0, CF-1.13',
-     'gspy_version': '2.2.4',
+     'gspy_version': '2.2.8',
      'history': 'This example dataset includes the raw AEM data and gridded '
                 'magnetic data as provided by the contractor, CGG Canada Services, '
                 'Ltd, as well as 1-D resistivity models inverted by the USGS using '
@@ -517,9 +526,18 @@ Survey Attributes Option 2:
                 '/survey/data/raw_data/tempest_system;  '
                 '/survey/models/inverted_models/tempest_system;  '
                 '/survey/models/inverted_models/inversion_parameters;  '
+                '/survey/derived_maps/maps/magnetic_system;  /survey; raw data '
+                '/survey/data; inverted 1-D electrical resistivity models '
+                '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+                '/survey/data/raw_data; inverted resistivity models '
+                '/survey/models/inverted_models; gridded map of total magnetic '
+                'intensity /survey/derived_maps/maps;  '
+                '/survey/data/raw_data/tempest_system;  '
+                '/survey/models/inverted_models/tempest_system;  '
+                '/survey/models/inverted_models/inversion_parameters;  '
                 '/survey/derived_maps/maps/magnetic_system; ',
      'conventions': 'GS-2.0, CF-1.13',
-     'gspy_version': '2.2.4',
+     'gspy_version': '2.2.8',
      'history': 'This example dataset includes the raw AEM data and gridded '
                 'magnetic data as provided by the contractor, CGG Canada Services, '
                 'Ltd, as well as 1-D resistivity models inverted by the USGS using '
@@ -1748,7 +1766,7 @@ just the models branch:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.604 seconds)
+   **Total running time of the script:** (0 minutes 0.379 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_xarray_methods.py:

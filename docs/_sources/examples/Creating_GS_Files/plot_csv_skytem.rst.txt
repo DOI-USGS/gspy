@@ -474,7 +474,7 @@ View the Data Tree
     │       comment:       This dataset includes minimally processed (raw) AEM and ra...
     │       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
     │       content:       Wisconsin SkyTEM survey information /survey;  /survey/nomi...
-    │       gspy_version:  2.2.4
+    │       gspy_version:  2.2.8
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
@@ -515,8 +515,8 @@ View the Data Tree
     │   │   │       type:        data
     │   │   │       structure:   tabular
     │   │   │       mode:        airborne
-    │   │   │       method:      electromagnetic, time domain
-    │   │   │       instrument:  skytem
+    │   │   │       method:      ['electromagnetic, time domain', 'magnetic']
+    │   │   │       instrument:  SkyTEM 304M
     │   │   ├── Group: /survey/data/raw_data/skytem_system
     │   │   │       Dimensions:                                      (gate_times: 22, nv: 2,
     │   │   │                                                         lm_gate_times: 28,
@@ -620,7 +620,7 @@ View the Data Tree
     │   │   │       structure:   tabular
     │   │   │       mode:        airborne
     │   │   │       method:      electromagnetic, time domain
-    │   │   │       instrument:  skytem
+    │   │   │       instrument:  SkyTEM 304M
     │   │   ├── Group: /survey/data/processed_data/skytem_system
     │   │   │       Dimensions:                                      (gate_times: 22, nv: 2,
     │   │   │                                                         lm_gate_times: 27,
@@ -711,8 +711,8 @@ View the Data Tree
     │               type:        data
     │               structure:   tabular
     │               mode:        airborne
-    │               method:      electromagnetic
-    │               instrument:  skytem
+    │               method:      electromagnetic, time domain
+    │               instrument:  SkyTEM 304M
     ├── Group: /survey/models
     │   │   Dimensions:      ()
     │   │   Data variables:
@@ -761,13 +761,14 @@ View the Data Tree
     │                   model_file          <U33 132B ...
     │                   inversion_software  <U16 64B ...
     │                   software_version    <U9 36B ...
+    │                   software_reference  <U11 44B ...
     │                   date                <U17 68B ...
-    │                   comment             <U253 1kB ...
+    │                   description         <U253 1kB ...
     │                   data_file           <U32 128B ...
     │               Attributes:
     │                   type:        parameters
     │                   method:      electromagnetic, time domain
-    │                   instrument:  RESOSkyTEM 304MLVE
+    │                   instrument:  SkyTEM 304M
     │                   mode:        airborne
     │                   property:    electrical resistivity
     │                   name:        inversion_parameters
@@ -798,7 +799,7 @@ View the Data Tree
                     type:        data
                     structure:   raster
                     mode:        airborne
-                    method:      electromagnetic, time domain
+                    method:      ['electromagnetic, time domain', 'magnetic, total field']
                     instrument:  skytem
                     property:    ['total magnetic intensity', 'depth to bedrock']
 
@@ -877,7 +878,7 @@ Plotting Examples
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.498 seconds)
+   **Total running time of the script:** (0 minutes 1.470 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem.py:

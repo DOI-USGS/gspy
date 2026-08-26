@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Functionality &mdash; gspy 2.2.8 documentation</title>
+  <title>Basic Functionality &mdash; gspy 2.2.8.post1.dev39+g93dc3f2a8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=918ed70e"></script>
+      <script src="../../_static/documentation_options.js?v=377256bc"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -151,7 +151,7 @@ Group: /survey
 │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
 │       comment:       This dataset is incomplete and has been downsampled for th...
 │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-│       gspy_version:  2.2.4
+│       gspy_version:  2.2.8
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -393,7 +393,7 @@ Attributes:
     references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
     comment:       This dataset is incomplete and has been downsampled for th...
     content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-    gspy_version:  2.2.4
+    gspy_version:  2.2.8
     conventions:   GS-2.0, CF-1.13
 </pre></div>
 </div>
@@ -422,7 +422,7 @@ Attributes:
     references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
     comment:       This dataset is incomplete and has been downsampled for th...
     content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-    gspy_version:  2.2.4
+    gspy_version:  2.2.8
     conventions:   GS-2.0, CF-1.13
 </pre></div>
 </div>
@@ -443,9 +443,18 @@ either directly or by using the group path</p>
             &#39;/survey/data/raw_data/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
+            &#39;/survey/derived_maps/maps/magnetic_system;  /survey; raw data &#39;
+            &#39;/survey/data; inverted 1-D electrical resistivity models &#39;
+            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
+            &#39;/survey/data/raw_data; inverted resistivity models &#39;
+            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
+            &#39;intensity /survey/derived_maps/maps;  &#39;
+            &#39;/survey/data/raw_data/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
             &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
  &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
- &#39;gspy_version&#39;: &#39;2.2.4&#39;,
+ &#39;gspy_version&#39;: &#39;2.2.8&#39;,
  &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
             &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
             &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
@@ -478,9 +487,18 @@ either directly or by using the group path</p>
             &#39;/survey/data/raw_data/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/tempest_system;  &#39;
             &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
+            &#39;/survey/derived_maps/maps/magnetic_system;  /survey; raw data &#39;
+            &#39;/survey/data; inverted 1-D electrical resistivity models &#39;
+            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
+            &#39;/survey/data/raw_data; inverted resistivity models &#39;
+            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
+            &#39;intensity /survey/derived_maps/maps;  &#39;
+            &#39;/survey/data/raw_data/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/tempest_system;  &#39;
+            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
             &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
  &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
- &#39;gspy_version&#39;: &#39;2.2.4&#39;,
+ &#39;gspy_version&#39;: &#39;2.2.8&#39;,
  &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
             &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
             &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
@@ -1248,7 +1266,7 @@ Group: /
                 name:        inversion_parameters
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.604 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.379 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-xarray-methods-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/97247a44857b3780174169eaa85d2363/plot_xarray_methods.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xarray_methods.ipynb</span></code></a></p>

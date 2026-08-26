@@ -5,8 +5,8 @@ dataset_attrs:
     type: data
     structure: tabular
     mode: airborne
-    method: electromagnetic, time domain
-    instrument: skytem
+    method: ["electromagnetic, time domain", "magnetic"]
+    instrument: SkyTEM 304M
 
 coordinates:
     x: E_Nad83
@@ -113,9 +113,9 @@ variables:
     DateTime:
         standard_name: time
         long_name: Time, decimal days
-        units: day
+        units: days since 1900-1-1 0:0:0
+        calendar: gregorian
         missing_value: not_defined
-        axis: T
         datum: January 1, 1900
 
     dec:
