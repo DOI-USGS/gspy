@@ -1,26 +1,34 @@
-# Pre-commit hooks for gspy. Runs locally on `git commit`; nothing server-side.
-#
-# One-time setup per clone:
-#     pip install pre-commit
-#     pre-commit install
-#
-# After that, the checks below run automatically on every commit against the
-# staged files. Run against everything on demand with:
-#     pre-commit run --all-files
+# Run once to enable:  pre-commit install
+# Thereafter mypy runs on staged files at every `git commit` and blocks on
+# type errors. Config for mypy itself lives in pyproject.toml ([tool.mypy]).
 repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        # Type stubs / deps mypy needs to resolve imports it doesn't ignore.
+        additional_dependencies:
+          - numpy
+        # Check the whole package, not just the staged subset, so cross-file
+        # signature changes are caught. Config (paths, ignores) is in pyproject.
+        pass_filenames: false
+        args: ["--config-file=pyproject.toml"]
   - repo: local
     hooks:
       - id: no-absolute-paths
-        name: Block absolute paths and leaked identities
+        name: Block absolute paths, leaked identities and credentials
         description: >-
           Reject /Users/<name>, /home/<name>/, and Windows <drive>:\Users\
           paths that Sphinx bakes into generated docs, plus personal free-mail
-          addresses (gmail/yahoo/...) and internal DOI hostnames (*.gs.doi.net,
-          igsk* build machines). Official *.usgs.gov / doi.gov addresses pass.
+          addresses (gmail/yahoo/...), internal DOI hostnames (*.gs.doi.net,
+          igsk* build machines) and hard-coded credentials (quoted
+          password/token/api_key literals, credentials in URLs, PEM private
+          keys, AWS/GitHub keys). Official *.usgs.gov / doi.gov addresses and
+          placeholder or environment-sourced values pass.
         entry: python scripts/hygiene.py
         # `language: python` lets pre-commit provide the interpreter, so the
         # `python` executable exists on every OS (macOS/Linux often lack a bare
         # `python`; Windows lacks `python3`). No third-party deps are needed.
         language: python
         # Skip binary artifacts the scanner would ignore anyway.
-        exclude: '\.(zip|h5|nc|png|jpe?g|gif|pdf|tiff?|ico|woff2?|ttf|eot)$'
+        exclude: '\.(zip|h5|hdf5|nc|nc4|netcdf|png|jpe?g|gif|pdf|tiff?|ico|woff2?|ttf|eot|las|laz|shp|shx|dbf|npy|npz|so|nbi|nbc)$'
