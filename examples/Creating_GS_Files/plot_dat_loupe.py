@@ -51,7 +51,7 @@ data = join(data_path, 'data//Kankakee.dat')
 metadata = join(data_path, 'data//Loupe_data_metadata.yml')
 
 #%%
-raw_data = data_container.gs.add(key='raw_data', data_filename=data, 
+raw_data = data_container.gs.add(key='raw_data', data=data, 
                                  metadata_file=metadata, file_type='loupe')
 
 #%%
@@ -81,7 +81,7 @@ d_data = join(data_path, 'model//Kankakee_MOD_dat.xyz')
 d_supp = join(data_path, 'model//models.yml')
 
 #%%
-md = model_container.gs.add(key='inversion', data_filename=d_data, metadata_file=d_supp)
+md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
 
 #%%
 #

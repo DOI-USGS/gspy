@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from os.path import join
 import numpy as np
 import gspy
-from gspy import Survey
+from gspy import Survey, Metadata
 import xarray as xr
 from pprint import pprint
 import warnings
@@ -66,12 +66,14 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
 d_data1 = join(data_path, 'data//skytem_contractor_data.csv')
 d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
 
-raw_systems = {"skytem_system" : survey["nominal_system"],
-          "magnetic_system" : survey["magnetic_system"]}
+raw_systems = Metadata.read(join(data_path, "data//skytem_system.yml"))
+
+# raw_systems = {"skytem_system" : survey["nominal_system"],
+        #   "magnetic_system" : survey["magnetic_system"]}
 
 # Add the raw AEM data as a tabular dataset,
 # pass the EM system from the survey
-rd = data_container.gs.add(key='raw_data', data_filename=d_data1, 
+rd = data_container.gs.add(key='raw_data', data=d_data1,
                            metadata_file=d_supp1, system=raw_systems)
 
 #%%
@@ -82,15 +84,17 @@ rd = data_container.gs.add(key='raw_data', data_filename=d_data1,
 d_data2 = join(data_path, 'data//skytem_processed_data.csv')
 d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
 
+print(rd['skytem_system'])
+
 #%%
 # Example of how systems can be selected and modified to accurately match the processed data
-proc_systems = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], 
+proc_systems = {"skytem_system" : rd["skytem_system"].isel(lm_gate_times=np.s_[1:],
                                                           hm_gate_times=np.s_[10:]),
-          "magnetic_system" : survey["magnetic_system"]}
+          "magnetic_system" : rd["magnetic_system"]}
 
 #%%
 # Add the processed AEM data as a tabular dataset, passing the updated systems
-pd = data_container.gs.add(key='processed_data', data_filename=d_data2, 
+pd = data_container.gs.add(key='processed_data', data=d_data2,
                            metadata_file=d_supp2, system=proc_systems)
 
 #%%
@@ -117,7 +121,7 @@ m_data3 = join(data_path, 'model//skytem_inverted_models.csv')
 m_supp3 = join(data_path, 'model//skytem_inverted_models.yml')
 
 # Add the inverted AEM models as a tabular dataset
-mods = model_container.gs.add(key='inverted_models', data_filename=m_data3, 
+mods = model_container.gs.add(key='inverted_models', data=m_data3,
                               metadata_file=m_supp3)
 
 #%%
@@ -144,7 +148,7 @@ d_data4 = join(data_path, 'data//top_dolomite_blocky_lidar.csv')
 d_supp4 = join(data_path, 'data//bedrock_picks.yml')
 
 # Add the AEM-based estimated of depth to bedrock as a tabular dataset
-bedrock = data_container.gs.add(key='depth_to_bedrock', data_filename=d_data4, 
+bedrock = data_container.gs.add(key='depth_to_bedrock', data=d_data4,
                                 metadata_file=d_supp4)
 
 #%%
@@ -196,7 +200,7 @@ survey.gs.to_netcdf(d_out)
 data_container.gs.to_netcdf(join(data_path, 'test_datacontainer.nc'))
 
 # %%
-# Opening a GS NetCDF 
+# Opening a GS NetCDF
 # ^^^^^^^^^^^^^^^^^^^
 new_survey = gspy.open_datatree(d_out)['survey']
 
