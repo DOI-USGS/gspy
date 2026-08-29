@@ -1,0 +1,44 @@
+dataset_attrs:
+    title: SkyTEM AEM Survey, Northeast Wisconsin Bedrock Mapping
+    institution: USGS Geology, Geophysics, and Geochemistry Science Center
+    source: ??
+    history: ??
+    references: ??
+    comment: ??
+    conventions: GS 2.0
+    type: survey
+survey_information:
+    contractor_project_number: ??
+    contractor: SkyTEM Canada Inc
+    client: U.S. Geological Survey
+    survey_type: EM/Mag
+    survey_area_name: ??
+    state: ??
+    country: ??
+    acquisition_start: 20210117
+    acquisition_end: 20210207
+    dataset_created: yyyymmdd
+spatial_ref:
+    wkid: 3071
+    authority: EPSG
+    crs_wkt: ??
+    vertical_crs: NAVD88
+flightline_information:
+    traverse_line_spacing: ??
+    traverse_line_direction: ??
+    tie_line_spacing: ??
+    tie_line_direction: ??
+    nominal_line_spacing: ??
+    nominal_terrain_clearance: ??
+    final_line_kilometers: ??
+    traverse_line_numbers: ??
+    tie_line_numbers: ??
+survey_equipment:
+    aircraft: ??
+    magnetometer: ??
+    spectrometer_system: ??
+    radar_altimeter_system: ??
+    radar_altimeter_sample_rate: ??
+    laser_altimeter_system: ??
+    navigation_system: ??
+    acquisition_system: ??

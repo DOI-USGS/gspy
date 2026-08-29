@@ -1,0 +1,340 @@
+dataset_attrs:
+    content: ?? summary statement of what the dataset contains ??
+    comment: ?? additional details or ancillary information ??
+    type: ?? data or models ??
+    method: ?? what geophysical method(s) are represented by this dataset ??
+    mode: ?? ground or airborne or borehole or ... ??
+    instrument: ?? what is the instrument ??
+    structure: tabular
+    property: ?? is there a physical or geophysical property represented? ?
+coordinates:
+    x: ?? name of the x-axis coordinate variable ??
+    y: ?? name of the y-axis coordinate variable ??
+    z: ?? name of the z-axis (vertical) coordinate variable ??
+    t: ?? name of the t-axis (temporal) coordinate variable ??
+dimensions:
+    my_dimension_variable_name:
+        standard_name: my_dimension_variable_name
+        long_name: more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.
+        units: units of the dimension
+        missing_value: not_defined
+        length: 10
+        increment: 5.0
+        origin: 2.5
+    my_other_dimension_variable_name:
+        standard_name: my_other_dimension_variable_name
+        long_name: A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.
+        units: units of the dimension
+        missing_value: not_defined
+        bounds: [[0, 2], [2, 6], [4, 10], [8, 16]]
+        centers: [1, 4, 7, 12]
+variables:
+    DTM:
+        standard_name: dtm
+        long_name: Final Ground Elevation (Ortho)
+        missing_value: -999.99
+        units: m
+    Date:
+        standard_name: date
+        long_name: Date (yyyymmdd)
+        missing_value: -9999999
+        units: not_defined
+    EMX_HPRG:
+        standard_name: emx_hprg
+        long_name: HPRG Corrected EMX Windows
+        missing_value: -999.999999
+        units: fT
+        dimensions: ['index', '??']
+    EMX_NonHPRG:
+        standard_name: emx_nonhprg
+        long_name: Raw (non-HPRG) EMX Windows
+        missing_value: -999.999999
+        units: fT
+        dimensions: ['index', '??']
+    EMZ_HPRG:
+        standard_name: emz_hprg
+        long_name: HPRG Corrected EMZ Windows
+        missing_value: -999.999999
+        units: fT
+        dimensions: ['index', '??']
+    EMZ_NonHPRG:
+        standard_name: emz_nonhprg
+        long_name: Raw (non-HPRG) EMZ Windows
+        missing_value: -999.999999
+        units: fT
+        dimensions: ['index', '??']
+    Easting:
+        standard_name: easting
+        long_name: PROJECTION=WGS84/15N
+        missing_value: -99999.99
+        units: m
+    Easting_Albers:
+        standard_name: easting_albers
+        long_name: PROJECTION=WGS84/Albers
+        missing_value: -99999.99
+        units: m
+    Fiducial:
+        standard_name: fiducial
+        long_name: Fiducial Number
+        missing_value: -999999.9
+        units: not_defined
+    Flight:
+        standard_name: flight
+        long_name: Flight Number
+        missing_value: -99
+        units: not_defined
+    GPS_Elevation:
+        standard_name: gps_elevation
+        long_name: Final GPS Elevation (Ortho)
+        missing_value: -999.99
+        units: m
+    GPS_Time:
+        standard_name: gps_time
+        long_name: GPS seconds of week
+        missing_value: -999999.9
+        units: s
+    HSep_GPS:
+        standard_name: hsep_gps
+        long_name: Tx-Rx horizontal GPS separation
+        missing_value: -999.99
+        units: m
+    HSep_PFEst:
+        standard_name: hsep_pfest
+        long_name: Tx-Rx primary field derived horizontal separation
+        missing_value: -999.99
+        units: m
+    HSep_Std:
+        standard_name: hsep_std
+        long_name: Tx-Rx HPRG corrected nominal horizontal separation
+        missing_value: -999.99
+        units: m
+    Laser:
+        standard_name: laser
+        long_name: Final Laser altimeter
+        missing_value: -999.99
+        units: m
+    Latitude:
+        standard_name: latitude
+        long_name: DATUM=WGS84
+        missing_value: -99.9999999
+        units: deg
+    Line:
+        standard_name: line
+        long_name: Line Number
+        missing_value: -99999999
+        units: not_defined
+    Longitude:
+        standard_name: longitude
+        long_name: DATUM=WGS84
+        missing_value: -999.9999999
+        units: deg
+    Northing:
+        standard_name: northing
+        long_name: PROJECTION=WGS84/15N
+        missing_value: -999999.99
+        units: m
+    Northing_Albers:
+        standard_name: northing_albers
+        long_name: PROJECTION=WGS84/Albers
+        missing_value: -999999.99
+        units: m
+    Proj_CGG:
+        standard_name: proj_cgg
+        long_name: CGG Project Number
+        missing_value: -9999
+        units: not_defined
+    Proj_Client:
+        standard_name: proj_client
+        long_name: Client Project Number
+        missing_value: -99999999
+        units: not_defined
+    RMI:
+        standard_name: rmi
+        long_name: Final RMI
+        missing_value: -99999.999
+        units: nT
+    Radalt:
+        standard_name: radalt
+        long_name: Final Radar altimeter
+        missing_value: -999.99
+        units: m
+    Rx_Bearing:
+        standard_name: rx_bearing
+        long_name: Receiver bird bearing
+        missing_value: -999.99
+        units: deg
+    Rx_Pitch:
+        standard_name: rx_pitch
+        long_name: Receiver coil pitch nose up positive
+        missing_value: -999.99
+        units: deg
+    Rx_Roll:
+        standard_name: rx_roll
+        long_name: Receiver coil roll to the right positive
+        missing_value: -999.99
+        units: deg
+    Rx_Yaw:
+        standard_name: rx_yaw
+        long_name: Receiver coil yaw to the right positive
+        missing_value: -999.99
+        units: deg
+    TMI:
+        standard_name: tmi
+        long_name: Final TMI
+        missing_value: -99999.999
+        units: nT
+    TSep_GPS:
+        standard_name: tsep_gps
+        long_name: Tx-Rx transverse GPS separation
+        missing_value: -999.99
+        units: m
+    Time_Local:
+        standard_name: time_local
+        long_name: Local time (CST) seconds since midnight
+        missing_value: -999999.9
+        units: s
+    Time_UTC:
+        standard_name: time_utc
+        long_name: UTC time seconds since midnight
+        missing_value: -999999.9
+        units: s
+    Tx_Bearing:
+        standard_name: tx_bearing
+        long_name: Transmitter loop bearing
+        missing_value: -999.99
+        units: deg
+    Tx_Elevation:
+        standard_name: tx_elevation
+        long_name: Final Transmitter Elevation (Ortho)
+        missing_value: -999.99
+        units: m
+    Tx_Height:
+        standard_name: tx_height
+        long_name: Transmitter height above ground
+        missing_value: -999.99
+        units: m
+    Tx_Height_Std:
+        standard_name: tx_height_std
+        long_name: Transmitter height above ground Standard
+        missing_value: -999.99
+        units: m
+    Tx_Pitch:
+        standard_name: tx_pitch
+        long_name: Transmitter loop pitch nose up positive
+        missing_value: -999.99
+        units: deg
+    Tx_Roll:
+        standard_name: tx_roll
+        long_name: Transmitter loop roll right-wing down positive
+        missing_value: -999.99
+        units: deg
+    Tx_Yaw:
+        standard_name: tx_yaw
+        long_name: Transmitter loop yaw to the right positive
+        missing_value: -999.99
+        units: deg
+    VSep_GPS:
+        standard_name: vsep_gps
+        long_name: Tx-Rx vertical GPS separation
+        missing_value: -999.99
+        units: m
+    VSep_PFEst:
+        standard_name: vsep_pfest
+        long_name: Tx-Rx primary field derived vertical separation
+        missing_value: -999.99
+        units: m
+    VSep_Std:
+        standard_name: vsep_std
+        long_name: Tx-Rx HPRG corrected nominal vertical separation
+        missing_value: -999.99
+        units: m
+    X_Geofact:
+        standard_name: x_geofact
+        long_name: Geometry factor - X component
+        missing_value: -9999.99999
+        units: not_defined
+    X_LowFreq:
+        standard_name: x_lowfreq
+        long_name: Low Frequency monitor - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_Powerline:
+        standard_name: x_powerline
+        long_name: Powerline - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_PrimaryField:
+        standard_name: x_primaryfield
+        long_name: Primary Field - X component
+        missing_value: -9999.999
+        units: fT
+    X_Sferics:
+        standard_name: x_sferics
+        long_name: Sferics - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_VLF1:
+        standard_name: x_vlf1
+        long_name: VLF1 21.4kHz - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_VLF2:
+        standard_name: x_vlf2
+        long_name: VLF2 24.0kHz - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_VLF3:
+        standard_name: x_vlf3
+        long_name: VLF3 24.8kHz - X component
+        missing_value: -9999.999
+        units: not_defined
+    X_VLF4:
+        standard_name: x_vlf4
+        long_name: VLF4 25.2kHz - X component
+        missing_value: -9999.999
+        units: not_defined
+    Z_Geofact:
+        standard_name: z_geofact
+        long_name: Geometry factor - Z component
+        missing_value: -9999.99999
+        units: not_defined
+    Z_LowFreq:
+        standard_name: z_lowfreq
+        long_name: Low Frequency monitor - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_Powerline:
+        standard_name: z_powerline
+        long_name: Powerline - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_PrimaryField:
+        standard_name: z_primaryfield
+        long_name: Primary Field - Z component
+        missing_value: -9999.999
+        units: fT
+    Z_Sferics:
+        standard_name: z_sferics
+        long_name: Sferics - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_VLF1:
+        standard_name: z_vlf1
+        long_name: VLF1 21.4kHz - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_VLF2:
+        standard_name: z_vlf2
+        long_name: VLF2 24.0kHz - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_VLF3:
+        standard_name: z_vlf3
+        long_name: VLF3 24.8kHz - Z component
+        missing_value: -9999.999
+        units: not_defined
+    Z_VLF4:
+        standard_name: z_vlf4
+        long_name: VLF4 25.2kHz - Z component
+        missing_value: -9999.999
+        units: not_defined

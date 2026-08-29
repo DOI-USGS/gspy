@@ -1,0 +1,105 @@
+dataset_attrs:
+    content: raw AEM data
+    comment: This dataset includes minimally processed (raw) AEM data
+    type: data
+    mode: airborne
+    method: [magnetic, radiometric, "electromagnetic, time domain"]
+    instrument: 30Hz Tempest
+
+coordinates:
+    x: Easting_Albers
+    y: Northing_Albers
+    z: DTM
+
+tempest_system:
+    type: system
+    mode: airborne
+    method: electromagnetic, time domain
+    instrument: 30Hz Tempest
+
+    dimensions:
+        gate_times:
+            standard_name: gate_times
+            long_name: receiver gate times
+            units: seconds
+            missing_value: not_defined
+            bounds: [[5.430000e-06, 1.628000e-05],
+                        [2.713000e-05, 3.798000e-05],
+                        [4.883000e-05, 5.968000e-05],
+                        [7.053000e-05, 1.030800e-04],
+                        [1.139400e-04, 1.681900e-04],
+                        [1.790400e-04, 2.767000e-04],
+                        [2.875500e-04, 4.503200e-04],
+                        [4.611700e-04, 7.107400e-04],
+                        [7.215900e-04, 1.101380e-03],
+                        [1.112230e-03, 1.709030e-03],
+                        [1.719880e-03, 2.663920e-03],
+                        [2.674770e-03, 4.161360e-03],
+                        [4.172210e-03, 6.505170e-03],
+                        [6.516030e-03, 1.008600e-02],
+                        [1.009686e-02, 1.666171e-02]]
+            centers: [1.085000e-05, 3.255000e-05, 5.426000e-05, 8.681000e-05,
+                1.410600e-04, 2.278700e-04, 3.689300e-04, 5.859500e-04,
+                9.114800e-04, 1.410630e-03, 2.191900e-03, 3.418070e-03,
+                5.338690e-03, 8.301020e-03, 1.337928e-02]
+
+    variables:
+
+        data_normalized: True
+        output_data_type: B
+        reference_frame: right-handed positive up
+        output_sample_frequency: 5
+        digitization_frequency: 92160
+        
+        transmitter:
+            label: Z
+            area: 155
+            waveform_type: square
+            waveform_time:
+                values: [-1.66666667e-02, -1.66612413e-02, -5.4255e-06,  0.0, 5.4255e-06,  1.66612413e-02,  1.66666667e-02]
+                long_name: not_defined
+                missing_value: not_defined
+                units: s
+            waveform_current:
+                values: [0.0,  1.0,  1.0,  0.0, -1.0, -1.0,  0.0]
+                dimensions: 'waveform_time'
+            scale_factor: 0.5
+            peak_current: 560
+            peak_moment: 86800
+            base_frequency: 30
+            orientation: Z
+            number_of_turns: 1
+            on_time: 0.00833
+            off_time: 0.00833
+
+        receiver:
+            label: [z, x]
+            orientation: [z, x]
+
+        couplet:
+            transmitters: [z, z]
+            receivers: [z, x]
+            txrx_dx: [-120, -120]
+            txrx_dy: [0, 0]
+            txrx_dz: [-52, -52]
+
+variables:
+    Easting_Albers:
+        long_name: Easting_Albers:PROJECTION=WGS84/Albers
+    Northing_Albers:
+        long_name: Northing_Albers:PROJECTION=WGS84/Albers
+    DTM:
+        positive: up
+        datum: NAD88
+    EMX_NonHPRG:
+        system_couplet: z_x
+        dimensions: [index, gate_times]
+    EMX_HPRG:
+        system_couplet: z_x
+        dimensions: [index, gate_times]
+    EMZ_NonHPRG:
+        system_couplet: z_z
+        dimensions: [index, gate_times]
+    EMZ_HPRG:
+        system_couplet: z_z
+        dimensions: [index, gate_times]

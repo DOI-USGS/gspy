@@ -1,0 +1,27 @@
+name: gspy_workshop
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - jupyterlab
+  - ipykernel
+  - chardet
+  - numpy
+  - scipy
+  - pandas
+  - xarray
+  - h5py
+  - h5netcdf
+  - netcdf4
+  - rioxarray
+  - rasterio
+  - pyproj
+  - pyyaml
+  - matplotlib
+  - fortranformat
+  # A declared gspy dependency that the workshop never touches, but listing it
+  # here lets conda-forge resolve GMT rather than leaving it to pip.
+  - pygmt
+  - pip
+  - pip:
+      - gspy

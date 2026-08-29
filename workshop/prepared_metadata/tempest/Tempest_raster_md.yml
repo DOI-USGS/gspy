@@ -1,0 +1,130 @@
+dataset_attrs:
+    comment: contractor-derived product
+    content: gridded map of total magnetic intensity
+    type: data
+    mode: airborne
+    method: magnetic
+    instrument: Scintrex CS-3 cesium vapor magnetometer 
+
+magnetic_system:
+    type: system
+    mode: airborne
+    method: magnetic
+    instrument: Scintrex CS-3 c cesium-vapor magnetometer
+    
+    prefixes: ['base_magnetometer']
+
+    dimensions:
+        base_mag_locations:
+            standard_name: base_mag_locations
+            long_name: Base Magnetometer Location Index Numbers
+            units: not_defined
+            missing_value: not_defined
+            length: 6
+            increment: 1
+            origin: 1
+
+    variables:
+        transmitter:
+            label: passive
+            description: No artificial transmitter was used; the system measures the Earth's natural magnetic field (passive field). 
+    
+        receiver:
+            label: scalar_magnetometer
+            sensor_type: cesium_vapor
+            sensor_model: CS-3
+            sensor_manufacturer: Scintrex
+            description: Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger.
+                Magnetic samples are processed by a FASDAS magnetometer processor
+                board and synchronized via GPS PPS; a Bartington MAG-03MS100
+                three-axis fluxgate provides aircraft attitude for compensation.
+            orientation: tail-stinger mounted
+            coordinates: 
+                values: "[-10.74, 0.0, -0.55]"  
+                long_name: magnetometer location relative to Tx loop center (X,Y,Z)
+                units: meters 
+            acquisition_system: FASDAS survey/magnetometer computer; NovAtel OEMV-3 GPS with
+                OMNISTAR differential corrections; dynamic compensation driven by IMU
+                and fluxgate attitude inputs. A tail stinger mounted Bartington MAG-03MS100 three-axis fluxgate magnetometer is used to provide information on the attitude of the aircraft. This information is used for compensation of the measured magnetic total field.
+            sample_frequency:
+                values: 0.2
+                units: s                      
+            sensitivity:
+                values: 0.001
+                units: nT                     
+            typical_noise:
+                values: 1.0
+                units: nT                     
+            compensation: fully digital     
+            parallax:
+                values: 1.8
+                units: s                    
+    
+        base_magnetometer:
+            label: base_magnetometer
+            description: Ground magnetic base stations established at low-gradient sites; two CF1 magnetometers operated continuously at 1 s sampling with ~0.01 nT sensitivity. Base data edited to remove spikes/level shifts and used for diurnal correction per base location.
+            sensor_type: CF1 magnetometer
+            sample_frequency: 
+                values: 1
+                units: s
+            sensitivity: 
+                values: 0.01
+                units: nT
+            
+            location_names:
+                values: ["Greenwood, MS", "Alexandria, LA", "Monroe, LA", "West Memphis, AR", "Sikeston, MO", "Greenwood, MS"]
+                dimensions: 'base_mag_locations'
+
+            flights:
+                values: ["007-027", "028-036", "038-042", "044-062", "063-074", "075-077"]
+                dimensions: 'base_mag_locations'
+
+            values: 
+                values: [49170.0, 47640.7, 48362.6, 50083.5, 51678.8, 49170.0]
+                dimensions: 'base_mag_locations'
+
+
+        dynamic_compensation: Compensation calibration flights at high altitude; pitches/rolls/yaws used to derive coefficients that remove aircraft-induced magnetic noise. Reported improvement ratio ~2.91 (std. dev. uncompensated vs. compensated).  
+        diurnal_correction: Diurnal base values applied by location (see base_magnetometer section); base data edited and filtered to remove non-geophysical disturbances.
+        igrf_model_date: "2019-12-01"
+        igrf_model_height: "167.9 m"
+        igrf_removed_model_epoch: "2015.0"
+        tieline_levelling: RMI levelled to prior RESOLVE data; due to height differences and limited tie lines, manual adjustments and micro-levelling were applied.
+        deliverables: "Total Magnetic Intensity (TMI), provided with EM & terrain data"
+
+        couplet:
+            transmitters: [passive]
+            receivers: [scalar_magnetometer]
+            description: Passive Earth field transmitter paired with single scalar magnetometer receiver mounted in tail stinger.
+
+coordinates:
+    x: Easting_Albers
+    y: Northing_Albers
+
+dimensions:
+    x: Easting_Albers
+    y: Northing_Albers
+
+variables:
+    magnetic_tmi:
+        dimensions: [x, y]
+        system_couplet: passive_scalar_magnetometer
+        standard_name: total_magnetic_intensity
+        long_name: Total magnetic intensity, diurnally corrected and filtered
+        units: nT
+        missing_value: 1.70141e+38
+        files: [../../data/tempest/mag.tif]
+
+    Easting_Albers:
+        standard_name: easting_albers
+        long_name: Easting
+        units: meter
+        missing_value: not_defined
+        
+    Northing_Albers:
+        standard_name: northing_albers
+        long_name: Northing
+        units: meter
+        missing_value: not_defined
+
+
