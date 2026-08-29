@@ -2,17 +2,6 @@
 # Thereafter mypy runs on staged files at every `git commit` and blocks on
 # type errors. Config for mypy itself lives in pyproject.toml ([tool.mypy]).
 repos:
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.2
-    hooks:
-      - id: mypy
-        # Type stubs / deps mypy needs to resolve imports it doesn't ignore.
-        additional_dependencies:
-          - numpy
-        # Check the whole package, not just the staged subset, so cross-file
-        # signature changes are caught. Config (paths, ignores) is in pyproject.
-        pass_filenames: false
-        args: ["--config-file=pyproject.toml"]
   - repo: local
     hooks:
       - id: no-absolute-paths

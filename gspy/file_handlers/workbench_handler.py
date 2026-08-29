@@ -1,29 +1,34 @@
-from pprint import pprint
-import re
 import numpy as np
 from pandas import read_csv, Series, concat, Index
 from .xyz_handler import xyz_handler
-from ..metadata.Metadata import Metadata
 
-class workbench_handler(xyz_handler):
+class workbench_handler(xyz_handler, key='workbench'):
+    """Handler for Aarhus Workbench .xyz data
+    """
+    priority = 10
 
     @classmethod
-    def read(cls, filename, metadata=None, **kwargs):
+    def can_read(cls, filename):
+        return super().can_read(filename) and cls.is_workbench(filename)
 
-        assert 'system' in kwargs, ValueError("Need to pass a system through when reading workbench data")
+    def read(self, metadata=None, system=None, **kwargs):
+        """Read a Workbench .xyz data file.
 
-        self = cls()
+        Parameters
+        ----------
+        metadata : dict, optional
+            GSPy variable metadata.
+        system : xarray.DataTree
+            The system this data was collected with. Its couplet labels name the
+            channels in the file, so the read cannot proceed without it.
 
-        self.filename = filename
+        """
+        if system is None:
+            raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
-        self.__read(metadata, **kwargs)
-
-        return self, self.metadata
-
-    def __read(self, metadata=None, **kwargs):
         self.metadata, n_header = self.__parse_metadata(self.filename)
 
-        system = kwargs['system'].gs.get_system_with_method('electromagnetic')
+        system = system.gs.get_system_with_method('electromagnetic')
 
         mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
 
@@ -122,37 +127,44 @@ class workbench_handler(xyz_handler):
 
         return df_avg
 
-class workbench_model_handler(xyz_handler):
+class workbench_model_handler(xyz_handler, key='workbench_model'):
+    """Handler for Aarhus Workbench .xyz inverted models
+
+    A model .xyz comes as a set of three: _dat, _inv and _syn. The gate times in
+    their headers define a dimension, returned in ``file_metadata``.
+
+    """
+    #: Beats workbench_handler, which claims any .xyz Workbench file.
+    priority = 20
 
     @classmethod
-    def read(cls, filename, metadata=None, **kwargs):
+    def can_read(cls, filename):
+        return super().can_read(filename) and cls.is_workbench_model(str(filename))
 
-        assert 'system' in kwargs, ValueError(f"Need to pass a system through when reading workbench data {filename}")
+    def read(self, metadata=None, system=None, **kwargs):
+        """Read a Workbench .xyz model file and its siblings.
 
-        self = cls()
+        Parameters
+        ----------
+        metadata : dict, optional
+            GSPy variable metadata.
+        system : xarray.DataTree
+            The system this data was collected with. Its couplet labels name the
+            channels in the files, so the read cannot proceed without it.
 
-        self.filename = filename
+        """
+        if system is None:
+            raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
-        dimensions = self.__read(metadata, **kwargs)
-
-        return self, dimensions
-
-    def __read(self, metadata=None, **kwargs):
-        # self.metadata, n_header = self.__parse_metadata(self.filename)
         self.metadata = {}
 
-        system = kwargs['system'].gs.get_system_with_method('electromagnetic')
+        system = system.gs.get_system_with_method('electromagnetic')
 
         mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
 
-        self._df, dimensions = self.read_data(self.filename, mapping=mapping)
+        self._df, self._file_metadata = self.read_data(self.filename, mapping=mapping)
 
         self.combine_metadata(metadata)
-
-        return dimensions
-
-    def __parse_metadata(self, filename):
-        pass
 
     def read_data(self, filename, **kwargs):
 
@@ -215,8 +227,6 @@ class workbench_model_handler(xyz_handler):
                                                           "units": "seconds",
                                                           "missing_value": "not_defined",
                                                           "centers": gate_times}
-                        print('Detected gate_time metadata from the workbench files')
-                        pprint(dimensions)
                     else:
                         dimensions["lm_gate_times"] = {"standard_name": "lm_gate_times",
                                                           "long_name": "calibrated low moment gate times",
@@ -228,8 +238,6 @@ class workbench_model_handler(xyz_handler):
                                                           "units": "seconds",
                                                           "missing_value": "not_defined",
                                                           "centers": gate_times[col_indices1-1]}
-                        print('Detected gate_time metadata from the workbench files')
-                        pprint(dimensions)
                     file_metadata = {'dimensions':dimensions}
 
 

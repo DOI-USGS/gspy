@@ -1,13 +1,19 @@
-from copy import copy
-from pathlib import Path
 import pandas as pd
-from ..metadata.Metadata import Metadata
 from .file_handler_abc import file_handler
 
-class csv_handler(file_handler):
+class csv_handler(file_handler, key='csv'):
     """CSV handler wrapping pandas
 
+    The catch all: anything no other format claims is read as delimited text.
+
     """
+    #: Lower than every other format, so a more specific handler always wins.
+    priority = -1
+
+    @classmethod
+    def can_read(cls, filename):
+        return True
+
     @property
     def columns(self):
         return self.df.columns
@@ -15,23 +21,7 @@ class csv_handler(file_handler):
     def metadata_template(self, **kwargs):
 
         out = super().metadata_template(**kwargs)
-
-        template = {"standard_name": "not_defined",
-                    "long_name": "not_defined",
-                    "missing_value": "not_defined",
-                    "units": "not_defined"}
-
-        columns_counts = self.column_header_counts
-        variables = {}
-        columns = sorted(list(columns_counts.keys()))
-
-        for var in columns:
-            tmp = Metadata.merge(template, kwargs.get(var, {}))
-            if columns_counts[var] > 1:
-                tmp['dimensions'] = tmp.get('dimensions', ['index', '??'])
-            variables[var] = tmp
-
-        out['variables'] = variables
+        out['variables'] = self.variable_metadata_template(**kwargs)
 
         return out
 
@@ -39,16 +29,11 @@ class csv_handler(file_handler):
     def type(self):
         return 'csv'
 
-    @classmethod
-    def read(cls, filename, metadata=None, **kwargs):
-        self = cls()
-
-        self.filename = filename
-
+    def read(self, metadata=None, **kwargs):
         kwargs.pop('system', None)
 
         # Read the csv file
-        self.df = pd.read_csv(filename, na_values=['NaN'], **kwargs)
+        self.df = pd.read_csv(self.filename, na_values=['NaN'], **kwargs)
 
         weird = (self.df.map(type) != self.df.iloc[0].apply(type)).any(axis=0)
         for w in weird.keys():
@@ -58,9 +43,12 @@ class csv_handler(file_handler):
         self.metadata = {}
         self.combine_metadata(metadata)
 
-        return self, {}
+    @classmethod
+    def to_file(cls, tabular, filename):
+        """Write a gspy Tabular out as a csv.
 
-    def to_file(self, xr_dataset, filename):
+        A classmethod because writing needs no file to have been read.
 
-        tmpdf = xr_dataset.xr_to_dataframe()
+        """
+        tmpdf = tabular._obj.xr_to_dataframe()
         tmpdf.to_csv(filename, index=None)

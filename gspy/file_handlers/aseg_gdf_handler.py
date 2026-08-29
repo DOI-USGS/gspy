@@ -1,14 +1,25 @@
 import re
 import numpy as np
 import chardet
+from pathlib import Path
 from pandas import read_csv, read_fwf, DataFrame
 from .file_handler_abc import file_handler
 from ..metadata.Metadata import Metadata
 
 
-class aseg_gdf2_handler(file_handler):
+class aseg_gdf2_handler(file_handler, key='aseg'):
     """Handler for aseg gdf2 files
+
+    An ASEG-GDF2 .dat file comes with a .dfn definition file.
+
     """
+    priority = 10
+
+    @classmethod
+    def can_read(cls, filename):
+        filename = Path(filename)
+        return filename.suffix.lower() == '.dat' and filename.with_suffix('.dfn').is_file()
+
     @property
     def dfn_columns(self):
         """Entries in self.metadata that describe a column in the data file.
@@ -37,32 +48,19 @@ class aseg_gdf2_handler(file_handler):
                 out.append(key)
         return out
 
+    def column_metadata(self, column):
+        """The DFN file defines standard_name, long_name, units and missing_value
+        for every column, so a template starts from those rather than from
+        "not_defined" entries. The fortran format is ours, not the user's.
+        """
+        return {key : value for key, value in self.dfn_columns.get(column, {}).items()
+                if key != 'format'}
+
     def metadata_template(self, **kwargs):
 
         out = super().metadata_template(**kwargs)
 
-        template = {"standard_name": "not_defined",
-                    "long_name": "not_defined",
-                    "missing_value": "not_defined",
-                    "units": "not_defined"}
-
-        # The DFN file already defines standard_name, long_name, units and
-        # missing_value for every column, so use those as the starting point
-        # rather than a template of "not_defined" entries.
-        dfn = self.dfn_columns
-        existing_variables = kwargs.get('variables', {})
-
-        columns_counts = self.column_header_counts
-        variables = {}
-        for var in sorted(columns_counts.keys()):
-            from_dfn = {k : v for k, v in dfn.get(var, {}).items() if k != 'format'}
-            tmp = Metadata.merge(template, from_dfn)
-            tmp = Metadata.merge(tmp, existing_variables.get(var, {}))
-            if columns_counts[var] > 1:
-                tmp['dimensions'] = tmp.get('dimensions', ['index', '??'])
-            variables[var] = tmp
-
-        out['variables'] = variables
+        out['variables'] = self.variable_metadata_template(**kwargs)
 
         coords = kwargs.get('coordinates', self.metadata.get('coordinates', {}))
         axes = {'x' : {"axis" : "X"},
@@ -86,7 +84,7 @@ class aseg_gdf2_handler(file_handler):
     @property
     def numpy_formats(self):
         out = {}
-        for key, value in self.metadata.items():
+        for key, value in self.dfn_columns.items():
             fmt = value['format']
             if 'i' in fmt:
                 npfmt = np.int32
@@ -114,7 +112,7 @@ class aseg_gdf2_handler(file_handler):
             out = [first]
         else:
             out = []
-        for key, value in self.metadata.items():
+        for key, value in self.dfn_columns.items():
             fmt = value['format']
             if 'i' in fmt:
                 width = fmt.split('i')
@@ -140,26 +138,20 @@ class aseg_gdf2_handler(file_handler):
 
         return out
 
-    @classmethod
-    def read(cls, filename, metadata=None, fixed_format=False, **kwargs):
+    def read(self, metadata=None, fixed_format=False, **kwargs):
         """Read the contents of an ASEG-GDF2 file.
 
         First, we parse the definition file then use that with Pandas.
 
         Parameters
         ----------
-        filename : str
-            Data file.
-
-        Returns
-        -------
-        gspy.aseg_gdf_handler
+        metadata : dict, optional
+            GSPy variable metadata to merge with the DFN definitions.
+        fixed_format : bool, optional
+            Read as fixed width columns using the DFN's fortran formats.
 
         """
-        self = cls()
-
-        self.filename = filename
-        self.md_filename = filename.split('.dat')[0] + ".dfn"
+        self.md_filename = self.filename.split('.dat')[0] + ".dfn"
 
         # Open the DFN and parse into a dict.
         first_col_width, self.metadata = self.__parse_dfn_file(self.md_filename)
@@ -186,8 +178,6 @@ class aseg_gdf2_handler(file_handler):
             self._df = read_csv(self.filename, names=self.columns, dtype=self.numpy_formats, index_col=False, sep=r'\s+')
 
         self.combine_metadata(metadata)
-
-        return self, {}
 
     def __parse_dfn_file(self, filename):
         """Parses the ASEG GDF2 definition file but includes fixes.
@@ -300,39 +290,23 @@ class aseg_gdf2_handler(file_handler):
 
         return standard_name, metadata
 
-    @staticmethod
-    def _create_variable_metadata_template(filename, *args, **kwargs):
-        """Generates a template metadata file for variables only.
+    @classmethod
+    def to_file(cls, tabular, filename, default_f32="f10.3", default_f64="g12.6"):
+        """Export tabular data to an ASEG formatted data file
 
-        Assumes metadata has been provided for the dataset already, but creates extra entries for variables.
+        A classmethod because writing needs no file to have been read.
+
+        Parameters
+        ----------
+        tabular : gspy.Tabular
+            Dataset accessor to write.
+        filename : str
+            Path to output aseg file
 
         """
-        tmp_dic = {}
-        coords = kwargs['coordinates']
-        if 'x' in coords:
-            tmp_dic[coords['x']] = {"axis" : "X"}
-        if 'y' in coords:
-            tmp_dic[coords['y']] = {"axis" : "Y"}
-        if 'z' in coords:
-            tmp_dic[coords['z']] = {"axis" : "Z",
-                                    "positive" : "up or down?",
-                                    "datum" : "not_defined"}
-        if 't' in coords:
-            tmp_dic[coords['t']] = {"axis" : "T",
-                                    "datum" : "not_defined"}
+        raise NotImplementedError("Cannot yet write to aseg")
 
-        template_filename = "{}_variable_metadata_template.{}".format(*filename.split(os.sep)[-1].split('.'))
-
-        dump_metadata_to_file({'variable_metadata':tmp_dic}, template_filename)
-
-        s = ("\nGspy requires additional metadata on top of the ASEG standard in order to honour the CF convention.\n"
-             "We are creating a template file called {} that you need to fill out.\n"
-             "Once filled out, add that 'variable_metadata' dictionary to the metadata file\n").format(template_filename)
-
-        raise Exception(s)
-
-
-    def to_file(self, xr_dataset, filename, default_f32="f10.3", default_f64="g12.6"):
+        xr_dataset = tabular._obj
 
         skip_these = [xr_dataset.coords[x].attrs['bounds'] for x in xr_dataset.dims if 'bounds' in xr_dataset.coords[x].attrs]
 
@@ -358,19 +332,10 @@ class aseg_gdf2_handler(file_handler):
                         units = "UNITS={},".format(attrs['units'])
                     # Grab the format if present, otherwise use a default
 
-                fformat = attrs.get('format', self.get_fortran_format(key, default_f32=default_f32, default_f64=default_f64))
+                fformat = attrs.get('format', tabular.get_fortran_format(key, default_f32=default_f32, default_f64=default_f64))
 
                 strng = "DEFN {} ST=RECD,RT=;{}:{}:{}{}NAME={}\n".format(row, var.attrs['standard_name'], fformat, null, units, attrs['long_name'])
                 f.write(strng)
 
                 row += 1
             f.write("DEFN {} ST=RECD,RT=;END DEFN\n".format(row))
-        """Export tabular data to an ASEG formatted data file
-
-        Parameters
-        ----------
-        filename : str
-            Path to output aseg file
-
-        """
-        raise NotImplementedError("Cannot yet write to aseg")

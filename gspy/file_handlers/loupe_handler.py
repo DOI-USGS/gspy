@@ -1,42 +1,40 @@
 import re
 from copy import copy
 import numpy as np
-import chardet
 from os.path import isfile
+from pathlib import Path
 from .csv_handler import csv_handler
-from pandas import read_csv, read_fwf, DataFrame, concat, Series
-from pprint import pprint
+from pandas import read_csv, DataFrame
 
 
-class loupe_handler(csv_handler):
+class loupe_handler(csv_handler, key='loupe'):
     """Handler for Loupe data
+
+    A Loupe .dat file comes with a .dat.desc description file.
+
     """
+    priority = 10
+
+    @classmethod
+    def can_read(cls, filename):
+        return Path(filename).suffix.lower() == '.dat' and isfile(f"{filename}.desc")
 
     @property
     def type(self):
         return 'loupe'
 
-    @classmethod
-    def read(cls, filename, metadata=None, **kwargs):
+    def read(self, metadata=None, **kwargs):
         """Read the contents of a Loupe data and desc file.
 
         First, we parse the definition file then use that with Pandas.
 
         Parameters
         ----------
-        data_file_name : str
-            Data file.
-
-        Returns
-        -------
-        gspy.loupe_gs
+        metadata : dict, optional
+            GSPy variable metadata to merge with the desc file's descriptions.
 
         """
-        self = cls()
-
-        self.filename = filename
-
-        self.md_filename = filename + ".desc"
+        self.md_filename = self.filename + ".desc"
 
         # Open the DFN and parse into a dict.
         desc_metadata = self.__parse_desc_file(self.md_filename)
@@ -96,11 +94,9 @@ class loupe_handler(csv_handler):
 
         self.df = DataFrame(out_df)
 
-        self.metadata = metadata
+        self.metadata = dict(metadata or {})
 
         self.combine_metadata(desc_metadata, matched_keys=True)
-
-        return self, {}
 
     def __parse_desc_file(self, file_name):
         """Parses the ASEG GDF2 definition file but includes fixes.
