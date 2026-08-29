@@ -15,9 +15,22 @@ class System(Dataset):
                      'method',
                      'instrument')
 
-    # One spec per method family. Each names the fields that method uses and the
-    # thing each field is repeated for; the shape comes from the caller.
-    template_directory = Path(__file__).parents[1] / 'metadata' / 'system_templates'
+    @classmethod
+    def _template_directory(cls):
+        """Where the bundled system templates live.
+
+        One spec per method family. Each names the fields that method uses and
+        the thing each field is repeated for; the shape comes from the caller.
+
+        Resolved on call rather than at import so the builder's absolute path is
+        never baked into a class attribute (Sphinx renders those into the docs).
+
+        Returns
+        -------
+        pathlib.Path
+
+        """
+        return Path(__file__).parents[1] / 'metadata' / 'system_templates'
 
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
@@ -50,7 +63,7 @@ class System(Dataset):
         tuple of str
 
         """
-        return tuple(sorted(p.stem for p in cls.template_directory.glob('*.yml')))
+        return tuple(sorted(p.stem for p in cls._template_directory().glob('*.yml')))
 
     @classmethod
     def metadata_template(cls, key, name=None, transmitters=None, receivers=None, metadata=None):
@@ -160,7 +173,7 @@ class System(Dataset):
     @classmethod
     def _template_spec(cls, key):
         """The field spec for a method family, by short key."""
-        path = cls.template_directory / f"{key}.yml"
+        path = cls._template_directory() / f"{key}.yml"
         if not path.exists():
             raise ValueError(f"No system template called '{key}'. Choose one of {cls.templates()}")
 
