@@ -47,9 +47,23 @@ files = ["requirements.txt"]
 [project.optional-dependencies]
 docs = ["sphinx_gallery",
         "sphinx_rtd_theme"]
+test = ["pytest"]
 dev = ["gspy[docs]",
+       "gspy[test]",
        "twine"]
 excel = ["openpyxl"]
+
+[tool.mypy]
+# The pre-commit hook runs with pass_filenames = false, so mypy needs its target
+# here or it exits 2 and blocks every commit.
+files = ["gspy"]
+# Third-party geoscience stack (rioxarray, pyproj, chardet, ...) ships no stubs.
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = ["slow: runs a full example script end to end"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["gspy"]
