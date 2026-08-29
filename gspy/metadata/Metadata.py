@@ -1,4 +1,5 @@
 import os
+from copy import deepcopy
 from os.path import splitext
 from ._json_md_handler import read_json, to_json
 from ._yml_md_handler import read_yml, to_yml
@@ -8,7 +9,7 @@ import pprint
 
 class Metadata(dict):
 
-    def __init__(self, *args, required:tuple=None, **kwargs):
+    def __init__(self, *args, required:tuple|None=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.required = required
 
@@ -17,7 +18,7 @@ class Metadata(dict):
         return self._required
 
     @required.setter
-    def required(self, values:tuple):
+    def required(self, values:tuple|None):
         if values is not None:
             self._required = values
 
@@ -69,8 +70,9 @@ class Metadata(dict):
         out : Metadata
             Merged dictionaries
         """
-        # Create a copy of dict1 to avoid modifying it directly
-        self = this.copy()
+        # Deep, because a shallow copy shares the nested dicts with the caller and
+        # self[key].update(value) below would write straight into them.
+        self, that = deepcopy(dict(this)), deepcopy(dict(that))
 
         # Update with dict2, overwriting existing entries
         for key, value in that.items():
@@ -87,9 +89,6 @@ class Metadata(dict):
 
     def dump(self, filename, **kwargs):
         self.pop('directory', None)
-
-        print(self.pop('directory', ""))
-
 
         base, extension = splitext(filename)
 

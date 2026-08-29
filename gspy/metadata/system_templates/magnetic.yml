@@ -1,0 +1,117 @@
+# Magnetic system.
+#
+# Shaped by System.metadata_template('magnetic', transmitters=..., receivers=...).
+# The earth's field is the transmitter and it is passive, so the defaults below
+# describe a single passive transmitter read by a single magnetometer. Ask for
+# more receivers for a gradiometer and the couplets follow.
+pairing: cross
+
+labels:
+  transmitter: [passive]
+  receiver: [scalar_magnetometer]
+
+attrs:
+  type: system
+  mode: '?? airborne, ground, waterborne or borehole ??'
+  method: magnetic
+  instrument: '?? make and model, e.g. Geometrics G-822A cesium vapour magnetometer ??'
+
+dimensions:
+  base_mag_locations:
+    standard_name: base_mag_locations
+    long_name: base magnetometer location index numbers
+    units: not_defined
+    missing_value: not_defined
+    centers: '?? one index per base station location, e.g. [1, 2] ??'
+    discrete: true
+
+variables:
+
+  scalars:
+    diurnal_correction: '?? how the diurnal signal was removed, or that it was not ??'
+    lag_correction: '?? lag applied, or that none was ??'
+    heading_correction: '?? heading correction applied, or that none was ??'
+    dynamic_compensation: '?? aircraft compensation, e.g. the figure of merit result ??'
+    tieline_levelling: '?? how tie lines were used, or that none were ??'
+    microlevelling: '?? micro-levelling applied, or that none was ??'
+    altitude_correction: '?? altitude correction applied, or none ??'
+    igrf_model_date: '?? model generation and date, e.g. 2015, 15th generation ??'
+    igrf_model_location: '?? where the model was evaluated ??'
+    igrf_model_height: '?? height the model was evaluated at ??'
+    igrf_removed_model_epoch: '?? epoch of the model that was removed ??'
+    deliverables: '?? which products were produced, e.g. TMI, RMI, CVG ??'
+
+  transmitter:
+    description: '?? no artificial transmitter; the earth field is measured passively ??'
+
+  receiver:
+    sensor_type: '?? e.g. cesium_vapor ??'
+    sensor_model: '?? e.g. G-822A ??'
+    sensor_manufacturer: '?? e.g. Geometrics ??'
+    description: '?? what the sensor is and where it is mounted ??'
+    orientation: '?? how the sensor is mounted, e.g. tail stinger ??'
+    coordinates: '?? sensor position on the platform, or not_defined ??'
+    acquisition_system: '?? recording and navigation systems ??'
+    sample_frequency:
+      values: '?? Hz ??'
+      units: Hz
+    sensitivity:
+      values: '?? nT ??'
+      units: nT
+    accuracy:
+      values: '?? nT ??'
+      units: nT
+    typical_noise:
+      values: '?? nT ??'
+      units: nT
+    sensor_height:
+      values: '?? metres above ground ??'
+      units: m
+    lag_factor:
+      values: '?? seconds ??'
+      units: s
+    fom_pitch: '?? figure of merit, pitch, or not_defined ??'
+    fom_roll: '?? figure of merit, roll, or not_defined ??'
+    fom_yaw: '?? figure of merit, yaw, or not_defined ??'
+    fom_sum: '?? figure of merit, total, or not_defined ??'
+
+  couplet:
+    description: '?? which transmitter is paired with which receiver ??'
+
+prefixes:
+
+  base_magnetometer:
+    label: base_magnetometer
+    description: '?? where the base stations were and what they had to meet ??'
+    sensor_type: '?? sensor and synchronisation ??'
+    sample_frequency:
+      values: '?? Hz ??'
+      units: Hz
+    secondary_sensor_model: '?? backup sensor model, or not_defined ??'
+    secondary_sensor_sample_frequency: '?? backup sensor rate, or not_defined ??'
+    secondary_sensor_accuracy: '?? backup sensor accuracy, or not_defined ??'
+    secondary_sensor_precision: '?? backup sensor precision, or not_defined ??'
+    setup_dates: '?? when the stations were occupied ??'
+    location_names:
+      values: '?? one name per base station location ??'
+      dimensions: base_mag_locations
+    values:
+      values: '?? reference field value at each location ??'
+      units: nT
+      dimensions: base_mag_locations
+    latitude:
+      values: '?? latitude of each location ??'
+      long_name: Latitude
+      units: decimal degrees
+      dimensions: base_mag_locations
+    longitude:
+      values: '?? longitude of each location ??'
+      long_name: Longitude
+      units: decimal degrees
+      dimensions: base_mag_locations
+    elevation:
+      values: '?? elevation of each location ??'
+      long_name: Elevation
+      datum: '?? e.g. WGS84 ??'
+      units: m
+      dimensions: base_mag_locations

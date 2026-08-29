@@ -85,6 +85,9 @@ class Coordinate(DataArray):
                 values = (np.arange(nx) * dx) + x0
 
             else:
+                # bounds arrive as 2xN, a row of lower edges and a row of upper edges,
+                # so summing down axis 0 gives one center per cell. See
+                # Dataset.add_bounds_to_coordinate, which documents the same layout.
                 values = 0.5 * np.sum(bounds, axis=0)
 
         kwargs['values'] = values
@@ -138,7 +141,7 @@ class Coordinate(DataArray):
         """
         kwargs['standard_name'] = cls.check_is_projected(name, is_projected)
 
-        cls.check_standard_coordinates(name, **kwargs)
+        kwargs = cls.check_standard_coordinates(name, **kwargs)
 
         if is_dimension:
             dims = [name]
@@ -187,6 +190,12 @@ class Coordinate(DataArray):
         datum : str, optional
             Datum. Only used if name == 'z' or 't'.
 
+        Returns
+        -------
+        dict
+            The metadata, with the CF ``axis`` filled in for a standard coordinate.
+            Returned rather than mutated in place, since **kwargs is a local copy.
+
         """
         if name in ("x", "y", "z", "t"):
             if 'axis' not in kwargs:
@@ -197,3 +206,5 @@ class Coordinate(DataArray):
                 #assert kwargs['datum'] in ['ground surface', 'ellipsoid']
             if name == "t":
                 assert "datum" in kwargs, ValueError("time coordinate definition requires datum entry e.g. datum: Jan-01-1900")
+
+        return kwargs

@@ -254,7 +254,7 @@ class Raster(Dataset):
         ds = rio.open_rasterio(filename)
 
         # clean up
-        ds = ds.squeeze().drop('band')
+        ds = ds.squeeze().drop_vars('band')
         if '_FillValue' in ds.attrs:
             ds.values[ds.values == ds.attrs['_FillValue']] = np.nan
             #ds.attrs['missing_value'] = ds.attrs['_FillValue']

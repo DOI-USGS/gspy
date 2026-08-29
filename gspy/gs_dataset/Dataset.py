@@ -28,7 +28,8 @@ class Dataset:
     out : xarray.Dataset
 
     """
-    required_metadata = ('type',
+    #: Attributes every GS dataset must carry. Subclasses narrow or widen this.
+    required_metadata: tuple[str, ...] = ('type',
                      'structure',
                      'mode',
                      'method',
@@ -433,8 +434,56 @@ class Dataset:
     #     return dic
 
     @staticmethod
-    def metadata_template(data_filename=None, metadata_file=None, **kwargs):
+    def _system_specs(systems):
+        """One set of :meth:`System.metadata_template` arguments per system asked for.
 
+        ``systems`` is a family key, a list of them, or a mapping of the name to file
+        each system under onto either its key or the arguments describing its shape.
+
+        """
+        if isinstance(systems, str):
+            return [dict(key=systems)]
+
+        if isinstance(systems, dict):
+            return [dict(name=name, **(dict(key=spec) if isinstance(spec, str) else dict(spec)))
+                    for name, spec in systems.items()]
+
+        return [dict(key=key) for key in systems]
+
+    @staticmethod
+    def metadata_template(data=None, metadata_file=None, systems=None, **kwargs):
+        """Metadata template for a dataset, and for the systems that recorded it.
+
+        Parameters
+        ----------
+        data : str or pandas.DataFrame or gspy.file_handlers.file_handler, optional
+            The data to describe, as a filename, a table already read in, or a
+            handler that has already read one.
+        metadata_file : str or dict, optional
+            Existing metadata, whether complete or partial. Its entries win over the
+            template's placeholders.
+        systems : str or list or dict, optional
+            Templates for the systems this dataset was recorded with. A method family
+            key on its own, a list of keys, or a mapping of the name to file each
+            system under onto its key or onto the arguments describing its shape::
+
+                systems='tdem'
+                systems=['tdem', 'magnetic']
+                systems={'skytem_system': dict(key='tdem',
+                                               transmitters=['LM', 'HM'],
+                                               receivers=['z', 'x']),
+                         'magnetic_system': 'magnetic'}
+
+        Returns
+        -------
+        gspy.Metadata
+
+        See Also
+        --------
+        gspy.gs_dataset.System.System.metadata_template : What each system looks like
+        gspy.gs_dataset.System.System.templates : The families available
+
+        """
         system = kwargs.get('system', {})
         json_md = Metadata()
 
@@ -456,11 +505,16 @@ class Dataset:
                     system, _ = Container.Systems(**system)
 
 
+        if systems is not None:
+            from .System import System
+            for spec in Dataset._system_specs(systems):
+                system_metadata = Metadata.merge(system_metadata, System.metadata_template(**spec))
+
         # Attach apriori given system dict
         kwargs['system'] = system
 
         from .Tabular import Tabular
-        out = Tabular.metadata_template(data_filename,  metadata_file=json_md, **kwargs)
+        out = Tabular.metadata_template(data,  metadata_file=json_md, **kwargs)
         out = Metadata.merge(out, system_metadata)
 
         return out

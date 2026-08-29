@@ -44,9 +44,11 @@ class Spatial_ref:
                 auth = kwargs["authority"]
             else:
                 print('WARNING! No authority passed for WKID, DEFAULTING to EPSG')
+                auth = 'EPSG'
 
-            if auth == 'EPSG':
-                crs = CRS.from_epsg(val)
+            # from_authority covers EPSG and anything else pyproj knows, so an
+            # authority other than EPSG no longer leaves crs unassigned.
+            crs = CRS.from_authority(auth, val)
 
         elif ("crs_wkt" in kwargs.keys()) and (kwargs.get("crs_wkt", "None") != "None"):
             crs = CRS.from_wkt(kwargs["crs_wkt"].replace("'",'"'))

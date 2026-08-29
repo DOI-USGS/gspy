@@ -48,8 +48,12 @@ class DataArray:
         name : str
             Used purely for error messages.
         bounds : array_like, optional
-            * Has shape (size of dimension, 2) defining the bounds of each "cell" in the coordinate
-            * if not present, bounds are computed. Otherwise assign them.
+            Any of the three layouts below. If absent, bounds are computed.
+
+            * (2, size of dimension) — a row of lower edges and a row of upper edges,
+              which is how the metadata files write them
+            * (size of dimension + 1, ) — contiguous cell edges
+            * (size of dimension, 2) — an explicit [lower, upper] pair per cell
 
         Returns
         -------
@@ -70,6 +74,10 @@ class DataArray:
             centers = coordinate.values
             if bounds.shape == (centers.size+1, ):
                 bounds = asarray((bounds[:-1], bounds[1:])).transpose()
+            elif bounds.shape == (2, centers.size):
+                # Transpose, not reshape: reshaping 2xN row-major pairs lower edges
+                # with lower edges and hands cell j the bounds of cell 2j.
+                bounds = bounds.T
             else:
                 bounds = bounds.reshape((-1, 2))
                 assert bounds.shape == (centers.size, 2), ValueError(f'bounds for coordinate {name} must have shape (2, centers)')

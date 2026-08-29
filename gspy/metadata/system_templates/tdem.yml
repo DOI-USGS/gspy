@@ -1,0 +1,89 @@
+# Time domain electromagnetic system.
+#
+# Shaped by System.metadata_template('tdem', transmitters=..., receivers=...).
+# Every receiver measures every transmitter, so N transmitters and M receivers
+# give N x M couplets, and each transmitter gets its own set of gate times.
+pairing: cross
+
+attrs:
+  type: system
+  mode: '?? airborne, ground, waterborne or borehole ??'
+  method: electromagnetic, time domain
+  instrument: '?? make and model, e.g. SkyTEM 304M ??'
+
+dimensions:
+  gate_times:
+    per: transmitter
+    long_name: '?? e.g. calibrated {label} gate times ??'
+    units: seconds
+    missing_value: not_defined
+    centers: '?? one centre time per {label} gate, seconds ??'
+    bounds: '?? a row of {label} gate open times then a row of close times, 2 by number of gates ??'
+  n_loop_vertices:
+    standard_name: number_of_loop_vertices
+    long_name: number of transmitter loop vertices
+    units: not_defined
+    missing_value: not_defined
+    length: '?? how many corners the transmitter loop has ??'
+  xyz:
+    standard_name: xyz_coordinates
+    long_name: coordinates of the loop vertices
+    units: not_defined
+    missing_value: not_defined
+    length: 3
+
+variables:
+
+  scalars:
+    data_normalized: '?? True or False, is the data normalised by transmitter moment ??'
+    reference_frame: '?? e.g. right-handed positive down ??'
+    output_data_type: '?? what the data file holds, e.g. dBdt or B ??'
+    output_sample_frequency: '?? Hz, of the delivered data ??'
+    sample_rate: '?? seconds per sounding ??'
+    digitization_frequency: '?? Hz ??'
+    stacks: '?? how many transients were stacked ??'
+    powerline_frequency: '?? Hz, 50 or 60 ??'
+
+  transmitter:
+    number_of_turns: '?? turns of wire in the loop ??'
+    area: '?? loop area, m^2 ??'
+    coordinates:
+      values: '?? loop vertex coordinates, an xyz triple per vertex per transmitter ??'
+      dimensions: [n_transmitter, n_loop_vertices, xyz]
+    orientation: '?? dipole orientation, e.g. z ??'
+    waveform_type: '?? e.g. trapezoid or square ??'
+    waveform_time:
+      values: '?? time of each waveform vertex, seconds ??'
+      long_name: waveform time
+      units: s
+      missing_value: not_defined
+    waveform_current:
+      values: '?? normalised current at each waveform time ??'
+      dimensions: [n_transmitter, waveform_time]
+    current_scale_factor: '?? multiplier taking the normalised waveform to amps ??'
+    peak_current: '?? amps ??'
+    moment: '?? A m^2 ??'
+    peak_moment: '?? A m^2 at peak current ??'
+    base_frequency: '?? Hz ??'
+    on_time: '?? seconds ??'
+    off_time: '?? seconds ??'
+    height: '?? metres above ground ??'
+
+  receiver:
+    orientation: '?? coil orientation, e.g. z ??'
+    area:
+      values: '?? effective coil area, m^2 ??'
+      units: m^2
+    coil_low_pass_filter: '?? Hz ??'
+    instrument_low_pass_filter: '?? Hz ??'
+    delay_time: '?? seconds between transmitter off and the first gate ??'
+    gain: '?? amplifier gain ??'
+    height: '?? metres above ground ??'
+
+  couplet:
+    txrx_dx: '?? metres from transmitter to receiver, along the line ??'
+    txrx_dy: '?? metres from transmitter to receiver, across the line ??'
+    txrx_dz: '?? metres from transmitter to receiver, vertical ??'
+    data_type: '?? e.g. dBdt or B ??'
+    sample_rate: '?? seconds per sounding ??'
+    gate_times: '?? which gate times this couplet is measured on ??'

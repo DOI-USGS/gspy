@@ -1,0 +1,57 @@
+# Frequency domain electromagnetic system.
+#
+# Shaped by System.metadata_template('fdem', transmitters=..., receivers=...).
+# Each transmitter coil has its own receiver coil, so transmitters and receivers
+# pair up one to one and give one couplet each. Give only one side and the other
+# is mirrored from it.
+pairing: paired
+
+attrs:
+  type: system
+  mode: '?? airborne, ground, waterborne or borehole ??'
+  method: electromagnetic, frequency domain
+  instrument: '?? make and model, e.g. RESOLVE ??'
+
+dimensions:
+  channel:
+    standard_name: frequency_domain_complex_data
+    long_name: complex frequency domain data channel
+    units: not_defined
+    missing_value: not_defined
+    centers: [in-phase, quadrature]
+    discrete: true
+  frequency:
+    standard_name: frequency
+    long_name: nominal measurement frequency
+    units: Hz
+    missing_value: not_defined
+    centers: '?? one nominal frequency per coil pair, Hz ??'
+    discrete: true
+
+variables:
+
+  scalars:
+    data_normalized: '?? True or False, is the data normalised by transmitter moment ??'
+    reference_frame: '?? e.g. right-handed positive up ??'
+    output_data_type: '?? what the data file holds, e.g. ppm ??'
+    output_sample_frequency: '?? Hz, of the delivered data ??'
+
+  transmitter:
+    orientation: '?? dipole orientation, e.g. z ??'
+    area: '?? loop area, m^2 ??'
+    number_of_turns: '?? turns of wire in the coil ??'
+    moment: '?? A m^2 ??'
+
+  receiver:
+    orientation: '?? coil orientation, e.g. z ??'
+    area:
+      values: '?? effective coil area, m^2 ??'
+      units: m^2
+
+  couplet:
+    txrx_dx: '?? metres from transmitter to receiver, along the line ??'
+    txrx_dy: '?? metres from transmitter to receiver, across the line ??'
+    txrx_dz: '?? metres from transmitter to receiver, vertical ??'
+    orientation: '?? coplanar or coaxial ??'
+    actual_frequency: '?? measured frequency, Hz, where it differs from nominal ??'
+    moment: '?? A m^2 ??'

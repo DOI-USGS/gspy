@@ -5,7 +5,7 @@ from numpy import arange, int32
 
 from .Dataset import Dataset
 from ..metadata.Metadata import Metadata
-from ..file_handlers import file_handler
+from ..file_handlers import InsufficientMetadataError, handler_for, open_datafile
 
 class Tabular(Dataset):
     """Accessor to xarray.Dataset that handles Tabular data
@@ -19,39 +19,102 @@ class Tabular(Dataset):
         self._obj = xarray_obj
 
     @staticmethod
-    def metadata_template(filename,  metadata_file=None, system=None, **kwargs):
+    def metadata_template(data, metadata_file=None, system=None, file_type=None, **kwargs):
+        """Metadata template for some tabular data.
 
-        tmp = xr.Dataset(attrs={})
-        self = Tabular(tmp)
+        Parameters
+        ----------
+        data : str or pandas.DataFrame or gspy.file_handlers.file_handler
+            The data to describe, as a filename, a table already read in, or a
+            handler that has already read one.
+        metadata_file : str or dict, optional
+            Existing metadata, whether complete or partial. Its entries win over
+            the template's placeholders.
+        system : xarray.DataTree, optional
+            Needed by formats whose columns are named after a system's channels.
+        file_type : str, optional
+            Name a format explicitly instead of detecting it, e.g. 'loupe'.
 
-        self.file_handler = file_handler(filename)
+        Returns
+        -------
+        gspy.Metadata
 
-        # Read the GSPy json file.
-        json_md = {}
-        if metadata_file is not None:
-            if isinstance(metadata_file, str):
-                json_md = self.read_metadata(metadata_file)
-            else:
-                json_md = metadata_file
+        """
+        json_md = Metadata.read(metadata_file)
 
-        # Read in the data using the respective file type handler
-        file, file_metadata = self.file_handler.read(filename, metadata=json_md, system=system)
+        # Get a handler for the data, reading it only if it is a filename
+        file = open_datafile(data, metadata=json_md, system=system, file_type=file_type)
 
-        out = file.metadata_template(**json_md, **file_metadata)
+        return Tabular._template_from_handler(file, json_md)
+
+    @staticmethod
+    def _template_from_handler(file, json_md):
+        """Fold what a handler knows about its file into a tabular metadata template."""
+        out = file.metadata_template(**json_md, **file.file_metadata)
         out['dataset_attrs']['structure'] = 'tabular'
 
-        if 'coordinates' in json_md:
-            for k, v in json_md['coordinates'].items():
-                entry = out['variables'][v]
-                if k == 'z':
-                    entry["positive"] = entry.get('positive', "?? up or down ??")
-                if k in ('z', 't'):
-                    entry["datum"] = entry.get("datum", "?? what is the datum ??")
+        for k, v in json_md.get('coordinates', {}).items():
+            entry = out['variables'][v]
+            if k == 'z':
+                entry["positive"] = entry.get('positive', "?? up or down ??")
+            if k in ('z', 't'):
+                entry["datum"] = entry.get("datum", "?? what is the datum ??")
 
         return out
 
+    @staticmethod
+    def _systems(system):
+        """The systems to look in, however the system was passed.
+
+        A system arrives here as a tree of them, a dict of them, a lone dataset, or as
+        nothing at all. Nothing to look in gives nothing back, which the callers report
+        as a missing system or an unmatched dimension rather than walking into an
+        attribute error.
+
+        """
+        if system is None:
+            return []
+
+        if isinstance(system, dict):
+            return list(system.values())
+
+        if isinstance(system, xr.DataTree):
+            return [node for node in system.subtree
+                    if (node.attrs.get('type') or '').lower() == 'system']
+
+        return [system]
+
+    @staticmethod
+    def _couplet_labels(system):
+        """Every couplet label in a system, however the system was passed."""
+        return [label for dataset in Tabular._systems(system) if 'couplet_label' in dataset
+                for label in dataset['couplet_label'].values]
+
+    @staticmethod
+    def _system_coordinate(system, dimension):
+        """The coordinate a system defines for one of its own dimensions, or None.
+
+        Only a system the dimension actually belongs to can supply it, and the first
+        one that does is the answer. A system attached to a dataset inherits that
+        dataset's coordinates, so a magnetometer hanging off an AEM dataset can see its
+        gate times too, and answering with those would hand back the channels of
+        whatever the system was attached to instead of the ones asked for - which is
+        what happens when a system is iselled down to the channels a processed dataset
+        kept, and some other system is passed alongside it.
+
+        """
+        for dataset in Tabular._systems(system):
+            if not isinstance(dataset, (xr.Dataset, xr.DataTree)):
+                continue
+
+            owned = dataset.to_dataset(inherit=False) if isinstance(dataset, xr.DataTree) else dataset
+            if dimension in owned.dims and dimension in dataset.coords:
+                return dataset[dimension]
+
+        return None
+
     @classmethod
-    def read(cls, filename, metadata_file=None, spatial_ref=None, **kwargs):
+    def read(cls, data, metadata_file=None, spatial_ref=None, **kwargs):
         """Instantiate a Tabular class from tabular data
 
         When reading the metadata and data file, the following are established in order
@@ -61,8 +124,15 @@ class Tabular(Dataset):
 
         Parameters
         ----------
-        filename : str
-            Filename to read from.
+        data : str or pandas.DataFrame or gspy.file_handlers.file_handler
+            The data to ingest, as any of
+
+            * a filename, read with whichever handler recognises it
+            * a DataFrame already in memory, for data that needed work before
+              GSPy saw it
+            * a handler that has already read its file, so a second pass over a
+              large file is not needed
+
         metadata_file : str, optional
             Json file name, by default None
         spatial_ref : dict, gspy.Spatial_ref, or xarray.DataArray, optional
@@ -76,6 +146,7 @@ class Tabular(Dataset):
         See Also
         --------
         ..survey.Spatial_ref : For information on creating a spatial ref
+        gspy.file_handlers.open_datafile : How each form of ``data`` is handled
 
         """
         def column_matches(pattern, cols):
@@ -84,19 +155,15 @@ class Tabular(Dataset):
         tmp = xr.Dataset(attrs={})
         self = cls(tmp)
 
-        self.file_handler = file_handler(filename, **kwargs)
-
         # Set the spatial ref
         self._obj = self._obj.gs.set_spatial_ref(spatial_ref)
 
         # Read the GSPy metadata file.
-        if isinstance(metadata_file, str):
-            json_md = self.read_metadata(metadata_file)
-        else:
-            json_md = metadata_file
+        json_md = Metadata.read(metadata_file)
 
-        # Read in the data using the respective file type handler
-        file, file_metadata = self.file_handler.read(filename, metadata=json_md.get('variables', {}), **kwargs)
+        # Get a handler for the data, reading it only if it is a filename
+        file = open_datafile(data, metadata=json_md.get('variables', {}), **kwargs)
+        file_metadata = file.file_metadata
 
         system = kwargs.get('system', None)
 
@@ -115,6 +182,15 @@ class Tabular(Dataset):
                                     system["/"+path] = node.to_dataset().gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
                             else: # xr.Dataset
                                 system = system.gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
+
+        # Hand back a template when there is no variable metadata to work with.
+        # Before the coordinates are popped below, so the template keeps them.
+        if not 'variables' in json_md:
+            # file.filename, not the argument: for a DataFrame there is no path,
+            # and the handler carries a label to use in its place.
+            raise InsufficientMetadataError(template=cls._template_from_handler(file, json_md),
+                                            filename=file.filename,
+                                            missing=file.missing_metadata(json_md))
 
         # Add the index coordinate
         self._obj = self.add_coordinate_from_values('index',
@@ -138,11 +214,6 @@ class Tabular(Dataset):
                     if isinstance(dimensions[key], dict):
                         # dicts are defined explicitly in the json file.
                         self._obj = self.add_coordinate_from_dict(b.lower(), is_dimension=True, **dimensions[key])
-
-        # Write out a template json file when no variable metadata is found
-        if not 'variables' in json_md:
-            _ = self.metadata_template(filename, **file.metadata_template(**json_md), **kwargs)
-            raise Exception(file.write_metadata_template())
 
         column_counts = file.column_header_counts
 
@@ -185,14 +256,15 @@ class Tabular(Dataset):
 
             # check system couplet labels
             if "system_couplet" in var_meta:
-                assert type(system) is not dict, ValueError(f"A system couplet exists for variable {var} but no system is passed")
-                couplet_labels = []
-                for node in system.subtree:
-                    node_type = (node.attrs.get("type") or "").lower()
-                    if node_type == "system":
-                        couplet_labels = couplet_labels + list(node['couplet_label'].values)
-                assert var_meta["system_couplet"] in couplet_labels, ValueError(f"variable {var} has a system_couplet value that does not match any couplet labels: {couplet_labels}")
-            
+                couplet_labels = cls._couplet_labels(system)
+
+                if len(couplet_labels) == 0:
+                    raise ValueError(f"A system couplet exists for variable {var} but no system is passed")
+
+                if var_meta["system_couplet"] not in couplet_labels:
+                    raise ValueError(f"variable {var} has a system_couplet value that does not match any couplet labels: {couplet_labels}")
+
+
             if not var in coordinates.keys():
                 all_columns = sorted(list(file.df.columns))
 
@@ -261,25 +333,14 @@ class Tabular(Dataset):
                         # Check for the dimensions of the variable and try adding from a system class.
                         # system = kwargs.get('system', None)
 
+                        # Take any dimension we do not have yet from the system it
+                        # belongs to, e.g. the gate times a set of channels sits on.
                         for dim in var_meta['dimensions']:
                             dl = dim.lower()
-                            if dl not in list(self._obj.dims):
-                                if system is not None:
-                                    if isinstance(system, dict):
-                                        for k, sys in system.items():
-                                            for coord in sys.coords:
-                                                if dl in sys.coords:
-                                                    self._obj = self._obj.assign_coords({dl:sys[dl]})
-                                    else:
-                                        if isinstance(system, xr.DataTree):
-                                            for path,node in system.items():
-                                                for coord in node.coords:
-                                                    if dl in node.coords:
-                                                        self._obj = self._obj.assign_coords({dl:node[dl]})
-                                        else:
-                                            for coord in system.coords:
-                                                if dl in system.coords:
-                                                    self._obj = self._obj.assign_coords({dl:system[dl]})
+                            if dl not in self._obj.dims:
+                                coordinate = cls._system_coordinate(system, dl)
+                                if coordinate is not None:
+                                    self._obj = self._obj.assign_coords({dl: coordinate})
 
                         assert all([dim.lower() in self._obj.dims for dim in var_meta['dimensions']]), ValueError(f"Could not match dimensions for variable {var} with metadata dimensions {var_meta['dimensions']}. Dimensions already attached are: {list(self._obj.dims)}")
 
@@ -322,7 +383,7 @@ class Tabular(Dataset):
         return out
 
     def to_file(self, filename, **kwargs):
+        """Write this dataset out in one of the tabular file formats."""
+        handler = handler_for(filename, file_type=kwargs.pop('file_type', None))
 
-        file_handler = file_handler(filename)
-
-        file_handler.to_file(self._obj, filename, **kwargs)
+        handler.to_file(self, filename, **kwargs)

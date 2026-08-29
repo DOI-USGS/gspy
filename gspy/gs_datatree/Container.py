@@ -147,7 +147,7 @@ class Container:
         return self._obj
 
     @staticmethod
-    def read_metadata(filename=None):
+    def read_metadata(filename):
         """Read metadata for the survey
 
         Parameters
@@ -161,14 +161,9 @@ class Container:
 
         See Also
         --------
-        Survey.write_metadata_template : For more metadata data information
+        Container.metadata_template : For a starting point when there is no file yet
 
         """
-        if filename is None:
-            md_template = super.metadata_template()
-            md_template.dump("survey_metadata_template.yml")
-            raise Exception("Please re-run and specify the survey metadata when instantiating Survey()")
-
         # reading the data from the file
         out = Metadata.read(filename)
         out.pop('directory', None)
@@ -209,11 +204,14 @@ class Container:
         return self._obj[key]
 
     @classmethod
-    def Data(cls, data_filename=None, metadata_file=None, spatial_ref=None, **kwargs):
+    def Data(cls, data=None, metadata_file=None, spatial_ref=None, **kwargs):
 
         json_md = Metadata.read(metadata_file)
 
         system = kwargs.get('system', {})
+
+        if isinstance(system, str):
+            system = Metadata.read(system)
 
         # No systems were passed through, try to read from metadata
         if len(system) == 0:
@@ -230,10 +228,11 @@ class Container:
         # Attach systems (datatree at this point) otherwise empty dict
         kwargs['system'] = system
 
-        if data_filename is None:
+        # No data to ingest means the variables are rasters named in the metadata.
+        if data is None:
             dataset = Raster.read(metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
         else:
-            dataset = Tabular.read(data_filename, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
+            dataset = Tabular.read(data, metadata_file=json_md, spatial_ref=spatial_ref, **kwargs)
 
         self = cls(DataTree(dataset))
 
@@ -277,6 +276,30 @@ class Container:
                     self._obj[key] = parameters[key]
         return self._obj
 
+    @staticmethod
+    def _lift_system(node):
+        """A system node as a standalone dataset, carrying only the coordinates it uses.
+
+        A system attached to a dataset inherits that dataset's coordinates, so a plain
+        ``to_dataset()`` drags the host's index and gate times along with it - a
+        magnetometer lifted off an AEM dataset comes away holding that dataset's gate
+        times, and then claims to define them for whatever it is handed to next.
+        ``to_dataset(inherit=False)`` goes too far the other way: once a system is
+        attached, its own gate times live on the host, so dropping every inherited
+        coordinate leaves the system with dimensions and no values for them.
+
+        So keep the inherited coordinates the system's own variables are defined
+        along, and drop the rest.
+
+        """
+        own = node.to_dataset(inherit=False)
+        used = {dim for variable in own.data_vars.values() for dim in variable.dims}
+
+        lifted = node.to_dataset()
+        return lifted.drop_vars([name for name, coordinate in lifted.coords.items()
+                                 if name not in own.coords
+                                 and not set(coordinate.dims) <= used])
+
     @classmethod
     def Systems(cls, **kwargs):
         systems = {}
@@ -287,7 +310,7 @@ class Container:
                     value = System.from_dict(name=key, **value)
                 else:
                     if isinstance(value, DataTree):
-                        value = value.to_dataset()
+                        value = cls._lift_system(value)
                 systems[key] = value
 
         out = DataTree.from_dict(systems)
