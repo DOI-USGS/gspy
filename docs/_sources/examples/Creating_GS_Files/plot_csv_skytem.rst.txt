@@ -42,7 +42,7 @@ Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoo
     from os.path import join
     import numpy as np
     import gspy
-    from gspy import Survey
+    from gspy import Survey, Metadata
     import xarray as xr
     from pprint import pprint
     import warnings
@@ -117,7 +117,7 @@ Attach leaves to the data branch
 
 1. Raw Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-77
+.. GENERATED FROM PYTHON SOURCE LINES 63-79
 
 .. code-block:: Python
 
@@ -127,12 +127,14 @@ Attach leaves to the data branch
     d_data1 = join(data_path, 'data//skytem_contractor_data.csv')
     d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
 
-    raw_systems = {"skytem_system" : survey["nominal_system"],
-              "magnetic_system" : survey["magnetic_system"]}
+    raw_systems = Metadata.read(join(data_path, "data//skytem_system.yml"))
+
+    # raw_systems = {"skytem_system" : survey["nominal_system"],
+            #   "magnetic_system" : survey["magnetic_system"]}
 
     # Add the raw AEM data as a tabular dataset,
     # pass the EM system from the survey
-    rd = data_container.gs.add(key='raw_data', data_filename=d_data1, 
+    rd = data_container.gs.add(key='raw_data', data=d_data1,
                                metadata_file=d_supp1, system=raw_systems)
 
 
@@ -142,11 +144,11 @@ Attach leaves to the data branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-79
+.. GENERATED FROM PYTHON SOURCE LINES 80-81
 
 2. Processed Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-85
+.. GENERATED FROM PYTHON SOURCE LINES 81-89
 
 .. code-block:: Python
 
@@ -156,24 +158,78 @@ Attach leaves to the data branch
     d_data2 = join(data_path, 'data//skytem_processed_data.csv')
     d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
 
+    print(rd['skytem_system'])
 
 
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    <xarray.DataTree 'skytem_system'>
+    Group: /survey/data/raw_data/skytem_system
+        Dimensions:                                      (index: 2000,
+                                                          hm_gate_times: 32,
+                                                          lm_gate_times: 28,
+                                                          gate_times: 22, nv: 2,
+                                                          n_loop_vertices: 8, xyz: 3,
+                                                          n_transmitter: 2,
+                                                          transmitter_lm_waveform_time: 21,
+                                                          transmitter_hm_waveform_time: 36,
+                                                          n_receiver: 2, n_couplet: 4,
+                                                          dim_0: 1)
+        Coordinates:
+          * gate_times                                   (gate_times) float64 176B 5....
+          * nv                                           (nv) int64 16B 0 1
+          * n_loop_vertices                              (n_loop_vertices) int64 64B ...
+          * xyz                                          (xyz) int64 24B 0 1 2
+          * n_transmitter                                (n_transmitter) int64 16B 0 1
+          * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
+          * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
+          * n_receiver                                   (n_receiver) int64 16B 0 1
+          * n_couplet                                    (n_couplet) int64 32B 0 1 2 3
+        Inherited coordinates:
+          * index                                        (index) int32 8kB 0 1 ... 1999
+          * hm_gate_times                                (hm_gate_times) float64 256B ...
+          * lm_gate_times                                (lm_gate_times) float64 224B ...
+        Dimensions without coordinates: dim_0
+        Data variables: (12/35)
+            gate_times_bnds                              (gate_times, nv) float64 352B ...
+            lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
+            hm_gate_times_bnds                           (hm_gate_times, nv) float64 512B ...
+            n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
+            xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
+            transmitter_label                            (n_transmitter) <U2 16B 'LM'...
+            ...                                           ...
+            couplet_data_type                            (n_couplet) <U4 64B 'dBdt' ....
+            couplet_gate_times                           (n_couplet) <U13 208B 'lm_ga...
+            data_normalized                              (dim_0) bool 1B True
+            skytem_skb_gex_available                     (dim_0) bool 1B True
+            reference_frame                              <U26 104B 'right-handed posi...
+            coil_orientations                            <U4 16B 'X, Z'
+        Attributes:
+            type:        system
+            mode:        airborne
+            method:      electromagnetic, time domain
+            instrument:  SkyTEM 304M
+            name:        skytem_system
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-87
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 90-91
 
 Example of how systems can be selected and modified to accurately match the processed data
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-91
+.. GENERATED FROM PYTHON SOURCE LINES 91-95
 
 .. code-block:: Python
 
-    proc_systems = {"skytem_system" : survey["nominal_system"].isel(lm_gate_times=np.s_[1:], 
+    proc_systems = {"skytem_system" : rd["skytem_system"].isel(lm_gate_times=np.s_[1:],
                                                               hm_gate_times=np.s_[10:]),
-              "magnetic_system" : survey["magnetic_system"]}
+              "magnetic_system" : rd["magnetic_system"]}
 
 
 
@@ -182,15 +238,15 @@ Example of how systems can be selected and modified to accurately match the proc
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-93
+.. GENERATED FROM PYTHON SOURCE LINES 96-97
 
 Add the processed AEM data as a tabular dataset, passing the updated systems
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-96
+.. GENERATED FROM PYTHON SOURCE LINES 97-100
 
 .. code-block:: Python
 
-    pd = data_container.gs.add(key='processed_data', data_filename=d_data2, 
+    pd = data_container.gs.add(key='processed_data', data=d_data2,
                                metadata_file=d_supp2, system=proc_systems)
 
 
@@ -200,7 +256,7 @@ Add the processed AEM data as a tabular dataset, passing the updated systems
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-102
+.. GENERATED FROM PYTHON SOURCE LINES 101-106
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/skytem_processed_data.yml
    :language: yaml
@@ -208,12 +264,12 @@ Add the processed AEM data as a tabular dataset, passing the updated systems
    :caption: Processed Data YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 105-107
+.. GENERATED FROM PYTHON SOURCE LINES 109-111
 
 Create a Models Branch
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 107-111
+.. GENERATED FROM PYTHON SOURCE LINES 111-115
 
 .. code-block:: Python
 
@@ -228,11 +284,11 @@ Create a Models Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-113
+.. GENERATED FROM PYTHON SOURCE LINES 116-117
 
 3. Inverted Models
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-123
+.. GENERATED FROM PYTHON SOURCE LINES 117-127
 
 .. code-block:: Python
 
@@ -243,7 +299,7 @@ Create a Models Branch
     m_supp3 = join(data_path, 'model//skytem_inverted_models.yml')
 
     # Add the inverted AEM models as a tabular dataset
-    mods = model_container.gs.add(key='inverted_models', data_filename=m_data3, 
+    mods = model_container.gs.add(key='inverted_models', data=m_data3,
                                   metadata_file=m_supp3)
 
 
@@ -253,7 +309,7 @@ Create a Models Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 124-129
+.. GENERATED FROM PYTHON SOURCE LINES 128-133
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/model/skytem_inverted_models.yml
    :language: yaml
@@ -261,20 +317,20 @@ Create a Models Branch
    :caption: Inverted Models YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-134
+.. GENERATED FROM PYTHON SOURCE LINES 136-138
 
 Derivative Products
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-137
+.. GENERATED FROM PYTHON SOURCE LINES 140-141
 
 4. Bedrock Picks
 
-.. GENERATED FROM PYTHON SOURCE LINES 139-140
+.. GENERATED FROM PYTHON SOURCE LINES 143-144
 
 Adding bedrock picks to the 'data' branch
 
-.. GENERATED FROM PYTHON SOURCE LINES 140-150
+.. GENERATED FROM PYTHON SOURCE LINES 144-154
 
 .. code-block:: Python
 
@@ -285,7 +341,7 @@ Adding bedrock picks to the 'data' branch
     d_supp4 = join(data_path, 'data//bedrock_picks.yml')
 
     # Add the AEM-based estimated of depth to bedrock as a tabular dataset
-    bedrock = data_container.gs.add(key='depth_to_bedrock', data_filename=d_data4, 
+    bedrock = data_container.gs.add(key='depth_to_bedrock', data=d_data4,
                                     metadata_file=d_supp4)
 
 
@@ -295,7 +351,7 @@ Adding bedrock picks to the 'data' branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 151-156
+.. GENERATED FROM PYTHON SOURCE LINES 155-160
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/bedrock_picks.yml
    :language: yaml
@@ -303,15 +359,15 @@ Adding bedrock picks to the 'data' branch
    :caption: Bedrock Picks YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 159-160
+.. GENERATED FROM PYTHON SOURCE LINES 163-164
 
 5. Raster Maps
 
-.. GENERATED FROM PYTHON SOURCE LINES 162-163
+.. GENERATED FROM PYTHON SOURCE LINES 166-167
 
 Create a 3rd container for the derived raaster maps
 
-.. GENERATED FROM PYTHON SOURCE LINES 163-173
+.. GENERATED FROM PYTHON SOURCE LINES 167-177
 
 .. code-block:: Python
 
@@ -332,7 +388,7 @@ Create a 3rd container for the derived raaster maps
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 174-179
+.. GENERATED FROM PYTHON SOURCE LINES 178-183
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/magnetics_bedrock_picks.yml
    :language: yaml
@@ -340,12 +396,12 @@ Create a 3rd container for the derived raaster maps
    :caption: Gridded Maps YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 182-184
+.. GENERATED FROM PYTHON SOURCE LINES 186-188
 
 Save to NetCDF file
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 184-189
+.. GENERATED FROM PYTHON SOURCE LINES 188-193
 
 .. code-block:: Python
 
@@ -361,16 +417,16 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 190-192
+.. GENERATED FROM PYTHON SOURCE LINES 194-196
 
 Export just one branch to file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-195
+.. GENERATED FROM PYTHON SOURCE LINES 198-199
 
 The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
 
-.. GENERATED FROM PYTHON SOURCE LINES 195-198
+.. GENERATED FROM PYTHON SOURCE LINES 199-202
 
 .. code-block:: Python
 
@@ -384,12 +440,12 @@ The gspy goal is to have the complete survey in a single file. However, we can a
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 199-201
+.. GENERATED FROM PYTHON SOURCE LINES 203-205
 
-Opening a GS NetCDF 
+Opening a GS NetCDF
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 201-203
+.. GENERATED FROM PYTHON SOURCE LINES 205-207
 
 .. code-block:: Python
 
@@ -402,12 +458,12 @@ Opening a GS NetCDF
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 204-206
+.. GENERATED FROM PYTHON SOURCE LINES 208-210
 
 View the Data Tree
 ^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 206-209
+.. GENERATED FROM PYTHON SOURCE LINES 210-213
 
 .. code-block:: Python
 
@@ -441,7 +497,7 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 210-212
+.. GENERATED FROM PYTHON SOURCE LINES 214-216
 
 .. code-block:: Python
 
@@ -473,7 +529,7 @@ View the Data Tree
     │       references:    Minsley, Burke J., B.R. Bloss, D.J. Hart, W. Fitzpatrick, ...
     │       comment:       This dataset includes minimally processed (raw) AEM and ra...
     │       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
-    │       content:       Wisconsin SkyTEM survey information /survey;  /survey/nomi...
+    │       content:       Wisconsin SkyTEM survey information /survey; raw and proce...
     │       gspy_version:  2.2.8
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
@@ -557,7 +613,7 @@ View the Data Tree
     │   │   │           mode:        airborne
     │   │   │           method:      electromagnetic, time domain
     │   │   │           instrument:  SkyTEM 304M
-    │   │   │           name:        nominal_system
+    │   │   │           name:        skytem_system
     │   │   └── Group: /survey/data/raw_data/magnetic_system
     │   │           Dimensions:                           (n_transmitter: 1, n_receiver: 1,
     │   │                                                  n_couplet: 1, n_base_magnetometer: 1,
@@ -661,7 +717,7 @@ View the Data Tree
     │   │   │           mode:        airborne
     │   │   │           method:      electromagnetic, time domain
     │   │   │           instrument:  SkyTEM 304M
-    │   │   │           name:        nominal_system
+    │   │   │           name:        skytem_system
     │   │   └── Group: /survey/data/processed_data/magnetic_system
     │   │           Dimensions:                           (n_transmitter: 1, n_receiver: 1,
     │   │                                                  n_couplet: 1, n_base_magnetometer: 1,
@@ -806,12 +862,12 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 213-215
+.. GENERATED FROM PYTHON SOURCE LINES 217-219
 
 Plotting Examples
 ^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 215-220
+.. GENERATED FROM PYTHON SOURCE LINES 219-224
 
 .. code-block:: Python
 
@@ -832,7 +888,7 @@ Plotting Examples
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 221-226
+.. GENERATED FROM PYTHON SOURCE LINES 225-230
 
 .. code-block:: Python
 
@@ -853,7 +909,7 @@ Plotting Examples
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 227-233
+.. GENERATED FROM PYTHON SOURCE LINES 231-237
 
 .. code-block:: Python
 
@@ -878,7 +934,7 @@ Plotting Examples
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.470 seconds)
+   **Total running time of the script:** (0 minutes 1.565 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem.py:

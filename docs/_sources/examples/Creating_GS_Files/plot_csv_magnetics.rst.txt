@@ -121,7 +121,7 @@ Add the raw magnetic data to the branch
 
 .. code-block:: Python
 
-    rd = data_container.gs.add(key='raw_data', data_filename=d_data1, metadata_file=d_supp1)
+    rd = data_container.gs.add(key='raw_data', data=d_data1, metadata_file=d_supp1)
 
 
 
@@ -419,7 +419,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.534 seconds)
+   **Total running time of the script:** (0 minutes 0.542 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_magnetics.py:

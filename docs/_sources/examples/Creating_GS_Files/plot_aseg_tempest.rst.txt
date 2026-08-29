@@ -118,7 +118,7 @@ Import raw AEM data from ASEG-GDF2 format.
 
     # Add the raw AEM data to the data branch
     rd = data_container.gs.add(key='raw_data', 
-                               data_filename=d_data, 
+                               data=d_data, 
                                metadata_file=d_supp)
 
 
@@ -163,7 +163,7 @@ Create a 2nd branch and attach model data leaves
     # Add models to the model container, note this example contains a "parameters" group that
     # is added as a leaflet below the model group.
     mod = model_container.gs.add(key='inverted_models', 
-                                 data_filename=m_data, 
+                                 data=m_data, 
                                  metadata_file=m_supp, 
                                  system=rd.tempest_system,
                                  derived_from=rd)
@@ -674,7 +674,7 @@ Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.374 seconds)
+   **Total running time of the script:** (0 minutes 1.462 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest.py:

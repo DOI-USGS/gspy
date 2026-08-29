@@ -51,7 +51,7 @@ d_data = join(data_path, 'data//prod_726_729raw_RAW_export.xyz')
 d_supp = join(data_path, 'data//raw_data.yml')
 
 # Add the raw AEM data
-rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=d_supp)
+rd = data_container.gs.add(key='raw_data', data=d_data, metadata_file=d_supp)
 
 #%%
 # Create a 'models' branch and attach data leaves
@@ -72,7 +72,7 @@ d_data = join(data_path, 'model//prod_726_729_LBv2_bky_MOD_dat.xyz')
 d_supp = join(data_path, 'model//models.yml')
 
 #%%
-md = model_container.gs.add(key='inversion', data_filename=d_data, metadata_file=d_supp)
+md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
 
 # %%
 # Save to NetCDF file

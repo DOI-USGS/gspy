@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DAT &amp; XYZ (Loupe TEM) &mdash; gspy 2.2.8.post1.dev39+g93dc3f2a8 documentation</title>
+  <title>DAT &amp; XYZ (Loupe TEM) &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=377256bc"></script>
+      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -184,7 +184,7 @@ to download the full example code.</p>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Loupe_data_metadata.yml&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
                                  <span class="n">metadata_file</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;loupe&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -540,18 +540,7 @@ one of the three files need to be passed to provide the base filename</p>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//models.yml&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Detected gate_time metadata from the workbench files
-{&#39;gate_times&#39;: {&#39;centers&#39;: array([1.495e-05, 1.693e-05, 1.892e-05, 2.091e-05, 2.487e-05, 3.082e-05,
-       3.876e-05, 4.868e-05, 6.257e-05, 7.844e-05, 1.023e-04, 1.340e-04,
-       1.737e-04, 2.292e-04, 3.027e-04, 3.999e-04, 5.308e-04, 7.024e-04,
-       9.326e-04, 1.237e-03, 1.643e-03]),
-                &#39;long_name&#39;: &#39;calibrated gate times&#39;,
-                &#39;missing_value&#39;: &#39;not_defined&#39;,
-                &#39;standard_name&#39;: &#39;gate_times&#39;,
-                &#39;units&#39;: &#39;seconds&#39;}}
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
@@ -1097,7 +1086,7 @@ Group: /survey
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_dat_loupe_001.png" srcset="../../_images/sphx_glr_plot_dat_loupe_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.845 seconds)</p>
+<img src="../../_images/sphx_glr_plot_dat_loupe_001.png" srcset="../../_images/sphx_glr_plot_dat_loupe_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.856 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-dat-loupe-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/66dd79b444190004dc9df3df3d72d569/plot_dat_loupe.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_dat_loupe.ipynb</span></code></a></p>

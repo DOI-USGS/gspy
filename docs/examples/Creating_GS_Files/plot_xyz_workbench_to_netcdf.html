@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workbench XYZ &mdash; gspy 2.2.8.post1.dev39+g93dc3f2a8 documentation</title>
+  <title>Workbench XYZ &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=377256bc"></script>
+      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -219,7 +219,7 @@ to download the full example code.</p>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//raw_data.yml&#39;</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data</span>
-<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -236,27 +236,7 @@ one of the three files need to be passed to provide the base filename</p>
 <span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//models.yml&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data_filename</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Detected gate_time metadata from the workbench files
-{&#39;hm_gate_times&#39;: {&#39;centers&#39;: array([7.292e-05, 7.641e-05, 8.091e-05, 8.641e-05, 9.342e-05, 1.024e-04,
-       1.139e-04, 1.284e-04, 1.464e-04, 1.689e-04, 1.969e-04, 2.324e-04,
-       2.779e-04, 3.349e-04, 4.069e-04, 4.979e-04, 6.119e-04, 7.559e-04,
-       9.374e-04, 1.166e-03, 1.454e-03, 1.818e-03, 2.277e-03, 2.855e-03,
-       3.574e-03, 4.454e-03, 5.531e-03, 6.849e-03, 8.463e-03, 1.044e-02]),
-                   &#39;long_name&#39;: &#39;calibrated high moment gate times&#39;,
-                   &#39;missing_value&#39;: &#39;not_defined&#39;,
-                   &#39;standard_name&#39;: &#39;hm_gate_times&#39;,
-                   &#39;units&#39;: &#39;seconds&#39;},
- &#39;lm_gate_times&#39;: {&#39;centers&#39;: array([1.273e-05, 1.622e-05, 2.072e-05, 2.622e-05, 3.323e-05, 4.222e-05,
-       5.372e-05, 6.822e-05, 8.622e-05, 1.087e-04, 1.367e-04, 1.722e-04,
-       2.177e-04, 2.747e-04, 3.467e-04, 4.377e-04, 5.517e-04, 6.957e-04,
-       8.772e-04, 1.106e-03, 1.394e-03]),
-                   &#39;long_name&#39;: &#39;calibrated low moment gate times&#39;,
-                   &#39;missing_value&#39;: &#39;not_defined&#39;,
-                   &#39;standard_name&#39;: &#39;lm_gate_times&#39;,
-                   &#39;units&#39;: &#39;seconds&#39;}}
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -500,7 +480,7 @@ Group: /survey/models
                 name:        inversion_parameters
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.748 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.777 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/80fa00703aec9cd579f2311600850f2c/plot_xyz_workbench_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xyz_workbench_to_netcdf.ipynb</span></code></a></p>

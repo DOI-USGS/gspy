@@ -126,7 +126,7 @@ Point to Workbench XYZ data files
     d_supp = join(data_path, 'data//raw_data.yml')
 
     # Add the raw AEM data
-    rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=d_supp)
+    rd = data_container.gs.add(key='raw_data', data=d_data, metadata_file=d_supp)
 
 
 
@@ -185,34 +185,11 @@ one of the three files need to be passed to provide the base filename
 
 .. code-block:: Python
 
-    md = model_container.gs.add(key='inversion', data_filename=d_data, metadata_file=d_supp)
+    md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
 
 
 
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Detected gate_time metadata from the workbench files
-    {'hm_gate_times': {'centers': array([7.292e-05, 7.641e-05, 8.091e-05, 8.641e-05, 9.342e-05, 1.024e-04,
-           1.139e-04, 1.284e-04, 1.464e-04, 1.689e-04, 1.969e-04, 2.324e-04,
-           2.779e-04, 3.349e-04, 4.069e-04, 4.979e-04, 6.119e-04, 7.559e-04,
-           9.374e-04, 1.166e-03, 1.454e-03, 1.818e-03, 2.277e-03, 2.855e-03,
-           3.574e-03, 4.454e-03, 5.531e-03, 6.849e-03, 8.463e-03, 1.044e-02]),
-                       'long_name': 'calibrated high moment gate times',
-                       'missing_value': 'not_defined',
-                       'standard_name': 'hm_gate_times',
-                       'units': 'seconds'},
-     'lm_gate_times': {'centers': array([1.273e-05, 1.622e-05, 2.072e-05, 2.622e-05, 3.323e-05, 4.222e-05,
-           5.372e-05, 6.822e-05, 8.622e-05, 1.087e-04, 1.367e-04, 1.722e-04,
-           2.177e-04, 2.747e-04, 3.467e-04, 4.377e-04, 5.517e-04, 6.957e-04,
-           8.772e-04, 1.106e-03, 1.394e-03]),
-                       'long_name': 'calibrated low moment gate times',
-                       'missing_value': 'not_defined',
-                       'standard_name': 'lm_gate_times',
-                       'units': 'seconds'}}
 
 
 
@@ -523,7 +500,7 @@ Models Branch
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.748 seconds)
+   **Total running time of the script:** (0 minutes 0.777 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py:

@@ -107,7 +107,7 @@ var_meta = Metadata.read(var_md, table=True)
 md = Metadata.merge(rd_meta, var_meta)
 
 # Add the raw AEM data
-rd = data_container.gs.add(key='raw_data', data_filename=d_data, metadata_file=md)
+rd = data_container.gs.add(key='raw_data', data=d_data, metadata_file=md)
 
 #%%
 # View the merged Metadata to see how the information was imported
@@ -190,7 +190,7 @@ mod_md.dump(join(data_path, 'model//Resolve_model_md.xlsx'))
 
 #%%
 # Add the inverted AEM models with combined metadata dictionary
-mod_branch = model_container.gs.add(key="inverted_models", data_filename=m_data, metadata_file=mod_md)
+mod_branch = model_container.gs.add(key="inverted_models", data=m_data, metadata_file=mod_md)
 
 #%%
 # Inspect the two branches

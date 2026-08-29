@@ -134,7 +134,7 @@ Attach raw data with the Loupe EM system
 
 .. code-block:: Python
 
-    raw_data = data_container.gs.add(key='raw_data', data_filename=data, 
+    raw_data = data_container.gs.add(key='raw_data', data=data, 
                                      metadata_file=metadata, file_type='loupe')
 
 
@@ -202,25 +202,11 @@ one of the three files need to be passed to provide the base filename
 
 .. code-block:: Python
 
-    md = model_container.gs.add(key='inversion', data_filename=d_data, metadata_file=d_supp)
+    md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
 
 
 
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Detected gate_time metadata from the workbench files
-    {'gate_times': {'centers': array([1.495e-05, 1.693e-05, 1.892e-05, 2.091e-05, 2.487e-05, 3.082e-05,
-           3.876e-05, 4.868e-05, 6.257e-05, 7.844e-05, 1.023e-04, 1.340e-04,
-           1.737e-04, 2.292e-04, 3.027e-04, 3.999e-04, 5.308e-04, 7.024e-04,
-           9.326e-04, 1.237e-03, 1.643e-03]),
-                    'long_name': 'calibrated gate times',
-                    'missing_value': 'not_defined',
-                    'standard_name': 'gate_times',
-                    'units': 'seconds'}}
 
 
 
@@ -520,7 +506,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.845 seconds)
+   **Total running time of the script:** (0 minutes 1.856 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_dat_loupe.py:

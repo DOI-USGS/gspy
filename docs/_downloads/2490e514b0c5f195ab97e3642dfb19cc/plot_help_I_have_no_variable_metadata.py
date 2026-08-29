@@ -21,7 +21,7 @@ GSPy provides a ``metadata_template`` function to generate a template YAML file 
 #%%
 
 from os.path import join
-from gspy import Survey, Dataset
+from gspy import Survey, Dataset, System
 import matplotlib.pyplot as plt
 from matplotlib import image as img
 
@@ -119,3 +119,55 @@ template.dump("template_md_resolve_partial.yml")
 #    :caption: Partial Data YAML file
 #
 
+#%%
+# Generate the Metadata Template for the System that Recorded My Data
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#%%
+# A system is described per method, so pick the family that matches how the data
+# was acquired.
+print(System.templates())
+
+#%%
+# The shape of the template comes from how many transmitters and receivers the
+# system has. A dual moment time domain system read by two coils has four
+# couplets, and each moment gets its own gate times, named after it.
+template = System.metadata_template('tdem',
+                                    name='skytem_system',
+                                    transmitters=['LM', 'HM'],
+                                    receivers=['z', 'x'])
+template.dump("template_md_tdem_system.yml")
+
+#%%
+#
+# .. literalinclude:: /../../examples/Creating_GS_Files/template_md_tdem_system.yml
+#    :language: yaml
+#    :linenos:
+#    :caption: Dual moment time domain system template
+#
+
+#%%
+# A frequency domain system pairs each transmitter coil with its own receiver
+# coil, so one set of labels is enough and the couplets follow one to one.
+template = System.metadata_template('fdem',
+                                    name='resolve_system',
+                                    transmitters=['400Z', '1800Z', '3300X',
+                                                  '8200Z', '40000Z', '140000Z'])
+template.dump("template_md_fdem_system.yml")
+
+#%%
+# Systems belong to the dataset they recorded, so ask for them alongside the
+# variables. Name each one and describe its shape, or give the family key on its
+# own where the defaults suffice - a magnetometer is one passive transmitter read
+# by one sensor.
+template = Dataset.metadata_template(data,
+                                     systems={'skytem_system': dict(key='tdem',
+                                                                    transmitters=['LM', 'HM'],
+                                                                    receivers=['z', 'x']),
+                                              'magnetic_system': 'magnetic'})
+template.dump("template_md_resolve_with_systems.yml")
+
+#%%
+# The placeholders read ``?? what goes here ??``. Delete the fields your system
+# does not have, and fill in the dimensions - the real gate times or frequencies -
+# before handing the metadata to a dataset.

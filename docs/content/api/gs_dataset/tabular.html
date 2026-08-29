@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tabular &mdash; gspy 2.2.8.post1.dev39+g93dc3f2a8 documentation</title>
+  <title>Tabular &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=377256bc"></script>
+      <script src="../../../_static/documentation_options.js?v=f530f8aa"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -121,12 +121,28 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Tabular.Tabular.metadata_template">
-<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Tabular.Tabular.metadata_template" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">metadata_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Tabular.Tabular.metadata_template" title="Link to this definition"></a></dt>
+<dd><p>Metadata template for some tabular data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em><em> or </em><em>gspy.file_handlers.file_handler</em>) – The data to describe, as a filename, a table already read in, or a
+handler that has already read one.</p></li>
+<li><p><strong>metadata_file</strong> (<em>str</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – Existing metadata, whether complete or partial. Its entries win over
+the template’s placeholders.</p></li>
+<li><p><strong>system</strong> (<em>xarray.DataTree</em><em>, </em><em>optional</em>) – Needed by formats whose columns are named after a system’s channels.</p></li>
+<li><p><strong>file_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Name a format explicitly instead of detecting it, e.g. ‘loupe’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>gspy.Metadata</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Tabular.Tabular.read">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Tabular.Tabular.read" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Tabular.Tabular.read" title="Link to this definition"></a></dt>
 <dd><p>Instantiate a Tabular class from tabular data</p>
 <p>When reading the metadata and data file, the following are established in order
 * User defined dimensions
@@ -135,7 +151,15 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – Filename to read from.</p></li>
+<li><p><strong>data</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em><em> or </em><em>gspy.file_handlers.file_handler</em>) – <p>The data to ingest, as any of</p>
+<ul>
+<li><p>a filename, read with whichever handler recognises it</p></li>
+<li><p>a DataFrame already in memory, for data that needed work before
+GSPy saw it</p></li>
+<li><p>a handler that has already read its file, so a second pass over a
+large file is not needed</p></li>
+</ul>
+</p></li>
 <li><p><strong>metadata_file</strong> (<em>str</em><em>, </em><em>optional</em>) – Json file name, by default None</p></li>
 <li><p><strong>spatial_ref</strong> (<em>dict</em><em>, </em><em>gspy.Spatial_ref</em><em>, or </em><em>xarray.DataArray</em><em>, </em><em>optional</em>) – Spatial ref object, by default None</p></li>
 </ul>
@@ -152,6 +176,8 @@
 <dl class="simple">
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">survey.Spatial_ref</span></code></dt><dd><p>For information on creating a spatial ref</p>
 </dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gspy.file_handlers.open_datafile</span></code></dt><dd><p>How each form of <code class="docutils literal notranslate"><span class="pre">data</span></code> is handled</p>
+</dd>
 </dl>
 </div>
 </dd></dl>
@@ -159,7 +185,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Tabular.Tabular.to_file">
 <span class="sig-name descname"><span class="pre">to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Tabular.Tabular.to_file" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Write this dataset out in one of the tabular file formats.</p>
+</dd></dl>
 
 </dd></dl>
 

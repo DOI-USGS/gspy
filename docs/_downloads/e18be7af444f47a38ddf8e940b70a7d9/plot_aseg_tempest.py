@@ -57,7 +57,7 @@ d_supp = join(data_path, 'data//Tempest_data_md.yml')
 
 # Add the raw AEM data to the data branch
 rd = data_container.gs.add(key='raw_data', 
-                           data_filename=d_data, 
+                           data=d_data, 
                            metadata_file=d_supp)
 
 #%%
@@ -87,7 +87,7 @@ m_supp = join(data_path, 'model//Tempest_model_md.yml')
 # Add models to the model container, note this example contains a "parameters" group that
 # is added as a leaflet below the model group.
 mod = model_container.gs.add(key='inverted_models', 
-                             data_filename=m_data, 
+                             data=m_data, 
                              metadata_file=m_supp, 
                              system=rd.tempest_system,
                              derived_from=rd)
