@@ -49,8 +49,7 @@ survey_equipment:
     inclinometer_system: Two Bjerre Technology inclinometers
     inclinometer_installation: Both inclinometers were installed on the rear of the EM frame near the Z coil.
     inclinometer_information: Measured x and y tilt at 2 Hz sampling rate.  The x angle is parallel to flight direction (positive when front is above horizontal); y angle is perpendicular to flight direction (negative when right side is above horizontal).
-    gsp_system: Differential GPS using OEMV1-L1 chipset and Trimble Bullet III antennas. Two DGPS units recorded by EM system; a third GPS recorded by the magnetic system.
+    gps_system: Differential GPS using OEMV1-L1 chipset and Trimble Bullet III antennas. Two DGPS units recorded by EM system; a third GPS recorded by the magnetic system.
     gps_installation:  DGPS antenna mounted on top of the boom in front of the frame
     gps_information: Sampling rate 1 Hz. The uncertainty in the xyz-directions is 1 m after processing. 
-    acquisition_system: SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses.     gps_information: Sampling rate 1 Hz. The uncertainty in the xyz-directions is 1 m after processing.
-    acquisition_system: SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses.
+    acquisition_system: SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses. 
