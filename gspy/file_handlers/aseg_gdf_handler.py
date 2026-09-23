@@ -100,7 +100,15 @@ class aseg_gdf2_handler(file_handler, key='aseg'):
                 npfmt = np.float64
             elif 'a' in fmt:
                 npfmt = str
-            out[key] = npfmt
+
+            # A repeated format defines one column per repeat, named the same
+            # way self.columns names them.
+            test = re.split('es|e|f|i|g|d|a', fmt)
+            if test[0] != '':
+                for i in range(np.int32(test[0])):
+                    out['{}[{}]'.format(key, i)] = npfmt
+            else:
+                out[key] = npfmt
         return out
 
     @property
@@ -108,33 +116,25 @@ class aseg_gdf2_handler(file_handler, key='aseg'):
         return 'aseg'
 
     def __col_widths_from_fortran_format(self, first):
+        """One width per column, matching self.columns.
+
+        A repeated format like 4F10.2 is four columns of ten characters, not
+        one column of forty, so it contributes four entries here just as it
+        contributes four names to self.columns.
+        """
         if first > 0:
             out = [first]
         else:
             out = []
         for key, value in self.dfn_columns.items():
-            fmt = value['format']
-            if 'i' in fmt:
-                width = fmt.split('i')
-            elif 'f' in fmt:
-                width = fmt.split('f')
-            elif 'e'in fmt:
-                width = fmt.split('e')
-            elif 'es' in fmt:
-                width = fmt.split('es')
-            elif 'd' in fmt:
-                width = fmt.split('d')
-            elif 'g' in fmt:
-                width = fmt.split('g')
-            elif 'a' in fmt:
-                width = fmt.split('a')
+            test = re.split('es|e|f|i|g|d|a', value['format'])
 
-            if width[0] == '':
-                width = np.int32(np.float32(width[-1]))
+            width = np.int32(np.float32(test[-1]))
+
+            if test[0] != '':
+                out += [width] * np.int32(test[0])
             else:
-                width = np.int32(width[0]) * np.int32(np.float32(width[-1]))
-
-            out.append(width)
+                out.append(width)
 
         return out
 
@@ -159,7 +159,7 @@ class aseg_gdf2_handler(file_handler, key='aseg'):
         if fixed_format:
             widths = self.__col_widths_from_fortran_format(first_col_width)
 
-            test = read_fwf(self.filename, widths=widths)
+            test = read_fwf(self.filename, widths=widths, header=None)
 
             if test.values.shape[1] != len(self.columns):
                 test.columns = ['-'] + self.columns
