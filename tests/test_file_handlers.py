@@ -156,6 +156,20 @@ class TestRead:
         assert "Line" in read.metadata, "the .dfn definitions land in metadata"
         assert read.nrecords == 2001
 
+    def test_aseg_fixed_format_agrees_with_the_default_read(self):
+        """The DFN's fortran formats describe the same columns the default
+        whitespace read finds, so the two routes have to land on the same frame.
+        """
+        default = aseg_gdf2_handler(TEMPEST_DAT)
+        default.read()
+        fixed = aseg_gdf2_handler(TEMPEST_DAT)
+        fixed.read(fixed_format=True)
+
+        assert list(fixed.df.columns) == list(default.df.columns)
+        assert fixed.nrecords == default.nrecords
+        np.testing.assert_allclose(fixed.df.to_numpy(dtype=float),
+                                   default.df.to_numpy(dtype=float))
+
     def test_metadata_passed_in_is_merged_with_what_the_file_knows(self):
         read = open_datafile(RESOLVE_CSV, metadata={"line": {"units": "-"}})
         assert read.metadata["line"]["units"] == "-"
