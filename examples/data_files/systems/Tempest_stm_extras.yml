@@ -1,0 +1,30 @@
+## What Tempest.stm cannot say.
+#
+# A .stm is a forward modelling file: it holds the waveform, the gate times and
+# the geometry a forward model needs, and nothing about the aircraft that flew or
+# the loop that was actually built. Everything here is a field the format has no
+# place for, or one it scaled out - Tempest.stm states a single turn of one square
+# metre, so the real loop is put back below.
+
+tempest_system:
+    instrument: 30Hz Tempest
+
+    variables:
+        reference_frame: right-handed positive up
+        output_sample_frequency: 5
+        data_normalized: false
+
+        transmitter:
+            area: 155
+            number_of_turns: 1
+            peak_current: 560
+            peak_moment: 86800
+            waveform_type: square
+            current_scale_factor: 0.5
+            on_time: 0.00833
+            off_time: 0.00833
+
+        couplet:
+            txrx_dx: [-120, -120]
+            txrx_dy: [0, 0]
+            txrx_dz: [-52, -52]
