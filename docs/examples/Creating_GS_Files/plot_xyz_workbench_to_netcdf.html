@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workbench XYZ &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>Workbench XYZ &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,14 +19,15 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Basic Functionality" href="../Interacting_With_GS_Files/plot_xarray_methods.html" />
-    <link rel="prev" title="Magnetic Raster Dataset" href="plot_csv_magnetics.html" /> 
+    <link rel="prev" title="Systems (YAML, GA-AEM .stm, templates)" href="plot_systems.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,6 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs (2D &amp; 3D)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_systems.html">Systems (YAML, GA-AEM .stm, templates)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Workbench XYZ</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#initialize-the-survey">Initialize the Survey</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#create-a-data-branch-and-attach-data-leaves">Create a ‘data’ branch and attach data leaves</a></li>
@@ -129,7 +131,7 @@ to download the full example code.</p>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">institution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USGS Geology, Geophysics, and Geochemistry Science Center</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SkyTEM provided raw data, USGS generated inverted resistivity models</span>
 <span class="linenos"> 5</span><span class="w">    </span><span class="nt">history</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data acquisition 07/15/2022 - 08/03/2022 by SkyTEM Canada Inc. AEM and magnetic data processing by SkyTEM Canada Inc. 08/2022 - 10/2022. Raw and minimally processed AEM data, and processed magnetic data, received by USGS from SkyTEM Canada Inc 10/2022. Minimally processed AEM data were exported to netCDF using GSPy version 1.0.1 11/2023. Minimally processed binary data received from the contractor were imported into the Aarhus Workbench software (v 6 - 2024.2, Aarhus Geosoftware, Aarhus, Denmark) and processed. Filters were applied to inclinometer and spatial positioning data to smooth raw data and remove sensor dropouts. Altimeter data were filtered, smoothed, and manually edited to correct false altitudes associated with trees, open water, and other obstacles, resulting in processed altitude representative of the distance between the AEM sensor airframe and bare earth. Raw electromagnetic data were visually examined for couplings and noise associated with infrastructure and considered in the context of the locations of known or suspected infrastructure (power lines, pipelines, etc...) and magnetic anomalies; impacted data were manually removed. Some infrastructure-impacted data may remain in the processed dataset. Culled electromagnetic data were spatially averaged using a sounding distance of 1.5 seconds and  trapezoidal filter widths of 1.5, 3, and 6 seconds at gate times 1e-5, 5e-4, and 1e-3 seconds (low-moment data) and 3, 3, and 6 seconds at 1e-4, 1e-3, and 1e-2 seconds (high-moment data). Low-signal data were removed from the averaged data through a combination of filters and manual culling. Deterministic inversion of the processed AEM data was implemented in Aarhus Workbench software (v 6 - 2024.2, Aarhus Geosoftware, Aarhus, Denmark) by USGS. Inversion parameters were selected by running a series of test models with varying starting model resistivity values, layer discretization, vertical/lateral constraints, and other inversion parameters. Laterally constrained blocky inversion models were developed using a 40-layer domain with layer top depths ranging between 1 and 300 meters and layer thickness increasing with depth. Inversions were run with vertical and lateral constraints of values of 4.0 and 2.0, respectively, and a spatially varying, data-dependent homogenous half-space starting model.  Sensor altitude was treated as a free parameter after the 8th iteration. Depth of investigation was constrained to depths between 5 and 400 meters.</span>
-<span class="linenos"> 6</span><span class="w">    </span><span class="nt">references</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey,</span><span class="nv"> </span><span class="s">2024,</span><span class="nv"> </span><span class="s">Airborne</span><span class="nv"> </span><span class="s">electromagnetic</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">magnetic</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Delaware</span><span class="nv"> </span><span class="s">Bay</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">surrounding</span><span class="nv"> </span><span class="s">regions</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">New</span><span class="nv"> </span><span class="s">Jersey</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Delaware,</span><span class="nv"> </span><span class="s">2022</span><span class="nv"> </span><span class="s">(ver</span><span class="nv"> </span><span class="s">2.0,</span><span class="nv"> </span><span class="s">April</span><span class="nv"> </span><span class="s">2025):</span><span class="nv"> </span><span class="s">U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">release,</span><span class="nv"> </span><span class="s">https://doi.org/10.5066/F7J96592.&quot;</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="nt">references</span><span class="p">:</span><span class="w"> </span><span class="s">"U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey,</span><span class="nv"> </span><span class="s">2024,</span><span class="nv"> </span><span class="s">Airborne</span><span class="nv"> </span><span class="s">electromagnetic</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">magnetic</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Delaware</span><span class="nv"> </span><span class="s">Bay</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">surrounding</span><span class="nv"> </span><span class="s">regions</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">New</span><span class="nv"> </span><span class="s">Jersey</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Delaware,</span><span class="nv"> </span><span class="s">2022</span><span class="nv"> </span><span class="s">(ver</span><span class="nv"> </span><span class="s">2.0,</span><span class="nv"> </span><span class="s">April</span><span class="nv"> </span><span class="s">2025):</span><span class="nv"> </span><span class="s">U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">release,</span><span class="nv"> </span><span class="s">https://doi.org/10.5066/F7J96592."</span>
 <span class="linenos"> 7</span><span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">These data are a subset from the referenced data release, included here for demonstration purposes only</span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delaware Bay SkyTEM survey information</span>
 <span class="linenos"> 9</span><span class="w">    </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Airborne electromagnetic (AEM) and magnetic survey data were collected during July and August 2022 over a distance of 3,588.5 line kilometers covering Delaware Bay and surrounding regions in New Jersey and Delaware. Data were collected as part of the USGS Delaware River Basin Next Generation Water Observing Systems (NGWOS) project to improve understanding of groundwater salinity distributions near Delaware Bay. The survey was primarily funded by the USGS, with partial support through collaboration with the University of Delaware to extend data collection to parts of Rehoboth Bay and Indian River Bay. Data were acquired by SkyTEM Canada Inc. with the SkyTEM 304M time-domain helicopter-borne electromagnetic system together with a Geometrics G822A cesium vapor magnetometer. The survey was acquired at a nominal flight height of 30 - 40 m above terrain along parallel flight lines primarily oriented southwest-northeast and with nominal line spacing of 500 m over land and nearshore, and 3000 m over open-water parts of Delaware Bay. Several irregular flightlines were acquired along, and perpendicular to, nearby rivers to capture salinity patterns along these hydrologic flowpaths. Version 2.0 includes additional processed AEM data and inverted resistivity models.</span>
@@ -138,7 +140,7 @@ to download the full example code.</p>
 <span class="linenos">12</span><span class="w">    </span><span class="nt">contractor_project_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20048</span>
 <span class="linenos">13</span><span class="w">    </span><span class="nt">contractor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SkyTEM Canada Inc</span>
 <span class="linenos">14</span><span class="w">    </span><span class="nt">client</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">U.S. Geological Survey</span>
-<span class="linenos">15</span><span class="w">    </span><span class="nt">survey_type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;electromagnetic&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;magnetic&#39;</span><span class="p p-Indicator">]</span>
+<span class="linenos">15</span><span class="w">    </span><span class="nt">survey_type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'electromagnetic'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'magnetic'</span><span class="p p-Indicator">]</span>
 <span class="linenos">16</span><span class="w">    </span><span class="nt">survey_area_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Delaware Bay</span>
 <span class="linenos">17</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DE, NJ</span>
 <span class="linenos">18</span><span class="w">    </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USA</span>
@@ -163,7 +165,7 @@ to download the full example code.</p>
 <span class="linenos">37</span>
 <span class="linenos">38</span><span class="nt">flightline_information</span><span class="p">:</span>
 <span class="linenos">39</span><span class="w">    </span><span class="nt">traverse_line_spacing</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">500 3000</span><span class="p p-Indicator">]</span>
-<span class="linenos">40</span><span class="w">    </span><span class="nt">traverse_line_direction</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;sw-ne&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;variable&#39;</span><span class="p p-Indicator">]</span>
+<span class="linenos">40</span><span class="w">    </span><span class="nt">traverse_line_direction</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'sw-ne'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'variable'</span><span class="p p-Indicator">]</span>
 <span class="linenos">41</span><span class="w">    </span><span class="nt">tie_line_spacing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">n/a</span>
 <span class="linenos">42</span><span class="w">    </span><span class="nt">tie_line_direction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">n/a</span>
 <span class="linenos">43</span><span class="w">    </span><span class="nt">nominal_terrain_clearance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30 - 40 m</span>
@@ -197,11 +199,11 @@ to download the full example code.</p>
 </div>
 </div>
 <p>Path to example files</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//data_files/workbench&#39;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">'..//data_files/workbench'</span>
 </pre></div>
 </div>
 <p>Survey Metadata file</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;survey.yml&quot;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"survey.yml"</span><span class="p">)</span>
 
 <span class="c1"># Establish survey instance</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
@@ -211,38 +213,38 @@ to download the full example code.</p>
 <section id="create-a-data-branch-and-attach-data-leaves">
 <h2>Create a ‘data’ branch and attach data leaves<a class="headerlink" href="#create-a-data-branch-and-attach-data-leaves" title="Link to this heading"></a></h2>
 <p>Make the branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw data&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"raw data"</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Point to Workbench XYZ data files</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//prod_726_729raw_RAW_export.xyz&#39;</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//raw_data.yml&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//prod_726_729raw_RAW_export.xyz'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//raw_data.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data</span>
-<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'raw_data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="create-a-models-branch-and-attach-data-leaves">
 <h2>Create a ‘models’ branch and attach data leaves<a class="headerlink" href="#create-a-models-branch-and-attach-data-leaves" title="Link to this heading"></a></h2>
 <p>Make the branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;inverse models&#39;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'models'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">'inverse models'</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Import Workbench XYZ inversion results (syn/dat/inv)</p>
 <p>GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
 one of the three files need to be passed to provide the base filename</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//prod_726_729_LBv2_bky_MOD_dat.xyz&#39;</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//models.yml&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//prod_726_729_LBv2_bky_MOD_dat.xyz'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//models.yml'</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'inversion'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="save-to-netcdf-file">
 <h2>Save to NetCDF file<a class="headerlink" href="#save-to-netcdf-file" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;workbench_example.nc&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'workbench_example.nc'</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -279,10 +281,10 @@ Attributes:
 <section id="inspect-the-two-branches">
 <h2>Inspect the two branches<a class="headerlink" href="#inspect-the-two-branches" title="Link to this heading"></a></h2>
 <p>Data Branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;data&#39;&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'data'&gt;
 Group: /survey/data
 │   Dimensions:      ()
 │   Data variables:
@@ -301,8 +303,8 @@ Group: /survey/data
     │       y                (index) float64 3kB 1.981e+06 1.981e+06 ... 1.983e+06
     │       z                (index) float64 3kB 4.82 5.19 5.31 5.66 ... 5.44 5.26 5.21
     │   Data variables: (12/15)
-    │       date             (index) object 3kB &#39;2022-07-26&#39; ... &#39;2022-07-26&#39;
-    │       time             (index) object 3kB &#39;12:36:24.002&#39; ... &#39;12:42:21.342&#39;
+    │       date             (index) object 3kB '2022-07-26' ... '2022-07-26'
+    │       time             (index) object 3kB '12:36:24.002' ... '12:42:21.342'
     │       line_no          (index) int64 3kB 101201 101201 101201 ... 200801 200801
     │       rx_altitude      (index) float64 3kB 50.75 49.58 49.3 ... 29.92 31.33 31.79
     │       rx_altitude_std  (index) float64 3kB 1.061 1.062 1.063 ... 1.105 1.1 1.098
@@ -347,14 +349,14 @@ Group: /survey/data
                 hm_gate_times_bnds                           (hm_gate_times, nv) float64 592B ...
                 n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
                 xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
-                transmitter_label                            (n_transmitter) &lt;U2 16B &#39;lm&#39;...
+                transmitter_label                            (n_transmitter) &lt;U2 16B 'lm'...
                 ...                                           ...
                 couplet_sample_rate                          (n_couplet) float64 16B 0.1 0.1
                 couplet_txrx_dx                              (n_couplet) float64 16B -13....
                 couplet_txrx_dy                              (n_couplet) float64 16B 0.0 0.0
                 couplet_txrx_dz                              (n_couplet) float64 16B -2.0...
-                couplet_data_type                            (n_couplet) &lt;U4 32B &#39;dBdt&#39; &#39;...
-                couplet_gate_times                           (n_couplet) &lt;U13 104B &#39;lm_ga...
+                couplet_data_type                            (n_couplet) &lt;U4 32B 'dBdt' '...
+                couplet_gate_times                           (n_couplet) &lt;U13 104B 'lm_ga...
             Attributes:
                 type:                      system
                 mode:                      airborne
@@ -369,10 +371,10 @@ Group: /survey/data
 </pre></div>
 </div>
 <p>Models Branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models'</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;models&#39;&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'models'&gt;
 Group: /survey/models
 │   Dimensions:      ()
 │   Data variables:
@@ -401,7 +403,7 @@ Group: /survey/models
     │       lm_gate_times_bnds   (lm_gate_times, nv) float64 336B -3.145e-06 ... 0.00141
     │       hm_gate_times_bnds   (hm_gate_times, nv) float64 480B 2.742e-05 ... 0.01049
     │       line_no              (index) int64 7kB 101201 101201 ... 103801 103801
-    │       date                 (index) object 7kB &#39;2022-07-26&#39; ... &#39;2022-07-26&#39;
+    │       date                 (index) object 7kB '2022-07-26' ... '2022-07-26'
     │       ...                   ...
     │       lm_z_data            (index, lm_gate_times) float64 156kB 3.208e-09 ... 9...
     │       lm_z_datastd         (index, lm_gate_times) float64 156kB 1.03 ... 9.999e+03
@@ -439,15 +441,15 @@ Group: /survey/models
     │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 480B ...
     │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
     │           xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
-    │           transmitter_label                            (n_transmitter) &lt;U2 16B &#39;lm&#39;...
+    │           transmitter_label                            (n_transmitter) &lt;U2 16B 'lm'...
     │           transmitter_number_of_turns                  (n_transmitter) int64 16B 1 4
     │           ...                                           ...
     │           couplet_sample_rate                          (n_couplet) float64 16B 0.1 0.1
     │           couplet_txrx_dx                              (n_couplet) float64 16B -13....
     │           couplet_txrx_dy                              (n_couplet) float64 16B 0.0 0.0
     │           couplet_txrx_dz                              (n_couplet) float64 16B -2.0...
-    │           couplet_data_type                            (n_couplet) &lt;U4 32B &#39;dBdt&#39; &#39;...
-    │           couplet_gate_times                           (n_couplet) &lt;U13 104B &#39;lm_ga...
+    │           couplet_data_type                            (n_couplet) &lt;U4 32B 'dBdt' '...
+    │           couplet_gate_times                           (n_couplet) &lt;U13 104B 'lm_ga...
     │       Attributes:
     │           type:                      system
     │           mode:                      airborne
@@ -463,14 +465,14 @@ Group: /survey/models
             Dimensions:             (dim_0: 1)
             Dimensions without coordinates: dim_0
             Data variables:
-                model_file          &lt;U33 132B &#39;prod_726_729_LBv2_bky_MOD_inv.xyz&#39;
-                inversion_software  &lt;U46 184B &#39;Workbench, Aarhus Geosoftware, Aarhus, Den...
-                software_version    &lt;U33 132B &#39;Aarhus Workbench version 6 2024.2&#39;
+                model_file          &lt;U33 132B 'prod_726_729_LBv2_bky_MOD_inv.xyz'
+                inversion_software  &lt;U46 184B 'Workbench, Aarhus Geosoftware, Aarhus, Den...
+                software_version    &lt;U33 132B 'Aarhus Workbench version 6 2024.2'
                 date                (dim_0) int64 8B 2024
                 number_of_layers    (dim_0) int64 8B 40
-                constraints         &lt;U21 84B &#39;laterally constrained&#39;
-                description         &lt;U805 3kB &#39;Deterministic inversion of the processed A...
-                data_file           &lt;U30 120B &#39;prod_726_729raw_RAW_export.xyz&#39;
+                constraints         &lt;U21 84B 'laterally constrained'
+                description         &lt;U805 3kB 'Deterministic inversion of the processed A...
+                data_file           &lt;U30 120B 'prod_726_729raw_RAW_export.xyz'
             Attributes:
                 type:        parameters
                 method:      electromagnetic, time domain
@@ -500,7 +502,7 @@ Group: /survey/models
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plot_csv_magnetics.html" class="btn btn-neutral float-left" title="Magnetic Raster Dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot_systems.html" class="btn btn-neutral float-left" title="Systems (YAML, GA-AEM .stm, templates)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../Interacting_With_GS_Files/plot_xarray_methods.html" class="btn btn-neutral float-right" title="Basic Functionality" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

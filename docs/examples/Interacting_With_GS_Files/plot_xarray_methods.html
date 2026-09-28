@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Functionality &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>Basic Functionality &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -113,12 +114,12 @@ to download the full example code.</p>
 </pre></div>
 </div>
 <p>First open the netcdf GS standard file, generate it if doesn’t already exist</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">input_file</span> <span class="o">=</span> <span class="s2">&quot;..//data_files//tempest_aseg//Tempest.nc&quot;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">input_file</span> <span class="o">=</span> <span class="s2">"..//data_files//tempest_aseg//Tempest.nc"</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;..//Creating_GS_Files//plot_aseg_tempest.py&quot;</span><span class="p">])</span>
-<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"..//Creating_GS_Files//plot_aseg_tempest.py"</span><span class="p">])</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
 </pre></div>
 </div>
 <section id="accessing-the-groups-within-the-tree">
@@ -126,13 +127,13 @@ to download the full example code.</p>
 <p>Survey</p>
 <p>the <code class="docutils literal notranslate"><span class="pre">survey</span></code> object here is a DataTree, printing it will show the entire contents
 of the DataTree</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Survey:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Survey:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey:
 
-&lt;xarray.DataTree &#39;survey&#39;&gt;
+&lt;xarray.DataTree 'survey'&gt;
 Group: /survey
 │   Dimensions:                 ()
 │   Coordinates:
@@ -188,7 +189,7 @@ Group: /survey
 │       │       comment:     This dataset includes minimally processed (raw) AEM data
 │       │       type:        data
 │       │       mode:        airborne
-│       │       method:      [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
+│       │       method:      ['magnetic', 'radiometric', 'electromagnetic, time domain']
 │       │       instrument:  30Hz Tempest
 │       │       structure:   tabular
 │       └── Group: /survey/data/raw_data/tempest_system
@@ -369,7 +370,7 @@ Group: /survey
 </div>
 <p>The DataSet object at the location /survey can be isolated through two options:</p>
 <p>Option 1) directly form the DataTree object <code class="docutils literal notranslate"><span class="pre">survey</span></code></p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Option 1:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Option 1:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -398,8 +399,8 @@ Attributes:
 </pre></div>
 </div>
 <p>or Option 2) use the path to the group and then retrieve the DataSet</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Option 2:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;/survey&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Option 2:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'/survey'</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Option 2:
@@ -432,99 +433,99 @@ either directly or by using the group path</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset is incomplete and has been downsampled for the &#39;
-            &#39;purposes of this example.&#39;,
- &#39;content&#39;: &#39;Tempest AEM Survey from the Mississippi Alluvial Plain /survey; &#39;
-            &#39;raw data /survey/data; inverted 1-D electrical resistivity models &#39;
-            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
-            &#39;/survey/data/raw_data; inverted resistivity models &#39;
-            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
-            &#39;intensity /survey/derived_maps/maps;  &#39;
-            &#39;/survey/data/raw_data/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
-            &#39;/survey/derived_maps/maps/magnetic_system;  /survey; raw data &#39;
-            &#39;/survey/data; inverted 1-D electrical resistivity models &#39;
-            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
-            &#39;/survey/data/raw_data; inverted resistivity models &#39;
-            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
-            &#39;intensity /survey/derived_maps/maps;  &#39;
-            &#39;/survey/data/raw_data/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
-            &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
- &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
- &#39;gspy_version&#39;: &#39;2.2.8&#39;,
- &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
-            &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
-            &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
-            &#39;the GALEISBSTDEM time-domain deterministic inversion software &#39;
-            &#39;(Brodie 2015, Geoscience Australia, Release-20160606).&#39;,
- &#39;institution&#39;: &#39;USGS Geology, Geophysics, &amp; Geochemistry Science Center&#39;,
- &#39;references&#39;: &#39;Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., &#39;
-               &#39;Hoogenboom, B.E., and Burton, B.L., 2021, Airborne &#39;
-               &#39;electromagnetic, magnetic, and radiometric survey of the &#39;
-               &#39;Mississippi Alluvial Plain, November 2019 - March 2020: U.S. &#39;
-               &#39;Geological Survey data release, &#39;
-               &#39;https://doi.org/10.5066/P9E44CTQ.&#39;,
- &#39;source&#39;: &#39;Contractor provided ASEG-GDF2 formatted data&#39;,
- &#39;title&#39;: &#39;Example Tempest Airborne Electromagnetic (AEM) Dataset&#39;,
- &#39;type&#39;: &#39;survey&#39;}
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{'comment': 'This dataset is incomplete and has been downsampled for the '
+            'purposes of this example.',
+ 'content': 'Tempest AEM Survey from the Mississippi Alluvial Plain /survey; '
+            'raw data /survey/data; inverted 1-D electrical resistivity models '
+            '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+            '/survey/data/raw_data; inverted resistivity models '
+            '/survey/models/inverted_models; gridded map of total magnetic '
+            'intensity /survey/derived_maps/maps;  '
+            '/survey/data/raw_data/tempest_system;  '
+            '/survey/models/inverted_models/tempest_system;  '
+            '/survey/models/inverted_models/inversion_parameters;  '
+            '/survey/derived_maps/maps/magnetic_system;  /survey; raw data '
+            '/survey/data; inverted 1-D electrical resistivity models '
+            '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+            '/survey/data/raw_data; inverted resistivity models '
+            '/survey/models/inverted_models; gridded map of total magnetic '
+            'intensity /survey/derived_maps/maps;  '
+            '/survey/data/raw_data/tempest_system;  '
+            '/survey/models/inverted_models/tempest_system;  '
+            '/survey/models/inverted_models/inversion_parameters;  '
+            '/survey/derived_maps/maps/magnetic_system; ',
+ 'conventions': 'GS-2.0, CF-1.13',
+ 'gspy_version': '2.2.8',
+ 'history': 'This example dataset includes the raw AEM data and gridded '
+            'magnetic data as provided by the contractor, CGG Canada Services, '
+            'Ltd, as well as 1-D resistivity models inverted by the USGS using '
+            'the GALEISBSTDEM time-domain deterministic inversion software '
+            '(Brodie 2015, Geoscience Australia, Release-20160606).',
+ 'institution': 'USGS Geology, Geophysics, &amp; Geochemistry Science Center',
+ 'references': 'Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., '
+               'Hoogenboom, B.E., and Burton, B.L., 2021, Airborne '
+               'electromagnetic, magnetic, and radiometric survey of the '
+               'Mississippi Alluvial Plain, November 2019 - March 2020: U.S. '
+               'Geological Survey data release, '
+               'https://doi.org/10.5066/P9E44CTQ.',
+ 'source': 'Contractor provided ASEG-GDF2 formatted data',
+ 'title': 'Example Tempest Airborne Electromagnetic (AEM) Dataset',
+ 'type': 'survey'}
 </pre></div>
 </div>
 <p>Survey Attributes Option 2:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;/survey&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'/survey'</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;comment&#39;: &#39;This dataset is incomplete and has been downsampled for the &#39;
-            &#39;purposes of this example.&#39;,
- &#39;content&#39;: &#39;Tempest AEM Survey from the Mississippi Alluvial Plain /survey; &#39;
-            &#39;raw data /survey/data; inverted 1-D electrical resistivity models &#39;
-            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
-            &#39;/survey/data/raw_data; inverted resistivity models &#39;
-            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
-            &#39;intensity /survey/derived_maps/maps;  &#39;
-            &#39;/survey/data/raw_data/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
-            &#39;/survey/derived_maps/maps/magnetic_system;  /survey; raw data &#39;
-            &#39;/survey/data; inverted 1-D electrical resistivity models &#39;
-            &#39;/survey/models; derived maps /survey/derived_maps; raw AEM data &#39;
-            &#39;/survey/data/raw_data; inverted resistivity models &#39;
-            &#39;/survey/models/inverted_models; gridded map of total magnetic &#39;
-            &#39;intensity /survey/derived_maps/maps;  &#39;
-            &#39;/survey/data/raw_data/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/tempest_system;  &#39;
-            &#39;/survey/models/inverted_models/inversion_parameters;  &#39;
-            &#39;/survey/derived_maps/maps/magnetic_system; &#39;,
- &#39;conventions&#39;: &#39;GS-2.0, CF-1.13&#39;,
- &#39;gspy_version&#39;: &#39;2.2.8&#39;,
- &#39;history&#39;: &#39;This example dataset includes the raw AEM data and gridded &#39;
-            &#39;magnetic data as provided by the contractor, CGG Canada Services, &#39;
-            &#39;Ltd, as well as 1-D resistivity models inverted by the USGS using &#39;
-            &#39;the GALEISBSTDEM time-domain deterministic inversion software &#39;
-            &#39;(Brodie 2015, Geoscience Australia, Release-20160606).&#39;,
- &#39;institution&#39;: &#39;USGS Geology, Geophysics, &amp; Geochemistry Science Center&#39;,
- &#39;references&#39;: &#39;Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., &#39;
-               &#39;Hoogenboom, B.E., and Burton, B.L., 2021, Airborne &#39;
-               &#39;electromagnetic, magnetic, and radiometric survey of the &#39;
-               &#39;Mississippi Alluvial Plain, November 2019 - March 2020: U.S. &#39;
-               &#39;Geological Survey data release, &#39;
-               &#39;https://doi.org/10.5066/P9E44CTQ.&#39;,
- &#39;source&#39;: &#39;Contractor provided ASEG-GDF2 formatted data&#39;,
- &#39;title&#39;: &#39;Example Tempest Airborne Electromagnetic (AEM) Dataset&#39;,
- &#39;type&#39;: &#39;survey&#39;}
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{'comment': 'This dataset is incomplete and has been downsampled for the '
+            'purposes of this example.',
+ 'content': 'Tempest AEM Survey from the Mississippi Alluvial Plain /survey; '
+            'raw data /survey/data; inverted 1-D electrical resistivity models '
+            '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+            '/survey/data/raw_data; inverted resistivity models '
+            '/survey/models/inverted_models; gridded map of total magnetic '
+            'intensity /survey/derived_maps/maps;  '
+            '/survey/data/raw_data/tempest_system;  '
+            '/survey/models/inverted_models/tempest_system;  '
+            '/survey/models/inverted_models/inversion_parameters;  '
+            '/survey/derived_maps/maps/magnetic_system;  /survey; raw data '
+            '/survey/data; inverted 1-D electrical resistivity models '
+            '/survey/models; derived maps /survey/derived_maps; raw AEM data '
+            '/survey/data/raw_data; inverted resistivity models '
+            '/survey/models/inverted_models; gridded map of total magnetic '
+            'intensity /survey/derived_maps/maps;  '
+            '/survey/data/raw_data/tempest_system;  '
+            '/survey/models/inverted_models/tempest_system;  '
+            '/survey/models/inverted_models/inversion_parameters;  '
+            '/survey/derived_maps/maps/magnetic_system; ',
+ 'conventions': 'GS-2.0, CF-1.13',
+ 'gspy_version': '2.2.8',
+ 'history': 'This example dataset includes the raw AEM data and gridded '
+            'magnetic data as provided by the contractor, CGG Canada Services, '
+            'Ltd, as well as 1-D resistivity models inverted by the USGS using '
+            'the GALEISBSTDEM time-domain deterministic inversion software '
+            '(Brodie 2015, Geoscience Australia, Release-20160606).',
+ 'institution': 'USGS Geology, Geophysics, &amp; Geochemistry Science Center',
+ 'references': 'Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., '
+               'Hoogenboom, B.E., and Burton, B.L., 2021, Airborne '
+               'electromagnetic, magnetic, and radiometric survey of the '
+               'Mississippi Alluvial Plain, November 2019 - March 2020: U.S. '
+               'Geological Survey data release, '
+               'https://doi.org/10.5066/P9E44CTQ.',
+ 'source': 'Contractor provided ASEG-GDF2 formatted data',
+ 'title': 'Example Tempest Airborne Electromagnetic (AEM) Dataset',
+ 'type': 'survey'}
 </pre></div>
 </div>
 <p>Similarly, to expand a specific variable of the survey, we can access it
 directly from the survey object, i.e. no path needed first</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Survey Information:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;survey_information&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Survey Information:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'survey_information'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Survey Information:
 
-&lt;xarray.DataArray &#39;survey_information&#39; ()&gt; Size: 8B
+&lt;xarray.DataArray 'survey_information' ()&gt; Size: 8B
 [1 values with dtype=float64]
 Coordinates:
     spatial_ref  float64 8B ...
@@ -546,7 +547,7 @@ Attributes:
 Dataset (in this case /survey) and all children. Note this does not return
 grandchildren! So in this case we only see the container branches immediately
 beneath the survey</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Items of the Survey DataTree</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Items of the Survey DataTree</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">survey</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="c1"># do something with the item if desired</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -567,13 +568,13 @@ derived_maps
 Dataset has children beneath it then technically it is still a DataTree object
 and printing it will show the rest of that branch of the tree.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the data branch</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Data Branch:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Data Branch:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Data Branch:
 
-&lt;xarray.DataTree &#39;data&#39;&gt;
+&lt;xarray.DataTree 'data'&gt;
 Group: /survey/data
 │   Dimensions:      ()
 │   Data variables:
@@ -609,7 +610,7 @@ Group: /survey/data
     │       comment:     This dataset includes minimally processed (raw) AEM data
     │       type:        data
     │       mode:        airborne
-    │       method:      [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
+    │       method:      ['magnetic', 'radiometric', 'electromagnetic, time domain']
     │       instrument:  30Hz Tempest
     │       structure:   tabular
     └── Group: /survey/data/raw_data/tempest_system
@@ -647,13 +648,13 @@ Group: /survey/data
 </div>
 <p>Zoom in to the lowest level of the tree, notice it is still technically a DataTree
 object but it has no children.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">System Leaflet at the bottom of the Tree:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/raw_data/tempest_system&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">System Leaflet at the bottom of the Tree:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data/tempest_system'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>System Leaflet at the bottom of the Tree:
 
-&lt;xarray.DataTree &#39;tempest_system&#39;&gt;
+&lt;xarray.DataTree 'tempest_system'&gt;
 Group: /survey/data/raw_data/tempest_system
     Dimensions:                       (index: 2001, gate_times: 15, nv: 2,
                                        n_transmitter: 1, waveform_time: 7,
@@ -692,8 +693,8 @@ Group: /survey/data/raw_data/tempest_system
 </div>
 <p>Use the .to_dataset method to isolate the Dataset (convert from DataTree to
 Dataset), can optionally create a new variable with just that Dataset:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tempest_system</span> <span class="o">=</span> <span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/raw_data/tempest_system&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">System Leaflet, as a Dataset:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tempest_system</span> <span class="o">=</span> <span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data/tempest_system'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">System Leaflet, as a Dataset:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tempest_system</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -736,28 +737,28 @@ Attributes:
 </div>
 <p>!!!! Important !!!! This returns an copy from the DataTree, i.e. any changes to
 tempest_system does not change the source. For example:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tempest_system</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;aaaaaaa&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;adding a new attribute&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Altered attributes on the DataSet:&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">tempest_system</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'aaaaaaa'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'adding a new attribute'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Altered attributes on the DataSet:'</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">tempest_system</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Source group attributes do not see the new attribute:&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/raw_data/tempest_system&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Source group attributes do not see the new attribute:'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data/tempest_system'</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Altered attributes on the DataSet:
-{&#39;aaaaaaa&#39;: &#39;adding a new attribute&#39;,
- &#39;instrument&#39;: &#39;30Hz Tempest&#39;,
- &#39;method&#39;: &#39;electromagnetic, time domain&#39;,
- &#39;mode&#39;: &#39;airborne&#39;,
- &#39;name&#39;: &#39;tempest_system&#39;,
- &#39;type&#39;: &#39;system&#39;}
+{'aaaaaaa': 'adding a new attribute',
+ 'instrument': '30Hz Tempest',
+ 'method': 'electromagnetic, time domain',
+ 'mode': 'airborne',
+ 'name': 'tempest_system',
+ 'type': 'system'}
 
 
 Source group attributes do not see the new attribute:
-{&#39;instrument&#39;: &#39;30Hz Tempest&#39;,
- &#39;method&#39;: &#39;electromagnetic, time domain&#39;,
- &#39;mode&#39;: &#39;airborne&#39;,
- &#39;name&#39;: &#39;tempest_system&#39;,
- &#39;type&#39;: &#39;system&#39;}
+{'instrument': '30Hz Tempest',
+ 'method': 'electromagnetic, time domain',
+ 'mode': 'airborne',
+ 'name': 'tempest_system',
+ 'type': 'system'}
 </pre></div>
 </div>
 </section>
@@ -767,27 +768,27 @@ Source group attributes do not see the new attribute:
 <h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading"></a></h3>
 <p>Dimensions are simply <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">length</span></code> pairs corresponding to the dimension
 coordinate variables represented in the specific Dataset group being examined</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the method &quot;sizes&quot; to see a list of all the dimensions of a group</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Dimensions:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the method "sizes" to see a list of all the dimensions of a group</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Dimensions:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">]</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Dimensions:
 
-Frozen(ChainMap({&#39;layer_depth&#39;: 30, &#39;nv&#39;: 2, &#39;gate_times&#39;: 15, &#39;index&#39;: 2001}, {}, {}, {}))
+Frozen(ChainMap({'layer_depth': 30, 'nv': 2, 'gate_times': 15, 'index': 2001}, {}, {}, {}))
 </pre></div>
 </div>
 <p>Isolate an individual dimension coordinate for further examination</p>
 <p>Tabular data are typically 1-D or 2-D variables with the primary dimension
 being <code class="docutils literal notranslate"><span class="pre">index</span></code>, which often corresponds to the rows of the input text
 file representing individual measurements.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Looking at the Index dimension coordinate:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Looking at the Index dimension coordinate:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">][</span><span class="s1">'index'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Looking at the Index dimension coordinate:
 
-&lt;xarray.DataArray &#39;index&#39; (index: 2001)&gt; Size: 16kB
+&lt;xarray.DataArray 'index' (index: 2001)&gt; Size: 16kB
 array([0.000e+00, 1.000e+00, 2.000e+00, ..., 1.998e+03, 1.999e+03, 2.000e+03],
       shape=(2001,))
 Coordinates:
@@ -807,13 +808,13 @@ Attributes:
 <p>If a dimension is not discrete, meaning it represents ranges (such as depth layers),
 then the bounds on each dimension value also need to be defined, and are linked
 to the dimension through the “bounds” attribute.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Example of a non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;layer_depth&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Example of a non-discrete dimension:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">][</span><span class="s1">'layer_depth'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Example of a non-discrete dimension:
 
-&lt;xarray.DataArray &#39;layer_depth&#39; (layer_depth: 30)&gt; Size: 240B
+&lt;xarray.DataArray 'layer_depth' (layer_depth: 30)&gt; Size: 240B
 array([  1.5  ,   4.65 ,   8.115,  11.925,  16.115,  20.725,  25.795,  31.375,
         37.515,  44.265,  51.69 ,  59.86 ,  68.85 ,  78.74 ,  89.615, 101.575,
        114.73 , 129.2  , 145.12 , 162.63 , 181.89 , 203.08 , 226.39 , 252.03 ,
@@ -832,13 +833,13 @@ Attributes:
 </div>
 <p>Notice that the bounds variable is 2-D [index, nv] where nv = number of vertices,
 in this case of length 2:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Corresponding bounds on this non-discrete dimension:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;layer_depth_bnds&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Corresponding bounds on this non-discrete dimension:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">][</span><span class="s1">'layer_depth_bnds'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Corresponding bounds on this non-discrete dimension:
 
-&lt;xarray.DataArray &#39;layer_depth_bnds&#39; (layer_depth: 30, nv: 2)&gt; Size: 480B
+&lt;xarray.DataArray 'layer_depth_bnds' (layer_depth: 30, nv: 2)&gt; Size: 480B
 [60 values with dtype=float64]
 Coordinates:
   * layer_depth  (layer_depth) float64 240B 1.5 4.65 8.115 ... 382.9 424.2 467.5
@@ -851,8 +852,8 @@ Attributes:
     grid_mapping:   spatial_ref
 </pre></div>
 </div>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">See the bounds:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;layer_depth_bnds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">See the bounds:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">][</span><span class="s1">'layer_depth_bnds'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>See the bounds:
@@ -898,8 +899,8 @@ house the coordinates (i.e. values) of that dimension.
 This means a dataset can have both dimensional and non-dimensional coordinates.
 Dimensional coordinates are noted with a * (or bold text) in printed output of
 the xarray, such as <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">gate_times</span></code> in this example.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Inspect the coordinates of a tabular dataset:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/raw_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Inspect the coordinates of a tabular dataset:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Inspect the coordinates of a tabular dataset:
@@ -923,13 +924,13 @@ Per CF conventions, these spatiotemporal coordinates have extra attributes
 required such as “axis” and strict requirements on “standard_names” to make
 the datasets recognizable to GIS software. GSPy handles automatically handles
 these requirements for users.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Inspecting a specific coordinate variable:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;data/raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Inspecting a specific coordinate variable:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">][</span><span class="s1">'x'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Inspecting a specific coordinate variable:
 
-&lt;xarray.DataArray &#39;x&#39; (index: 2001)&gt; Size: 16kB
+&lt;xarray.DataArray 'x' (index: 2001)&gt; Size: 16kB
 [2001 values with dtype=float64]
 Coordinates:
   * index        (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03 2e+03
@@ -954,8 +955,8 @@ the Survey.</p>
 models.Therefore, Raster data almost always have dimensional coordinates, i.e.,
 the data dimensions correspond directly to either spatial or temporal
 coordinates (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>).</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Inspect the coordinates of a raster dataset:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;derived_maps/maps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Inspect the coordinates of a raster dataset:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Inspect the coordinates of a raster dataset:
@@ -971,18 +972,18 @@ Coordinates:
 <p>the <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code> coordinate variable is a non-dimensional coordinate that
 contains information on the coordinate reference system. All groups within the
 DataTree inherit the same spatial_ref. For more information, see <a class="reference internal" href="plot_coordinate_reference_systems.html#coordinate-reference-systems"><span class="std std-ref">Coordinate Reference Systems</span></a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">CRS spatial_ref variable:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;derived_maps/maps&#39;</span><span class="p">][</span><span class="s1">&#39;spatial_ref&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">CRS spatial_ref variable:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'spatial_ref'</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>CRS spatial_ref variable:
 
-&lt;xarray.DataArray &#39;spatial_ref&#39; ()&gt; Size: 8B
+&lt;xarray.DataArray 'spatial_ref' ()&gt; Size: 8B
 [1 values with dtype=float64]
 Coordinates:
     spatial_ref  float64 8B ...
 Attributes: (12/19)
-    crs_wkt:                        PROJCRS[&quot;NAD83 / Conus Albers&quot;,BASEGEOGCR...
+    crs_wkt:                        PROJCRS["NAD83 / Conus Albers",BASEGEOGCR...
     semi_major_axis:                6378137.0
     semi_minor_axis:                6356752.314140356
     inverse_flattening:             298.257222101
@@ -1008,38 +1009,38 @@ for more details.</p>
 information about a dataset group as a whole, such as model inversion parameters
 or other processing descriptions. At a minimum, a <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute should
 contain a brief summary of the contents of the dataset.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Dataset Attributes:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">Dataset Attributes:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Dataset Attributes:
 
-{&#39;comment&#39;: &#39;This dataset includes inverted resistivity models derived from &#39;
-            &#39;processed AEM data produced by USGS&#39;,
- &#39;content&#39;: &#39;inverted resistivity models&#39;,
- &#39;instrument&#39;: &#39;30Hz Tempest&#39;,
- &#39;method&#39;: &#39;electromagnetic, time domain&#39;,
- &#39;mode&#39;: &#39;airborne&#39;,
- &#39;property&#39;: &#39;electrical conductivity&#39;,
- &#39;structure&#39;: &#39;tabular&#39;,
- &#39;type&#39;: &#39;model&#39;}
+{'comment': 'This dataset includes inverted resistivity models derived from '
+            'processed AEM data produced by USGS',
+ 'content': 'inverted resistivity models',
+ 'instrument': '30Hz Tempest',
+ 'method': 'electromagnetic, time domain',
+ 'mode': 'airborne',
+ 'property': 'electrical conductivity',
+ 'structure': 'tabular',
+ 'type': 'model'}
 </pre></div>
 </div>
 <p>Variable attributes</p>
 <p>Each data variable must contain attributes detailing the metadata
 of that individual variable. These follow the <a class="reference external" href="http://cfconventions.org/">Climate and Forecast (CF) metadata conventions</a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">DataArray (variable) Attributes:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;models/inverted_models&#39;</span><span class="p">][</span><span class="s1">&#39;conductivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">DataArray (variable) Attributes:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models/inverted_models'</span><span class="p">][</span><span class="s1">'conductivity'</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DataArray (variable) Attributes:
 
-{&#39;format&#39;: &#39;30e15.6&#39;,
- &#39;grid_mapping&#39;: &#39;spatial_ref&#39;,
- &#39;long_name&#39;: &#39;Layer conductivity&#39;,
- &#39;standard_name&#39;: &#39;conductivity&#39;,
- &#39;units&#39;: &#39;S/m&#39;,
- &#39;valid_range&#39;: array([1.456164e-04, 1.000000e+01])}
+{'format': '30e15.6',
+ 'grid_mapping': 'spatial_ref',
+ 'long_name': 'Layer conductivity',
+ 'standard_name': 'conductivity',
+ 'units': 'S/m',
+ 'valid_range': array([1.456164e-04, 1.000000e+01])}
 </pre></div>
 </div>
 </section>
@@ -1053,9 +1054,9 @@ through a file and identify groups based on their attributes</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">find_groups_by_attrs</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
-        <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_groups_by_attrs</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">'type'</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">nc_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">""</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="n">find_attr</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">find_value</span><span class="p">:</span>
@@ -1063,85 +1064,85 @@ through a file and identify groups based on their attributes</p>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cur_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                             <span class="k">for</span> <span class="n">ind_value</span> <span class="ow">in</span> <span class="n">cur_value</span><span class="p">:</span>
                                 <span class="k">if</span> <span class="n">ind_value</span> <span class="o">==</span> <span class="n">find_value</span><span class="p">:</span>
-                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="k">if</span> <span class="n">cur_value</span> <span class="o">==</span> <span class="n">find_value</span><span class="p">:</span>
-                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Group: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
             <span class="c1"># Recurse into subgroups</span>
             <span class="k">for</span> <span class="n">gname</span><span class="p">,</span> <span class="n">subg</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">walk</span><span class="p">(</span><span class="n">subg</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">gname</span><span class="p">)</span>
+                <span class="n">walk</span><span class="p">(</span><span class="n">subg</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="n">gname</span><span class="p">)</span>
         <span class="n">walk</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>see all the groups and their types</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">'type'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey
-        type = &#39;survey&#39;
+        type = 'survey'
 Group: /survey/data
-        type = &#39;container&#39;
+        type = 'container'
 Group: /survey/data/raw_data
-        type = &#39;data&#39;
+        type = 'data'
 Group: /survey/data/raw_data/tempest_system
-        type = &#39;system&#39;
+        type = 'system'
 Group: /survey/models
-        type = &#39;container&#39;
+        type = 'container'
 Group: /survey/models/inverted_models
-        type = &#39;model&#39;
+        type = 'model'
 Group: /survey/models/inverted_models/tempest_system
-        type = &#39;system&#39;
+        type = 'system'
 Group: /survey/models/inverted_models/inversion_parameters
-        type = &#39;parameters&#39;
+        type = 'parameters'
 Group: /survey/derived_maps
-        type = &#39;container&#39;
+        type = 'container'
 Group: /survey/derived_maps/maps
-        type = &#39;data&#39;
+        type = 'data'
 Group: /survey/derived_maps/maps/magnetic_system
-        type = &#39;system&#39;
+        type = 'system'
 </pre></div>
 </div>
 <p>find just the system type groups</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">'type'</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">'system'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/data/raw_data/tempest_system
-        type = &#39;system&#39;
+        type = 'system'
 Group: /survey/models/inverted_models/tempest_system
-        type = &#39;system&#39;
+        type = 'system'
 Group: /survey/derived_maps/maps/magnetic_system
-        type = &#39;system&#39;
+        type = 'system'
 </pre></div>
 </div>
 <p>find just the model type groups</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">'type'</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">'model'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/models/inverted_models
-        type = &#39;model&#39;
+        type = 'model'
 </pre></div>
 </div>
 <p>find every group related to the ‘magnetic’ method</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">&#39;magnetic&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">find_groups_by_attrs</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">find_attr</span><span class="o">=</span><span class="s1">'method'</span><span class="p">,</span> <span class="n">find_value</span><span class="o">=</span><span class="s1">'magnetic'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Group: /survey/data/raw_data
-        method = [&#39;magnetic&#39;, &#39;radiometric&#39;, &#39;electromagnetic, time domain&#39;]
+        method = ['magnetic', 'radiometric', 'electromagnetic, time domain']
 Group: /survey/derived_maps/maps
-        method = &#39;magnetic&#39;
+        method = 'magnetic'
 Group: /survey/derived_maps/maps/magnetic_system
-        method = &#39;magnetic&#39;
+        method = 'magnetic'
 </pre></div>
 </div>
 <p>Then if you want to open one of these groups now that you see the path,
 without GSPy just native xarray. Notice this opens just that single group,
 you do not have access to the rest of the datatree here:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;/survey/derived_maps/maps&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">'/survey/derived_maps/maps'</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </pre></div>
@@ -1170,7 +1171,7 @@ Attributes:
 <p>If you want to open a datatree, point the group to where you want to start
 the tree, can be ‘/survey’ for the entire tree, or in this case we load
 just the models branch:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;/survey/models&#39;</span><span class="p">,</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">'/survey/models'</span><span class="p">,</span>
                       <span class="n">decode_timedelta</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>

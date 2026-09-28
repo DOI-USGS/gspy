@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GeoTIFFs (2D &amp; 3D) &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>GeoTIFFs (2D &amp; 3D) &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -66,6 +67,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_systems.html">Systems (YAML, GA-AEM .stm, templates)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench XYZ</a></li>
 </ul>
 </li>
@@ -141,10 +143,10 @@ to download the full example code.</p>
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;..//data_files//tempest_aseg&quot;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s2">"..//data_files//tempest_aseg"</span>
 
 <span class="c1"># Survey metadata file</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//Tempest_survey_md.yml&quot;</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//Tempest_survey_md.yml"</span><span class="p">)</span>
 
 <span class="c1"># Establish the Survey</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
@@ -157,7 +159,7 @@ to download the full example code.</p>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">institution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USGS Geology, Geophysics, &amp; Geochemistry Science Center</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">Contractor provided ASEG-GDF2 formatted data</span>
 <span class="linenos"> 5</span><span class="w">    </span><span class="nt">history</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This example dataset includes the raw AEM data and gridded magnetic data as provided by the contractor, CGG Canada Services, Ltd, as well as 1-D resistivity models inverted by the USGS using the GALEISBSTDEM time-domain deterministic inversion software (Brodie 2015, Geoscience Australia, Release-20160606).</span><span class="w"> </span>
-<span class="linenos"> 6</span><span class="w">    </span><span class="nt">references</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Minsley,</span><span class="nv"> </span><span class="s">B.J.,</span><span class="nv"> </span><span class="s">James,</span><span class="nv"> </span><span class="s">S.R.,</span><span class="nv"> </span><span class="s">Bedrosian,</span><span class="nv"> </span><span class="s">P.A.,</span><span class="nv"> </span><span class="s">Pace,</span><span class="nv"> </span><span class="s">M.D.,</span><span class="nv"> </span><span class="s">Hoogenboom,</span><span class="nv"> </span><span class="s">B.E.,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Burton,</span><span class="nv"> </span><span class="s">B.L.,</span><span class="nv"> </span><span class="s">2021,</span><span class="nv"> </span><span class="s">Airborne</span><span class="nv"> </span><span class="s">electromagnetic,</span><span class="nv"> </span><span class="s">magnetic,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">radiometric</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Mississippi</span><span class="nv"> </span><span class="s">Alluvial</span><span class="nv"> </span><span class="s">Plain,</span><span class="nv"> </span><span class="s">November</span><span class="nv"> </span><span class="s">2019</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">March</span><span class="nv"> </span><span class="s">2020:</span><span class="nv"> </span><span class="s">U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">release,</span><span class="nv"> </span><span class="s">https://doi.org/10.5066/P9E44CTQ.&quot;</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="nt">references</span><span class="p">:</span><span class="w"> </span><span class="s">"Minsley,</span><span class="nv"> </span><span class="s">B.J.,</span><span class="nv"> </span><span class="s">James,</span><span class="nv"> </span><span class="s">S.R.,</span><span class="nv"> </span><span class="s">Bedrosian,</span><span class="nv"> </span><span class="s">P.A.,</span><span class="nv"> </span><span class="s">Pace,</span><span class="nv"> </span><span class="s">M.D.,</span><span class="nv"> </span><span class="s">Hoogenboom,</span><span class="nv"> </span><span class="s">B.E.,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Burton,</span><span class="nv"> </span><span class="s">B.L.,</span><span class="nv"> </span><span class="s">2021,</span><span class="nv"> </span><span class="s">Airborne</span><span class="nv"> </span><span class="s">electromagnetic,</span><span class="nv"> </span><span class="s">magnetic,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">radiometric</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Mississippi</span><span class="nv"> </span><span class="s">Alluvial</span><span class="nv"> </span><span class="s">Plain,</span><span class="nv"> </span><span class="s">November</span><span class="nv"> </span><span class="s">2019</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">March</span><span class="nv"> </span><span class="s">2020:</span><span class="nv"> </span><span class="s">U.S.</span><span class="nv"> </span><span class="s">Geological</span><span class="nv"> </span><span class="s">Survey</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">release,</span><span class="nv"> </span><span class="s">https://doi.org/10.5066/P9E44CTQ."</span>
 <span class="linenos"> 7</span><span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This dataset is incomplete and has been downsampled for the purposes of this example.</span><span class="w"> </span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tempest AEM Survey from the Mississippi Alluvial Plain</span>
 <span class="linenos"> 9</span>
@@ -191,7 +193,7 @@ to download the full example code.</p>
 <span class="linenos">37</span><span class="w">    </span><span class="nt">traverse_line_direction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">various</span>
 <span class="linenos">38</span><span class="w">    </span><span class="nt">nominal_terrain_clearance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
 <span class="linenos">39</span><span class="w">    </span><span class="nt">final_line_kilometers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24868</span>
-<span class="linenos">40</span><span class="w">    </span><span class="nt">TRAVERSE LINE NUMBERS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[192401</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">265021,</span><span class="nv"> </span><span class="s">400801</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">401401,</span><span class="nv"> </span><span class="s">500101,</span><span class="nv"> </span><span class="s">604501</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">608101,</span><span class="nv"> </span><span class="s">700201</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">700206,</span><span class="nv"> </span><span class="s">710101</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">710401]&quot;</span>
+<span class="linenos">40</span><span class="w">    </span><span class="nt">TRAVERSE LINE NUMBERS</span><span class="p">:</span><span class="w"> </span><span class="s">"[192401</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">265021,</span><span class="nv"> </span><span class="s">400801</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">401401,</span><span class="nv"> </span><span class="s">500101,</span><span class="nv"> </span><span class="s">604501</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">608101,</span><span class="nv"> </span><span class="s">700201</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">700206,</span><span class="nv"> </span><span class="s">710101</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">710401]"</span>
 <span class="linenos">41</span><span class="w">    </span><span class="nt">REPEAT LINE NUMBERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9100071 - 9180772</span>
 <span class="linenos">42</span><span class="w">    </span><span class="nt">PRE ZERO LINE NUMBERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90200702 - 90207701</span>
 <span class="linenos">43</span><span class="w">    </span><span class="nt">POST ZERO LINE NUMBERS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90500702 - 90507701</span>
@@ -219,19 +221,19 @@ to download the full example code.</p>
 </section>
 <section id="create-a-branch-for-all-maps">
 <h2>Create a branch for all maps<a class="headerlink" href="#create-a-branch-for-all-maps" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_products&#39;</span><span class="p">,</span>
-                                    <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;container of gridded maps of magnetic and electrical resistivity values&quot;</span><span class="p">,</span>
-                                           <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Magnetic map is contractor-derived, resistivity maps are USGS-derived&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'derived_products'</span><span class="p">,</span>
+                                    <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"container of gridded maps of magnetic and electrical resistivity values"</span><span class="p">,</span>
+                                           <span class="n">comment</span> <span class="o">=</span> <span class="s2">"Magnetic map is contractor-derived, resistivity maps are USGS-derived"</span><span class="p">))</span>
 </pre></div>
 </div>
 <section id="attach-the-2d-magnetic-raster-dataset-600-m-cell-size">
 <h3>Attach the 2D Magnetic Raster Dataset (600 m cell size)<a class="headerlink" href="#attach-the-2d-magnetic-raster-dataset-600-m-cell-size" title="Link to this heading"></a></h3>
 <p>Define input metadata file, which contains the TIF filename linked
 with desired variable name and info.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_raster_md.yml&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//Tempest_raster_md.yml'</span><span class="p">)</span>
 
 <span class="c1"># Attach the magnetic map to the container</span>
-<span class="n">mm</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;mag_map&quot;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">)</span>
+<span class="n">mm</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"mag_map"</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
@@ -250,7 +252,7 @@ with desired variable name and info.</p>
 <span class="linenos"> 12</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic</span>
 <span class="linenos"> 13</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scintrex CS-3 c cesium-vapor magnetometer</span>
 <span class="linenos"> 14</span><span class="w">    </span>
-<span class="linenos"> 15</span><span class="w">    </span><span class="nt">prefixes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;base_magnetometer&#39;</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 15</span><span class="w">    </span><span class="nt">prefixes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'base_magnetometer'</span><span class="p p-Indicator">]</span>
 <span class="linenos"> 16</span>
 <span class="linenos"> 17</span><span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span>
 <span class="linenos"> 18</span><span class="w">        </span><span class="nt">base_mag_locations</span><span class="p">:</span>
@@ -265,7 +267,7 @@ with desired variable name and info.</p>
 <span class="linenos"> 27</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
 <span class="linenos"> 28</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
 <span class="linenos"> 29</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive</span>
-<span class="linenos"> 30</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial transmitter was used; the system measures the Earth&#39;s natural magnetic field (passive field).</span><span class="w"> </span>
+<span class="linenos"> 30</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial transmitter was used; the system measures the Earth's natural magnetic field (passive field).</span><span class="w"> </span>
 <span class="linenos"> 31</span><span class="w">    </span>
 <span class="linenos"> 32</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
 <span class="linenos"> 33</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scalar_magnetometer</span>
@@ -278,7 +280,7 @@ with desired variable name and info.</p>
 <span class="linenos"> 40</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">three-axis fluxgate provides aircraft attitude for compensation.</span>
 <span class="linenos"> 41</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tail-stinger mounted</span>
 <span class="linenos"> 42</span><span class="w">            </span><span class="nt">coordinates</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 43</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[-10.74,</span><span class="nv"> </span><span class="s">0.0,</span><span class="nv"> </span><span class="s">-0.55]&quot;</span><span class="w">  </span>
+<span class="linenos"> 43</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="s">"[-10.74,</span><span class="nv"> </span><span class="s">0.0,</span><span class="nv"> </span><span class="s">-0.55]"</span><span class="w">  </span>
 <span class="linenos"> 44</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetometer location relative to Tx loop center (X,Y,Z)</span>
 <span class="linenos"> 45</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meters</span><span class="w"> </span>
 <span class="linenos"> 46</span><span class="w">            </span><span class="nt">acquisition_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FASDAS survey/magnetometer computer; NovAtel OEMV-3 GPS with</span>
@@ -310,25 +312,25 @@ with desired variable name and info.</p>
 <span class="linenos"> 72</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
 <span class="linenos"> 73</span><span class="w">            </span>
 <span class="linenos"> 74</span><span class="w">            </span><span class="nt">location_names</span><span class="p">:</span>
-<span class="linenos"> 75</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Greenwood,</span><span class="nv"> </span><span class="s">MS&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Alexandria,</span><span class="nv"> </span><span class="s">LA&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Monroe,</span><span class="nv"> </span><span class="s">LA&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;West</span><span class="nv"> </span><span class="s">Memphis,</span><span class="nv"> </span><span class="s">AR&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Sikeston,</span><span class="nv"> </span><span class="s">MO&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Greenwood,</span><span class="nv"> </span><span class="s">MS&quot;</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 76</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;base_mag_locations&#39;</span>
+<span class="linenos"> 75</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Alexandria,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Monroe,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"West</span><span class="nv"> </span><span class="s">Memphis,</span><span class="nv"> </span><span class="s">AR"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Sikeston,</span><span class="nv"> </span><span class="s">MO"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 76</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
 <span class="linenos"> 77</span>
 <span class="linenos"> 78</span><span class="w">            </span><span class="nt">flights</span><span class="p">:</span>
-<span class="linenos"> 79</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;007-027&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;028-036&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;038-042&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;044-062&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;063-074&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;075-077&quot;</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 80</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;base_mag_locations&#39;</span>
+<span class="linenos"> 79</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"007-027"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"028-036"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"038-042"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"044-062"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"063-074"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"075-077"</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 80</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
 <span class="linenos"> 81</span>
 <span class="linenos"> 82</span><span class="w">            </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span>
 <span class="linenos"> 83</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">49170.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">47640.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">48362.6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50083.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">51678.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">49170.0</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 84</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;base_mag_locations&#39;</span>
+<span class="linenos"> 84</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
 <span class="linenos"> 85</span>
 <span class="linenos"> 86</span>
 <span class="linenos"> 87</span><span class="w">        </span><span class="nt">dynamic_compensation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Compensation calibration flights at high altitude; pitches/rolls/yaws used to derive coefficients that remove aircraft-induced magnetic noise. Reported improvement ratio ~2.91 (std. dev. uncompensated vs. compensated).</span><span class="w">  </span>
 <span class="linenos"> 88</span><span class="w">        </span><span class="nt">diurnal_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnal base values applied by location (see base_magnetometer section); base data edited and filtered to remove non-geophysical disturbances.</span>
-<span class="linenos"> 89</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2019-12-01&quot;</span>
-<span class="linenos"> 90</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;167.9</span><span class="nv"> </span><span class="s">m&quot;</span>
-<span class="linenos"> 91</span><span class="w">        </span><span class="nt">igrf_removed_model_epoch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2015.0&quot;</span>
+<span class="linenos"> 89</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">"2019-12-01"</span>
+<span class="linenos"> 90</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="s">"167.9</span><span class="nv"> </span><span class="s">m"</span>
+<span class="linenos"> 91</span><span class="w">        </span><span class="nt">igrf_removed_model_epoch</span><span class="p">:</span><span class="w"> </span><span class="s">"2015.0"</span>
 <span class="linenos"> 92</span><span class="w">        </span><span class="nt">tieline_levelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMI levelled to prior RESOLVE data; due to height differences and limited tie lines, manual adjustments and micro-levelling were applied.</span>
-<span class="linenos"> 93</span><span class="w">        </span><span class="nt">deliverables</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Total</span><span class="nv"> </span><span class="s">Magnetic</span><span class="nv"> </span><span class="s">Intensity</span><span class="nv"> </span><span class="s">(TMI),</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">EM</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">terrain</span><span class="nv"> </span><span class="s">data&quot;</span>
+<span class="linenos"> 93</span><span class="w">        </span><span class="nt">deliverables</span><span class="p">:</span><span class="w"> </span><span class="s">"Total</span><span class="nv"> </span><span class="s">Magnetic</span><span class="nv"> </span><span class="s">Intensity</span><span class="nv"> </span><span class="s">(TMI),</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">EM</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">terrain</span><span class="nv"> </span><span class="s">data"</span>
 <span class="linenos"> 94</span>
 <span class="linenos"> 95</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
 <span class="linenos"> 96</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">passive</span><span class="p p-Indicator">]</span>
@@ -371,10 +373,10 @@ with desired variable name and info.</p>
 <section id="attach-3d-resistivity-grids-aligned-2d-magnetic-raster-1000-m-cell-size">
 <h3>Attach 3D Resistivity Grids + Aligned 2D Magnetic Raster (1000 m cell size)<a class="headerlink" href="#attach-3d-resistivity-grids-aligned-2d-magnetic-raster-1000-m-cell-size" title="Link to this heading"></a></h3>
 <p>Import both 3-D resistivity and 2-D magnetic data, aligned onto a common 1000 m x 1000 m grid</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//Tempest_rasters_md.yml&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//Tempest_rasters_md.yml'</span><span class="p">)</span>
 
 <span class="c1"># Attach rasters to the container</span>
-<span class="n">rm</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;all_maps&quot;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">)</span>
+<span class="n">rm</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"all_maps"</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
@@ -383,7 +385,7 @@ with desired variable name and info.</p>
 <span class="linenos"> 2</span><span class="w">    </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">resistivity models are USGS-derived, the total magnetic intensity map is contractor-derived</span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interpolated resistivity models (3-D depth grid) and total magnetic intensity map (2-D)</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data, models</span>
-<span class="linenos"> 5</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;electromagnetic,</span><span class="nv"> </span><span class="s">time</span><span class="nv"> </span><span class="s">domain&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;magnetic&quot;</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"electromagnetic,</span><span class="nv"> </span><span class="s">time</span><span class="nv"> </span><span class="s">domain"</span><span class="p p-Indicator">,</span><span class="s">"magnetic"</span><span class="p p-Indicator">]</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30Hz Tempest</span>
 <span class="linenos"> 7</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="nt">property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electrical resistivity, total magnetic intensity</span>
@@ -400,7 +402,7 @@ with desired variable name and info.</p>
 <span class="linenos">19</span><span class="w">    </span><span class="nt">depth</span><span class="p">:</span>
 <span class="linenos">20</span><span class="w">        </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth is defined here inside our yaml file in order to stack the resistivity tifs along a third dimension. This depth information is not contained in any of the individual tifs.</span>
 <span class="linenos">21</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth</span>
-<span class="linenos">22</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Depth below earth&#39;s surface DTM</span>
+<span class="linenos">22</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Depth below earth's surface DTM</span>
 <span class="linenos">23</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m</span>
 <span class="linenos">24</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
 <span class="linenos">25</span><span class="w">        </span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
@@ -456,7 +458,7 @@ Therefore the name “depth” ends up not getting used because that dimension b
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;survey&#39;&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'survey'&gt;
 Group: /survey
 │   Dimensions:                 ()
 │   Coordinates:
@@ -514,18 +516,18 @@ Group: /survey
     │             * n_base_magnetometer                 (n_base_magnetometer) int64 8B 0
     │           Data variables: (12/35)
     │               base_mag_locations_bnds             (base_mag_locations, nv) float64 96B ...
-    │               transmitter_label                   (n_transmitter) &lt;U7 28B &#39;passive&#39;
-    │               transmitter_description             (n_transmitter) &lt;U107 428B &quot;No artifi...
-    │               receiver_label                      (n_receiver) &lt;U19 76B &#39;scalar_magneto...
-    │               receiver_sensor_type                (n_receiver) &lt;U12 48B &#39;cesium_vapor&#39;
-    │               receiver_sensor_model               (n_receiver) &lt;U4 16B &#39;CS-3&#39;
+    │               transmitter_label                   (n_transmitter) &lt;U7 28B 'passive'
+    │               transmitter_description             (n_transmitter) &lt;U107 428B "No artifi...
+    │               receiver_label                      (n_receiver) &lt;U19 76B 'scalar_magneto...
+    │               receiver_sensor_type                (n_receiver) &lt;U12 48B 'cesium_vapor'
+    │               receiver_sensor_model               (n_receiver) &lt;U4 16B 'CS-3'
     │               ...                                  ...
-    │               diurnal_correction                  &lt;U142 568B &#39;Diurnal base values appli...
-    │               igrf_model_date                     &lt;U10 40B &#39;2019-12-01&#39;
-    │               igrf_model_height                   &lt;U7 28B &#39;167.9 m&#39;
-    │               igrf_removed_model_epoch            &lt;U6 24B &#39;2015.0&#39;
-    │               tieline_levelling                   &lt;U137 548B &#39;RMI levelled to prior RES...
-    │               deliverables                        &lt;U63 252B &#39;Total Magnetic Intensity (...
+    │               diurnal_correction                  &lt;U142 568B 'Diurnal base values appli...
+    │               igrf_model_date                     &lt;U10 40B '2019-12-01'
+    │               igrf_model_height                   &lt;U7 28B '167.9 m'
+    │               igrf_removed_model_epoch            &lt;U6 24B '2015.0'
+    │               tieline_levelling                   &lt;U137 548B 'RMI levelled to prior RES...
+    │               deliverables                        &lt;U63 252B 'Total Magnetic Intensity (...
     │           Attributes:
     │               type:        system
     │               mode:        airborne
@@ -550,7 +552,7 @@ Group: /survey
                 comment:     resistivity models are USGS-derived, the total magnetic inte...
                 content:     interpolated resistivity models (3-D depth grid) and total m...
                 type:        data, models
-                method:      [&#39;electromagnetic, time domain&#39;, &#39;magnetic&#39;]
+                method:      ['electromagnetic, time domain', 'magnetic']
                 instrument:  30Hz Tempest
                 mode:        airborne
                 property:    electrical resistivity, total magnetic intensity
@@ -560,13 +562,13 @@ Group: /survey
 </section>
 <section id="save-to-netcdf-file">
 <h2>Save to NetCDF file<a class="headerlink" href="#save-to-netcdf-file" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;tifs.nc&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'tifs.nc'</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Option 1:</p>
 <p>Pass a variable name to export just that variable</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s2">&quot;all_maps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_tif</span><span class="p">(</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">'derived_products'</span><span class="p">][</span><span class="s2">"all_maps"</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_tif</span><span class="p">(</span><span class="s1">'magnetic_tmi'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>magnetic_tmi.tif
@@ -576,7 +578,7 @@ Group: /survey
 <p>Export all the variables by NOT passing any variable names,
 but need to specify a slice dimension for the 3D resistivity variable.
 Can optionally pass a directory path to export tiffs to.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s2">&quot;all_maps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_tif</span><span class="p">(</span><span class="n">slice_dim</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">data_path</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">'derived_products'</span><span class="p">][</span><span class="s2">"all_maps"</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_tif</span><span class="p">(</span><span class="n">slice_dim</span><span class="o">=</span><span class="s1">'z'</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">data_path</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>../data_files/tempest_aseg/resistivity_0.0.tif
@@ -588,20 +590,20 @@ Can optionally pass a directory path to export tiffs to.</p>
 </pre></div>
 </div>
 <p>Reading back in the GS NetCDF file</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Plotting</p>
 <p>Make a map-view plot of a specific data variable, using Xarray’s plotter
 In this case, we slice the 3-D resistivity variable along the depth dimension</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">r_plot</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s2">&quot;all_maps&quot;</span><span class="p">][</span><span class="s1">&#39;resistivity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">r_plot</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_products'</span><span class="p">][</span><span class="s2">"all_maps"</span><span class="p">][</span><span class="s1">'resistivity'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">'z'</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_plot_tifs_001.png" srcset="../../_images/sphx_glr_plot_tifs_001.png" alt="z = 0.0, z = 5.0, z = 10.0, z = 15.0, z = 20.0" class = "sphx-glr-single-img"/><p>Make a map-view plot comparing the different x-y discretization of the two magnetic variables, using Xarray’s plotter</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">plot1</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s2">&quot;all_maps&quot;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plot2</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_products&#39;</span><span class="p">][</span><span class="s2">&quot;mag_map&quot;</span><span class="p">][</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">},</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plot1</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_products'</span><span class="p">][</span><span class="s2">"all_maps"</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plot2</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_products'</span><span class="p">][</span><span class="s2">"mag_map"</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'Greys'</span><span class="p">,</span> <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'label'</span><span class="p">:</span> <span class="s1">''</span><span class="p">},</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">1.20556e6</span><span class="p">,</span> <span class="mf">1.21476e6</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">3.5201e5</span><span class="p">,</span> <span class="mf">3.6396e5</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>

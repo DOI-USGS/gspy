@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -71,6 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_tifs.html">GeoTIFFs (2D &amp; 3D)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_systems.html">Systems (YAML, GA-AEM .stm, templates)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_xyz_workbench_to_netcdf.html">Workbench XYZ</a></li>
 </ul>
 </li>
@@ -133,16 +135,16 @@ To make the size of this example more managable, some of the input datasets have
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;..//data_files//skytem_csv&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'..//data_files//skytem_csv'</span>
 
 <span class="c1"># Survey metadata file</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//skytem_survey.yml&quot;</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//skytem_survey.yml"</span><span class="p">)</span>
 
 <span class="c1"># Establish the Survey</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
@@ -168,8 +170,8 @@ To make the size of this example more managable, some of the input datasets have
 <span class="linenos">16</span><span class="w">    </span><span class="nt">survey_area_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northeast Wisconsin Bedrock Mapping</span>
 <span class="linenos">17</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WI</span>
 <span class="linenos">18</span><span class="w">    </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USA</span>
-<span class="linenos">19</span><span class="w">    </span><span class="nt">acquisition_start</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20210117&quot;</span>
-<span class="linenos">20</span><span class="w">    </span><span class="nt">acquisition_end</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20210207&quot;</span>
+<span class="linenos">19</span><span class="w">    </span><span class="nt">acquisition_start</span><span class="p">:</span><span class="w"> </span><span class="s">"20210117"</span>
+<span class="linenos">20</span><span class="w">    </span><span class="nt">acquisition_end</span><span class="p">:</span><span class="w"> </span><span class="s">"20210207"</span>
 <span class="linenos">21</span><span class="w">    </span><span class="nt">survey_attributes_units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SI</span>
 <span class="linenos">22</span>
 <span class="linenos">23</span><span class="nt">spatial_ref</span><span class="p">:</span>
@@ -213,8 +215,8 @@ To make the size of this example more managable, some of the input datasets have
 </section>
 <section id="create-a-data-branch">
 <h2>Create a Data Branch<a class="headerlink" href="#create-a-data-branch" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raw and processed data&quot;</span><span class="p">,</span>
-                                                        <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;&lt;extra info goes here&gt;&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"raw and processed data"</span><span class="p">,</span>
+                                                        <span class="n">comment</span> <span class="o">=</span> <span class="s2">"&lt;extra info goes here&gt;"</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Attach leaves to the data branch</p>
@@ -223,17 +225,17 @@ To make the size of this example more managable, some of the input datasets have
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import raw AEM data from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_contractor_data.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_contractor_data.yml&#39;</span><span class="p">)</span>
+<span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_contractor_data.csv'</span><span class="p">)</span>
+<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_contractor_data.yml'</span><span class="p">)</span>
 
-<span class="n">raw_systems</span> <span class="o">=</span> <span class="n">Metadata</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;data//skytem_system.yml&quot;</span><span class="p">))</span>
+<span class="n">raw_systems</span> <span class="o">=</span> <span class="n">Metadata</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//skytem_system.yml"</span><span class="p">))</span>
 
-<span class="c1"># raw_systems = {&quot;skytem_system&quot; : survey[&quot;nominal_system&quot;],</span>
-        <span class="c1">#   &quot;magnetic_system&quot; : survey[&quot;magnetic_system&quot;]}</span>
+<span class="c1"># raw_systems = {"skytem_system" : survey["nominal_system"],</span>
+        <span class="c1">#   "magnetic_system" : survey["magnetic_system"]}</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset,</span>
 <span class="c1"># pass the EM system from the survey</span>
-<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span>
+<span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'raw_data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span>
                            <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">raw_systems</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -242,13 +244,13 @@ To make the size of this example more managable, some of the input datasets have
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import processed AEM data from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_processed_data.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//skytem_processed_data.yml&#39;</span><span class="p">)</span>
+<span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_processed_data.csv'</span><span class="p">)</span>
+<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_processed_data.yml'</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="s1">&#39;skytem_system&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="s1">'skytem_system'</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;skytem_system&#39;&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'skytem_system'&gt;
 Group: /survey/data/raw_data/skytem_system
     Dimensions:                                      (index: 2000,
                                                       hm_gate_times: 32,
@@ -281,14 +283,14 @@ Group: /survey/data/raw_data/skytem_system
         hm_gate_times_bnds                           (hm_gate_times, nv) float64 512B ...
         n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
         xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
-        transmitter_label                            (n_transmitter) &lt;U2 16B &#39;LM&#39;...
+        transmitter_label                            (n_transmitter) &lt;U2 16B 'LM'...
         ...                                           ...
-        couplet_data_type                            (n_couplet) &lt;U4 64B &#39;dBdt&#39; ....
-        couplet_gate_times                           (n_couplet) &lt;U13 208B &#39;lm_ga...
+        couplet_data_type                            (n_couplet) &lt;U4 64B 'dBdt' ....
+        couplet_gate_times                           (n_couplet) &lt;U13 208B 'lm_ga...
         data_normalized                              (dim_0) bool 1B True
         skytem_skb_gex_available                     (dim_0) bool 1B True
-        reference_frame                              &lt;U26 104B &#39;right-handed posi...
-        coil_orientations                            &lt;U4 16B &#39;X, Z&#39;
+        reference_frame                              &lt;U26 104B 'right-handed posi...
+        coil_orientations                            &lt;U4 16B 'X, Z'
     Attributes:
         type:        system
         mode:        airborne
@@ -298,13 +300,13 @@ Group: /survey/data/raw_data/skytem_system
 </pre></div>
 </div>
 <p>Example of how systems can be selected and modified to accurately match the processed data</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">proc_systems</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;skytem_system&quot;</span> <span class="p">:</span> <span class="n">rd</span><span class="p">[</span><span class="s2">&quot;skytem_system&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">lm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">proc_systems</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"skytem_system"</span> <span class="p">:</span> <span class="n">rd</span><span class="p">[</span><span class="s2">"skytem_system"</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">lm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
                                                           <span class="n">hm_gate_times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">10</span><span class="p">:]),</span>
-          <span class="s2">&quot;magnetic_system&quot;</span> <span class="p">:</span> <span class="n">rd</span><span class="p">[</span><span class="s2">&quot;magnetic_system&quot;</span><span class="p">]}</span>
+          <span class="s2">"magnetic_system"</span> <span class="p">:</span> <span class="n">rd</span><span class="p">[</span><span class="s2">"magnetic_system"</span><span class="p">]}</span>
 </pre></div>
 </div>
 <p>Add the processed AEM data as a tabular dataset, passing the updated systems</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;processed_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'processed_data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data2</span><span class="p">,</span>
                            <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp2</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">proc_systems</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -471,8 +473,8 @@ Group: /survey/data/raw_data/skytem_system
 <section id="create-a-models-branch">
 <h2>Create a Models Branch<a class="headerlink" href="#create-a-models-branch" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new container for models</span>
-<span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;Inverted models&quot;</span><span class="p">,</span>
-                                                          <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This is a test&quot;</span><span class="p">))</span>
+<span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'models'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"Inverted models"</span><span class="p">,</span>
+                                                          <span class="n">comment</span> <span class="o">=</span> <span class="s2">"This is a test"</span><span class="p">))</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -480,11 +482,11 @@ Group: /survey/data/raw_data/skytem_system
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import inverted AEM models from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//skytem_inverted_models.csv&#39;</span><span class="p">)</span>
-<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;model//skytem_inverted_models.yml&#39;</span><span class="p">)</span>
+<span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//skytem_inverted_models.csv'</span><span class="p">)</span>
+<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//skytem_inverted_models.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
-<span class="n">mods</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;inverted_models&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span>
+<span class="n">mods</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'inverted_models'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span>
                               <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -511,10 +513,10 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos"> 19</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
 <span class="linenos"> 20</span><span class="w">        </span><span class="nt">model_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WI_SkyTEM_2021_InvertedModels.csv</span>
 <span class="linenos"> 21</span><span class="w">        </span><span class="nt">inversion_software</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Aarhus Workbench</span>
-<span class="linenos"> 22</span><span class="w">        </span><span class="nt">software_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v</span><span class="nv"> </span><span class="s">6.0.1.0&quot;</span>
-<span class="linenos"> 23</span><span class="w">        </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;placeholder&quot;</span>
-<span class="linenos"> 24</span><span class="w">        </span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;03/2021</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">06/2021&quot;</span>
-<span class="linenos"> 25</span><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Processed</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">inverted</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Aarhus</span><span class="nv"> </span><span class="s">Workbench</span><span class="nv"> </span><span class="s">software</span><span class="nv"> </span><span class="s">(v</span><span class="nv"> </span><span class="s">6.0.1.0)</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">laterally</span><span class="nv"> </span><span class="s">constrained</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">recover</span><span class="nv"> </span><span class="s">40-layer</span><span class="nv"> </span><span class="s">fixed</span><span class="nv"> </span><span class="s">depth</span><span class="nv"> </span><span class="s">blocky</span><span class="nv"> </span><span class="s">resistivity</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">USGS</span><span class="nv"> </span><span class="s">03/2021</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">06/2021;</span><span class="nv"> </span><span class="s">Inverted</span><span class="nv"> </span><span class="s">resistivity</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">exported</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">netCDF</span><span class="nv"> </span><span class="s">11/2021.&quot;</span>
+<span class="linenos"> 22</span><span class="w">        </span><span class="nt">software_version</span><span class="p">:</span><span class="w"> </span><span class="s">"v</span><span class="nv"> </span><span class="s">6.0.1.0"</span>
+<span class="linenos"> 23</span><span class="w">        </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">"placeholder"</span>
+<span class="linenos"> 24</span><span class="w">        </span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="s">"03/2021</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">06/2021"</span>
+<span class="linenos"> 25</span><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Processed</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">inverted</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Aarhus</span><span class="nv"> </span><span class="s">Workbench</span><span class="nv"> </span><span class="s">software</span><span class="nv"> </span><span class="s">(v</span><span class="nv"> </span><span class="s">6.0.1.0)</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">laterally</span><span class="nv"> </span><span class="s">constrained</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">recover</span><span class="nv"> </span><span class="s">40-layer</span><span class="nv"> </span><span class="s">fixed</span><span class="nv"> </span><span class="s">depth</span><span class="nv"> </span><span class="s">blocky</span><span class="nv"> </span><span class="s">resistivity</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">USGS</span><span class="nv"> </span><span class="s">03/2021</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">06/2021;</span><span class="nv"> </span><span class="s">Inverted</span><span class="nv"> </span><span class="s">resistivity</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">exported</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">netCDF</span><span class="nv"> </span><span class="s">11/2021."</span>
 <span class="linenos"> 26</span><span class="w">        </span><span class="nt">data_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WI_SkyTEM_2021_ProcessedData.csv</span>
 <span class="linenos"> 27</span>
 <span class="linenos"> 28</span><span class="nt">coordinates</span><span class="p">:</span>
@@ -732,11 +734,11 @@ Group: /survey/data/raw_data/skytem_system
 <p>Adding bedrock picks to the ‘data’ branch</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import AEM-based estimated of depth to bedrock from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//top_dolomite_blocky_lidar.csv&#39;</span><span class="p">)</span>
-<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//bedrock_picks.yml&#39;</span><span class="p">)</span>
+<span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//top_dolomite_blocky_lidar.csv'</span><span class="p">)</span>
+<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//bedrock_picks.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
-<span class="n">bedrock</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;depth_to_bedrock&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span>
+<span class="n">bedrock</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'depth_to_bedrock'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span>
                                 <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -806,14 +808,14 @@ Group: /survey/data/raw_data/skytem_system
 <li><p>Raster Maps</p></li>
 </ol>
 <p>Create a 3rd container for the derived raaster maps</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">derived_maps</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;raster products derived from airborne data and models&quot;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">derived_maps</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'derived_maps'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"raster products derived from airborne data and models"</span><span class="p">))</span>
 
 <span class="c1"># Import interpolated bedrock and magnetic maps from TIF-format.</span>
 <span class="c1"># Define input metadata file (which contains the TIF filenames linked to variable names)</span>
-<span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;data//magnetics_bedrock_picks.yml&#39;</span><span class="p">)</span>
+<span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//magnetics_bedrock_picks.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the interpolated maps as a raster dataset</span>
-<span class="n">maps</span> <span class="o">=</span> <span class="n">derived_maps</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;maps&#39;</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
+<span class="n">maps</span> <span class="o">=</span> <span class="n">derived_maps</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'maps'</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id5">
@@ -824,7 +826,7 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos"> 4</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
 <span class="linenos"> 5</span><span class="w">    </span><span class="nt">structure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raster</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;electromagnetic,</span><span class="nv"> </span><span class="s">time</span><span class="nv"> </span><span class="s">domain&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;magnetic,</span><span class="nv"> </span><span class="s">total</span><span class="nv"> </span><span class="s">field&quot;</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"electromagnetic,</span><span class="nv"> </span><span class="s">time</span><span class="nv"> </span><span class="s">domain"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"magnetic,</span><span class="nv"> </span><span class="s">total</span><span class="nv"> </span><span class="s">field"</span><span class="p p-Indicator">]</span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skytem</span>
 <span class="linenos"> 9</span><span class="w">    </span><span class="nt">property</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">total magnetic intensity</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">depth to bedrock</span><span class="p p-Indicator">]</span>
 <span class="linenos">10</span>
@@ -888,7 +890,7 @@ Group: /survey/data/raw_data/skytem_system
 </section>
 <section id="save-to-netcdf-file">
 <h2>Save to NetCDF file<a class="headerlink" href="#save-to-netcdf-file" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;skytem.nc&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_out</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'skytem.nc'</span><span class="p">)</span>
 <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">d_out</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -896,13 +898,13 @@ Group: /survey/data/raw_data/skytem_system
 <section id="export-just-one-branch-to-file">
 <h2>Export just one branch to file<a class="headerlink" href="#export-just-one-branch-to-file" title="Link to this heading"></a></h2>
 <p>The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;test_datacontainer.nc&#39;</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'test_datacontainer.nc'</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
 <section id="opening-a-gs-netcdf">
 <h2>Opening a GS NetCDF<a class="headerlink" href="#opening-a-gs-netcdf" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">&#39;survey&#39;</span><span class="p">]</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -930,7 +932,7 @@ Group: /survey/data/raw_data/skytem_system
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree &#39;survey&#39;&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'survey'&gt;
 Group: /survey
 │   Dimensions:                 ()
 │   Coordinates:
@@ -990,7 +992,7 @@ Group: /survey
 │   │   │       type:        data
 │   │   │       structure:   tabular
 │   │   │       mode:        airborne
-│   │   │       method:      [&#39;electromagnetic, time domain&#39;, &#39;magnetic&#39;]
+│   │   │       method:      ['electromagnetic, time domain', 'magnetic']
 │   │   │       instrument:  SkyTEM 304M
 │   │   ├── Group: /survey/data/raw_data/skytem_system
 │   │   │       Dimensions:                                      (gate_times: 22, nv: 2,
@@ -1274,28 +1276,28 @@ Group: /survey
                 type:        data
                 structure:   raster
                 mode:        airborne
-                method:      [&#39;electromagnetic, time domain&#39;, &#39;magnetic, total field&#39;]
+                method:      ['electromagnetic, time domain', 'magnetic, total field']
                 instrument:  skytem
-                property:    [&#39;total magnetic intensity&#39;, &#39;depth to bedrock&#39;]
+                property:    ['total magnetic intensity', 'depth to bedrock']
 </pre></div>
 </div>
 </section>
 <section id="plotting-examples">
 <h2>Plotting Examples<a class="headerlink" href="#plotting-examples" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;raw_data&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'raw_data'</span><span class="p">][</span><span class="s1">'height'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pcd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;processed_data&#39;</span><span class="p">]</span>
+<img src="../../_images/sphx_glr_plot_csv_skytem_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pcd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'processed_data'</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">pcd</span><span class="p">[</span><span class="s1">&#39;tx_altitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pcd</span><span class="p">[</span><span class="s1">'tx_altitude'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">&#39;derived_maps&#39;</span><span class="p">][</span><span class="s1">&#39;maps&#39;</span><span class="p">]</span>
+<img src="../../_images/sphx_glr_plot_csv_skytem_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_maps'</span><span class="p">][</span><span class="s1">'maps'</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">m</span><span class="p">[</span><span class="s1">&#39;magnetic_tmi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
