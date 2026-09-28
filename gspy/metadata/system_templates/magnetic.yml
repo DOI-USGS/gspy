@@ -1,5 +1,11 @@
 # Magnetic system.
 #
+# Replace every '?? ... ??' with a value, or with not_defined where it is unknown.
+# A field can hold its value beside its key, or nest it under values: alongside
+# its own attributes (units, long_name, ...). One value given for a receiver field
+# is repeated for every receiver; a list gives one value each, in label order.
+# Delete the fields that do not apply to your survey.
+
 # Shaped by System.metadata_template('magnetic', transmitters=..., receivers=...).
 # The earth's field is the transmitter and it is passive, so the defaults below
 # describe a single passive transmitter read by a single magnetometer. Ask for
@@ -12,11 +18,13 @@ labels:
 
 attrs:
   type: system
-  mode: '?? airborne, ground, waterborne or borehole ??'
-  method: magnetic
-  instrument: '?? make and model, e.g. Geometrics G-822A cesium vapour magnetometer ??'
+  mode: '?? airborne, ground, waterborne or borehole ??'  # the platform the system is operated from
+  method: magnetic  # leave as is; the method family
+  instrument: '?? make and model, e.g. Geometrics G-822A cesium vapour magnetometer ??'  # as the contractor names it
 
+# The axes the system's arrays lie along. Each needs centers (or bounds), or a length.
 dimensions:
+  # One entry per base station location, indexing the base_magnetometer arrays.
   base_mag_locations:
     standard_name: base_mag_locations
     long_name: base magnetometer location index numbers
@@ -27,89 +35,96 @@ dimensions:
 
 variables:
 
+  # One value each, describing how the data were processed. A sentence is fine.
   scalars:
-    diurnal_correction: '?? how the diurnal signal was removed, or that it was not ??'
-    lag_correction: '?? lag applied, or that none was ??'
-    heading_correction: '?? heading correction applied, or that none was ??'
-    dynamic_compensation: '?? aircraft compensation, e.g. the figure of merit result ??'
-    tieline_levelling: '?? how tie lines were used, or that none were ??'
-    microlevelling: '?? micro-levelling applied, or that none was ??'
-    altitude_correction: '?? altitude correction applied, or none ??'
-    igrf_model_date: '?? model generation and date, e.g. 2015, 15th generation ??'
-    igrf_model_location: '?? where the model was evaluated ??'
-    igrf_model_height: '?? height the model was evaluated at ??'
-    igrf_removed_model_epoch: '?? epoch of the model that was removed ??'
-    deliverables: '?? which products were produced, e.g. TMI, RMI, CVG ??'
+    diurnal_correction: '?? how the diurnal signal was removed, or that it was not ??'  # e.g. base station subtraction
+    lag_correction: '?? lag applied, or that none was ??'  # the shift for the sensor's distance behind the GPS
+    heading_correction: '?? heading correction applied, or that none was ??'  # from a cloverleaf test, say
+    dynamic_compensation: '?? aircraft compensation, e.g. the figure of merit result ??'  # the aircraft's own field removed
+    tieline_levelling: '?? how tie lines were used, or that none were ??'  # crossover differences removed
+    microlevelling: '?? micro-levelling applied, or that none was ??'  # residual line corrugation removed
+    altitude_correction: '?? altitude correction applied, or none ??'  # continuation to a common height
+    igrf_model_date: '?? model generation and date, e.g. 2015, 15th generation ??'  # of the reference field removed
+    igrf_model_location: '?? where the model was evaluated ??'  # e.g. the survey centre, or at every point
+    igrf_model_height: '?? height the model was evaluated at ??'  # metres, and the datum it is above
+    igrf_removed_model_epoch: '?? epoch of the model that was removed ??'  # decimal year, e.g. 2024.5
+    deliverables: '?? which products were produced, e.g. TMI, RMI, CVG ??'  # total, residual, vertical gradient ...
 
+  # The earth's field; nothing to fill in but a description.
   transmitter:
-    description: '?? no artificial transmitter; the earth field is measured passively ??'
+    description: '?? no artificial transmitter; the earth field is measured passively ??'  # can be left as it reads
 
+  # One entry per magnetometer, in the order of its labels.
   receiver:
-    sensor_type: '?? e.g. cesium_vapor ??'
-    sensor_model: '?? e.g. G-822A ??'
-    sensor_manufacturer: '?? e.g. Geometrics ??'
-    description: '?? what the sensor is and where it is mounted ??'
-    orientation: '?? how the sensor is mounted, e.g. tail stinger ??'
-    coordinates: '?? sensor position on the platform, or not_defined ??'
-    acquisition_system: '?? recording and navigation systems ??'
-    sample_frequency:
+    sensor_type: '?? e.g. cesium_vapor ??'  # cesium vapour, potassium, overhauser, fluxgate ...
+    sensor_model: '?? e.g. G-822A ??'  # model number
+    sensor_manufacturer: '?? e.g. Geometrics ??'  # who made it
+    description: '?? what the sensor is and where it is mounted ??'  # free text
+    orientation: '?? how the sensor is mounted, e.g. tail stinger ??'  # stinger, towed bird, wingtip ...
+    coordinates: '?? sensor position on the platform, or not_defined ??'  # metres from the reference point
+    acquisition_system: '?? recording and navigation systems ??'  # the logger and GPS
+    sample_frequency:  # readings per second
       values: '?? Hz ??'
       units: Hz
-    sensitivity:
+    sensitivity:  # the smallest change the sensor resolves
       values: '?? nT ??'
       units: nT
-    accuracy:
+    accuracy:  # the absolute accuracy stated by the maker
       values: '?? nT ??'
       units: nT
-    typical_noise:
+    typical_noise:  # as measured in flight, e.g. from the fourth difference
       values: '?? nT ??'
       units: nT
-    sensor_height:
+    sensor_height:  # nominal; the measured height goes in the data
       values: '?? metres above ground ??'
       units: m
-    lag_factor:
+    lag_factor:  # the time shift applied in lag_correction
       values: '?? seconds ??'
       units: s
-    fom_pitch: '?? figure of merit, pitch, or not_defined ??'
-    fom_roll: '?? figure of merit, roll, or not_defined ??'
-    fom_yaw: '?? figure of merit, yaw, or not_defined ??'
-    fom_sum: '?? figure of merit, total, or not_defined ??'
+    fom_pitch: '?? figure of merit, pitch, or not_defined ??'  # nT, from the compensation flight
+    fom_roll: '?? figure of merit, roll, or not_defined ??'  # nT, from the compensation flight
+    fom_yaw: '?? figure of merit, yaw, or not_defined ??'  # nT, from the compensation flight
+    fom_sum: '?? figure of merit, total, or not_defined ??'  # nT, the sum over all manoeuvres
 
+  # One entry per transmitter and receiver pair; transmitters and receivers are
+  # filled in from the labels.
   couplet:
-    description: '?? which transmitter is paired with which receiver ??'
+    description: '?? which transmitter is paired with which receiver ??'  # can be left as it reads
 
 prefixes:
 
+  # The ground base stations used for the diurnal correction. Delete the block if
+  # there were none. Location arrays take one value per base_mag_locations entry.
   base_magnetometer:
-    label: base_magnetometer
-    description: '?? where the base stations were and what they had to meet ??'
-    sensor_type: '?? sensor and synchronisation ??'
-    sample_frequency:
+    label: base_magnetometer  # leave as is
+    description: '?? where the base stations were and what they had to meet ??'  # e.g. the diurnal tolerance
+    sensor_type: '?? sensor and synchronisation ??'  # and how it was synchronised with the aircraft
+    sample_frequency:  # readings per second
       values: '?? Hz ??'
       units: Hz
-    secondary_sensor_model: '?? backup sensor model, or not_defined ??'
-    secondary_sensor_sample_frequency: '?? backup sensor rate, or not_defined ??'
-    secondary_sensor_accuracy: '?? backup sensor accuracy, or not_defined ??'
-    secondary_sensor_precision: '?? backup sensor precision, or not_defined ??'
-    setup_dates: '?? when the stations were occupied ??'
-    location_names:
+    secondary_sensor_model: '?? backup sensor model, or not_defined ??'  # a second base station, if any
+    secondary_sensor_sample_frequency: '?? backup sensor rate, or not_defined ??'  # Hz
+    secondary_sensor_accuracy: '?? backup sensor accuracy, or not_defined ??'  # nT
+    secondary_sensor_precision: '?? backup sensor precision, or not_defined ??'  # nT
+    setup_dates: '?? when the stations were occupied ??'  # a date range is fine
+    location_names:  # e.g. [airport, camp]
       values: '?? one name per base station location ??'
       dimensions: base_mag_locations
-    values:
+    values:  # the base value each station was levelled to
       values: '?? reference field value at each location ??'
       units: nT
       dimensions: base_mag_locations
-    latitude:
+    latitude:  # one per location
       values: '?? latitude of each location ??'
       long_name: Latitude
       units: decimal degrees
       dimensions: base_mag_locations
-    longitude:
+    longitude:  # one per location
       values: '?? longitude of each location ??'
       long_name: Longitude
       units: decimal degrees
       dimensions: base_mag_locations
-    elevation:
+    elevation:  # one per location, above the datum
       values: '?? elevation of each location ??'
       long_name: Elevation
       datum: '?? e.g. WGS84 ??'

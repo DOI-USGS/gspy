@@ -20,14 +20,12 @@ variables:
         long_name: Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         missing_value: not_defined
-        axis: x
 
     N_Nad83:
         standard_name: northing_nad83
         long_name: Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)
         units: meter
         missing_value: not_defined
-        axis: y
 
     LM_X:
         standard_name: em_data_lmx

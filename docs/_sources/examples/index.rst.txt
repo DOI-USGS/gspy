@@ -4,6 +4,10 @@
 Examples
 ########
 
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
 
 .. raw:: html
 
@@ -20,6 +24,10 @@ Examples
 =================
 Creating GS Files
 =================
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
 
 
 .. raw:: html
@@ -149,6 +157,23 @@ Creating GS Files
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Where a system definition comes from.">
+
+.. only:: html
+
+  .. image:: /examples/Creating_GS_Files/images/thumb/sphx_glr_plot_systems_thumb.png
+    :alt:
+
+  :doc:`/examples/Creating_GS_Files/plot_systems`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Systems (YAML, GA-AEM .stm, templates)</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example supports data and models read from Aarhus Workbench XYZ files. What&#x27;s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times. ">
 
 .. only:: html
@@ -181,11 +206,16 @@ Creating GS Files
    /examples/Creating_GS_Files/plot_tifs
    /examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata
    /examples/Creating_GS_Files/plot_csv_magnetics
+   /examples/Creating_GS_Files/plot_systems
    /examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf
 
 =========================
 Interacting With GS Files
 =========================
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
 
 
 .. raw:: html

@@ -50,6 +50,7 @@ docs = ["sphinx_gallery",
 test = ["pytest"]
 dev = ["gspy[docs]",
        "gspy[test]",
+       "gspy[excel]",
        "twine"]
 excel = ["openpyxl"]
 

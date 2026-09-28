@@ -2,16 +2,18 @@ import os
 from copy import deepcopy
 from os.path import splitext
 from ._json_md_handler import read_json, to_json
-from ._yml_md_handler import read_yml, to_yml
+from ._yml_md_handler import read_yml, read_yml_comments, to_yml
 from ._xl_md_handler import read_excel, to_excel
 from ._csv_md_handler import read_csv, to_csv
 import pprint
 
 class Metadata(dict):
 
-    def __init__(self, *args, required:tuple|None=None, **kwargs):
+    def __init__(self, *args, required:tuple|None=None, comments:dict|None=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.required = required
+        # {path of keys: {'above': [lines], 'inline': str}}, written back out to a yml.
+        self.comments = comments if comments is not None else dict(getattr(args[0], 'comments', {}) if args else {})
 
     @property
     def required(self):
@@ -49,6 +51,8 @@ class Metadata(dict):
                 assert False, ValueError("metadata filename does not end with json or yml")
 
         out = cls(out)
+        if extension in ('.yml', '.yaml'):
+            out.comments = read_yml_comments(filename)
 
         out = out._sort_out_list_of_strings()
         out['directory'] = os.path.split(filename)[0]
@@ -72,6 +76,7 @@ class Metadata(dict):
         """
         # Deep, because a shallow copy shares the nested dicts with the caller and
         # self[key].update(value) below would write straight into them.
+        comments = {**getattr(this, 'comments', {}), **getattr(that, 'comments', {})}
         self, that = deepcopy(dict(this)), deepcopy(dict(that))
 
         # Update with dict2, overwriting existing entries
@@ -85,7 +90,7 @@ class Metadata(dict):
                 if not matched_keys:
                     self[key] = value
 
-        return cls(self)
+        return cls(self, comments=comments)
 
     def dump(self, filename, **kwargs):
         self.pop('directory', None)
@@ -95,10 +100,8 @@ class Metadata(dict):
         match extension:
             case ".json":
                 to_json(self, filename, **kwargs)
-            case ".yml":
-                to_yml(self, filename, **kwargs)
-            case ".yaml":
-                to_yml(self, filename, **kwargs)
+            case ".yml" | ".yaml":
+                to_yml(self, filename, comments=self.comments, **kwargs)
             case ".xlsx":
                 to_excel(self, filename, **kwargs)
             case ".csv":

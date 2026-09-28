@@ -10,6 +10,7 @@ from ..gs_dataset.System import System
 from ..gs_dataset.Parameters import Parameters
 from ..gs_dataset.Tabular import Tabular
 from ..gs_dataset.Raster import Raster
+from ..utilities.encoding import dataset_encoding, fill_value
 
 from xarray import DataArray as xr_DataArray
 from xarray import DataTree, register_datatree_accessor
@@ -329,15 +330,22 @@ class Container:
 
         return out, kwargs
 
-    def to_netcdf(self, *args, **kwargs):
+    def to_netcdf(self, *args, compression=True, **kwargs):
         """Write the survey to a netcdf file
+
+        Every numeric variable with at least one dimension is compressed and chunked.
+        Scalars and strings are left alone, since a filter buys them nothing.
 
         Parameters
         ----------
         args : list
-            Arguments to pass to xarray.Dataset.to_netcdf
+            Arguments to pass to xarray.DataTree.to_netcdf
+        compression : bool or dict, optional
+            True for :data:`gspy.utilities.encoding.DEFAULT_COMPRESSION`, False for
+            none, or a dict laid over the defaults, e.g. ``dict(complevel=9)``.
         kwargs : dict
-            Keyword arguments to pass to xarray.Dataset.to_netcdf
+            Keyword arguments to pass to xarray.DataTree.to_netcdf. An ``encoding``
+            given for a variable wins over the defaults for that variable.
 
         Returns
         -------
@@ -370,7 +378,27 @@ class Container:
         else:
             out = self._obj
 
+        kwargs["encoding"] = self._encoding(out, compression, kwargs.get("encoding"))
+
         out.to_netcdf(*args, **kwargs)
+
+    @staticmethod
+    def _encoding(tree, compression, given=None):
+        """:func:`dataset_encoding` for every group, keyed by group path.
+
+        Only the node written from inherits its parents' coordinates, so only it
+        gets encoding for them.
+
+        """
+        given = given or {}
+        encoding = {}
+        for node in tree.subtree:
+            group = dataset_encoding(node.to_dataset(inherit=node is tree), compression,
+                                     given.get(node.path))
+            if group:
+                encoding[node.path] = group
+
+        return encoding
 
     def plot(self, *args, **kwargs):
         self._obj.dataset.gs.plot(*args, **kwargs)
@@ -535,10 +563,9 @@ def _write_one_var_to_tif(ds, var_name, slice_dim=None, out_dir=None):
     if arr.size != 6:
         raise ValueError(f"'GeoTransform' must have six values, got {arr.size}.")
 
-    # Set _FillValue from missing_value if present
-    if "missing_value" in da.attrs and "_FillValue" not in da.attrs:
-        if "missing_value" != "not_defined":
-            da.attrs["_FillValue"] = da.attrs["missing_value"]
+    # rioxarray writes the encoded fill as the raster's nodata.
+    if da.dtype.kind in "iuf":
+        da.encoding["_FillValue"] = fill_value(var_name, da.variable, da.dtype)
 
     # If variable has slice_dim, export per slice
     if slice_dim is not None and slice_dim in da.dims:

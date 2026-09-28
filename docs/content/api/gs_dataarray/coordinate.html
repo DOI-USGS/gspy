@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coordinate &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>Coordinate &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -192,12 +193,12 @@ Returned rather than mutated in place, since <a href="#id1"><span class="problem
 </dl>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Depth below earth&#39;s surface DTM&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;missing_value&quot;</span><span class="p">:</span> <span class="s2">&quot;not_defined&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;centers&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"depth"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"long_name"</span><span class="p">:</span> <span class="s2">"Depth below earth's surface DTM"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"missing_value"</span><span class="p">:</span> <span class="s2">"not_defined"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"centers"</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">'depth'</span><span class="p">,</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -230,12 +231,12 @@ Has shape (size of dimension, ) defining the center values of each “cell”</p
 </dl>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Depth below earth&#39;s surface DTM&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;missing_value&quot;</span><span class="p">:</span> <span class="s2">&quot;not_defined&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">&quot;centers&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">depth_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"depth"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"long_name"</span><span class="p">:</span> <span class="s2">"Depth below earth's surface DTM"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"missing_value"</span><span class="p">:</span> <span class="s2">"not_defined"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>              <span class="s2">"centers"</span> <span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinate</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="s1">'depth'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">],</span> <span class="o">**</span><span class="n">depth_dict</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

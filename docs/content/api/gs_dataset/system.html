@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>System &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>System &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -117,6 +118,21 @@
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.System.System.from_dict" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.System.System.from_stm">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_stm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stm</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.System.System.from_stm" title="Link to this definition"></a></dt>
+<dd><p>A system built from a GA-AEM .stm file.</p>
+<p>Takes the same arguments as <a class="reference internal" href="#gspy.gs_dataset.System.System.metadata_from_stm" title="gspy.gs_dataset.System.System.metadata_from_stm"><code class="xref py py-meth docutils literal notranslate"><span class="pre">metadata_from_stm()</span></code></a> and builds what it
+returns. A time domain .stm carries its own gate times and waveform, so this
+yields a system on its own; pass the rest in <code class="docutils literal notranslate"><span class="pre">metadata</span></code> to fill in what the
+file cannot say.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xarray.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="gspy.gs_dataset.System.System.is_projected">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.gs_dataset.System.System.is_projected" title="Link to this definition"></a></dt>
@@ -129,6 +145,50 @@
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gspy.gs_dataset.System.System.metadata_from_stm">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">metadata_from_stm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receivers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.System.System.metadata_from_stm" title="Link to this definition"></a></dt>
+<dd><p>System metadata read from a GA-AEM .stm file, over a template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stm</strong> (<em>str</em><em> or </em><em>dict</em>) – The file, or <code class="docutils literal notranslate"><span class="pre">{transmitter</span> <span class="pre">label:</span> <span class="pre">file}</span></code> where a moment is a file of its
+own. The labels are the transmitters, in the order given.</p></li>
+<li><p><strong>domain</strong> (<em>str</em><em>, </em><em>optional</em>) – ‘time’ or ‘frequency’, where the file does not say or says wrongly.
+Worked out from the file by default.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – What to file the system under, as in <a class="reference internal" href="#gspy.gs_dataset.System.System.metadata_template" title="gspy.gs_dataset.System.System.metadata_template"><code class="xref py py-meth docutils literal notranslate"><span class="pre">metadata_template()</span></code></a>.</p></li>
+<li><p><strong>receivers</strong> (<em>int</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The receivers. Taken from which components the file scales by default.</p></li>
+<li><p><strong>metadata</strong> (<em>str</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – What you already know, or the yml holding it. Wins over the file. A yml
+written as one <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_system:</span></code> entry is unwrapped, and names the system.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">the</span> <span class="pre">system}</span></code>, ready to build, or to dump and fill in.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>gspy.Metadata</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>A .stm is a forward modelling file, not a system description, so what it can
+answer it answers and the rest is left as template placeholders. It models an
+airborne dipole, so the mode is airborne and there is no loop geometry to ask
+for. Its normalised loop - one turn, one amp, one square metre, with the data
+scaled to match - is flagged rather than imported, because importing it would
+claim a 1 m^2 single turn loop. Anything read that GSPy has no field for is
+recorded in the attributes under <code class="docutils literal notranslate"><span class="pre">stm_</span></code>, so nothing in the file is lost.</p>
+<p class="rubric">Examples</p>
+<p>A moment per file, read by two coils:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">from_stm</span><span class="p">({</span><span class="s1">'LM'</span><span class="p">:</span> <span class="s1">'SkytemLM.stm'</span><span class="p">,</span> <span class="s1">'HM'</span><span class="p">:</span> <span class="s1">'SkytemHM.stm'</span><span class="p">},</span>
+<span class="gp">... </span>                <span class="n">receivers</span><span class="o">=</span><span class="p">[</span><span class="s1">'z'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">],</span> <span class="n">metadata</span><span class="o">=</span><span class="s1">'skytem_system.yml'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or dump what the file knows and fill in the rest by hand:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">metadata_from_stm</span><span class="p">(</span><span class="s1">'Tempest.stm'</span><span class="p">)</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">'tempest_system.yml'</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -170,20 +230,42 @@ are filled in, the same way <code class="docutils literal notranslate"><span cla
 coordinate reference system from <code class="docutils literal notranslate"><span class="pre">wkid:</span> <span class="pre">'??'</span></code>.</p>
 <p class="rubric">Examples</p>
 <p>Two moments read by two coils, so four couplets:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="s1">&#39;tdem&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;skytem_system&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="n">transmitters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LM&#39;</span><span class="p">,</span> <span class="s1">&#39;HM&#39;</span><span class="p">],</span> <span class="n">receivers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="s1">'tdem'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'skytem_system'</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">transmitters</span><span class="o">=</span><span class="p">[</span><span class="s1">'LM'</span><span class="p">,</span> <span class="s1">'HM'</span><span class="p">],</span> <span class="n">receivers</span><span class="o">=</span><span class="p">[</span><span class="s1">'z'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Six frequencies, each coil pair its own couplet:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="s1">&#39;fdem&#39;</span><span class="p">,</span> <span class="n">transmitters</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">metadata_template</span><span class="p">(</span><span class="s1">'fdem'</span><span class="p">,</span> <span class="n">transmitters</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.System.System.open">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.System.System.open" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.System.System.open" title="Link to this definition"></a></dt>
+<dd><p>One system, read from a metadata file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – The file. A system is an entry named with “system” in it, which is how a
+container picks them out of a dataset’s metadata too, so a file written
+for a dataset can be opened here as well.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Which system to build. Only needed where the file holds more than one.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>xarray.Dataset</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the file holds no system, or holds several and none was asked for.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'Resolve_system.yml'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'skytem_system.yml'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'magnetic_system'</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gspy.gs_dataset.System.System.required_metadata">

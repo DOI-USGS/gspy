@@ -1,5 +1,11 @@
 # Frequency domain electromagnetic system.
 #
+# Replace every '?? ... ??' with a value, or with not_defined where it is unknown.
+# A field can hold its value beside its key, or nest it under values: alongside
+# its own attributes (units, long_name, ...). One value given for a transmitter,
+# receiver or couplet field is repeated for every one of them; a list gives one
+# value each, in label order.
+
 # Shaped by System.metadata_template('fdem', transmitters=..., receivers=...).
 # Each transmitter coil has its own receiver coil, so transmitters and receivers
 # pair up one to one and give one couplet each. Give only one side and the other
@@ -8,18 +14,21 @@ pairing: paired
 
 attrs:
   type: system
-  mode: '?? airborne, ground, waterborne or borehole ??'
-  method: electromagnetic, frequency domain
-  instrument: '?? make and model, e.g. RESOLVE ??'
+  mode: '?? airborne, ground, waterborne or borehole ??'  # the platform the system is operated from
+  method: electromagnetic, frequency domain  # leave as is; the method family
+  instrument: '?? make and model, e.g. RESOLVE ??'  # as the contractor names it
 
+# The axes the system's arrays lie along. Each needs centers (or bounds), or a length.
 dimensions:
-  channel:
+  channel:  # the two parts of a complex measurement; leave as is
     standard_name: frequency_domain_complex_data
     long_name: complex frequency domain data channel
     units: not_defined
     missing_value: not_defined
     centers: [in-phase, quadrature]
     discrete: true
+  # The nominal frequencies, one per coil pair and in the order of the labels.
+  # A list, e.g. [400, 1800, 3300, 8200, 40000, 140000].
   frequency:
     standard_name: frequency
     long_name: nominal measurement frequency
@@ -30,28 +39,33 @@ dimensions:
 
 variables:
 
+  # One value each, describing the whole system.
   scalars:
-    data_normalized: '?? True or False, is the data normalised by transmitter moment ??'
-    reference_frame: '?? e.g. right-handed positive up ??'
-    output_data_type: '?? what the data file holds, e.g. ppm ??'
-    output_sample_frequency: '?? Hz, of the delivered data ??'
+    data_normalized: '?? True or False, is the data normalised by transmitter moment ??'  # True if divided by the primary field
+    reference_frame: '?? e.g. right-handed positive up ??'  # the sign convention of the delivered components
+    output_data_type: '?? what the data file holds, e.g. ppm ??'  # the unit of the in-phase and quadrature data
+    output_sample_frequency: '?? Hz, of the delivered data ??'  # soundings per second as delivered
 
+  # One entry per transmitter coil, in the order of its labels.
   transmitter:
-    orientation: '?? dipole orientation, e.g. z ??'
-    area: '?? loop area, m^2 ??'
-    number_of_turns: '?? turns of wire in the coil ??'
-    moment: '?? A m^2 ??'
+    orientation: '?? dipole orientation, e.g. z ??'  # the axis of the transmitter dipole
+    area: '?? loop area, m^2 ??'  # the area enclosed by the coil
+    number_of_turns: '?? turns of wire in the coil ??'  # per coil
+    moment: '?? A m^2 ??'  # turns x area x current
 
+  # One entry per receiver coil, in the order of its labels.
   receiver:
-    orientation: '?? coil orientation, e.g. z ??'
-    area:
+    orientation: '?? coil orientation, e.g. z ??'  # the axis of the receiver coil
+    area:  # the effective area of the receiver coil
       values: '?? effective coil area, m^2 ??'
       units: m^2
 
+  # One entry per coil pair. transmitters and receivers are filled in from the
+  # labels; everything else is per couplet.
   couplet:
-    txrx_dx: '?? metres from transmitter to receiver, along the line ??'
-    txrx_dy: '?? metres from transmitter to receiver, across the line ??'
-    txrx_dz: '?? metres from transmitter to receiver, vertical ??'
-    orientation: '?? coplanar or coaxial ??'
-    actual_frequency: '?? measured frequency, Hz, where it differs from nominal ??'
-    moment: '?? A m^2 ??'
+    txrx_dx: '?? metres from transmitter to receiver, along the line ??'  # the coil separation, positive forward
+    txrx_dy: '?? metres from transmitter to receiver, across the line ??'  # sign by reference_frame
+    txrx_dz: '?? metres from transmitter to receiver, vertical ??'  # sign by reference_frame
+    orientation: '?? coplanar or coaxial ??'  # how the two coils of the pair face each other
+    actual_frequency: '?? measured frequency, Hz, where it differs from nominal ??'  # or the nominal frequency again
+    moment: '?? A m^2 ??'  # of this pair's transmitter coil

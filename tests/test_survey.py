@@ -10,9 +10,10 @@ import pytest
 from gspy import Metadata, Survey
 from gspy.gs_dataset.Tabular import Tabular
 from gspy.gs_datatree.Container import Container
+from gspy.utilities.encoding import chunk_shape
 from pyproj import CRS
 
-from conftest import DATA, build_magnetics, data_row_count, gs_leaves
+from conftest import BUILDERS, DATA, build_magnetics, data_row_count, gs_leaves
 
 CF_GLOBAL_ATTRS = ("title", "institution", "source", "history", "references")
 CF_VAR_ATTRS = ("standard_name", "long_name", "units", "missing_value")
@@ -380,20 +381,20 @@ class TestRoundtrip:
                     if attr in built[path][var].attrs:
                         assert attr in leaf[var].attrs, f"{path}:{var} lost {attr}"
 
-    def test_missing_value_comes_back_in_encoding_not_attrs(self, roundtrip):
-        """Current behaviour, worth knowing about: the GS convention requires
-        missing_value on every variable, and it is written to the file, but xarray
-        consumes it while decoding. Code reading a GS file back through gspy has to
-        look in ``.encoding`` for it.
+    def test_missing_value_comes_back_in_encoding_unless_a_placeholder(self, roundtrip):
+        """xarray consumes a missing value while decoding, so code reading a GS
+        file back has to look in ``.encoding`` for it. A ``'not_defined'``
+        placeholder has nothing to decode and stays on the attributes.
         """
         _, built, back = roundtrip
         for leaf in gs_leaves(back):
             path = leaf.path[len("/survey/"):]
             for var in leaf.dataset.data_vars:
-                if "missing_value" not in built[path][var].attrs:
+                stated = built[path][var].attrs.get("missing_value")
+                if stated is None or leaf[var].dtype.kind not in "biuf":
                     continue
-                assert "missing_value" not in leaf[var].attrs, f"{path}:{var}"
-                assert "missing_value" in leaf[var].encoding, f"{path}:{var}"
+                where = leaf[var].attrs if isinstance(stated, str) else leaf[var].encoding
+                assert "missing_value" in where, f"{path}:{var}"
 
     def test_write_stamps_version_and_conventions(self, roundtrip):
         _, _, back = roundtrip
@@ -436,3 +437,192 @@ class TestRoundtrip:
 
         back = gspy.open_datatree(path)["survey/magnetic_data"]
         assert set(back.children) == {"raw_data", "grids"}
+
+
+def stored(path):
+    """{hdf5 path: dataset} for every netCDF variable in a written file.
+
+    A dimension without a coordinate is written by h5netcdf as a placeholder
+    dataset of its own, which is not a variable and carries no encoding.
+    """
+    import h5py
+
+    placeholder = b"This is a netCDF dimension but not a netCDF variable"
+    found = {}
+
+    def visit(name, item):
+        if isinstance(item, h5py.Dataset) and \
+                not bytes(item.attrs.get("NAME", b"")).startswith(placeholder):
+            found[name] = item
+
+    handle = h5py.File(path, "r")
+    handle.visititems(visit)
+    return handle, found
+
+
+def numeric_arrays(tree):
+    """Where in the file every variable numeric in memory, with a dimension, lands.
+
+    Judged in memory rather than on disk: an empty yml entry is an object array of
+    None, which xarray stores as float but has nothing in it to compress.
+    """
+    return {f"{node.path.lstrip('/')}/{name}"
+            for node in tree.subtree
+            for name, variable in node.to_dataset(inherit=node is tree).variables.items()
+            if variable.ndim > 0 and variable.dtype.kind in "biuf"}
+
+
+def masked(variable):
+    """The values as read back: a stated missing value becomes NaN."""
+    values = variable.values.astype(float)
+    missing = variable.attrs.get("missing_value")
+    if missing is not None and not isinstance(missing, str):
+        values[values == missing] = np.nan
+    return values
+
+
+class TestCompression:
+    """A written file is compressed unless asked otherwise.
+
+    Shuffle is on alongside gzip: grouping the bytes of each value by position is
+    what lets gzip find the repetition in neighbouring floats.
+    """
+
+    def test_every_numeric_array_is_compressed_and_shuffled(self, tmp_path):
+        survey = build_magnetics()
+        expected = numeric_arrays(survey.parent)
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path)
+
+        handle, found = stored(path)
+        with handle:
+            assert expected and expected <= set(found)
+            for name in expected:
+                dataset = found[name]
+                assert (dataset.compression, dataset.compression_opts, dataset.shuffle) \
+                    == ("gzip", 4, True), name
+
+    def test_every_numeric_array_is_chunked_by_its_shape(self, tmp_path):
+        survey = build_magnetics()
+        expected = numeric_arrays(survey.parent)
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path)
+
+        handle, found = stored(path)
+        with handle:
+            for name in expected:
+                dataset = found[name]
+                assert dataset.chunks == chunk_shape(dataset.shape, dataset.dtype.itemsize), name
+
+    def test_strings_and_scalars_are_left_alone(self, tmp_path):
+        """Filters on a scalar or a variable length string buy nothing."""
+        survey = build_magnetics()
+        expected = numeric_arrays(survey.parent)
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path)
+
+        handle, found = stored(path)
+        with handle:
+            others = {name: d for name, d in found.items() if name not in expected}
+            assert any(d.ndim == 0 for d in others.values())
+            assert any(d.dtype.kind == "O" for d in others.values())
+            for name, dataset in others.items():
+                assert dataset.compression is None, name
+
+    def test_the_settings_can_be_changed(self, tmp_path):
+        """What is given is laid over the defaults, so shuffle stays on."""
+        survey = build_magnetics()
+        expected = numeric_arrays(survey.parent)
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path, compression=dict(complevel=9))
+
+        handle, found = stored(path)
+        with handle:
+            for name in expected:
+                assert (found[name].compression_opts, found[name].shuffle) == (9, True), name
+
+    def test_compression_can_be_turned_off(self, tmp_path):
+        path = tmp_path / "magnetics.nc"
+        build_magnetics().gs.to_netcdf(path, compression=False)
+
+        handle, found = stored(path)
+        with handle:
+            assert all(d.compression is None and not d.shuffle for d in found.values())
+
+    def test_an_encoding_given_for_a_variable_wins_for_that_variable(self, tmp_path):
+        """Naming any compression setting for a variable replaces the defaults for it,
+        so ``zlib=False`` alone is enough to turn it off.
+        """
+        survey = build_magnetics()
+        expected = numeric_arrays(survey.parent)
+        node = next(n for n in gs_leaves(survey) if n.attrs.get("structure") == "tabular")
+        name = next(v for v in node.dataset.data_vars
+                    if node[v].ndim and node[v].dtype.kind == "f")
+        mine = f"{node.path.lstrip('/')}/{name}"
+
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path, encoding={node.path: {name: dict(zlib=False)}})
+
+        handle, found = stored(path)
+        with handle:
+            assert found[mine].compression is None and not found[mine].shuffle
+            others = expected - {mine}
+            assert others and all(found[other].compression == "gzip" for other in others)
+
+    def test_an_encoding_that_does_not_touch_compression_keeps_it(self, tmp_path):
+        survey = build_magnetics()
+        node = next(n for n in gs_leaves(survey) if n.attrs.get("structure") == "tabular")
+        name = next(v for v in node.dataset.data_vars
+                    if node[v].ndim == 1 and node[v].dtype.kind == "f")
+
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path, encoding={node.path: {name: dict(chunksizes=(100,))}})
+
+        handle, found = stored(path)
+        with handle:
+            dataset = found[f"{node.path.lstrip('/')}/{name}"]
+            assert (dataset.chunks, dataset.compression, dataset.shuffle) == ((100,), "gzip", True)
+
+    def test_a_container_written_on_its_own_is_compressed_too(self, tmp_path):
+        branch = build_magnetics()["magnetic_data"]
+        expected = numeric_arrays(branch)
+        path = tmp_path / "branch.nc"
+        branch.gs.to_netcdf(path)
+
+        handle, found = stored(path)
+        with handle:
+            assert expected and expected <= set(found)
+            assert all(found[name].compression == "gzip" and found[name].shuffle
+                       for name in expected)
+
+    def test_the_values_survive_compression(self, tmp_path):
+        survey = build_magnetics()
+        path = tmp_path / "magnetics.nc"
+        survey.gs.to_netcdf(path)
+
+        back = gspy.open_datatree(path)
+        for node in gs_leaves(back["survey"]):
+            written = survey.parent[node.path]
+            for name in node.dataset.data_vars:
+                if node[name].dtype.kind in "biuf":
+                    np.testing.assert_array_equal(node[name].values, masked(written[name]))
+
+
+class TestRewriting:
+    """A survey read from a file can be written out again."""
+
+    @pytest.mark.parametrize("build", BUILDERS.values(), ids=BUILDERS.keys())
+    @pytest.mark.parametrize("compression", [True, False])
+    def test_a_survey_read_back_writes_again(self, tmp_path, build, compression):
+        build().gs.to_netcdf(tmp_path / "a.nc")
+
+        gspy.open_datatree(tmp_path / "a.nc")["survey"].gs.to_netcdf(
+            tmp_path / "b.nc", compression=compression)
+
+        first = gspy.open_datatree(tmp_path / "a.nc")
+        second = gspy.open_datatree(tmp_path / "b.nc")
+        for node in gs_leaves(first["survey"]):
+            for name in node.dataset.data_vars:
+                if node[name].dtype.kind in "biuf":
+                    np.testing.assert_array_equal(second[node.path][name].values,
+                                                  node[name].values)

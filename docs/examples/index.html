@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Examples &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>Examples &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../_static/documentation_options.js?v=35f65317"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -60,6 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_tifs.html">GeoTIFFs (2D &amp; 3D)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_help_I_have_no_variable_metadata.html">Help! I have no metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html">Magnetic Raster Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_systems.html">Systems (YAML, GA-AEM .stm, templates)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Creating_GS_Files/plot_xyz_workbench_to_netcdf.html">Workbench XYZ</a></li>
 </ul>
 </li>
@@ -101,9 +103,9 @@
              
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
-<div class="sphx-glr-thumbnails"></div><section id="creating-gs-files">
+<div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"></div><section id="creating-gs-files">
 <h2>Creating GS Files<a class="headerlink" href="#creating-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:"><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_thumb.png" />
+<div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the workflow for creating a GS file from the ASEG file format, as well as how to add multiple associated datasets to the Survey. Specifically, this AEM survey contains the following datasets:"><img alt="" src="../_images/sphx_glr_plot_aseg_tempest_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_aseg_tempest.html"><span class="doc">ASEG-GDF (Tempest AEM)</span></a></p>
   <div class="sphx-glr-thumbnail-title">ASEG-GDF (Tempest AEM)</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the typical workflow for creating a GS file for an AEM survey in its entirety, i.e., the NetCDF file contains all related datasets together, e.g., raw data, processed data, inverted models, and derivative products. Specifically, this survey contains:"><img alt="" src="../_images/sphx_glr_plot_csv_skytem_thumb.png" />
@@ -124,6 +126,9 @@
 </div><div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. "><img alt="" src="../_images/sphx_glr_plot_csv_magnetics_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_csv_magnetics.html"><span class="doc">Magnetic Raster Dataset</span></a></p>
   <div class="sphx-glr-thumbnail-title">Magnetic Raster Dataset</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Where a system definition comes from."><img alt="" src="../_images/sphx_glr_plot_systems_thumb.png" />
+<p><a class="reference internal" href="Creating_GS_Files/plot_systems.html"><span class="doc">Systems (YAML, GA-AEM .stm, templates)</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Systems (YAML, GA-AEM .stm, templates)</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="This example supports data and models read from Aarhus Workbench XYZ files. What&#x27;s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times. "><img alt="" src="../_images/sphx_glr_plot_xyz_workbench_to_netcdf_thumb.png" />
 <p><a class="reference internal" href="Creating_GS_Files/plot_xyz_workbench_to_netcdf.html"><span class="doc">Workbench XYZ</span></a></p>
   <div class="sphx-glr-thumbnail-title">Workbench XYZ</div>
@@ -132,7 +137,7 @@
 </section>
 <section id="interacting-with-gs-files">
 <h2>Interacting With GS Files<a class="headerlink" href="#interacting-with-gs-files" title="Link to this heading"></a></h2>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into Xarray DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type."><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
+<div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The GS standard organizes datasets and metadata within a Data Tree. In GSPy, this is implemented through accessors into Xarray DataTrees, Datasets, and DataArrays. This example demonstrates basic xarray functionality for exploring the data and metadata for each class type."><img alt="" src="../_images/sphx_glr_plot_xarray_methods_thumb.png" />
 <p><a class="reference internal" href="Interacting_With_GS_Files/plot_xarray_methods.html"><span class="doc">Basic Functionality</span></a></p>
   <div class="sphx-glr-thumbnail-title">Basic Functionality</div>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Every Survey must have a coordinate reference system (CRS) defined and all datasets within the Survey adhere to the same CRS."><img alt="" src="../_images/sphx_glr_plot_coordinate_reference_systems_thumb.png" />

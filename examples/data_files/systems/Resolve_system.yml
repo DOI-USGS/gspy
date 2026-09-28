@@ -1,0 +1,45 @@
+resolve_system:
+    type: system
+    mode: airborne
+    method: electromagnetic, frequency domain
+    instrument: RESOLVE
+
+    dimensions:
+        channel:
+            centers: ['in-phase','quadrature']
+            standard_name: frequency_domain_complex_data
+            long_name: complex frequency domain data channel
+            units: not_defined
+            missing_value: not_defined
+            discrete: True
+        frequency:
+            standard_name: frequency
+            long_name: nominal measurement frequency
+            units: Hz
+            missing_value: not_defined
+            centers: [400, 1800, 3300, 8200, 40000, 140000]
+            discrete: True
+
+    variables:
+        data_normalized: True
+        output_data_type: ppm
+        reference_frame: right-handed positive up
+        output_sample_frequency: 10
+
+        transmitter:
+            label: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            orientation: [z, z, x, z, z, z]
+
+        receiver:
+            label: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            orientation: [z, z, x, z, z, z]
+
+        couplet:
+            transmitters: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            receivers: [400Z, 1800Z, 3300X, 8200Z, 40000Z, 140000Z]
+            txrx_dx: [7.93, 7.95, 9.06, 7.93, 7.92, 7.97]
+            txrx_dy: [0, 0, 0, 0, 0, 0]
+            txrx_dz: [0, 0, 0, 0, 0, 0]
+            orientation: [coplanar, coplanar, coaxial, coplanar, coplanar, coplanar]
+            actual_frequency: [381, 1829, 3385, 8261, 40430, 133400]
+            moment: [359, 187, 150, 72, 49, 17]

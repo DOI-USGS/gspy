@@ -34,6 +34,11 @@ conda activate gspy_workshop
 jupyter lab
 ```
 
+If you dont see the gspy_workshop as a kernel run this in the terminal
+```
+python -m ipykernel install --user --name=gspy_workshop
+```
+
 **Launch Jupyter from this folder.** Every path in the notebooks is relative to
 the workshop root, so make sure you start jupyter in the root folder.
 

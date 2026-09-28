@@ -1,9 +1,16 @@
 # Gamma ray spectrometer system.
 #
+# Replace every '?? ... ??' with a value, or with not_defined where it is unknown.
+# A field can hold its value beside its key, or nest it under values: alongside
+# its own attributes (units, long_name, ...). One value given for a receiver field
+# is repeated for every receiver; a list gives one value each, in label order.
+# The correction fields are the full set the USGS examples record; delete the ones
+# your survey did not do. TC, K, Th, U and UU are the total count, potassium,
+# thorium, uranium and upward uranium windows.
+
 # Shaped by System.metadata_template('radiometric', transmitters=..., receivers=...).
 # The ground is the source and it is passive, so the defaults below describe a
-# single passive transmitter read by one spectrometer. The correction fields are
-# the full set the USGS examples record; delete the ones your survey did not do.
+# single passive transmitter read by one spectrometer.
 pairing: cross
 
 labels:
@@ -12,11 +19,14 @@ labels:
 
 attrs:
   type: system
-  mode: '?? airborne, ground, waterborne or borehole ??'
-  method: gamma spectrometry
-  instrument: '?? make and model, e.g. Radiation Solutions RS-500 ??'
+  mode: '?? airborne, ground, waterborne or borehole ??'  # the platform the system is operated from
+  method: gamma spectrometry  # leave as is; the method family
+  instrument: '?? make and model, e.g. Radiation Solutions RS-500 ??'  # as the contractor names it
 
+# The axes the system's arrays lie along. Each needs centers (or bounds), or a length.
 dimensions:
+  # The energy channels of a recorded spectrum, counted from origin in steps of
+  # increment.
   spectra:
     standard_name: spectra
     long_name: radiometric spectra sample
@@ -29,101 +39,118 @@ dimensions:
 
 variables:
 
+  # One value each, describing how the data were processed. A sentence is fine.
   scalars:
-    down_livetime_or_deadtime_corrected: '?? livetime or deadtime ??'
-    up_livetime_or_deadtime_corrected: '?? livetime or deadtime ??'
-    lowpass_filtering: '?? which channels were smoothed and how ??'
+    down_livetime_or_deadtime_corrected: '?? livetime or deadtime ??'  # which correction the downward counts had
+    up_livetime_or_deadtime_corrected: '?? livetime or deadtime ??'  # which correction the upward counts had
+    lowpass_filtering: '?? which channels were smoothed and how ??'  # the filter and its length
+    # The low pass filter length for each channel, in fiducials (samples).
     lowpass_filtering_fid_cutoff_cosmic: '?? fiducials, or not_defined ??'
-    lowpass_filtering_fid_cutoff_TC: '?? fiducials, or not_defined ??'
-    lowpass_filtering_fid_cutoff_K: '?? fiducials, or not_defined ??'
-    lowpass_filtering_fid_cutoff_Th: '?? fiducials, or not_defined ??'
-    lowpass_filtering_fid_cutoff_U: '?? fiducials, or not_defined ??'
-    lowpass_filtering_fid_cutoff_altimeter: '?? fiducials, or not_defined ??'
+    lowpass_filtering_fid_cutoff_TC: '?? fiducials, or not_defined ??'  # see above
+    lowpass_filtering_fid_cutoff_K: '?? fiducials, or not_defined ??'  # see above
+    lowpass_filtering_fid_cutoff_Th: '?? fiducials, or not_defined ??'  # see above
+    lowpass_filtering_fid_cutoff_U: '?? fiducials, or not_defined ??'  # see above
+    lowpass_filtering_fid_cutoff_altimeter: '?? fiducials, or not_defined ??'  # see above
+    # The aircraft's own background in each window, from flights over water or at
+    # altitude, counts per second.
     background_parameter_aircraft_TC: '?? counts per second ??'
-    background_parameter_aircraft_K: '?? counts per second ??'
-    background_parameter_aircraft_Th: '?? counts per second ??'
-    background_parameter_aircraft_U: '?? counts per second ??'
-    background_parameter_aircraft_UU: '?? counts per second ??'
+    background_parameter_aircraft_K: '?? counts per second ??'  # see above
+    background_parameter_aircraft_Th: '?? counts per second ??'  # see above
+    background_parameter_aircraft_U: '?? counts per second ??'  # see above
+    background_parameter_aircraft_UU: '?? counts per second ??'  # see above
+    # How much of the cosmic window's count rate appears in each window.
     background_parameter_cosmic_TC: '?? counts per second per cosmic count ??'
-    background_parameter_cosmic_K: '?? counts per second per cosmic count ??'
-    background_parameter_cosmic_Th: '?? counts per second per cosmic count ??'
-    background_parameter_cosmic_U: '?? counts per second per cosmic count ??'
-    background_parameter_cosmic_UU: '?? counts per second per cosmic count ??'
-    radon_background_correction_method: '?? e.g. upward detector method ??'
-    radon_background_correction_up_method_A1: '?? coefficient, or not_defined ??'
-    radon_background_correction_up_method_A2: '?? coefficient, or not_defined ??'
+    background_parameter_cosmic_K: '?? counts per second per cosmic count ??'  # see above
+    background_parameter_cosmic_Th: '?? counts per second per cosmic count ??'  # see above
+    background_parameter_cosmic_U: '?? counts per second per cosmic count ??'  # see above
+    background_parameter_cosmic_UU: '?? counts per second per cosmic count ??'  # see above
+    radon_background_correction_method: '?? e.g. upward detector method ??'  # or spectral ratio, or none
+    radon_background_correction_up_method_A1: '?? coefficient, or not_defined ??'  # upward detector method coefficient
+    radon_background_correction_up_method_A2: '?? coefficient, or not_defined ??'  # upward detector method coefficient
+    # Stripping ratios: the fraction of one window's counts seen in another, from
+    # the calibration pads. alpha, beta and gamma strip downwards in energy; a, b
+    # and g upwards.
     compton_stripping_ratio_alpha: '?? Th into U ??'
-    compton_stripping_ratio_beta: '?? Th into K ??'
-    compton_stripping_ratio_gamma: '?? U into K ??'
-    compton_stripping_ratio_a: '?? U into Th ??'
-    compton_stripping_ratio_b: '?? K into Th ??'
-    compton_stripping_ratio_g: '?? K into U ??'
-    compton_stripping_nominal_altitude:
+    compton_stripping_ratio_beta: '?? Th into K ??'  # see above
+    compton_stripping_ratio_gamma: '?? U into K ??'  # see above
+    compton_stripping_ratio_a: '?? U into Th ??'  # see above
+    compton_stripping_ratio_b: '?? K into Th ??'  # see above
+    compton_stripping_ratio_g: '?? K into U ??'  # see above
+    compton_stripping_nominal_altitude:  # the height the stripping ratios were adjusted to
       values: '?? altitude the ratios apply at ??'
       units: m
+    # How quickly each window's count rate falls off with height, per metre.
     height_attenuation_coefficient_TC: '?? per metre ??'
-    height_attenuation_coefficient_K: '?? per metre ??'
-    height_attenuation_coefficient_Th: '?? per metre ??'
-    height_attenuation_coefficient_U: '?? per metre ??'
+    height_attenuation_coefficient_K: '?? per metre ??'  # see above
+    height_attenuation_coefficient_Th: '?? per metre ??'  # see above
+    height_attenuation_coefficient_U: '?? per metre ??'  # see above
+    # Converts corrected count rates to ground concentrations, from calibration.
     source_sensitivity_factor_TC: '?? counts per second per unit concentration ??'
-    source_sensitivity_factor_K: '?? counts per second per percent K ??'
-    source_sensitivity_factor_Th: '?? counts per second per ppm eTh ??'
-    source_sensitivity_factor_U: '?? counts per second per ppm eU ??'
-    air_absorbed_dose_rate: '?? nGy per hour ??'
-    natural_dose_rate_components: '?? K, U and Th contributions to dose rate ??'
+    source_sensitivity_factor_K: '?? counts per second per percent K ??'  # see above
+    source_sensitivity_factor_Th: '?? counts per second per ppm eTh ??'  # see above
+    source_sensitivity_factor_U: '?? counts per second per ppm eU ??'  # see above
+    air_absorbed_dose_rate: '?? nGy per hour ??'  # how it was calculated, or its conversion factor
+    natural_dose_rate_components: '?? K, U and Th contributions to dose rate ??'  # the factor for each
+    # Free text describing each processing step, for the report.
     corrections: '?? the correction chain that was applied, in order ??'
-    calibration_pads: '?? who determined the stripping ratios, on what, and when ??'
-    cosmic_calibration: '?? the high altitude passes flown ??'
-    height_attenuation: '?? the calibration lines flown ??'
-    radon_correction: '?? how the radon component was derived and stripped ??'
-    prefiltering: '?? what was smoothed before the corrections ??'
-    compton_stripping: '?? how the stripping coefficients were applied ??'
-    altitude_attenuation_correction: '?? the nominal height corrected to ??'
-    conversion_to_concentrations: '?? how windows became concentrations ??'
-    radiometric_ratios: '?? which ratios were produced and how ??'
-    deliverables: '?? which products were produced ??'
+    calibration_pads: '?? who determined the stripping ratios, on what, and when ??'  # see above
+    cosmic_calibration: '?? the high altitude passes flown ??'  # see above
+    height_attenuation: '?? the calibration lines flown ??'  # see above
+    radon_correction: '?? how the radon component was derived and stripped ??'  # see above
+    prefiltering: '?? what was smoothed before the corrections ??'  # see above
+    compton_stripping: '?? how the stripping coefficients were applied ??'  # see above
+    altitude_attenuation_correction: '?? the nominal height corrected to ??'  # see above
+    conversion_to_concentrations: '?? how windows became concentrations ??'  # see above
+    radiometric_ratios: '?? which ratios were produced and how ??'  # e.g. eU/eTh, eU/K, eTh/K
+    deliverables: '?? which products were produced ??'  # grids, profiles, spectra ...
 
+  # The ground; nothing to fill in but a description.
   transmitter:
-    description: '?? no artificial source; natural ground radiation is measured ??'
+    description: '?? no artificial source; natural ground radiation is measured ??'  # can be left as it reads
 
+  # One entry per spectrometer, in the order of its labels.
   receiver:
-    sensor_type: '?? e.g. NaI(Tl) scintillation crystals ??'
-    sensor_model: '?? e.g. RS-500 ??'
-    sensor_manufacturer: '?? e.g. Radiation Solutions Inc. ??'
-    description: '?? the detector packs, their volumes and where they are mounted ??'
-    crystal_type: '?? e.g. NaI(Tl) ??'
-    operating_range:
+    sensor_type: '?? e.g. NaI(Tl) scintillation crystals ??'  # the detector technology
+    sensor_model: '?? e.g. RS-500 ??'  # model number
+    sensor_manufacturer: '?? e.g. Radiation Solutions Inc. ??'  # who made it
+    description: '?? the detector packs, their volumes and where they are mounted ??'  # free text
+    crystal_type: '?? e.g. NaI(Tl) ??'  # the scintillator
+    operating_range:  # the count rates the spectrometer handles
       values: '?? e.g. 0 to 100000 ??'
       units: counts_per_second
-    operating_limits:
+    operating_limits:  # the temperatures it is rated for
       values: '?? e.g. -20 to +50 ??'
       units: temperature, degrees Celsius
-    sample_frequency:
+    sample_frequency:  # spectra per second
       values: '?? Hz ??'
       units: Hz
-    downward_volume:
+    downward_volume:  # total crystal volume looking at the ground
       values: '?? litres of downward looking crystal ??'
       units: liters
-    upward_volume:
+    upward_volume:  # total crystal volume shielded from the ground, for radon
       values: '?? litres of upward looking crystal ??'
       units: liters
+    # The energy range of each window, keV, e.g. '1370 to 1570' for potassium.
     spectrometer_TC_win: '?? total count window, keV, or not_defined ??'
-    spectrometer_K_win: '?? potassium window, keV, or not_defined ??'
-    spectrometer_Th_win: '?? thorium window, keV, or not_defined ??'
-    spectrometer_U_win: '?? uranium window, keV, or not_defined ??'
-    spectrometer_cosmic_win: '?? cosmic window, keV, or not_defined ??'
+    spectrometer_K_win: '?? potassium window, keV, or not_defined ??'  # see above
+    spectrometer_Th_win: '?? thorium window, keV, or not_defined ??'  # see above
+    spectrometer_U_win: '?? uranium window, keV, or not_defined ??'  # see above
+    spectrometer_cosmic_win: '?? cosmic window, keV, or not_defined ??'  # see above
+    # The same windows as channels of the spectra dimension, first and last.
     TC_index_start: '?? first spectrum sample of the total count window ??'
-    TC_index_end: '?? last spectrum sample of the total count window ??'
-    K_index_start: '?? first spectrum sample of the potassium window ??'
-    K_index_end: '?? last spectrum sample of the potassium window ??'
-    Th_index_start: '?? first spectrum sample of the thorium window ??'
-    Th_index_end: '?? last spectrum sample of the thorium window ??'
-    U_index_start: '?? first spectrum sample of the uranium window ??'
-    U_index_end: '?? last spectrum sample of the uranium window ??'
-    UU_index_start: '?? first spectrum sample of the upward uranium window ??'
-    UU_index_end: '?? last spectrum sample of the upward uranium window ??'
-    cosmic_index_start: '?? first spectrum sample of the cosmic window ??'
-    cosmic_index_end: '?? last spectrum sample of the cosmic window ??'
+    TC_index_end: '?? last spectrum sample of the total count window ??'  # see above
+    K_index_start: '?? first spectrum sample of the potassium window ??'  # see above
+    K_index_end: '?? last spectrum sample of the potassium window ??'  # see above
+    Th_index_start: '?? first spectrum sample of the thorium window ??'  # see above
+    Th_index_end: '?? last spectrum sample of the thorium window ??'  # see above
+    U_index_start: '?? first spectrum sample of the uranium window ??'  # see above
+    U_index_end: '?? last spectrum sample of the uranium window ??'  # see above
+    UU_index_start: '?? first spectrum sample of the upward uranium window ??'  # see above
+    UU_index_end: '?? last spectrum sample of the upward uranium window ??'  # see above
+    cosmic_index_start: '?? first spectrum sample of the cosmic window ??'  # see above
+    cosmic_index_end: '?? last spectrum sample of the cosmic window ??'  # see above
 
+  # One entry per source and detector pair; transmitters and receivers are filled
+  # in from the labels.
   couplet:
-    description: '?? which source is paired with which detector ??'
+    description: '?? which source is paired with which detector ??'  # can be left as it reads

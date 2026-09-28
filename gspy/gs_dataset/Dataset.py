@@ -10,6 +10,7 @@ from ..gs_dataarray.DataArray import DataArray
 from ..gs_dataarray.Coordinate import Coordinate
 
 from ..utilities import same_length_lists, deprecated
+from ..utilities.encoding import dataset_encoding
 from ..metadata.Metadata import Metadata
 from ..gs_dataarray.Spatial_ref import Spatial_ref
 
@@ -641,15 +642,22 @@ class Dataset:
 
         return self._obj
 
-    def to_netcdf(self, *args, **kwargs):
-        """Write the survey to a netcdf file
+    def to_netcdf(self, *args, compression=True, **kwargs):
+        """Write the dataset to a netcdf file
+
+        Every numeric variable with at least one dimension is compressed and chunked.
+        Scalars and strings are left alone, since a filter buys them nothing.
 
         Parameters
         ----------
         args : list
             Arguments to pass to xarray.Dataset.to_netcdf
+        compression : bool or dict, optional
+            True for :data:`gspy.utilities.encoding.DEFAULT_COMPRESSION`, False for
+            none, or a dict laid over the defaults, e.g. ``dict(complevel=9)``.
         kwargs : dict
-            Keyword arguments to pass to xarray.Dataset.to_netcdf
+            Keyword arguments to pass to xarray.Dataset.to_netcdf. An ``encoding``
+            given for a variable wins over the defaults for that variable.
 
         Returns
         -------
@@ -658,6 +666,7 @@ class Dataset:
         """
         kwargs["format"] = kwargs.get("format", "NETCDF4")
         kwargs["engine"] = kwargs.get("engine", "h5netcdf")
+        kwargs["encoding"] = dataset_encoding(self._obj, compression, kwargs.get("encoding"))
 
         self._obj.to_netcdf(*args, **kwargs)
 

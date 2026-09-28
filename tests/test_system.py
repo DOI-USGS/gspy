@@ -16,6 +16,11 @@ RESOLVE_CSV = str(DATA / "resolve" / "data" / "Resolve.csv")
 RESOLVE_MD = str(DATA / "resolve" / "data" / "Resolve_data_md.yml")
 SKYTEM_MD = str(DATA / "skytem_csv" / "data" / "skytem_system.yml")
 
+# One system to a file, two to a file, and none.
+RESOLVE_SYSTEM = str(DATA / "systems" / "Resolve_system.yml")
+TWO_SYSTEMS = SKYTEM_MD
+NO_SYSTEM = str(DATA / "resolve" / "data" / "Resolve_survey_md.yml")
+
 FAMILIES = ("fdem", "magnetic", "radiometric", "tdem")
 
 # What a dimension needs before a system will build, by the name it goes by. A
@@ -29,6 +34,11 @@ DIMENSION_SIZES = {
 }
 
 WAVEFORM = [0.0, 1.0e-3, 2.0e-3]
+
+
+@pytest.fixture(scope="module")
+def resolve():
+    return System.from_dict(**Metadata.read(RESOLVE_SYSTEM)["resolve_system"])
 
 
 def answered(value):
@@ -290,6 +300,92 @@ class TestItBuilds:
         """
         with pytest.raises(ValueError):
             System.from_dict(**System.metadata_template("tdem")["tdem_system"])
+
+
+class TestSystemWideValues:
+    """A value describing the whole system is one value, not an array of one.
+
+    Nothing in a system is indexed by these, so there is no dimension for them to
+    be along. The string ones have always come out this way; these pin the rest to
+    match, so an unnamed ``dim_0`` never reaches a file.
+    """
+
+    @pytest.mark.parametrize("name", ["output_sample_frequency", "data_normalized",
+                                      "output_data_type", "reference_frame"])
+    def test_it_carries_no_dimension(self, resolve, name):
+        assert resolve[name].dims == ()
+
+    def test_the_value_itself_survives(self, resolve):
+        assert resolve["output_sample_frequency"].item() == 10
+        assert resolve["reference_frame"].item() == "right-handed positive up"
+
+    @pytest.mark.parametrize("value", [10, 10.5, True])
+    def test_whatever_kind_of_value_it_is(self, value):
+        system = buildable("tdem")
+        system["variables"]["output_sample_frequency"] = value
+
+        assert System.from_dict(**system)["output_sample_frequency"].dims == ()
+
+
+class TestOneValueForEvery:
+    """One value given for a transmitter, receiver or couplet field is every one's.
+
+    A value can sit next to its key or be nested under ``values`` alongside its
+    attributes; either way it is repeated to match.
+    """
+
+    FIELDS = [("transmitter", "current_scale_factor", 2),
+              ("receiver", "gain", 2),
+              ("couplet", "txrx_dz", 4)]
+
+    @pytest.mark.parametrize("prefix, field, count", FIELDS)
+    @pytest.mark.parametrize("given", [2.5, {"values": 2.5, "units": "not_defined"}],
+                             ids=["next_to_the_key", "nested"])
+    def test_it_is_repeated(self, prefix, field, count, given):
+        system = buildable("tdem", transmitters=["LM", "HM"], receivers=["z", "x"])
+        system["variables"][prefix][field] = given
+
+        built = System.from_dict(**system)[f"{prefix}_{field}"]
+
+        assert built.dims == (f"n_{prefix}",)
+        assert list(built.values) == [2.5] * count
+
+    def test_a_nested_value_keeps_its_attributes(self):
+        system = buildable("tdem", transmitters=["LM", "HM"])
+        system["variables"]["transmitter"]["peak_current"] = {"values": 9.0, "units": "A"}
+
+        assert System.from_dict(**system)["transmitter_peak_current"].attrs["units"] == "A"
+
+
+class TestOpening:
+
+    def test_a_file_holding_one_system_opens(self):
+        system = System.open(RESOLVE_SYSTEM)
+
+        assert system.attrs["instrument"] == "RESOLVE"
+        assert system.sizes["n_couplet"] == 6
+
+    def test_it_is_named_the_way_a_container_names_one(self):
+        assert System.open(RESOLVE_SYSTEM).attrs["name"] == "resolve_system"
+
+    def test_a_file_holding_several_asks_which_one(self):
+        """Silently building the last one would hand back the wrong system."""
+        with pytest.raises(ValueError, match="magnetic_system, skytem_system"):
+            System.open(TWO_SYSTEMS)
+
+    def test_naming_one_of_several_opens_that_one(self):
+        system = System.open(TWO_SYSTEMS, name="magnetic_system")
+
+        assert system.attrs["method"] == "magnetic"
+
+    def test_a_name_that_is_not_in_the_file_says_what_is(self):
+        with pytest.raises(ValueError, match="magnetic_system, skytem_system"):
+            System.open(TWO_SYSTEMS, name="tempest_system")
+
+    def test_a_file_with_no_system_in_it_says_so(self):
+        """A system is picked out by "system" in its key, the way a container does."""
+        with pytest.raises(ValueError, match="holds no system"):
+            System.open(NO_SYSTEM)
 
 
 class TestDumping:

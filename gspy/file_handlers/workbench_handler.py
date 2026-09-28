@@ -1,5 +1,5 @@
 import numpy as np
-from pandas import read_csv, Series, concat, Index
+from pandas import read_csv, Series, concat
 from .xyz_handler import xyz_handler
 
 class workbench_handler(xyz_handler, key='workbench'):
@@ -251,22 +251,22 @@ class workbench_model_handler(xyz_handler, key='workbench_model'):
 
                     # grab correct columns to merge
                     if single_moment:
-                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0, 'RECORD')]
                         if ft == 'dat':
                             colset1std = colset1.str.replace('DATA','DATASTD')
-                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0, 'RECORD')]
                         colset=colset1
                     elif (segment == 1) | (segment == 3): #dual moment convention LM
-                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset1.insert(0, 'RECORD')]
                         if ft == 'dat':
                             colset1std = colset1.str.replace('DATA','DATASTD')
-                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset1std.insert(0, 'RECORD')]
                         colset=colset1
                     elif (segment == 2) | (segment == 4): #dual moment convention HM
-                        couplet_data = df[df['SEGMENTS']==segment][colset2.insert(0,Index(['RECORD']))]
+                        couplet_data = df[df['SEGMENTS']==segment][colset2.insert(0, 'RECORD')]
                         if ft == 'dat':
                             colset2std = colset2.str.replace('DATA','DATASTD')
-                            couplet_std = df[df['SEGMENTS']==segment][colset2std.insert(0,Index(['RECORD']))]
+                            couplet_std = df[df['SEGMENTS']==segment][colset2std.insert(0, 'RECORD')]
                         colset=colset2
 
                     # merge into combined dataframe

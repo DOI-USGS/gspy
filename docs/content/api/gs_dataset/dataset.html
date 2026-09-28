@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dataset &mdash; gspy 2.2.8.post1.dev47+gfe4db39cb documentation</title>
+  <title>Dataset &mdash; gspy 2.2.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=fd6457a4" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
@@ -19,9 +19,10 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=f530f8aa"></script>
+      <script src="../../../_static/documentation_options.js?v=35f65317"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -409,12 +410,12 @@ template’s placeholders.</p></li>
 <li><p><strong>systems</strong> (<em>str</em><em> or </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – <p>Templates for the systems this dataset was recorded with. A method family
 key on its own, a list of keys, or a mapping of the name to file each
 system under onto its key or onto the arguments describing its shape:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systems</span><span class="o">=</span><span class="s1">&#39;tdem&#39;</span>
-<span class="n">systems</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tdem&#39;</span><span class="p">,</span> <span class="s1">&#39;magnetic&#39;</span><span class="p">]</span>
-<span class="n">systems</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;skytem_system&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;tdem&#39;</span><span class="p">,</span>
-                               <span class="n">transmitters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LM&#39;</span><span class="p">,</span> <span class="s1">&#39;HM&#39;</span><span class="p">],</span>
-                               <span class="n">receivers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">]),</span>
-         <span class="s1">&#39;magnetic_system&#39;</span><span class="p">:</span> <span class="s1">&#39;magnetic&#39;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systems</span><span class="o">=</span><span class="s1">'tdem'</span>
+<span class="n">systems</span><span class="o">=</span><span class="p">[</span><span class="s1">'tdem'</span><span class="p">,</span> <span class="s1">'magnetic'</span><span class="p">]</span>
+<span class="n">systems</span><span class="o">=</span><span class="p">{</span><span class="s1">'skytem_system'</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'tdem'</span><span class="p">,</span>
+                               <span class="n">transmitters</span><span class="o">=</span><span class="p">[</span><span class="s1">'LM'</span><span class="p">,</span> <span class="s1">'HM'</span><span class="p">],</span>
+                               <span class="n">receivers</span><span class="o">=</span><span class="p">[</span><span class="s1">'z'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">]),</span>
+         <span class="s1">'magnetic_system'</span><span class="p">:</span> <span class="s1">'magnetic'</span><span class="p">}</span>
 </pre></div>
 </div>
 </p></li>
