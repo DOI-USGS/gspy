@@ -7,6 +7,7 @@ from xarray import DataArray as xr_DataArray
 from xarray import DataTree as xr_DataTree
 from xarray import register_dataarray_accessor
 from ..metadata.Metadata import Metadata
+from ..utilities.encoding import fill_value
 from pandas import Series
 
 default_metadata = ('standard_name', 'long_name', 'missing_value', 'units')
@@ -174,18 +175,26 @@ class DataArray:
         if 'dtype' in kwargs:
             values = values.astype(kwargs['dtype'])
 
-        if isinstance(values, int) or isinstance(values, float):
+        # A lone number describing the whole thing stays a lone number. Wrapping it
+        # only makes sense where there is a dimension of length one to lie along;
+        # otherwise xarray would name the axis it invents for it, giving a 'dim_0'.
+        if isinstance(values, (int, float)) and 'dimensions' in kwargs:
             values = [values]
 
         if "dimensions" in kwargs:
             if nd > 0:
                 assert nd == len(kwargs['dimensions']), ValueError(f"Mismatching dims for {name}")
 
-        return xr_DataArray(values,
+        out = xr_DataArray(values,
                 name=name,
                 dims=kwargs.pop('dimensions', None),
                 coords=kwargs.pop('coords', None),
                 attrs=kwargs)
+
+        # On the encoding, where xarray keeps it, so it shows before the file is written.
+        if out.dtype.kind in "iuf":
+            out.encoding['_FillValue'] = fill_value(name, out.variable, out.dtype)
+        return out
 
     @staticmethod
     def catch_nan(values, name, **kwargs):
