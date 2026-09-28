@@ -7,6 +7,7 @@ dataset_attrs:
     mode: airborne
     method: electromagnetic, time domain
     instrument: SkyTEM 304M
+    reference: I did this
 
 coordinates:
     x: E_N83WTM
