@@ -168,7 +168,40 @@ class System(Dataset):
         system['dimensions'] = dimensions
         system['variables'] = variables
 
-        return Metadata({name: Metadata.merge(system, metadata if metadata is not None else {})})
+        out = Metadata({name: Metadata.merge(system, metadata if metadata is not None else {})})
+        out.comments = cls._template_comments(spec.comments, name, transmitters, per_transmitter)
+        return out
+
+    @classmethod
+    def _template_comments(cls, comments, name, transmitters, per_transmitter):
+        """The template's comments, moved to where its fields end up in the system.
+
+        The header goes above the system, attributes are lifted to its top level,
+        scalars and prefixes into its variables, and a per transmitter dimension's
+        comment is copied to each transmitter's.
+
+        """
+        out = {}
+        for path, comment in comments.items():
+            head, rest = path[:1], path[1:]
+            if path == ():
+                out[(name,)] = comment
+            elif head == ('attrs',) and rest:
+                out[(name, *rest)] = comment
+            elif head == ('dimensions',) and rest and rest[0] in per_transmitter:
+                for label in transmitters:
+                    named = cls._template_dimension(rest[0], label, transmitters)
+                    labelled = lambda text: text.replace('{label}', label)
+                    out[(name, 'dimensions', named, *rest[1:])] = \
+                        {k: [labelled(line) for line in v] if k == 'above' else labelled(v)
+                         for k, v in comment.items()}
+            elif head in (('dimensions',), ('variables',)) and rest != ('scalars',):
+                if rest[:1] == ('scalars',):
+                    rest = rest[1:]
+                out[(name, *head, *rest)] = comment
+            elif head == ('prefixes',) and rest:
+                out[(name, 'variables', *rest)] = comment
+        return out
 
     @classmethod
     def _template_spec(cls, key):

@@ -138,16 +138,21 @@ class TestDump:
         assert {k: str(v) for k, v in flat_back.items()} == \
                {k: str(v) for k, v in flat_src.items()}
 
-    @pytest.mark.parametrize("ext", [".yml", ".csv"])
-    def test_yml_and_csv_lose_the_type_of_numeric_looking_strings(self, tmp_path, ext):
-        """Current behaviour. Both writers stringify and the readers re-parse, so a
-        deliberately quoted version or epoch comes back as a number. Only json is
-        type-preserving. Matters for anything that later does string operations on
-        such a value.
+    def test_csv_loses_the_type_of_numeric_looking_strings(self, tmp_path):
+        """Current behaviour. The writer stringifies and the reader re-parses, so a
+        deliberately quoted version or epoch comes back as a number. Matters for
+        anything that later does string operations on such a value.
         """
-        path = tmp_path / f"md{ext}"
+        path = tmp_path / "md.csv"
         Metadata({"epoch": "2015.0"}).dump(str(path))
         assert _read_as_nested(path)["epoch"] == 2015.0
+
+    @pytest.mark.parametrize("value", ["2015.0", "one # two", "a: b", "True", "[1, 2]"])
+    def test_yml_keeps_a_string_a_string(self, tmp_path, value):
+        """Quoted where written bare it would read back as something else."""
+        path = tmp_path / "md.yml"
+        Metadata({"epoch": value}).dump(str(path))
+        assert _read_as_nested(path)["epoch"] == value
 
     def test_an_unsupported_extension_raises(self, tmp_path):
         with pytest.raises(Exception, match="Unknown extension"):
