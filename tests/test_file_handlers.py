@@ -450,6 +450,17 @@ class TestWorkbench:
 
         assert survey["models/inversion"]["x"].size > 0
 
+    def test_header_gate_times_the_system_does_not_define_are_refused(self):
+        """Times measured from the waveform start, not from turn-off, say."""
+        md = Metadata.read(WORKBENCH_MOD_MD)
+        gates = md["nominal_system"]["dimensions"]["lm_gate_times"]
+        gates["centers"] = [t + 0.0047 for t in gates["centers"]]
+        survey = Survey.from_dict(str(DATA / "workbench" / "survey.yml"))
+        models = survey.gs.add_container("models", **dict(content="inverse models"))
+
+        with pytest.raises(ValueError, match="lm_gate_times"):
+            models.gs.add(key="inversion", data=WORKBENCH_MOD, metadata_file=md)
+
     def test_a_coordinate_is_found_under_either_name(self):
         assert workbench_handler.aliases("X") == ["X", "UTMX"]
         assert workbench_handler.aliases("UTMY") == ["UTMY", "Y"]

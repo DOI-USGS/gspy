@@ -113,6 +113,30 @@ class Tabular(Dataset):
 
         return None
 
+    @staticmethod
+    def _check_system_defines(system, dimension, centers):
+        """Raise unless every one of a file's ``centers`` lies inside a bound the system
+        already gives ``dimension``. A subset passes, since an inversion can drop gates.
+        """
+        for dataset in Tabular._systems(system):
+            if not isinstance(dataset, (xr.Dataset, xr.DataTree)):
+                continue
+
+            owned = dataset.to_dataset(inherit=False) if isinstance(dataset, xr.DataTree) else dataset
+            if dimension not in owned.dims or dimension not in owned.coords:
+                continue
+
+            bounds = owned.get(owned[dimension].attrs.get('bounds', ''))
+            if bounds is None:
+                continue
+
+            lower, upper = bounds.values.min(axis=1), bounds.values.max(axis=1)
+            outside = [c for c in np.atleast_1d(centers) if not np.any((lower <= c) & (c <= upper))]
+            if outside:
+                raise ValueError(f"The file's {dimension} [{', '.join(f'{c:.4g}' for c in outside)}] fall outside "
+                                 f"every {dimension} bound in the system, {lower.min():.4g} to {upper.max():.4g}. "
+                                 "Check the gate times in the system yml, e.g. that both count from the same time zero.")
+
     @classmethod
     def read(cls, data, metadata_file=None, spatial_ref=None, **kwargs):
         """Instantiate a Tabular class from tabular data
@@ -174,6 +198,7 @@ class Tabular(Dataset):
             if 'dimensions' in file_metadata:
                 if system is not None:
                     for key, values in file_metadata['dimensions'].items():
+                        cls._check_system_defines(system, key, values['centers'])
                         if isinstance(system, dict):
                             system = system.gs.add_coordinate_from_dict(key, discrete=True, is_dimension=True, **values)
                         else:
