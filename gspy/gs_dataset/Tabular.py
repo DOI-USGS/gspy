@@ -50,10 +50,16 @@ class Tabular(Dataset):
     @staticmethod
     def _template_from_handler(file, json_md):
         """Fold what a handler knows about its file into a tabular metadata template."""
-        out = file.metadata_template(**json_md, **file.file_metadata)
+        given = Metadata(json_md)
+        for key, value in (file.file_metadata or {}).items():
+            given[key] = given.get(key, {}) | value
+
+        out = file.metadata_template(**given)
         out['dataset_attrs']['structure'] = 'tabular'
 
-        for k, v in json_md.get('coordinates', {}).items():
+        for k, v in out['coordinates'].items():
+            if v not in out['variables']:
+                continue
             entry = out['variables'][v]
             if k == 'z':
                 entry["positive"] = entry.get('positive', "?? up or down ??")

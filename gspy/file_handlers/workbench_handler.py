@@ -3,9 +3,14 @@ from warnings import warn
 import numpy as np
 from pandas import read_csv, Series, concat
 from .xyz_handler import xyz_handler
+from ..metadata.Metadata import Metadata
 
 class _workbench_names:
-    """Column naming shared by the Workbench exports."""
+    """Column naming, and the metadata template, shared by the Workbench exports.
+
+    A subclass's read fills in ``_units`` and ``_gate_times``, and it gives
+    ``_attrs``, ``_channel_columns`` and ``_template_dimensions``.
+    """
 
     #: Newer Workbench versions export UTMX and UTMY as X and Y.
     _alternatives = {'X': 'UTMX', 'Y': 'UTMY', 'UTMX': 'X', 'UTMY': 'Y'}
@@ -20,6 +25,57 @@ class _workbench_names:
         RHO[1], is left alone."""
         columns = columns.str.replace(r'_\[\D[^\]]*\]$', '', regex=True)
         return columns.str.replace(r'_STD(\d+)$', r'_STD_\1', regex=True)
+
+    @classmethod
+    def _bracket_units(cls, columns):
+        """The unit a column carries in its name, m for ALTITUDE_[m], by tidied name."""
+        units = columns.str.extract(r'_\[(\D[^\]]*)\]$')[0]
+        return {name: unit for name, unit in zip(cls._tidied(columns), units) if isinstance(unit, str)}
+
+    @staticmethod
+    def _couplet_gate_times(system):
+        """The gate times dimension each couplet label is measured on.
+
+        Without gate times in the system, each transmitter's are named after it, the
+        way System.metadata_template names them.
+        """
+        labels = system.gs.couplet_labels
+        if 'couplet_gate_times' in system:
+            return dict(zip(labels, (str(g) for g in system['couplet_gate_times'].values)))
+
+        transmitters = [str(t).lower() for t in system['couplet_transmitters'].values]
+        if len(set(transmitters)) == 1:
+            return dict.fromkeys(labels, 'gate_times')
+        return {label: f"{t}_gate_times" for label, t in zip(labels, transmitters)}
+
+    def column_metadata(self, column):
+        out = {'units': self._units[column]} if column in self._units else {}
+        if column == 'ELEVATION':
+            out['positive'] = 'up'
+        for label, gates in self._gate_times.items():
+            if column in self._channel_columns(label):
+                out.update(dimensions=['index', gates], system_couplet=label)
+        return out
+
+    def metadata_template(self, **kwargs):
+        out = super().metadata_template(**kwargs)
+
+        out['dataset_attrs'] = Metadata.merge(Metadata.merge(out['dataset_attrs'], self._attrs),
+                                              kwargs.get('dataset_attrs', {}))
+
+        columns = self.df.columns
+        coordinates = {axis: next((n for n in self.aliases(name) if n in columns), None)
+                       for axis, name in (('x', 'UTMX'), ('y', 'UTMY'), ('z', 'ELEVATION'))}
+        out['coordinates'] = Metadata.merge({k: v for k, v in coordinates.items() if v},
+                                            kwargs.get('coordinates', {}))
+
+        out['dimensions'] = Metadata.merge(self._template_dimensions(), kwargs.get('dimensions', {}))
+        if 'layers_minus_1' in out['dimensions']:
+            out.comments[('dimensions', 'layers_minus_1')] = {'above': [
+                "The boundaries between layers, one fewer than there are layers. The",
+                "per-boundary uncertainties, DEP_BOT_STD and THK_STD, use it."]}
+
+        return out
 
     def combine_metadata(self, new, **kwargs):
         """A yml key keeping the underscore of a unit, ALTITUDE_ for ALTITUDE_[m],
@@ -58,19 +114,42 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
         if system is None:
             raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
-        self.metadata, n_header = self.__parse_metadata(self.filename)
+        self.metadata = {}
+        header_gates, n_header = self.__parse_metadata(self.filename)
 
         system = system.gs.get_system_with_method('electromagnetic')
 
         mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
+        self._gate_times = self._couplet_gate_times(system)
+
+        # The header's gate times, for the dimensions the system does not define.
+        self._header_gates = {}
+        for channel, label in mapping.items():
+            name = self._gate_times[label]
+            if name not in system.dims and channel in header_gates:
+                self._header_gates.setdefault(name, header_gates[channel])
 
         self._df = self.read_data(self.filename, header=n_header, mapping=mapping)
         
         self.combine_metadata(metadata)
 
-    def __parse_metadata(self, filename):
+    _attrs = {'type': 'data', 'method': 'electromagnetic, time domain'}
 
-        metadata = dict()
+    @staticmethod
+    def _channel_columns(label):
+        return (label.upper(), f"{label.upper()}_STD")
+
+    def _template_dimensions(self):
+        return {name: {'standard_name': name,
+                       'long_name': 'gate times, from the data file header',
+                       'units': 'seconds',
+                       'missing_value': 'not_defined',
+                       'centers': centers}
+                for name, centers in self._header_gates.items()}
+
+    def __parse_metadata(self, filename):
+        """The gate times of each channel, and how many lines the header takes."""
+        gates = dict()
 
         n_header = -1; done = False
 
@@ -79,27 +158,24 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
                 n_header += 1
                 line = file.readline()
                 if 'Gates for channel' in line:
-                    splt = line.split(':')
-                    # key = splt[0].removeprefix('/').strip().replace(" ", "_")
-                    # metadata[key] = np.float64(splt[1].split())
-                    # print(metadata[key].size)
-
-                    # metadata[f"channel {int(splt[0][-2])}"] = np.float64(splt[1][1:].split())
+                    channel, times = line.split(':')
+                    gates[int(channel.split()[-1])] = np.float64(times.split()).tolist()
                 if 'DUMMY' in line:
                     line = file.readline()
-                    # metadata['dummy'] = np.float64(line[1:].strip('\n'))
                 if 'DATE' in line:
                     n_header += 1
                     done = True
 
-        return metadata, n_header
+        return gates, n_header
 
     def read_data(self, filename, **kwargs):
 
         mapping = kwargs.pop('mapping')
 
         df = read_csv(filename, sep=r',\s+', engine='python', **kwargs)
-        df.columns = self._tidied(Series(df.columns.str.replace(r'[,/ ]+', '',regex=True)))
+        columns = Series(df.columns.str.replace(r'[,/ ]+', '',regex=True))
+        self._units = self._bracket_units(columns)
+        df.columns = self._tidied(columns)
 
         # define column groups
         unique_columns = ['DATE','TIME']
@@ -194,6 +270,8 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
         system = system.gs.get_system_with_method('electromagnetic')
 
         mapping = {i+1:c_label for i, c_label in enumerate(system.gs.couplet_labels)}
+        self._gate_times = self._couplet_gate_times(system)
+        self._units = {}
 
         self._df, self._file_metadata = self.read_data(self.filename, mapping=mapping)
 
@@ -202,6 +280,45 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
                              "Define the gate times dimensions in the system yml, and name them with the couplet's gate_times.")
 
         self.combine_metadata(metadata)
+
+    _attrs = {'type': 'models', 'method': 'electromagnetic, time domain',
+              'property': 'electrical resistivity'}
+
+    @staticmethod
+    def _channel_columns(label):
+        return (f"{label}_data", f"{label}_datastd", f"{label}_syn")
+
+    def column_metadata(self, column):
+        out = super().column_metadata(column)
+        n_layers, count = self.column_header_counts.get('RHO'), self.column_header_counts[column]
+        if n_layers and count > 1 and 'dimensions' not in out:
+            dimension = {n_layers: 'layer_depth', n_layers - 1: 'layers_minus_1'}.get(count)
+            if dimension:
+                out['dimensions'] = ['index', dimension]
+        return out
+
+    def _template_dimensions(self):
+        """The layers, bounded by DEP_TOP and DEP_BOT where every record shares them."""
+        n_layers = self.column_header_counts.get('RHO')
+        if not n_layers:
+            return {}
+
+        layers = {'standard_name': 'layer_depth',
+                  'long_name': 'Depth to the top and bottom of each model layer',
+                  'units': self._units.get('DEP_TOP', 'm'),
+                  'missing_value': 'not_defined'}
+        depths = [self.df.filter(regex=rf'^{name}_\d+$') for name in ('DEP_TOP', 'DEP_BOT')]
+        if all(d.shape[1] == n_layers and (d.nunique() == 1).all() for d in depths):
+            layers['bounds'] = [d.iloc[0].tolist() for d in depths]
+        else:
+            layers.update(origin=0, increment=1, length=n_layers)
+
+        return {'layer_depth': layers,
+                'layers_minus_1': {'standard_name': 'layers_minus_1',
+                                   'long_name': 'Index of the boundary between two model layers',
+                                   'units': 'not_defined',
+                                   'missing_value': 'not_defined',
+                                   'origin': 0, 'increment': 1, 'length': n_layers - 1}}
 
     def read_data(self, filename, **kwargs):
 
@@ -230,7 +347,9 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
 
             # put data into dataframe
             df = read_csv(file, header=header_row, sep=r"(?<!/)\s+", engine='python')
-            df.columns = self._tidied(Series(df.columns.str.replace("/ ", "")))
+            columns = Series(df.columns.str.replace("/ ", ""))
+            self._units |= self._bracket_units(columns)
+            df.columns = self._tidied(columns)
 
             if ft == 'inv':
                 df_combined = df

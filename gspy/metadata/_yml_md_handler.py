@@ -1,5 +1,6 @@
 import re
 
+import numpy as np
 import yaml
 
 KEY = re.compile(r"^(\s*)([^\s#:'\"-][^:]*?):(\s|$)(.*)$")
@@ -66,6 +67,8 @@ def read_yml_comments(filename):
 
 def _scalar(value):
     """``value`` as written after its key, quoted only where it would not read back as itself."""
+    if isinstance(value, (np.ndarray, np.generic)):
+        value = value.tolist()
     if isinstance(value, str):
         try:
             if yaml.safe_load(f"k: {value}") == {"k": value}:
