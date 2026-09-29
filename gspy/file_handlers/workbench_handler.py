@@ -1,3 +1,5 @@
+from warnings import warn
+
 import numpy as np
 from pandas import read_csv, Series, concat
 from .xyz_handler import xyz_handler
@@ -18,6 +20,19 @@ class _workbench_names:
         RHO[1], is left alone."""
         columns = columns.str.replace(r'_\[\D[^\]]*\]$', '', regex=True)
         return columns.str.replace(r'_STD(\d+)$', r'_STD_\1', regex=True)
+
+    def combine_metadata(self, new, **kwargs):
+        """A yml key keeping the underscore of a unit, ALTITUDE_ for ALTITUDE_[m],
+        still describes the ALTITUDE column."""
+        columns = self.column_header_counts
+        renamed = {key: key.rstrip('_') for key in (new or {})
+                   if key not in columns and key.rstrip('_') in columns}
+        for old, name in renamed.items():
+            warn(f"{old} in the metadata is read as {name}. Rename it, the trailing underscore is no longer needed.")
+
+        if renamed:
+            new = {renamed.get(key, key): value for key, value in new.items()}
+        super().combine_metadata(new, **kwargs)
 
 class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
     """Handler for Aarhus Workbench .xyz data

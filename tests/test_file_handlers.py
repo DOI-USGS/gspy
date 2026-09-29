@@ -372,6 +372,21 @@ class TestWorkbench:
         assert "ALTITUDE_A-PRIORI_STD" in read.column_header_counts
         assert not [name for name in read.column_header_counts if name.endswith("_")]
 
+    def test_a_yml_key_with_the_old_trailing_underscore_still_describes_its_column(self,
+                                                                                  workbench_system):
+        with pytest.warns(UserWarning, match="ALTITUDE_ .* ALTITUDE"):
+            read = open_datafile(WORKBENCH_MOD, metadata={"ALTITUDE_": {"units": "m"}},
+                                 system=workbench_system)
+
+        assert read.metadata["ALTITUDE"]["units"] == "m"
+        assert "ALTITUDE_" not in read.metadata
+
+    def test_a_trailing_underscore_that_names_no_column_is_left_alone(self, workbench_system):
+        read = open_datafile(WORKBENCH_MOD, metadata={"NOT_A_COLUMN_": {"units": "m"}},
+                             system=workbench_system)
+
+        assert "NOT_A_COLUMN_" in read.metadata
+
     def test_the_em_columns_are_named_after_the_couplet_labels(self, workbench_system):
         read = open_datafile(WORKBENCH_MOD, metadata={}, system=workbench_system)
 
