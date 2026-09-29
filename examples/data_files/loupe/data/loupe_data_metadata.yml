@@ -104,21 +104,21 @@ variables:
         missing_value: not_defined
         units: nV/Am4
         dimensions: ['index', 'gate_times']
-        system_couplet: z_x
+        system_couplet: z_x_dbdt
     Y_CH:
         standard_name: y_ch
         long_name: Y time channel windows data
         missing_value: not_defined
         units: nV/Am4
         dimensions: ['index', 'gate_times']
-        system_couplet: z_y
+        system_couplet: z_y_dbdt
     Z_CH:
         standard_name: z_ch
         long_name: Z time channel windows data
         missing_value: not_defined
         units: nV/Am4
         dimensions: ['index', 'gate_times']
-        system_couplet: z_z
+        system_couplet: z_z_dbdt
     HEIGHT:
         standard_name: height
         long_name: Calculated reading position height above MSL, WGS84 ellipsoid

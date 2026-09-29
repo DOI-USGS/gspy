@@ -810,7 +810,7 @@ class System(Dataset):
                     if 'label' not in vars['couplet'].keys():
                         vars['couplet'] = self.__couplet_labels(**vars['couplet'])
                     if 'gate_times' in vars['couplet']:
-                        vars['couplet']['gate_times'] = [x.lower() for x in vars['couplet']['gate_times']]
+                        vars['couplet']['gate_times'] = [x.lower() for x in self.__listed(vars['couplet']['gate_times'])]
 
                 self, kwargs['variables'] = self.__add_using_prefix(prefix, **kwargs['variables'])
 
@@ -850,10 +850,22 @@ class System(Dataset):
                 raise ValueError(f"transmitter {field} {numbers[field]} is not turns x area x peak current, "
                                  f"{product}")
 
+    @staticmethod
+    def __listed(value):
+        """One of something, or a list of them, as a list."""
+        value = value.get('values') if isinstance(value, dict) else value
+        return list(value) if isinstance(value, (list, tuple, np.ndarray)) else [value]
+
     def __couplet_labels(self, **kwargs):
-        kwargs['label'] = kwargs.get('receivers')
-        if 'transmitters' in kwargs:
-            kwargs['label'] = [f"{a}_{b}" for a, b in zip(kwargs['transmitters'], kwargs['label'])]
+        """transmitter_receiver_datatype, or transmitter_receiver without a data type."""
+        parts = [self.__listed(kwargs[key]) for key in ('transmitters', 'receivers') if key in kwargs]
+        data_type = kwargs.get('data_type')
+        if data_type is not None and '??' not in str(data_type) and 'not_defined' not in str(data_type):
+            parts.append([str(x).lower() for x in self.__listed(data_type)])
+
+        count = max(len(part) for part in parts)
+        parts = [part * count if len(part) == 1 else part for part in parts]
+        kwargs['label'] = ['_'.join(str(x) for x in names) for names in zip(*parts)]
         return kwargs
 
     def __add_using_prefix(self, prefix, **kwargs):

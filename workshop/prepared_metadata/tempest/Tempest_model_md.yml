@@ -92,27 +92,27 @@ variables:
         dimensions: [index, layer_depth]
 
     observed_EMSystem_1_XS:
-        system_couplet: z_x
+        system_couplet: z_x_b
         dimensions: [index, gate_times]
 
     observed_EMSystem_1_ZS:
-        system_couplet: z_z
+        system_couplet: z_z_b
         dimensions: [index, gate_times]
 
     noise_EMSystem_1_XS:
-        system_couplet: z_x
+        system_couplet: z_x_b
         dimensions: [index, gate_times]
 
     noise_EMSystem_1_ZS:
-        system_couplet: z_z
+        system_couplet: z_z_b
         dimensions: [index, gate_times]
 
     predicted_EMSystem_1_XS:
-        system_couplet: z_x
+        system_couplet: z_x_b
         dimensions: [index, gate_times]
 
     predicted_EMSystem_1_ZS:
-        system_couplet: z_z
+        system_couplet: z_z_b
         dimensions: [index, gate_times]
 
 inversion_parameters:

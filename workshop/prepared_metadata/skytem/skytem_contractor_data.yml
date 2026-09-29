@@ -32,7 +32,7 @@ variables:
         long_name: EM data, low moment x-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: lm_x
+        system_couplet: lm_x_dbdt
         dimensions: [index, lm_gate_times]
 
     LM_Z:
@@ -40,7 +40,7 @@ variables:
         long_name: EM data, low moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: lm_z
+        system_couplet: lm_z_dbdt
         dimensions: [index, lm_gate_times]
 
     HM_X:
@@ -48,7 +48,7 @@ variables:
         long_name: EM data, high moment x-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: hm_x
+        system_couplet: hm_x_dbdt
         dimensions: [index, hm_gate_times]
 
     HM_Z:
@@ -56,7 +56,7 @@ variables:
         long_name: EM data, high moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: hm_z
+        system_couplet: hm_z_dbdt
         dimensions: [index, hm_gate_times]
 
     _60Hz_Intensity:

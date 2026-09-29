@@ -79,6 +79,7 @@ tempest_system:
         couplet:
             transmitters: [z, z]
             receivers: [z, x]
+            data_type: [B, B]
             txrx_dx: [-120, -120]
             txrx_dy: [0, 0]
             txrx_dz: [-52, -52]
@@ -92,14 +93,14 @@ variables:
         positive: up
         datum: NAD88
     EMX_NonHPRG:
-        system_couplet: z_x
+        system_couplet: z_x_b
         dimensions: [index, gate_times]
     EMX_HPRG:
-        system_couplet: z_x
+        system_couplet: z_x_b
         dimensions: [index, gate_times]
     EMZ_NonHPRG:
-        system_couplet: z_z
+        system_couplet: z_z_b
         dimensions: [index, gate_times]
     EMZ_HPRG:
-        system_couplet: z_z
+        system_couplet: z_z_b
         dimensions: [index, gate_times]

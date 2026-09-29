@@ -671,7 +671,7 @@ class TestItBuilds:
         assert system.attrs["type"] == "system"
         assert (system.sizes["n_transmitter"], system.sizes["n_receiver"]) == (2, 2)
         assert system.sizes["n_couplet"] == 4
-        assert list(system["couplet_label"].values) == ["LM_z", "HM_z", "LM_x", "HM_x"]
+        assert list(system["couplet_label"].values) == ["LM_z_dbdt", "HM_z_dbdt", "LM_x_dbdt", "HM_x_dbdt"]
 
     def test_the_gates_it_builds_are_the_gates_in_the_file(self):
         system = System.from_stm({"LM": SKYTEM_LM, "HM": SKYTEM_HM})

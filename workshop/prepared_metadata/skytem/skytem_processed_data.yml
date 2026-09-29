@@ -80,7 +80,7 @@ variables:
         long_name: EM data, low moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: lm_z
+        system_couplet: lm_z_dbdt
         dimensions: [index, lm_gate_times]
 
     LM_DataSTD:
@@ -88,7 +88,7 @@ variables:
         long_name: EM data error standard deviation, low moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: lm_z
+        system_couplet: lm_z_dbdt
         dimensions: [index, lm_gate_times]
 
     HM_Data:
@@ -96,7 +96,7 @@ variables:
         long_name: EM data, high moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: hm_z
+        system_couplet: hm_z_dbdt
         dimensions: [index, hm_gate_times]
 
     HM_DataSTD:
@@ -104,7 +104,7 @@ variables:
         long_name: EM data error standard deviation, high moment z-component
         units: picoVolt per Ampere per meter^4
         missing_value: -9999.99
-        system_couplet: hm_z
+        system_couplet: hm_z_dbdt
         dimensions: [index, hm_gate_times]
 
     TX_ALTITUDE:

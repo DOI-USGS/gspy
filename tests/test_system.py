@@ -357,6 +357,40 @@ class TestOneValueForEvery:
         assert System.from_dict(**system)["transmitter_peak_current"].attrs["units"] == "A"
 
 
+class TestCoupletLabels:
+    """A couplet not given a label is named transmitter_receiver_data type."""
+
+    @staticmethod
+    def labelled(**couplet):
+        system = buildable("tdem", transmitters=["LM", "HM"], receivers=["z"])
+        system["variables"]["couplet"].update(couplet)
+        return list(System.from_dict(**system)["couplet_label"].values)
+
+    def test_the_data_type_is_part_of_it(self):
+        assert self.labelled(data_type=["dBdt", "B"]) == ["LM_z_dbdt", "HM_z_b"]
+
+    def test_one_data_type_names_every_couplet(self):
+        assert self.labelled(data_type="dBdt") == ["LM_z_dbdt", "HM_z_dbdt"]
+
+    def test_without_a_data_type_it_is_transmitter_receiver(self):
+        system = System.from_dict(**buildable("magnetic"))
+
+        assert list(system["couplet_label"].values) == ["passive_scalar_magnetometer"]
+
+    def test_a_label_given_is_kept(self):
+        assert self.labelled(label=["a", "b"], data_type="dBdt") == ["a", "b"]
+
+
+class TestOneGateTimes:
+
+    def test_a_single_couplet_can_name_its_gate_times_bare(self):
+        """A bare name is one name, not split into its letters."""
+        system = buildable("tdem")
+        system["variables"]["couplet"]["gate_times"] = "Gate_Times"
+
+        assert System.from_dict(**system)["couplet_gate_times"].values.tolist() == ["gate_times"]
+
+
 class TestOpening:
 
     def test_a_file_holding_one_system_opens(self):
