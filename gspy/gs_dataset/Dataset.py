@@ -930,6 +930,9 @@ class Dataset:
     # System specific accessors
     @property
     def couplet_labels(self):
+        if 'couplet_label' in self._obj:
+            return [str(label) for label in self._obj['couplet_label'].values]
+
         tx = self._obj['couplet_transmitters'].values
         rx = self._obj['couplet_receivers'].values
 

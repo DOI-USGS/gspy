@@ -130,6 +130,11 @@ class file_handler(ABC):
         """
         return Path(filename).suffix.lower() in cls.extensions
 
+    @classmethod
+    def aliases(cls, name):
+        """Every name a column can go by in this format, ``name`` first."""
+        return [name]
+
     @property
     def df(self):
         return self._df

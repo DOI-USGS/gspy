@@ -4,6 +4,8 @@ Bound to the abc contract - a handler exposes ``df``, ``metadata``, ``columns``,
 ``nrecords``, ``type`` and ``file_metadata`` - rather than to how any one format
 parses its file.
 """
+import re
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -344,6 +346,99 @@ class TestFileMetadata:
         """Its channels are named after the system's couplet labels."""
         with pytest.raises(ValueError, match="system"):
             open_datafile(WORKBENCH_XYZ, metadata={})
+
+
+def workbench_model_copy(tmp_path, edit):
+    """The three files of the example model, each line passed through ``edit``."""
+    for kind in ("dat", "inv", "syn"):
+        source = WORKBENCH_MOD.replace("_dat.xyz", f"_{kind}.xyz")
+        lines = open(source).read().splitlines(keepends=True)
+        (tmp_path / f"model_{kind}.xyz").write_text("".join(edit(lines)))
+    return str(tmp_path / "model_dat.xyz")
+
+
+def without_gate_times(lines):
+    """A multi-node export: the header does not say the gate times."""
+    at = next(i for i, line in enumerate(lines) if "GATE TIMES" in line)
+    return lines[:at] + lines[at + 2:]
+
+
+class TestWorkbench:
+
+    def test_a_unit_in_brackets_leaves_no_trailing_underscore(self, workbench_system):
+        """ALTITUDE_[m] is ALTITUDE, in metres."""
+        read = open_datafile(WORKBENCH_MOD, metadata={}, system=workbench_system)
+
+        assert "ALTITUDE_A-PRIORI_STD" in read.column_header_counts
+        assert not [name for name in read.column_header_counts if name.endswith("_")]
+
+    def test_the_em_columns_are_named_after_the_couplet_labels(self, workbench_system):
+        read = open_datafile(WORKBENCH_MOD, metadata={}, system=workbench_system)
+
+        assert {"lm_z_dbdt_data", "hm_z_dbdt_datastd", "hm_z_dbdt_syn"} <= set(read.column_header_counts)
+
+    def test_the_raw_channels_are_named_after_the_couplet_labels(self):
+        md = Metadata.read(str(DATA / "workbench" / "data" / "raw_data.yml"))
+        system, _ = Container.Systems(nominal_system=md["nominal_system"])
+
+        read = open_datafile(WORKBENCH_XYZ, metadata={}, system=system)
+
+        channels = {"LM_Z_DBDT", "LM_Z_DBDT_STD", "HM_Z_DBDT", "HM_Z_DBDT_STD"}
+        assert channels == {name for name in read.column_header_counts if "Z_DBDT" in name}
+
+    def test_rho_std1_is_the_first_rho_std(self, tmp_path, workbench_system):
+        """Newer exports drop the underscore before the layer number."""
+        path = workbench_model_copy(tmp_path, lambda lines: [re.sub(r"RHO_STD_(\d+)", r"RHO_STD\1", line)
+                                                             for line in lines])
+        read = open_datafile(path, metadata={}, system=workbench_system)
+
+        assert read.column_header_counts["RHO_STD"] == 40
+
+    def test_a_multi_node_export_takes_its_gate_times_from_the_system(self, tmp_path,
+                                                                     workbench_system):
+        read = open_datafile(workbench_model_copy(tmp_path, without_gate_times), metadata={},
+                             system=workbench_system)
+
+        assert "dimensions" not in read.file_metadata
+        assert "lm_z_dbdt_data_1" in read.df.columns
+
+    def test_a_multi_node_export_needs_the_gate_times_in_the_system(self, tmp_path):
+        md = Metadata.read(WORKBENCH_MOD_MD)["nominal_system"]
+        for name in ("lm_gate_times", "hm_gate_times"):
+            md["dimensions"].pop(name)
+        md["variables"]["couplet"].pop("gate_times")
+        system, _ = Container.Systems(nominal_system=md)
+
+        with pytest.raises(ValueError, match="system yml"):
+            open_datafile(workbench_model_copy(tmp_path, without_gate_times), metadata={},
+                          system=system)
+
+    def test_x_and_y_are_read_where_utmx_and_utmy_were(self, tmp_path):
+        """Newer Workbench exports call the easting and northing X and Y."""
+        raw = open(WORKBENCH_XYZ).read().replace("UTMX,", "X,").replace("UTMY,", "Y,")
+        path = tmp_path / "raw.xyz"
+        path.write_text(raw)
+        md = Metadata.read(str(DATA / "workbench" / "data" / "raw_data.yml"))
+        system, _ = Container.Systems(nominal_system=md["nominal_system"])
+
+        read = open_datafile(str(path), metadata={}, system=system)
+
+        assert {"X", "Y"} <= set(read.df.columns)
+
+    def test_a_yml_saying_x_and_y_reads_a_file_saying_utmx_and_utmy(self):
+        md = Metadata.read(WORKBENCH_MOD_MD)
+        md["coordinates"].update(x="X", y="Y")
+        survey = Survey.from_dict(str(DATA / "workbench" / "survey.yml"))
+        models = survey.gs.add_container("models", **dict(content="inverse models"))
+
+        models.gs.add(key="inversion", data=WORKBENCH_MOD, metadata_file=md)
+
+        assert survey["models/inversion"]["x"].size > 0
+
+    def test_a_coordinate_is_found_under_either_name(self):
+        assert workbench_handler.aliases("X") == ["X", "UTMX"]
+        assert workbench_handler.aliases("UTMY") == ["UTMY", "Y"]
+        assert workbench_handler.aliases("ELEVATION") == ["ELEVATION"]
 
 
 class TestColumnHeaderCounts:

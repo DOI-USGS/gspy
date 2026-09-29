@@ -219,17 +219,20 @@ class Tabular(Dataset):
 
         # Add in the spatio-temporal coordinates
         for key in list(coordinates.keys()):
-            coord = coordinates[key].strip()
+            names = file.aliases(coordinates[key].strip())
+            column = next((name for name in names if name in file.df.columns), names[0])
+            coord = next((name for name in names if name in file.metadata), None)
             discrete = key in ('x', 'y', 'z', 't')
 
-            assert coord in file.metadata, ValueError(f"Missing metadata for coordinate {key}")
+            assert coord is not None, ValueError(f"Missing metadata for coordinate {key}")
 
             # remove the coord from column counts & metadata, so doesn't get added again later
-            column_counts.pop(coord, None)
+            for name in names:
+                column_counts.pop(name, None)
             coord_meta, _ = file.metadata.pop_and_split((coord,))
             # Might need to handle already added coords from the dimensions dict.
             self._obj = self.add_coordinate_from_values(key.lower(),
-                                            values=file.df[coord].values,
+                                            values=file.df[column].values,
                                             dimensions=["index"],
                                             discrete = discrete,
                                             is_projected = self.is_projected,

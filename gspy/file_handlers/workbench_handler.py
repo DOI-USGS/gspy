@@ -2,7 +2,24 @@ import numpy as np
 from pandas import read_csv, Series, concat
 from .xyz_handler import xyz_handler
 
-class workbench_handler(xyz_handler, key='workbench'):
+class _workbench_names:
+    """Column naming shared by the Workbench exports."""
+
+    #: Newer Workbench versions export UTMX and UTMY as X and Y.
+    _alternatives = {'X': 'UTMX', 'Y': 'UTMY', 'UTMX': 'X', 'UTMY': 'Y'}
+
+    @classmethod
+    def aliases(cls, name):
+        return [name] + ([cls._alternatives[name]] if name in cls._alternatives else [])
+
+    @staticmethod
+    def _tidied(columns):
+        """ALTITUDE_[m] is ALTITUDE, and RHO_STD1 is RHO_STD_1. A numbered bracket,
+        RHO[1], is left alone."""
+        columns = columns.str.replace(r'_\[\D[^\]]*\]$', '', regex=True)
+        return columns.str.replace(r'_STD(\d+)$', r'_STD_\1', regex=True)
+
+class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
     """Handler for Aarhus Workbench .xyz data
     """
     priority = 10
@@ -67,11 +84,12 @@ class workbench_handler(xyz_handler, key='workbench'):
         mapping = kwargs.pop('mapping')
 
         df = read_csv(filename, sep=r',\s+', engine='python', **kwargs)
-        df.columns = Series(df.columns.str.replace(r'[,/ ]+', '',regex=True))
+        df.columns = self._tidied(Series(df.columns.str.replace(r'[,/ ]+', '',regex=True)))
 
         # define column groups
         unique_columns = ['DATE','TIME']
-        base_columns = ['DATE','TIME','LINE_NO','UTMX','UTMY','ELEVATION']
+        base_columns = [next((name for name in self.aliases(column) if name in df.columns), column)
+                        for column in ['DATE','TIME','LINE_NO','UTMX','UTMY','ELEVATION']]
         geometry_columns = ['RX_ALTITUDE',  'RX_ALTITUDE_STD',
                             'TX_ALTITUDE',  'TX_ALTITUDE_STD',
                             'TILT_X',  'TILT_X_STD',
@@ -88,6 +106,7 @@ class workbench_handler(xyz_handler, key='workbench'):
         dfu = df[base_columns]
 
         df_dict = {}
+        geometry = {}
         for key, value in mapping.items():
             # Filter the DataFrame for the current channel
             new_df = df[df['CHANNEL_NO'] == key]
@@ -104,34 +123,33 @@ class workbench_handler(xyz_handler, key='workbench'):
             cols_to_drop = new_df.columns[new_df.columns.str.contains('DBDT') & ~new_df.columns.str.contains('Ch' + str(key))]
             new_df.drop(columns = cols_to_drop, inplace=True)
 
+            # DBDT_Ch1GT5 is gate 4 of the first couplet, LM_Z_DBDT_4, and DBDT_STD_Ch1GT5 is LM_Z_DBDT_STD_4
             renamer = {}
             for column in new_df.columns:
                 if 'Ch' in column:
                     splt = column.split('GT')
-                    new_name = f"{splt[0].replace(f'Ch{key}', value.upper())}_{np.int32(splt[1])-1}"
-
-                    # new_name = column.replace(f"Ch{key}GT", "").replace(f'DBDT', value.upper())
-                    renamer[column] = new_name
+                    std = '_STD' if '_STD_' in splt[0] else ''
+                    renamer[column] = f"{value.upper()}{std}_{np.int32(splt[1])-1}"
             new_df.rename(columns=renamer, inplace=True)
 
             # Store the DataFrame in the dictionary
-            df_dict[value] = new_df
+            df_dict[value] = new_df[list(renamer.values())]
+            geometry[value] = new_df[geometry_columns]
             # print(f'{channel_df.shape[0]} rows in channel {value} ({key}) vs {new_df.shape[0]} in combined dataset')
 
-        df_geom = concat(df_dict.values())
-        df_geom = df_geom[geometry_columns].groupby(level=0).mean()
+        df_geom = concat(geometry.values())
+        df_geom = df_geom.groupby(level=0).mean()
 
-        df_avg = concat([dfu, df_geom],axis=1)
-        for key,df_i in df_dict.items():
-            df_avg = concat([df_avg,df_i.filter(like='DBDT',axis=1)],axis=1)
+        df_avg = concat([dfu, df_geom, *df_dict.values()],axis=1)
 
         return df_avg
 
-class workbench_model_handler(xyz_handler, key='workbench_model'):
+class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_model'):
     """Handler for Aarhus Workbench .xyz inverted models
 
     A model .xyz comes as a set of three: _dat, _inv and _syn. The gate times in
-    their headers define a dimension, returned in ``file_metadata``.
+    their headers define a dimension, returned in ``file_metadata``. A multi-node
+    export writes no gate times, so the system yml has to define them.
 
     """
     #: Beats workbench_handler, which claims any .xyz Workbench file.
@@ -164,6 +182,10 @@ class workbench_model_handler(xyz_handler, key='workbench_model'):
 
         self._df, self._file_metadata = self.read_data(self.filename, mapping=mapping)
 
+        if 'dimensions' not in self._file_metadata and 'couplet_gate_times' not in system:
+            raise ValueError(f"{self.filename} does not list its gate times, as a multi-node export does not. "
+                             "Define the gate times dimensions in the system yml, and name them with the couplet's gate_times.")
+
         self.combine_metadata(metadata)
 
     def read_data(self, filename, **kwargs):
@@ -190,11 +212,10 @@ class workbench_model_handler(xyz_handler, key='workbench_model'):
                         header_row = i
                         break
                     i += 1
-            assert gate_times is not None, ValueError("Could not read gate_times from workbench model files.")
 
             # put data into dataframe
             df = read_csv(file, header=header_row, sep=r"(?<!/)\s+", engine='python')
-            df.columns = Series(df.columns.str.replace("/ ", ""))
+            df.columns = self._tidied(Series(df.columns.str.replace("/ ", "")))
 
             if ft == 'inv':
                 df_combined = df
@@ -221,7 +242,9 @@ class workbench_model_handler(xyz_handler, key='workbench_model'):
                     col_indices1 = np.asarray([np.int32(x.strip().split('_')[1]) for x in colset2], dtype=np.int32)
 
                     dimensions = {}
-                    if single_moment:
+                    if gate_times is None:
+                        pass
+                    elif single_moment:
                         dimensions["gate_times"] = {"standard_name": "gate_times",
                                                           "long_name": "calibrated gate times",
                                                           "units": "seconds",
@@ -238,7 +261,7 @@ class workbench_model_handler(xyz_handler, key='workbench_model'):
                                                           "units": "seconds",
                                                           "missing_value": "not_defined",
                                                           "centers": gate_times[col_indices1-1]}
-                    file_metadata = {'dimensions':dimensions}
+                    file_metadata = {'dimensions':dimensions} if dimensions else {}
 
 
                 # iterate over mapping keys

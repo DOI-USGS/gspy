@@ -157,62 +157,62 @@ variables:
         missing_value: not_defined
         units: m
         dimensions: ['index', 'layer_depth']
-    z_x_data:
-        standard_name: z_x_data
+    z_x_dbdt_data:
+        standard_name: z_x_dbdt_data
         long_name: Observed EM data, X-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_x'
-    z_x_datastd:
-        standard_name: z_x_datastd
+        system_couplet: 'z_x_dbdt'
+    z_x_dbdt_datastd:
+        standard_name: z_x_dbdt_datastd
         long_name: Observed EM data, X-component standard deviation factor
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_x'
-    z_x_syn:
-        standard_name: z_x_syn
+        system_couplet: 'z_x_dbdt'
+    z_x_dbdt_syn:
+        standard_name: z_x_dbdt_syn
         long_name: Inversion synthetic EM response, X-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-    z_y_data:
-        standard_name: z_y_data
+    z_y_dbdt_data:
+        standard_name: z_y_dbdt_data
         long_name: Observed EM data, Y-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_y'
-    z_y_datastd:
-        standard_name: z_y_datastd
+        system_couplet: 'z_y_dbdt'
+    z_y_dbdt_datastd:
+        standard_name: z_y_dbdt_datastd
         long_name: Observed EM data, Y-component standard deviation factor
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_y'
-    z_y_syn:
-        standard_name: z_y_syn
+        system_couplet: 'z_y_dbdt'
+    z_y_dbdt_syn:
+        standard_name: z_y_dbdt_syn
         long_name: Inversion synthetic EM response, Y-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-    z_z_data:
-        standard_name: z_z_data
+    z_z_dbdt_data:
+        standard_name: z_z_dbdt_data
         long_name: Observed EM data, Z-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_z'
-    z_z_datastd:
-        standard_name: z_z_datastd
+        system_couplet: 'z_z_dbdt'
+    z_z_dbdt_datastd:
+        standard_name: z_z_dbdt_datastd
         long_name: Observed EM data, Z-component standard deviation factor
         missing_value: not_defined
         units: Volt per Ampere per meter^4
         dimensions: ['index', 'gate_times']
-        system_couplet: 'z_z'
-    z_z_syn:
-        standard_name: z_z_syn
+        system_couplet: 'z_z_dbdt'
+    z_z_dbdt_syn:
+        standard_name: z_z_dbdt_syn
         long_name: Inversion synthetic EM response, Z-component
         missing_value: not_defined
         units: Volt per Ampere per meter^4
