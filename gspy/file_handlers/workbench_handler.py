@@ -115,7 +115,7 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
             raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
         self.metadata = {}
-        header_gates, n_header = self.__parse_metadata(self.filename)
+        header_gates, n_header, dummy = self.__parse_metadata(self.filename)
 
         system = system.gs.get_system_with_method('electromagnetic')
 
@@ -129,7 +129,7 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
             if name not in system.dims and channel in header_gates:
                 self._header_gates.setdefault(name, header_gates[channel])
 
-        self._df = self.read_data(self.filename, header=n_header, mapping=mapping)
+        self._df = self.read_data(self.filename, header=n_header, mapping=mapping, dummy=dummy)
         
         self.combine_metadata(metadata)
 
@@ -148,8 +148,10 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
                 for name, centers in self._header_gates.items()}
 
     def __parse_metadata(self, filename):
-        """The gate times of each channel, and how many lines the header takes."""
+        """The gate times of each channel, how many lines the header takes, and
+        the dummy value standing in for missing data."""
         gates = dict()
+        dummy = None
 
         n_header = -1; done = False
 
@@ -161,21 +163,27 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
                     channel, times = line.split(':')
                     gates[int(channel.split()[-1])] = np.float64(times.split()).tolist()
                 if 'DUMMY' in line:
-                    line = file.readline()
+                    dummy = float(file.readline().removeprefix('/'))
                 if 'DATE' in line:
                     n_header += 1
                     done = True
 
-        return gates, n_header
+        return gates, n_header, dummy
 
     def read_data(self, filename, **kwargs):
 
         mapping = kwargs.pop('mapping')
+        dummy = kwargs.pop('dummy')
 
         df = read_csv(filename, sep=r',\s+', engine='python', **kwargs)
         columns = Series(df.columns.str.replace(r'[,/ ]+', '',regex=True))
         self._units = self._bracket_units(columns)
         df.columns = self._tidied(columns)
+
+        # The export declares its missing value; no reading keeps it.
+        if dummy is not None:
+            numbers = df.select_dtypes('number')
+            df[numbers.columns] = numbers.replace(dummy, np.nan)
 
         # define column groups
         unique_columns = ['DATE','TIME']
@@ -327,6 +335,7 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
         ftypes = ['inv','dat','syn']
 
         gate_times = None
+        dummy = None
         for ft in ftypes: # read in syn/dat/inv files and parse header row and gate times
             file = f"{filename[:-8]}_{ft}.xyz"
             with open(file, 'r') as f:
@@ -339,6 +348,10 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
                         nl = f.readline()
                         i += 1
                         gate_times = np.float64(nl.removeprefix('/').split())
+
+                    if 'DUMMY' in line:
+                        dummy = float(f.readline().removeprefix('/'))
+                        i += 1
 
                     if 'LINE_NO' in line:
                         header_row = i
@@ -360,7 +373,7 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
                     # figure out which columns are which segment and whether dual moment or single
                     dat = df.filter(like='DATA_')
                     flg = dat.copy(deep=True)
-                    flg[flg==9999] = 0
+                    flg[flg==(dummy if dummy is not None else 9999)] = 0
                     flg[flg>0] = 1
                     xprod = np.matmul(flg.T, flg).head(1)
                     #plt.pcolormesh(xprod)
@@ -435,5 +448,10 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
                         if ft == 'dat':
                             df_combined = df_combined.merge(couplet_std[['RECORD',col.replace('DATA','DATASTD')]], how='left', on='RECORD')
                             df_combined = df_combined.rename(columns={col.replace('DATA','DATASTD'): datcol.replace('data','datastd')})
+
+        # The export declares its missing value; no reading keeps it.
+        if dummy is not None:
+            numbers = df_combined.select_dtypes('number')
+            df_combined[numbers.columns] = numbers.replace(dummy, np.nan)
 
         return df_combined, file_metadata
