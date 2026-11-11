@@ -63,9 +63,9 @@ variables:
   # One entry per coil pair. transmitters and receivers are filled in from the
   # labels; everything else is per couplet.
   couplet:
-    txrx_dx: '?? metres from transmitter to receiver, along the line ??'  # the coil separation, positive forward
-    txrx_dy: '?? metres from transmitter to receiver, across the line ??'  # sign by reference_frame
-    txrx_dz: '?? metres from transmitter to receiver, vertical ??'  # sign by reference_frame
+    txrx_dx: '?? meters from transmitter to receiver, along the line ??'  # the coil separation, positive forward
+    txrx_dy: '?? meters from transmitter to receiver, across the line ??'  # sign by reference_frame
+    txrx_dz: '?? meters from transmitter to receiver, vertical ??'  # sign by reference_frame
     orientation: '?? coplanar or coaxial ??'  # how the two coils of the pair face each other
     actual_frequency: '?? measured frequency, Hz, where it differs from nominal ??'  # or the nominal frequency again
     moment: '?? A m^2 ??'  # of this pair's transmitter coil

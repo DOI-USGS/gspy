@@ -20,7 +20,7 @@ attrs:
   type: system
   mode: '?? airborne, ground, waterborne or borehole ??'  # the platform the system is operated from
   method: magnetic  # leave as is; the method family
-  instrument: '?? make and model, e.g. Geometrics G-822A cesium vapour magnetometer ??'  # as the contractor names it
+  instrument: '?? make and model, e.g. Geometrics G-822A cesium vapor magnetometer ??'  # as the contractor names it
 
 # The axes the system's arrays lie along. Each needs centers (or bounds), or a length.
 dimensions:
@@ -46,7 +46,7 @@ variables:
     altitude_correction: '?? altitude correction applied, or none ??'  # continuation to a common height
     igrf_model_date: '?? model generation and date, e.g. 2015, 15th generation ??'  # of the reference field removed
     igrf_model_location: '?? where the model was evaluated ??'  # e.g. the survey centre, or at every point
-    igrf_model_height: '?? height the model was evaluated at ??'  # metres, and the datum it is above
+    igrf_model_height: '?? height the model was evaluated at ??'  # meters, and the datum it is above
     igrf_removed_model_epoch: '?? epoch of the model that was removed ??'  # decimal year, e.g. 2024.5
     deliverables: '?? which products were produced, e.g. TMI, RMI, CVG ??'  # total, residual, vertical gradient ...
 
@@ -61,7 +61,7 @@ variables:
     sensor_manufacturer: '?? e.g. Geometrics ??'  # who made it
     description: '?? what the sensor is and where it is mounted ??'  # free text
     orientation: '?? how the sensor is mounted, e.g. tail stinger ??'  # stinger, towed bird, wingtip ...
-    coordinates: '?? sensor position on the platform, or not_defined ??'  # metres from the reference point
+    coordinates: '?? sensor position on the platform, or not_defined ??'  # meters from the reference point
     acquisition_system: '?? recording and navigation systems ??'  # the logger and GPS
     sample_frequency:  # readings per second
       values: '?? Hz ??'
@@ -76,7 +76,7 @@ variables:
       values: '?? nT ??'
       units: nT
     sensor_height:  # nominal; the measured height goes in the data
-      values: '?? metres above ground ??'
+      values: '?? meters above ground ??'
       units: m
     lag_factor:  # the time shift applied in lag_correction
       values: '?? seconds ??'

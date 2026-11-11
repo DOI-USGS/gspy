@@ -59,7 +59,7 @@ variables:
   transmitter:
     number_of_turns: '?? turns of wire in the loop ??'  # per transmitter; a moment may use fewer turns than another
     area: '?? loop area, m^2 ??'  # the area enclosed by the loop, not the wire length
-    # The loop corners relative to the system's reference point, metres. Its
+    # The loop corners relative to the system's reference point, meters. Its
     # dimensions give the shape, so write out every vertex of every transmitter.
     coordinates:
       values: '?? loop vertex coordinates, an xyz triple per vertex per transmitter ??'
@@ -84,7 +84,7 @@ variables:
     base_frequency: '?? Hz ??'  # repetition rate of the waveform, one full on-off cycle
     on_time: '?? seconds ??'  # how long the current is on in each half cycle
     off_time: '?? seconds ??'  # how long the current is off in each half cycle, where the gates sit
-    height: '?? metres above ground ??'  # nominal; the measured height goes in the data
+    height: '?? meters above ground ??'  # nominal; the measured height goes in the data
 
   # One entry per receiver coil, in the order of its labels.
   receiver:
@@ -96,14 +96,14 @@ variables:
     instrument_low_pass_filter: '?? Hz ??'  # cut off of the receiver electronics
     delay_time: '?? seconds between transmitter off and the first gate ??'  # or not_defined if the gates already include it
     gain: '?? amplifier gain ??'  # dimensionless
-    height: '?? metres above ground ??'  # nominal; the measured height goes in the data
+    height: '?? meters above ground ??'  # nominal; the measured height goes in the data
 
   # One entry per transmitter and receiver pair. transmitters, receivers and
   # gate_times are filled in from the labels; everything else is per couplet.
   couplet:
-    txrx_dx: '?? metres from transmitter to receiver, along the line ??'  # positive in the flight direction
-    txrx_dy: '?? metres from transmitter to receiver, across the line ??'  # sign by reference_frame
-    txrx_dz: '?? metres from transmitter to receiver, vertical ??'  # sign by reference_frame
+    txrx_dx: '?? meters from transmitter to receiver, along the line ??'  # positive in the flight direction
+    txrx_dy: '?? meters from transmitter to receiver, across the line ??'  # sign by reference_frame
+    txrx_dz: '?? meters from transmitter to receiver, vertical ??'  # sign by reference_frame
     data_type: '?? e.g. dBdt or B ??'  # the quantity this couplet's data column holds
     sample_rate: '?? seconds per sounding ??'  # for this couplet, where moments are sampled differently
     gate_times: '?? which gate times this couplet is measured on ??'  # filled in; the dimension of its transmitter
