@@ -22,7 +22,7 @@ import gspy
 # .. literalinclude:: /../../examples/data_files/workbench/survey.yml
 #    :language: yaml
 #    :linenos:
-#    :caption: this is a test
+#    :caption: Survey YAML file
 #
 
 #%%

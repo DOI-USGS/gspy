@@ -250,7 +250,7 @@ pprint(survey['models/inverted_models']['conductivity'].attrs)
 # find groups of interest
 
 #%%
-# Here's a simply function using native netCDF and xarray methods to search
+# Here's a simple function using native netCDF and xarray methods to search
 # through a file and identify groups based on their attributes
 
 import xarray as xr

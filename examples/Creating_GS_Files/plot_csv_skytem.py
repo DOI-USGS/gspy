@@ -68,11 +68,8 @@ d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
 
 raw_systems = Metadata.read(join(data_path, "data//skytem_system.yml"))
 
-# raw_systems = {"skytem_system" : survey["nominal_system"],
-        #   "magnetic_system" : survey["magnetic_system"]}
-
 # Add the raw AEM data as a tabular dataset,
-# pass the EM system from the survey
+# passing the systems read from the YAML
 rd = data_container.gs.add(key='raw_data', data=d_data1,
                            metadata_file=d_supp1, system=raw_systems)
 
@@ -111,7 +108,7 @@ pd = data_container.gs.add(key='processed_data', data=d_data2,
 
 # Create a new container for models
 model_container = survey.gs.add_container('models', **dict(content = "Inverted models",
-                                                          comment = "This is a test"))
+                                                           comment = "1-D resistivity models inverted from the processed AEM data"))
 #%%
 # 3. Inverted Models
 
@@ -163,7 +160,7 @@ bedrock = data_container.gs.add(key='depth_to_bedrock', data=d_data4,
 # 5. Raster Maps
 
 #%%
-# Create a 3rd container for the derived raaster maps
+# Create a 3rd container for the derived raster maps
 
 derived_maps = survey.gs.add_container('derived_maps', **dict(content = "raster products derived from airborne data and models"))
 

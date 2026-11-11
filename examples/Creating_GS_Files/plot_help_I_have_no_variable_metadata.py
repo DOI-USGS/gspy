@@ -161,9 +161,9 @@ template.dump("template_md_fdem_system.yml")
 # own where the defaults suffice - a magnetometer is one passive transmitter read
 # by one sensor.
 template = Dataset.metadata_template(data,
-                                     systems={'skytem_system': dict(key='tdem',
-                                                                    transmitters=['LM', 'HM'],
-                                                                    receivers=['z', 'x']),
+                                     systems={'resolve_system': dict(key='fdem',
+                                                                     transmitters=['400Z', '1800Z', '3300X',
+                                                                                   '8200Z', '40000Z', '140000Z']),
                                               'magnetic_system': 'magnetic'})
 template.dump("template_md_resolve_with_systems.yml")
 
