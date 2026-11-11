@@ -14,7 +14,7 @@ survey_information:
     state: IN
     country: USA
     acquisition_start: 20230808
-    acquisition_end: 2020809
+    acquisition_end: 20230809
     survey_attributes_units: SI
 
 spatial_ref:

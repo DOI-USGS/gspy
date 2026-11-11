@@ -6,13 +6,13 @@ dataset_attrs:
     structure: tabular
     mode: airborne
     method: magnetic, total magnetic field
-    instrument: cesium vapour
+    instrument: cesium vapor
 
 magnetic_system:
     type: system
     mode: airborne
     method: magnetic
-    instrument: Geometrics G-822A cesium‑vapor magnetometer 
+    instrument: Geometrics G-822A cesium-vapor magnetometer
 
     prefixes: ['base_magnetometer']
 
