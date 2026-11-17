@@ -105,10 +105,10 @@ Partial existing Survey metadata file, generate a combined template to see what 
 
 
     # Path to example files
-    data_path = '..//data_files//'
+    data_path = '../data_files'
 
     # Pre-existing Survey metadata file
-    metadata = join(data_path, "documents//Resolve_survey_incomplete_md.yml")
+    metadata = join(data_path, "documents", "Resolve_survey_incomplete_md.yml")
 
 
 
@@ -170,8 +170,8 @@ Each column in the CSV file becomes a variable by default.
 
 .. code-block:: Python
 
-    data_path = '..//data_files//resolve'
-    data = join(data_path, 'data//Resolve.csv')
+    data_path = '../data_files/resolve'
+    data = join(data_path, 'data', 'Resolve.csv')
     template = Dataset.metadata_template(data)
     template.dump("template_md_resolve_empty.yml")
 
@@ -203,7 +203,7 @@ Here we have a CSV data file and a partial metadata file (missing the variable a
 .. code-block:: Python
 
 
-    metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+    metadata = join(data_path, 'data', 'Resolve_data_md_without_variables.yml')
 
 
 
@@ -334,9 +334,9 @@ by one sensor.
 .. code-block:: Python
 
     template = Dataset.metadata_template(data,
-                                         systems={'skytem_system': dict(key='tdem',
-                                                                        transmitters=['LM', 'HM'],
-                                                                        receivers=['z', 'x']),
+                                         systems={'resolve_system': dict(key='fdem',
+                                                                         transmitters=['400Z', '1800Z', '3300X',
+                                                                                       '8200Z', '40000Z', '140000Z']),
                                                   'magnetic_system': 'magnetic'})
     template.dump("template_md_resolve_with_systems.yml")
 
@@ -356,7 +356,7 @@ before handing the metadata to a dataset.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.642 seconds)
+   **Total running time of the script:** (0 minutes 0.772 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py:

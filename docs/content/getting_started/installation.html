@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installing GSPy &mdash; gspy 2.2.9 documentation</title>
+  <title>Installing GSPy &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -51,7 +51,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting_started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing GSPy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing GSPy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-paths-when-running-the-examples">File paths when running the examples</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="gs_data_tree.html">The GS Data Tree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="netcdf_basics.html">NetCDF Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="converting_aseg_gdf2_files.html">Notes for ASEG-GDF2 Files</a></li>
@@ -92,6 +95,18 @@
   <section id="installing-gspy">
 <h1>Installing GSPy<a class="headerlink" href="#installing-gspy" title="Link to this heading"></a></h1>
 <p>pip install gspy</p>
+<section id="file-paths-when-running-the-examples">
+<h2>File paths when running the examples<a class="headerlink" href="#file-paths-when-running-the-examples" title="Link to this heading"></a></h2>
+<p>The example scripts read their data through relative paths built with
+<code class="docutils literal notranslate"><span class="pre">os.path.join</span></code>. If you copy an example into a notebook and switch to an
+absolute path, use a plain Windows path with single forward slashes, e.g.
+<code class="docutils literal notranslate"><span class="pre">C:/Users/&lt;name&gt;/gspy/examples/data_files</span></code>.</p>
+<p>A path containing a doubled forward slash is harmless on its own, but a path
+whose prefix is written <code class="docutils literal notranslate"><span class="pre">C://</span></code> looks like a URL protocol to the file layer
+(anything containing <code class="docutils literal notranslate"><span class="pre">://</span></code> is read as one). That is where errors like “fsspec
+required”, “.nc treated as a folder” or netCDF’s <code class="docutils literal notranslate"><span class="pre">OSError</span> <span class="pre">[Errno</span> <span class="pre">-36]</span></code> come
+from when opening or writing a file. Single slashes fix all three.</p>
+</section>
 </section>
 
 

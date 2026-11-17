@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.9 documentation</title>
+  <title>CSV &amp; Rasters: Multi-dataset Survey with Derivative Products &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -141,10 +141,10 @@ To make the size of this example more managable, some of the input datasets have
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'..//data_files//skytem_csv'</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'../data_files/skytem_csv'</span>
 
 <span class="c1"># Survey metadata file</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//skytem_survey.yml"</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="s2">"skytem_survey.yml"</span><span class="p">)</span>
 
 <span class="c1"># Establish the Survey</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
@@ -203,12 +203,10 @@ To make the size of this example more managable, some of the input datasets have
 <span class="linenos">49</span><span class="w">    </span><span class="nt">inclinometer_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Two Bjerre Technology inclinometers</span>
 <span class="linenos">50</span><span class="w">    </span><span class="nt">inclinometer_installation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Both inclinometers were installed on the rear of the EM frame near the Z coil.</span>
 <span class="linenos">51</span><span class="w">    </span><span class="nt">inclinometer_information</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measured x and y tilt at 2 Hz sampling rate.  The x angle is parallel to flight direction (positive when front is above horizontal); y angle is perpendicular to flight direction (negative when right side is above horizontal).</span>
-<span class="linenos">52</span><span class="w">    </span><span class="nt">gsp_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Differential GPS using OEMV1-L1 chipset and Trimble Bullet III antennas. Two DGPS units recorded by EM system; a third GPS recorded by the magnetic system.</span>
+<span class="linenos">52</span><span class="w">    </span><span class="nt">gps_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Differential GPS using OEMV1-L1 chipset and Trimble Bullet III antennas. Two DGPS units recorded by EM system; a third GPS recorded by the magnetic system.</span>
 <span class="linenos">53</span><span class="w">    </span><span class="nt">gps_installation</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">DGPS antenna mounted on top of the boom in front of the frame</span>
 <span class="linenos">54</span><span class="w">    </span><span class="nt">gps_information</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sampling rate 1 Hz. The uncertainty in the xyz-directions is 1 m after processing.</span><span class="w"> </span>
 <span class="linenos">55</span><span class="w">    </span><span class="nt">acquisition_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses.</span><span class="w"> </span>
-<span class="linenos">56</span><span class="w">    </span><span class="nt">gps_information</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sampling rate 1 Hz. The uncertainty in the xyz-directions is 1 m after processing.</span>
-<span class="linenos">57</span><span class="w">    </span><span class="nt">acquisition_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SkyTEM 304M. The EM system records full waveforms and gate stacks; magnetic DAS synchronized with TEM pulses.</span>
 </pre></div>
 </div>
 </div>
@@ -225,27 +223,28 @@ To make the size of this example more managable, some of the input datasets have
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import raw AEM data from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_contractor_data.csv'</span><span class="p">)</span>
-<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_contractor_data.yml'</span><span class="p">)</span>
+<span class="n">d_data1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'skytem_contractor_data.csv'</span><span class="p">)</span>
+<span class="n">d_supp1</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'skytem_contractor_data.yml'</span><span class="p">)</span>
 
-<span class="n">raw_systems</span> <span class="o">=</span> <span class="n">Metadata</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//skytem_system.yml"</span><span class="p">))</span>
-
-<span class="c1"># raw_systems = {"skytem_system" : survey["nominal_system"],</span>
-        <span class="c1">#   "magnetic_system" : survey["magnetic_system"]}</span>
+<span class="n">raw_systems</span> <span class="o">=</span> <span class="n">Metadata</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="s2">"skytem_system.yml"</span><span class="p">))</span>
 
 <span class="c1"># Add the raw AEM data as a tabular dataset,</span>
-<span class="c1"># pass the EM system from the survey</span>
+<span class="c1"># passing the systems read from the YAML</span>
 <span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'raw_data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data1</span><span class="p">,</span>
                            <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp1</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="n">raw_systems</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Each waveform is one (n_transmitter x waveform_time) variable shared by both
+moments, so the moment reads out in the transmitter label of each row rather
+than in the waveform variable name. The gate-time variables do carry it in
+their long names: lm_gate_times is the low moment, hm_gate_times the high.</p>
 <ol class="arabic simple" start="2">
 <li><p>Processed Data</p></li>
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import processed AEM data from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_processed_data.csv'</span><span class="p">)</span>
-<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//skytem_processed_data.yml'</span><span class="p">)</span>
+<span class="n">d_data2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'skytem_processed_data.csv'</span><span class="p">)</span>
+<span class="n">d_supp2</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'skytem_processed_data.yml'</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">rd</span><span class="p">[</span><span class="s1">'skytem_system'</span><span class="p">])</span>
 </pre></div>
@@ -260,8 +259,7 @@ Group: /survey/data/raw_data/skytem_system
                                                       n_transmitter: 2,
                                                       transmitter_lm_waveform_time: 21,
                                                       transmitter_hm_waveform_time: 36,
-                                                      n_receiver: 2, n_couplet: 4,
-                                                      dim_0: 1)
+                                                      n_receiver: 2, n_couplet: 4)
     Coordinates:
       * gate_times                                   (gate_times) float64 176B 5....
       * nv                                           (nv) int64 16B 0 1
@@ -276,7 +274,6 @@ Group: /survey/data/raw_data/skytem_system
       * index                                        (index) int32 8kB 0 1 ... 1999
       * hm_gate_times                                (hm_gate_times) float64 256B ...
       * lm_gate_times                                (lm_gate_times) float64 224B ...
-    Dimensions without coordinates: dim_0
     Data variables: (12/35)
         gate_times_bnds                              (gate_times, nv) float64 352B ...
         lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
@@ -287,8 +284,8 @@ Group: /survey/data/raw_data/skytem_system
         ...                                           ...
         couplet_data_type                            (n_couplet) &lt;U4 64B 'dBdt' ....
         couplet_gate_times                           (n_couplet) &lt;U13 208B 'lm_ga...
-        data_normalized                              (dim_0) bool 1B True
-        skytem_skb_gex_available                     (dim_0) bool 1B True
+        data_normalized                              bool 1B True
+        skytem_skb_gex_available                     bool 1B True
         reference_frame                              &lt;U26 104B 'right-handed posi...
         coil_orientations                            &lt;U4 16B 'X, Z'
     Attributes:
@@ -333,139 +330,129 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos"> 19</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">processing_index</span>
 <span class="linenos"> 20</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique index number for processing</span>
 <span class="linenos"> 21</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 22</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 23</span>
-<span class="linenos"> 24</span><span class="w">    </span><span class="nt">sLINE_NO</span><span class="p">:</span>
-<span class="linenos"> 25</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master_line</span>
-<span class="linenos"> 26</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Master line number</span>
-<span class="linenos"> 27</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 28</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 29</span>
-<span class="linenos"> 30</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
-<span class="linenos"> 31</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
-<span class="linenos"> 32</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos"> 33</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos"> 34</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 35</span>
-<span class="linenos"> 36</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
-<span class="linenos"> 37</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
-<span class="linenos"> 38</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos"> 39</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos"> 40</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 41</span>
-<span class="linenos"> 42</span><span class="w">    </span><span class="nt">TIMESTAMP</span><span class="p">:</span>
-<span class="linenos"> 43</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
-<span class="linenos"> 44</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time, decimal days</span>
-<span class="linenos"> 45</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">days since 1900-1-1 0:0:0</span>
-<span class="linenos"> 46</span><span class="w">        </span><span class="nt">calendar</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gregorian</span>
-<span class="linenos"> 47</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 48</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">January 1, 1900</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span><span class="w">    </span><span class="nt">sLINE_NO</span><span class="p">:</span>
+<span class="linenos"> 24</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master_line</span>
+<span class="linenos"> 25</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Master line number</span>
+<span class="linenos"> 26</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
+<span class="linenos"> 29</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
+<span class="linenos"> 30</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos"> 31</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
+<span class="linenos"> 34</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
+<span class="linenos"> 35</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos"> 36</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span><span class="w">    </span><span class="nt">TIMESTAMP</span><span class="p">:</span>
+<span class="linenos"> 39</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
+<span class="linenos"> 40</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time, decimal days</span>
+<span class="linenos"> 41</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">days since 1900-1-1 0:0:0</span>
+<span class="linenos"> 42</span><span class="w">        </span><span class="nt">calendar</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gregorian</span>
+<span class="linenos"> 43</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">January 1, 1900</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="w">    </span><span class="nt">RECORD</span><span class="p">:</span>
+<span class="linenos"> 46</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">record</span>
+<span class="linenos"> 47</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workbench record number</span>
+<span class="linenos"> 48</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
 <span class="linenos"> 49</span>
-<span class="linenos"> 50</span><span class="w">    </span><span class="nt">RECORD</span><span class="p">:</span>
-<span class="linenos"> 51</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">record</span>
-<span class="linenos"> 52</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workbench record number</span>
-<span class="linenos"> 53</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 54</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 55</span>
-<span class="linenos"> 56</span><span class="w">    </span><span class="nt">ELEVATION</span><span class="p">:</span>
-<span class="linenos"> 57</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation</span>
-<span class="linenos"> 58</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
-<span class="linenos"> 59</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos"> 60</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 61</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
-<span class="linenos"> 62</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
-<span class="linenos"> 63</span>
-<span class="linenos"> 64</span><span class="w">    </span><span class="nt">ALT</span><span class="p">:</span>
-<span class="linenos"> 65</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
-<span class="linenos"> 66</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
-<span class="linenos"> 67</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos"> 68</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 69</span>
-<span class="linenos"> 70</span><span class="w">    </span><span class="nt">NUMDATA</span><span class="p">:</span>
-<span class="linenos"> 71</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number_of_data</span>
-<span class="linenos"> 72</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of active time gates</span>
-<span class="linenos"> 73</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 74</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 75</span>
-<span class="linenos"> 76</span><span class="w">    </span><span class="nt">LM_Data</span><span class="p">:</span>
-<span class="linenos"> 77</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_lmz</span>
-<span class="linenos"> 78</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data, low moment z-component</span>
-<span class="linenos"> 79</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
-<span class="linenos"> 80</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos"> 81</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lm_z</span>
-<span class="linenos"> 82</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">lm_gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 83</span>
-<span class="linenos"> 84</span><span class="w">    </span><span class="nt">LM_DataSTD</span><span class="p">:</span>
-<span class="linenos"> 85</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_error_lmz</span>
-<span class="linenos"> 86</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data error standard deviation, low moment z-component</span>
-<span class="linenos"> 87</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
-<span class="linenos"> 88</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos"> 89</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lm_z</span>
-<span class="linenos"> 90</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">lm_gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 91</span>
-<span class="linenos"> 92</span><span class="w">    </span><span class="nt">HM_Data</span><span class="p">:</span>
-<span class="linenos"> 93</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_hmz</span>
-<span class="linenos"> 94</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data, high moment z-component</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
-<span class="linenos"> 96</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos"> 97</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hm_z</span>
-<span class="linenos"> 98</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">hm_gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 99</span>
-<span class="linenos">100</span><span class="w">    </span><span class="nt">HM_DataSTD</span><span class="p">:</span>
-<span class="linenos">101</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_error_hmz</span>
-<span class="linenos">102</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data error standard deviation, high moment z-component</span>
-<span class="linenos">103</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
-<span class="linenos">104</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">105</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hm_z</span>
-<span class="linenos">106</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">hm_gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span><span class="w">    </span><span class="nt">TX_ALTITUDE</span><span class="p">:</span>
-<span class="linenos">109</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transmitter_altitude</span>
-<span class="linenos">110</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Processed transmitter altitude</span>
-<span class="linenos">111</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">112</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">113</span>
-<span class="linenos">114</span><span class="w">    </span><span class="nt">TX_ALTITUDE_STD</span><span class="p">:</span>
-<span class="linenos">115</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transmitter_altitude_error</span>
-<span class="linenos">116</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation for transmitter altitude</span>
-<span class="linenos">117</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">118</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">119</span>
-<span class="linenos">120</span><span class="w">    </span><span class="nt">RX_ALTITUDE</span><span class="p">:</span>
-<span class="linenos">121</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver_altitude</span>
-<span class="linenos">122</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Processed receiver altitude</span>
-<span class="linenos">123</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">124</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">125</span>
-<span class="linenos">126</span><span class="w">    </span><span class="nt">RX_ALTITUDE_STD</span><span class="p">:</span>
-<span class="linenos">127</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver_altitude_error</span>
-<span class="linenos">128</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation for receiver altitude</span>
-<span class="linenos">129</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">130</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">131</span>
-<span class="linenos">132</span><span class="w">    </span><span class="nt">txrx_dx</span><span class="p">:</span>
-<span class="linenos">133</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dx</span>
-<span class="linenos">134</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nominal inline transmitter-receiver offset</span>
-<span class="linenos">135</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">136</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">137</span>
-<span class="linenos">138</span><span class="w">    </span><span class="nt">txrx_dy</span><span class="p">:</span>
-<span class="linenos">139</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dy</span>
-<span class="linenos">140</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nominal transverse transmitter-receiver offset</span>
-<span class="linenos">141</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">142</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">143</span>
-<span class="linenos">144</span><span class="w">    </span><span class="nt">txrx_dz</span><span class="p">:</span>
-<span class="linenos">145</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dz</span>
-<span class="linenos">146</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Calculated vertical transmitter-receiver offset</span>
-<span class="linenos">147</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">148</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">149</span>
-<span class="linenos">150</span><span class="w">    </span><span class="nt">LINE_NO</span><span class="p">:</span>
-<span class="linenos">151</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line_number</span>
-<span class="linenos">152</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
-<span class="linenos">153</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">154</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 50</span><span class="w">    </span><span class="nt">ELEVATION</span><span class="p">:</span>
+<span class="linenos"> 51</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation</span>
+<span class="linenos"> 52</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
+<span class="linenos"> 53</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos"> 54</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
+<span class="linenos"> 55</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
+<span class="linenos"> 56</span>
+<span class="linenos"> 57</span><span class="w">    </span><span class="nt">ALT</span><span class="p">:</span>
+<span class="linenos"> 58</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
+<span class="linenos"> 59</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
+<span class="linenos"> 60</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos"> 61</span>
+<span class="linenos"> 62</span><span class="w">    </span><span class="nt">NUMDATA</span><span class="p">:</span>
+<span class="linenos"> 63</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number_of_data</span>
+<span class="linenos"> 64</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of active time gates</span>
+<span class="linenos"> 65</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 66</span>
+<span class="linenos"> 67</span><span class="w">    </span><span class="nt">LM_Data</span><span class="p">:</span>
+<span class="linenos"> 68</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_lmz</span>
+<span class="linenos"> 69</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data, low moment z-component</span>
+<span class="linenos"> 70</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
+<span class="linenos"> 71</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos"> 72</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lm_z_dbdt</span>
+<span class="linenos"> 73</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">lm_gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 74</span>
+<span class="linenos"> 75</span><span class="w">    </span><span class="nt">LM_DataSTD</span><span class="p">:</span>
+<span class="linenos"> 76</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_error_lmz</span>
+<span class="linenos"> 77</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data error standard deviation, low moment z-component</span>
+<span class="linenos"> 78</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
+<span class="linenos"> 79</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos"> 80</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lm_z_dbdt</span>
+<span class="linenos"> 81</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">lm_gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 82</span>
+<span class="linenos"> 83</span><span class="w">    </span><span class="nt">HM_Data</span><span class="p">:</span>
+<span class="linenos"> 84</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_hmz</span>
+<span class="linenos"> 85</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data, high moment z-component</span>
+<span class="linenos"> 86</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
+<span class="linenos"> 87</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos"> 88</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hm_z_dbdt</span>
+<span class="linenos"> 89</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">hm_gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span><span class="w">    </span><span class="nt">HM_DataSTD</span><span class="p">:</span>
+<span class="linenos"> 92</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">em_data_error_hmz</span>
+<span class="linenos"> 93</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM data error standard deviation, high moment z-component</span>
+<span class="linenos"> 94</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">picoVolt per Ampere per meter^4</span>
+<span class="linenos"> 95</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos"> 96</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hm_z_dbdt</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">hm_gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="nt">TX_ALTITUDE</span><span class="p">:</span>
+<span class="linenos">100</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transmitter_altitude</span>
+<span class="linenos">101</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Processed transmitter altitude</span>
+<span class="linenos">102</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">103</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="w">    </span><span class="nt">TX_ALTITUDE_STD</span><span class="p">:</span>
+<span class="linenos">106</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transmitter_altitude_error</span>
+<span class="linenos">107</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation for transmitter altitude</span>
+<span class="linenos">108</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">109</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="w">    </span><span class="nt">RX_ALTITUDE</span><span class="p">:</span>
+<span class="linenos">112</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver_altitude</span>
+<span class="linenos">113</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Processed receiver altitude</span>
+<span class="linenos">114</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">115</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span><span class="w">    </span><span class="nt">RX_ALTITUDE_STD</span><span class="p">:</span>
+<span class="linenos">118</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver_altitude_error</span>
+<span class="linenos">119</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation for receiver altitude</span>
+<span class="linenos">120</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">121</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span><span class="w">    </span><span class="nt">txrx_dx</span><span class="p">:</span>
+<span class="linenos">124</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dx</span>
+<span class="linenos">125</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nominal inline transmitter-receiver offset</span>
+<span class="linenos">126</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">127</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">128</span>
+<span class="linenos">129</span><span class="w">    </span><span class="nt">txrx_dy</span><span class="p">:</span>
+<span class="linenos">130</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dy</span>
+<span class="linenos">131</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nominal transverse transmitter-receiver offset</span>
+<span class="linenos">132</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">133</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">134</span>
+<span class="linenos">135</span><span class="w">    </span><span class="nt">txrx_dz</span><span class="p">:</span>
+<span class="linenos">136</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">txrx_dz</span>
+<span class="linenos">137</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Calculated vertical transmitter-receiver offset</span>
+<span class="linenos">138</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">139</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span><span class="w">    </span><span class="nt">LINE_NO</span><span class="p">:</span>
+<span class="linenos">142</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line_number</span>
+<span class="linenos">143</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
+<span class="linenos">144</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
 </pre></div>
 </div>
 </div>
@@ -474,7 +461,7 @@ Group: /survey/data/raw_data/skytem_system
 <h2>Create a Models Branch<a class="headerlink" href="#create-a-models-branch" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new container for models</span>
 <span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'models'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"Inverted models"</span><span class="p">,</span>
-                                                          <span class="n">comment</span> <span class="o">=</span> <span class="s2">"This is a test"</span><span class="p">))</span>
+                                                           <span class="n">comment</span> <span class="o">=</span> <span class="s2">"1-D resistivity models inverted from the processed AEM data"</span><span class="p">))</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -482,8 +469,8 @@ Group: /survey/data/raw_data/skytem_system
 </ol>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import inverted AEM models from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//skytem_inverted_models.csv'</span><span class="p">)</span>
-<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//skytem_inverted_models.yml'</span><span class="p">)</span>
+<span class="n">m_data3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'skytem_inverted_models.csv'</span><span class="p">)</span>
+<span class="n">m_supp3</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'skytem_inverted_models.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the inverted AEM models as a tabular dataset</span>
 <span class="n">mods</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'inverted_models'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">m_data3</span><span class="p">,</span>
@@ -530,198 +517,176 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos"> 36</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_depth</span>
 <span class="linenos"> 37</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Depth to model layer</span>
 <span class="linenos"> 38</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meters</span>
-<span class="linenos"> 39</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 40</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.375</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">1.16</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">2.02</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 41</span><span class="w">                    </span><span class="nv">2.965</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.005</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">5.145</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 42</span><span class="w">                    </span><span class="nv">6.39</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.755</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">9.255</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 43</span><span class="w">                    </span><span class="nv">10.9</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">12.7</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">14.675</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 44</span><span class="w">                    </span><span class="nv">16.845</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">19.22</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.825</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 45</span><span class="w">                    </span><span class="nv">24.685</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">27.815</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">31.25</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 46</span><span class="w">                    </span><span class="nv">35.02</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">39.15</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">43.68</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 47</span><span class="w">                    </span><span class="nv">48.65</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">54.095</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">60.065</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 48</span><span class="w">                    </span><span class="nv">66.615</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">73.795</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">81.67</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 49</span><span class="w">                    </span><span class="nv">90.31</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">99.78</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">110.16</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 50</span><span class="w">                    </span><span class="nv">121.545</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">134.03</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">147.72</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 51</span><span class="w">                    </span><span class="nv">162.73</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">179.19</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">197.24</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 52</span><span class="w">                    </span><span class="nv">217.035</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">238.745</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">262.55</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">343.75</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 53</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="w">  </span><span class="nv">0.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">0.75</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 54</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">0.75</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">1.57</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 55</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">1.57</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">2.47</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 56</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">2.47</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">3.46</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 57</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">3.46</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.55</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 58</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">4.55</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">5.74</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 59</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">5.74</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">7.04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 60</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">7.04</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">8.47</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 61</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">8.47</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">10.04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 62</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">10.04</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">11.76</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 63</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">11.76</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">13.64</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 64</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">13.64</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">15.71</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 65</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">15.71</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">17.98</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 66</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">17.98</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">20.46</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 67</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">20.46</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">23.19</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 68</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">23.19</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">26.18</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 69</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">26.18</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">29.45</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 70</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">29.45</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">33.05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 71</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">33.05</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">36.99</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 72</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">36.99</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">41.31</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 73</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">41.31</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">46.05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 74</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">46.05</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">51.25</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 75</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">51.25</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">56.94</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 76</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">56.94</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">63.19</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 77</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">63.19</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">70.04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 78</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">70.04</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">77.55</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 79</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">77.55</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">85.79</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 80</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">85.79</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">94.83</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 81</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">94.83</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">104.73</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 82</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">104.73</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">115.59</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 83</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">115.59</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">127.5</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 84</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">127.5</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">140.56</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 85</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">140.56</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">154.88</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 86</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">154.88</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">170.58</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 87</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">170.58</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">187.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 88</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">187.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">206.68</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 89</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">206.68</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">227.39</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 90</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">227.39</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">250.1</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 91</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">250.1</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">275.0</span><span class="w">  </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 92</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">275.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">412.5</span><span class="w"> </span><span class="p p-Indicator">]]</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">    </span><span class="nt">pINDEX</span><span class="p">:</span>
-<span class="linenos"> 96</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">processing_index</span>
-<span class="linenos"> 97</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique index number for processing</span>
-<span class="linenos"> 98</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 99</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">100</span>
-<span class="linenos">101</span><span class="w">    </span><span class="nt">sLINE_NO</span><span class="p">:</span>
-<span class="linenos">102</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master_line</span>
-<span class="linenos">103</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Master line number</span>
-<span class="linenos">104</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">105</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">106</span>
-<span class="linenos">107</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
-<span class="linenos">108</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
-<span class="linenos">109</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">110</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">111</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">112</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
-<span class="linenos">113</span>
-<span class="linenos">114</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
-<span class="linenos">115</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
-<span class="linenos">116</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">117</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">118</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">119</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
-<span class="linenos">120</span>
-<span class="linenos">121</span><span class="w">    </span><span class="nt">TIMESTAMP</span><span class="p">:</span>
-<span class="linenos">122</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
-<span class="linenos">123</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time, decimal days since January 1, 1900</span>
-<span class="linenos">124</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">day</span>
-<span class="linenos">125</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">126</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t</span>
-<span class="linenos">127</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">January 1, 1900</span>
-<span class="linenos">128</span>
-<span class="linenos">129</span><span class="w">    </span><span class="nt">RECORD</span><span class="p">:</span>
-<span class="linenos">130</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">record</span>
-<span class="linenos">131</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workbench record number</span>
-<span class="linenos">132</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">133</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">134</span>
-<span class="linenos">135</span><span class="w">    </span><span class="nt">ELEVATION</span><span class="p">:</span>
-<span class="linenos">136</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation</span>
-<span class="linenos">137</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
-<span class="linenos">138</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">139</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">140</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z</span>
-<span class="linenos">141</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
-<span class="linenos">142</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
-<span class="linenos">143</span>
-<span class="linenos">144</span><span class="w">    </span><span class="nt">ALT</span><span class="p">:</span>
-<span class="linenos">145</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
-<span class="linenos">146</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
-<span class="linenos">147</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">148</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">149</span>
-<span class="linenos">150</span><span class="w">    </span><span class="nt">INVALT</span><span class="p">:</span>
-<span class="linenos">151</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude</span>
-<span class="linenos">152</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inverted instrument altitude</span>
-<span class="linenos">153</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">154</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 39</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.375</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">1.16</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">2.02</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 40</span><span class="w">                    </span><span class="nv">2.965</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.005</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">5.145</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 41</span><span class="w">                    </span><span class="nv">6.39</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.755</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">9.255</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 42</span><span class="w">                    </span><span class="nv">10.9</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">12.7</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">14.675</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 43</span><span class="w">                    </span><span class="nv">16.845</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">19.22</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21.825</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 44</span><span class="w">                    </span><span class="nv">24.685</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">27.815</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">31.25</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 45</span><span class="w">                    </span><span class="nv">35.02</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">39.15</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">43.68</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 46</span><span class="w">                    </span><span class="nv">48.65</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">54.095</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">60.065</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 47</span><span class="w">                    </span><span class="nv">66.615</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">73.795</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">81.67</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 48</span><span class="w">                    </span><span class="nv">90.31</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">99.78</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">110.16</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 49</span><span class="w">                    </span><span class="nv">121.545</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">134.03</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">147.72</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 50</span><span class="w">                    </span><span class="nv">162.73</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">179.19</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">197.24</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 51</span><span class="w">                    </span><span class="nv">217.035</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">238.745</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">262.55</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">343.75</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 52</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="w">  </span><span class="nv">0.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">0.75</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 53</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">0.75</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">1.57</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 54</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">1.57</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">2.47</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 55</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">2.47</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">3.46</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 56</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">3.46</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.55</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 57</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">4.55</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">5.74</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 58</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">5.74</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">7.04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 59</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">7.04</span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">8.47</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 60</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">8.47</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">10.04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 61</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">10.04</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">11.76</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 62</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">11.76</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">13.64</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 63</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">13.64</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">15.71</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 64</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">15.71</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">17.98</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 65</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">17.98</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">20.46</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 66</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">20.46</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">23.19</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 67</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">23.19</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">26.18</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 68</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">26.18</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">29.45</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 69</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">29.45</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">33.05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 70</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">33.05</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">36.99</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 71</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">36.99</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">41.31</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 72</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">41.31</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">46.05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 73</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">46.05</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">51.25</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 74</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">51.25</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">56.94</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 75</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">56.94</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">63.19</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 76</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">63.19</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">70.04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 77</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">70.04</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">77.55</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 78</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">77.55</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">85.79</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 79</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">85.79</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">94.83</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 80</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">94.83</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">104.73</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 81</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">104.73</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">115.59</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 82</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">115.59</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">127.5</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 83</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">127.5</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">140.56</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 84</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">140.56</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">154.88</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 85</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">154.88</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">170.58</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 86</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">170.58</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">187.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 87</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">187.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">206.68</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 88</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">206.68</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">227.39</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 89</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">227.39</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">250.1</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 90</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">250.1</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">275.0</span><span class="w">  </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 91</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">275.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">412.5</span><span class="w"> </span><span class="p p-Indicator">]]</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 94</span><span class="w">    </span><span class="nt">pINDEX</span><span class="p">:</span>
+<span class="linenos"> 95</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">processing_index</span>
+<span class="linenos"> 96</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique index number for processing</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="nt">sLINE_NO</span><span class="p">:</span>
+<span class="linenos">100</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master_line</span>
+<span class="linenos">101</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Master line number</span>
+<span class="linenos">102</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
+<span class="linenos">105</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
+<span class="linenos">106</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">107</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">108</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
+<span class="linenos">109</span>
+<span class="linenos">110</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
+<span class="linenos">111</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
+<span class="linenos">112</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">113</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">114</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span><span class="w">    </span><span class="nt">TIMESTAMP</span><span class="p">:</span>
+<span class="linenos">117</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
+<span class="linenos">118</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time, decimal days since January 1, 1900</span>
+<span class="linenos">119</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">day</span>
+<span class="linenos">120</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t</span>
+<span class="linenos">121</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">January 1, 1900</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span><span class="w">    </span><span class="nt">RECORD</span><span class="p">:</span>
+<span class="linenos">124</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">record</span>
+<span class="linenos">125</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Workbench record number</span>
+<span class="linenos">126</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="w">    </span><span class="nt">ELEVATION</span><span class="p">:</span>
+<span class="linenos">129</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation</span>
+<span class="linenos">130</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
+<span class="linenos">131</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">132</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z</span>
+<span class="linenos">133</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
+<span class="linenos">134</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
+<span class="linenos">135</span>
+<span class="linenos">136</span><span class="w">    </span><span class="nt">ALT</span><span class="p">:</span>
+<span class="linenos">137</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
+<span class="linenos">138</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
+<span class="linenos">139</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span><span class="w">    </span><span class="nt">INVALT</span><span class="p">:</span>
+<span class="linenos">142</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude</span>
+<span class="linenos">143</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inverted instrument altitude</span>
+<span class="linenos">144</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">145</span>
+<span class="linenos">146</span><span class="w">    </span><span class="nt">INVALTSTD</span><span class="p">:</span>
+<span class="linenos">147</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude_uncertainty</span>
+<span class="linenos">148</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation of inverted instrument altitude</span>
+<span class="linenos">149</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">150</span>
+<span class="linenos">151</span><span class="w">    </span><span class="nt">DELTAALT</span><span class="p">:</span>
+<span class="linenos">152</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude_difference</span>
+<span class="linenos">153</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measured minus inverted altitude</span>
+<span class="linenos">154</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
 <span class="linenos">155</span>
-<span class="linenos">156</span><span class="w">    </span><span class="nt">INVALTSTD</span><span class="p">:</span>
-<span class="linenos">157</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude_uncertainty</span>
-<span class="linenos">158</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard deviation of inverted instrument altitude</span>
-<span class="linenos">159</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">160</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">161</span>
-<span class="linenos">162</span><span class="w">    </span><span class="nt">DELTAALT</span><span class="p">:</span>
-<span class="linenos">163</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted_altitude_difference</span>
-<span class="linenos">164</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measured minus inverted altitude</span>
-<span class="linenos">165</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">166</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">167</span>
-<span class="linenos">168</span><span class="w">    </span><span class="nt">NUMDATA</span><span class="p">:</span>
-<span class="linenos">169</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number_of_data</span>
-<span class="linenos">170</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of active time gates</span>
-<span class="linenos">171</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">172</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">173</span>
-<span class="linenos">174</span><span class="w">    </span><span class="nt">RESDATA</span><span class="p">:</span>
-<span class="linenos">175</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_residual</span>
-<span class="linenos">176</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error-weighted inversion data misfit (target = 1.0)</span>
-<span class="linenos">177</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">178</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">179</span>
-<span class="linenos">180</span><span class="w">    </span><span class="nt">RESTOTAL</span><span class="p">:</span>
-<span class="linenos">181</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_residual</span>
-<span class="linenos">182</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total inversion residual (data and model regularization)</span>
-<span class="linenos">183</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">184</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">185</span>
-<span class="linenos">186</span><span class="w">    </span><span class="nt">RHO_I</span><span class="p">:</span>
-<span class="linenos">187</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_resistivity</span>
-<span class="linenos">188</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inverted layer resistivity</span>
-<span class="linenos">189</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ohm*meter</span>
-<span class="linenos">190</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">191</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos">156</span><span class="w">    </span><span class="nt">NUMDATA</span><span class="p">:</span>
+<span class="linenos">157</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number_of_data</span>
+<span class="linenos">158</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of active time gates</span>
+<span class="linenos">159</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">160</span>
+<span class="linenos">161</span><span class="w">    </span><span class="nt">RESDATA</span><span class="p">:</span>
+<span class="linenos">162</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_residual</span>
+<span class="linenos">163</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error-weighted inversion data misfit (target = 1.0)</span>
+<span class="linenos">164</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">165</span>
+<span class="linenos">166</span><span class="w">    </span><span class="nt">RESTOTAL</span><span class="p">:</span>
+<span class="linenos">167</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_residual</span>
+<span class="linenos">168</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total inversion residual (data and model regularization)</span>
+<span class="linenos">169</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">170</span>
+<span class="linenos">171</span><span class="w">    </span><span class="nt">RHO_I</span><span class="p">:</span>
+<span class="linenos">172</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_resistivity</span>
+<span class="linenos">173</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inverted layer resistivity</span>
+<span class="linenos">174</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ohm*meter</span>
+<span class="linenos">175</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos">176</span>
+<span class="linenos">177</span><span class="w">    </span><span class="nt">RHO_I_STD</span><span class="p">:</span>
+<span class="linenos">178</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_resistivity_uncertainty</span>
+<span class="linenos">179</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Uncertainty in inverted layer resistivity</span>
+<span class="linenos">180</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">181</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos">182</span>
+<span class="linenos">183</span><span class="w">    </span><span class="nt">DOI_CONSERVATIVE</span><span class="p">:</span>
+<span class="linenos">184</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_of_investigation_conservative</span>
+<span class="linenos">185</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conservative estimate of depth of investigation (DOI)</span>
+<span class="linenos">186</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">187</span>
+<span class="linenos">188</span><span class="w">    </span><span class="nt">DOI_STANDARD</span><span class="p">:</span>
+<span class="linenos">189</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_of_investigation_standard</span>
+<span class="linenos">190</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard estimate of depth of investigation (DOI)</span>
+<span class="linenos">191</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
 <span class="linenos">192</span>
-<span class="linenos">193</span><span class="w">    </span><span class="nt">RHO_I_STD</span><span class="p">:</span>
-<span class="linenos">194</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_resistivity_uncertainty</span>
-<span class="linenos">195</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Uncertainty in inverted layer resistivity</span>
-<span class="linenos">196</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">197</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">198</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
-<span class="linenos">199</span>
-<span class="linenos">200</span><span class="w">    </span><span class="nt">DOI_CONSERVATIVE</span><span class="p">:</span>
-<span class="linenos">201</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_of_investigation_conservative</span>
-<span class="linenos">202</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conservative estimate of depth of investigation (DOI)</span>
-<span class="linenos">203</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">204</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">205</span>
-<span class="linenos">206</span><span class="w">    </span><span class="nt">DOI_STANDARD</span><span class="p">:</span>
-<span class="linenos">207</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_of_investigation_standard</span>
-<span class="linenos">208</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard estimate of depth of investigation (DOI)</span>
-<span class="linenos">209</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">210</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">211</span>
-<span class="linenos">212</span><span class="w">    </span><span class="nt">DEP_TOP</span><span class="p">:</span>
-<span class="linenos">213</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_top</span>
-<span class="linenos">214</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Top of model layers</span>
-<span class="linenos">215</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">216</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">217</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
-<span class="linenos">218</span>
-<span class="linenos">219</span><span class="w">    </span><span class="nt">DEP_BOT</span><span class="p">:</span>
-<span class="linenos">220</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_bottom</span>
-<span class="linenos">221</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bottom of model layers</span>
-<span class="linenos">222</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">223</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">224</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
-<span class="linenos">225</span>
-<span class="linenos">226</span><span class="w">    </span><span class="nt">LINE_NO</span><span class="p">:</span>
-<span class="linenos">227</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line_number</span>
-<span class="linenos">228</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
-<span class="linenos">229</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">230</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">193</span><span class="w">    </span><span class="nt">DEP_TOP</span><span class="p">:</span>
+<span class="linenos">194</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_top</span>
+<span class="linenos">195</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Top of model layers</span>
+<span class="linenos">196</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">197</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos">198</span>
+<span class="linenos">199</span><span class="w">    </span><span class="nt">DEP_BOT</span><span class="p">:</span>
+<span class="linenos">200</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">depth_bottom</span>
+<span class="linenos">201</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bottom of model layers</span>
+<span class="linenos">202</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">203</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos">204</span>
+<span class="linenos">205</span><span class="w">    </span><span class="nt">LINE_NO</span><span class="p">:</span>
+<span class="linenos">206</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line_number</span>
+<span class="linenos">207</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
+<span class="linenos">208</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
 </pre></div>
 </div>
 </div>
@@ -734,8 +699,8 @@ Group: /survey/data/raw_data/skytem_system
 <p>Adding bedrock picks to the ‘data’ branch</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import AEM-based estimated of depth to bedrock from CSV-format.</span>
 <span class="c1"># Define input data file and associated metadata file</span>
-<span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//top_dolomite_blocky_lidar.csv'</span><span class="p">)</span>
-<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//bedrock_picks.yml'</span><span class="p">)</span>
+<span class="n">d_data4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'top_dolomite_blocky_lidar.csv'</span><span class="p">)</span>
+<span class="n">d_supp4</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'bedrock_picks.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the AEM-based estimated of depth to bedrock as a tabular dataset</span>
 <span class="n">bedrock</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'depth_to_bedrock'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data4</span><span class="p">,</span>
@@ -762,57 +727,50 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">16</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">identifier</span>
 <span class="linenos">17</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique identifier</span>
 <span class="linenos">18</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">19</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">20</span>
-<span class="linenos">21</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
-<span class="linenos">22</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting</span>
-<span class="linenos">23</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">24</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">25</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">26</span>
-<span class="linenos">27</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
-<span class="linenos">28</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing</span>
-<span class="linenos">29</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">30</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">31</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">32</span>
-<span class="linenos">33</span><span class="w">    </span><span class="nt">BR_ELEVATION</span><span class="p">:</span>
-<span class="linenos">34</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">top_bedrock_elevation</span>
-<span class="linenos">35</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)</span>
-<span class="linenos">36</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">37</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">38</span>
-<span class="linenos">39</span><span class="w">    </span><span class="nt">ZSTD</span><span class="p">:</span>
-<span class="linenos">40</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation_uncertainty</span>
-<span class="linenos">41</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard devation of top bedrock elevation</span>
-<span class="linenos">42</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">43</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">    </span><span class="nt">E_N83WTM</span><span class="p">:</span>
+<span class="linenos">21</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting</span>
+<span class="linenos">22</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">23</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">    </span><span class="nt">N_N83WTM</span><span class="p">:</span>
+<span class="linenos">26</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing</span>
+<span class="linenos">27</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">28</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="w">    </span><span class="nt">BR_ELEVATION</span><span class="p">:</span>
+<span class="linenos">31</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">top_bedrock_elevation</span>
+<span class="linenos">32</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)</span>
+<span class="linenos">33</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">    </span><span class="nt">ZSTD</span><span class="p">:</span>
+<span class="linenos">36</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elevation_uncertainty</span>
+<span class="linenos">37</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard devation of top bedrock elevation</span>
+<span class="linenos">38</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="w">    </span><span class="nt">OriginType</span><span class="p">:</span>
+<span class="linenos">41</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">point_origin</span>
+<span class="linenos">42</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Point origin type; 3 = automated pick from resistivity value; 0 = manual pick</span>
+<span class="linenos">43</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
 <span class="linenos">44</span>
-<span class="linenos">45</span><span class="w">    </span><span class="nt">OriginType</span><span class="p">:</span>
-<span class="linenos">46</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">point_origin</span>
-<span class="linenos">47</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Point origin type; 3 = automated pick from resistivity value; 0 = manual pick</span>
+<span class="linenos">45</span><span class="w">    </span><span class="nt">EditDate</span><span class="p">:</span>
+<span class="linenos">46</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edit_date</span>
+<span class="linenos">47</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date of interpretation point</span>
 <span class="linenos">48</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">49</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">50</span>
-<span class="linenos">51</span><span class="w">    </span><span class="nt">EditDate</span><span class="p">:</span>
-<span class="linenos">52</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edit_date</span>
-<span class="linenos">53</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date of interpretation point</span>
-<span class="linenos">54</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">55</span><span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">M/D/YYYY H:MM</span>
-<span class="linenos">56</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">57</span><span class="w">        </span><span class="nt">dtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="linenos">49</span><span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">M/D/YYYY H:MM</span>
+<span class="linenos">50</span><span class="w">        </span><span class="nt">dtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
 </pre></div>
 </div>
 </div>
 <ol class="arabic simple" start="5">
 <li><p>Raster Maps</p></li>
 </ol>
-<p>Create a 3rd container for the derived raaster maps</p>
+<p>Create a 3rd container for the derived raster maps</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">derived_maps</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'derived_maps'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"raster products derived from airborne data and models"</span><span class="p">))</span>
 
 <span class="c1"># Import interpolated bedrock and magnetic maps from TIF-format.</span>
 <span class="c1"># Define input metadata file (which contains the TIF filenames linked to variable names)</span>
-<span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//magnetics_bedrock_picks.yml'</span><span class="p">)</span>
+<span class="n">m_supp5</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'magnetics_bedrock_picks.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the interpolated maps as a raster dataset</span>
 <span class="n">maps</span> <span class="o">=</span> <span class="n">derived_maps</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'maps'</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">m_supp5</span><span class="p">)</span>
@@ -843,7 +801,7 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">21</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
 <span class="linenos">22</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total magnetic intensity, diurnally corrected and filtered</span>
 <span class="linenos">23</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">24</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">24</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
 <span class="linenos">25</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mag_tmi.tif</span><span class="p p-Indicator">]</span>
 <span class="linenos">26</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">27</span>
@@ -851,7 +809,7 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">29</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">residual_magnetic_field</span>
 <span class="linenos">30</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Residual magnetic field, IGRF corrected from 2015 model</span>
 <span class="linenos">31</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">32</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">32</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
 <span class="linenos">33</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mag_rmf.tif</span><span class="p p-Indicator">]</span>
 <span class="linenos">34</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">35</span>
@@ -859,7 +817,7 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">37</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bedrock_top_elevation</span>
 <span class="linenos">38</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Elevation, top of dolomite bedrock, North American Vertical Datum of 1988 (NAVD88)</span>
 <span class="linenos">39</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foot</span>
-<span class="linenos">40</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">40</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
 <span class="linenos">41</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">top_bedrock.tif</span><span class="p p-Indicator">]</span>
 <span class="linenos">42</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">43</span>
@@ -867,7 +825,7 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">45</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bedrock_depth</span>
 <span class="linenos">46</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Depth to bedrock</span>
 <span class="linenos">47</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foot</span>
-<span class="linenos">48</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.9</span>
+<span class="linenos">48</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.9</span>
 <span class="linenos">49</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">bedrock_depth.tif</span><span class="p p-Indicator">]</span>
 <span class="linenos">50</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">51</span>
@@ -875,15 +833,13 @@ Group: /survey/data/raw_data/skytem_system
 <span class="linenos">53</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
 <span class="linenos">54</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
 <span class="linenos">55</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">56</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">57</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
-<span class="linenos">58</span>
-<span class="linenos">59</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
-<span class="linenos">60</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
-<span class="linenos">61</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">62</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">63</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">64</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
+<span class="linenos">56</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
+<span class="linenos">59</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
+<span class="linenos">60</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">61</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">62</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
 </pre></div>
 </div>
 </div>
@@ -951,7 +907,7 @@ Group: /survey
 │       comment:       This dataset includes minimally processed (raw) AEM and ra...
 │       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
 │       content:       Wisconsin SkyTEM survey information /survey; raw and proce...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.9
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -965,13 +921,13 @@ Group: /survey
 │   │   │   Dimensions:          (index: 2000, hm_gate_times: 32, lm_gate_times: 28)
 │   │   │   Coordinates:
 │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-│   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
-│   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
-│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 16kB ...
 │   │   │       y                (index) float64 16kB ...
 │   │   │       z                (index) float64 16kB ...
 │   │   │       t                (index) float64 16kB ...
+│   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
+│   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
+│   │   │       spatial_ref      float64 8B ...
 │   │   │   Data variables: (12/30)
 │   │   │       _60hz_intensity  (index) float64 16kB ...
 │   │   │       alt              (index) float64 16kB ...
@@ -1002,8 +958,7 @@ Group: /survey
 │   │   │                                                         n_transmitter: 2,
 │   │   │                                                         transmitter_lm_waveform_time: 21,
 │   │   │                                                         transmitter_hm_waveform_time: 36,
-│   │   │                                                         n_receiver: 2, n_couplet: 4,
-│   │   │                                                         dim_0: 1)
+│   │   │                                                         n_receiver: 2, n_couplet: 4)
 │   │   │       Coordinates:
 │   │   │         * gate_times                                   (gate_times) float64 176B 5....
 │   │   │         * nv                                           (nv) float64 16B 0.0 1.0
@@ -1014,21 +969,20 @@ Group: /survey
 │   │   │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
 │   │   │         * n_receiver                                   (n_receiver) float64 16B 0.0...
 │   │   │         * n_couplet                                    (n_couplet) float64 32B 0.0 ...
-│   │   │       Dimensions without coordinates: dim_0
 │   │   │       Data variables: (12/35)
 │   │   │           gate_times_bnds                              (gate_times, nv) float64 352B ...
 │   │   │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
 │   │   │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 512B ...
 │   │   │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
 │   │   │           xyz_bnds                                     (xyz, nv) float64 48B ...
-│   │   │           transmitter_label                            (n_transmitter) &lt;U2 16B ...
+│   │   │           transmitter_label                            (n_transmitter) object 16B ...
 │   │   │           ...                                           ...
-│   │   │           couplet_data_type                            (n_couplet) &lt;U4 64B ...
-│   │   │           couplet_gate_times                           (n_couplet) &lt;U13 208B ...
-│   │   │           data_normalized                              (dim_0) bool 1B ...
-│   │   │           skytem_skb_gex_available                     (dim_0) bool 1B ...
-│   │   │           reference_frame                              &lt;U26 104B ...
-│   │   │           coil_orientations                            &lt;U4 16B ...
+│   │   │           couplet_data_type                            (n_couplet) object 32B ...
+│   │   │           couplet_gate_times                           (n_couplet) object 32B ...
+│   │   │           data_normalized                              bool 1B ...
+│   │   │           skytem_skb_gex_available                     bool 1B ...
+│   │   │           reference_frame                              object 8B ...
+│   │   │           coil_orientations                            object 8B ...
 │   │   │       Attributes:
 │   │   │           type:        system
 │   │   │           mode:        airborne
@@ -1046,38 +1000,38 @@ Group: /survey
 │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
 │   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │           Data variables: (12/28)
-│   │               transmitter_label                 (n_transmitter) &lt;U7 28B ...
-│   │               transmitter_description           (n_transmitter) &lt;U142 568B ...
-│   │               receiver_label                    (n_receiver) &lt;U19 76B ...
-│   │               receiver_sensor_type              (n_receiver) &lt;U23 92B ...
-│   │               receiver_sensor_model             (n_receiver) &lt;U6 24B ...
-│   │               receiver_sensor_manufacturer      (n_receiver) &lt;U10 40B ...
+│   │               transmitter_label                 (n_transmitter) object 8B ...
+│   │               transmitter_description           (n_transmitter) object 8B ...
+│   │               receiver_label                    (n_receiver) object 8B ...
+│   │               receiver_sensor_type              (n_receiver) object 8B ...
+│   │               receiver_sensor_model             (n_receiver) object 8B ...
+│   │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
 │   │               ...                                ...
-│   │               diurnal_correction                &lt;U110 440B ...
-│   │               tieline_levelling                 &lt;U33 132B ...
-│   │               microlevelling                    &lt;U31 124B ...
-│   │               igrf_model_date                   &lt;U21 84B ...
-│   │               igrf_model_location               &lt;U54 216B ...
-│   │               igrf_model_height                 &lt;U69 276B ...
+│   │               diurnal_correction                object 8B ...
+│   │               tieline_levelling                 object 8B ...
+│   │               microlevelling                    object 8B ...
+│   │               igrf_model_date                   object 8B ...
+│   │               igrf_model_location               object 8B ...
+│   │               igrf_model_height                 object 8B ...
 │   │           Attributes:
 │   │               type:        system
 │   │               mode:        airborne
 │   │               method:      magnetic
-│   │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+│   │               instrument:  Geometrics G-822A cesium-vapor magnetometer
 │   │               name:        magnetic_system
 │   ├── Group: /survey/data/processed_data
 │   │   │   Dimensions:          (index: 2000, lm_gate_times: 27, hm_gate_times: 22)
 │   │   │   Coordinates:
 │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-│   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
-│   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
-│   │   │       spatial_ref      float64 8B ...
 │   │   │       x                (index) float64 16kB ...
 │   │   │       y                (index) float64 16kB ...
 │   │   │       z                (index) float64 16kB ...
 │   │   │       t                (index) float64 16kB ...
+│   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
+│   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
+│   │   │       spatial_ref      float64 8B ...
 │   │   │   Data variables: (12/17)
-│   │   │       pindex           (index) float64 16kB ...
+│   │   │       pindex           (index) int64 16kB ...
 │   │   │       sline_no         (index) float64 16kB ...
 │   │   │       record           (index) float64 16kB ...
 │   │   │       alt              (index) float64 16kB ...
@@ -1106,8 +1060,7 @@ Group: /survey
 │   │   │                                                         n_transmitter: 2,
 │   │   │                                                         transmitter_lm_waveform_time: 21,
 │   │   │                                                         transmitter_hm_waveform_time: 36,
-│   │   │                                                         n_receiver: 2, n_couplet: 4,
-│   │   │                                                         dim_0: 1)
+│   │   │                                                         n_receiver: 2, n_couplet: 4)
 │   │   │       Coordinates:
 │   │   │         * gate_times                                   (gate_times) float64 176B 5....
 │   │   │         * nv                                           (nv) float64 16B 0.0 1.0
@@ -1118,21 +1071,20 @@ Group: /survey
 │   │   │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
 │   │   │         * n_receiver                                   (n_receiver) float64 16B 0.0...
 │   │   │         * n_couplet                                    (n_couplet) float64 32B 0.0 ...
-│   │   │       Dimensions without coordinates: dim_0
 │   │   │       Data variables: (12/35)
 │   │   │           gate_times_bnds                              (gate_times, nv) float64 352B ...
 │   │   │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 432B ...
 │   │   │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 352B ...
 │   │   │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
 │   │   │           xyz_bnds                                     (xyz, nv) float64 48B ...
-│   │   │           transmitter_label                            (n_transmitter) &lt;U2 16B ...
+│   │   │           transmitter_label                            (n_transmitter) object 16B ...
 │   │   │           ...                                           ...
-│   │   │           couplet_data_type                            (n_couplet) &lt;U4 64B ...
-│   │   │           couplet_gate_times                           (n_couplet) &lt;U13 208B ...
-│   │   │           data_normalized                              (dim_0) bool 1B ...
-│   │   │           skytem_skb_gex_available                     (dim_0) bool 1B ...
-│   │   │           reference_frame                              &lt;U26 104B ...
-│   │   │           coil_orientations                            &lt;U4 16B ...
+│   │   │           couplet_data_type                            (n_couplet) object 32B ...
+│   │   │           couplet_gate_times                           (n_couplet) object 32B ...
+│   │   │           data_normalized                              bool 1B ...
+│   │   │           skytem_skb_gex_available                     bool 1B ...
+│   │   │           reference_frame                              object 8B ...
+│   │   │           coil_orientations                            object 8B ...
 │   │   │       Attributes:
 │   │   │           type:        system
 │   │   │           mode:        airborne
@@ -1150,37 +1102,37 @@ Group: /survey
 │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
 │   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
 │   │           Data variables: (12/28)
-│   │               transmitter_label                 (n_transmitter) &lt;U7 28B ...
-│   │               transmitter_description           (n_transmitter) &lt;U142 568B ...
-│   │               receiver_label                    (n_receiver) &lt;U19 76B ...
-│   │               receiver_sensor_type              (n_receiver) &lt;U23 92B ...
-│   │               receiver_sensor_model             (n_receiver) &lt;U6 24B ...
-│   │               receiver_sensor_manufacturer      (n_receiver) &lt;U10 40B ...
+│   │               transmitter_label                 (n_transmitter) object 8B ...
+│   │               transmitter_description           (n_transmitter) object 8B ...
+│   │               receiver_label                    (n_receiver) object 8B ...
+│   │               receiver_sensor_type              (n_receiver) object 8B ...
+│   │               receiver_sensor_model             (n_receiver) object 8B ...
+│   │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
 │   │               ...                                ...
-│   │               diurnal_correction                &lt;U110 440B ...
-│   │               tieline_levelling                 &lt;U33 132B ...
-│   │               microlevelling                    &lt;U31 124B ...
-│   │               igrf_model_date                   &lt;U21 84B ...
-│   │               igrf_model_location               &lt;U54 216B ...
-│   │               igrf_model_height                 &lt;U69 276B ...
+│   │               diurnal_correction                object 8B ...
+│   │               tieline_levelling                 object 8B ...
+│   │               microlevelling                    object 8B ...
+│   │               igrf_model_date                   object 8B ...
+│   │               igrf_model_location               object 8B ...
+│   │               igrf_model_height                 object 8B ...
 │   │           Attributes:
 │   │               type:        system
 │   │               mode:        airborne
 │   │               method:      magnetic
-│   │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+│   │               instrument:  Geometrics G-822A cesium-vapor magnetometer
 │   │               name:        magnetic_system
 │   └── Group: /survey/data/depth_to_bedrock
 │           Dimensions:       (index: 82864)
 │           Coordinates:
 │             * index         (index) float64 663kB 0.0 1.0 2.0 ... 8.286e+04 8.286e+04
-│               spatial_ref   float64 8B ...
 │               x             (index) float64 663kB ...
 │               y             (index) float64 663kB ...
+│               spatial_ref   float64 8B ...
 │           Data variables:
-│               id            (index) float64 663kB ...
+│               id            (index) int64 663kB ...
 │               br_elevation  (index) float64 663kB ...
 │               zstd          (index) float64 663kB ...
-│               origintype    (index) float64 663kB ...
+│               origintype    (index) int64 663kB ...
 │               editdate      (index) object 663kB ...
 │           Attributes:
 │               content:     bedrock elevation points
@@ -1196,7 +1148,7 @@ Group: /survey
 │   │       spatial_ref  float64 8B ...
 │   │   Attributes:
 │   │       content:  Inverted models
-│   │       comment:  This is a test
+│   │       comment:  1-D resistivity models inverted from the processed AEM data
 │   │       type:     container
 │   └── Group: /survey/models/inverted_models
 │       │   Dimensions:           (layer_depth: 40, nv: 2, index: 2000)
@@ -1204,14 +1156,14 @@ Group: /survey
 │       │     * layer_depth       (layer_depth) float64 320B 0.375 1.16 2.02 ... 262.6 343.8
 │       │     * nv                (nv) float64 16B 0.0 1.0
 │       │     * index             (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-│       │       spatial_ref       float64 8B ...
 │       │       x                 (index) float64 16kB ...
 │       │       y                 (index) float64 16kB ...
 │       │       z                 (index) float64 16kB ...
 │       │       t                 (index) float64 16kB ...
+│       │       spatial_ref       float64 8B ...
 │       │   Data variables: (12/18)
 │       │       layer_depth_bnds  (layer_depth, nv) float64 640B ...
-│       │       pindex            (index) float64 16kB ...
+│       │       pindex            (index) int64 16kB ...
 │       │       sline_no          (index) float64 16kB ...
 │       │       record            (index) float64 16kB ...
 │       │       alt               (index) float64 16kB ...
@@ -1235,13 +1187,13 @@ Group: /survey
 │       └── Group: /survey/models/inverted_models/inversion_parameters
 │               Dimensions:             ()
 │               Data variables:
-│                   model_file          &lt;U33 132B ...
-│                   inversion_software  &lt;U16 64B ...
-│                   software_version    &lt;U9 36B ...
-│                   software_reference  &lt;U11 44B ...
-│                   date                &lt;U17 68B ...
-│                   description         &lt;U253 1kB ...
-│                   data_file           &lt;U32 128B ...
+│                   model_file          object 8B ...
+│                   inversion_software  object 8B ...
+│                   software_version    object 8B ...
+│                   software_reference  object 8B ...
+│                   date                object 8B ...
+│                   description         object 8B ...
+│                   data_file           object 8B ...
 │               Attributes:
 │                   type:        parameters
 │                   method:      electromagnetic, time domain
@@ -1284,26 +1236,46 @@ Group: /survey
 </section>
 <section id="plotting-examples">
 <h2>Plotting Examples<a class="headerlink" href="#plotting-examples" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'raw_data'</span><span class="p">][</span><span class="s1">'height'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pcd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'processed_data'</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">pcd</span><span class="p">[</span><span class="s1">'tx_altitude'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_maps'</span><span class="p">][</span><span class="s1">'maps'</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">m</span><span class="p">[</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A line profile of the raw flight-line data, subset by line so the figure</span>
+<span class="c1"># records which line it shows. gs.plot draws a variable against distance</span>
+<span class="c1"># along the line, and labels both axes from the variable metadata.</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">][</span><span class="s1">'line'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">'line'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_skytem_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.565 seconds)</p>
+<img src="../../_images/sphx_glr_plot_csv_skytem_001.png" srcset="../../_images/sphx_glr_plot_csv_skytem_001.png" alt="Line 100101" class = "sphx-glr-single-img"/><p>The same view of the processed data: subset one line, then draw the
+transmitter altitude against distance along it.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pcd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'processed_data'</span><span class="p">]</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pcd</span><span class="p">[</span><span class="s1">'line_no'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">pcd</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">'line_no'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tx_altitude'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_csv_skytem_002.png" srcset="../../_images/sphx_glr_plot_csv_skytem_002.png" alt="Line 100101" class = "sphx-glr-single-img"/><p>A map view of the contractor’s magnetic grid, using xarray’s plotter. The
+title is set explicitly because xarray otherwise fills it from the leftover
+scalar coordinate ‘spatial_ref’, which carries no information.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_maps'</span><span class="p">][</span><span class="s1">'maps'</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">m</span><span class="p">[</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Total magnetic intensity"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_csv_skytem_003.png" srcset="../../_images/sphx_glr_plot_csv_skytem_003.png" alt="Total magnetic intensity, spatial_ref = 0.0" class = "sphx-glr-single-img"/><p>For a notebook walkthrough of this same survey, from raw CSVs through to
+plots, see the workshop notebooks, e.g. workshop/1_skytem_from_scratch.ipynb.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 2.154 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-skytem-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/034773591e391e260ea9931ac31bd124/plot_csv_skytem.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_skytem.ipynb</span></code></a></p>

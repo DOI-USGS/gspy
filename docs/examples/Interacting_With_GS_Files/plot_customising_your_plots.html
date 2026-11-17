@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customising Your Plots &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/scroll_and_wrap.css?v=de27d25c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GS Convention" href="../../gspy_convention_requirements.html" />
+    <link rel="prev" title="Coordinate Reference Systems" href="plot_coordinate_reference_systems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            gspy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/metadata/index.html">Metadata Handling</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#creating-gs-files">Creating GS Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#interacting-with-gs-files">Interacting With GS Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_xarray_methods.html">Basic Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_coordinate_reference_systems.html">Coordinate Reference Systems</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Customising Your Plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#figure-size">Figure size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titles">Titles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colormaps-and-color-range">Colormaps and color range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colorbar-label">Colorbar label</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overriding-the-automatic-axis-labels">Overriding the automatic axis labels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gspy_convention_requirements.html">GS Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/api/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gspy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Customising Your Plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/Interacting_With_GS_Files/plot_customising_your_plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-interacting-with-gs-files-plot-customising-your-plots-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="customising-your-plots">
+<span id="sphx-glr-examples-interacting-with-gs-files-plot-customising-your-plots-py"></span><h1>Customising Your Plots<a class="headerlink" href="#customising-your-plots" title="Link to this heading"></a></h1>
+<p>GSPy and xarray plotters fill in labels, titles and colorbars from the data
+metadata - by default the CF standard name and units. Any of them can be
+overridden: the plotters take standard keyword arguments and they draw onto
+ordinary matplotlib figures. This example works through the most common
+customisations on the TEMPEST AEM survey.</p>
+<p>Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">isfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
+</pre></div>
+</div>
+<p>First open the netcdf GS standard file, generate it if doesn’t already exist</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">input_file</span> <span class="o">=</span> <span class="s2">"../data_files/tempest_aseg/Tempest.nc"</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"../Creating_GS_Files/plot_aseg_tempest.py"</span><span class="p">])</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">input_file</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="figure-size">
+<h2>Figure size<a class="headerlink" href="#figure-size" title="Link to this heading"></a></h2>
+<p>Create the figure with the size you want - in inches - before plotting:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_001.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_001.png" alt="plot customising your plots" class = "sphx-glr-single-img"/><p>xarray’s plotter also takes figsize directly, which is handy when it is the
+one creating the figure:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                 <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"A small map from a direct figsize"</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_002.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_002.png" alt="A small map from a direct figsize, spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0.98, 'A small map from a direct figsize')
+</pre></div>
+</div>
+</section>
+<section id="titles">
+<h2>Titles<a class="headerlink" href="#titles" title="Link to this heading"></a></h2>
+<p>Tabular plots use plt.title as normal. Raster plots through xarray’s plotter
+write their title as a super-title, and if left alone fill it from any
+leftover scalar coordinate - such as the CRS variable <code class="docutils literal notranslate"><span class="pre">spatial_ref</span></code>, which
+prints as “spatial_ref=0.0” and carries no information. Setting the
+super-title afterwards replaces it:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Total magnetic intensity"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_003.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_003.png" alt="Total magnetic intensity, spatial_ref = 0.0" class = "sphx-glr-single-img"/></section>
+<section id="colormaps-and-color-range">
+<h2>Colormaps and color range<a class="headerlink" href="#colormaps-and-color-range" title="Link to this heading"></a></h2>
+<p>cmap takes any installed matplotlib colormap name. Set the colour range with
+vmin and vmax, or use robust=True to clip it to the 2nd-98th percentiles
+instead of the extremes, which keeps a few outliers from washing out the
+map:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Total magnetic intensity, terrain colormap"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_004.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_004.png" alt="Total magnetic intensity, terrain colormap, spatial_ref = 0.0" class = "sphx-glr-single-img"/></section>
+<section id="colorbar-label">
+<h2>Colorbar label<a class="headerlink" href="#colorbar-label" title="Link to this heading"></a></h2>
+<p>xarray’s plotter takes cbar_kwargs, passed straight to the colorbar - the
+quickest way to shorten its label. On a GSPy scatter, the colorbar is an
+extra axes on the figure and its label can simply be replaced:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                 <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'label'</span><span class="p">:</span> <span class="s1">'TMI (nT)'</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Short colorbar label from cbar_kwargs"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">'tx_height'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"TX height (m)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Same override on a GSPy scatter"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../_images/sphx_glr_plot_customising_your_plots_005.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_005.png" alt="Short colorbar label from cbar_kwargs, spatial_ref = 0.0" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../_images/sphx_glr_plot_customising_your_plots_006.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_006.png" alt="Same override on a GSPy scatter" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="overriding-the-automatic-axis-labels">
+<h2>Overriding the automatic axis labels<a class="headerlink" href="#overriding-the-automatic-axis-labels" title="Link to this heading"></a></h2>
+<p>GSPy builds its axis labels from the coordinate metadata: the CF standard
+name and units. Where a variable has no standard name its long name is used,
+and that text can run to several lines. The figures are ordinary matplotlib
+figures, so every label can be replaced afterwards whatever it started as.
+This also works on xarray raster plots, whose axis labels come from the
+coordinates:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Easting (m)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Northing (m)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Flight path, coloured by TMI"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"TMI (nT)"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_007.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_007.png" alt="Flight path, coloured by TMI" class = "sphx-glr-single-img"/><p>On a line profile, the same holds - the metadata labels are drawn first and
+overwritten after:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Distance along line (m)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"TMI (nT)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Short labels on a line profile"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_008.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_008.png" alt="Short labels on a line profile" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.359 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-customising-your-plots-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/dabee726cd2c3601059fa8cf608da964/plot_customising_your_plots.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_customising_your_plots.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/858f2834b761723b3befd008a3fbfb3a/plot_customising_your_plots.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_customising_your_plots.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/54ca270b8f79909d640661ee86f6731f/plot_customising_your_plots.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_customising_your_plots.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plot_coordinate_reference_systems.html" class="btn btn-neutral float-left" title="Coordinate Reference Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../gspy_convention_requirements.html" class="btn btn-neutral float-right" title="GS Convention" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright None.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

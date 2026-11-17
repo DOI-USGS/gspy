@@ -140,7 +140,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files.">
 
 .. only:: html
 
@@ -174,7 +174,7 @@ Creating GS Files
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This example supports data and models read from Aarhus Workbench XYZ files. What&#x27;s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example supports data and models read from Aarhus Workbench XYZ files. What&#x27;s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times.">
 
 .. only:: html
 
@@ -258,6 +258,23 @@ Interacting With GS Files
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="GSPy and xarray plotters fill in labels, titles and colorbars from the data metadata - by default the CF standard name and units. Any of them can be overridden: the plotters take standard keyword arguments and they draw onto ordinary matplotlib figures. This example works through the most common customisations on the TEMPEST AEM survey.">
+
+.. only:: html
+
+  .. image:: /examples/Interacting_With_GS_Files/images/thumb/sphx_glr_plot_customising_your_plots_thumb.png
+    :alt:
+
+  :doc:`/examples/Interacting_With_GS_Files/plot_customising_your_plots`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Customising Your Plots</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -270,6 +287,7 @@ Interacting With GS Files
 
    /examples/Interacting_With_GS_Files/plot_xarray_methods
    /examples/Interacting_With_GS_Files/plot_coordinate_reference_systems
+   /examples/Interacting_With_GS_Files/plot_customising_your_plots
 
 
 .. only:: html

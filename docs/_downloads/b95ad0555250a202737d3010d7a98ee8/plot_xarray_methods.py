@@ -18,11 +18,11 @@ from pprint import pprint
 
 #%%
 # First open the netcdf GS standard file, generate it if doesn't already exist
-input_file = "..//data_files//tempest_aseg//Tempest.nc"
+input_file = "../data_files/tempest_aseg/Tempest.nc"
 if not isfile(input_file):
     import subprocess
     import sys
-    subprocess.run([sys.executable, "..//Creating_GS_Files//plot_aseg_tempest.py"])
+    subprocess.run([sys.executable, "../Creating_GS_Files/plot_aseg_tempest.py"])
 survey = gspy.open_datatree(input_file)['survey']
 
 #%%
@@ -250,7 +250,7 @@ pprint(survey['models/inverted_models']['conductivity'].attrs)
 # find groups of interest
 
 #%%
-# Here's a simply function using native netCDF and xarray methods to search
+# Here's a simple function using native netCDF and xarray methods to search
 # through a file and identify groups based on their attributes
 
 import xarray as xr

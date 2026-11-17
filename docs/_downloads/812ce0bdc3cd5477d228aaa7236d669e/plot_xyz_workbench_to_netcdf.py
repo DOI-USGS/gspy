@@ -2,9 +2,11 @@
 Workbench XYZ
 -------------
 
-This example supports data and models read from Aarhus Workbench XYZ files. What's unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times. 
+This example supports data and models read from Aarhus Workbench XYZ files. What's unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times.
 
-The workbench file handler detects when an XYZ file matches this format and parses out the metadata to be joined with additional metadata passed from a YAML file. 
+The workbench file handler detects when an XYZ file matches this format and parses out the metadata to be joined with additional metadata passed from a YAML file.
+
+Workbench inversion results come as a triplet of .dat, .inv and .syn exports sharing a base filename. Passing any one of the three is enough: gspy locates the other two and combines all three into one dataset in the GS file.
 
 Source Reference: U.S. Geological Survey, 2024, Airborne electromagnetic and magnetic survey of Delaware Bay and surrounding regions of New Jersey and Delaware, 2022 (ver 2.0, April 2025): U.S. Geological Survey data release, https://doi.org/10.5066/F7J96592.
 """
@@ -22,12 +24,12 @@ import gspy
 # .. literalinclude:: /../../examples/data_files/workbench/survey.yml
 #    :language: yaml
 #    :linenos:
-#    :caption: this is a test
+#    :caption: Survey YAML file
 #
 
 #%%
 # Path to example files
-data_path = '..//data_files/workbench'
+data_path = '../data_files/workbench'
 
 #%%
 # Survey Metadata file
@@ -47,8 +49,8 @@ data_container = survey.gs.add_container('data', **dict(content = "raw data"))
 #%%
 # Point to Workbench XYZ data files
 
-d_data = join(data_path, 'data//prod_726_729raw_RAW_export.xyz')
-d_supp = join(data_path, 'data//raw_data.yml')
+d_data = join(data_path, 'data', 'prod_726_729raw_RAW_export.xyz')
+d_supp = join(data_path, 'data', 'raw_data.yml')
 
 # Add the raw AEM data
 rd = data_container.gs.add(key='raw_data', data=d_data, metadata_file=d_supp)
@@ -68,11 +70,16 @@ model_container = survey.gs.add_container('models', **dict(content='inverse mode
 # GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
 # one of the three files need to be passed to provide the base filename
 
-d_data = join(data_path, 'model//prod_726_729_LBv2_bky_MOD_dat.xyz')
-d_supp = join(data_path, 'model//models.yml')
+d_data = join(data_path, 'model', 'prod_726_729_LBv2_bky_MOD_dat.xyz')
+d_supp = join(data_path, 'model', 'models.yml')
 
 #%%
 md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
+
+#%%
+# Note there is no 'processed data' group in this survey: Workbench inversion
+# exports bundle the model, the input data it was inverted from and the
+# synthetic responses together, and they all live in the models branch.
 
 # %%
 # Save to NetCDF file
@@ -82,19 +89,31 @@ d_out = join(data_path, 'workbench_example.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%
-# Inspect survey
-# ^^^^^^^^^^^^^^
-print(survey.dataset)
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+new_survey = gspy.open_datatree(d_out)['survey']
+print(new_survey.gs.tree)
+print(new_survey)
+
+# %%
+# Plotting
+# ^^^^^^^^
+
+# A line profile of the raw data against distance along the survey line, with
+# the line number in the title.
+line = int(new_survey['data/raw_data']['line_no'].values[0])
+subset = new_survey['data/raw_data'].gs.subset('line_no', line)
+
+plt.figure()
+subset.gs.plot('rx_altitude', x='distance')
+plt.title(f"Line {line}")
+plt.tight_layout()
 
 #%%
-# Inspect the two branches
-# ^^^^^^^^^^^^^^^^^^^^^^^^
-
-#%%
-# Data Branch
-print(survey['data'])
-
-#%%
-# Models Branch
-print(survey['models'])
+# A map view of the traverse coloured by a tabular variable, using GSPy's
+# plotter.
+fig, ax = plt.subplots()
+subset.gs.scatter(hue='rx_altitude', cmap='jet', ax=ax)
+ax.set_title(f"Line {line}")
+plt.show()
 

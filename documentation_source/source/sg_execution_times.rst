@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.689** total execution time for 11 files **from all galleries**:
+**00:15.028** total execution time for 12 files **from all galleries**:
 
 .. container::
 
@@ -32,36 +32,39 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_systems.py` (``../../examples/Creating_GS_Files/plot_systems.py``)
-     - 00:00.689
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``../../examples/Creating_GS_Files/plot_aseg_tempest.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``../../examples/Creating_GS_Files/plot_csv_magnetics.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``../../examples/Creating_GS_Files/plot_csv_resolve.py``)
-     - 00:00.000
-     - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``../../examples/Creating_GS_Files/plot_csv_skytem.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py` (``../../examples/Creating_GS_Files/plot_dat_loupe.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``../../examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``../../examples/Creating_GS_Files/plot_tifs.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``../../examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
-     - 00:00.000
+     - 00:02.154
      - 0.0
    * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_xarray_methods.py` (``../../examples/Interacting_With_GS_Files/plot_xarray_methods.py``)
-     - 00:00.000
+     - 00:02.054
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py` (``../../examples/Creating_GS_Files/plot_dat_loupe.py``)
+     - 00:01.701
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``../../examples/Creating_GS_Files/plot_csv_resolve.py``)
+     - 00:01.602
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``../../examples/Creating_GS_Files/plot_aseg_tempest.py``)
+     - 00:01.499
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_customising_your_plots.py` (``../../examples/Interacting_With_GS_Files/plot_customising_your_plots.py``)
+     - 00:01.359
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``../../examples/Creating_GS_Files/plot_xyz_workbench_to_netcdf.py``)
+     - 00:01.187
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``../../examples/Creating_GS_Files/plot_tifs.py``)
+     - 00:01.161
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``../../examples/Creating_GS_Files/plot_help_I_have_no_variable_metadata.py``)
+     - 00:00.772
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``../../examples/Creating_GS_Files/plot_csv_magnetics.py``)
+     - 00:00.686
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_systems.py` (``../../examples/Creating_GS_Files/plot_systems.py``)
+     - 00:00.481
+     - 0.0
+   * - :ref:`sphx_glr_examples_Interacting_With_GS_Files_plot_coordinate_reference_systems.py` (``../../examples/Interacting_With_GS_Files/plot_coordinate_reference_systems.py``)
+     - 00:00.372
      - 0.0

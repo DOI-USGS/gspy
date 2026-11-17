@@ -21,16 +21,17 @@
 Magnetic Raster Dataset
 -----------------------
 
-These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. 
+These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files.
 
 Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
 
-.. GENERATED FROM PYTHON SOURCE LINES 11-18
+.. GENERATED FROM PYTHON SOURCE LINES 11-20
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
     from os.path import join
+    import numpy as np
     import gspy
     from gspy import Survey
     import warnings
@@ -43,18 +44,19 @@ Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoo
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-21
+
+.. GENERATED FROM PYTHON SOURCE LINES 22-24
 
 Initialize the Survey
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-31
+.. GENERATED FROM PYTHON SOURCE LINES 24-34
 
 .. code-block:: Python
 
 
     # Path to example files
-    data_path = '..//data_files//magnetics'
+    data_path = '../data_files/magnetics'
 
     # Survey metadata file
     metadata = join(data_path, "WI_Magnetics_survey_md.yml")
@@ -69,7 +71,7 @@ Initialize the Survey
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-37
+.. GENERATED FROM PYTHON SOURCE LINES 35-40
 
 .. literalinclude:: /../../examples/data_files/magnetics/WI_Magnetics_survey_md.yml
    :language: yaml
@@ -77,12 +79,12 @@ Initialize the Survey
    :caption: Survey YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-42
+.. GENERATED FROM PYTHON SOURCE LINES 43-45
 
 Create a Data Branch
 ^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-45
+.. GENERATED FROM PYTHON SOURCE LINES 45-48
 
 .. code-block:: Python
 
@@ -96,12 +98,12 @@ Create a Data Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 49-51
 
 Add the raw magnetic data to the branch
 """""""""""""""""""""""""""""""""""""""
 
-.. GENERATED FROM PYTHON SOURCE LINES 48-53
+.. GENERATED FROM PYTHON SOURCE LINES 51-56
 
 .. code-block:: Python
 
@@ -117,7 +119,7 @@ Add the raw magnetic data to the branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-56
+.. GENERATED FROM PYTHON SOURCE LINES 57-59
 
 .. code-block:: Python
 
@@ -130,7 +132,7 @@ Add the raw magnetic data to the branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 57-62
+.. GENERATED FROM PYTHON SOURCE LINES 60-65
 
 .. literalinclude:: /../../examples/data_files/magnetics/WI_Magnetics_raw_data_md.yml
    :language: yaml
@@ -138,17 +140,17 @@ Add the raw magnetic data to the branch
    :caption: Raw Magnetic Data YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-67
+.. GENERATED FROM PYTHON SOURCE LINES 68-70
 
 Add the Gridded Data
 """"""""""""""""""""
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-71
+.. GENERATED FROM PYTHON SOURCE LINES 72-74
 
 Import a tif of gridded mag data.
 The metadata file for raster datasets should contain paths to the raster files.
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-75
+.. GENERATED FROM PYTHON SOURCE LINES 74-78
 
 .. code-block:: Python
 
@@ -163,7 +165,7 @@ The metadata file for raster datasets should contain paths to the raster files.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-81
+.. GENERATED FROM PYTHON SOURCE LINES 79-84
 
 .. literalinclude:: /../../examples/data_files/magnetics/WI_Magnetics_grids_md.yml
    :language: yaml
@@ -171,12 +173,12 @@ The metadata file for raster datasets should contain paths to the raster files.
    :caption: Gridded (Raster) Magnetic YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-87
+.. GENERATED FROM PYTHON SOURCE LINES 88-90
 
 Save to NetCDF file
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-91
+.. GENERATED FROM PYTHON SOURCE LINES 90-94
 
 .. code-block:: Python
 
@@ -191,12 +193,12 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-94
+.. GENERATED FROM PYTHON SOURCE LINES 95-97
 
-Opening a GS NetCDF 
+Opening a GS NetCDF
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-97
+.. GENERATED FROM PYTHON SOURCE LINES 97-100
 
 .. code-block:: Python
 
@@ -210,16 +212,17 @@ Opening a GS NetCDF
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 98-100
+.. GENERATED FROM PYTHON SOURCE LINES 101-103
 
 View the Data Tree
 ^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-103
+.. GENERATED FROM PYTHON SOURCE LINES 103-107
 
 .. code-block:: Python
 
 
+    print(new_survey.gs.tree)
     print(new_survey)
 
 
@@ -229,6 +232,12 @@ View the Data Tree
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
+
+    /survey
+    /survey/magnetic_data
+    /survey/magnetic_data/raw_data
+    /survey/magnetic_data/grids
+    /survey/magnetic_data/raw_data/magnetic_system
 
     <xarray.DataTree 'survey'>
     Group: /survey
@@ -249,7 +258,7 @@ View the Data Tree
     │       comment:       This dataset includes minimally processed (raw) AEM and ra...
     │       summary:       Magnetic survey data were collected during January and Feb...
     │       content:       Wisconsin SkyTEM survey information /survey; raw flightlin...
-    │       gspy_version:  2.2.8
+    │       gspy_version:  2.2.9
     │       conventions:   GS-2.0, CF-1.13
     └── Group: /survey/magnetic_data
         │   Dimensions:      ()
@@ -263,13 +272,13 @@ View the Data Tree
         │   │   Dimensions:      (index: 6785)
         │   │   Coordinates:
         │   │     * index        (index) float64 54kB 0.0 1.0 2.0 ... 6.783e+03 6.784e+03
-        │   │       spatial_ref  float64 8B ...
         │   │       x            (index) float64 54kB ...
         │   │       y            (index) float64 54kB ...
         │   │       z            (index) float64 54kB ...
+        │   │       spatial_ref  float64 8B ...
         │   │   Data variables: (12/17)
         │   │       fid          (index) float64 54kB ...
-        │   │       line         (index) float64 54kB ...
+        │   │       line         (index) int64 54kB ...
         │   │       lon          (index) float64 54kB ...
         │   │       lat          (index) float64 54kB ...
         │   │       alt          (index) float64 54kB ...
@@ -288,7 +297,7 @@ View the Data Tree
         │   │       structure:   tabular
         │   │       mode:        airborne
         │   │       method:      magnetic, total magnetic field
-        │   │       instrument:  cesium vapour
+        │   │       instrument:  cesium vapor
         │   └── Group: /survey/magnetic_data/raw_data/magnetic_system
         │           Dimensions:                           (n_transmitter: 1, n_receiver: 1,
         │                                                  n_couplet: 1, n_base_magnetometer: 1,
@@ -300,24 +309,24 @@ View the Data Tree
         │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
         │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
         │           Data variables: (12/29)
-        │               transmitter_label                 (n_transmitter) <U7 28B ...
-        │               transmitter_description           (n_transmitter) <U142 568B ...
-        │               receiver_label                    (n_receiver) <U19 76B ...
-        │               receiver_sensor_type              (n_receiver) <U23 92B ...
-        │               receiver_sensor_model             (n_receiver) <U6 24B ...
-        │               receiver_sensor_manufacturer      (n_receiver) <U10 40B ...
+        │               transmitter_label                 (n_transmitter) object 8B ...
+        │               transmitter_description           (n_transmitter) object 8B ...
+        │               receiver_label                    (n_receiver) object 8B ...
+        │               receiver_sensor_type              (n_receiver) object 8B ...
+        │               receiver_sensor_model             (n_receiver) object 8B ...
+        │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
         │               ...                                ...
-        │               diurnal_correction                <U110 440B ...
-        │               tieline_levelling                 <U33 132B ...
-        │               microlevelling                    <U31 124B ...
-        │               igrf_model_date                   <U21 84B ...
-        │               igrf_model_location               <U54 216B ...
-        │               igrf_model_height                 <U69 276B ...
+        │               diurnal_correction                object 8B ...
+        │               tieline_levelling                 object 8B ...
+        │               microlevelling                    object 8B ...
+        │               igrf_model_date                   object 8B ...
+        │               igrf_model_location               object 8B ...
+        │               igrf_model_height                 object 8B ...
         │           Attributes:
         │               type:        system
         │               mode:        airborne
         │               method:      magnetic
-        │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+        │               instrument:  Geometrics G-822A cesium-vapor magnetometer
         │               name:        magnetic_system
         └── Group: /survey/magnetic_data/grids
                 Dimensions:       (x: 799, nv: 2, y: 1155)
@@ -344,25 +353,31 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-106
+.. GENERATED FROM PYTHON SOURCE LINES 108-110
 
 Plotting
 ^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-111
+.. GENERATED FROM PYTHON SOURCE LINES 110-121
 
 .. code-block:: Python
 
 
+    # Line profiles of the flight-line data, subset by line so each figure records
+    # which line it shows. gs.plot draws a variable against distance along the line.
+    line = int(np.unique(new_survey['magnetic_data/raw_data']['line'].values)[0])
+    subset = new_survey['magnetic_data/raw_data'].gs.subset('line', line)
+
     plt.figure()
-    new_survey['magnetic_data/raw_data']['height'].plot()
+    subset.gs.plot('height', x='distance')
+    plt.title(f"Line {line}")
     plt.tight_layout()
 
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_001.png
-   :alt: spatial_ref = 0.0
+   :alt: Line 100101
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_001.png
    :class: sphx-glr-single-img
 
@@ -370,20 +385,20 @@ Plotting
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-117
+.. GENERATED FROM PYTHON SOURCE LINES 122-127
 
 .. code-block:: Python
 
-    pd = new_survey['magnetic_data/raw_data']['tmi']
     plt.figure()
-    pd.plot()
+    subset.gs.plot('tmi', x='distance')
+    plt.title(f"Line {line}")
     plt.tight_layout()
 
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_002.png
-   :alt: spatial_ref = 0.0
+   :alt: Line 100101
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_002.png
    :class: sphx-glr-single-img
 
@@ -391,13 +406,20 @@ Plotting
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 118-127
+.. GENERATED FROM PYTHON SOURCE LINES 128-131
+
+A map view of the contractor's interpolated magnetic grid, using xarray's
+plotter. The title is set explicitly because xarray otherwise fills it from
+the leftover scalar coordinate 'spatial_ref', which carries no information.
+
+.. GENERATED FROM PYTHON SOURCE LINES 131-141
 
 .. code-block:: Python
 
     m = new_survey['magnetic_data/grids/magnetic_tmi']
     plt.figure()
-    m.plot(cmap='jet')
+    m.plot(cmap='jet', robust=True)
+    plt.suptitle("Total magnetic intensity")
     plt.tight_layout()
 
     plt.show()
@@ -408,7 +430,7 @@ Plotting
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_003.png
-   :alt: spatial_ref = 0.0
+   :alt: Total magnetic intensity, spatial_ref = 0.0
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_magnetics_003.png
    :class: sphx-glr-single-img
 
@@ -419,7 +441,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.542 seconds)
+   **Total running time of the script:** (0 minutes 0.686 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_magnetics.py:

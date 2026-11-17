@@ -313,7 +313,7 @@ components the file scales its output by, at the bottom of the file.
 
     [1.0855e-05 3.2555e-05 5.4255e-05 8.6805e-05]
     ['x' 'z']
-    ['transmitter_1_x' 'transmitter_1_z']
+    ['transmitter_1_x_b' 'transmitter_1_z_b']
 
 
 
@@ -366,7 +366,7 @@ say so - the extra coil's fields become placeholders to fill in.
  .. code-block:: none
 
     ['z']
-    ['LM_z' 'HM_z' 'LM_x' 'HM_x']
+    ['LM_z_dbdt' 'HM_z_dbdt' 'LM_x_dbdt' 'HM_x_dbdt']
 
 
 
@@ -464,23 +464,33 @@ receiver coils were.
 
  .. code-block:: none
 
-    ['transmitter_number_of_turns', 'transmitter_area', 'transmitter_waveform_type', 'transmitter_current_scale_factor', 'transmitter_peak_current', 'transmitter_moment', 'transmitter_peak_moment', 'transmitter_on_time', 'transmitter_off_time', 'transmitter_height', 'receiver_area', 'receiver_coil_low_pass_filter', 'receiver_instrument_low_pass_filter', 'receiver_delay_time', 'receiver_gain', 'receiver_height', 'couplet_txrx_dx', 'couplet_txrx_dy', 'couplet_txrx_dz', 'couplet_sample_rate', 'reference_frame', 'output_sample_frequency', 'sample_rate', 'stacks', 'powerline_frequency']
+    ['transmitter_waveform_type', 'transmitter_current_scale_factor', 'transmitter_on_time', 'transmitter_off_time', 'transmitter_height', 'receiver_area', 'receiver_coil_low_pass_filter', 'receiver_instrument_low_pass_filter', 'receiver_delay_time', 'receiver_gain', 'receiver_height', 'couplet_txrx_dx', 'couplet_txrx_dy', 'couplet_txrx_dz', 'couplet_sample_rate', 'reference_frame', 'output_sample_frequency', 'sample_rate', 'stacks', 'powerline_frequency']
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 183-186
+.. GENERATED FROM PYTHON SOURCE LINES 183-193
 
-GA-AEM also normalises the loop away, writing one turn of one square metre
-carrying one amp with the data scaled to match. Importing that would claim a
-1 m^2 single turn loop, so it is flagged instead and the loop left placeheld.
+Normalisation is two questions, and the file answers one of them.
+``SecondaryFieldNormalisation`` says whether GA-AEM divided the secondary field
+by the primary one, which is what makes the delivered numbers ppm - so it sets
+``output_data_type``. Whether the data the system is attached to was normalised
+by the transmitter moment is ``data_normalized``, which is about the data file
+rather than the forward model, so it is left for you to answer.
 
-.. GENERATED FROM PYTHON SOURCE LINES 186-189
+The loop itself is taken as the file states it. Tempest.stm states a single turn
+of one square meter, which is a real loop scaled out of the forward model - put
+the real one back if the data needs it.
+
+.. GENERATED FROM PYTHON SOURCE LINES 193-199
 
 .. code-block:: Python
 
 
+    print(tempest_stm['output_data_type'].values)
     print(tempest_stm['data_normalized'].values)
+    print(tempest_stm['transmitter_area'].values,
+          tempest_stm['transmitter_peak_current'].values)
 
 
 
@@ -490,18 +500,20 @@ carrying one amp with the data scaled to match. Importing that would claim a
 
  .. code-block:: none
 
-    True
+    B
+    False
+    [1] [0.5]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 190-193
+.. GENERATED FROM PYTHON SOURCE LINES 200-203
 
 Nothing read is thrown away, though. Anything in the file that GSPy has no
-field for is kept in the attributes under ``stm_``, the normalised loop
-included, so the file can be reconstructed from the system.
+field for is kept in the attributes under ``stm_``, so the file can be
+reconstructed from the system.
 
-.. GENERATED FROM PYTHON SOURCE LINES 193-198
+.. GENERATED FROM PYTHON SOURCE LINES 203-208
 
 .. code-block:: Python
 
@@ -520,9 +532,6 @@ included, so the file can be reconstructed from the system.
 
     stm_file: Tempest.stm
     stm_name: Tempest-30.0Hz
-    stm_transmitter_number_of_turns: 1
-    stm_transmitter_peak_current: 0.5
-    stm_transmitter_loop_area: 1
     stm_receiver_window_weighting_scheme: Boxcar
     stm_forward_modelling_secondary_field_normalisation: none
     stm_forward_modelling_frequencies_per_decade: 6
@@ -531,7 +540,7 @@ included, so the file can be reconstructed from the system.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 199-205
+.. GENERATED FROM PYTHON SOURCE LINES 209-215
 
 Dump what the file knows, fill in the rest by hand
 +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -540,7 +549,7 @@ Dump what the file knows, fill in the rest by hand
 system, so it can be written out as a template: the imported values are real,
 and what the file could not say is still a placeholder to answer.
 
-.. GENERATED FROM PYTHON SOURCE LINES 205-209
+.. GENERATED FROM PYTHON SOURCE LINES 215-219
 
 .. code-block:: Python
 
@@ -555,7 +564,7 @@ and what the file could not say is still a placeholder to answer.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 210-215
+.. GENERATED FROM PYTHON SOURCE LINES 220-225
 
 .. literalinclude:: /../../examples/Creating_GS_Files/template_md_stm_tempest.yml
    :language: yaml
@@ -563,11 +572,11 @@ and what the file could not say is still a placeholder to answer.
    :caption: Tempest.stm written out as a system template
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 218-219
+.. GENERATED FROM PYTHON SOURCE LINES 228-229
 
 Filled in, it reads straight back.
 
-.. GENERATED FROM PYTHON SOURCE LINES 219-222
+.. GENERATED FROM PYTHON SOURCE LINES 229-232
 
 .. code-block:: Python
 
@@ -587,7 +596,7 @@ Filled in, it reads straight back.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 223-234
+.. GENERATED FROM PYTHON SOURCE LINES 233-244
 
 A .stm and a YAML together
 ++++++++++++++++++++++++++
@@ -601,7 +610,7 @@ and let the ``.stm`` supply the waveform, the gate times and the geometry.
    :caption: Tempest_stm_extras.yml
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 234-238
+.. GENERATED FROM PYTHON SOURCE LINES 244-248
 
 .. code-block:: Python
 
@@ -616,18 +625,20 @@ and let the ``.stm`` supply the waveform, the gate times and the geometry.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 239-241
+.. GENERATED FROM PYTHON SOURCE LINES 249-252
 
 The YAML wins wherever the two overlap, so it can correct the file as well as
-add to it - here it puts the real loop back over the normalised one.
+add to it - here it puts the real loop back over the unit one the forward model
+used.
 
-.. GENERATED FROM PYTHON SOURCE LINES 241-246
+.. GENERATED FROM PYTHON SOURCE LINES 252-258
 
 .. code-block:: Python
 
 
     print(tempest.attrs['instrument'])
     print(tempest['transmitter_area'].values, tempest['transmitter_peak_current'].values)
+    print(tempest['data_normalized'].values)
     print(tempest['couplet_txrx_dz'].values)
 
 
@@ -640,17 +651,18 @@ add to it - here it puts the real loop back over the normalised one.
 
     30Hz Tempest
     [155] [560]
+    False
     [-52 -52]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 247-249
+.. GENERATED FROM PYTHON SOURCE LINES 259-261
 
 What is left placeheld is what neither source knows. Answer those, or delete
 the fields this system does not have, and the definition is finished.
 
-.. GENERATED FROM PYTHON SOURCE LINES 249-252
+.. GENERATED FROM PYTHON SOURCE LINES 261-264
 
 .. code-block:: Python
 
@@ -665,12 +677,12 @@ the fields this system does not have, and the definition is finished.
 
  .. code-block:: none
 
-    ['transmitter_moment', 'transmitter_height', 'receiver_area', 'receiver_coil_low_pass_filter', 'receiver_instrument_low_pass_filter', 'receiver_delay_time', 'receiver_gain', 'receiver_height', 'couplet_sample_rate', 'sample_rate', 'stacks', 'powerline_frequency']
+    ['transmitter_height', 'receiver_area', 'receiver_coil_low_pass_filter', 'receiver_instrument_low_pass_filter', 'receiver_delay_time', 'receiver_gain', 'receiver_height', 'couplet_sample_rate', 'sample_rate', 'stacks', 'powerline_frequency']
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 253-259
+.. GENERATED FROM PYTHON SOURCE LINES 265-271
 
 From a template alone
 +++++++++++++++++++++
@@ -679,7 +691,7 @@ With no file to start from, ask for the family and the shape. See
 :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py`
 for more on templates.
 
-.. GENERATED FROM PYTHON SOURCE LINES 259-264
+.. GENERATED FROM PYTHON SOURCE LINES 271-276
 
 .. code-block:: Python
 
@@ -701,7 +713,7 @@ for more on templates.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 265-276
+.. GENERATED FROM PYTHON SOURCE LINES 277-288
 
 Attaching one to the data it recorded
 +++++++++++++++++++++++++++++++++++++
@@ -715,7 +727,7 @@ measured it by name, so label the transmitter the way the data file writes it -
 a bare ``.stm`` does not name its own transmitter, and would be indexed
 ``transmitter_1`` instead.
 
-.. GENERATED FROM PYTHON SOURCE LINES 276-289
+.. GENERATED FROM PYTHON SOURCE LINES 288-301
 
 .. code-block:: Python
 
@@ -739,12 +751,12 @@ a bare ``.stm`` does not name its own transmitter, and would be indexed
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 290-292
+.. GENERATED FROM PYTHON SOURCE LINES 302-304
 
 Which is what the ``system_couplet`` of each electromagnetic variable is checked
 against.
 
-.. GENERATED FROM PYTHON SOURCE LINES 292-298
+.. GENERATED FROM PYTHON SOURCE LINES 304-310
 
 .. code-block:: Python
 
@@ -762,8 +774,8 @@ against.
 
  .. code-block:: none
 
-    ['z_x' 'z_z']
-    {'emx_nonhprg': 'z_x', 'emz_nonhprg': 'z_z'}
+    ['z_x_b' 'z_z_b']
+    {'emx_nonhprg': 'z_x_b', 'emz_nonhprg': 'z_z_b'}
 
 
 
@@ -771,7 +783,7 @@ against.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.689 seconds)
+   **Total running time of the script:** (0 minutes 0.481 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_systems.py:

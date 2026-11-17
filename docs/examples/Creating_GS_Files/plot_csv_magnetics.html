@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magnetic Raster Dataset &mdash; gspy 2.2.9 documentation</title>
+  <title>Magnetic Raster Dataset &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -117,6 +117,7 @@ to download the full example code.</p>
 <p>Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P93SY9LI">https://doi.org/10.5066/P93SY9LI</a>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Survey</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
@@ -126,7 +127,7 @@ to download the full example code.</p>
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'..//data_files//magnetics'</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'../data_files/magnetics'</span>
 
 <span class="c1"># Survey metadata file</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"WI_Magnetics_survey_md.yml"</span><span class="p">)</span>
@@ -215,13 +216,13 @@ to download the full example code.</p>
 <span class="linenos">  5</span><span class="w">    </span><span class="nt">structure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tabular</span>
 <span class="linenos">  6</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
 <span class="linenos">  7</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic, total magnetic field</span>
-<span class="linenos">  8</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium vapour</span>
+<span class="linenos">  8</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium vapor</span>
 <span class="linenos">  9</span>
 <span class="linenos"> 10</span><span class="nt">magnetic_system</span><span class="p">:</span>
 <span class="linenos"> 11</span><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system</span>
 <span class="linenos"> 12</span><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
 <span class="linenos"> 13</span><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic</span>
-<span class="linenos"> 14</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Geometrics G-822A cesium‑vapor magnetometer</span><span class="w"> </span>
+<span class="linenos"> 14</span><span class="w">    </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Geometrics G-822A cesium-vapor magnetometer</span>
 <span class="linenos"> 15</span>
 <span class="linenos"> 16</span><span class="w">    </span><span class="nt">prefixes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'base_magnetometer'</span><span class="p p-Indicator">]</span>
 <span class="linenos"> 17</span>
@@ -230,202 +231,182 @@ to download the full example code.</p>
 <span class="linenos"> 20</span><span class="w">            </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_mag_locations</span>
 <span class="linenos"> 21</span><span class="w">            </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Base Magnetometer Location Index Numbers</span>
 <span class="linenos"> 22</span><span class="w">            </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 23</span><span class="w">            </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 24</span><span class="w">            </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 25</span><span class="w">            </span><span class="nt">discrete</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos"> 26</span>
-<span class="linenos"> 27</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 28</span>
-<span class="linenos"> 29</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
-<span class="linenos"> 30</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive</span>
-<span class="linenos"> 31</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial magnetic transmitter was used. The system measures the scalar Larmor precession frequency induced by the Earth's magnetic field.</span>
-<span class="linenos"> 32</span>
-<span class="linenos"> 33</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
-<span class="linenos"> 34</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scalar_magnetometer</span>
-<span class="linenos"> 35</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium-vapor split-beam</span>
-<span class="linenos"> 36</span><span class="w">            </span><span class="nt">sensor_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">G-822A</span>
-<span class="linenos"> 37</span><span class="w">            </span><span class="nt">sensor_manufacturer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Geometrics</span>
-<span class="linenos"> 38</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger. Measures total magnetic field through Larmor precession frequency.</span>
-<span class="linenos"> 39</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tail-stinger mounted; scalar measurement independent of orientation.</span>
-<span class="linenos"> 40</span><span class="w">            </span><span class="nt">coordinates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_reported</span><span class="w">   </span>
-<span class="linenos"> 41</span><span class="w">            </span><span class="nt">lag_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lag was negligible and no lag correction was applied</span>
-<span class="linenos"> 42</span><span class="w">            </span><span class="nt">heading_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Heading was negligible and no heading correction was applied</span>
-<span class="linenos"> 43</span>
-<span class="linenos"> 44</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
-<span class="linenos"> 45</span><span class="w">            </span><span class="nt">passive_scalar_pair</span><span class="p">:</span>
-<span class="linenos"> 46</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">passive</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 47</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">scalar_magnetometer</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 48</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The magnetic measurement system consists of the Earth's field as a passive transmitter and a single scalar magnetometer mounted in the tail stinger.</span>
-<span class="linenos"> 49</span>
-<span class="linenos"> 50</span><span class="w">        </span><span class="nt">base_magnetometer</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 51</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
-<span class="linenos"> 52</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The base station magnetometer was placed in a location of low magnetic gradient, away from electrical transmission lines and moving metallic objects, such as motor vehicles and aircrafts.</span><span class="w"> </span>
-<span class="linenos"> 53</span>
-<span class="linenos"> 54</span><span class="w">            </span><span class="nt">location_names</span><span class="p">:</span>
-<span class="linenos"> 55</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Door</span><span class="nv"> </span><span class="s">County"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Manitowoc"</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 56</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 57</span>
-<span class="linenos"> 58</span><span class="w">            </span><span class="nt">values</span><span class="p">:</span>
-<span class="linenos"> 59</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">54538</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">54194.7</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 60</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
-<span class="linenos"> 61</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 62</span>
-<span class="linenos"> 63</span><span class="w">            </span><span class="nt">latitude</span><span class="p">:</span>
-<span class="linenos"> 64</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">44.849335</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">44.127998</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 65</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Latitude in WGS84</span>
-<span class="linenos"> 66</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decial degrees</span>
-<span class="linenos"> 67</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 68</span>
-<span class="linenos"> 69</span><span class="w">            </span><span class="nt">longitude</span><span class="p">:</span>
-<span class="linenos"> 70</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">87.422440</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">87.685524</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 71</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Longitude in WGS84</span>
-<span class="linenos"> 72</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decial degrees</span>
-<span class="linenos"> 73</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 74</span><span class="w">            </span>
-<span class="linenos"> 75</span><span class="w">            </span><span class="nt">elevation</span><span class="p">:</span>
-<span class="linenos"> 76</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">178.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">164.4</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 77</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Elevation</span>
-<span class="linenos"> 78</span><span class="w">                </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WGS84</span>
-<span class="linenos"> 79</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m</span>
-<span class="linenos"> 80</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span><span class="w">        </span><span class="nt">diurnal_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnal signal removed using 3 second Fraser low-pass filter and subtracting base-station magnetometer values.</span>
-<span class="linenos"> 83</span><span class="w">        </span><span class="nt">tieline_levelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No tie line-leveling were applied</span>
-<span class="linenos"> 84</span><span class="w">        </span><span class="nt">microlevelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No micro-levelling were applied</span><span class="w"> </span>
-<span class="linenos"> 85</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">"2015,</span><span class="nv"> </span><span class="s">15th</span><span class="nv"> </span><span class="s">generation"</span><span class="w"> </span>
-<span class="linenos"> 86</span><span class="w">        </span><span class="nt">igrf_model_location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable according to GPS WGS84 longitude and latitude</span>
-<span class="linenos"> 87</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable according to magnetic sensor altitude derived from DGPS data</span><span class="w">    </span>
-<span class="linenos"> 88</span>
-<span class="linenos"> 89</span><span class="nt">coordinates</span><span class="p">:</span>
-<span class="linenos"> 90</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">E_Nad83</span>
-<span class="linenos"> 91</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N_Nad83</span>
-<span class="linenos"> 92</span><span class="w">    </span><span class="nt">z</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEM</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">    </span><span class="nt">E_Nad83</span><span class="p">:</span>
-<span class="linenos"> 96</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
-<span class="linenos"> 97</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos"> 98</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos"> 99</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">100</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
-<span class="linenos">101</span>
-<span class="linenos">102</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
-<span class="linenos">103</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
-<span class="linenos">104</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">105</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">106</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">107</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
-<span class="linenos">108</span>
-<span class="linenos">109</span><span class="w">    </span><span class="nt">Alt</span><span class="p">:</span>
-<span class="linenos">110</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
-<span class="linenos">111</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
-<span class="linenos">112</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">113</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">114</span>
-<span class="linenos">115</span><span class="w">    </span><span class="nt">Base_Mag</span><span class="p">:</span>
-<span class="linenos">116</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
-<span class="linenos">117</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Raw magnetic base station data</span>
-<span class="linenos">118</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">119</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
-<span class="linenos">120</span>
-<span class="linenos">121</span><span class="w">    </span><span class="nt">Date</span><span class="p">:</span>
-<span class="linenos">122</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
-<span class="linenos">123</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date, yyyy/mm/dd</span>
-<span class="linenos">124</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">125</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 23</span><span class="w">            </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 24</span><span class="w">            </span><span class="nt">discrete</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
+<span class="linenos"> 29</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive</span>
+<span class="linenos"> 30</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial magnetic transmitter was used. The system measures the scalar Larmor precession frequency induced by the Earth's magnetic field.</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
+<span class="linenos"> 33</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scalar_magnetometer</span>
+<span class="linenos"> 34</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium-vapor split-beam</span>
+<span class="linenos"> 35</span><span class="w">            </span><span class="nt">sensor_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">G-822A</span>
+<span class="linenos"> 36</span><span class="w">            </span><span class="nt">sensor_manufacturer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Geometrics</span>
+<span class="linenos"> 37</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger. Measures total magnetic field through Larmor precession frequency.</span>
+<span class="linenos"> 38</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tail-stinger mounted; scalar measurement independent of orientation.</span>
+<span class="linenos"> 39</span><span class="w">            </span><span class="nt">coordinates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_reported</span><span class="w">   </span>
+<span class="linenos"> 40</span><span class="w">            </span><span class="nt">lag_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lag was negligible and no lag correction was applied</span>
+<span class="linenos"> 41</span><span class="w">            </span><span class="nt">heading_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Heading was negligible and no heading correction was applied</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
+<span class="linenos"> 44</span><span class="w">            </span><span class="nt">passive_scalar_pair</span><span class="p">:</span>
+<span class="linenos"> 45</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">passive</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 46</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">scalar_magnetometer</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 47</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The magnetic measurement system consists of the Earth's field as a passive transmitter and a single scalar magnetometer mounted in the tail stinger.</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span><span class="w">        </span><span class="nt">base_magnetometer</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 50</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
+<span class="linenos"> 51</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The base station magnetometer was placed in a location of low magnetic gradient, away from electrical transmission lines and moving metallic objects, such as motor vehicles and aircrafts.</span><span class="w"> </span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span><span class="w">            </span><span class="nt">location_names</span><span class="p">:</span>
+<span class="linenos"> 54</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Door</span><span class="nv"> </span><span class="s">County"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Manitowoc"</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 55</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 56</span>
+<span class="linenos"> 57</span><span class="w">            </span><span class="nt">values</span><span class="p">:</span>
+<span class="linenos"> 58</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">54538</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">54194.7</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 59</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
+<span class="linenos"> 60</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 61</span>
+<span class="linenos"> 62</span><span class="w">            </span><span class="nt">latitude</span><span class="p">:</span>
+<span class="linenos"> 63</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">44.849335</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">44.127998</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 64</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Latitude in WGS84</span>
+<span class="linenos"> 65</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decial degrees</span>
+<span class="linenos"> 66</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 67</span>
+<span class="linenos"> 68</span><span class="w">            </span><span class="nt">longitude</span><span class="p">:</span>
+<span class="linenos"> 69</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">87.422440</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">87.685524</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 70</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Longitude in WGS84</span>
+<span class="linenos"> 71</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decial degrees</span>
+<span class="linenos"> 72</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 73</span><span class="w">            </span>
+<span class="linenos"> 74</span><span class="w">            </span><span class="nt">elevation</span><span class="p">:</span>
+<span class="linenos"> 75</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">178.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">164.4</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 76</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Elevation</span>
+<span class="linenos"> 77</span><span class="w">                </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WGS84</span>
+<span class="linenos"> 78</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m</span>
+<span class="linenos"> 79</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span><span class="w">        </span><span class="nt">diurnal_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnal signal removed using 3 second Fraser low-pass filter and subtracting base-station magnetometer values.</span>
+<span class="linenos"> 82</span><span class="w">        </span><span class="nt">tieline_levelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No tie line-leveling were applied</span>
+<span class="linenos"> 83</span><span class="w">        </span><span class="nt">microlevelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No micro-levelling were applied</span><span class="w"> </span>
+<span class="linenos"> 84</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">"2015,</span><span class="nv"> </span><span class="s">15th</span><span class="nv"> </span><span class="s">generation"</span><span class="w"> </span>
+<span class="linenos"> 85</span><span class="w">        </span><span class="nt">igrf_model_location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable according to GPS WGS84 longitude and latitude</span>
+<span class="linenos"> 86</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable according to magnetic sensor altitude derived from DGPS data</span><span class="w">    </span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span><span class="nt">coordinates</span><span class="p">:</span>
+<span class="linenos"> 89</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">E_Nad83</span>
+<span class="linenos"> 90</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">N_Nad83</span>
+<span class="linenos"> 91</span><span class="w">    </span><span class="nt">z</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEM</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 94</span><span class="w">    </span><span class="nt">E_Nad83</span><span class="p">:</span>
+<span class="linenos"> 95</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
+<span class="linenos"> 96</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos"> 98</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
+<span class="linenos"> 99</span>
+<span class="linenos">100</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
+<span class="linenos">101</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
+<span class="linenos">102</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">103</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">104</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
+<span class="linenos">105</span>
+<span class="linenos">106</span><span class="w">    </span><span class="nt">Alt</span><span class="p">:</span>
+<span class="linenos">107</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">altitude</span>
+<span class="linenos">108</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DGPS instrument altitude</span>
+<span class="linenos">109</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="w">    </span><span class="nt">Base_Mag</span><span class="p">:</span>
+<span class="linenos">112</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
+<span class="linenos">113</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Raw magnetic base station data</span>
+<span class="linenos">114</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
+<span class="linenos">115</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span><span class="w">    </span><span class="nt">Date</span><span class="p">:</span>
+<span class="linenos">118</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
+<span class="linenos">119</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date, yyyy/mm/dd</span>
+<span class="linenos">120</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">121</span>
+<span class="linenos">122</span><span class="w">    </span><span class="nt">dec</span><span class="p">:</span>
+<span class="linenos">123</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decliniation</span>
+<span class="linenos">124</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IGRF declination</span>
+<span class="linenos">125</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
 <span class="linenos">126</span>
-<span class="linenos">127</span><span class="w">    </span><span class="nt">dec</span><span class="p">:</span>
-<span class="linenos">128</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decliniation</span>
-<span class="linenos">129</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IGRF declination</span>
-<span class="linenos">130</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
-<span class="linenos">131</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">132</span>
-<span class="linenos">133</span><span class="w">    </span><span class="nt">DEM</span><span class="p">:</span>
-<span class="linenos">134</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dem</span>
-<span class="linenos">135</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
-<span class="linenos">136</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">137</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">138</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
-<span class="linenos">139</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
-<span class="linenos">140</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
-<span class="linenos">141</span>
-<span class="linenos">142</span><span class="w">    </span><span class="nt">Diurnal</span><span class="p">:</span>
-<span class="linenos">143</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic_diurnal</span>
-<span class="linenos">144</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Magnetic base station diurnal variation</span>
-<span class="linenos">145</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">146</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">147</span>
-<span class="linenos">148</span><span class="w">    </span><span class="nt">Fid</span><span class="p">:</span>
-<span class="linenos">149</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fiducial</span>
-<span class="linenos">150</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique fiducial number</span>
-<span class="linenos">151</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">152</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">153</span>
-<span class="linenos">154</span><span class="w">    </span><span class="nt">Height</span><span class="p">:</span>
-<span class="linenos">155</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instrument_height</span>
-<span class="linenos">156</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instrument height above ground</span>
-<span class="linenos">157</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">158</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">127</span><span class="w">    </span><span class="nt">DEM</span><span class="p">:</span>
+<span class="linenos">128</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dem</span>
+<span class="linenos">129</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Digital elevation model</span>
+<span class="linenos">130</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">131</span><span class="w">        </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
+<span class="linenos">132</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
+<span class="linenos">133</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North American Vertical Datum of 1988 (NAVD88)</span>
+<span class="linenos">134</span>
+<span class="linenos">135</span><span class="w">    </span><span class="nt">Diurnal</span><span class="p">:</span>
+<span class="linenos">136</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic_diurnal</span>
+<span class="linenos">137</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Magnetic base station diurnal variation</span>
+<span class="linenos">138</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span><span class="w">    </span><span class="nt">Fid</span><span class="p">:</span>
+<span class="linenos">141</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fiducial</span>
+<span class="linenos">142</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique fiducial number</span>
+<span class="linenos">143</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">144</span>
+<span class="linenos">145</span><span class="w">    </span><span class="nt">Height</span><span class="p">:</span>
+<span class="linenos">146</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instrument_height</span>
+<span class="linenos">147</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instrument height above ground</span>
+<span class="linenos">148</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span><span class="w">    </span><span class="nt">igrf</span><span class="p">:</span>
+<span class="linenos">151</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic_igrf_model</span>
+<span class="linenos">152</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Magnetic IGRF value from 2015 model</span>
+<span class="linenos">153</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
+<span class="linenos">154</span>
+<span class="linenos">155</span><span class="w">    </span><span class="nt">inc</span><span class="p">:</span>
+<span class="linenos">156</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inclination</span>
+<span class="linenos">157</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IGRF inclination</span>
+<span class="linenos">158</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
 <span class="linenos">159</span>
-<span class="linenos">160</span><span class="w">    </span><span class="nt">igrf</span><span class="p">:</span>
-<span class="linenos">161</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetic_igrf_model</span>
-<span class="linenos">162</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Magnetic IGRF value from 2015 model</span>
-<span class="linenos">163</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">164</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">165</span>
-<span class="linenos">166</span><span class="w">    </span><span class="nt">inc</span><span class="p">:</span>
-<span class="linenos">167</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inclination</span>
-<span class="linenos">168</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IGRF inclination</span>
-<span class="linenos">169</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
-<span class="linenos">170</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">171</span>
-<span class="linenos">172</span><span class="w">    </span><span class="nt">Lat</span><span class="p">:</span>
-<span class="linenos">173</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latitude</span>
-<span class="linenos">174</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Latitude, World Geodetic System of 1984 (WGS84)</span>
-<span class="linenos">175</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
-<span class="linenos">176</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">177</span>
-<span class="linenos">178</span><span class="w">    </span><span class="nt">Line</span><span class="p">:</span>
-<span class="linenos">179</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line</span>
-<span class="linenos">180</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
-<span class="linenos">181</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">182</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">183</span>
-<span class="linenos">184</span><span class="w">    </span><span class="nt">Lon</span><span class="p">:</span>
-<span class="linenos">185</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longitude</span>
-<span class="linenos">186</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Longitude, World Geodetic System of 1984 (WGS84)</span>
-<span class="linenos">187</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
-<span class="linenos">188</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">160</span><span class="w">    </span><span class="nt">Lat</span><span class="p">:</span>
+<span class="linenos">161</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latitude</span>
+<span class="linenos">162</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Latitude, World Geodetic System of 1984 (WGS84)</span>
+<span class="linenos">163</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
+<span class="linenos">164</span>
+<span class="linenos">165</span><span class="w">    </span><span class="nt">Line</span><span class="p">:</span>
+<span class="linenos">166</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">line</span>
+<span class="linenos">167</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Line number</span>
+<span class="linenos">168</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">169</span>
+<span class="linenos">170</span><span class="w">    </span><span class="nt">Lon</span><span class="p">:</span>
+<span class="linenos">171</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longitude</span>
+<span class="linenos">172</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Longitude, World Geodetic System of 1984 (WGS84)</span>
+<span class="linenos">173</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">degree</span>
+<span class="linenos">174</span>
+<span class="linenos">175</span><span class="w">    </span><span class="nt">Mag_Filt</span><span class="p">:</span>
+<span class="linenos">176</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity_filtered</span>
+<span class="linenos">177</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Filtered total magnetic intensity data</span>
+<span class="linenos">178</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
+<span class="linenos">179</span>
+<span class="linenos">180</span><span class="w">    </span><span class="nt">Mag_Raw</span><span class="p">:</span>
+<span class="linenos">181</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity_raw</span>
+<span class="linenos">182</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Raw total magnetic intensity data</span>
+<span class="linenos">183</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span><span class="w">    </span><span class="nt">RMF</span><span class="p">:</span>
+<span class="linenos">186</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">residual_magnetic_field</span>
+<span class="linenos">187</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Residual magnetic field, IGRF corrected based on 2015 model</span>
+<span class="linenos">188</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
 <span class="linenos">189</span>
-<span class="linenos">190</span><span class="w">    </span><span class="nt">Mag_Filt</span><span class="p">:</span>
-<span class="linenos">191</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity_filtered</span>
-<span class="linenos">192</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Filtered total magnetic intensity data</span>
-<span class="linenos">193</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">194</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">195</span>
-<span class="linenos">196</span><span class="w">    </span><span class="nt">Mag_Raw</span><span class="p">:</span>
-<span class="linenos">197</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity_raw</span>
-<span class="linenos">198</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Raw total magnetic intensity data</span>
-<span class="linenos">199</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">200</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">201</span>
-<span class="linenos">202</span><span class="w">    </span><span class="nt">RMF</span><span class="p">:</span>
-<span class="linenos">203</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">residual_magnetic_field</span>
-<span class="linenos">204</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Residual magnetic field, IGRF corrected based on 2015 model</span>
-<span class="linenos">205</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">206</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">207</span>
-<span class="linenos">208</span><span class="w">    </span><span class="nt">Time</span><span class="p">:</span>
-<span class="linenos">209</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_utc</span>
-<span class="linenos">210</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal coordinated time (UTC), hh:mm:ss</span>
-<span class="linenos">211</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">212</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">213</span>
-<span class="linenos">214</span><span class="w">    </span><span class="nt">TMI</span><span class="p">:</span>
-<span class="linenos">215</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
-<span class="linenos">216</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnally corrected filtered total magnetic intensity</span>
-<span class="linenos">217</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">218</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">190</span><span class="w">    </span><span class="nt">Time</span><span class="p">:</span>
+<span class="linenos">191</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_utc</span>
+<span class="linenos">192</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal coordinated time (UTC), hh:mm:ss</span>
+<span class="linenos">193</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos">194</span>
+<span class="linenos">195</span><span class="w">    </span><span class="nt">TMI</span><span class="p">:</span>
+<span class="linenos">196</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
+<span class="linenos">197</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnally corrected filtered total magnetic intensity</span>
+<span class="linenos">198</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
 </pre></div>
 </div>
 </div>
@@ -463,7 +444,7 @@ The metadata file for raster datasets should contain paths to the raster files.<
 <span class="linenos">21</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
 <span class="linenos">22</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total magnetic intensity, diurnally corrected and filtered</span>
 <span class="linenos">23</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">24</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">24</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
 <span class="linenos">25</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Midwest_Core_MAG_TMI_NAD83.tif</span>
 <span class="linenos">26</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">27</span>
@@ -471,7 +452,7 @@ The metadata file for raster datasets should contain paths to the raster files.<
 <span class="linenos">29</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">residual_magnetic_field</span>
 <span class="linenos">30</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Residual magnetic field, IGRF corrected from 2015 model</span>
 <span class="linenos">31</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nanoTesla</span>
-<span class="linenos">32</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
+<span class="linenos">32</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-9999.99</span>
 <span class="linenos">33</span><span class="w">        </span><span class="nt">files </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Midwest_Core_MAG_RMF_NAD83.tif</span>
 <span class="linenos">34</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
 <span class="linenos">35</span>
@@ -479,15 +460,13 @@ The metadata file for raster datasets should contain paths to the raster files.<
 <span class="linenos">37</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_nad83</span>
 <span class="linenos">38</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
 <span class="linenos">39</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">40</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">41</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
-<span class="linenos">42</span>
-<span class="linenos">43</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
-<span class="linenos">44</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
-<span class="linenos">45</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
-<span class="linenos">46</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">47</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">48</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
+<span class="linenos">40</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">x</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="w">    </span><span class="nt">N_Nad83</span><span class="p">:</span>
+<span class="linenos">43</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_nad83</span>
+<span class="linenos">44</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing, Wisconsin Transverse Mercator (WTM), North American Datum of 1983 (NAD83)</span>
+<span class="linenos">45</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">46</span><span class="w">        </span><span class="nt">axis </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">y</span>
 </pre></div>
 </div>
 </div>
@@ -508,10 +487,17 @@ The metadata file for raster datasets should contain paths to the raster files.<
 </section>
 <section id="view-the-data-tree">
 <h2>View the Data Tree<a class="headerlink" href="#view-the-data-tree" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'survey'&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/survey
+/survey/magnetic_data
+/survey/magnetic_data/raw_data
+/survey/magnetic_data/grids
+/survey/magnetic_data/raw_data/magnetic_system
+
+&lt;xarray.DataTree 'survey'&gt;
 Group: /survey
 │   Dimensions:                 ()
 │   Coordinates:
@@ -530,7 +516,7 @@ Group: /survey
 │       comment:       This dataset includes minimally processed (raw) AEM and ra...
 │       summary:       Magnetic survey data were collected during January and Feb...
 │       content:       Wisconsin SkyTEM survey information /survey; raw flightlin...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.9
 │       conventions:   GS-2.0, CF-1.13
 └── Group: /survey/magnetic_data
     │   Dimensions:      ()
@@ -544,13 +530,13 @@ Group: /survey
     │   │   Dimensions:      (index: 6785)
     │   │   Coordinates:
     │   │     * index        (index) float64 54kB 0.0 1.0 2.0 ... 6.783e+03 6.784e+03
-    │   │       spatial_ref  float64 8B ...
     │   │       x            (index) float64 54kB ...
     │   │       y            (index) float64 54kB ...
     │   │       z            (index) float64 54kB ...
+    │   │       spatial_ref  float64 8B ...
     │   │   Data variables: (12/17)
     │   │       fid          (index) float64 54kB ...
-    │   │       line         (index) float64 54kB ...
+    │   │       line         (index) int64 54kB ...
     │   │       lon          (index) float64 54kB ...
     │   │       lat          (index) float64 54kB ...
     │   │       alt          (index) float64 54kB ...
@@ -569,7 +555,7 @@ Group: /survey
     │   │       structure:   tabular
     │   │       mode:        airborne
     │   │       method:      magnetic, total magnetic field
-    │   │       instrument:  cesium vapour
+    │   │       instrument:  cesium vapor
     │   └── Group: /survey/magnetic_data/raw_data/magnetic_system
     │           Dimensions:                           (n_transmitter: 1, n_receiver: 1,
     │                                                  n_couplet: 1, n_base_magnetometer: 1,
@@ -581,24 +567,24 @@ Group: /survey
     │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
     │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
     │           Data variables: (12/29)
-    │               transmitter_label                 (n_transmitter) &lt;U7 28B ...
-    │               transmitter_description           (n_transmitter) &lt;U142 568B ...
-    │               receiver_label                    (n_receiver) &lt;U19 76B ...
-    │               receiver_sensor_type              (n_receiver) &lt;U23 92B ...
-    │               receiver_sensor_model             (n_receiver) &lt;U6 24B ...
-    │               receiver_sensor_manufacturer      (n_receiver) &lt;U10 40B ...
+    │               transmitter_label                 (n_transmitter) object 8B ...
+    │               transmitter_description           (n_transmitter) object 8B ...
+    │               receiver_label                    (n_receiver) object 8B ...
+    │               receiver_sensor_type              (n_receiver) object 8B ...
+    │               receiver_sensor_model             (n_receiver) object 8B ...
+    │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
     │               ...                                ...
-    │               diurnal_correction                &lt;U110 440B ...
-    │               tieline_levelling                 &lt;U33 132B ...
-    │               microlevelling                    &lt;U31 124B ...
-    │               igrf_model_date                   &lt;U21 84B ...
-    │               igrf_model_location               &lt;U54 216B ...
-    │               igrf_model_height                 &lt;U69 276B ...
+    │               diurnal_correction                object 8B ...
+    │               tieline_levelling                 object 8B ...
+    │               microlevelling                    object 8B ...
+    │               igrf_model_date                   object 8B ...
+    │               igrf_model_location               object 8B ...
+    │               igrf_model_height                 object 8B ...
     │           Attributes:
     │               type:        system
     │               mode:        airborne
     │               method:      magnetic
-    │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+    │               instrument:  Geometrics G-822A cesium-vapor magnetometer
     │               name:        magnetic_system
     └── Group: /survey/magnetic_data/grids
             Dimensions:       (x: 799, nv: 2, y: 1155)
@@ -626,26 +612,36 @@ Group: /survey
 </section>
 <section id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/raw_data'</span><span class="p">][</span><span class="s1">'height'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line profiles of the flight-line data, subset by line so each figure records</span>
+<span class="c1"># which line it shows. gs.plot draws a variable against distance along the line.</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/raw_data'</span><span class="p">][</span><span class="s1">'line'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">'line'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_magnetics_001.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_001.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/raw_data'</span><span class="p">][</span><span class="s1">'tmi'</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<img src="../../_images/sphx_glr_plot_csv_magnetics_001.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_001.png" alt="Line 100101" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_magnetics_002.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/grids/magnetic_tmi'</span><span class="p">]</span>
+<img src="../../_images/sphx_glr_plot_csv_magnetics_002.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_002.png" alt="Line 100101" class = "sphx-glr-single-img"/><p>A map view of the contractor’s interpolated magnetic grid, using xarray’s
+plotter. The title is set explicitly because xarray otherwise fills it from
+the leftover scalar coordinate ‘spatial_ref’, which carries no information.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'magnetic_data/grids/magnetic_tmi'</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Total magnetic intensity"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_csv_magnetics_003.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_003.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.542 seconds)</p>
+<img src="../../_images/sphx_glr_plot_csv_magnetics_003.png" srcset="../../_images/sphx_glr_plot_csv_magnetics_003.png" alt="Total magnetic intensity, spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.686 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-csv-magnetics-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/5d0eb7adc2374b05e2d607c898f76d30/plot_csv_magnetics.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_csv_magnetics.ipynb</span></code></a></p>

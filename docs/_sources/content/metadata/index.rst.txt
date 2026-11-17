@@ -152,9 +152,12 @@ The GS standard requires the following attributes on all variables:
     * units
     
 All numeric variables require additional attributes to document any null or missing values:
-    
+
     * missing_value
     * valid_range
+
+When writing a dataset's metadata file, ``_FillValue`` is accepted as a synonym
+of ``missing_value``; the templates gspy generates use the CF name.
 
 +----------------------+----------------------------------------------------------------------------------+
 | Variable Attribute   | Description                                                                      |

@@ -38,3 +38,18 @@ Example GS Data Tree
 
 For more detailed information on the GS Data Standard and its requirements, see the :doc:`GS convention <../../gspy_convention_requirements>` page.
 
+Reading the printed survey
+==========================
+
+In the printed tree you may notice scalar variables such as
+``survey_information``, ``survey_units`` or ``flightline_information`` that
+show an empty ``float64`` NaN, and look like the same block repeated. Nothing
+is missing: netCDF cannot store nested attributes, so each metadata block is
+attached to one of these placeholder variables, and the printed text view
+lists the values separately under each block's heading.
+
+In a Jupyter notebook, displaying the survey (the variable name on its own,
+without ``print``) gives xarray's tree view, where each block's fields are
+listed inline under its variable and read much more easily. The workshop
+notebooks use that display style throughout.
+

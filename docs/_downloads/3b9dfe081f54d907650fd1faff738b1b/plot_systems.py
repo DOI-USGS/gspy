@@ -180,16 +180,26 @@ plt.tight_layout()
 print(placeholders(tempest_stm))
 
 #%%
-# GA-AEM also normalises the loop away, writing one turn of one square metre
-# carrying one amp with the data scaled to match. Importing that would claim a
-# 1 m^2 single turn loop, so it is flagged instead and the loop left placeheld.
+# Normalisation is two questions, and the file answers one of them.
+# ``SecondaryFieldNormalisation`` says whether GA-AEM divided the secondary field
+# by the primary one, which is what makes the delivered numbers ppm - so it sets
+# ``output_data_type``. Whether the data the system is attached to was normalised
+# by the transmitter moment is ``data_normalized``, which is about the data file
+# rather than the forward model, so it is left for you to answer.
+#
+# The loop itself is taken as the file states it. Tempest.stm states a single turn
+# of one square meter, which is a real loop scaled out of the forward model - put
+# the real one back if the data needs it.
 
+print(tempest_stm['output_data_type'].values)
 print(tempest_stm['data_normalized'].values)
+print(tempest_stm['transmitter_area'].values,
+      tempest_stm['transmitter_peak_current'].values)
 
 #%%
 # Nothing read is thrown away, though. Anything in the file that GSPy has no
-# field for is kept in the attributes under ``stm_``, the normalised loop
-# included, so the file can be reconstructed from the system.
+# field for is kept in the attributes under ``stm_``, so the file can be
+# reconstructed from the system.
 
 for key, value in tempest_stm.attrs.items():
     if key.startswith('stm_'):
@@ -237,10 +247,12 @@ tempest = System.from_stm(join(system_path, 'Tempest.stm'),
 
 #%%
 # The YAML wins wherever the two overlap, so it can correct the file as well as
-# add to it - here it puts the real loop back over the normalised one.
+# add to it - here it puts the real loop back over the unit one the forward model
+# used.
 
 print(tempest.attrs['instrument'])
 print(tempest['transmitter_area'].values, tempest['transmitter_peak_current'].values)
+print(tempest['data_normalized'].values)
 print(tempest['couplet_txrx_dz'].values)
 
 #%%

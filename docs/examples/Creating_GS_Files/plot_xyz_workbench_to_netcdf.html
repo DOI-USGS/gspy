@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workbench XYZ &mdash; gspy 2.2.9 documentation</title>
+  <title>Workbench XYZ &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -67,8 +67,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#create-a-data-branch-and-attach-data-leaves">Create a ‘data’ branch and attach data leaves</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#create-a-models-branch-and-attach-data-leaves">Create a ‘models’ branch and attach data leaves</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#save-to-netcdf-file">Save to NetCDF file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inspect-survey">Inspect survey</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inspect-the-two-branches">Inspect the two branches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-the-data-tree">View the Data Tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plotting">Plotting</a></li>
 </ul>
 </li>
 </ul>
@@ -115,6 +115,7 @@ to download the full example code.</p>
 <span id="sphx-glr-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py"></span><h1>Workbench XYZ<a class="headerlink" href="#workbench-xyz" title="Link to this heading"></a></h1>
 <p>This example supports data and models read from Aarhus Workbench XYZ files. What’s unique about these files is that metadata is embedded in the header of the data files, such as the electromagnetic gate times.</p>
 <p>The workbench file handler detects when an XYZ file matches this format and parses out the metadata to be joined with additional metadata passed from a YAML file.</p>
+<p>Workbench inversion results come as a triplet of .dat, .inv and .syn exports sharing a base filename. Passing any one of the three is enough: gspy locates the other two and combines all three into one dataset in the GS file.</p>
 <p>Source Reference: U.S. Geological Survey, 2024, Airborne electromagnetic and magnetic survey of Delaware Bay and surrounding regions of New Jersey and Delaware, 2022 (ver 2.0, April 2025): U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/F7J96592">https://doi.org/10.5066/F7J96592</a>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
@@ -125,7 +126,7 @@ to download the full example code.</p>
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">this is a test</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">Survey YAML file</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">dataset_attrs</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Airborne electromagnetic and magnetic survey of Delaware Bay and surrounding regions of New Jersey and Delaware, 2022</span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">institution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USGS Geology, Geophysics, and Geochemistry Science Center</span>
@@ -199,7 +200,7 @@ to download the full example code.</p>
 </div>
 </div>
 <p>Path to example files</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">'..//data_files/workbench'</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">'../data_files/workbench'</span>
 </pre></div>
 </div>
 <p>Survey Metadata file</p>
@@ -217,8 +218,8 @@ to download the full example code.</p>
 </pre></div>
 </div>
 <p>Point to Workbench XYZ data files</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//prod_726_729raw_RAW_export.xyz'</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//raw_data.yml'</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'prod_726_729raw_RAW_export.xyz'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'raw_data.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data</span>
 <span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'raw_data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
@@ -234,13 +235,16 @@ to download the full example code.</p>
 <p>Import Workbench XYZ inversion results (syn/dat/inv)</p>
 <p>GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
 one of the three files need to be passed to provide the base filename</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//prod_726_729_LBv2_bky_MOD_dat.xyz'</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//models.yml'</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'prod_726_729_LBv2_bky_MOD_dat.xyz'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'models.yml'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">model_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'inversion'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d_data</span><span class="p">,</span> <span class="n">metadata_file</span><span class="o">=</span><span class="n">d_supp</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Note there is no ‘processed data’ group in this survey: Workbench inversion
+exports bundle the model, the input data it was inverted from and the
+synthetic responses together, and they all live in the models branch.</p>
 </section>
 <section id="save-to-netcdf-file">
 <h2>Save to NetCDF file<a class="headerlink" href="#save-to-netcdf-file" title="Link to this heading"></a></h2>
@@ -249,240 +253,255 @@ one of the three files need to be passed to provide the base filename</p>
 </pre></div>
 </div>
 </section>
-<section id="inspect-survey">
-<h2>Inspect survey<a class="headerlink" href="#inspect-survey" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+<section id="view-the-data-tree">
+<h2>View the Data Tree<a class="headerlink" href="#view-the-data-tree" title="Link to this heading"></a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DatasetView&gt; Size: 40B
-Dimensions:                 ()
-Coordinates:
-    spatial_ref             float64 8B 0.0
-Data variables:
-    survey_information      float64 8B nan
-    survey_units            float64 8B nan
-    flightline_information  float64 8B nan
-    survey_equipment        float64 8B nan
-Attributes:
-    type:          survey
-    title:         Airborne electromagnetic and magnetic survey of Delaware B...
-    institution:   USGS Geology, Geophysics, and Geochemistry Science Center
-    source:        SkyTEM provided raw data, USGS generated inverted resistiv...
-    history:       Data acquisition 07/15/2022 - 08/03/2022 by SkyTEM Canada ...
-    references:    U.S. Geological Survey, 2024, Airborne electromagnetic and...
-    comment:       These data are a subset from the referenced data release, ...
-    content:       Delaware Bay SkyTEM survey information /survey; raw data /...
-    summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
-    gspy_version:  2.2.8
-    conventions:   GS-2.0, CF-1.13
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/survey
+/survey/data
+/survey/models
+/survey/data/raw_data
+/survey/models/inversion
+/survey/data/raw_data/nominal_system
+/survey/models/inversion/nominal_system
+/survey/models/inversion/inversion_parameters
+
+&lt;xarray.DataTree 'survey'&gt;
+Group: /survey
+│   Dimensions:                 ()
+│   Coordinates:
+│       spatial_ref             float64 8B ...
+│   Data variables:
+│       survey_information      float64 8B ...
+│       survey_units            float64 8B ...
+│       flightline_information  float64 8B ...
+│       survey_equipment        float64 8B ...
+│   Attributes:
+│       type:          survey
+│       title:         Airborne electromagnetic and magnetic survey of Delaware B...
+│       institution:   USGS Geology, Geophysics, and Geochemistry Science Center
+│       source:        SkyTEM provided raw data, USGS generated inverted resistiv...
+│       history:       Data acquisition 07/15/2022 - 08/03/2022 by SkyTEM Canada ...
+│       references:    U.S. Geological Survey, 2024, Airborne electromagnetic and...
+│       comment:       These data are a subset from the referenced data release, ...
+│       content:       Delaware Bay SkyTEM survey information /survey; raw data /...
+│       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
+│       gspy_version:  2.2.9
+│       conventions:   GS-2.0, CF-1.13
+├── Group: /survey/data
+│   │   Dimensions:      ()
+│   │   Data variables:
+│   │       spatial_ref  float64 8B ...
+│   │   Attributes:
+│   │       content:  raw data
+│   │       type:     container
+│   └── Group: /survey/data/raw_data
+│       │   Dimensions:          (index: 338, lm_gate_times: 28, hm_gate_times: 37)
+│       │   Coordinates:
+│       │     * index            (index) float64 3kB 0.0 1.0 2.0 3.0 ... 335.0 336.0 337.0
+│       │       x                (index) float64 3kB ...
+│       │       y                (index) float64 3kB ...
+│       │       z                (index) float64 3kB ...
+│       │     * lm_gate_times    (lm_gate_times) float64 224B 1e-07 2.25e-07 ... 0.001394
+│       │     * hm_gate_times    (hm_gate_times) float64 296B 5.892e-05 ... 0.01044
+│       │       spatial_ref      float64 8B ...
+│       │   Data variables: (12/15)
+│       │       date             (index) &lt;U10 14kB ...
+│       │       time             (index) object 3kB ...
+│       │       line_no          (index) int64 3kB ...
+│       │       rx_altitude      (index) float64 3kB ...
+│       │       rx_altitude_std  (index) float64 3kB ...
+│       │       tx_altitude      (index) float64 3kB ...
+│       │       ...               ...
+│       │       tilt_y           (index) float64 3kB ...
+│       │       tilt_y_std       (index) float64 3kB ...
+│       │       lm_z_dbdt        (index, lm_gate_times) float64 76kB ...
+│       │       lm_z_dbdt_std    (index, lm_gate_times) float64 76kB ...
+│       │       hm_z_dbdt        (index, hm_gate_times) float64 100kB ...
+│       │       hm_z_dbdt_std    (index, hm_gate_times) float64 100kB ...
+│       │   Attributes:
+│       │       content:     raw data
+│       │       comment:     example raw data imported from XYZ format
+│       │       type:        data
+│       │       structure:   tabular
+│       │       mode:        airborne
+│       │       method:      electromagnetic, time domain
+│       │       instrument:  skyTEM 304M
+│       └── Group: /survey/data/raw_data/nominal_system
+│               Dimensions:                                      (gate_times: 22, nv: 2,
+│                                                                 lm_gate_times: 28,
+│                                                                 hm_gate_times: 37,
+│                                                                 n_loop_vertices: 8, xyz: 3,
+│                                                                 n_transmitter: 2,
+│                                                                 transmitter_lm_waveform_time: 21,
+│                                                                 transmitter_hm_waveform_time: 36,
+│                                                                 n_receiver: 1, n_couplet: 2)
+│               Coordinates:
+│                 * gate_times                                   (gate_times) float64 176B 5....
+│                 * nv                                           (nv) float64 16B 0.0 1.0
+│                 * n_loop_vertices                              (n_loop_vertices) float64 64B ...
+│                 * xyz                                          (xyz) float64 24B 0.0 1.0 2.0
+│                 * n_transmitter                                (n_transmitter) float64 16B ...
+│                 * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
+│                 * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
+│                 * n_receiver                                   (n_receiver) float64 8B 0.0
+│                 * n_couplet                                    (n_couplet) float64 16B 0.0 1.0
+│               Data variables: (12/32)
+│                   gate_times_bnds                              (gate_times, nv) float64 352B ...
+│                   lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
+│                   hm_gate_times_bnds                           (hm_gate_times, nv) float64 592B ...
+│                   n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
+│                   xyz_bnds                                     (xyz, nv) float64 48B ...
+│                   transmitter_label                            (n_transmitter) object 16B ...
+│                   ...                                           ...
+│                   couplet_sample_rate                          (n_couplet) float64 16B ...
+│                   couplet_txrx_dx                              (n_couplet) float64 16B ...
+│                   couplet_txrx_dy                              (n_couplet) float64 16B ...
+│                   couplet_txrx_dz                              (n_couplet) float64 16B ...
+│                   couplet_data_type                            (n_couplet) object 16B ...
+│                   couplet_gate_times                           (n_couplet) object 16B ...
+│               Attributes:
+│                   type:                      system
+│                   mode:                      airborne
+│                   method:                    electromagnetic, time domain
+│                   instrument:                skyTEM 304M
+│                   name:                      nominal_system
+│                   data_normalized:           True
+│                   skytem_skb_gex_available:  True
+│                   reference_frame:           right-handed positive down
+│                   coil_orientations:         X, Z
+│                   sample_rate:               0.1
+└── Group: /survey/models
+    │   Dimensions:      ()
+    │   Data variables:
+    │       spatial_ref  float64 8B ...
+    │   Attributes:
+    │       content:  inverse models
+    │       type:     container
+    └── Group: /survey/models/inversion
+        │   Dimensions:                (layer_depth: 40, nv: 2, layers_minus_1: 39,
+        │                               lm_gate_times: 21, hm_gate_times: 30, index: 926)
+        │   Coordinates:
+        │     * layer_depth            (layer_depth) float64 320B 0.25 0.7788 ... 375.0
+        │     * nv                     (nv) float64 16B 0.0 1.0
+        │     * layers_minus_1         (layers_minus_1) float64 312B 0.0 1.0 ... 37.0 38.0
+        │     * lm_gate_times          (lm_gate_times) float64 168B 1.273e-05 ... 0.001394
+        │     * hm_gate_times          (hm_gate_times) float64 240B 7.292e-05 ... 0.01044
+        │     * index                  (index) float64 7kB 0.0 1.0 2.0 ... 923.0 924.0 925.0
+        │       x                      (index) float64 7kB ...
+        │       y                      (index) float64 7kB ...
+        │       z                      (index) float64 7kB ...
+        │       spatial_ref            float64 8B ...
+        │   Data variables: (12/32)
+        │       layer_depth_bnds       (layer_depth, nv) float64 640B ...
+        │       layers_minus_1_bnds    (layers_minus_1, nv) float64 624B ...
+        │       lm_gate_times_bnds     (lm_gate_times, nv) float64 336B ...
+        │       hm_gate_times_bnds     (hm_gate_times, nv) float64 480B ...
+        │       line_no                (index) int64 7kB ...
+        │       date                   (index) &lt;U10 37kB ...
+        │       ...                     ...
+        │       lm_z_dbdt_data         (index, lm_gate_times) float64 156kB ...
+        │       lm_z_dbdt_datastd      (index, lm_gate_times) float64 156kB ...
+        │       hm_z_dbdt_data         (index, hm_gate_times) float64 222kB ...
+        │       hm_z_dbdt_datastd      (index, hm_gate_times) float64 222kB ...
+        │       lm_z_dbdt_syn          (index, lm_gate_times) float64 156kB ...
+        │       hm_z_dbdt_syn          (index, hm_gate_times) float64 222kB ...
+        │   Attributes:
+        │       content:     inverted resistivity models with input data and synthetic re...
+        │       comment:     This dataset includes AEM inverted models produced by USGS u...
+        │       type:        model, data
+        │       structure:   tabular
+        │       mode:        airborne
+        │       method:      electromagnetic, time domain
+        │       instrument:  skyTEM 304M
+        │       property:    electrical resistivity
+        ├── Group: /survey/models/inversion/nominal_system
+        │       Dimensions:                                      (lm_gate_times: 21, nv: 2,
+        │                                                         hm_gate_times: 30,
+        │                                                         n_loop_vertices: 8, xyz: 3,
+        │                                                         n_transmitter: 2,
+        │                                                         transmitter_lm_waveform_time: 21,
+        │                                                         transmitter_hm_waveform_time: 36,
+        │                                                         n_receiver: 1, n_couplet: 2)
+        │       Coordinates:
+        │         * n_loop_vertices                              (n_loop_vertices) float64 64B ...
+        │         * xyz                                          (xyz) float64 24B 0.0 1.0 2.0
+        │         * n_transmitter                                (n_transmitter) float64 16B ...
+        │         * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
+        │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
+        │         * n_receiver                                   (n_receiver) float64 8B 0.0
+        │         * n_couplet                                    (n_couplet) float64 16B 0.0 1.0
+        │       Data variables: (12/33)
+        │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 336B ...
+        │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 480B ...
+        │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
+        │           xyz_bnds                                     (xyz, nv) float64 48B ...
+        │           transmitter_label                            (n_transmitter) object 16B ...
+        │           transmitter_number_of_turns                  (n_transmitter) int64 16B ...
+        │           ...                                           ...
+        │           couplet_sample_rate                          (n_couplet) float64 16B ...
+        │           couplet_txrx_dx                              (n_couplet) float64 16B ...
+        │           couplet_txrx_dy                              (n_couplet) float64 16B ...
+        │           couplet_txrx_dz                              (n_couplet) float64 16B ...
+        │           couplet_data_type                            (n_couplet) object 16B ...
+        │           couplet_gate_times                           (n_couplet) object 16B ...
+        │       Attributes:
+        │           type:                      system
+        │           mode:                      airborne
+        │           method:                    electromagnetic, time domain
+        │           instrument:                skyTEM 304M
+        │           name:                      nominal_system
+        │           data_normalized:           True
+        │           skytem_skb_gex_available:  True
+        │           reference_frame:           right-handed positive down
+        │           coil_orientations:         X, Z
+        │           sample_rate:               0.1
+        └── Group: /survey/models/inversion/inversion_parameters
+                Dimensions:             ()
+                Data variables:
+                    model_file          object 8B ...
+                    inversion_software  object 8B ...
+                    software_version    object 8B ...
+                    date                int64 8B ...
+                    number_of_layers    int64 8B ...
+                    constraints         object 8B ...
+                    description         object 8B ...
+                    data_file           object 8B ...
+                Attributes:
+                    type:        parameters
+                    method:      electromagnetic, time domain
+                    instrument:  skyTEM 304M
+                    mode:        airborne
+                    property:    electrical resistivity
+                    name:        inversion_parameters
 </pre></div>
 </div>
 </section>
-<section id="inspect-the-two-branches">
-<h2>Inspect the two branches<a class="headerlink" href="#inspect-the-two-branches" title="Link to this heading"></a></h2>
-<p>Data Branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">])</span>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading"></a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A line profile of the raw data against distance along the survey line, with</span>
+<span class="c1"># the line number in the title.</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">][</span><span class="s1">'line_no'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">'line_no'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'rx_altitude'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'data'&gt;
-Group: /survey/data
-│   Dimensions:      ()
-│   Data variables:
-│       spatial_ref  float64 8B 0.0
-│   Attributes:
-│       content:  raw data
-│       type:     container
-└── Group: /survey/data/raw_data
-    │   Dimensions:          (index: 338, lm_gate_times: 28, hm_gate_times: 37)
-    │   Coordinates:
-    │     * index            (index) int32 1kB 0 1 2 3 4 5 6 ... 332 333 334 335 336 337
-    │     * lm_gate_times    (lm_gate_times) float64 224B 1e-07 2.25e-07 ... 0.001394
-    │     * hm_gate_times    (hm_gate_times) float64 296B 5.892e-05 ... 0.01044
-    │       spatial_ref      float64 8B 0.0
-    │       x                (index) float64 3kB 1.746e+06 1.746e+06 ... 1.745e+06
-    │       y                (index) float64 3kB 1.981e+06 1.981e+06 ... 1.983e+06
-    │       z                (index) float64 3kB 4.82 5.19 5.31 5.66 ... 5.44 5.26 5.21
-    │   Data variables: (12/15)
-    │       date             (index) object 3kB '2022-07-26' ... '2022-07-26'
-    │       time             (index) object 3kB '12:36:24.002' ... '12:42:21.342'
-    │       line_no          (index) int64 3kB 101201 101201 101201 ... 200801 200801
-    │       rx_altitude      (index) float64 3kB 50.75 49.58 49.3 ... 29.92 31.33 31.79
-    │       rx_altitude_std  (index) float64 3kB 1.061 1.062 1.063 ... 1.105 1.1 1.098
-    │       tx_altitude      (index) float64 3kB 48.13 46.82 46.41 ... 27.26 28.68 29.13
-    │       ...               ...
-    │       tilt_y           (index) float64 3kB 3.8 3.3 3.3 3.0 2.8 ... 2.0 1.9 1.1 0.9
-    │       tilt_y_std       (index) float64 3kB 1.004 1.004 1.004 ... 1.004 1.004 1.004
-    │       dbdt_lm_z        (index, lm_gate_times) float64 76kB 9.999e+03 ... 9.999e+03
-    │       dbdt_std_lm_z    (index, lm_gate_times) float64 76kB 9.999e+03 ... 9.999e+03
-    │       dbdt_hm_z        (index, hm_gate_times) float64 100kB nan nan ... nan nan
-    │       dbdt_std_hm_z    (index, hm_gate_times) float64 100kB nan nan ... nan nan
-    │   Attributes:
-    │       content:     raw data
-    │       comment:     example raw data imported from XYZ format
-    │       type:        data
-    │       structure:   tabular
-    │       mode:        airborne
-    │       method:      electromagnetic, time domain
-    │       instrument:  skyTEM 304M
-    └── Group: /survey/data/raw_data/nominal_system
-            Dimensions:                                      (gate_times: 22, nv: 2,
-                                                              lm_gate_times: 28,
-                                                              hm_gate_times: 37,
-                                                              n_loop_vertices: 8, xyz: 3,
-                                                              n_transmitter: 2,
-                                                              transmitter_lm_waveform_time: 21,
-                                                              transmitter_hm_waveform_time: 36,
-                                                              n_receiver: 1, n_couplet: 2)
-            Coordinates:
-              * gate_times                                   (gate_times) float64 176B 5....
-              * nv                                           (nv) int64 16B 0 1
-              * n_loop_vertices                              (n_loop_vertices) int64 64B ...
-              * xyz                                          (xyz) int64 24B 0 1 2
-              * n_transmitter                                (n_transmitter) int64 16B 0 1
-              * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
-              * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
-              * n_receiver                                   (n_receiver) int64 8B 0
-              * n_couplet                                    (n_couplet) int64 16B 0 1
-            Data variables: (12/32)
-                gate_times_bnds                              (gate_times, nv) float64 352B ...
-                lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
-                hm_gate_times_bnds                           (hm_gate_times, nv) float64 592B ...
-                n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
-                xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
-                transmitter_label                            (n_transmitter) &lt;U2 16B 'lm'...
-                ...                                           ...
-                couplet_sample_rate                          (n_couplet) float64 16B 0.1 0.1
-                couplet_txrx_dx                              (n_couplet) float64 16B -13....
-                couplet_txrx_dy                              (n_couplet) float64 16B 0.0 0.0
-                couplet_txrx_dz                              (n_couplet) float64 16B -2.0...
-                couplet_data_type                            (n_couplet) &lt;U4 32B 'dBdt' '...
-                couplet_gate_times                           (n_couplet) &lt;U13 104B 'lm_ga...
-            Attributes:
-                type:                      system
-                mode:                      airborne
-                method:                    electromagnetic, time domain
-                instrument:                skyTEM 304M
-                name:                      nominal_system
-                data_normalized:           True
-                skytem_skb_gex_available:  True
-                reference_frame:           right-handed positive down
-                coil_orientations:         X, Z
-                sample_rate:               0.1
+<img src="../../_images/sphx_glr_plot_xyz_workbench_to_netcdf_001.png" srcset="../../_images/sphx_glr_plot_xyz_workbench_to_netcdf_001.png" alt="Line 101201" class = "sphx-glr-single-img"/><p>A map view of the traverse coloured by a tabular variable, using GSPy’s
+plotter.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">'rx_altitude'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Models Branch</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">'models'</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'models'&gt;
-Group: /survey/models
-│   Dimensions:      ()
-│   Data variables:
-│       spatial_ref  float64 8B 0.0
-│   Attributes:
-│       content:  inverse models
-│       type:     container
-└── Group: /survey/models/inversion
-    │   Dimensions:              (index: 926, layer_depth: 40, nv: 2,
-    │                             layers_minus_1: 39, lm_gate_times: 21,
-    │                             hm_gate_times: 30)
-    │   Coordinates:
-    │     * index                (index) int32 4kB 0 1 2 3 4 5 ... 921 922 923 924 925
-    │     * layer_depth          (layer_depth) float64 320B 0.25 0.7788 ... 284.3 375.0
-    │     * nv                   (nv) int64 16B 0 1
-    │     * layers_minus_1       (layers_minus_1) int64 312B 0 1 2 3 4 ... 35 36 37 38
-    │     * lm_gate_times        (lm_gate_times) float64 168B 1.273e-05 ... 0.001394
-    │     * hm_gate_times        (hm_gate_times) float64 240B 7.292e-05 ... 0.01044
-    │       spatial_ref          float64 8B 0.0
-    │       x                    (index) float64 7kB 4.614e+05 4.614e+05 ... 4.8e+05
-    │       y                    (index) float64 7kB 4.333e+06 4.333e+06 ... 4.359e+06
-    │       z                    (index) float64 7kB 6.4 5.8 5.2 4.7 ... 0.4 0.4 0.4 0.3
-    │   Data variables: (12/28)
-    │       layer_depth_bnds     (layer_depth, nv) float64 640B 0.0 0.5 ... 300.0 450.0
-    │       layers_minus_1_bnds  (layers_minus_1, nv) float64 624B -0.5 0.5 ... 38.5
-    │       lm_gate_times_bnds   (lm_gate_times, nv) float64 336B -3.145e-06 ... 0.00141
-    │       hm_gate_times_bnds   (hm_gate_times, nv) float64 480B 2.742e-05 ... 0.01049
-    │       line_no              (index) int64 7kB 101201 101201 ... 103801 103801
-    │       date                 (index) object 7kB '2022-07-26' ... '2022-07-26'
-    │       ...                   ...
-    │       lm_z_data            (index, lm_gate_times) float64 156kB 3.208e-09 ... 9...
-    │       lm_z_datastd         (index, lm_gate_times) float64 156kB 1.03 ... 9.999e+03
-    │       hm_z_data            (index, hm_gate_times) float64 222kB nan ... 9.999e+03
-    │       hm_z_datastd         (index, hm_gate_times) float64 222kB nan ... 9.999e+03
-    │       lm_z_syn             (index, lm_gate_times) float64 156kB 3.274e-09 ... 9...
-    │       hm_z_syn             (index, hm_gate_times) float64 222kB nan ... 9.999e+03
-    │   Attributes:
-    │       content:     inverted resistivity models with input data and synthetic re...
-    │       comment:     This dataset includes AEM inverted models produced by USGS u...
-    │       type:        model, data
-    │       structure:   tabular
-    │       mode:        airborne
-    │       method:      electromagnetic, time domain
-    │       instrument:  skyTEM 304M
-    │       property:    electrical resistivity
-    ├── Group: /survey/models/inversion/nominal_system
-    │       Dimensions:                                      (lm_gate_times: 21, nv: 2,
-    │                                                         hm_gate_times: 30,
-    │                                                         n_loop_vertices: 8, xyz: 3,
-    │                                                         n_transmitter: 2,
-    │                                                         transmitter_lm_waveform_time: 21,
-    │                                                         transmitter_hm_waveform_time: 36,
-    │                                                         n_receiver: 1, n_couplet: 2)
-    │       Coordinates:
-    │         * n_loop_vertices                              (n_loop_vertices) int64 64B ...
-    │         * xyz                                          (xyz) int64 24B 0 1 2
-    │         * n_transmitter                                (n_transmitter) int64 16B 0 1
-    │         * transmitter_lm_waveform_time                 (transmitter_lm_waveform_time) float64 168B ...
-    │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
-    │         * n_receiver                                   (n_receiver) int64 8B 0
-    │         * n_couplet                                    (n_couplet) int64 16B 0 1
-    │       Data variables: (12/33)
-    │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 336B ...
-    │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 480B ...
-    │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
-    │           xyz_bnds                                     (xyz, nv) float64 48B -0.5 ....
-    │           transmitter_label                            (n_transmitter) &lt;U2 16B 'lm'...
-    │           transmitter_number_of_turns                  (n_transmitter) int64 16B 1 4
-    │           ...                                           ...
-    │           couplet_sample_rate                          (n_couplet) float64 16B 0.1 0.1
-    │           couplet_txrx_dx                              (n_couplet) float64 16B -13....
-    │           couplet_txrx_dy                              (n_couplet) float64 16B 0.0 0.0
-    │           couplet_txrx_dz                              (n_couplet) float64 16B -2.0...
-    │           couplet_data_type                            (n_couplet) &lt;U4 32B 'dBdt' '...
-    │           couplet_gate_times                           (n_couplet) &lt;U13 104B 'lm_ga...
-    │       Attributes:
-    │           type:                      system
-    │           mode:                      airborne
-    │           method:                    electromagnetic, time domain
-    │           instrument:                skyTEM 304M
-    │           name:                      nominal_system
-    │           data_normalized:           True
-    │           skytem_skb_gex_available:  True
-    │           reference_frame:           right-handed positive down
-    │           coil_orientations:         X, Z
-    │           sample_rate:               0.1
-    └── Group: /survey/models/inversion/inversion_parameters
-            Dimensions:             (dim_0: 1)
-            Dimensions without coordinates: dim_0
-            Data variables:
-                model_file          &lt;U33 132B 'prod_726_729_LBv2_bky_MOD_inv.xyz'
-                inversion_software  &lt;U46 184B 'Workbench, Aarhus Geosoftware, Aarhus, Den...
-                software_version    &lt;U33 132B 'Aarhus Workbench version 6 2024.2'
-                date                (dim_0) int64 8B 2024
-                number_of_layers    (dim_0) int64 8B 40
-                constraints         &lt;U21 84B 'laterally constrained'
-                description         &lt;U805 3kB 'Deterministic inversion of the processed A...
-                data_file           &lt;U30 120B 'prod_726_729raw_RAW_export.xyz'
-            Attributes:
-                type:        parameters
-                method:      electromagnetic, time domain
-                instrument:  skyTEM 304M
-                mode:        airborne
-                property:    electrical resistivity
-                name:        inversion_parameters
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.777 seconds)</p>
+<img src="../../_images/sphx_glr_plot_xyz_workbench_to_netcdf_002.png" srcset="../../_images/sphx_glr_plot_xyz_workbench_to_netcdf_002.png" alt="Line 101201" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.187 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-xyz-workbench-to-netcdf-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/80fa00703aec9cd579f2311600850f2c/plot_xyz_workbench_to_netcdf.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xyz_workbench_to_netcdf.ipynb</span></code></a></p>

@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 data_path = '../data_files/loupe'
 
 # Survey metadata file
-metadata = join(data_path, "data//LoupeEM_survey_md.yml")
+metadata = join(data_path, "data", "LoupeEM_survey_md.yml")
 
 #%%
 # Establish the Survey
@@ -47,8 +47,8 @@ data_container = survey.gs.add_container('data', **dict(content='data container'
 #%%
 # Attach raw data with the Loupe EM system
 
-data = join(data_path, 'data//Kankakee.dat')
-metadata = join(data_path, 'data//Loupe_data_metadata.yml')
+data = join(data_path, 'data', 'Kankakee.dat')
+metadata = join(data_path, 'data', 'Loupe_data_metadata.yml')
 
 #%%
 raw_data = data_container.gs.add(key='raw_data', data=data, 
@@ -61,6 +61,17 @@ raw_data = data_container.gs.add(key='raw_data', data=data,
 #    :linenos:
 #    :caption: Raw Data YAML file
 #
+
+#%%
+# The long names of the raw columns, including oddities like a leading "(m)"
+# or "(UNITS)", are transcribed from the survey's original .dat.desc file that
+# accompanies the Loupe export; gspy keeps contractor metadata as-is rather
+# than rewriting it. What the .desc file does not declare - units, missing
+# values, the gate-times dimension, and each EM column's system couplet -
+# comes from the 'variables' block of the metadata YAML, merged on top. Where
+# the two do describe the same field, the .desc wording is preserved. The
+# ASEG-GDF2 example shows the case where the YAML does overwrite the file's
+# own descriptions, field by field.
 
 #%%
 # Create a 'models' branch and attach data leaves
@@ -77,8 +88,8 @@ model_container = survey.gs.add_container('models', **dict(content='models conta
 # GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
 # one of the three files need to be passed to provide the base filename
 
-d_data = join(data_path, 'model//Kankakee_MOD_dat.xyz')
-d_supp = join(data_path, 'model//models.yml')
+d_data = join(data_path, 'model', 'Kankakee_MOD_dat.xyz')
+d_supp = join(data_path, 'model', 'models.yml')
 
 #%%
 md = model_container.gs.add(key='inversion', data=d_data, metadata_file=d_supp)
@@ -103,19 +114,34 @@ survey.gs.to_netcdf(d_out)
 new_survey = gspy.open_datatree(d_out)['survey']
 
 #%%
-# Inspect the data tree
-# ^^^^^^^^^^^^^^^^^^^^^
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+print(new_survey.gs.tree)
 print(new_survey)
 
 # %%
 # Plotting
 # ^^^^^^^^
 
+# Line profiles of the antenna and coil heights along one traverse, subset by
+# line so the title records which one. The axis labels drawn from the variable
+# metadata are then overwritten with shorter wording.
+line = int(new_survey['data/raw_data']['line'].values[0])
+subset = new_survey['data/raw_data'].gs.subset('line', line)
+
 plt.figure()
-new_survey['data/raw_data']['gps_height'].plot(label='gps_height')
-new_survey['data/raw_data']['tx_height'].plot(label='tx_height')
-new_survey['data/raw_data']['rx_height'].plot(label='rx_height')
+subset.gs.plot('gps_height', x='distance', label='GPS height')
+subset.gs.plot('tx_height', x='distance', label='TX height')
+subset.gs.plot('rx_height', x='distance', label='RX height')
+plt.xlabel('Distance along line (m)')
+plt.ylabel('Height (m)')
+plt.title(f"Line {line}")
 plt.tight_layout()
 plt.legend()
+
+#%%
+# A map view of the traverses coloured by height, using GSPy's plotter.
+plt.figure()
+new_survey['data/raw_data'].gs.scatter(hue='z', cmap='viridis')
 
 plt.show()

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The GS Data Tree &mdash; gspy 2.2.9 documentation</title>
+  <title>The GS Data Tree &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installing GSPy</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">The GS Data Tree</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example-gs-data-tree">Example GS Data Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-the-printed-survey">Reading the printed survey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="netcdf_basics.html">NetCDF Basics</a></li>
@@ -120,6 +121,19 @@
 </figcaption>
 </figure>
 <p>For more detailed information on the GS Data Standard and its requirements, see the <a class="reference internal" href="../../gspy_convention_requirements.html"><span class="doc">GS convention</span></a> page.</p>
+</section>
+<section id="reading-the-printed-survey">
+<h2>Reading the printed survey<a class="headerlink" href="#reading-the-printed-survey" title="Link to this heading"></a></h2>
+<p>In the printed tree you may notice scalar variables such as
+<code class="docutils literal notranslate"><span class="pre">survey_information</span></code>, <code class="docutils literal notranslate"><span class="pre">survey_units</span></code> or <code class="docutils literal notranslate"><span class="pre">flightline_information</span></code> that
+show an empty <code class="docutils literal notranslate"><span class="pre">float64</span></code> NaN, and look like the same block repeated. Nothing
+is missing: netCDF cannot store nested attributes, so each metadata block is
+attached to one of these placeholder variables, and the printed text view
+lists the values separately under each block’s heading.</p>
+<p>In a Jupyter notebook, displaying the survey (the variable name on its own,
+without <code class="docutils literal notranslate"><span class="pre">print</span></code>) gives xarray’s tree view, where each block’s fields are
+listed inline under its variable and read much more easily. The workshop
+notebooks use that display style throughout.</p>
 </section>
 </section>
 

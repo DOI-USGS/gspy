@@ -29,7 +29,21 @@ This example demonstrates the workflow for creating a GS file from the `ASEG <ht
 
 Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-20
+.. GENERATED FROM PYTHON SOURCE LINES 14-16
+
+.. code-block:: Python
+   :dedent: 1
+
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 18-22
 
 .. code-block:: Python
 
@@ -44,21 +58,21 @@ Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hooge
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-23
+.. GENERATED FROM PYTHON SOURCE LINES 23-25
 
 Initialize the Survey
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-33
+.. GENERATED FROM PYTHON SOURCE LINES 25-35
 
 .. code-block:: Python
 
 
     # Path to example files
-    data_path = "..//data_files//tempest_aseg"
+    data_path = "../data_files/tempest_aseg"
 
     # Survey Metadata file
-    metadata = join(data_path, "data//Tempest_survey_md.yml")
+    metadata = join(data_path, "data", "Tempest_survey_md.yml")
 
     # Establish survey instance
     survey = gspy.Survey.from_dict(metadata)
@@ -70,7 +84,7 @@ Initialize the Survey
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-39
+.. GENERATED FROM PYTHON SOURCE LINES 36-41
 
 .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_survey_md.yml
    :language: yaml
@@ -78,16 +92,16 @@ Initialize the Survey
    :caption: Survey YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-44
+.. GENERATED FROM PYTHON SOURCE LINES 44-46
 
 Create a branch and attach data leaves
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-47
+.. GENERATED FROM PYTHON SOURCE LINES 48-49
 
 Create the first branch (container) called "data"
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-49
+.. GENERATED FROM PYTHON SOURCE LINES 49-51
 
 .. code-block:: Python
 
@@ -100,25 +114,25 @@ Create the first branch (container) called "data"
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-51
+.. GENERATED FROM PYTHON SOURCE LINES 52-53
 
 1. Raw Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 55-56
 
 Import raw AEM data from ASEG-GDF2 format.
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-63
+.. GENERATED FROM PYTHON SOURCE LINES 56-65
 
 .. code-block:: Python
 
 
-    d_data = join(data_path, 'data//Tempest.dat')
-    d_supp = join(data_path, 'data//Tempest_data_md.yml')
+    d_data = join(data_path, 'data', 'Tempest.dat')
+    d_supp = join(data_path, 'data', 'Tempest_data_md.yml')
 
     # Add the raw AEM data to the data branch
-    rd = data_container.gs.add(key='raw_data', 
-                               data=d_data, 
+    rd = data_container.gs.add(key='raw_data',
+                               data=d_data,
                                metadata_file=d_supp)
 
 
@@ -128,15 +142,15 @@ Import raw AEM data from ASEG-GDF2 format.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-65
+.. GENERATED FROM PYTHON SOURCE LINES 66-67
 
-Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML. 
+Note for ASEG-GDF2 files, variable metadata is pulled directly from the DFN file associated with the DAT file. Any additional variable metadata, or desired overwrites to the DFN values, can be passed through the YAML.
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-68
+.. GENERATED FROM PYTHON SOURCE LINES 69-70
 
 In this example, multiple systems are defined in the Tempest_data_md.yml metadata file:
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-75
+.. GENERATED FROM PYTHON SOURCE LINES 72-77
 
 .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_data_md.yml
    :language: yaml
@@ -144,12 +158,12 @@ In this example, multiple systems are defined in the Tempest_data_md.yml metadat
    :caption: Raw Data YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-80
+.. GENERATED FROM PYTHON SOURCE LINES 80-82
 
 Create a 2nd branch and attach model data leaves
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-95
+.. GENERATED FROM PYTHON SOURCE LINES 82-97
 
 .. code-block:: Python
 
@@ -157,14 +171,14 @@ Create a 2nd branch and attach model data leaves
     model_container = survey.gs.add_container('models', **dict(content = "inverted 1-D electrical resistivity models"))
 
     # Define Path to inverted AEM models and corresponding metadata file
-    m_data = join(data_path, 'model//Tempest_model.dat')
-    m_supp = join(data_path, 'model//Tempest_model_md.yml')
+    m_data = join(data_path, 'model', 'Tempest_model.dat')
+    m_supp = join(data_path, 'model', 'Tempest_model_md.yml')
 
     # Add models to the model container, note this example contains a "parameters" group that
     # is added as a leaflet below the model group.
-    mod = model_container.gs.add(key='inverted_models', 
-                                 data=m_data, 
-                                 metadata_file=m_supp, 
+    mod = model_container.gs.add(key='inverted_models',
+                                 data=m_data,
+                                 metadata_file=m_supp,
                                  system=rd.tempest_system,
                                  derived_from=rd)
 
@@ -175,7 +189,7 @@ Create a 2nd branch and attach model data leaves
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-101
+.. GENERATED FROM PYTHON SOURCE LINES 98-103
 
 .. literalinclude:: /../../examples/data_files/tempest_aseg/model/Tempest_model_md.yml
    :language: yaml
@@ -183,12 +197,12 @@ Create a 2nd branch and attach model data leaves
    :caption: Inverted Model YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-106
+.. GENERATED FROM PYTHON SOURCE LINES 106-108
 
 Create a 3rd branch for the magnetic intensity map
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-116
+.. GENERATED FROM PYTHON SOURCE LINES 108-118
 
 .. code-block:: Python
 
@@ -197,7 +211,7 @@ Create a 3rd branch for the magnetic intensity map
     map_container = survey.gs.add_container('derived_maps', **dict(content = "derived maps"))
 
     # Import the magnetic data from TIF-format.
-    d_supp = join(data_path, 'data//Tempest_raster_md.yml')
+    d_supp = join(data_path, 'data', 'Tempest_raster_md.yml')
 
     # Add the magnetic map to the data
     maps = map_container.gs.add(key='maps', metadata_file = d_supp)
@@ -209,11 +223,11 @@ Create a 3rd branch for the magnetic intensity map
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 117-118
+.. GENERATED FROM PYTHON SOURCE LINES 119-120
 
 Note: raster data files are defined within the metadata file
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-125
+.. GENERATED FROM PYTHON SOURCE LINES 122-127
 
 .. literalinclude:: /../../examples/data_files/tempest_aseg/data/Tempest_raster_md.yml
    :language: yaml
@@ -221,12 +235,12 @@ Note: raster data files are defined within the metadata file
    :caption: Magnetic Raster Map YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 128-130
+.. GENERATED FROM PYTHON SOURCE LINES 130-132
 
 Save NetCDF file
 ^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 130-134
+.. GENERATED FROM PYTHON SOURCE LINES 132-136
 
 .. code-block:: Python
 
@@ -241,11 +255,11 @@ Save NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 135-136
+.. GENERATED FROM PYTHON SOURCE LINES 137-138
 
 Read back in the NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-138
+.. GENERATED FROM PYTHON SOURCE LINES 138-140
 
 .. code-block:: Python
 
@@ -255,18 +269,30 @@ Read back in the NetCDF file
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'date' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+      var = coder.decode(var, name=name)
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'flight' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+      var = coder.decode(var, name=name)
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'line' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+      var = coder.decode(var, name=name)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 139-141
+
+.. GENERATED FROM PYTHON SOURCE LINES 141-143
 
 View the Data Tree
 ^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 141-143
+.. GENERATED FROM PYTHON SOURCE LINES 143-146
 
 .. code-block:: Python
 
+    print(new_survey.gs.tree)
     print(new_survey)
 
 
@@ -276,6 +302,18 @@ View the Data Tree
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
+
+    /survey
+    /survey/data
+    /survey/models
+    /survey/derived_maps
+    /survey/data/raw_data
+    /survey/models/inverted_models
+    /survey/derived_maps/maps
+    /survey/data/raw_data/tempest_system
+    /survey/models/inverted_models/tempest_system
+    /survey/models/inverted_models/inversion_parameters
+    /survey/derived_maps/maps/magnetic_system
 
     <xarray.DataTree 'survey'>
     Group: /survey
@@ -296,7 +334,7 @@ View the Data Tree
     │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
     │       comment:       This dataset is incomplete and has been downsampled for th...
     │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-    │       gspy_version:  2.2.8
+    │       gspy_version:  2.2.9
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
@@ -309,11 +347,11 @@ View the Data Tree
     │       │   Dimensions:         (index: 2001, gate_times: 15)
     │       │   Coordinates:
     │       │     * index           (index) float64 16kB 0.0 1.0 2.0 ... 1.999e+03 2e+03
-    │       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-    │       │       spatial_ref     float64 8B ...
     │       │       x               (index) float64 16kB ...
     │       │       y               (index) float64 16kB ...
     │       │       z               (index) float64 16kB ...
+    │       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+    │       │       spatial_ref     float64 8B ...
     │       │   Data variables: (12/58)
     │       │       line            (index) float64 16kB ...
     │       │       flight          (index) float64 16kB ...
@@ -338,29 +376,27 @@ View the Data Tree
     │       │       structure:   tabular
     │       └── Group: /survey/data/raw_data/tempest_system
     │               Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
-    │                                                  waveform_time: 7, n_receiver: 2,
-    │                                                  n_couplet: 2, dim_0: 1)
+    │                                                  waveform_time: 7, n_receiver: 2, n_couplet: 2)
     │               Coordinates:
     │                 * nv                            (nv) float64 16B 0.0 1.0
     │                 * n_transmitter                 (n_transmitter) float64 8B 0.0
     │                 * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
     │                 * n_receiver                    (n_receiver) float64 16B 0.0 1.0
     │                 * n_couplet                     (n_couplet) float64 16B 0.0 1.0
-    │               Dimensions without coordinates: dim_0
-    │               Data variables: (12/26)
+    │               Data variables: (12/27)
     │                   gate_times_bnds               (gate_times, nv) float64 240B ...
-    │                   transmitter_label             (n_transmitter) <U1 4B ...
+    │                   transmitter_label             (n_transmitter) object 8B ...
     │                   transmitter_area              (n_transmitter) int64 8B ...
-    │                   transmitter_waveform_type     (n_transmitter) <U6 24B ...
+    │                   transmitter_waveform_type     (n_transmitter) object 8B ...
     │                   transmitter_waveform_current  (waveform_time) float64 56B ...
     │                   transmitter_scale_factor      (n_transmitter) float64 8B ...
     │                   ...                            ...
     │                   couplet_txrx_dz               (n_couplet) int64 16B ...
-    │                   data_normalized               (dim_0) bool 1B ...
-    │                   output_data_type              <U1 4B ...
-    │                   reference_frame               <U24 96B ...
-    │                   output_sample_frequency       (dim_0) int64 8B ...
-    │                   digitization_frequency        (dim_0) int64 8B ...
+    │                   data_normalized               bool 1B ...
+    │                   output_data_type              object 8B ...
+    │                   reference_frame               object 8B ...
+    │                   output_sample_frequency       int64 8B ...
+    │                   digitization_frequency        int64 8B ...
     │               Attributes:
     │                   type:        system
     │                   mode:        airborne
@@ -382,15 +418,15 @@ View the Data Tree
     │       │     * nv                       (nv) float64 16B 0.0 1.0
     │       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
     │       │     * index                    (index) float64 16kB 0.0 1.0 ... 1.999e+03 2e+03
-    │       │       spatial_ref              float64 8B ...
     │       │       x                        (index) float64 16kB ...
     │       │       y                        (index) float64 16kB ...
     │       │       z                        (index) float64 16kB ...
+    │       │       spatial_ref              float64 8B ...
     │       │   Data variables: (12/46)
     │       │       layer_depth_bnds         (layer_depth, nv) float64 480B ...
     │       │       gate_times_bnds          (gate_times, nv) float64 240B ...
-    │       │       uniqueid                 (index) float64 16kB ...
-    │       │       survey                   (index) float64 16kB ...
+    │       │       uniqueid                 (index) int32 8kB ...
+    │       │       survey                   (index) int32 8kB ...
     │       │       date                     (index) float64 16kB ...
     │       │       flight                   (index) float64 16kB ...
     │       │       ...                       ...
@@ -399,7 +435,7 @@ View the Data Tree
     │       │       phig                     (index) float64 16kB ...
     │       │       phis                     (index) float64 16kB ...
     │       │       lambda                   (index) float64 16kB ...
-    │       │       iterations               (index) float64 16kB ...
+    │       │       iterations               (index) int32 8kB ...
     │       │   Attributes:
     │       │       content:     inverted resistivity models
     │       │       comment:     This dataset includes inverted resistivity models derived fr...
@@ -411,28 +447,26 @@ View the Data Tree
     │       │       structure:   tabular
     │       ├── Group: /survey/models/inverted_models/tempest_system
     │       │       Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
-    │       │                                          waveform_time: 7, n_receiver: 2,
-    │       │                                          n_couplet: 2, dim_0: 1)
+    │       │                                          waveform_time: 7, n_receiver: 2, n_couplet: 2)
     │       │       Coordinates:
     │       │         * n_transmitter                 (n_transmitter) float64 8B 0.0
     │       │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
     │       │         * n_receiver                    (n_receiver) float64 16B 0.0 1.0
     │       │         * n_couplet                     (n_couplet) float64 16B 0.0 1.0
-    │       │       Dimensions without coordinates: dim_0
-    │       │       Data variables: (12/26)
+    │       │       Data variables: (12/27)
     │       │           gate_times_bnds               (gate_times, nv) float64 240B ...
-    │       │           transmitter_label             (n_transmitter) <U1 4B ...
+    │       │           transmitter_label             (n_transmitter) object 8B ...
     │       │           transmitter_area              (n_transmitter) int64 8B ...
-    │       │           transmitter_waveform_type     (n_transmitter) <U6 24B ...
+    │       │           transmitter_waveform_type     (n_transmitter) object 8B ...
     │       │           transmitter_waveform_current  (waveform_time) float64 56B ...
     │       │           transmitter_scale_factor      (n_transmitter) float64 8B ...
     │       │           ...                            ...
     │       │           couplet_txrx_dz               (n_couplet) int64 16B ...
-    │       │           data_normalized               (dim_0) bool 1B ...
-    │       │           output_data_type              <U1 4B ...
-    │       │           reference_frame               <U24 96B ...
-    │       │           output_sample_frequency       (dim_0) int64 8B ...
-    │       │           digitization_frequency        (dim_0) int64 8B ...
+    │       │           data_normalized               bool 1B ...
+    │       │           output_data_type              object 8B ...
+    │       │           reference_frame               object 8B ...
+    │       │           output_sample_frequency       int64 8B ...
+    │       │           digitization_frequency        int64 8B ...
     │       │       Attributes:
     │       │           type:        system
     │       │           mode:        airborne
@@ -442,11 +476,11 @@ View the Data Tree
     │       └── Group: /survey/models/inverted_models/inversion_parameters
     │               Dimensions:             ()
     │               Data variables:
-    │                   software            <U61 244B ...
-    │                   software_reference  <U298 1kB ...
-    │                   description         <U1402 6kB ...
-    │                   doi_calculation     <U592 2kB ...
-    │                   phid_cut            <U256 1kB ...
+    │                   software            object 8B ...
+    │                   software_reference  object 8B ...
+    │                   description         object 8B ...
+    │                   doi_calculation     object 8B ...
+    │                   phid_cut            object 8B ...
     │               Attributes:
     │                   type:        parameters
     │                   method:      electromagnetic, time domain
@@ -492,18 +526,18 @@ View the Data Tree
                       * n_base_magnetometer                 (n_base_magnetometer) float64 8B 0.0
                     Data variables: (12/35)
                         base_mag_locations_bnds             (base_mag_locations, nv) float64 96B ...
-                        transmitter_label                   (n_transmitter) <U7 28B ...
-                        transmitter_description             (n_transmitter) <U107 428B ...
-                        receiver_label                      (n_receiver) <U19 76B ...
-                        receiver_sensor_type                (n_receiver) <U12 48B ...
-                        receiver_sensor_model               (n_receiver) <U4 16B ...
+                        transmitter_label                   (n_transmitter) object 8B ...
+                        transmitter_description             (n_transmitter) object 8B ...
+                        receiver_label                      (n_receiver) object 8B ...
+                        receiver_sensor_type                (n_receiver) object 8B ...
+                        receiver_sensor_model               (n_receiver) object 8B ...
                         ...                                  ...
-                        diurnal_correction                  <U142 568B ...
-                        igrf_model_date                     <U10 40B ...
-                        igrf_model_height                   <U7 28B ...
-                        igrf_removed_model_epoch            <U6 24B ...
-                        tieline_levelling                   <U137 548B ...
-                        deliverables                        <U63 252B ...
+                        diurnal_correction                  object 8B ...
+                        igrf_model_date                     object 8B ...
+                        igrf_model_height                   object 8B ...
+                        igrf_removed_model_epoch            object 8B ...
+                        tieline_levelling                   object 8B ...
+                        deliverables                        object 8B ...
                     Attributes:
                         type:        system
                         mode:        airborne
@@ -514,15 +548,24 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 144-145
+.. GENERATED FROM PYTHON SOURCE LINES 147-153
+
+The scalar variables that print as an empty ``float64`` NaN, such as
+``survey_information`` or ``flightline_information``, are not missing data.
+netCDF cannot hold nested attributes, so each metadata block is attached to
+one of these placeholder variables. In a Jupyter notebook, displaying the
+survey without ``print`` gives xarray's tree view, where each block's fields
+are listed inline; the workshop notebooks use that style throughout.
+
+.. GENERATED FROM PYTHON SOURCE LINES 155-156
 
 Once the survey is read in, we can access variables like a standard xarray dataset.
 
-.. GENERATED FROM PYTHON SOURCE LINES 147-148
+.. GENERATED FROM PYTHON SOURCE LINES 158-159
 
 Option A:
 
-.. GENERATED FROM PYTHON SOURCE LINES 148-149
+.. GENERATED FROM PYTHON SOURCE LINES 159-160
 
 .. code-block:: Python
 
@@ -552,11 +595,11 @@ Option A:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 150-151
+.. GENERATED FROM PYTHON SOURCE LINES 161-162
 
 Option B:
 
-.. GENERATED FROM PYTHON SOURCE LINES 151-153
+.. GENERATED FROM PYTHON SOURCE LINES 162-164
 
 .. code-block:: Python
 
@@ -587,11 +630,11 @@ Option B:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 154-155
+.. GENERATED FROM PYTHON SOURCE LINES 165-166
 
 Option C:
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-157
+.. GENERATED FROM PYTHON SOURCE LINES 166-168
 
 .. code-block:: Python
 
@@ -622,26 +665,32 @@ Option C:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 158-161
+.. GENERATED FROM PYTHON SOURCE LINES 169-172
 
 Plotting Examples
 ^^^^^^^^^^^^^^^^^
 demonstrating different ways to access and plot variables
 
-.. GENERATED FROM PYTHON SOURCE LINES 161-166
+.. GENERATED FROM PYTHON SOURCE LINES 172-183
 
 .. code-block:: Python
 
 
-    # Make a scatter plot of a specific tabular variable, using GSPy's plotter
+    # A line profile of one variable along a flight line. The data hold a single
+    # line here, so we subset by it anyway and put the line number in the title.
+    line = int(new_survey['data']['raw_data']['line'].values[0])
+    subset = new_survey['data']['raw_data'].gs.subset('line', line)
+
     plt.figure()
-    new_survey['data']['raw_data'].gs.scatter(x='x', hue='tx_height', cmap='jet')
+    subset.gs.plot('tmi', x='distance')
+    plt.title(f"Line {line}")
+    plt.tight_layout()
 
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_001.png
-   :alt: plot aseg tempest
+   :alt: Line 225401
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_001.png
    :class: sphx-glr-single-img
 
@@ -649,22 +698,51 @@ demonstrating different ways to access and plot variables
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-168
+.. GENERATED FROM PYTHON SOURCE LINES 184-187
 
-Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
+A map view of the flight path, coloured by a tabular variable, using GSPy's
+plotter. The 'y' coordinate is used automatically, so it is never named in
+the call; axis and colorbar labels are built from the variable metadata.
 
-.. GENERATED FROM PYTHON SOURCE LINES 168-170
+.. GENERATED FROM PYTHON SOURCE LINES 187-190
+
+.. code-block:: Python
+
+    plt.figure()
+    new_survey['data']['raw_data'].gs.scatter(x='x', hue='tx_height', cmap='jet')
+
+
+
+
+.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_002.png
+   :alt: plot aseg tempest
+   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_002.png
+   :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 191-195
+
+A map view of a raster variable, using xarray's plotter. The title is set
+explicitly because xarray otherwise fills it from the leftover scalar
+coordinate 'spatial_ref', which carries no information.
+HT
+
+.. GENERATED FROM PYTHON SOURCE LINES 195-198
 
 .. code-block:: Python
 
     plt.figure()
     new_survey['derived_maps/maps']['magnetic_tmi'].plot(cmap='jet', robust=True)
+    plt.suptitle("Total magnetic intensity")
     plt.show()
 
 
-.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_002.png
-   :alt: spatial_ref = 0.0
-   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_002.png
+.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_003.png
+   :alt: Total magnetic intensity, spatial_ref = 0.0
+   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_aseg_tempest_003.png
    :class: sphx-glr-single-img
 
 
@@ -674,7 +752,7 @@ Make a 2-D map plot of a specific raster variable, using Xarrays's plotter
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.462 seconds)
+   **Total running time of the script:** (0 minutes 1.499 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest.py:

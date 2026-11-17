@@ -46,10 +46,10 @@ template.dump("template_survey_empty.yml")
 # Partial existing Survey metadata file, generate a combined template to see what might be missing
 
 # Path to example files
-data_path = '..//data_files//'
+data_path = '../data_files'
 
 # Pre-existing Survey metadata file
-metadata = join(data_path, "documents//Resolve_survey_incomplete_md.yml")
+metadata = join(data_path, "documents", "Resolve_survey_incomplete_md.yml")
 
 #%%
 # Generate the template, passing the pre-existing file
@@ -83,8 +83,8 @@ template.dump("template_md_partial_survey.yml")
 #%%
 # Pass the data file (in this case a CSV) to make the template variable-specific.
 # Each column in the CSV file becomes a variable by default.
-data_path = '..//data_files//resolve'
-data = join(data_path, 'data//Resolve.csv')
+data_path = '../data_files/resolve'
+data = join(data_path, 'data', 'Resolve.csv')
 template = Dataset.metadata_template(data)
 template.dump("template_md_resolve_empty.yml")
 
@@ -102,7 +102,7 @@ template.dump("template_md_resolve_empty.yml")
 #%%
 # Here we have a CSV data file and a partial metadata file (missing the variable attributes)
 
-metadata = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+metadata = join(data_path, 'data', 'Resolve_data_md_without_variables.yml')
 
 #%%
 # Generate the template for this CSV dataset by combining the existing
@@ -161,9 +161,9 @@ template.dump("template_md_fdem_system.yml")
 # own where the defaults suffice - a magnetometer is one passive transmitter read
 # by one sensor.
 template = Dataset.metadata_template(data,
-                                     systems={'skytem_system': dict(key='tdem',
-                                                                    transmitters=['LM', 'HM'],
-                                                                    receivers=['z', 'x']),
+                                     systems={'resolve_system': dict(key='fdem',
+                                                                     transmitters=['400Z', '1800Z', '3300X',
+                                                                                   '8200Z', '40000Z', '140000Z']),
                                               'magnetic_system': 'magnetic'})
 template.dump("template_md_resolve_with_systems.yml")
 

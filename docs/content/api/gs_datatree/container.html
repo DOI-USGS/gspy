@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Container &mdash; gspy 2.2.9 documentation</title>
+  <title>Container &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -296,13 +296,18 @@ coordinate reference system.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_datatree.Container.Container.to_netcdf">
-<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_datatree.Container.Container.to_netcdf" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_datatree.Container.Container.to_netcdf" title="Link to this definition"></a></dt>
 <dd><p>Write the survey to a netcdf file</p>
+<p>Every numeric variable with at least one dimension is compressed and chunked.
+Scalars and strings are left alone, since a filter buys them nothing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> (<em>list</em>) – Arguments to pass to xarray.Dataset.to_netcdf</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguments to pass to xarray.Dataset.to_netcdf</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – Arguments to pass to xarray.DataTree.to_netcdf</p></li>
+<li><p><strong>compression</strong> (<em>bool</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – True for <code class="xref py py-data docutils literal notranslate"><span class="pre">gspy.utilities.encoding.DEFAULT_COMPRESSION</span></code>, False for
+none, or a dict laid over the defaults, e.g. <code class="docutils literal notranslate"><span class="pre">dict(complevel=9)</span></code>.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Keyword arguments to pass to xarray.DataTree.to_netcdf. An <code class="docutils literal notranslate"><span class="pre">encoding</span></code>
+given for a variable wins over the defaults for that variable.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>

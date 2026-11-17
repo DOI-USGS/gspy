@@ -58,7 +58,7 @@ Initialize the Survey
     data_path = '../data_files/loupe'
 
     # Survey metadata file
-    metadata = join(data_path, "data//LoupeEM_survey_md.yml")
+    metadata = join(data_path, "data", "LoupeEM_survey_md.yml")
 
 
 
@@ -120,8 +120,8 @@ Attach raw data with the Loupe EM system
 .. code-block:: Python
 
 
-    data = join(data_path, 'data//Kankakee.dat')
-    metadata = join(data_path, 'data//Loupe_data_metadata.yml')
+    data = join(data_path, 'data', 'Kankakee.dat')
+    metadata = join(data_path, 'data', 'Loupe_data_metadata.yml')
 
 
 
@@ -152,16 +152,28 @@ Attach raw data with the Loupe EM system
    :caption: Raw Data YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-68
+.. GENERATED FROM PYTHON SOURCE LINES 66-75
+
+The long names of the raw columns, including oddities like a leading "(m)"
+or "(UNITS)", are transcribed from the survey's original .dat.desc file that
+accompanies the Loupe export; gspy keeps contractor metadata as-is rather
+than rewriting it. What the .desc file does not declare - units, missing
+values, the gate-times dimension, and each EM column's system couplet -
+comes from the 'variables' block of the metadata YAML, merged on top. Where
+the two do describe the same field, the .desc wording is preserved. The
+ASEG-GDF2 example shows the case where the YAML does overwrite the file's
+own descriptions, field by field.
+
+.. GENERATED FROM PYTHON SOURCE LINES 77-79
 
 Create a 'models' branch and attach data leaves
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-71
+.. GENERATED FROM PYTHON SOURCE LINES 81-82
 
 Make the branch
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-73
+.. GENERATED FROM PYTHON SOURCE LINES 82-84
 
 .. code-block:: Python
 
@@ -174,22 +186,22 @@ Make the branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-75
+.. GENERATED FROM PYTHON SOURCE LINES 85-86
 
 Import Workbench XYZ inversion results (syn/dat/inv)
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-79
+.. GENERATED FROM PYTHON SOURCE LINES 88-90
 
 GSPy automatically recognizes Workbench inversion files (syn/dat/inv), only
 one of the three files need to be passed to provide the base filename
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-83
+.. GENERATED FROM PYTHON SOURCE LINES 90-94
 
 .. code-block:: Python
 
 
-    d_data = join(data_path, 'model//Kankakee_MOD_dat.xyz')
-    d_supp = join(data_path, 'model//models.yml')
+    d_data = join(data_path, 'model', 'Kankakee_MOD_dat.xyz')
+    d_supp = join(data_path, 'model', 'models.yml')
 
 
 
@@ -198,7 +210,7 @@ one of the three files need to be passed to provide the base filename
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 84-86
+.. GENERATED FROM PYTHON SOURCE LINES 95-97
 
 .. code-block:: Python
 
@@ -211,7 +223,7 @@ one of the three files need to be passed to provide the base filename
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-92
+.. GENERATED FROM PYTHON SOURCE LINES 98-103
 
 .. literalinclude:: /../../examples/data_files/loupe/model/models.yml
    :language: yaml
@@ -219,12 +231,12 @@ one of the three files need to be passed to provide the base filename
    :caption: Inverted Models YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-97
+.. GENERATED FROM PYTHON SOURCE LINES 106-108
 
 Save to NetCDF file
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-101
+.. GENERATED FROM PYTHON SOURCE LINES 108-112
 
 .. code-block:: Python
 
@@ -239,11 +251,11 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-103
+.. GENERATED FROM PYTHON SOURCE LINES 113-114
 
 Reading back in the GS NetCDF file
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-105
+.. GENERATED FROM PYTHON SOURCE LINES 114-116
 
 .. code-block:: Python
 
@@ -256,15 +268,16 @@ Reading back in the GS NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-108
+.. GENERATED FROM PYTHON SOURCE LINES 117-119
 
-Inspect the data tree
-^^^^^^^^^^^^^^^^^^^^^
+View the Data Tree
+^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-110
+.. GENERATED FROM PYTHON SOURCE LINES 119-122
 
 .. code-block:: Python
 
+    print(new_survey.gs.tree)
     print(new_survey)
 
 
@@ -274,6 +287,15 @@ Inspect the data tree
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
+
+    /survey
+    /survey/data
+    /survey/models
+    /survey/data/raw_data
+    /survey/models/inversion
+    /survey/data/raw_data/loupe_system
+    /survey/models/inversion/loupe_system
+    /survey/models/inversion/inversion_parameters
 
     <xarray.DataTree 'survey'>
     Group: /survey
@@ -293,7 +315,7 @@ Inspect the data tree
     │       comment:       This dataset includes minimally processed (raw) and fully ...
     │       summary:       Ground-based electromagnetic data were collected in August...
     │       content:       Kankakee LoupeEM survey information /survey; data containe...
-    │       gspy_version:  2.2.8
+    │       gspy_version:  2.2.9
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
@@ -306,11 +328,11 @@ Inspect the data tree
     │       │   Dimensions:       (index: 2474, gate_times: 23)
     │       │   Coordinates:
     │       │     * index         (index) float64 20kB 0.0 1.0 2.0 ... 2.472e+03 2.473e+03
-    │       │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
-    │       │       spatial_ref   float64 8B ...
     │       │       x             (index) float64 20kB ...
     │       │       y             (index) float64 20kB ...
     │       │       z             (index) float64 20kB ...
+    │       │     * gate_times    (gate_times) float64 184B 1.297e-05 1.495e-05 ... 0.002183
+    │       │       spatial_ref   float64 8B ...
     │       │   Data variables: (12/42)
     │       │       fid           (index) object 20kB ...
     │       │       acq           (index) float64 20kB ...
@@ -324,7 +346,7 @@ Inspect the data tree
     │       │       x_ch          (index, gate_times) float64 455kB ...
     │       │       y_ch          (index, gate_times) float64 455kB ...
     │       │       z_ch          (index, gate_times) float64 455kB ...
-    │       │       line          (index) float64 20kB ...
+    │       │       line          (index) int64 20kB ...
     │       │   Attributes:
     │       │       content:     raw loupe EM data
     │       │       comment:     n/a
@@ -350,15 +372,15 @@ Inspect the data tree
     │                   gate_times_bnds                      (gate_times, nv) float64 368B ...
     │                   n_loop_vertices_bnds                 (n_loop_vertices, nv) float64 128B ...
     │                   xyz_bnds                             (xyz, nv) float64 48B ...
-    │                   transmitter_label                    (n_transmitter) <U1 4B ...
+    │                   transmitter_label                    (n_transmitter) object 8B ...
     │                   transmitter_number_of_turns          (n_transmitter) int64 8B ...
     │                   transmitter_coordinates              (n_transmitter, n_loop_vertices, xyz) float64 192B ...
     │                   ...                                   ...
     │                   couplet_txrx_dx                      (n_couplet) float64 24B ...
     │                   couplet_txrx_dy                      (n_couplet) float64 24B ...
     │                   couplet_txrx_dz                      (n_couplet) float64 24B ...
-    │                   couplet_data_type                    (n_couplet) <U4 48B ...
-    │                   couplet_gate_times                   (n_couplet) <U10 120B ...
+    │                   couplet_data_type                    (n_couplet) object 24B ...
+    │                   couplet_gate_times                   (n_couplet) object 24B ...
     │                   sample_rate                          float64 8B ...
     │               Attributes:
     │                   type:                    system
@@ -388,24 +410,24 @@ Inspect the data tree
             │     * layers_minus_1       (layers_minus_1) float64 152B 0.0 1.0 2.0 ... 17.0 18.0
             │     * gate_times           (gate_times) float64 168B 1.495e-05 ... 0.001643
             │     * index                (index) float64 44kB 0.0 1.0 ... 5.545e+03 5.546e+03
-            │       spatial_ref          float64 8B ...
             │       x                    (index) float64 44kB ...
             │       y                    (index) float64 44kB ...
             │       z                    (index) float64 44kB ...
+            │       spatial_ref          float64 8B ...
             │   Data variables: (12/30)
             │       layer_depth_bnds     (layer_depth, nv) float64 320B ...
             │       layers_minus_1_bnds  (layers_minus_1, nv) float64 304B ...
             │       gate_times_bnds      (gate_times, nv) float64 336B ...
-            │       line_no              (index) float64 44kB ...
-            │       date                 (index) object 44kB ...
+            │       line_no              (index) int64 44kB ...
+            │       date                 (index) <U10 222kB ...
             │       time                 (index) object 44kB ...
             │       ...                   ...
-            │       z_y_datastd          (index, gate_times) float64 932kB ...
-            │       z_z_data             (index, gate_times) float64 932kB ...
-            │       z_z_datastd          (index, gate_times) float64 932kB ...
-            │       z_x_syn              (index, gate_times) float64 932kB ...
-            │       z_y_syn              (index, gate_times) float64 932kB ...
-            │       z_z_syn              (index, gate_times) float64 932kB ...
+            │       z_y_dbdt_datastd     (index, gate_times) float64 932kB ...
+            │       z_z_dbdt_data        (index, gate_times) float64 932kB ...
+            │       z_z_dbdt_datastd     (index, gate_times) float64 932kB ...
+            │       z_x_dbdt_syn         (index, gate_times) float64 932kB ...
+            │       z_y_dbdt_syn         (index, gate_times) float64 932kB ...
+            │       z_z_dbdt_syn         (index, gate_times) float64 932kB ...
             │   Attributes:
             │       content:     inverted resistivity models with input data and synthetic re...
             │       comment:     This dataset includes resistivity models produced by USGS us...
@@ -431,15 +453,15 @@ Inspect the data tree
             │           gate_times_bnds                      (gate_times, nv) float64 336B ...
             │           n_loop_vertices_bnds                 (n_loop_vertices, nv) float64 128B ...
             │           xyz_bnds                             (xyz, nv) float64 48B ...
-            │           transmitter_label                    (n_transmitter) <U1 4B ...
+            │           transmitter_label                    (n_transmitter) object 8B ...
             │           transmitter_number_of_turns          (n_transmitter) int64 8B ...
             │           transmitter_coordinates              (n_transmitter, n_loop_vertices, xyz) float64 192B ...
             │           ...                                   ...
             │           couplet_txrx_dx                      (n_couplet) float64 24B ...
             │           couplet_txrx_dy                      (n_couplet) float64 24B ...
             │           couplet_txrx_dz                      (n_couplet) float64 24B ...
-            │           couplet_data_type                    (n_couplet) <U4 48B ...
-            │           couplet_gate_times                   (n_couplet) <U10 120B ...
+            │           couplet_data_type                    (n_couplet) object 24B ...
+            │           couplet_gate_times                   (n_couplet) object 24B ...
             │           sample_rate                          float64 8B ...
             │       Attributes:
             │           type:                    system
@@ -454,15 +476,14 @@ Inspect the data tree
             │           stacks:                  360
             │           powerline_frequency:     60.0
             └── Group: /survey/models/inversion/inversion_parameters
-                    Dimensions:             (dim_0: 1)
-                    Dimensions without coordinates: dim_0
+                    Dimensions:             ()
                     Data variables:
-                        model_file          <U20 80B ...
-                        inversion_software  <U46 184B ...
-                        software_version    <U33 132B ...
-                        date                (dim_0) int64 8B ...
-                        number_of_layers    (dim_0) int64 8B ...
-                        description         <U106 424B ...
+                        model_file          object 8B ...
+                        inversion_software  object 8B ...
+                        software_version    object 8B ...
+                        date                int64 8B ...
+                        number_of_layers    int64 8B ...
+                        description         object 8B ...
                     Attributes:
                         type:        parameters
                         method:      electromagnetic, time domain
@@ -474,29 +495,67 @@ Inspect the data tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 111-113
+.. GENERATED FROM PYTHON SOURCE LINES 123-125
 
 Plotting
 ^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-121
+.. GENERATED FROM PYTHON SOURCE LINES 125-142
 
 .. code-block:: Python
 
 
+    # Line profiles of the antenna and coil heights along one traverse, subset by
+    # line so the title records which one. The axis labels drawn from the variable
+    # metadata are then overwritten with shorter wording.
+    line = int(new_survey['data/raw_data']['line'].values[0])
+    subset = new_survey['data/raw_data'].gs.subset('line', line)
+
     plt.figure()
-    new_survey['data/raw_data']['gps_height'].plot(label='gps_height')
-    new_survey['data/raw_data']['tx_height'].plot(label='tx_height')
-    new_survey['data/raw_data']['rx_height'].plot(label='rx_height')
+    subset.gs.plot('gps_height', x='distance', label='GPS height')
+    subset.gs.plot('tx_height', x='distance', label='TX height')
+    subset.gs.plot('rx_height', x='distance', label='RX height')
+    plt.xlabel('Distance along line (m)')
+    plt.ylabel('Height (m)')
+    plt.title(f"Line {line}")
     plt.tight_layout()
     plt.legend()
+
+
+
+
+.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_001.png
+   :alt: Line 1
+   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_001.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    <matplotlib.legend.Legend object at 0x16fa7e660>
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 143-144
+
+A map view of the traverses coloured by height, using GSPy's plotter.
+
+.. GENERATED FROM PYTHON SOURCE LINES 144-147
+
+.. code-block:: Python
+
+    plt.figure()
+    new_survey['data/raw_data'].gs.scatter(hue='z', cmap='viridis')
 
     plt.show()
 
 
-.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_001.png
-   :alt: spatial_ref = 0.0
-   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_001.png
+.. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_002.png
+   :alt: plot dat loupe
+   :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_dat_loupe_002.png
    :class: sphx-glr-single-img
 
 
@@ -506,7 +565,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.856 seconds)
+   **Total running time of the script:** (0 minutes 1.701 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_dat_loupe.py:

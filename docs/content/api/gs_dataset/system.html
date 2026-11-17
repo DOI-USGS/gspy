@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>System &mdash; gspy 2.2.9 documentation</title>
+  <title>System &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -175,10 +175,14 @@ written as one <code class="docutils literal notranslate"><span class="pre">&lt;
 <p>A .stm is a forward modelling file, not a system description, so what it can
 answer it answers and the rest is left as template placeholders. It models an
 airborne dipole, so the mode is airborne and there is no loop geometry to ask
-for. Its normalised loop - one turn, one amp, one square metre, with the data
-scaled to match - is flagged rather than imported, because importing it would
-claim a 1 m^2 single turn loop. Anything read that GSPy has no field for is
-recorded in the attributes under <code class="docutils literal notranslate"><span class="pre">stm_</span></code>, so nothing in the file is lost.</p>
+for. The loop is kept per transmitter, a placeholder for one whose file does not
+say; GA-AEM has no default for NumberOfTurns. The moment is turns x area x peak
+current, of the loop the system ends up with once the yml is merged. The file
+is often a unit loop the forward model scaled out, so <code class="docutils literal notranslate"><span class="pre">data_normalized</span></code> is
+judged by the file’s own loop and normalisation: a unit moment or ppm means
+normalised, a real moment means not. Where the files disagree, it is yours.
+Anything read that GSPy has no field for is recorded in the attributes under
+<code class="docutils literal notranslate"><span class="pre">stm_</span></code>, so nothing in the file is lost.</p>
 <p class="rubric">Examples</p>
 <p>A moment per file, read by two coils:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">System</span><span class="o">.</span><span class="n">from_stm</span><span class="p">({</span><span class="s1">'LM'</span><span class="p">:</span> <span class="s1">'SkytemLM.stm'</span><span class="p">,</span> <span class="s1">'HM'</span><span class="p">:</span> <span class="s1">'SkytemHM.stm'</span><span class="p">},</span>

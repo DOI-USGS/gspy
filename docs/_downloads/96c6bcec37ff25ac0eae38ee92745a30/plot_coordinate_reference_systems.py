@@ -21,7 +21,7 @@ from pprint import pprint
 
 #%%
 
-survey = gspy.open_datatree("..//data_files//skytem_csv//skytem.nc")['survey']
+survey = gspy.open_datatree(join('..', 'data_files', 'skytem_csv', 'skytem.nc'))['survey']
 
 ################################################################################
 # The CRS variable is called ``spatial_ref`` and gets initialized in the Survey.

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASEG-GDF (Tempest AEM) &mdash; gspy 2.2.9 documentation</title>
+  <title>ASEG-GDF (Tempest AEM) &mdash; gspy 2.2.9.post1.dev2+g90b75abcb.d20260922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -19,7 +19,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=35f65317"></script>
+      <script src="../../_static/documentation_options.js?v=66119747"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -121,6 +121,9 @@ to download the full example code.</p>
 <li><p>An interpolated map of total magnetic intensity</p></li>
 </ol>
 <p>Source Reference: Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, <a class="reference external" href="https://doi.org/10.5066/P9E44CTQ">https://doi.org/10.5066/P9E44CTQ</a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gspy</span>
@@ -129,10 +132,10 @@ to download the full example code.</p>
 <section id="initialize-the-survey">
 <h2>Initialize the Survey<a class="headerlink" href="#initialize-the-survey" title="Link to this heading"></a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to example files</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s2">"..//data_files//tempest_aseg"</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s2">"../data_files/tempest_aseg"</span>
 
 <span class="c1"># Survey Metadata file</span>
-<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data//Tempest_survey_md.yml"</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="s2">"Tempest_survey_md.yml"</span><span class="p">)</span>
 
 <span class="c1"># Establish survey instance</span>
 <span class="n">survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">Survey</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
@@ -157,7 +160,7 @@ to download the full example code.</p>
 <span class="linenos">15</span><span class="w">    </span><span class="nt">contractor_project_number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">603756FWA</span>
 <span class="linenos">16</span><span class="w">    </span><span class="nt">contractor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CGG Canada Services Ltd.</span>
 <span class="linenos">17</span><span class="w">    </span><span class="nt">client</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">U.S. Geological Survey</span>
-<span class="linenos">18</span><span class="w">    </span><span class="nt">survey_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electromagneticmagneticradiometric</span>
+<span class="linenos">18</span><span class="w">    </span><span class="nt">survey_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electromagnetic magnetic radiometric</span>
 <span class="linenos">19</span><span class="w">    </span><span class="nt">survey_area_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mississippi Alluvial Plain (MAP)</span>
 <span class="linenos">20</span><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MO,AR,TN,MS,LA,IL,KY</span>
 <span class="linenos">21</span><span class="w">    </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USA</span>
@@ -215,8 +218,8 @@ to download the full example code.</p>
 <li><p>Raw Data</p></li>
 </ol>
 <p>Import raw AEM data from ASEG-GDF2 format.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//Tempest.dat'</span><span class="p">)</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//Tempest_data_md.yml'</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">d_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'Tempest.dat'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'Tempest_data_md.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the raw AEM data to the data branch</span>
 <span class="n">rd</span> <span class="o">=</span> <span class="n">data_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'raw_data'</span><span class="p">,</span>
@@ -252,87 +255,86 @@ to download the full example code.</p>
 <span class="linenos"> 22</span><span class="w">            </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gate_times</span>
 <span class="linenos"> 23</span><span class="w">            </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver gate times</span>
 <span class="linenos"> 24</span><span class="w">            </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seconds</span>
-<span class="linenos"> 25</span><span class="w">            </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 26</span><span class="w">            </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">5.430000e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.628000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 27</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.713000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.798000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 28</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.883000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.968000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 29</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">7.053000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.030800e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 30</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.139400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.681900e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 31</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.790400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.767000e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 32</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.875500e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.503200e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 33</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.611700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.107400e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 34</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">7.215900e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.101380e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 35</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.112230e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.709030e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 36</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.719880e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.663920e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 37</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.674770e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.161360e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 38</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.172210e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.505170e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 39</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">6.516030e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.008600e-02</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 40</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.009686e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.666171e-02</span><span class="p p-Indicator">]]</span>
-<span class="linenos"> 41</span><span class="w">            </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.085000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.255000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.426000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.681000e-05</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 42</span><span class="w">                </span><span class="nv">1.410600e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.278700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.689300e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.859500e-04</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 43</span><span class="w">                </span><span class="nv">9.114800e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.410630e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.191900e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.418070e-03</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 44</span><span class="w">                </span><span class="nv">5.338690e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.301020e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.337928e-02</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 45</span>
-<span class="linenos"> 46</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 47</span>
-<span class="linenos"> 48</span><span class="w">        </span><span class="nt">data_normalized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="linenos"> 49</span><span class="w">        </span><span class="nt">output_data_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
-<span class="linenos"> 50</span><span class="w">        </span><span class="nt">reference_frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">right-handed positive up</span>
-<span class="linenos"> 51</span><span class="w">        </span><span class="nt">output_sample_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-<span class="linenos"> 52</span><span class="w">        </span><span class="nt">digitization_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">92160</span>
-<span class="linenos"> 53</span><span class="w">        </span>
-<span class="linenos"> 54</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
-<span class="linenos"> 55</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
-<span class="linenos"> 56</span><span class="w">            </span><span class="nt">area</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">155</span>
-<span class="linenos"> 57</span><span class="w">            </span><span class="nt">waveform_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">square</span>
-<span class="linenos"> 58</span><span class="w">            </span><span class="nt">waveform_time</span><span class="p">:</span>
-<span class="linenos"> 59</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-1.66666667e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.66612413e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.4255e-06</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.4255e-06</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.66612413e-02</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.66666667e-02</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 60</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 61</span><span class="w">                </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 62</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span>
-<span class="linenos"> 63</span><span class="w">            </span><span class="nt">waveform_current</span><span class="p">:</span>
-<span class="linenos"> 64</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 65</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'waveform_time'</span>
-<span class="linenos"> 66</span><span class="w">            </span><span class="nt">scale_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<span class="linenos"> 67</span><span class="w">            </span><span class="nt">peak_current</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">560</span>
-<span class="linenos"> 68</span><span class="w">            </span><span class="nt">peak_moment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86800</span>
-<span class="linenos"> 69</span><span class="w">            </span><span class="nt">base_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="linenos"> 70</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
-<span class="linenos"> 71</span><span class="w">            </span><span class="nt">number_of_turns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos"> 72</span><span class="w">            </span><span class="nt">on_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00833</span>
-<span class="linenos"> 73</span><span class="w">            </span><span class="nt">off_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00833</span>
-<span class="linenos"> 74</span>
-<span class="linenos"> 75</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
-<span class="linenos"> 76</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 77</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 78</span>
-<span class="linenos"> 79</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
-<span class="linenos"> 80</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">z</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 81</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 82</span><span class="w">            </span><span class="nt">txrx_dx</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-120</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-120</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 83</span><span class="w">            </span><span class="nt">txrx_dy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 84</span><span class="w">            </span><span class="nt">txrx_dz</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-52</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-52</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 85</span>
-<span class="linenos"> 86</span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 87</span><span class="w">    </span><span class="nt">Easting_Albers</span><span class="p">:</span>
-<span class="linenos"> 88</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers:PROJECTION=WGS84/Albers</span>
-<span class="linenos"> 89</span><span class="w">    </span><span class="nt">Northing_Albers</span><span class="p">:</span>
-<span class="linenos"> 90</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers:PROJECTION=WGS84/Albers</span>
-<span class="linenos"> 91</span><span class="w">    </span><span class="nt">DTM</span><span class="p">:</span>
-<span class="linenos"> 92</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
-<span class="linenos"> 93</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NAD88</span>
-<span class="linenos"> 94</span><span class="w">    </span><span class="nt">EMX_NonHPRG</span><span class="p">:</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x</span>
-<span class="linenos"> 96</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 97</span><span class="w">    </span><span class="nt">EMX_HPRG</span><span class="p">:</span>
-<span class="linenos"> 98</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x</span>
-<span class="linenos"> 99</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">100</span><span class="w">    </span><span class="nt">EMZ_NonHPRG</span><span class="p">:</span>
-<span class="linenos">101</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z</span>
-<span class="linenos">102</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">103</span><span class="w">    </span><span class="nt">EMZ_HPRG</span><span class="p">:</span>
-<span class="linenos">104</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z</span>
-<span class="linenos">105</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 25</span><span class="w">            </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">5.430000e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.628000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 26</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.713000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.798000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 27</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.883000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.968000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 28</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">7.053000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.030800e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 29</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.139400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.681900e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 30</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.790400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.767000e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 31</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.875500e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.503200e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 32</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.611700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.107400e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 33</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">7.215900e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.101380e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 34</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.112230e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.709030e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 35</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.719880e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.663920e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 36</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">2.674770e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.161360e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 37</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">4.172210e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.505170e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 38</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">6.516030e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.008600e-02</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 39</span><span class="w">                        </span><span class="p p-Indicator">[</span><span class="nv">1.009686e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.666171e-02</span><span class="p p-Indicator">]]</span>
+<span class="linenos"> 40</span><span class="w">            </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.085000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.255000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.426000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.681000e-05</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 41</span><span class="w">                </span><span class="nv">1.410600e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.278700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.689300e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.859500e-04</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 42</span><span class="w">                </span><span class="nv">9.114800e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.410630e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.191900e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.418070e-03</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 43</span><span class="w">                </span><span class="nv">5.338690e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.301020e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.337928e-02</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="w">        </span><span class="nt">data_normalized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="linenos"> 48</span><span class="w">        </span><span class="nt">output_data_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
+<span class="linenos"> 49</span><span class="w">        </span><span class="nt">reference_frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">right-handed positive up</span>
+<span class="linenos"> 50</span><span class="w">        </span><span class="nt">output_sample_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="linenos"> 51</span><span class="w">        </span><span class="nt">digitization_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">92160</span>
+<span class="linenos"> 52</span><span class="w">        </span>
+<span class="linenos"> 53</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
+<span class="linenos"> 54</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
+<span class="linenos"> 55</span><span class="w">            </span><span class="nt">area</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">155</span>
+<span class="linenos"> 56</span><span class="w">            </span><span class="nt">waveform_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">square</span>
+<span class="linenos"> 57</span><span class="w">            </span><span class="nt">waveform_time</span><span class="p">:</span>
+<span class="linenos"> 58</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-1.66666667e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.66612413e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-5.4255e-06</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.4255e-06</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.66612413e-02</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.66666667e-02</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 59</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 60</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span>
+<span class="linenos"> 61</span><span class="w">            </span><span class="nt">waveform_current</span><span class="p">:</span>
+<span class="linenos"> 62</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-1.0</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 63</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'waveform_time'</span>
+<span class="linenos"> 64</span><span class="w">            </span><span class="nt">scale_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="linenos"> 65</span><span class="w">            </span><span class="nt">peak_current</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">560</span>
+<span class="linenos"> 66</span><span class="w">            </span><span class="nt">peak_moment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86800</span>
+<span class="linenos"> 67</span><span class="w">            </span><span class="nt">base_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="linenos"> 68</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Z</span>
+<span class="linenos"> 69</span><span class="w">            </span><span class="nt">number_of_turns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos"> 70</span><span class="w">            </span><span class="nt">on_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00833</span>
+<span class="linenos"> 71</span><span class="w">            </span><span class="nt">off_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00833</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
+<span class="linenos"> 74</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 75</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
+<span class="linenos"> 78</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">z</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 79</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">z</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">x</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 80</span><span class="w">            </span><span class="nt">data_type</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">B</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">B</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 81</span><span class="w">            </span><span class="nt">txrx_dx</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-120</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-120</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 82</span><span class="w">            </span><span class="nt">txrx_dy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 83</span><span class="w">            </span><span class="nt">txrx_dz</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-52</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">-52</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 86</span><span class="w">    </span><span class="nt">Easting_Albers</span><span class="p">:</span>
+<span class="linenos"> 87</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers:PROJECTION=WGS84/Albers</span>
+<span class="linenos"> 88</span><span class="w">    </span><span class="nt">Northing_Albers</span><span class="p">:</span>
+<span class="linenos"> 89</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers:PROJECTION=WGS84/Albers</span>
+<span class="linenos"> 90</span><span class="w">    </span><span class="nt">DTM</span><span class="p">:</span>
+<span class="linenos"> 91</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
+<span class="linenos"> 92</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NAD88</span>
+<span class="linenos"> 93</span><span class="w">    </span><span class="nt">EMX_NonHPRG</span><span class="p">:</span>
+<span class="linenos"> 94</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x_b</span>
+<span class="linenos"> 95</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 96</span><span class="w">    </span><span class="nt">EMX_HPRG</span><span class="p">:</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x_b</span>
+<span class="linenos"> 98</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="nt">EMZ_NonHPRG</span><span class="p">:</span>
+<span class="linenos">100</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z_b</span>
+<span class="linenos">101</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos">102</span><span class="w">    </span><span class="nt">EMZ_HPRG</span><span class="p">:</span>
+<span class="linenos">103</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z_b</span>
+<span class="linenos">104</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </div>
@@ -342,8 +344,8 @@ to download the full example code.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">model_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'models'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"inverted 1-D electrical resistivity models"</span><span class="p">))</span>
 
 <span class="c1"># Define Path to inverted AEM models and corresponding metadata file</span>
-<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//Tempest_model.dat'</span><span class="p">)</span>
-<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model//Tempest_model_md.yml'</span><span class="p">)</span>
+<span class="n">m_data</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'Tempest_model.dat'</span><span class="p">)</span>
+<span class="n">m_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'Tempest_model_md.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add models to the model container, note this example contains a "parameters" group that</span>
 <span class="c1"># is added as a leaflet below the model group.</span>
@@ -375,117 +377,115 @@ to download the full example code.</p>
 <span class="linenos"> 17</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">layer_depth</span>
 <span class="linenos"> 18</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inverted model layer depth</span>
 <span class="linenos"> 19</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">m</span>
-<span class="linenos"> 20</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 21</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="w">  </span><span class="nv">0.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">3.0</span><span class="w">  </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 22</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">3.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">6.3</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 23</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">6.3</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">9.93</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 24</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">9.93</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">13.92</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 25</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">13.92</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">18.31</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 26</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">18.31</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">23.14</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 27</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">23.14</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">28.45</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 28</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">28.45</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">34.3</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 29</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">34.3</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">40.73</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 30</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">40.73</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">47.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 31</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">47.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">55.58</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 32</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">55.58</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">64.14</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 33</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">64.14</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">73.56</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 34</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">73.56</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">83.92</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 35</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">83.92</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">95.31</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 36</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">95.31</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">107.84</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 37</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">107.84</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">121.62</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 38</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">121.62</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">136.78</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 39</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">136.78</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">153.46</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 40</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">153.46</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">171.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 41</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">171.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">191.98</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 42</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">191.98</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">214.18</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 43</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">214.18</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">238.6</span><span class="w"> </span><span class="p p-Indicator">],</span>
-<span class="linenos"> 44</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">238.6</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">265.46</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 45</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">265.46</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">295.01</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 46</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">295.01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">327.51</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 47</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">327.51</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">363.26</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 48</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">363.26</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">402.59</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 49</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">402.59</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">445.85</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 50</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">445.85</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">489.11</span><span class="p p-Indicator">]]</span>
-<span class="linenos"> 51</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">1.5</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.65</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">8.115</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">11.925</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">16.115</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">20.725</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">25.795</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 52</span><span class="w">                    </span><span class="nv">31.375</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">37.515</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">44.265</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">51.69</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">59.86</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">68.85</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">78.74</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 53</span><span class="w">                    </span><span class="nv">89.615</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">101.575</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">114.73</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">129.2</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">145.12</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">162.63</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">181.89</span><span class="w"> </span><span class="p p-Indicator">,</span>
-<span class="linenos"> 54</span><span class="w">                    </span><span class="nv">203.08</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">226.39</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">252.03</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">280.235</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">311.26</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">345.385</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">382.925</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 55</span><span class="w">                    </span><span class="nv">424.22</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">467.48</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="linenos"> 56</span>
-<span class="linenos"> 57</span><span class="w">    </span><span class="nt">gate_times</span><span class="p">:</span>
-<span class="linenos"> 58</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gate_times</span>
-<span class="linenos"> 59</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver gate times</span>
-<span class="linenos"> 60</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seconds</span>
-<span class="linenos"> 61</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 62</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">5.430000e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.628000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 63</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.713000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.798000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 64</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.883000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.968000e-05</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 65</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">7.053000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.030800e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 66</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.139400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.681900e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 67</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.790400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.767000e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 68</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.875500e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.503200e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 69</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.611700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.107400e-04</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 70</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">7.215900e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.101380e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 71</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.112230e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.709030e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 72</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.719880e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.663920e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 73</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.674770e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.161360e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 74</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.172210e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.505170e-03</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 75</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">6.516030e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.008600e-02</span><span class="p p-Indicator">],</span>
-<span class="linenos"> 76</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.009686e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.666171e-02</span><span class="p p-Indicator">]]</span>
-<span class="linenos"> 77</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.085000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.255000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.426000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.681000e-05</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 78</span><span class="w">            </span><span class="nv">1.410600e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.278700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.689300e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.859500e-04</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 79</span><span class="w">            </span><span class="nv">9.114800e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.410630e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.191900e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.418070e-03</span><span class="p p-Indicator">,</span>
-<span class="linenos"> 80</span><span class="w">            </span><span class="nv">5.338690e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.301020e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.337928e-02</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 83</span><span class="w">    </span><span class="nt">elevation</span><span class="p">:</span>
-<span class="linenos"> 84</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
-<span class="linenos"> 85</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NAD88</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span><span class="w">    </span><span class="nt">conductivity</span><span class="p">:</span>
-<span class="linenos"> 88</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 89</span>
-<span class="linenos"> 90</span><span class="w">    </span><span class="nt">thickness</span><span class="p">:</span>
-<span class="linenos"> 91</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 92</span>
-<span class="linenos"> 93</span><span class="w">    </span><span class="nt">observed_EMSystem_1_XS</span><span class="p">:</span>
-<span class="linenos"> 94</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 96</span>
-<span class="linenos"> 97</span><span class="w">    </span><span class="nt">observed_EMSystem_1_ZS</span><span class="p">:</span>
-<span class="linenos"> 98</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z</span>
-<span class="linenos"> 99</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">100</span>
-<span class="linenos">101</span><span class="w">    </span><span class="nt">noise_EMSystem_1_XS</span><span class="p">:</span>
-<span class="linenos">102</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x</span>
-<span class="linenos">103</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">104</span>
-<span class="linenos">105</span><span class="w">    </span><span class="nt">noise_EMSystem_1_ZS</span><span class="p">:</span>
-<span class="linenos">106</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z</span>
-<span class="linenos">107</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">108</span>
-<span class="linenos">109</span><span class="w">    </span><span class="nt">predicted_EMSystem_1_XS</span><span class="p">:</span>
-<span class="linenos">110</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x</span>
-<span class="linenos">111</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">112</span>
-<span class="linenos">113</span><span class="w">    </span><span class="nt">predicted_EMSystem_1_ZS</span><span class="p">:</span>
-<span class="linenos">114</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z</span>
-<span class="linenos">115</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
-<span class="linenos">116</span>
-<span class="linenos">117</span><span class="nt">inversion_parameters</span><span class="p">:</span>
-<span class="linenos">118</span><span class="w">    </span><span class="nt">dataset_attrs</span><span class="p">:</span>
-<span class="linenos">119</span><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters</span>
-<span class="linenos">120</span><span class="w">        </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electromagnetic, time domain</span>
-<span class="linenos">121</span><span class="w">        </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30Hz Tempest</span>
-<span class="linenos">122</span><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
-<span class="linenos">123</span><span class="w">        </span><span class="nt">property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electrical conductivity</span>
-<span class="linenos">124</span>
-<span class="linenos">125</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos">126</span><span class="w">        </span><span class="nt">software</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GALEISBSTDEM 1-D time-domain deterministic inversion software</span>
-<span class="linenos">127</span><span class="w">        </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">"Brodie,</span><span class="nv"> </span><span class="s">R.</span><span class="nv"> </span><span class="s">C.,</span><span class="nv"> </span><span class="s">2015,</span><span class="nv"> </span><span class="s">GALEISBSTDEM:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">deterministic</span><span class="nv"> </span><span class="s">algorithm</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">1D</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">time-domain</span><span class="nv"> </span><span class="s">AEM</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">–</span><span class="nv"> </span><span class="s">theoretical</span><span class="nv"> </span><span class="s">details,</span><span class="nv"> </span><span class="s">accessed</span><span class="nv"> </span><span class="s">May</span><span class="nv"> </span><span class="s">1,</span><span class="nv"> </span><span class="s">2020,</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">https://github.com/GeoscienceAustralia/ga-aem/blob/master/docs/GALEISBSTDEM%20Inversion%20Algorithm%20Theoretical%20Details%20.pdf."</span>
-<span class="linenos">128</span><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inversions were done using a multilayered smooth model formulation in which 30 layer thicknesses were fixed and layer conductivities were solved for. Horizontal (X) and vertical (Z) components of the data were inverted separately. A vertical conductivity smoothing constraint, alpha_s = 1000, was applied. The inversion reference model used a half-space conductivity of 0.04 Siemens per meter (S/m) with a standard deviation of 1 S/m. The relative importance of the reference conductivity model, alpha_c, was set to 1.0. The horizontal and vertical separation between transmitter and receiver was given a lateral and vertical standard deviation constraint of 0.5 meters (m) in the reference model. The receiver pitch was also included with a 0.5 m standard deviation. These steps were repeated using the same inversion parameters but for reference models of higher (0.2 S/m) and lower (0.008 S/m) conductivity representing lower (5 Ohm-m) and higher (125) resistivity, respectively. A number of inversions were conducted with various homogenous prior model values, and constraints on resistivity. The final model parameters described above were selected because they best represent the physical understanding of the system and minimized data misfit. Final inverted resistivity values for each layer, layer thicknesses, and the uncertainty associated with these values can be found in the model dataset.</span>
-<span class="linenos">129</span><span class="w">        </span><span class="nt">doi_calculation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The depth of investigation (DOI) for each model location was calculated using the difference between the low and high reference conductivity model results. Using the approach from Oldenburg and Li (1999), models from the low and high reference inversions were divided and rescaled producing a metric of their similarity. Models were similar where constrained by the data (shallow depths) and diverge back to their distinct reference model values when no longer constrained by the data. Therefore, the DOI was calculated as the threshold below which models were no longer informed by the data.</span>
-<span class="linenos">130</span><span class="w">        </span><span class="nt">phid_cut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Individual models with a data misfit, "PhiD", less than or equal to 1.5 were accepted for final outputs and products. A new channel, "ACCEPT_FLAG" was added to the data file representing this misfit cutoff, with 0 = rejected models and 1 = accepted models.</span>
+<span class="linenos"> 20</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="w">  </span><span class="nv">0.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">3.0</span><span class="w">  </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 21</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">3.0</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">6.3</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 22</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">6.3</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">9.93</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 23</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">9.93</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">13.92</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 24</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">13.92</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">18.31</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 25</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">18.31</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">23.14</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 26</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">23.14</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">28.45</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 27</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">28.45</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">34.3</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 28</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">34.3</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">40.73</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 29</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">40.73</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">47.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 30</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">47.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">55.58</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 31</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">55.58</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">64.14</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 32</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">64.14</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">73.56</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 33</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">73.56</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">83.92</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 34</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">83.92</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">95.31</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 35</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">95.31</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">107.84</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 36</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">107.84</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">121.62</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 37</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">121.62</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">136.78</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 38</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">136.78</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">153.46</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 39</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">153.46</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">171.8</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 40</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">171.8</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">191.98</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 41</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">191.98</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">214.18</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 42</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">214.18</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">238.6</span><span class="w"> </span><span class="p p-Indicator">],</span>
+<span class="linenos"> 43</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">238.6</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">265.46</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 44</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">265.46</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">295.01</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 45</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">295.01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">327.51</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 46</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">327.51</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">363.26</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 47</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">363.26</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">402.59</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 48</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">402.59</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">445.85</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 49</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">445.85</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">489.11</span><span class="p p-Indicator">]]</span>
+<span class="linenos"> 50</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w">  </span><span class="nv">1.5</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">4.65</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">   </span><span class="nv">8.115</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">11.925</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">16.115</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">20.725</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">25.795</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 51</span><span class="w">                    </span><span class="nv">31.375</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">37.515</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">44.265</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">51.69</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">59.86</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">68.85</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">78.74</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 52</span><span class="w">                    </span><span class="nv">89.615</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">101.575</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">114.73</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">129.2</span><span class="w">  </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">145.12</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">162.63</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">181.89</span><span class="w"> </span><span class="p p-Indicator">,</span>
+<span class="linenos"> 53</span><span class="w">                    </span><span class="nv">203.08</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">226.39</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">252.03</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">280.235</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">311.26</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">345.385</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">382.925</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 54</span><span class="w">                    </span><span class="nv">424.22</span><span class="w"> </span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">467.48</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="linenos"> 55</span>
+<span class="linenos"> 56</span><span class="w">    </span><span class="nt">gate_times</span><span class="p">:</span>
+<span class="linenos"> 57</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gate_times</span>
+<span class="linenos"> 58</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">receiver gate times</span>
+<span class="linenos"> 59</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seconds</span>
+<span class="linenos"> 60</span><span class="w">        </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="nv">5.430000e-06</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.628000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 61</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.713000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.798000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 62</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.883000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.968000e-05</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 63</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">7.053000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.030800e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 64</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.139400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.681900e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 65</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.790400e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.767000e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 66</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.875500e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.503200e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 67</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.611700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">7.107400e-04</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 68</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">7.215900e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.101380e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 69</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.112230e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.709030e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 70</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.719880e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.663920e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 71</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">2.674770e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.161360e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 72</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">4.172210e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.505170e-03</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 73</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">6.516030e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.008600e-02</span><span class="p p-Indicator">],</span>
+<span class="linenos"> 74</span><span class="w">                    </span><span class="p p-Indicator">[</span><span class="nv">1.009686e-02</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.666171e-02</span><span class="p p-Indicator">]]</span>
+<span class="linenos"> 75</span><span class="w">        </span><span class="nt">centers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.085000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.255000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.426000e-05</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.681000e-05</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 76</span><span class="w">            </span><span class="nv">1.410600e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.278700e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.689300e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.859500e-04</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 77</span><span class="w">            </span><span class="nv">9.114800e-04</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.410630e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.191900e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.418070e-03</span><span class="p p-Indicator">,</span>
+<span class="linenos"> 78</span><span class="w">            </span><span class="nv">5.338690e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.301020e-03</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.337928e-02</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 81</span><span class="w">    </span><span class="nt">elevation</span><span class="p">:</span>
+<span class="linenos"> 82</span><span class="w">        </span><span class="nt">positive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">up</span>
+<span class="linenos"> 83</span><span class="w">        </span><span class="nt">datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NAD88</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="w">    </span><span class="nt">conductivity</span><span class="p">:</span>
+<span class="linenos"> 86</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span><span class="w">    </span><span class="nt">thickness</span><span class="p">:</span>
+<span class="linenos"> 89</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">layer_depth</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span><span class="w">    </span><span class="nt">observed_EMSystem_1_XS</span><span class="p">:</span>
+<span class="linenos"> 92</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x_b</span>
+<span class="linenos"> 93</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span><span class="w">    </span><span class="nt">observed_EMSystem_1_ZS</span><span class="p">:</span>
+<span class="linenos"> 96</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z_b</span>
+<span class="linenos"> 97</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="nt">noise_EMSystem_1_XS</span><span class="p">:</span>
+<span class="linenos">100</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x_b</span>
+<span class="linenos">101</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span><span class="w">    </span><span class="nt">noise_EMSystem_1_ZS</span><span class="p">:</span>
+<span class="linenos">104</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z_b</span>
+<span class="linenos">105</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span><span class="w">    </span><span class="nt">predicted_EMSystem_1_XS</span><span class="p">:</span>
+<span class="linenos">108</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_x_b</span>
+<span class="linenos">109</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="w">    </span><span class="nt">predicted_EMSystem_1_ZS</span><span class="p">:</span>
+<span class="linenos">112</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">z_z_b</span>
+<span class="linenos">113</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">gate_times</span><span class="p p-Indicator">]</span>
+<span class="linenos">114</span>
+<span class="linenos">115</span><span class="nt">inversion_parameters</span><span class="p">:</span>
+<span class="linenos">116</span><span class="w">    </span><span class="nt">dataset_attrs</span><span class="p">:</span>
+<span class="linenos">117</span><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters</span>
+<span class="linenos">118</span><span class="w">        </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electromagnetic, time domain</span>
+<span class="linenos">119</span><span class="w">        </span><span class="nt">instrument</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30Hz Tempest</span>
+<span class="linenos">120</span><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airborne</span>
+<span class="linenos">121</span><span class="w">        </span><span class="nt">property</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">electrical conductivity</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos">124</span><span class="w">        </span><span class="nt">software</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GALEISBSTDEM 1-D time-domain deterministic inversion software</span>
+<span class="linenos">125</span><span class="w">        </span><span class="nt">software_reference</span><span class="p">:</span><span class="w"> </span><span class="s">"Brodie,</span><span class="nv"> </span><span class="s">R.</span><span class="nv"> </span><span class="s">C.,</span><span class="nv"> </span><span class="s">2015,</span><span class="nv"> </span><span class="s">GALEISBSTDEM:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">deterministic</span><span class="nv"> </span><span class="s">algorithm</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">1D</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">sample</span><span class="nv"> </span><span class="s">inversion</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">time-domain</span><span class="nv"> </span><span class="s">AEM</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">–</span><span class="nv"> </span><span class="s">theoretical</span><span class="nv"> </span><span class="s">details,</span><span class="nv"> </span><span class="s">accessed</span><span class="nv"> </span><span class="s">May</span><span class="nv"> </span><span class="s">1,</span><span class="nv"> </span><span class="s">2020,</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">https://github.com/GeoscienceAustralia/ga-aem/blob/master/docs/GALEISBSTDEM%20Inversion%20Algorithm%20Theoretical%20Details%20.pdf."</span>
+<span class="linenos">126</span><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inversions were done using a multilayered smooth model formulation in which 30 layer thicknesses were fixed and layer conductivities were solved for. Horizontal (X) and vertical (Z) components of the data were inverted separately. A vertical conductivity smoothing constraint, alpha_s = 1000, was applied. The inversion reference model used a half-space conductivity of 0.04 Siemens per meter (S/m) with a standard deviation of 1 S/m. The relative importance of the reference conductivity model, alpha_c, was set to 1.0. The horizontal and vertical separation between transmitter and receiver was given a lateral and vertical standard deviation constraint of 0.5 meters (m) in the reference model. The receiver pitch was also included with a 0.5 m standard deviation. These steps were repeated using the same inversion parameters but for reference models of higher (0.2 S/m) and lower (0.008 S/m) conductivity representing lower (5 Ohm-m) and higher (125) resistivity, respectively. A number of inversions were conducted with various homogenous prior model values, and constraints on resistivity. The final model parameters described above were selected because they best represent the physical understanding of the system and minimized data misfit. Final inverted resistivity values for each layer, layer thicknesses, and the uncertainty associated with these values can be found in the model dataset.</span>
+<span class="linenos">127</span><span class="w">        </span><span class="nt">doi_calculation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The depth of investigation (DOI) for each model location was calculated using the difference between the low and high reference conductivity model results. Using the approach from Oldenburg and Li (1999), models from the low and high reference inversions were divided and rescaled producing a metric of their similarity. Models were similar where constrained by the data (shallow depths) and diverge back to their distinct reference model values when no longer constrained by the data. Therefore, the DOI was calculated as the threshold below which models were no longer informed by the data.</span>
+<span class="linenos">128</span><span class="w">        </span><span class="nt">phid_cut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Individual models with a data misfit, "PhiD", less than or equal to 1.5 were accepted for final outputs and products. A new channel, "ACCEPT_FLAG" was added to the data file representing this misfit cutoff, with 0 = rejected models and 1 = accepted models.</span>
 </pre></div>
 </div>
 </div>
@@ -496,7 +496,7 @@ to download the full example code.</p>
 <span class="n">map_container</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="s1">'derived_maps'</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s2">"derived maps"</span><span class="p">))</span>
 
 <span class="c1"># Import the magnetic data from TIF-format.</span>
-<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data//Tempest_raster_md.yml'</span><span class="p">)</span>
+<span class="n">d_supp</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'Tempest_raster_md.yml'</span><span class="p">)</span>
 
 <span class="c1"># Add the magnetic map to the data</span>
 <span class="n">maps</span> <span class="o">=</span> <span class="n">map_container</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'maps'</span><span class="p">,</span> <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">d_supp</span><span class="p">)</span>
@@ -526,113 +526,110 @@ to download the full example code.</p>
 <span class="linenos"> 19</span><span class="w">            </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_mag_locations</span>
 <span class="linenos"> 20</span><span class="w">            </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Base Magnetometer Location Index Numbers</span>
 <span class="linenos"> 21</span><span class="w">            </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 22</span><span class="w">            </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos"> 23</span><span class="w">            </span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
-<span class="linenos"> 24</span><span class="w">            </span><span class="nt">increment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos"> 25</span><span class="w">            </span><span class="nt">origin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos"> 26</span>
-<span class="linenos"> 27</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos"> 28</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
-<span class="linenos"> 29</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive</span>
-<span class="linenos"> 30</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial transmitter was used; the system measures the Earth's natural magnetic field (passive field).</span><span class="w"> </span>
-<span class="linenos"> 31</span><span class="w">    </span>
-<span class="linenos"> 32</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
-<span class="linenos"> 33</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scalar_magnetometer</span>
-<span class="linenos"> 34</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium_vapor</span>
-<span class="linenos"> 35</span><span class="w">            </span><span class="nt">sensor_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CS-3</span>
-<span class="linenos"> 36</span><span class="w">            </span><span class="nt">sensor_manufacturer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scintrex</span>
-<span class="linenos"> 37</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger.</span>
-<span class="linenos"> 38</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">Magnetic samples are processed by a FASDAS magnetometer processor</span>
-<span class="linenos"> 39</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">board and synchronized via GPS PPS; a Bartington MAG-03MS100</span>
-<span class="linenos"> 40</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">three-axis fluxgate provides aircraft attitude for compensation.</span>
-<span class="linenos"> 41</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tail-stinger mounted</span>
-<span class="linenos"> 42</span><span class="w">            </span><span class="nt">coordinates</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 43</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="s">"[-10.74,</span><span class="nv"> </span><span class="s">0.0,</span><span class="nv"> </span><span class="s">-0.55]"</span><span class="w">  </span>
-<span class="linenos"> 44</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetometer location relative to Tx loop center (X,Y,Z)</span>
-<span class="linenos"> 45</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meters</span><span class="w"> </span>
-<span class="linenos"> 46</span><span class="w">            </span><span class="nt">acquisition_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FASDAS survey/magnetometer computer; NovAtel OEMV-3 GPS with</span>
-<span class="linenos"> 47</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">OMNISTAR differential corrections; dynamic compensation driven by IMU</span>
-<span class="linenos"> 48</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">and fluxgate attitude inputs. A tail stinger mounted Bartington MAG-03MS100 three-axis fluxgate magnetometer is used to provide information on the attitude of the aircraft. This information is used for compensation of the measured magnetic total field.</span>
-<span class="linenos"> 49</span><span class="w">            </span><span class="nt">sample_frequency</span><span class="p">:</span>
-<span class="linenos"> 50</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
-<span class="linenos"> 51</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span><span class="w">                      </span>
-<span class="linenos"> 52</span><span class="w">            </span><span class="nt">sensitivity</span><span class="p">:</span>
-<span class="linenos"> 53</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="linenos"> 54</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span><span class="w">                     </span>
-<span class="linenos"> 55</span><span class="w">            </span><span class="nt">typical_noise</span><span class="p">:</span>
-<span class="linenos"> 56</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="linenos"> 57</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span><span class="w">                     </span>
-<span class="linenos"> 58</span><span class="w">            </span><span class="nt">compensation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fully digital</span><span class="w">     </span>
-<span class="linenos"> 59</span><span class="w">            </span><span class="nt">parallax</span><span class="p">:</span>
-<span class="linenos"> 60</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.8</span>
-<span class="linenos"> 61</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span><span class="w">                    </span>
-<span class="linenos"> 62</span><span class="w">    </span>
-<span class="linenos"> 63</span><span class="w">        </span><span class="nt">base_magnetometer</span><span class="p">:</span>
-<span class="linenos"> 64</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
-<span class="linenos"> 65</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ground magnetic base stations established at low-gradient sites; two CF1 magnetometers operated continuously at 1 s sampling with ~0.01 nT sensitivity. Base data edited to remove spikes/level shifts and used for diurnal correction per base location.</span>
-<span class="linenos"> 66</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF1 magnetometer</span>
-<span class="linenos"> 67</span><span class="w">            </span><span class="nt">sample_frequency</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 68</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="linenos"> 69</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span>
-<span class="linenos"> 70</span><span class="w">            </span><span class="nt">sensitivity</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 71</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
-<span class="linenos"> 72</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
-<span class="linenos"> 73</span><span class="w">            </span>
-<span class="linenos"> 74</span><span class="w">            </span><span class="nt">location_names</span><span class="p">:</span>
-<span class="linenos"> 75</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Alexandria,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Monroe,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"West</span><span class="nv"> </span><span class="s">Memphis,</span><span class="nv"> </span><span class="s">AR"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Sikeston,</span><span class="nv"> </span><span class="s">MO"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 76</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 77</span>
-<span class="linenos"> 78</span><span class="w">            </span><span class="nt">flights</span><span class="p">:</span>
-<span class="linenos"> 79</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"007-027"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"028-036"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"038-042"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"044-062"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"063-074"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"075-077"</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 80</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span><span class="w">            </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span>
-<span class="linenos"> 83</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">49170.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">47640.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">48362.6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50083.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">51678.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">49170.0</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 84</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 22</span><span class="w">            </span><span class="nt">length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="linenos"> 23</span><span class="w">            </span><span class="nt">increment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos"> 24</span><span class="w">            </span><span class="nt">origin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span><span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 27</span><span class="w">        </span><span class="nt">transmitter</span><span class="p">:</span>
+<span class="linenos"> 28</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive</span>
+<span class="linenos"> 29</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No artificial transmitter was used; the system measures the Earth's natural magnetic field (passive field).</span><span class="w"> </span>
+<span class="linenos"> 30</span><span class="w">    </span>
+<span class="linenos"> 31</span><span class="w">        </span><span class="nt">receiver</span><span class="p">:</span>
+<span class="linenos"> 32</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scalar_magnetometer</span>
+<span class="linenos"> 33</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cesium_vapor</span>
+<span class="linenos"> 34</span><span class="w">            </span><span class="nt">sensor_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CS-3</span>
+<span class="linenos"> 35</span><span class="w">            </span><span class="nt">sensor_manufacturer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scintrex</span>
+<span class="linenos"> 36</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scalar cesium-vapor magnetometer mounted in the aircraft tail stinger.</span>
+<span class="linenos"> 37</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">Magnetic samples are processed by a FASDAS magnetometer processor</span>
+<span class="linenos"> 38</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">board and synchronized via GPS PPS; a Bartington MAG-03MS100</span>
+<span class="linenos"> 39</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">three-axis fluxgate provides aircraft attitude for compensation.</span>
+<span class="linenos"> 40</span><span class="w">            </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tail-stinger mounted</span>
+<span class="linenos"> 41</span><span class="w">            </span><span class="nt">coordinates</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 42</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="s">"[-10.74,</span><span class="nv"> </span><span class="s">0.0,</span><span class="nv"> </span><span class="s">-0.55]"</span><span class="w">  </span>
+<span class="linenos"> 43</span><span class="w">                </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">magnetometer location relative to Tx loop center (X,Y,Z)</span>
+<span class="linenos"> 44</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meters</span><span class="w"> </span>
+<span class="linenos"> 45</span><span class="w">            </span><span class="nt">acquisition_system</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FASDAS survey/magnetometer computer; NovAtel OEMV-3 GPS with</span>
+<span class="linenos"> 46</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">OMNISTAR differential corrections; dynamic compensation driven by IMU</span>
+<span class="linenos"> 47</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">and fluxgate attitude inputs. A tail stinger mounted Bartington MAG-03MS100 three-axis fluxgate magnetometer is used to provide information on the attitude of the aircraft. This information is used for compensation of the measured magnetic total field.</span>
+<span class="linenos"> 48</span><span class="w">            </span><span class="nt">sample_frequency</span><span class="p">:</span>
+<span class="linenos"> 49</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="linenos"> 50</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span><span class="w">                      </span>
+<span class="linenos"> 51</span><span class="w">            </span><span class="nt">sensitivity</span><span class="p">:</span>
+<span class="linenos"> 52</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="linenos"> 53</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span><span class="w">                     </span>
+<span class="linenos"> 54</span><span class="w">            </span><span class="nt">typical_noise</span><span class="p">:</span>
+<span class="linenos"> 55</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="linenos"> 56</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span><span class="w">                     </span>
+<span class="linenos"> 57</span><span class="w">            </span><span class="nt">compensation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fully digital</span><span class="w">     </span>
+<span class="linenos"> 58</span><span class="w">            </span><span class="nt">parallax</span><span class="p">:</span>
+<span class="linenos"> 59</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.8</span>
+<span class="linenos"> 60</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span><span class="w">                    </span>
+<span class="linenos"> 61</span><span class="w">    </span>
+<span class="linenos"> 62</span><span class="w">        </span><span class="nt">base_magnetometer</span><span class="p">:</span>
+<span class="linenos"> 63</span><span class="w">            </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_magnetometer</span>
+<span class="linenos"> 64</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ground magnetic base stations established at low-gradient sites; two CF1 magnetometers operated continuously at 1 s sampling with ~0.01 nT sensitivity. Base data edited to remove spikes/level shifts and used for diurnal correction per base location.</span>
+<span class="linenos"> 65</span><span class="w">            </span><span class="nt">sensor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF1 magnetometer</span>
+<span class="linenos"> 66</span><span class="w">            </span><span class="nt">sample_frequency</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 67</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="linenos"> 68</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s</span>
+<span class="linenos"> 69</span><span class="w">            </span><span class="nt">sensitivity</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 70</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="linenos"> 71</span><span class="w">                </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
+<span class="linenos"> 72</span><span class="w">            </span>
+<span class="linenos"> 73</span><span class="w">            </span><span class="nt">location_names</span><span class="p">:</span>
+<span class="linenos"> 74</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Alexandria,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Monroe,</span><span class="nv"> </span><span class="s">LA"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"West</span><span class="nv"> </span><span class="s">Memphis,</span><span class="nv"> </span><span class="s">AR"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Sikeston,</span><span class="nv"> </span><span class="s">MO"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Greenwood,</span><span class="nv"> </span><span class="s">MS"</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 75</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span><span class="w">            </span><span class="nt">flights</span><span class="p">:</span>
+<span class="linenos"> 78</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"007-027"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"028-036"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"038-042"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"044-062"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"063-074"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"075-077"</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 79</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span><span class="w">            </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span>
+<span class="linenos"> 82</span><span class="w">                </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">49170.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">47640.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">48362.6</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50083.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">51678.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">49170.0</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 83</span><span class="w">                </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'base_mag_locations'</span>
+<span class="linenos"> 84</span>
 <span class="linenos"> 85</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span><span class="w">        </span><span class="nt">dynamic_compensation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Compensation calibration flights at high altitude; pitches/rolls/yaws used to derive coefficients that remove aircraft-induced magnetic noise. Reported improvement ratio ~2.91 (std. dev. uncompensated vs. compensated).</span><span class="w">  </span>
-<span class="linenos"> 88</span><span class="w">        </span><span class="nt">diurnal_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnal base values applied by location (see base_magnetometer section); base data edited and filtered to remove non-geophysical disturbances.</span>
-<span class="linenos"> 89</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">"2019-12-01"</span>
-<span class="linenos"> 90</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="s">"167.9</span><span class="nv"> </span><span class="s">m"</span>
-<span class="linenos"> 91</span><span class="w">        </span><span class="nt">igrf_removed_model_epoch</span><span class="p">:</span><span class="w"> </span><span class="s">"2015.0"</span>
-<span class="linenos"> 92</span><span class="w">        </span><span class="nt">tieline_levelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMI levelled to prior RESOLVE data; due to height differences and limited tie lines, manual adjustments and micro-levelling were applied.</span>
-<span class="linenos"> 93</span><span class="w">        </span><span class="nt">deliverables</span><span class="p">:</span><span class="w"> </span><span class="s">"Total</span><span class="nv"> </span><span class="s">Magnetic</span><span class="nv"> </span><span class="s">Intensity</span><span class="nv"> </span><span class="s">(TMI),</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">EM</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">terrain</span><span class="nv"> </span><span class="s">data"</span>
-<span class="linenos"> 94</span>
-<span class="linenos"> 95</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
-<span class="linenos"> 96</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">passive</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 97</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">scalar_magnetometer</span><span class="p p-Indicator">]</span>
-<span class="linenos"> 98</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Passive Earth field transmitter paired with single scalar magnetometer receiver mounted in tail stinger.</span>
-<span class="linenos"> 99</span>
-<span class="linenos">100</span><span class="nt">coordinates</span><span class="p">:</span>
-<span class="linenos">101</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers</span>
-<span class="linenos">102</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers</span>
-<span class="linenos">103</span>
-<span class="linenos">104</span><span class="nt">dimensions</span><span class="p">:</span>
-<span class="linenos">105</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers</span>
-<span class="linenos">106</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers</span>
-<span class="linenos">107</span>
-<span class="linenos">108</span><span class="nt">variables</span><span class="p">:</span>
-<span class="linenos">109</span><span class="w">    </span><span class="nt">magnetic_tmi</span><span class="p">:</span>
-<span class="linenos">110</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
-<span class="linenos">111</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive_scalar_magnetometer</span>
-<span class="linenos">112</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
-<span class="linenos">113</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total magnetic intensity, diurnally corrected and filtered</span>
-<span class="linenos">114</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
-<span class="linenos">115</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.70141e+38</span>
-<span class="linenos">116</span><span class="w">        </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mag.tif</span><span class="p p-Indicator">]</span>
-<span class="linenos">117</span>
-<span class="linenos">118</span><span class="w">    </span><span class="nt">Easting_Albers</span><span class="p">:</span>
-<span class="linenos">119</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_albers</span>
-<span class="linenos">120</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting</span>
-<span class="linenos">121</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">122</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
-<span class="linenos">123</span><span class="w">        </span>
-<span class="linenos">124</span><span class="w">    </span><span class="nt">Northing_Albers</span><span class="p">:</span>
-<span class="linenos">125</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_albers</span>
-<span class="linenos">126</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing</span>
-<span class="linenos">127</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
-<span class="linenos">128</span><span class="w">        </span><span class="nt">missing_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_defined</span>
+<span class="linenos"> 86</span><span class="w">        </span><span class="nt">dynamic_compensation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Compensation calibration flights at high altitude; pitches/rolls/yaws used to derive coefficients that remove aircraft-induced magnetic noise. Reported improvement ratio ~2.91 (std. dev. uncompensated vs. compensated).</span><span class="w">  </span>
+<span class="linenos"> 87</span><span class="w">        </span><span class="nt">diurnal_correction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diurnal base values applied by location (see base_magnetometer section); base data edited and filtered to remove non-geophysical disturbances.</span>
+<span class="linenos"> 88</span><span class="w">        </span><span class="nt">igrf_model_date</span><span class="p">:</span><span class="w"> </span><span class="s">"2019-12-01"</span>
+<span class="linenos"> 89</span><span class="w">        </span><span class="nt">igrf_model_height</span><span class="p">:</span><span class="w"> </span><span class="s">"167.9</span><span class="nv"> </span><span class="s">m"</span>
+<span class="linenos"> 90</span><span class="w">        </span><span class="nt">igrf_removed_model_epoch</span><span class="p">:</span><span class="w"> </span><span class="s">"2015.0"</span>
+<span class="linenos"> 91</span><span class="w">        </span><span class="nt">tieline_levelling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMI levelled to prior RESOLVE data; due to height differences and limited tie lines, manual adjustments and micro-levelling were applied.</span>
+<span class="linenos"> 92</span><span class="w">        </span><span class="nt">deliverables</span><span class="p">:</span><span class="w"> </span><span class="s">"Total</span><span class="nv"> </span><span class="s">Magnetic</span><span class="nv"> </span><span class="s">Intensity</span><span class="nv"> </span><span class="s">(TMI),</span><span class="nv"> </span><span class="s">provided</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">EM</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">terrain</span><span class="nv"> </span><span class="s">data"</span>
+<span class="linenos"> 93</span>
+<span class="linenos"> 94</span><span class="w">        </span><span class="nt">couplet</span><span class="p">:</span>
+<span class="linenos"> 95</span><span class="w">            </span><span class="nt">transmitters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">passive</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 96</span><span class="w">            </span><span class="nt">receivers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">scalar_magnetometer</span><span class="p p-Indicator">]</span>
+<span class="linenos"> 97</span><span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Passive Earth field transmitter paired with single scalar magnetometer receiver mounted in tail stinger.</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span><span class="nt">coordinates</span><span class="p">:</span>
+<span class="linenos">100</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers</span>
+<span class="linenos">101</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span><span class="nt">dimensions</span><span class="p">:</span>
+<span class="linenos">104</span><span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting_Albers</span>
+<span class="linenos">105</span><span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing_Albers</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos">108</span><span class="w">    </span><span class="nt">magnetic_tmi</span><span class="p">:</span>
+<span class="linenos">109</span><span class="w">        </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">x</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">y</span><span class="p p-Indicator">]</span>
+<span class="linenos">110</span><span class="w">        </span><span class="nt">system_couplet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">passive_scalar_magnetometer</span>
+<span class="linenos">111</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_magnetic_intensity</span>
+<span class="linenos">112</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Total magnetic intensity, diurnally corrected and filtered</span>
+<span class="linenos">113</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nT</span>
+<span class="linenos">114</span><span class="w">        </span><span class="nt">_FillValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.70141e+38</span>
+<span class="linenos">115</span><span class="w">        </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mag.tif</span><span class="p p-Indicator">]</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span><span class="w">    </span><span class="nt">Easting_Albers</span><span class="p">:</span>
+<span class="linenos">118</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easting_albers</span>
+<span class="linenos">119</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easting</span>
+<span class="linenos">120</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<span class="linenos">121</span><span class="w">        </span>
+<span class="linenos">122</span><span class="w">    </span><span class="nt">Northing_Albers</span><span class="p">:</span>
+<span class="linenos">123</span><span class="w">        </span><span class="nt">standard_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">northing_albers</span>
+<span class="linenos">124</span><span class="w">        </span><span class="nt">long_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Northing</span>
+<span class="linenos">125</span><span class="w">        </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
 </pre></div>
 </div>
 </div>
@@ -647,13 +644,34 @@ to download the full example code.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">new_survey</span> <span class="o">=</span> <span class="n">gspy</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span><span class="n">d_out</span><span class="p">)[</span><span class="s1">'survey'</span><span class="p">]</span>
 </pre></div>
 </div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'date' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+  var = coder.decode(var, name=name)
+/opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'flight' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+  var = coder.decode(var, name=name)
+/opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'line' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+  var = coder.decode(var, name=name)
+</pre></div>
+</div>
 </section>
 <section id="view-the-data-tree">
 <h2>View the Data Tree<a class="headerlink" href="#view-the-data-tree" title="Link to this heading"></a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataTree 'survey'&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/survey
+/survey/data
+/survey/models
+/survey/derived_maps
+/survey/data/raw_data
+/survey/models/inverted_models
+/survey/derived_maps/maps
+/survey/data/raw_data/tempest_system
+/survey/models/inverted_models/tempest_system
+/survey/models/inverted_models/inversion_parameters
+/survey/derived_maps/maps/magnetic_system
+
+&lt;xarray.DataTree 'survey'&gt;
 Group: /survey
 │   Dimensions:                 ()
 │   Coordinates:
@@ -672,7 +690,7 @@ Group: /survey
 │       references:    Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., H...
 │       comment:       This dataset is incomplete and has been downsampled for th...
 │       content:       Tempest AEM Survey from the Mississippi Alluvial Plain /su...
-│       gspy_version:  2.2.8
+│       gspy_version:  2.2.9
 │       conventions:   GS-2.0, CF-1.13
 ├── Group: /survey/data
 │   │   Dimensions:      ()
@@ -685,11 +703,11 @@ Group: /survey
 │       │   Dimensions:         (index: 2001, gate_times: 15)
 │       │   Coordinates:
 │       │     * index           (index) float64 16kB 0.0 1.0 2.0 ... 1.999e+03 2e+03
-│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
-│       │       spatial_ref     float64 8B ...
 │       │       x               (index) float64 16kB ...
 │       │       y               (index) float64 16kB ...
 │       │       z               (index) float64 16kB ...
+│       │     * gate_times      (gate_times) float64 120B 1.085e-05 3.255e-05 ... 0.01338
+│       │       spatial_ref     float64 8B ...
 │       │   Data variables: (12/58)
 │       │       line            (index) float64 16kB ...
 │       │       flight          (index) float64 16kB ...
@@ -714,29 +732,27 @@ Group: /survey
 │       │       structure:   tabular
 │       └── Group: /survey/data/raw_data/tempest_system
 │               Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
-│                                                  waveform_time: 7, n_receiver: 2,
-│                                                  n_couplet: 2, dim_0: 1)
+│                                                  waveform_time: 7, n_receiver: 2, n_couplet: 2)
 │               Coordinates:
 │                 * nv                            (nv) float64 16B 0.0 1.0
 │                 * n_transmitter                 (n_transmitter) float64 8B 0.0
 │                 * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
 │                 * n_receiver                    (n_receiver) float64 16B 0.0 1.0
 │                 * n_couplet                     (n_couplet) float64 16B 0.0 1.0
-│               Dimensions without coordinates: dim_0
-│               Data variables: (12/26)
+│               Data variables: (12/27)
 │                   gate_times_bnds               (gate_times, nv) float64 240B ...
-│                   transmitter_label             (n_transmitter) &lt;U1 4B ...
+│                   transmitter_label             (n_transmitter) object 8B ...
 │                   transmitter_area              (n_transmitter) int64 8B ...
-│                   transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
+│                   transmitter_waveform_type     (n_transmitter) object 8B ...
 │                   transmitter_waveform_current  (waveform_time) float64 56B ...
 │                   transmitter_scale_factor      (n_transmitter) float64 8B ...
 │                   ...                            ...
 │                   couplet_txrx_dz               (n_couplet) int64 16B ...
-│                   data_normalized               (dim_0) bool 1B ...
-│                   output_data_type              &lt;U1 4B ...
-│                   reference_frame               &lt;U24 96B ...
-│                   output_sample_frequency       (dim_0) int64 8B ...
-│                   digitization_frequency        (dim_0) int64 8B ...
+│                   data_normalized               bool 1B ...
+│                   output_data_type              object 8B ...
+│                   reference_frame               object 8B ...
+│                   output_sample_frequency       int64 8B ...
+│                   digitization_frequency        int64 8B ...
 │               Attributes:
 │                   type:        system
 │                   mode:        airborne
@@ -758,15 +774,15 @@ Group: /survey
 │       │     * nv                       (nv) float64 16B 0.0 1.0
 │       │     * gate_times               (gate_times) float64 120B 1.085e-05 ... 0.01338
 │       │     * index                    (index) float64 16kB 0.0 1.0 ... 1.999e+03 2e+03
-│       │       spatial_ref              float64 8B ...
 │       │       x                        (index) float64 16kB ...
 │       │       y                        (index) float64 16kB ...
 │       │       z                        (index) float64 16kB ...
+│       │       spatial_ref              float64 8B ...
 │       │   Data variables: (12/46)
 │       │       layer_depth_bnds         (layer_depth, nv) float64 480B ...
 │       │       gate_times_bnds          (gate_times, nv) float64 240B ...
-│       │       uniqueid                 (index) float64 16kB ...
-│       │       survey                   (index) float64 16kB ...
+│       │       uniqueid                 (index) int32 8kB ...
+│       │       survey                   (index) int32 8kB ...
 │       │       date                     (index) float64 16kB ...
 │       │       flight                   (index) float64 16kB ...
 │       │       ...                       ...
@@ -775,7 +791,7 @@ Group: /survey
 │       │       phig                     (index) float64 16kB ...
 │       │       phis                     (index) float64 16kB ...
 │       │       lambda                   (index) float64 16kB ...
-│       │       iterations               (index) float64 16kB ...
+│       │       iterations               (index) int32 8kB ...
 │       │   Attributes:
 │       │       content:     inverted resistivity models
 │       │       comment:     This dataset includes inverted resistivity models derived fr...
@@ -787,28 +803,26 @@ Group: /survey
 │       │       structure:   tabular
 │       ├── Group: /survey/models/inverted_models/tempest_system
 │       │       Dimensions:                       (gate_times: 15, nv: 2, n_transmitter: 1,
-│       │                                          waveform_time: 7, n_receiver: 2,
-│       │                                          n_couplet: 2, dim_0: 1)
+│       │                                          waveform_time: 7, n_receiver: 2, n_couplet: 2)
 │       │       Coordinates:
 │       │         * n_transmitter                 (n_transmitter) float64 8B 0.0
 │       │         * waveform_time                 (waveform_time) float64 56B -0.01667 ... 0....
 │       │         * n_receiver                    (n_receiver) float64 16B 0.0 1.0
 │       │         * n_couplet                     (n_couplet) float64 16B 0.0 1.0
-│       │       Dimensions without coordinates: dim_0
-│       │       Data variables: (12/26)
+│       │       Data variables: (12/27)
 │       │           gate_times_bnds               (gate_times, nv) float64 240B ...
-│       │           transmitter_label             (n_transmitter) &lt;U1 4B ...
+│       │           transmitter_label             (n_transmitter) object 8B ...
 │       │           transmitter_area              (n_transmitter) int64 8B ...
-│       │           transmitter_waveform_type     (n_transmitter) &lt;U6 24B ...
+│       │           transmitter_waveform_type     (n_transmitter) object 8B ...
 │       │           transmitter_waveform_current  (waveform_time) float64 56B ...
 │       │           transmitter_scale_factor      (n_transmitter) float64 8B ...
 │       │           ...                            ...
 │       │           couplet_txrx_dz               (n_couplet) int64 16B ...
-│       │           data_normalized               (dim_0) bool 1B ...
-│       │           output_data_type              &lt;U1 4B ...
-│       │           reference_frame               &lt;U24 96B ...
-│       │           output_sample_frequency       (dim_0) int64 8B ...
-│       │           digitization_frequency        (dim_0) int64 8B ...
+│       │           data_normalized               bool 1B ...
+│       │           output_data_type              object 8B ...
+│       │           reference_frame               object 8B ...
+│       │           output_sample_frequency       int64 8B ...
+│       │           digitization_frequency        int64 8B ...
 │       │       Attributes:
 │       │           type:        system
 │       │           mode:        airborne
@@ -818,11 +832,11 @@ Group: /survey
 │       └── Group: /survey/models/inverted_models/inversion_parameters
 │               Dimensions:             ()
 │               Data variables:
-│                   software            &lt;U61 244B ...
-│                   software_reference  &lt;U298 1kB ...
-│                   description         &lt;U1402 6kB ...
-│                   doi_calculation     &lt;U592 2kB ...
-│                   phid_cut            &lt;U256 1kB ...
+│                   software            object 8B ...
+│                   software_reference  object 8B ...
+│                   description         object 8B ...
+│                   doi_calculation     object 8B ...
+│                   phid_cut            object 8B ...
 │               Attributes:
 │                   type:        parameters
 │                   method:      electromagnetic, time domain
@@ -868,18 +882,18 @@ Group: /survey
                   * n_base_magnetometer                 (n_base_magnetometer) float64 8B 0.0
                 Data variables: (12/35)
                     base_mag_locations_bnds             (base_mag_locations, nv) float64 96B ...
-                    transmitter_label                   (n_transmitter) &lt;U7 28B ...
-                    transmitter_description             (n_transmitter) &lt;U107 428B ...
-                    receiver_label                      (n_receiver) &lt;U19 76B ...
-                    receiver_sensor_type                (n_receiver) &lt;U12 48B ...
-                    receiver_sensor_model               (n_receiver) &lt;U4 16B ...
+                    transmitter_label                   (n_transmitter) object 8B ...
+                    transmitter_description             (n_transmitter) object 8B ...
+                    receiver_label                      (n_receiver) object 8B ...
+                    receiver_sensor_type                (n_receiver) object 8B ...
+                    receiver_sensor_model               (n_receiver) object 8B ...
                     ...                                  ...
-                    diurnal_correction                  &lt;U142 568B ...
-                    igrf_model_date                     &lt;U10 40B ...
-                    igrf_model_height                   &lt;U7 28B ...
-                    igrf_removed_model_epoch            &lt;U6 24B ...
-                    tieline_levelling                   &lt;U137 548B ...
-                    deliverables                        &lt;U63 252B ...
+                    diurnal_correction                  object 8B ...
+                    igrf_model_date                     object 8B ...
+                    igrf_model_height                   object 8B ...
+                    igrf_removed_model_epoch            object 8B ...
+                    tieline_levelling                   object 8B ...
+                    deliverables                        object 8B ...
                 Attributes:
                     type:        system
                     mode:        airborne
@@ -888,6 +902,12 @@ Group: /survey
                     name:        magnetic_system
 </pre></div>
 </div>
+<p>The scalar variables that print as an empty <code class="docutils literal notranslate"><span class="pre">float64</span></code> NaN, such as
+<code class="docutils literal notranslate"><span class="pre">survey_information</span></code> or <code class="docutils literal notranslate"><span class="pre">flightline_information</span></code>, are not missing data.
+netCDF cannot hold nested attributes, so each metadata block is attached to
+one of these placeholder variables. In a Jupyter notebook, displaying the
+survey without <code class="docutils literal notranslate"><span class="pre">print</span></code> gives xarray’s tree view, where each block’s fields
+are listed inline; the workshop notebooks use that style throughout.</p>
 <p>Once the survey is read in, we can access variables like a standard xarray dataset.</p>
 <p>Option A:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">]</span><span class="o">.</span><span class="n">magnetic_tmi</span><span class="p">)</span>
@@ -950,18 +970,35 @@ Attributes:
 <section id="plotting-examples">
 <h2>Plotting Examples<a class="headerlink" href="#plotting-examples" title="Link to this heading"></a></h2>
 <p>demonstrating different ways to access and plot variables</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a scatter plot of a specific tabular variable, using GSPy's plotter</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A line profile of one variable along a flight line. The data hold a single</span>
+<span class="c1"># line here, so we subset by it anyway and put the line number in the title.</span>
+<span class="n">line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'raw_data'</span><span class="p">][</span><span class="s1">'line'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="s1">'line'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_aseg_tempest_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_001.png" alt="Line 225401" class = "sphx-glr-single-img"/><p>A map view of the flight path, coloured by a tabular variable, using GSPy’s
+plotter. The ‘y’ coordinate is used automatically, so it is never named in
+the call; axis and colorbar labels are built from the variable metadata.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'tx_height'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_aseg_tempest_001.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_001.png" alt="plot aseg tempest" class = "sphx-glr-single-img"/><p>Make a 2-D map plot of a specific raster variable, using Xarrays’s plotter</p>
+<img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="plot aseg tempest" class = "sphx-glr-single-img"/><p>A map view of a raster variable, using xarray’s plotter. The title is set
+explicitly because xarray otherwise fills it from the leftover scalar
+coordinate ‘spatial_ref’, which carries no information.
+HT</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">new_survey</span><span class="p">[</span><span class="s1">'derived_maps/maps'</span><span class="p">][</span><span class="s1">'magnetic_tmi'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'jet'</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Total magnetic intensity"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_aseg_tempest_002.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_002.png" alt="spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.462 seconds)</p>
+<img src="../../_images/sphx_glr_plot_aseg_tempest_003.png" srcset="../../_images/sphx_glr_plot_aseg_tempest_003.png" alt="Total magnetic intensity, spatial_ref = 0.0" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.499 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-aseg-tempest-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f4ba3c5b4e1b387ce8109a435ed7d940/plot_aseg_tempest.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_aseg_tempest.ipynb</span></code></a></p>

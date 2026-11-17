@@ -66,10 +66,10 @@ Initialize the Survey
 
 
     # Path to example files
-    data_path = '..//data_files//skytem_csv'
+    data_path = '../data_files/skytem_csv'
 
     # Survey metadata file
-    metadata = join(data_path, "data//skytem_survey.yml")
+    metadata = join(data_path, "data", "skytem_survey.yml")
 
     # Establish the Survey
     survey = Survey.from_dict(metadata)
@@ -117,23 +117,20 @@ Attach leaves to the data branch
 
 1. Raw Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-79
+.. GENERATED FROM PYTHON SOURCE LINES 63-76
 
 .. code-block:: Python
 
 
     # Import raw AEM data from CSV-format.
     # Define input data file and associated metadata file
-    d_data1 = join(data_path, 'data//skytem_contractor_data.csv')
-    d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
+    d_data1 = join(data_path, 'data', 'skytem_contractor_data.csv')
+    d_supp1 = join(data_path, 'data', 'skytem_contractor_data.yml')
 
-    raw_systems = Metadata.read(join(data_path, "data//skytem_system.yml"))
-
-    # raw_systems = {"skytem_system" : survey["nominal_system"],
-            #   "magnetic_system" : survey["magnetic_system"]}
+    raw_systems = Metadata.read(join(data_path, "data", "skytem_system.yml"))
 
     # Add the raw AEM data as a tabular dataset,
-    # pass the EM system from the survey
+    # passing the systems read from the YAML
     rd = data_container.gs.add(key='raw_data', data=d_data1,
                                metadata_file=d_supp1, system=raw_systems)
 
@@ -144,19 +141,26 @@ Attach leaves to the data branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-81
+.. GENERATED FROM PYTHON SOURCE LINES 77-81
+
+Each waveform is one (n_transmitter x waveform_time) variable shared by both
+moments, so the moment reads out in the transmitter label of each row rather
+than in the waveform variable name. The gate-time variables do carry it in
+their long names: lm_gate_times is the low moment, hm_gate_times the high.
+
+.. GENERATED FROM PYTHON SOURCE LINES 83-84
 
 2. Processed Data
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-89
+.. GENERATED FROM PYTHON SOURCE LINES 84-92
 
 .. code-block:: Python
 
 
     # Import processed AEM data from CSV-format.
     # Define input data file and associated metadata file
-    d_data2 = join(data_path, 'data//skytem_processed_data.csv')
-    d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
+    d_data2 = join(data_path, 'data', 'skytem_processed_data.csv')
+    d_supp2 = join(data_path, 'data', 'skytem_processed_data.yml')
 
     print(rd['skytem_system'])
 
@@ -178,8 +182,7 @@ Attach leaves to the data branch
                                                           n_transmitter: 2,
                                                           transmitter_lm_waveform_time: 21,
                                                           transmitter_hm_waveform_time: 36,
-                                                          n_receiver: 2, n_couplet: 4,
-                                                          dim_0: 1)
+                                                          n_receiver: 2, n_couplet: 4)
         Coordinates:
           * gate_times                                   (gate_times) float64 176B 5....
           * nv                                           (nv) int64 16B 0 1
@@ -194,7 +197,6 @@ Attach leaves to the data branch
           * index                                        (index) int32 8kB 0 1 ... 1999
           * hm_gate_times                                (hm_gate_times) float64 256B ...
           * lm_gate_times                                (lm_gate_times) float64 224B ...
-        Dimensions without coordinates: dim_0
         Data variables: (12/35)
             gate_times_bnds                              (gate_times, nv) float64 352B ...
             lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
@@ -205,8 +207,8 @@ Attach leaves to the data branch
             ...                                           ...
             couplet_data_type                            (n_couplet) <U4 64B 'dBdt' ....
             couplet_gate_times                           (n_couplet) <U13 208B 'lm_ga...
-            data_normalized                              (dim_0) bool 1B True
-            skytem_skb_gex_available                     (dim_0) bool 1B True
+            data_normalized                              bool 1B True
+            skytem_skb_gex_available                     bool 1B True
             reference_frame                              <U26 104B 'right-handed posi...
             coil_orientations                            <U4 16B 'X, Z'
         Attributes:
@@ -219,11 +221,11 @@ Attach leaves to the data branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-91
+.. GENERATED FROM PYTHON SOURCE LINES 93-94
 
 Example of how systems can be selected and modified to accurately match the processed data
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-95
+.. GENERATED FROM PYTHON SOURCE LINES 94-98
 
 .. code-block:: Python
 
@@ -238,11 +240,11 @@ Example of how systems can be selected and modified to accurately match the proc
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-97
+.. GENERATED FROM PYTHON SOURCE LINES 99-100
 
 Add the processed AEM data as a tabular dataset, passing the updated systems
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-100
+.. GENERATED FROM PYTHON SOURCE LINES 100-103
 
 .. code-block:: Python
 
@@ -256,7 +258,7 @@ Add the processed AEM data as a tabular dataset, passing the updated systems
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-106
+.. GENERATED FROM PYTHON SOURCE LINES 104-109
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/skytem_processed_data.yml
    :language: yaml
@@ -264,19 +266,19 @@ Add the processed AEM data as a tabular dataset, passing the updated systems
    :caption: Processed Data YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-111
+.. GENERATED FROM PYTHON SOURCE LINES 112-114
 
 Create a Models Branch
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 111-115
+.. GENERATED FROM PYTHON SOURCE LINES 114-118
 
 .. code-block:: Python
 
 
     # Create a new container for models
     model_container = survey.gs.add_container('models', **dict(content = "Inverted models",
-                                                              comment = "This is a test"))
+                                                               comment = "1-D resistivity models inverted from the processed AEM data"))
 
 
 
@@ -284,19 +286,19 @@ Create a Models Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 116-117
+.. GENERATED FROM PYTHON SOURCE LINES 119-120
 
 3. Inverted Models
 
-.. GENERATED FROM PYTHON SOURCE LINES 117-127
+.. GENERATED FROM PYTHON SOURCE LINES 120-130
 
 .. code-block:: Python
 
 
     # Import inverted AEM models from CSV-format.
     # Define input data file and associated metadata file
-    m_data3 = join(data_path, 'model//skytem_inverted_models.csv')
-    m_supp3 = join(data_path, 'model//skytem_inverted_models.yml')
+    m_data3 = join(data_path, 'model', 'skytem_inverted_models.csv')
+    m_supp3 = join(data_path, 'model', 'skytem_inverted_models.yml')
 
     # Add the inverted AEM models as a tabular dataset
     mods = model_container.gs.add(key='inverted_models', data=m_data3,
@@ -309,7 +311,7 @@ Create a Models Branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 128-133
+.. GENERATED FROM PYTHON SOURCE LINES 131-136
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/model/skytem_inverted_models.yml
    :language: yaml
@@ -317,28 +319,28 @@ Create a Models Branch
    :caption: Inverted Models YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-138
+.. GENERATED FROM PYTHON SOURCE LINES 139-141
 
 Derivative Products
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 140-141
+.. GENERATED FROM PYTHON SOURCE LINES 143-144
 
 4. Bedrock Picks
 
-.. GENERATED FROM PYTHON SOURCE LINES 143-144
+.. GENERATED FROM PYTHON SOURCE LINES 146-147
 
 Adding bedrock picks to the 'data' branch
 
-.. GENERATED FROM PYTHON SOURCE LINES 144-154
+.. GENERATED FROM PYTHON SOURCE LINES 147-157
 
 .. code-block:: Python
 
 
     # Import AEM-based estimated of depth to bedrock from CSV-format.
     # Define input data file and associated metadata file
-    d_data4 = join(data_path, 'data//top_dolomite_blocky_lidar.csv')
-    d_supp4 = join(data_path, 'data//bedrock_picks.yml')
+    d_data4 = join(data_path, 'data', 'top_dolomite_blocky_lidar.csv')
+    d_supp4 = join(data_path, 'data', 'bedrock_picks.yml')
 
     # Add the AEM-based estimated of depth to bedrock as a tabular dataset
     bedrock = data_container.gs.add(key='depth_to_bedrock', data=d_data4,
@@ -351,7 +353,7 @@ Adding bedrock picks to the 'data' branch
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-160
+.. GENERATED FROM PYTHON SOURCE LINES 158-163
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/bedrock_picks.yml
    :language: yaml
@@ -359,15 +361,15 @@ Adding bedrock picks to the 'data' branch
    :caption: Bedrock Picks YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 163-164
+.. GENERATED FROM PYTHON SOURCE LINES 166-167
 
 5. Raster Maps
 
-.. GENERATED FROM PYTHON SOURCE LINES 166-167
+.. GENERATED FROM PYTHON SOURCE LINES 169-170
 
-Create a 3rd container for the derived raaster maps
+Create a 3rd container for the derived raster maps
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-177
+.. GENERATED FROM PYTHON SOURCE LINES 170-180
 
 .. code-block:: Python
 
@@ -376,7 +378,7 @@ Create a 3rd container for the derived raaster maps
 
     # Import interpolated bedrock and magnetic maps from TIF-format.
     # Define input metadata file (which contains the TIF filenames linked to variable names)
-    m_supp5 = join(data_path, 'data//magnetics_bedrock_picks.yml')
+    m_supp5 = join(data_path, 'data', 'magnetics_bedrock_picks.yml')
 
     # Add the interpolated maps as a raster dataset
     maps = derived_maps.gs.add(key='maps', metadata_file=m_supp5)
@@ -388,7 +390,7 @@ Create a 3rd container for the derived raaster maps
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 178-183
+.. GENERATED FROM PYTHON SOURCE LINES 181-186
 
 .. literalinclude:: /../../examples/data_files/skytem_csv/data/magnetics_bedrock_picks.yml
    :language: yaml
@@ -396,12 +398,12 @@ Create a 3rd container for the derived raaster maps
    :caption: Gridded Maps YAML file
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 186-188
+.. GENERATED FROM PYTHON SOURCE LINES 189-191
 
 Save to NetCDF file
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 188-193
+.. GENERATED FROM PYTHON SOURCE LINES 191-196
 
 .. code-block:: Python
 
@@ -417,16 +419,16 @@ Save to NetCDF file
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-196
+.. GENERATED FROM PYTHON SOURCE LINES 197-199
 
 Export just one branch to file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 198-199
+.. GENERATED FROM PYTHON SOURCE LINES 201-202
 
 The gspy goal is to have the complete survey in a single file. However, we can also save containers or datasets separately.
 
-.. GENERATED FROM PYTHON SOURCE LINES 199-202
+.. GENERATED FROM PYTHON SOURCE LINES 202-205
 
 .. code-block:: Python
 
@@ -440,12 +442,12 @@ The gspy goal is to have the complete survey in a single file. However, we can a
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 203-205
+.. GENERATED FROM PYTHON SOURCE LINES 206-208
 
 Opening a GS NetCDF
 ^^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 205-207
+.. GENERATED FROM PYTHON SOURCE LINES 208-210
 
 .. code-block:: Python
 
@@ -458,12 +460,12 @@ Opening a GS NetCDF
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 208-210
+.. GENERATED FROM PYTHON SOURCE LINES 211-213
 
 View the Data Tree
 ^^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 210-213
+.. GENERATED FROM PYTHON SOURCE LINES 213-216
 
 .. code-block:: Python
 
@@ -497,7 +499,7 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 214-216
+.. GENERATED FROM PYTHON SOURCE LINES 217-219
 
 .. code-block:: Python
 
@@ -530,7 +532,7 @@ View the Data Tree
     │       comment:       This dataset includes minimally processed (raw) AEM and ra...
     │       summary:       Airborne electromagnetic (AEM) and magnetic survey data we...
     │       content:       Wisconsin SkyTEM survey information /survey; raw and proce...
-    │       gspy_version:  2.2.8
+    │       gspy_version:  2.2.9
     │       conventions:   GS-2.0, CF-1.13
     ├── Group: /survey/data
     │   │   Dimensions:      ()
@@ -544,13 +546,13 @@ View the Data Tree
     │   │   │   Dimensions:          (index: 2000, hm_gate_times: 32, lm_gate_times: 28)
     │   │   │   Coordinates:
     │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-    │   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
-    │   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
-    │   │   │       spatial_ref      float64 8B ...
     │   │   │       x                (index) float64 16kB ...
     │   │   │       y                (index) float64 16kB ...
     │   │   │       z                (index) float64 16kB ...
     │   │   │       t                (index) float64 16kB ...
+    │   │   │     * hm_gate_times    (hm_gate_times) float64 256B 2.886e-05 ... 0.003544
+    │   │   │     * lm_gate_times    (lm_gate_times) float64 224B -1.135e-06 ... 0.001394
+    │   │   │       spatial_ref      float64 8B ...
     │   │   │   Data variables: (12/30)
     │   │   │       _60hz_intensity  (index) float64 16kB ...
     │   │   │       alt              (index) float64 16kB ...
@@ -581,8 +583,7 @@ View the Data Tree
     │   │   │                                                         n_transmitter: 2,
     │   │   │                                                         transmitter_lm_waveform_time: 21,
     │   │   │                                                         transmitter_hm_waveform_time: 36,
-    │   │   │                                                         n_receiver: 2, n_couplet: 4,
-    │   │   │                                                         dim_0: 1)
+    │   │   │                                                         n_receiver: 2, n_couplet: 4)
     │   │   │       Coordinates:
     │   │   │         * gate_times                                   (gate_times) float64 176B 5....
     │   │   │         * nv                                           (nv) float64 16B 0.0 1.0
@@ -593,21 +594,20 @@ View the Data Tree
     │   │   │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
     │   │   │         * n_receiver                                   (n_receiver) float64 16B 0.0...
     │   │   │         * n_couplet                                    (n_couplet) float64 32B 0.0 ...
-    │   │   │       Dimensions without coordinates: dim_0
     │   │   │       Data variables: (12/35)
     │   │   │           gate_times_bnds                              (gate_times, nv) float64 352B ...
     │   │   │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 448B ...
     │   │   │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 512B ...
     │   │   │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
     │   │   │           xyz_bnds                                     (xyz, nv) float64 48B ...
-    │   │   │           transmitter_label                            (n_transmitter) <U2 16B ...
+    │   │   │           transmitter_label                            (n_transmitter) object 16B ...
     │   │   │           ...                                           ...
-    │   │   │           couplet_data_type                            (n_couplet) <U4 64B ...
-    │   │   │           couplet_gate_times                           (n_couplet) <U13 208B ...
-    │   │   │           data_normalized                              (dim_0) bool 1B ...
-    │   │   │           skytem_skb_gex_available                     (dim_0) bool 1B ...
-    │   │   │           reference_frame                              <U26 104B ...
-    │   │   │           coil_orientations                            <U4 16B ...
+    │   │   │           couplet_data_type                            (n_couplet) object 32B ...
+    │   │   │           couplet_gate_times                           (n_couplet) object 32B ...
+    │   │   │           data_normalized                              bool 1B ...
+    │   │   │           skytem_skb_gex_available                     bool 1B ...
+    │   │   │           reference_frame                              object 8B ...
+    │   │   │           coil_orientations                            object 8B ...
     │   │   │       Attributes:
     │   │   │           type:        system
     │   │   │           mode:        airborne
@@ -625,38 +625,38 @@ View the Data Tree
     │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
     │   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
     │   │           Data variables: (12/28)
-    │   │               transmitter_label                 (n_transmitter) <U7 28B ...
-    │   │               transmitter_description           (n_transmitter) <U142 568B ...
-    │   │               receiver_label                    (n_receiver) <U19 76B ...
-    │   │               receiver_sensor_type              (n_receiver) <U23 92B ...
-    │   │               receiver_sensor_model             (n_receiver) <U6 24B ...
-    │   │               receiver_sensor_manufacturer      (n_receiver) <U10 40B ...
+    │   │               transmitter_label                 (n_transmitter) object 8B ...
+    │   │               transmitter_description           (n_transmitter) object 8B ...
+    │   │               receiver_label                    (n_receiver) object 8B ...
+    │   │               receiver_sensor_type              (n_receiver) object 8B ...
+    │   │               receiver_sensor_model             (n_receiver) object 8B ...
+    │   │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
     │   │               ...                                ...
-    │   │               diurnal_correction                <U110 440B ...
-    │   │               tieline_levelling                 <U33 132B ...
-    │   │               microlevelling                    <U31 124B ...
-    │   │               igrf_model_date                   <U21 84B ...
-    │   │               igrf_model_location               <U54 216B ...
-    │   │               igrf_model_height                 <U69 276B ...
+    │   │               diurnal_correction                object 8B ...
+    │   │               tieline_levelling                 object 8B ...
+    │   │               microlevelling                    object 8B ...
+    │   │               igrf_model_date                   object 8B ...
+    │   │               igrf_model_location               object 8B ...
+    │   │               igrf_model_height                 object 8B ...
     │   │           Attributes:
     │   │               type:        system
     │   │               mode:        airborne
     │   │               method:      magnetic
-    │   │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+    │   │               instrument:  Geometrics G-822A cesium-vapor magnetometer
     │   │               name:        magnetic_system
     │   ├── Group: /survey/data/processed_data
     │   │   │   Dimensions:          (index: 2000, lm_gate_times: 27, hm_gate_times: 22)
     │   │   │   Coordinates:
     │   │   │     * index            (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-    │   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
-    │   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
-    │   │   │       spatial_ref      float64 8B ...
     │   │   │       x                (index) float64 16kB ...
     │   │   │       y                (index) float64 16kB ...
     │   │   │       z                (index) float64 16kB ...
     │   │   │       t                (index) float64 16kB ...
+    │   │   │     * lm_gate_times    (lm_gate_times) float64 216B 3.65e-07 ... 0.001394
+    │   │   │     * hm_gate_times    (hm_gate_times) float64 176B 5.636e-05 ... 0.003544
+    │   │   │       spatial_ref      float64 8B ...
     │   │   │   Data variables: (12/17)
-    │   │   │       pindex           (index) float64 16kB ...
+    │   │   │       pindex           (index) int64 16kB ...
     │   │   │       sline_no         (index) float64 16kB ...
     │   │   │       record           (index) float64 16kB ...
     │   │   │       alt              (index) float64 16kB ...
@@ -685,8 +685,7 @@ View the Data Tree
     │   │   │                                                         n_transmitter: 2,
     │   │   │                                                         transmitter_lm_waveform_time: 21,
     │   │   │                                                         transmitter_hm_waveform_time: 36,
-    │   │   │                                                         n_receiver: 2, n_couplet: 4,
-    │   │   │                                                         dim_0: 1)
+    │   │   │                                                         n_receiver: 2, n_couplet: 4)
     │   │   │       Coordinates:
     │   │   │         * gate_times                                   (gate_times) float64 176B 5....
     │   │   │         * nv                                           (nv) float64 16B 0.0 1.0
@@ -697,21 +696,20 @@ View the Data Tree
     │   │   │         * transmitter_hm_waveform_time                 (transmitter_hm_waveform_time) float64 288B ...
     │   │   │         * n_receiver                                   (n_receiver) float64 16B 0.0...
     │   │   │         * n_couplet                                    (n_couplet) float64 32B 0.0 ...
-    │   │   │       Dimensions without coordinates: dim_0
     │   │   │       Data variables: (12/35)
     │   │   │           gate_times_bnds                              (gate_times, nv) float64 352B ...
     │   │   │           lm_gate_times_bnds                           (lm_gate_times, nv) float64 432B ...
     │   │   │           hm_gate_times_bnds                           (hm_gate_times, nv) float64 352B ...
     │   │   │           n_loop_vertices_bnds                         (n_loop_vertices, nv) float64 128B ...
     │   │   │           xyz_bnds                                     (xyz, nv) float64 48B ...
-    │   │   │           transmitter_label                            (n_transmitter) <U2 16B ...
+    │   │   │           transmitter_label                            (n_transmitter) object 16B ...
     │   │   │           ...                                           ...
-    │   │   │           couplet_data_type                            (n_couplet) <U4 64B ...
-    │   │   │           couplet_gate_times                           (n_couplet) <U13 208B ...
-    │   │   │           data_normalized                              (dim_0) bool 1B ...
-    │   │   │           skytem_skb_gex_available                     (dim_0) bool 1B ...
-    │   │   │           reference_frame                              <U26 104B ...
-    │   │   │           coil_orientations                            <U4 16B ...
+    │   │   │           couplet_data_type                            (n_couplet) object 32B ...
+    │   │   │           couplet_gate_times                           (n_couplet) object 32B ...
+    │   │   │           data_normalized                              bool 1B ...
+    │   │   │           skytem_skb_gex_available                     bool 1B ...
+    │   │   │           reference_frame                              object 8B ...
+    │   │   │           coil_orientations                            object 8B ...
     │   │   │       Attributes:
     │   │   │           type:        system
     │   │   │           mode:        airborne
@@ -729,37 +727,37 @@ View the Data Tree
     │   │             * n_base_magnetometer               (n_base_magnetometer) float64 8B 0.0
     │   │             * base_mag_locations                (base_mag_locations) float64 16B 1.0 2.0
     │   │           Data variables: (12/28)
-    │   │               transmitter_label                 (n_transmitter) <U7 28B ...
-    │   │               transmitter_description           (n_transmitter) <U142 568B ...
-    │   │               receiver_label                    (n_receiver) <U19 76B ...
-    │   │               receiver_sensor_type              (n_receiver) <U23 92B ...
-    │   │               receiver_sensor_model             (n_receiver) <U6 24B ...
-    │   │               receiver_sensor_manufacturer      (n_receiver) <U10 40B ...
+    │   │               transmitter_label                 (n_transmitter) object 8B ...
+    │   │               transmitter_description           (n_transmitter) object 8B ...
+    │   │               receiver_label                    (n_receiver) object 8B ...
+    │   │               receiver_sensor_type              (n_receiver) object 8B ...
+    │   │               receiver_sensor_model             (n_receiver) object 8B ...
+    │   │               receiver_sensor_manufacturer      (n_receiver) object 8B ...
     │   │               ...                                ...
-    │   │               diurnal_correction                <U110 440B ...
-    │   │               tieline_levelling                 <U33 132B ...
-    │   │               microlevelling                    <U31 124B ...
-    │   │               igrf_model_date                   <U21 84B ...
-    │   │               igrf_model_location               <U54 216B ...
-    │   │               igrf_model_height                 <U69 276B ...
+    │   │               diurnal_correction                object 8B ...
+    │   │               tieline_levelling                 object 8B ...
+    │   │               microlevelling                    object 8B ...
+    │   │               igrf_model_date                   object 8B ...
+    │   │               igrf_model_location               object 8B ...
+    │   │               igrf_model_height                 object 8B ...
     │   │           Attributes:
     │   │               type:        system
     │   │               mode:        airborne
     │   │               method:      magnetic
-    │   │               instrument:  Geometrics G-822A cesium‑vapor magnetometer
+    │   │               instrument:  Geometrics G-822A cesium-vapor magnetometer
     │   │               name:        magnetic_system
     │   └── Group: /survey/data/depth_to_bedrock
     │           Dimensions:       (index: 82864)
     │           Coordinates:
     │             * index         (index) float64 663kB 0.0 1.0 2.0 ... 8.286e+04 8.286e+04
-    │               spatial_ref   float64 8B ...
     │               x             (index) float64 663kB ...
     │               y             (index) float64 663kB ...
+    │               spatial_ref   float64 8B ...
     │           Data variables:
-    │               id            (index) float64 663kB ...
+    │               id            (index) int64 663kB ...
     │               br_elevation  (index) float64 663kB ...
     │               zstd          (index) float64 663kB ...
-    │               origintype    (index) float64 663kB ...
+    │               origintype    (index) int64 663kB ...
     │               editdate      (index) object 663kB ...
     │           Attributes:
     │               content:     bedrock elevation points
@@ -775,7 +773,7 @@ View the Data Tree
     │   │       spatial_ref  float64 8B ...
     │   │   Attributes:
     │   │       content:  Inverted models
-    │   │       comment:  This is a test
+    │   │       comment:  1-D resistivity models inverted from the processed AEM data
     │   │       type:     container
     │   └── Group: /survey/models/inverted_models
     │       │   Dimensions:           (layer_depth: 40, nv: 2, index: 2000)
@@ -783,14 +781,14 @@ View the Data Tree
     │       │     * layer_depth       (layer_depth) float64 320B 0.375 1.16 2.02 ... 262.6 343.8
     │       │     * nv                (nv) float64 16B 0.0 1.0
     │       │     * index             (index) float64 16kB 0.0 1.0 2.0 ... 1.998e+03 1.999e+03
-    │       │       spatial_ref       float64 8B ...
     │       │       x                 (index) float64 16kB ...
     │       │       y                 (index) float64 16kB ...
     │       │       z                 (index) float64 16kB ...
     │       │       t                 (index) float64 16kB ...
+    │       │       spatial_ref       float64 8B ...
     │       │   Data variables: (12/18)
     │       │       layer_depth_bnds  (layer_depth, nv) float64 640B ...
-    │       │       pindex            (index) float64 16kB ...
+    │       │       pindex            (index) int64 16kB ...
     │       │       sline_no          (index) float64 16kB ...
     │       │       record            (index) float64 16kB ...
     │       │       alt               (index) float64 16kB ...
@@ -814,13 +812,13 @@ View the Data Tree
     │       └── Group: /survey/models/inverted_models/inversion_parameters
     │               Dimensions:             ()
     │               Data variables:
-    │                   model_file          <U33 132B ...
-    │                   inversion_software  <U16 64B ...
-    │                   software_version    <U9 36B ...
-    │                   software_reference  <U11 44B ...
-    │                   date                <U17 68B ...
-    │                   description         <U253 1kB ...
-    │                   data_file           <U32 128B ...
+    │                   model_file          object 8B ...
+    │                   inversion_software  object 8B ...
+    │                   software_version    object 8B ...
+    │                   software_reference  object 8B ...
+    │                   date                object 8B ...
+    │                   description         object 8B ...
+    │                   data_file           object 8B ...
     │               Attributes:
     │                   type:        parameters
     │                   method:      electromagnetic, time domain
@@ -862,25 +860,32 @@ View the Data Tree
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 217-219
+.. GENERATED FROM PYTHON SOURCE LINES 220-222
 
 Plotting Examples
 ^^^^^^^^^^^^^^^^^
 
-.. GENERATED FROM PYTHON SOURCE LINES 219-224
+.. GENERATED FROM PYTHON SOURCE LINES 222-234
 
 .. code-block:: Python
 
 
+    # A line profile of the raw flight-line data, subset by line so the figure
+    # records which line it shows. gs.plot draws a variable against distance
+    # along the line, and labels both axes from the variable metadata.
+    line = int(np.unique(new_survey['data/raw_data']['line'].values)[0])
+    subset = new_survey['data/raw_data'].gs.subset('line', line)
+
     plt.figure()
-    new_survey['data']['raw_data']['height'].plot()
+    subset.gs.plot('height', x='distance')
+    plt.title(f"Line {line}")
     plt.tight_layout()
 
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_001.png
-   :alt: spatial_ref = 0.0
+   :alt: Line 100101
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_001.png
    :class: sphx-glr-single-img
 
@@ -888,20 +893,29 @@ Plotting Examples
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 225-230
+.. GENERATED FROM PYTHON SOURCE LINES 235-237
+
+The same view of the processed data: subset one line, then draw the
+transmitter altitude against distance along it.
+
+.. GENERATED FROM PYTHON SOURCE LINES 237-246
 
 .. code-block:: Python
 
     pcd = new_survey['data']['processed_data']
+    line = int(np.unique(pcd['line_no'].values)[0])
+    subset = pcd.gs.subset('line_no', line)
+
     plt.figure()
-    pcd['tx_altitude'].plot()
+    subset.gs.plot('tx_altitude', x='distance')
+    plt.title(f"Line {line}")
     plt.tight_layout()
 
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_002.png
-   :alt: spatial_ref = 0.0
+   :alt: Line 100101
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_002.png
    :class: sphx-glr-single-img
 
@@ -909,23 +923,47 @@ Plotting Examples
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 231-237
+.. GENERATED FROM PYTHON SOURCE LINES 247-250
+
+A map view of the contractor's magnetic grid, using xarray's plotter. The
+title is set explicitly because xarray otherwise fills it from the leftover
+scalar coordinate 'spatial_ref', which carries no information.
+
+.. GENERATED FROM PYTHON SOURCE LINES 250-256
 
 .. code-block:: Python
 
     m = new_survey['derived_maps']['maps']
     plt.figure()
-    m['magnetic_tmi'].plot(cmap='jet')
+    m['magnetic_tmi'].plot(cmap='jet', robust=True)
+    plt.suptitle("Total magnetic intensity")
     plt.tight_layout()
 
-    plt.show()
 
 
 
 .. image-sg:: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_003.png
-   :alt: spatial_ref = 0.0
+   :alt: Total magnetic intensity, spatial_ref = 0.0
    :srcset: /examples/Creating_GS_Files/images/sphx_glr_plot_csv_skytem_003.png
    :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 257-259
+
+For a notebook walkthrough of this same survey, from raw CSVs through to
+plots, see the workshop notebooks, e.g. workshop/1_skytem_from_scratch.ipynb.
+
+.. GENERATED FROM PYTHON SOURCE LINES 259-261
+
+.. code-block:: Python
+
+
+    plt.show()
+
+
 
 
 
@@ -934,7 +972,7 @@ Plotting Examples
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.565 seconds)
+   **Total running time of the script:** (0 minutes 2.154 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_csv_skytem.py:
