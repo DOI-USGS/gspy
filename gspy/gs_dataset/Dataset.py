@@ -521,19 +521,25 @@ class Dataset:
         return out
 
     def plot(self, hue, **kwargs):
-        """Scatter plot of variable against x, y co-ordinates
+        """Line profile of a variable against a horizontal coordinate
 
         Parameters
         ----------
-        variable : str
-            Xarray Dataset variable name
+        hue : str
+            Variable to plot on the vertical axis
+
+        x : str
+            Horizontal coordinate, 'x' (default) or 'distance' along the line
+
+        **kwargs :
+            Passed to matplotlib.pyplot.plot
 
         Returns
         -------
         ax : matplotlib.Axes
             Figure handle
-        sc : xarray.plot.scatter
-            Plotting handle
+        splot :
+            The plotted line handles
 
         """
         ax = kwargs.pop('ax', plt.gca())
@@ -558,19 +564,27 @@ class Dataset:
         return ax, splot
 
     def scatter(self, **kwargs):
-        """Scatter plot of variable against x, y co-ordinates
+        """Scatter plot of the sample positions, optionally coloured by a variable
 
         Parameters
         ----------
-        variable : str
-            Xarray Dataset variable name
+        hue : str
+            Variable to colour the points with; without it this falls back
+            to a line profile of the y coordinate
+
+        x, y : str
+            Coordinate variables for the axes (default 'x' and 'y'; the y
+            coordinate never needs naming in the call)
+
+        **kwargs :
+            Passed to matplotlib.pyplot.scatter
 
         Returns
         -------
         ax : matplotlib.Axes
             Figure handle
-        sc : xarray.plot.scatter
-            Plotting handle
+        splot :
+            The plotted scatter handle
 
         """
         ax = kwargs.pop('ax', plt.gca())
@@ -591,11 +605,11 @@ class Dataset:
 
             splot = plt.scatter(x.values, y.values, c=self._obj[hue].values, **kwargs)
 
-            plt.xlabel(f"x\n{x.attrs['long_name']} [{x.attrs['units']}]")
-            plt.ylabel(f"y\n{y.attrs['long_name']} [{y.attrs['units']}]")
+            plt.xlabel(f"x\n{x.gs.label}")
+            plt.ylabel(f"y\n{y.gs.label}")
 
             cb=plt.colorbar()
-            cb.set_label(f"{hue}\n{self._obj[hue].attrs['long_name']} [{self._obj[hue].attrs['units']}]", rotation=-90, labelpad=30)
+            cb.set_label(f"{hue}\n{self._obj[hue].gs.label}", rotation=-90, labelpad=30)
 
             plt.tight_layout()
 

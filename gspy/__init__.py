@@ -8,6 +8,9 @@ from xarray import open_dataset as xr_open_dataset
 
 from ._version import __version__
 from .utilities.encoding import restore_fill_values, restore_placeholders, unmasked
+from .utilities.plotting import patch_xarray_labels
+
+patch_xarray_labels()
 
 def open_datatree(*args, **kwargs):
     kwargs['decode_times'] = kwargs.get('decode_times', False)
