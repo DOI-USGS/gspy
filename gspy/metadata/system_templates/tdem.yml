@@ -25,7 +25,6 @@ dimensions:
     per: transmitter
     long_name: '?? e.g. calibrated {label} gate times ??'
     units: seconds
-    missing_value: not_defined
     centers: '?? one centre time per {label} gate, seconds ??'
     bounds: '?? a row of {label} gate open times then a row of close times, 2 by number of gates ??'
   # Corners of the transmitter loop; coordinates holds an xyz triple for each.
@@ -33,13 +32,11 @@ dimensions:
     standard_name: number_of_loop_vertices
     long_name: number of transmitter loop vertices
     units: not_defined
-    missing_value: not_defined
     length: '?? how many corners the transmitter loop has ??'
   xyz:  # the three components of a loop vertex; leave as is
     standard_name: xyz_coordinates
     long_name: coordinates of the loop vertices
     units: not_defined
-    missing_value: not_defined
     length: 3
 
 variables:
@@ -73,7 +70,6 @@ variables:
       values: '?? time of each waveform vertex, seconds ??'
       long_name: waveform time
       units: s
-      missing_value: not_defined
     waveform_current:  # a row per transmitter, one value per waveform time, peak of 1
       values: '?? normalised current at each waveform time ??'
       dimensions: [n_transmitter, waveform_time]

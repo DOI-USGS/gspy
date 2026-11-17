@@ -19,7 +19,6 @@ magnetic_system:
             standard_name: base_mag_locations
             long_name: Base Magnetometer Location Index Numbers
             units: not_defined
-            missing_value: not_defined
             length: 6
             increment: 1
             origin: 1
@@ -112,19 +111,17 @@ variables:
         standard_name: total_magnetic_intensity
         long_name: Total magnetic intensity, diurnally corrected and filtered
         units: nT
-        missing_value: 1.70141e+38
+        _FillValue: 1.70141e+38
         files: [../../data/tempest/mag.tif]
 
     Easting_Albers:
         standard_name: easting_albers
         long_name: Easting
         units: meter
-        missing_value: not_defined
         
     Northing_Albers:
         standard_name: northing_albers
         long_name: Northing
         units: meter
-        missing_value: not_defined
 
 

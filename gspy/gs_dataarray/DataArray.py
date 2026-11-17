@@ -148,6 +148,9 @@ class DataArray:
             CF convention long name
         missing_value : int or float, optional
             Number that represents unusable data. default is 'not_defined'
+        _FillValue : int or float, optional
+            Accepted as a synonym of missing_value; if both are given,
+            missing_value wins
         standard_name : str, optional
             CF convention standard name
         units : str, optional
@@ -160,6 +163,13 @@ class DataArray:
         """
         values = kwargs.pop('values')
         nd = ndim(values)
+
+        # CF's name for the same declaration, for metadata files that state one;
+        # an explicit missing_value wins, and its documented default fills the rest.
+        fill = kwargs.pop('_FillValue', None)
+        if kwargs.get('missing_value', 'not_defined') == 'not_defined' and fill is not None:
+            kwargs['missing_value'] = fill
+        kwargs.setdefault('missing_value', 'not_defined')
 
         if kwargs.pop('check', True):
             cls.check_metadata(name, **kwargs)
@@ -273,11 +283,20 @@ class DataArray:
 
     @property
     def label(self):
-        return f"{self.long_name} [{self.units}]"
+        name = self.standard_name
+        if not name or name == "not_defined":
+            name = self.long_name
+        return f"{name} [{self.units}]"
 
     @staticmethod
     def metadata_template(**kwargs):
-        return Metadata.merge({key: "not_defined" for key in default_metadata}, kwargs)
+        # The template names the fill in CF form; from_values reads either key.
+        # A fill is the one field a user may legitimately not have, so the
+        # placeholder says so.
+        template = {key: "not_defined" for key in default_metadata}
+        del template['missing_value']
+        template['_FillValue'] = "?? or remove if not_defined"
+        return Metadata.merge(template, kwargs)
 
     def write_ncml(self, file, indent):
         si = "  "*(indent+1)

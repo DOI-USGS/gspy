@@ -654,7 +654,7 @@ class TestMetadataTemplate:
         assert set(template["variables"]) == set(resolve_csv.column_header_counts)
         assert template["variables"]["line"] == {"standard_name": "not_defined",
                                                 "long_name": "not_defined",
-                                                "missing_value": "not_defined",
+                                                "_FillValue": "?? or remove if not_defined",
                                                 "units": "not_defined"}
 
     def test_a_wide_column_gets_a_dimensions_entry_to_fill_in(self, resolve_csv):
@@ -703,8 +703,7 @@ class TestMissingMetadata:
     def test_a_partly_described_column_reports_the_attrs_it_lacks(self, resolve_csv):
         missing = resolve_csv.missing_metadata({"variables": {"line": {"standard_name": "line"}}})
 
-        assert {"variables.line.long_name", "variables.line.units",
-                "variables.line.missing_value"} <= set(missing)
+        assert {"variables.line.long_name", "variables.line.units"} <= set(missing)
 
     def test_placeholders_anywhere_in_the_metadata_are_reported(self, resolve_csv):
         missing = resolve_csv.missing_metadata({"dataset_attrs": {"content": "?? what ??"}})

@@ -29,7 +29,6 @@ dimensions
 ,,standard_name,layer_depth
 ,,long_name,Depth to model layer
 ,,units,meters
-,,missing_value,not_defined
 ,,centers,:1D
 ,,,0.5
 ,,,1.55

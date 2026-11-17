@@ -29,7 +29,6 @@ dimensions:
     standard_name: base_mag_locations
     long_name: base magnetometer location index numbers
     units: not_defined
-    missing_value: not_defined
     centers: '?? one index per base station location, e.g. [1, 2] ??'
     discrete: true
 

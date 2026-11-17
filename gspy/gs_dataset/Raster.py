@@ -357,7 +357,7 @@ class Raster(Dataset):
                 "standard_name": "depth",
                 "long_name": "Depth below earth's surface DTM",
                 "units": "m",
-                "missing_value": "not_defined",
+                "_FillValue": "?? or remove if not_defined",
                 "length" : 3,
                 "increment" : 5.0,
                 "origin" : 0.0,

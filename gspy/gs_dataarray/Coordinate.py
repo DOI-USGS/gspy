@@ -21,7 +21,7 @@ class Coordinate(DataArray):
         template = {"standard_name": "not_defined",
                     "long_name": "Can specify centers and/or bounds, or origin/increment/length",
                     "units": "not_defined",
-                    "missing_value": "not_defined",
+                    "_FillValue": "?? or remove if not_defined",
                     "centers" : [0, 1, 2],
                     "bounds" : [[-0.5, 0.5], [0.5, 1.5], [1.5, 2.5]],
                     "origin" : -0.5,

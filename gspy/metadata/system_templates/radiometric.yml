@@ -31,7 +31,6 @@ dimensions:
     standard_name: spectra
     long_name: radiometric spectra sample
     units: not_defined
-    missing_value: not_defined
     length: '?? how many samples in a spectrum, e.g. 256 ??'
     increment: 1
     origin: 0
@@ -79,11 +78,11 @@ variables:
     compton_stripping_nominal_altitude:  # the height the stripping ratios were adjusted to
       values: '?? altitude the ratios apply at ??'
       units: m
-    # How quickly each window's count rate falls off with height, per metre.
-    height_attenuation_coefficient_TC: '?? per metre ??'
-    height_attenuation_coefficient_K: '?? per metre ??'  # see above
-    height_attenuation_coefficient_Th: '?? per metre ??'  # see above
-    height_attenuation_coefficient_U: '?? per metre ??'  # see above
+    # How quickly each window's count rate falls off with height, per meter.
+    height_attenuation_coefficient_TC: '?? per meter ??'
+    height_attenuation_coefficient_K: '?? per meter ??'  # see above
+    height_attenuation_coefficient_Th: '?? per meter ??'  # see above
+    height_attenuation_coefficient_U: '?? per meter ??'  # see above
     # Converts corrected count rates to ground concentrations, from calibration.
     source_sensitivity_factor_TC: '?? counts per second per unit concentration ??'
     source_sensitivity_factor_K: '?? counts per second per percent K ??'  # see above

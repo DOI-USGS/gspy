@@ -24,7 +24,6 @@ dimensions:
     standard_name: frequency_domain_complex_data
     long_name: complex frequency domain data channel
     units: not_defined
-    missing_value: not_defined
     centers: [in-phase, quadrature]
     discrete: true
   # The nominal frequencies, one per coil pair and in the order of the labels.
@@ -33,7 +32,6 @@ dimensions:
     standard_name: frequency
     long_name: nominal measurement frequency
     units: Hz
-    missing_value: not_defined
     centers: '?? one nominal frequency per coil pair, Hz ??'
     discrete: true
 

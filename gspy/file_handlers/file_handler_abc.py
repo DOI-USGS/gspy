@@ -5,7 +5,7 @@ from pathlib import Path
 from ..metadata.Metadata import Metadata
 
 #: Attributes the GS convention requires on every variable.
-REQUIRED_VARIABLE_ATTRS = ('standard_name', 'long_name', 'units', 'missing_value')
+REQUIRED_VARIABLE_ATTRS = ('standard_name', 'long_name', 'units')
 
 
 class InsufficientMetadataError(Exception):
@@ -322,7 +322,7 @@ class file_handler(ABC):
                                    {'standard_name': 'my_dimension_variable_name',
                                     'long_name': 'more descriptive name of this dimension variable, numbers below are examples for how a regular 1-D dimension can be auto-generated.',
                                     'units': 'units of the dimension',
-                                    'missing_value': 'not_defined',
+                                    '_FillValue': '?? or remove if not_defined',
                                     'length': 10,
                                     'increment': 5.0,
                                     'origin': 2.5},
@@ -330,7 +330,7 @@ class file_handler(ABC):
                                    {'standard_name': 'my_other_dimension_variable_name',
                                     'long_name': 'A second example for how dimension variables can be defined. Again, numbers below are stand-ins for demonstration purposes. In this case the widths are irregular and might have overlapping bounds.',
                                     'units': 'units of the dimension',
-                                    'missing_value': 'not_defined',
+                                    '_FillValue': '?? or remove if not_defined',
                                     'bounds': [[0,2],[2,6],[4,10],[8,16]],
                                     'centers': [1,4,7,12]}}
 
@@ -363,7 +363,7 @@ class file_handler(ABC):
         """
         template = {"standard_name": "not_defined",
                     "long_name": "not_defined",
-                    "missing_value": "not_defined",
+                    "_FillValue": "?? or remove if not_defined",
                     "units": "not_defined"}
 
         existing = kwargs.get('variables', {})

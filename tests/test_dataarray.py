@@ -161,9 +161,11 @@ class TestVariableMetadata:
         DataArray.check_metadata("v", **MD)
 
     def test_the_template_offers_the_four_entries(self):
-        assert DataArray.metadata_template() == {k: "not_defined" for k in
-                                                 ("standard_name", "long_name",
-                                                  "units", "missing_value")}
+        template = DataArray.metadata_template()
+        assert template == {"standard_name": "not_defined",
+                            "long_name": "not_defined",
+                            "units": "not_defined",
+                            "_FillValue": "?? or remove if not_defined"}
 
     def test_from_values_needs_dimensions_for_an_array(self):
         with pytest.raises(AssertionError, match="dimensions must be specified"):

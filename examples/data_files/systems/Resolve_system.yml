@@ -10,13 +10,11 @@ resolve_system:
             standard_name: frequency_domain_complex_data
             long_name: complex frequency domain data channel
             units: not_defined
-            missing_value: not_defined
             discrete: True
         frequency:
             standard_name: frequency
             long_name: nominal measurement frequency
             units: Hz
-            missing_value: not_defined
             centers: [400, 1800, 3300, 8200, 40000, 140000]
             discrete: True
 

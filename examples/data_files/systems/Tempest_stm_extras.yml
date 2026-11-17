@@ -4,7 +4,7 @@
 # the geometry a forward model needs, and nothing about the aircraft that flew or
 # the loop that was actually built. Everything here is a field the format has no
 # place for, or one it scaled out - Tempest.stm states a single turn of one square
-# metre, so the real loop is put back below.
+# meter, so the real loop is put back below.
 
 tempest_system:
     instrument: 30Hz Tempest
