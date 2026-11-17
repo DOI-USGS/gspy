@@ -2,7 +2,7 @@
 Magnetic Raster Dataset
 -----------------------
 
-These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files. 
+These magnetic data channels were pulled from the Wisconsin SkyTEM example in this repository to demonstrate the relatively simple case of gridded raster files.
 
 Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoon, M.A., Stewart, E.K., Hunt, R.J., James, S.R., Foks, N.L., and Komiskey, M.J., 2022, Airborne electromagnetic and magnetic survey data, northeast Wisconsin (ver. 1.1, June 2022): U.S. Geological Survey data release, https://doi.org/10.5066/P93SY9LI.
 """
@@ -10,17 +10,20 @@ Source Reference: Minsley, B.J, Bloss, B.R., Hart, D.J., Fitzpatrick, W., Muldoo
 #%%
 import matplotlib.pyplot as plt
 from os.path import join
+import numpy as np
 import gspy
 from gspy import Survey
 import warnings
 warnings.filterwarnings('ignore')
+
+# sphinx_gallery_thumbnail_number = 3
 
 #%%
 # Initialize the Survey
 # ^^^^^^^^^^^^^^^^^^^^^
 
 # Path to example files
-data_path = '..//data_files//magnetics'
+data_path = '../data_files/magnetics'
 
 # Survey metadata file
 metadata = join(data_path, "WI_Magnetics_survey_md.yml")
@@ -89,7 +92,7 @@ d_out = join(data_path, 'magnetics.nc')
 survey.gs.to_netcdf(d_out)
 
 # %%
-# Opening a GS NetCDF 
+# Opening a GS NetCDF
 # ^^^^^^^^^^^^^^^^^^^
 
 new_survey = gspy.open_datatree(d_out)['survey']
@@ -98,26 +101,37 @@ new_survey = gspy.open_datatree(d_out)['survey']
 # View the Data Tree
 # ^^^^^^^^^^^^^^^^^^
 
+print(new_survey.gs.tree)
 print(new_survey)
 
 #%%
 # Plotting
 # ^^^^^^^^
 
+# Line profiles of the flight-line data, subset by line so each figure records
+# which line it shows. gs.plot draws a variable against distance along the line.
+line = int(np.unique(new_survey['magnetic_data/raw_data']['line'].values)[0])
+subset = new_survey['magnetic_data/raw_data'].gs.subset('line', line)
+
 plt.figure()
-new_survey['magnetic_data/raw_data']['height'].plot()
+subset.gs.plot('height', x='distance')
+plt.title(f"Line {line}")
 plt.tight_layout()
 
 #%%
-pd = new_survey['magnetic_data/raw_data']['tmi']
 plt.figure()
-pd.plot()
+subset.gs.plot('tmi', x='distance')
+plt.title(f"Line {line}")
 plt.tight_layout()
 
 #%%
+# A map view of the contractor's interpolated magnetic grid, using xarray's
+# plotter. The title is set explicitly because xarray otherwise fills it from
+# the leftover scalar coordinate 'spatial_ref', which carries no information.
 m = new_survey['magnetic_data/grids/magnetic_tmi']
 plt.figure()
-m.plot(cmap='jet')
+m.plot(cmap='jet', robust=True)
+plt.suptitle("Total magnetic intensity")
 plt.tight_layout()
 
 plt.show()

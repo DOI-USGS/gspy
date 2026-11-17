@@ -12,15 +12,20 @@ The GS standard requires a single set of ``x``, ``y``, ``z``, ``t`` coordinate v
     - 2-D magnetic grid, aligned to match the x-y dimensions of the resistivity layers (1000 m cell size)
     - 3-D resistivity grid
 
+The .tif filenames are not spelled out in this script: each metadata YAML lists them alongside the variable names they become.
+
 Lastly, GSPy provides a "to_tif()" method to export raster data as GeoTIFF. This example demonstrates how to use this method for both 2D and 3D variables.
 
-Source References: 
+Source References:
 
 Minsley, B.J., James, S.R., Bedrosian, P.A., Pace, M.D., Hoogenboom, B.E., and Burton, B.L., 2021, Airborne electromagnetic, magnetic, and radiometric survey of the Mississippi Alluvial Plain, November 2019 - March 2020: U.S. Geological Survey data release, https://doi.org/10.5066/P9E44CTQ.
 
 James, S.R., and Minsley, B.J., 2021, Combined results and derivative products of hydrogeologic structure and properties from airborne electromagnetic surveys in the Mississippi Alluvial Plain: U.S. Geological Survey data release, https://doi.org/10.5066/P9382RCI.
 
 """
+
+# sphinx_gallery_thumbnail_number = 3
+
 #%%
 import matplotlib.pyplot as plt
 from os.path import join
@@ -32,10 +37,10 @@ from gspy import Survey
 # ^^^^^^^^^^^^^^^^^^^^^
 
 # Path to example files
-data_path = "..//data_files//tempest_aseg"
+data_path = "../data_files/tempest_aseg"
 
 # Survey metadata file
-metadata = join(data_path, "data//Tempest_survey_md.yml")
+metadata = join(data_path, "data", "Tempest_survey_md.yml")
 
 # Establish the Survey
 survey = Survey.from_dict(metadata)
@@ -61,10 +66,10 @@ container = survey.gs.add_container('derived_products',
 # """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 #%%
-# Define input metadata file, which contains the TIF filename linked 
-# with desired variable name and info. 
+# Define input metadata file, which contains the TIF filename linked
+# with desired variable name and info.
 
-d_supp1 = join(data_path, 'data//Tempest_raster_md.yml')
+d_supp1 = join(data_path, 'data', 'Tempest_raster_md.yml')
 
 # Attach the magnetic map to the container
 mm = container.gs.add(key="mag_map", metadata_file=d_supp1)
@@ -83,7 +88,7 @@ mm = container.gs.add(key="mag_map", metadata_file=d_supp1)
 
 #%%
 # Import both 3-D resistivity and 2-D magnetic data, aligned onto a common 1000 m x 1000 m grid
-d_supp2 = join(data_path, 'data//Tempest_rasters_md.yml')
+d_supp2 = join(data_path, 'data', 'Tempest_rasters_md.yml')
 
 # Attach rasters to the container
 rm = container.gs.add(key="all_maps", metadata_file=d_supp2)
@@ -97,15 +102,16 @@ rm = container.gs.add(key="all_maps", metadata_file=d_supp2)
 #
 
 #%%
-# Note: the stack dimension is defined as "depth" but for the resistivity variable 
+# Note: the stack dimension is defined as "depth" but for the resistivity variable
 # the dimensions are listed as [x, y, z] ... this is because under coordinates
-# we are linking the `z` coordinate dimension to the incoming depth dimension. 
+# we are linking the `z` coordinate dimension to the incoming depth dimension.
 # Therefore the name "depth" ends up not getting used because that dimension becomes
 # "z" instead.
 
 #%%
-# Inspect the data tree
-# ^^^^^^^^^^^^^^^^^^^^^
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+print(survey.gs.tree)
 print(survey)
 
 # %%
@@ -115,17 +121,20 @@ d_out = join(data_path, 'tifs.nc')
 survey.gs.to_netcdf(d_out)
 
 #%%
-# Option 1: 
+# Exporting back to GeoTIFF
+# ^^^^^^^^^^^^^^^^^^^^^^^^^
 #
-# Pass a variable name to export just that variable
+# gs.to_tif writes the raster variables out as GeoTIFFs again, in two calling
+# styles.
+
+#%%
+# Option 1: pass a variable name to export just that variable.
 survey['derived_products']["all_maps"].gs.to_tif('magnetic_tmi')
 
 #%%
-# Option 2: 
-# 
-# Export all the variables by NOT passing any variable names,
-# but need to specify a slice dimension for the 3D resistivity variable.
-# Can optionally pass a directory path to export tiffs to.
+# Option 2: export every variable by passing no names; the 3-D resistivity
+# variable then needs a slice dimension, and a directory to export to can be
+# given optionally.
 survey['derived_products']["all_maps"].gs.to_tif(slice_dim='z', out_dir=data_path)
 
 #%%
@@ -136,16 +145,32 @@ new_survey = gspy.open_datatree(d_out)['survey']
 # Plotting
 
 #%%
-# Make a map-view plot of a specific data variable, using Xarray's plotter
-# In this case, we slice the 3-D resistivity variable along the depth dimension
+# A map view of the 3-D resistivity variable, using xarray's plotter: slicing
+# along the depth dimension gives one panel per layer. The title is set
+# explicitly, with the variable's units, because xarray otherwise fills it from
+# the leftover scalar coordinate 'spatial_ref', which carries no information.
 
-r_plot = new_survey['derived_products']["all_maps"]['resistivity'].plot(col='z', vmax=3, cmap='jet', robust=True)
+all_maps = new_survey['derived_products']["all_maps"]
+all_maps['resistivity'].plot(col='z', vmax=3, cmap='jet', robust=True)
+plt.suptitle(f"Resistivity ({all_maps['resistivity'].attrs['units']}) by depth")
 
 #%%
-# Make a map-view plot comparing the different x-y discretization of the two magnetic variables, using Xarray's plotter
+# A vertical section through the same 3-D grid, along one east-west row: after
+# slicing out one y, xarray plots resistivity against x and depth.
+
+plt.figure()
+all_maps['resistivity'].isel(y=all_maps.sizes['y'] // 2).plot(x='x', y='z', cmap='jet', robust=True)
+plt.suptitle("Resistivity section along the middle east-west row")
+plt.tight_layout()
+
+#%%
+# A map view comparing the x-y discretization of the two magnetic grids: the
+# finer 600 m grid is overplotted in greyscale on the coarser 1000 m grid in
+# colour, so the cell-size difference shows wherever the two do not overlap.
+
 plt.figure()
 ax=plt.gca()
-plot1 = new_survey['derived_products']["all_maps"]['magnetic_tmi'].plot(ax=ax, cmap='jet', vmin=0, vmax=1000, robust=True)
+plot1 = all_maps['magnetic_tmi'].plot(ax=ax, cmap='jet', vmin=0, vmax=1000, robust=True)
 plot2 = new_survey['derived_products']["mag_map"]['magnetic_tmi'].plot(ax=ax, cmap='Greys', cbar_kwargs={'label': ''}, robust=True)
 plt.ylim([1.20556e6, 1.21476e6])
 plt.xlim([3.5201e5, 3.6396e5])

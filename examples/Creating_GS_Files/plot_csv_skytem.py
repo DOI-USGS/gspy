@@ -32,10 +32,10 @@ warnings.filterwarnings('ignore')
 # ^^^^^^^^^^^^^^^^^^^^^
 
 # Path to example files
-data_path = '..//data_files//skytem_csv'
+data_path = '../data_files/skytem_csv'
 
 # Survey metadata file
-metadata = join(data_path, "data//skytem_survey.yml")
+metadata = join(data_path, "data", "skytem_survey.yml")
 
 # Establish the Survey
 survey = Survey.from_dict(metadata)
@@ -63,10 +63,10 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
 
 # Import raw AEM data from CSV-format.
 # Define input data file and associated metadata file
-d_data1 = join(data_path, 'data//skytem_contractor_data.csv')
-d_supp1 = join(data_path, 'data//skytem_contractor_data.yml')
+d_data1 = join(data_path, 'data', 'skytem_contractor_data.csv')
+d_supp1 = join(data_path, 'data', 'skytem_contractor_data.yml')
 
-raw_systems = Metadata.read(join(data_path, "data//skytem_system.yml"))
+raw_systems = Metadata.read(join(data_path, "data", "skytem_system.yml"))
 
 # Add the raw AEM data as a tabular dataset,
 # passing the systems read from the YAML
@@ -74,12 +74,18 @@ rd = data_container.gs.add(key='raw_data', data=d_data1,
                            metadata_file=d_supp1, system=raw_systems)
 
 #%%
+# Each waveform is one (n_transmitter x waveform_time) variable shared by both
+# moments, so the moment reads out in the transmitter label of each row rather
+# than in the waveform variable name. The gate-time variables do carry it in
+# their long names: lm_gate_times is the low moment, hm_gate_times the high.
+
+#%%
 # 2. Processed Data
 
 # Import processed AEM data from CSV-format.
 # Define input data file and associated metadata file
-d_data2 = join(data_path, 'data//skytem_processed_data.csv')
-d_supp2 = join(data_path, 'data//skytem_processed_data.yml')
+d_data2 = join(data_path, 'data', 'skytem_processed_data.csv')
+d_supp2 = join(data_path, 'data', 'skytem_processed_data.yml')
 
 print(rd['skytem_system'])
 
@@ -114,8 +120,8 @@ model_container = survey.gs.add_container('models', **dict(content = "Inverted m
 
 # Import inverted AEM models from CSV-format.
 # Define input data file and associated metadata file
-m_data3 = join(data_path, 'model//skytem_inverted_models.csv')
-m_supp3 = join(data_path, 'model//skytem_inverted_models.yml')
+m_data3 = join(data_path, 'model', 'skytem_inverted_models.csv')
+m_supp3 = join(data_path, 'model', 'skytem_inverted_models.yml')
 
 # Add the inverted AEM models as a tabular dataset
 mods = model_container.gs.add(key='inverted_models', data=m_data3,
@@ -141,8 +147,8 @@ mods = model_container.gs.add(key='inverted_models', data=m_data3,
 
 # Import AEM-based estimated of depth to bedrock from CSV-format.
 # Define input data file and associated metadata file
-d_data4 = join(data_path, 'data//top_dolomite_blocky_lidar.csv')
-d_supp4 = join(data_path, 'data//bedrock_picks.yml')
+d_data4 = join(data_path, 'data', 'top_dolomite_blocky_lidar.csv')
+d_supp4 = join(data_path, 'data', 'bedrock_picks.yml')
 
 # Add the AEM-based estimated of depth to bedrock as a tabular dataset
 bedrock = data_container.gs.add(key='depth_to_bedrock', data=d_data4,
@@ -166,7 +172,7 @@ derived_maps = survey.gs.add_container('derived_maps', **dict(content = "raster 
 
 # Import interpolated bedrock and magnetic maps from TIF-format.
 # Define input metadata file (which contains the TIF filenames linked to variable names)
-m_supp5 = join(data_path, 'data//magnetics_bedrock_picks.yml')
+m_supp5 = join(data_path, 'data', 'magnetics_bedrock_picks.yml')
 
 # Add the interpolated maps as a raster dataset
 maps = derived_maps.gs.add(key='maps', metadata_file=m_supp5)
@@ -214,20 +220,41 @@ print(new_survey)
 # Plotting Examples
 # ^^^^^^^^^^^^^^^^^
 
+# A line profile of the raw flight-line data, subset by line so the figure
+# records which line it shows. gs.plot draws a variable against distance
+# along the line, and labels both axes from the variable metadata.
+line = int(np.unique(new_survey['data/raw_data']['line'].values)[0])
+subset = new_survey['data/raw_data'].gs.subset('line', line)
+
 plt.figure()
-new_survey['data']['raw_data']['height'].plot()
+subset.gs.plot('height', x='distance')
+plt.title(f"Line {line}")
 plt.tight_layout()
 
 # %%
+# The same view of the processed data: subset one line, then draw the
+# transmitter altitude against distance along it.
 pcd = new_survey['data']['processed_data']
+line = int(np.unique(pcd['line_no'].values)[0])
+subset = pcd.gs.subset('line_no', line)
+
 plt.figure()
-pcd['tx_altitude'].plot()
+subset.gs.plot('tx_altitude', x='distance')
+plt.title(f"Line {line}")
 plt.tight_layout()
 
 # %%
+# A map view of the contractor's magnetic grid, using xarray's plotter. The
+# title is set explicitly because xarray otherwise fills it from the leftover
+# scalar coordinate 'spatial_ref', which carries no information.
 m = new_survey['derived_maps']['maps']
 plt.figure()
-m['magnetic_tmi'].plot(cmap='jet')
+m['magnetic_tmi'].plot(cmap='jet', robust=True)
+plt.suptitle("Total magnetic intensity")
 plt.tight_layout()
+
+# %%
+# For a notebook walkthrough of this same survey, from raw CSVs through to
+# plots, see the workshop notebooks, e.g. workshop/1_skytem_from_scratch.ipynb.
 
 plt.show()

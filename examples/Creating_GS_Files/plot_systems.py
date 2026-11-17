@@ -188,7 +188,7 @@ print(placeholders(tempest_stm))
 # rather than the forward model, so it is left for you to answer.
 #
 # The loop itself is taken as the file states it. Tempest.stm states a single turn
-# of one square metre, which is a real loop scaled out of the forward model - put
+# of one square meter, which is a real loop scaled out of the forward model - put
 # the real one back if the data needs it.
 
 print(tempest_stm['output_data_type'].values)

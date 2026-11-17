@@ -14,6 +14,8 @@ This example demonstrates how to convert comma-separated values (CSV) data to th
 
 This example also demonstrates how to read metadata from different formats (YAML and CSV), and includes examples of electromagnetic, magnetic, and radiometric systems.
 
+Note: this example also exports metadata to an Excel (.xlsx) file, so it needs openpyxl installed (conda install openpyxl, or pip install openpyxl).
+
 Source Reference: Burton, B.L., Minsley, B.J., Bloss, B.R., Rigby, J.R., Kress, W.H., and Smith, B.D., 2019, Airborne electromagnetic, magnetic, and radiometric survey, Shellmound, Mississippi, March 2018 (ver. 2.0, March 2024): U.S. Geological Survey data release, https://doi.org/10.5066/P9D4EA9W.
 
 """
@@ -29,10 +31,10 @@ from pprint import pprint
 # ^^^^^^^^^^^^^^^^^^^^^
 
 # Path to example files
-data_path = '..//data_files//resolve'
+data_path = '../data_files/resolve'
 
 # Survey metadata file
-metadata = join(data_path, "data//Resolve_survey_md.yml")
+metadata = join(data_path, "data", "Resolve_survey_md.yml")
 
 # Establish the Survey
 survey = gspy.Survey.from_dict(metadata)
@@ -57,7 +59,7 @@ data_container = survey.gs.add_container('data', **dict(content = "raw and proce
 # Point to raw data CSV file
 
 # Define input data file and associated metadata file
-d_data = join(data_path, 'data//Resolve.csv')
+d_data = join(data_path, 'data', 'Resolve.csv')
 
 #%%
 # Multiple Geophysical Systems & Metadata Formats
@@ -70,7 +72,7 @@ d_data = join(data_path, 'data//Resolve.csv')
 #%%
 # Metadata about the dataset and systems are in YAML format
 
-d_supp = join(data_path, 'data//Resolve_data_md_without_variables.yml')
+d_supp = join(data_path, 'data', 'Resolve_data_md_without_variables.yml')
 rd_meta = Metadata.read(d_supp)
 
 #%%
@@ -82,12 +84,19 @@ rd_meta = Metadata.read(d_supp)
 #
 
 #%%
+# The question marks and the missing variable entries are deliberate: this
+# file stands in for contractor metadata that describes the survey and systems
+# but never lists every data column. Nothing is broken in the data - the
+# variable attributes are supplied next, from a CSV table, and merged with
+# this file before the data are read.
+
+#%%
 # Variable metadata are in a CSV table
 
 #%%
 # Pass the flag 'table=True' for this specific metadata format
 
-var_md = join(data_path, 'data//Resolve_variable_table_md.csv')
+var_md = join(data_path, 'data', 'Resolve_variable_table_md.csv')
 var_meta = Metadata.read(var_md, table=True)
 
 #%%
@@ -124,7 +133,7 @@ model_container = survey.gs.add_container('models', **dict(content = "inverted m
 
 #%%
 # Define input model file
-m_data = join(data_path, 'model//Resolve_model.csv')
+m_data = join(data_path, 'model', 'Resolve_model.csv')
 
 #%%
 # Continue exploring different Metadata options
@@ -133,7 +142,7 @@ m_data = join(data_path, 'model//Resolve_model.csv')
 #%%
 # Once again, read partial metadata from YAML
 
-m_supp = join(data_path, 'model//Resolve_model_md.yml')
+m_supp = join(data_path, 'model', 'Resolve_model_md.yml')
 md_meta = Metadata.read(m_supp)
 
 #%%
@@ -147,7 +156,7 @@ md_meta = Metadata.read(m_supp)
 #%%
 # ... and read remaining metadata from CSV table
 
-mod_var_md = join(data_path, 'model//Resolve_model_variable_table_md.csv')
+mod_var_md = join(data_path, 'model', 'Resolve_model_variable_table_md.csv')
 mod_var_meta = Metadata.read(mod_var_md, table=True)
 
 #%%
@@ -176,8 +185,8 @@ mod_md = Metadata.merge(md_meta, mod_var_meta)
 # matches the YAML heiararchical dictionary format and 
 # is distinct from the variable metadata table (.csv but table=True) shown above. 
 
-mod_md.dump(join(data_path, 'model//Resolve_model_md.csv'))
-mod_md.dump(join(data_path, 'model//Resolve_model_md.xlsx'))
+mod_md.dump(join(data_path, 'model', 'Resolve_model_md.csv'))
+mod_md.dump(join(data_path, 'model', 'Resolve_model_md.xlsx'))
 
 #%%
 # 
@@ -215,19 +224,30 @@ survey.gs.to_netcdf(d_out)
 new_survey = gspy.open_datatree(d_out)['survey']
 
 # %%
+# View the Data Tree
+# ^^^^^^^^^^^^^^^^^^
+
+print(new_survey.gs.tree)
+print(new_survey)
+
+# %%
 # Plotting
 # ^^^^^^^^
 
-# Make a scatter plot of a specific data variable, using GSPy's plotter
+# A map view of a data variable across the whole survey, using GSPy's plotter
 plt.figure()
 new_survey['data/raw_data'].gs.scatter(hue='z', vmin=30, vmax=50)
 
 # %%
-# Subsetting by line number and plot by distance along line
-subset = new_survey['data/raw_data'].gs.subset('line', 10010)
+# A line profile, by subsetting to one line number and plotting against
+# distance along the line. Subsetting lets the title record which line is drawn.
+line = 10010
+subset = new_survey['data/raw_data'].gs.subset('line', line)
 
 plt.figure()
-_ = subset.gs.scatter(y='z', x='distance')
+_ = subset.gs.plot('z', x='distance')
+plt.title(f"Line {line}")
+plt.tight_layout()
 
 # %%
 # Make a scatter plot of a specific model variable, using GSPy's plotter
