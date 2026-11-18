@@ -3,30 +3,37 @@
     "name": "gspy",
     "organization": "U.S. Geological Survey",
     "description": "This package provides functions and workflows for standardizing geophysical datasets based on the NetCDF file format. The current implementation supports both time and frequency domain electromagnetic data, raw and processed, 1-D inverted models along flight lines, and 2-D/3-D gridded layers.",
-    "version": "1.0",
-    "status": "Development",
+    "version": "2.3.0",
+    "status": "Release",
 
     "permissions": {
       "usageType": "openSource",
       "licenses": [
         {
           "name": "Public Domain, CC0-1.0",
-          "URL": "https://code.usgs.gov/g3sc/gspy/-/raw/1.0/LICENSE.md"
+          "URL": "https://github.com/DOI-USGS/gspy/blob/master/LICENSE.md"
         }
       ]
     },
 
-    "homepageURL": "https://code.usgs.gov/g3sc/gspy",
-    "downloadURL": "https://code.usgs.gov/g3sc/gspy/-/archive/1.0/gspy-1.0.zip",
-    "disclaimerURL": "https://code.usgs.gov/g3sc/gspy/-/raw/1.0/DISCLAIMER.md",
-    "repositoryURL": "https://code.usgs.gov/g3sc/gspy.git",
+    "homepageURL": "https://github.com/DOI-USGS/gspy",
+    "downloadURL": "https://github.com/DOI-USGS/gspy/archive/refs/heads/master.zip",
+    "disclaimerURL": "https://github.com/DOI-USGS/gspy/blob/master/DISCLAIMER.md",
+    "repositoryURL": "https://github.com/DOI-USGS/gspy.git",
     "vcs": "git",
 
     "laborHours": 0,
 
     "tags": [
-      "TOPIC_TAG_1",
-      "TOPIC_TAG_2"
+      "geophysics",
+      "airborne-electromagnetics",
+      "time-domain-electromagnetics",
+      "frequency-domain-electromagnetics",
+      "magnetics",
+      "netcdf",
+      "xarray",
+      "data-standardization",
+      "hydrogeology"
     ],
 
     "languages": [
@@ -39,7 +46,7 @@
     },
 
     "date": {
-      "metadataLastUpdated": "2022-03-29"
+      "metadataLastUpdated": "2026-11-17"
     }
   }
 ]
