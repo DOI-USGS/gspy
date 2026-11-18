@@ -140,7 +140,7 @@ plt.tight_layout()
 plt.legend()
 
 #%%
-# A map view of the traverses coloured by height, using GSPy's plotter.
+# A map view of the traverses colored by height, using GSPy's plotter.
 plt.figure()
 new_survey['data/raw_data'].gs.scatter(hue='z', cmap='viridis')
 

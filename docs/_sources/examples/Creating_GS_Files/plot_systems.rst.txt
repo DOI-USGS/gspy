@@ -35,7 +35,7 @@ There are three ways to get one, and this example works through all of them:
 3. **From a template** for the method family, to fill in by hand -
    :meth:`System.metadata_template`.
 
-The three mix. A ``.stm`` is a forward modelling file rather than a system
+The three mix. A ``.stm`` is a forward modeling file rather than a system
 description, so it answers what it can and the rest is left as template
 placeholders reading ``?? what goes here ??`` - hand it a YAML alongside, or dump
 what it knows to a template and finish the job by hand.
@@ -291,7 +291,7 @@ waveform and the gate times are tables of unkeyed numbers inside them.
 .. GENERATED FROM PYTHON SOURCE LINES 113-116
 
 The gate times arrive as bounds, because that is what the file states, and the
-centres are their midpoints. Which receivers there are is read from the
+centers are their midpoints. Which receivers there are is read from the
 components the file scales its output by, at the bottom of the file.
 
 .. GENERATED FROM PYTHON SOURCE LINES 116-121
@@ -415,7 +415,7 @@ A transmitter reads as zero outside its own span.
         ax[0].plot(skytem_stm['waveform_time'].values,
                    skytem_stm['transmitter_waveform_current'].values[i, :],
                    marker='.', label=label)
-    ax[0].set(xlabel='time (s)', ylabel='normalised current',
+    ax[0].set(xlabel='time (s)', ylabel='normalized current',
               title='SkyTEM waveforms, read from two .stm files')
     ax[0].legend()
 
@@ -474,7 +474,7 @@ receiver coils were.
 Normalisation is two questions, and the file answers one of them.
 ``SecondaryFieldNormalisation`` says whether GA-AEM divided the secondary field
 by the primary one, which is what makes the delivered numbers ppm - so it sets
-``output_data_type``. Whether the data the system is attached to was normalised
+``output_data_type``. Whether the data the system is attached to was normalized
 by the transmitter moment is ``data_normalized``, which is about the data file
 rather than the forward model, so it is left for you to answer.
 
@@ -783,7 +783,7 @@ against.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.481 seconds)
+   **Total running time of the script:** (0 minutes 0.384 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_systems.py:

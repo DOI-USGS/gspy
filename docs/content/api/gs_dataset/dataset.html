@@ -381,6 +381,8 @@ as decimal days since datum or date-zero, add as “t” axis.</p>
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.is_projected">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.is_projected" title="Link to this definition"></a></dt>
 <dd><p>Does the dataset have a projected spatial reference</p>
+<p>CF spells the geographic grid mapping latitude_longitude; anything
+else named is projected, and a dataset with no spatial_ref is not.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>out</strong></p>
@@ -472,11 +474,11 @@ system under onto its key or onto the arguments describing its shape:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gspy.gs_dataset.Dataset.Dataset.scatter">
 <span class="sig-name descname"><span class="pre">scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gspy.gs_dataset.Dataset.Dataset.scatter" title="Link to this definition"></a></dt>
-<dd><p>Scatter plot of the sample positions, optionally coloured by a variable</p>
+<dd><p>Scatter plot of the sample positions, optionally colored by a variable</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hue</strong> (<em>str</em>) – Variable to colour the points with; without it this falls back
+<li><p><strong>hue</strong> (<em>str</em>) – Variable to color the points with; without it this falls back
 to a line profile of the y coordinate</p></li>
 <li><p><strong>x</strong> (<em>str</em>) – Coordinate variables for the axes (default ‘x’ and ‘y’; the y
 coordinate never needs naming in the call)</p></li>

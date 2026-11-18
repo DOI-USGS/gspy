@@ -110,7 +110,7 @@ plt.title(f"Line {line}")
 plt.tight_layout()
 
 #%%
-# A map view of the traverse coloured by a tabular variable, using GSPy's
+# A map view of the traverse colored by a tabular variable, using GSPy's
 # plotter.
 fig, ax = plt.subplots()
 subset.gs.scatter(hue='rx_altitude', cmap='jet', ax=ax)

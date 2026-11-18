@@ -273,11 +273,11 @@ Read back in the NetCDF file
 
  .. code-block:: none
 
-    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'date' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'date' has multiple fill values {np.int32(-2147483647), np.str_('not_defined')} defined, decoding all values to NaN.
       var = coder.decode(var, name=name)
-    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'flight' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'flight' has multiple fill values {np.int32(-2147483647), np.str_('not_defined')} defined, decoding all values to NaN.
       var = coder.decode(var, name=name)
-    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'line' has multiple fill values {np.str_('not_defined'), np.int32(-2147483647)} defined, decoding all values to NaN.
+    /opt/homebrew/Caskroom/miniforge/base/envs/gspy/lib/python3.14/site-packages/xarray/conventions.py:205: SerializationWarning: variable 'line' has multiple fill values {np.int32(-2147483647), np.str_('not_defined')} defined, decoding all values to NaN.
       var = coder.decode(var, name=name)
 
 
@@ -700,7 +700,7 @@ demonstrating different ways to access and plot variables
 
 .. GENERATED FROM PYTHON SOURCE LINES 184-187
 
-A map view of the flight path, coloured by a tabular variable, using GSPy's
+A map view of the flight path, colored by a tabular variable, using GSPy's
 plotter. The 'y' coordinate is used automatically, so it is never named in
 the call; axis and colorbar labels are built from the variable metadata.
 
@@ -752,7 +752,7 @@ HT
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.499 seconds)
+   **Total running time of the script:** (0 minutes 1.226 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_aseg_tempest.py:

@@ -496,8 +496,8 @@ slicing out one y, xarray plots resistivity against x and depth.
 .. GENERATED FROM PYTHON SOURCE LINES 167-170
 
 A map view comparing the x-y discretization of the two magnetic grids: the
-finer 600 m grid is overplotted in greyscale on the coarser 1000 m grid in
-colour, so the cell-size difference shows wherever the two do not overlap.
+finer 600 m grid is overplotted in grayscale on the coarser 1000 m grid in
+color, so the cell-size difference shows wherever the two do not overlap.
 
 .. GENERATED FROM PYTHON SOURCE LINES 170-178
 
@@ -526,7 +526,7 @@ colour, so the cell-size difference shows wherever the two do not overlap.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.161 seconds)
+   **Total running time of the script:** (0 minutes 0.978 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_tifs.py:

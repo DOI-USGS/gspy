@@ -535,13 +535,13 @@ Plotting
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x16fa7e660>
+    <matplotlib.legend.Legend object at 0x1408d2900>
 
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 143-144
 
-A map view of the traverses coloured by height, using GSPy's plotter.
+A map view of the traverses colored by height, using GSPy's plotter.
 
 .. GENERATED FROM PYTHON SOURCE LINES 144-147
 
@@ -565,7 +565,7 @@ A map view of the traverses coloured by height, using GSPy's plotter.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.701 seconds)
+   **Total running time of the script:** (0 minutes 1.552 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_dat_loupe.py:

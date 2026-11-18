@@ -165,8 +165,8 @@ plt.tight_layout()
 
 #%%
 # A map view comparing the x-y discretization of the two magnetic grids: the
-# finer 600 m grid is overplotted in greyscale on the coarser 1000 m grid in
-# colour, so the cell-size difference shows wherever the two do not overlap.
+# finer 600 m grid is overplotted in grayscale on the coarser 1000 m grid in
+# color, so the cell-size difference shows wherever the two do not overlap.
 
 plt.figure()
 ax=plt.gca()

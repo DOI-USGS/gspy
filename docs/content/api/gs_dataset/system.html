@@ -137,6 +137,8 @@ file cannot say.</p>
 <dt class="sig sig-object py" id="gspy.gs_dataset.System.System.is_projected">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_projected</span></span><a class="headerlink" href="#gspy.gs_dataset.System.System.is_projected" title="Link to this definition"></a></dt>
 <dd><p>Does the dataset have a projected spatial reference</p>
+<p>CF spells the geographic grid mapping latitude_longitude; anything
+else named is projected, and a dataset with no spatial_ref is not.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>out</strong></p>
@@ -172,15 +174,15 @@ written as one <code class="docutils literal notranslate"><span class="pre">&lt;
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>A .stm is a forward modelling file, not a system description, so what it can
+<p>A .stm is a forward modeling file, not a system description, so what it can
 answer it answers and the rest is left as template placeholders. It models an
 airborne dipole, so the mode is airborne and there is no loop geometry to ask
 for. The loop is kept per transmitter, a placeholder for one whose file does not
 say; GA-AEM has no default for NumberOfTurns. The moment is turns x area x peak
 current, of the loop the system ends up with once the yml is merged. The file
 is often a unit loop the forward model scaled out, so <code class="docutils literal notranslate"><span class="pre">data_normalized</span></code> is
-judged by the file’s own loop and normalisation: a unit moment or ppm means
-normalised, a real moment means not. Where the files disagree, it is yours.
+judged by the file’s own loop and normalization: a unit moment or ppm means
+normalized, a real moment means not. Where the files disagree, it is yours.
 Anything read that GSPy has no field for is recorded in the attributes under
 <code class="docutils literal notranslate"><span class="pre">stm_</span></code>, so nothing in the file is lost.</p>
 <p class="rubric">Examples</p>

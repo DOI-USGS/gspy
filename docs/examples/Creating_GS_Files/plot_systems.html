@@ -130,7 +130,7 @@ frequency domain system is written as.</p></li>
 <li><p><strong>From a template</strong> for the method family, to fill in by hand -
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">System.metadata_template()</span></code>.</p></li>
 </ol>
-<p>The three mix. A <code class="docutils literal notranslate"><span class="pre">.stm</span></code> is a forward modelling file rather than a system
+<p>The three mix. A <code class="docutils literal notranslate"><span class="pre">.stm</span></code> is a forward modeling file rather than a system
 description, so it answers what it can and the rest is left as template
 placeholders reading <code class="docutils literal notranslate"><span class="pre">??</span> <span class="pre">what</span> <span class="pre">goes</span> <span class="pre">here</span> <span class="pre">??</span></code> - hand it a YAML alongside, or dump
 what it knows to a template and finish the job by hand.</p>
@@ -324,7 +324,7 @@ waveform and the gate times are tables of unkeyed numbers inside them.</p>
 </pre></div>
 </div>
 <p>The gate times arrive as bounds, because that is what the file states, and the
-centres are their midpoints. Which receivers there are is read from the
+centers are their midpoints. Which receivers there are is read from the
 components the file scales its output by, at the bottom of the file.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tempest_stm</span><span class="p">[</span><span class="s1">'gate_times'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tempest_stm</span><span class="p">[</span><span class="s1">'receiver_label'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -377,7 +377,7 @@ A transmitter reads as zero outside its own span.</p>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">skytem_stm</span><span class="p">[</span><span class="s1">'waveform_time'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                <span class="n">skytem_stm</span><span class="p">[</span><span class="s1">'transmitter_waveform_current'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
                <span class="n">marker</span><span class="o">=</span><span class="s1">'.'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">'time (s)'</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">'normalised current'</span><span class="p">,</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">'time (s)'</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">'normalized current'</span><span class="p">,</span>
           <span class="n">title</span><span class="o">=</span><span class="s1">'SkyTEM waveforms, read from two .stm files'</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -406,7 +406,7 @@ receiver coils were.</p>
 <p>Normalisation is two questions, and the file answers one of them.
 <code class="docutils literal notranslate"><span class="pre">SecondaryFieldNormalisation</span></code> says whether GA-AEM divided the secondary field
 by the primary one, which is what makes the delivered numbers ppm - so it sets
-<code class="docutils literal notranslate"><span class="pre">output_data_type</span></code>. Whether the data the system is attached to was normalised
+<code class="docutils literal notranslate"><span class="pre">output_data_type</span></code>. Whether the data the system is attached to was normalized
 by the transmitter moment is <code class="docutils literal notranslate"><span class="pre">data_normalized</span></code>, which is about the data file
 rather than the forward model, so it is left for you to answer.</p>
 <p>The loop itself is taken as the file states it. Tempest.stm states a single turn
@@ -646,7 +646,7 @@ against.</p>
 {'emx_nonhprg': 'z_x_b', 'emz_nonhprg': 'z_z_b'}
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.481 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.384 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-creating-gs-files-plot-systems-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/da64d44e7cded2d43302c7866d217246/plot_systems.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_systems.ipynb</span></code></a></p>

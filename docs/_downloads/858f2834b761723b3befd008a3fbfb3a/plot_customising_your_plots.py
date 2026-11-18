@@ -63,7 +63,7 @@ plt.tight_layout()
 # Colormaps and color range
 # ^^^^^^^^^^^^^^^^^^^^^^^^^
 #
-# cmap takes any installed matplotlib colormap name. Set the colour range with
+# cmap takes any installed matplotlib colormap name. Set the color range with
 # vmin and vmax, or use robust=True to clip it to the 2nd-98th percentiles
 # instead of the extremes, which keeps a few outliers from washing out the
 # map:
@@ -108,7 +108,7 @@ fig, ax = plt.subplots()
 survey['data/raw_data'].gs.scatter(hue='tmi', cmap='viridis', ax=ax)
 ax.set_xlabel("Easting (m)")
 ax.set_ylabel("Northing (m)")
-ax.set_title("Flight path, coloured by TMI")
+ax.set_title("Flight path, colored by TMI")
 fig.axes[-1].set_ylabel("TMI (nT)")
 fig.tight_layout()
 

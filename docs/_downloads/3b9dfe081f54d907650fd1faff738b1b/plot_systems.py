@@ -16,7 +16,7 @@ There are three ways to get one, and this example works through all of them:
 3. **From a template** for the method family, to fill in by hand -
    :meth:`System.metadata_template`.
 
-The three mix. A ``.stm`` is a forward modelling file rather than a system
+The three mix. A ``.stm`` is a forward modeling file rather than a system
 description, so it answers what it can and the rest is left as template
 placeholders reading ``?? what goes here ??`` - hand it a YAML alongside, or dump
 what it knows to a template and finish the job by hand.
@@ -111,7 +111,7 @@ tempest_stm = System.from_stm(join(system_path, 'Tempest.stm'))
 
 #%%
 # The gate times arrive as bounds, because that is what the file states, and the
-# centres are their midpoints. Which receivers there are is read from the
+# centers are their midpoints. Which receivers there are is read from the
 # components the file scales its output by, at the bottom of the file.
 
 print(tempest_stm['gate_times'].values[:4])
@@ -156,7 +156,7 @@ for i, label in enumerate(skytem_stm['transmitter_label'].values):
     ax[0].plot(skytem_stm['waveform_time'].values,
                skytem_stm['transmitter_waveform_current'].values[i, :],
                marker='.', label=label)
-ax[0].set(xlabel='time (s)', ylabel='normalised current',
+ax[0].set(xlabel='time (s)', ylabel='normalized current',
           title='SkyTEM waveforms, read from two .stm files')
 ax[0].legend()
 
@@ -183,7 +183,7 @@ print(placeholders(tempest_stm))
 # Normalisation is two questions, and the file answers one of them.
 # ``SecondaryFieldNormalisation`` says whether GA-AEM divided the secondary field
 # by the primary one, which is what makes the delivered numbers ppm - so it sets
-# ``output_data_type``. Whether the data the system is attached to was normalised
+# ``output_data_type``. Whether the data the system is attached to was normalized
 # by the transmitter moment is ``data_normalized``, which is about the data file
 # rather than the forward model, so it is left for you to answer.
 #

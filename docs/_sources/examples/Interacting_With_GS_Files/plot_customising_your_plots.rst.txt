@@ -164,7 +164,7 @@ super-title afterwards replaces it:
 Colormaps and color range
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-cmap takes any installed matplotlib colormap name. Set the colour range with
+cmap takes any installed matplotlib colormap name. Set the color range with
 vmin and vmax, or use robust=True to clip it to the 2nd-98th percentiles
 instead of the extremes, which keeps a few outliers from washing out the
 map:
@@ -262,7 +262,7 @@ coordinates:
     survey['data/raw_data'].gs.scatter(hue='tmi', cmap='viridis', ax=ax)
     ax.set_xlabel("Easting (m)")
     ax.set_ylabel("Northing (m)")
-    ax.set_title("Flight path, coloured by TMI")
+    ax.set_title("Flight path, colored by TMI")
     fig.axes[-1].set_ylabel("TMI (nT)")
     fig.tight_layout()
 
@@ -270,7 +270,7 @@ coordinates:
 
 
 .. image-sg:: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_customising_your_plots_007.png
-   :alt: Flight path, coloured by TMI
+   :alt: Flight path, colored by TMI
    :srcset: /examples/Interacting_With_GS_Files/images/sphx_glr_plot_customising_your_plots_007.png
    :class: sphx-glr-single-img
 
@@ -311,7 +311,7 @@ overwritten after:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.359 seconds)
+   **Total running time of the script:** (0 minutes 1.240 seconds)
 
 
 .. _sphx_glr_download_examples_Interacting_With_GS_Files_plot_customising_your_plots.py:

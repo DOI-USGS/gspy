@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:11.243** total execution time for 9 files **from examples/Creating_GS_Files**:
+**00:05.182** total execution time for 9 files **from examples/Creating_GS_Files**:
 
 .. container::
 
@@ -32,30 +32,30 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``plot_csv_skytem.py``)
-     - 00:02.154
-     - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_dat_loupe.py` (``plot_dat_loupe.py``)
-     - 00:01.701
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
-     - 00:01.602
+     - 00:01.552
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_aseg_tempest.py` (``plot_aseg_tempest.py``)
-     - 00:01.499
+     - 00:01.226
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py` (``plot_xyz_workbench_to_netcdf.py``)
-     - 00:01.187
+     - 00:01.042
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_tifs.py` (``plot_tifs.py``)
-     - 00:01.161
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``plot_help_I_have_no_variable_metadata.py``)
-     - 00:00.772
-     - 0.0
-   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``plot_csv_magnetics.py``)
-     - 00:00.686
+     - 00:00.978
      - 0.0
    * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_systems.py` (``plot_systems.py``)
-     - 00:00.481
+     - 00:00.384
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_magnetics.py` (``plot_csv_magnetics.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_resolve.py` (``plot_csv_resolve.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_csv_skytem.py` (``plot_csv_skytem.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_examples_Creating_GS_Files_plot_help_I_have_no_variable_metadata.py` (``plot_help_I_have_no_variable_metadata.py``)
+     - 00:00.000
      - 0.0

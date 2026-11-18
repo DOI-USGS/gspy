@@ -498,7 +498,7 @@ Plotting
 
 .. GENERATED FROM PYTHON SOURCE LINES 113-115
 
-A map view of the traverse coloured by a tabular variable, using GSPy's
+A map view of the traverse colored by a tabular variable, using GSPy's
 plotter.
 
 .. GENERATED FROM PYTHON SOURCE LINES 115-120
@@ -525,7 +525,7 @@ plotter.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.187 seconds)
+   **Total running time of the script:** (0 minutes 1.042 seconds)
 
 
 .. _sphx_glr_download_examples_Creating_GS_Files_plot_xyz_workbench_to_netcdf.py:

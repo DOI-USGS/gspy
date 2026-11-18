@@ -181,7 +181,7 @@ plt.title(f"Line {line}")
 plt.tight_layout()
 
 #%%
-# A map view of the flight path, coloured by a tabular variable, using GSPy's
+# A map view of the flight path, colored by a tabular variable, using GSPy's
 # plotter. The 'y' coordinate is used automatically, so it is never named in
 # the call; axis and colorbar labels are built from the variable metadata.
 plt.figure()

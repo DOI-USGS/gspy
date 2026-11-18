@@ -161,7 +161,7 @@ super-title afterwards replaces it:</p>
 <img src="../../_images/sphx_glr_plot_customising_your_plots_003.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_003.png" alt="Total magnetic intensity, spatial_ref = 0.0" class = "sphx-glr-single-img"/></section>
 <section id="colormaps-and-color-range">
 <h2>Colormaps and color range<a class="headerlink" href="#colormaps-and-color-range" title="Link to this heading"></a></h2>
-<p>cmap takes any installed matplotlib colormap name. Set the colour range with
+<p>cmap takes any installed matplotlib colormap name. Set the color range with
 vmin and vmax, or use robust=True to clip it to the 2nd-98th percentiles
 instead of the extremes, which keeps a few outliers from washing out the
 map:</p>
@@ -207,12 +207,12 @@ coordinates:</p>
 <span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Easting (m)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Northing (m)"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Flight path, coloured by TMI"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Flight path, colored by TMI"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"TMI (nT)"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_customising_your_plots_007.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_007.png" alt="Flight path, coloured by TMI" class = "sphx-glr-single-img"/><p>On a line profile, the same holds - the metadata labels are drawn first and
+<img src="../../_images/sphx_glr_plot_customising_your_plots_007.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_007.png" alt="Flight path, colored by TMI" class = "sphx-glr-single-img"/><p>On a line profile, the same holds - the metadata labels are drawn first and
 overwritten after:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">survey</span><span class="p">[</span><span class="s1">'data/raw_data'</span><span class="p">]</span><span class="o">.</span><span class="n">gs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">'tmi'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'distance'</span><span class="p">)</span>
@@ -224,7 +224,7 @@ overwritten after:</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_customising_your_plots_008.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_008.png" alt="Short labels on a line profile" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.359 seconds)</p>
+<img src="../../_images/sphx_glr_plot_customising_your_plots_008.png" srcset="../../_images/sphx_glr_plot_customising_your_plots_008.png" alt="Short labels on a line profile" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.240 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-interacting-with-gs-files-plot-customising-your-plots-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/dabee726cd2c3601059fa8cf608da964/plot_customising_your_plots.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_customising_your_plots.ipynb</span></code></a></p>
