@@ -41,14 +41,6 @@ class System(Dataset):
     def is_projected(self):
         return False
 
-    # @property
-    # def attrs(self):
-    #     return self._obj.attrs
-
-    # @attrs.setter
-    # def attrs(self, values:dict):
-    #     assert isinstance(values, dict), TypeError("attrs must have type dict")
-    #     self._obj.attrs = self._obj.attrs | values
 
     def check_against_data(self, dataset):
         """Assert that gate time strings match the coordinates of the attached dataset.
@@ -141,7 +133,7 @@ class System(Dataset):
         name = f"{key}_system" if name is None else name
         if 'system' not in name:
             raise ValueError(f"A system must be named with 'system' in it, so '{name}' would not be "
-                             "recognised as one when the metadata is read back")
+                             "recognized as one when the metadata is read back")
 
         dimensions, per_transmitter = {}, []
         for dimension, values in spec.get('dimensions', {}).items():
@@ -193,9 +185,9 @@ class System(Dataset):
             elif head == ('dimensions',) and rest and rest[0] in per_transmitter:
                 for label in transmitters:
                     named = cls._template_dimension(rest[0], label, transmitters)
-                    labelled = lambda text: text.replace('{label}', label)
+                    labeled = lambda text: text.replace('{label}', label)
                     out[(name, 'dimensions', named, *rest[1:])] = \
-                        {k: [labelled(line) for line in v] if k == 'above' else labelled(v)
+                        {k: [labeled(line) for line in v] if k == 'above' else labeled(v)
                          for k, v in comment.items()}
             elif head in (('dimensions',), ('variables',)) and rest != ('scalars',):
                 if rest[:1] == ('scalars',):
@@ -348,15 +340,15 @@ class System(Dataset):
 
         Notes
         -----
-        A .stm is a forward modelling file, not a system description, so what it can
+        A .stm is a forward modeling file, not a system description, so what it can
         answer it answers and the rest is left as template placeholders. It models an
         airborne dipole, so the mode is airborne and there is no loop geometry to ask
         for. The loop is kept per transmitter, a placeholder for one whose file does not
         say; GA-AEM has no default for NumberOfTurns. The moment is turns x area x peak
         current, of the loop the system ends up with once the yml is merged. The file
         is often a unit loop the forward model scaled out, so ``data_normalized`` is
-        judged by the file's own loop and normalisation: a unit moment or ppm means
-        normalised, a real moment means not. Where the files disagree, it is yours.
+        judged by the file's own loop and normalization: a unit moment or ppm means
+        normalized, a real moment means not. Where the files disagree, it is yours.
         Anything read that GSPy has no field for is recorded in the attributes under
         ``stm_``, so nothing in the file is lost.
 
@@ -474,7 +466,7 @@ class System(Dataset):
         receivers = cls._template_labels(receivers, 'receiver', {})
 
         dimensions, transmitter, couplet = {}, {}, {}
-        times, currents, stated, normalisations = [], [], {}, []
+        times, currents, stated, normalizations = [], [], {}, []
 
         for label, path, stm in zip(transmitters, files.values(), blocks.values()):
             named = cls._template_dimension('gate_times', label, transmitters)
@@ -486,7 +478,7 @@ class System(Dataset):
                                  "transmitter did")
             times.append([time for time, _ in waveform])
             currents.append([current for _, current in waveform])
-            normalisations.append(stm.get('forward_modelling', {})
+            normalizations.append(stm.get('forward_modelling', {})
                                   .get('secondary_field_normalisation'))
 
             for field, block, key in (('base_frequency', 'transmitter', 'base_frequency'),
@@ -513,14 +505,14 @@ class System(Dataset):
         # Each couplet is read from its own transmitter, so the data type is per couplet
         # even where the moments were modelled as different quantities.
         block, key, types = stated['output_data_type']
-        types = [None if value is None else cls.__stm_data_type(value, normalisation)
-                 for value, normalisation in zip(types, normalisations)]
+        types = [None if value is None else cls.__stm_data_type(value, normalization)
+                 for value, normalization in zip(types, normalizations)]
         stated['output_data_type'] = (block, key, types)
         if all(value is not None for value in types):
             couplet['data_type'] = [types[t] for _ in receivers for t in range(len(transmitters))]
 
         placeholders = cls._template_spec('tdem')['variables']['transmitter']
-        cls.__stm_moment(transmitter, variables, stated, normalisations, placeholders)
+        cls.__stm_moment(transmitter, variables, stated, normalizations, placeholders)
 
         per_transmitter = ('number_of_turns', 'peak_current', 'area', 'base_frequency')
         for field, (block, key, values) in stated.items():
@@ -588,7 +580,7 @@ class System(Dataset):
                         for stated, current in zip(times, currents)]
 
     @staticmethod
-    def __stm_data_type(text, normalisation=None):
+    def __stm_data_type(text, normalization=None):
         """What the file delivers, spelled the way GSPy spells it.
 
         SecondaryFieldNormalisation divides the secondary field by the primary one,
@@ -596,7 +588,7 @@ class System(Dataset):
         get there. Which flavour of ppm it was is left to the provenance.
 
         """
-        if str(normalisation).lower() in ('ppm', 'ppmpeaktopeak'):
+        if str(normalization).lower() in ('ppm', 'ppmpeaktopeak'):
             return 'ppm'
         return {'db/dt': 'dBdt', 'dbdt': 'dBdt', 'b': 'B'}.get(str(text).lower(), text)
 
@@ -609,12 +601,12 @@ class System(Dataset):
         return cls._template_repeat_to([placeholder if value is None else value for value in values])
 
     @classmethod
-    def __stm_moment(cls, transmitter, variables, stated, normalisations, placeholders):
-        """Each transmitter's moment, from its loop, and whether the data were normalised by it.
+    def __stm_moment(cls, transmitter, variables, stated, normalizations, placeholders):
+        """Each transmitter's moment, from its loop, and whether the data were normalized by it.
 
         GA-AEM scales its output by turns x area x peak current and compares it with
         the data, so the data are in the units of the moment the file states: a unit
-        moment means normalised, and ppm is normalised whatever the moment.
+        moment means normalized, and ppm is normalized whatever the moment.
 
         """
         loops = zip(*(stated[field][2] for field in ('number_of_turns', 'area', 'peak_current')))
@@ -626,11 +618,11 @@ class System(Dataset):
                 transmitter[field] = cls._template_repeat_to(
                     [placeholders[field] if moment is None else moment for moment in moments])
 
-        normalised = [True if str(normalisation).lower() in ('ppm', 'ppmpeaktopeak')
+        normalized = [True if str(normalization).lower() in ('ppm', 'ppmpeaktopeak')
                       else None if moment is None else moment == 1.0
-                      for moment, normalisation in zip(moments, normalisations)]
-        if None not in normalised and len(set(normalised)) == 1:
-            variables['data_normalized'] = normalised[0]
+                      for moment, normalization in zip(moments, normalizations)]
+        if None not in normalized and len(set(normalized)) == 1:
+            variables['data_normalized'] = normalized[0]
 
     @classmethod
     def __stm_remoment(cls, transmitter, given):
@@ -701,7 +693,7 @@ class System(Dataset):
         received = table.pop('ror', None)
         if transmitted is None or received is None:
             raise ValueError(f"{path} does not say which way its coils point, so its pairs "
-                             "cannot be labelled")
+                             "cannot be labeled")
 
         labels = [f"{frequency}{orientation.upper()}"
                   for frequency, orientation in zip(frequencies, transmitted)]

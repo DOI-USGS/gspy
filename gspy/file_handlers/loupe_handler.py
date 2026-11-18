@@ -90,7 +90,6 @@ class loupe_handler(csv_handler, key='loupe'):
                         desc_metadata[f"{c}_{key_split}"]['standard_name'] = f"{c}_{key_split}".lower()
 
         out_df['line'] = line_number
-        #TODO: Parse the units from the desc file too.
 
         self.df = DataFrame(out_df)
 

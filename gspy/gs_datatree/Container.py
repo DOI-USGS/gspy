@@ -258,7 +258,6 @@ class Container:
                     parameters[key] = json_md.pop(key)
             # parameters were found, create a parameters datatree/dataset
             if len(parameters) > 0:
-                # TODO test this
                 parameters, _ = Container.Parameters(**parameters)
         else:
             # if parameters is a file path, read contents into dictionary

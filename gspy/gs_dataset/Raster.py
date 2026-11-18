@@ -170,25 +170,9 @@ class Raster(Dataset):
                 # Assumes existing coord matches!!!!!
                 # Not Yet Implemented: reconciliation step for adding multiple x,y,z,t coords OR resampling / realigning
                 # input tiffs onto existing x,y,z,t grids
-                #else:
-                #    print('coordinate already exists... ', coord)
 
         kwargs['dimensions'] = np.asarray(kwargs['dimensions'])[::-1]
 
-        # If an axis is given in the meta data, swap the axes of the temporary 3D array to stack along the user's defined axis
-        # if 'stack_axis' in kwargs:
-            # Case. tifs are x, y. stack along z. z is the 1st dimension
-            #[nz, ny, nx].  no swapping.
-            # Case. tifs are x, z. stack along y. y is the 2nd dimension.
-            # user dims = [x, y, z]
-            #[ny, nz, nx]. swap_to = 1, swap 0 with 1. gives [nz, ny, nx]
-            # Case. tifs are y, z. stack along x. x is the 3rd dimension
-            # user dims = [x, y, z]
-            #[nx, nz, ny]. swap_to = 2, swap 0 with 2. gives []
-
-            # swap_to = np.squeeze(np.argwhere(variable_dimensions == kwargs['stack_axis']))
-            # if swap_to > 0:
-            #     values = np.swapaxes(values, 0, swap_to)
 
         # Add the variable to the dataset
         self._obj = self.add_variable_from_dict(name, values=values, **kwargs)
@@ -200,38 +184,9 @@ class Raster(Dataset):
             raster_spatial_reference_name = ds[raster_spatial_reference].attrs['grid_mapping_name']
             if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
                 raise NotImplementedError(f"Need to reproject input file to match survey spatial ref, for variable {name}")
-        # elif 'crs_wkt' in ds[raster_spatial_reference].attrs.keys():
-        #     raster_spatial_reference_name = ds[raster_spatial_reference].attrs['crs_wkt']
-        #     if raster_spatial_reference_name != self.spatial_ref.attrs['crs_wkt']:
-        #         raise NotImplementedError(f"Need to reproject input file to match survey spatial ref, for variable {name}")
         else:
             print(f"WARNING: cannot identify CRS for input [{name}] raster, will assume the data matches the survey spatial_ref!")
 
-        # Reproject if input CRS does not match Survey
-        # if raster_spatial_reference_name != self.spatial_ref.attrs['grid_mapping_name']:
-        #     print('Grid CRS [{}] does not match Survey CRS [{}], reprojecting to Survey CRS'.format(raster_spatial_reference_name, self.spatial_ref.attrs['grid_mapping_name']))
-        #     if self.spatial_ref.attrs['wkid'] != "None":
-        #         target_crs = self.spatial_ref.attrs['wkid']
-        #     else:
-        #         target_crs = self.spatial_ref.attrs['crs_wkt']
-        #     print('Reprojecting ...')
-
-        #     # get fill value from file, if present
-        #     if '_FillValue' in ds.attrs:
-        #         nodata = ds.attrs['_FillValue']
-        #     else:
-        #         nodata = None
-
-        #     # supersede fill value from file with variable metadata value, if present
-        #     if 'missing_value' in json_metadata['variables'][name]:
-        #         if json_metadata['variables'][name]['missing_value'] != 'not_defined':
-        #             nodata = json_metadata['variables'][name]['missing_value']
-
-        #     # reproject, accounting for nodata value if present
-        #     if nodata is None:
-        #         ds = ds.rio.reproject(target_crs)
-        #     else:
-        #         ds = ds.rio.reproject(target_crs, nodata=nodata)
 
         return self._obj
 
@@ -257,7 +212,6 @@ class Raster(Dataset):
         ds = ds.squeeze().drop_vars('band')
         if '_FillValue' in ds.attrs:
             ds.values[ds.values == ds.attrs['_FillValue']] = np.nan
-            #ds.attrs['missing_value'] = ds.attrs['_FillValue']
 
         return ds
 
