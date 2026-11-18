@@ -5,6 +5,7 @@ the rest of gspy relies on actually live.
 """
 import numpy as np
 import pytest
+import xarray as xr
 from gspy.gs_dataarray.Coordinate import Coordinate
 from gspy.gs_dataarray.DataArray import DataArray
 from gspy.gs_dataarray.Spatial_ref import Spatial_ref
@@ -135,7 +136,7 @@ class TestBounds:
                 coords={"depth": depth.values})
 
     def test_computed_bounds_use_one_median_width_for_every_cell(self):
-        """Current behaviour, and not CF-clean for an irregular coordinate: every
+        """Current behavior, and not CF-clean for an irregular coordinate: every
         cell gets the median spacing (8.75 here), so the cells overlap instead of
         tiling and the first one starts below zero. Regular coordinates are fine.
         """
@@ -207,7 +208,7 @@ class TestMissingValues:
 
 class TestSpatialRef:
 
-    def test_an_epsg_prefixed_wkid_is_recognised(self):
+    def test_an_epsg_prefixed_wkid_is_recognized(self):
         sr = Spatial_ref.from_dict({"wkid": "EPSG:26915"})
         assert sr.attrs["authority"] == "EPSG"
         assert sr.attrs["wkid"] == "26915"
@@ -234,3 +235,18 @@ class TestSpatialRef:
 
     def test_a_bare_wkid_defaults_to_epsg(self):
         assert Spatial_ref.from_dict({"wkid": "26915"}).attrs["wkid"] == "26915"
+
+
+class TestIsProjected:
+    """The check the distance axes rely on: planar meters, or degrees."""
+
+    def test_a_geographic_crs_is_not_projected(self):
+        ds = xr.Dataset({"spatial_ref": Spatial_ref.from_dict({"wkid": "4326"})})
+        assert not ds.gs.is_projected
+
+    def test_a_projected_crs_is_projected(self):
+        ds = xr.Dataset({"spatial_ref": Spatial_ref.from_dict({"wkid": "3071"})})
+        assert ds.gs.is_projected
+
+    def test_no_spatial_ref_is_not_projected(self):
+        assert not xr.Dataset().gs.is_projected

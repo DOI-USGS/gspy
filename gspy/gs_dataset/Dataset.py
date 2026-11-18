@@ -51,6 +51,9 @@ class Dataset:
     def is_projected(self):
         """Does the dataset have a projected spatial reference
 
+        CF spells the geographic grid mapping latitude_longitude; anything
+        else named is projected, and a dataset with no spatial_ref is not.
+
         Returns
         -------
         out : bool
@@ -58,7 +61,7 @@ class Dataset:
         """
         if not 'spatial_ref' in self._obj:
             return False
-        return self._obj['spatial_ref'].attrs['grid_mapping_name'] != "lattitude longitude"
+        return self._obj['spatial_ref'].attrs['grid_mapping_name'] != "latitude_longitude"
 
     @property
     def json_metadata(self):
@@ -398,41 +401,6 @@ class Dataset:
                                                    missing_value = 'not_defined')
         return self._obj
 
-    # def read_metadata(self, filename):
-    #     """Read json metadata file
-
-    #     Parameters
-    #     ----------
-    #     filename : str
-    #         Json file
-
-    #     Returns
-    #     -------
-    #     dic : dict
-    #         Dictionary of JSON metadata
-
-    #     """
-    #     if filename == 'None':
-    #         return
-
-    #     if filename is None:
-    #         self.write_metadata_template(filename)
-    #         raise Exception("Please re-run and specify metadata when instantiating {}".format(self.__class__.__name__))
-
-    #     # reading the data from the file
-    #     dic = load_metadata_from_file(filename)
-
-    #     flag = check_key_whitespace(dic)
-    #     assert not flag, Exception("Metadata file {} has keys with whitespace.  Please remove spaces")
-
-    #     if 'coordinates' in dic:
-    #         for key, value in dic['coordinates'].items():
-    #             dic['coordinates'][key] = value.strip()
-
-    #     if "variables" in dic:
-    #         dic['variables'] = {key.lower():item for key, item in dic['variables'].items()}
-
-    #     return dic
 
     @staticmethod
     def _system_specs(systems):
@@ -564,12 +532,12 @@ class Dataset:
         return ax, splot
 
     def scatter(self, **kwargs):
-        """Scatter plot of the sample positions, optionally coloured by a variable
+        """Scatter plot of the sample positions, optionally colored by a variable
 
         Parameters
         ----------
         hue : str
-            Variable to colour the points with; without it this falls back
+            Variable to color the points with; without it this falls back
             to a line profile of the y coordinate
 
         x, y : str
@@ -685,29 +653,6 @@ class Dataset:
         self._obj.to_netcdf(*args, **kwargs)
 
 
-    # def write_netcdf(self, filename, group, **kwargs):
-    #     """Write to netcdf file
-
-    #     Parameters
-    #     ----------
-    #     filename : str
-    #         Path to the file
-    #     group : str
-    #         Netcdf group name to write to
-
-    #     """
-    #     mode = 'a' if os.path.isfile(filename) else 'w'
-    #     if 'raster' in group:
-    #         for var in self._obj.data_vars:
-    #             if self._obj[var].attrs['missing_value'] != 'not_defined':
-    #                 self._obj[var].attrs['_FillValue'] = self._obj[var].attrs['missing_value']
-    #             # if 'grid_mapping' in self._obj[var].attrs:
-    #             #     del self._obj[var].attrs['grid_mapping']
-
-    #     kwargs['engine'] = kwargs.get('engine', 'h5netcdf')
-    #     kwargs['format'] = kwargs.get('format', 'netcdf4')
-
-    #     self._obj.to_netcdf(filename, mode=mode, group=group, **kwargs)
 
     def write_zarr(self, filename, group, **kwargs):
         """Write to netcdf file
