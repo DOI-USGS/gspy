@@ -1,7 +1,7 @@
 """Readers for the data formats GSPy ingests.
 
 Each format is a subclass of :class:`gspy.file_handlers.file_handler` that
-registers itself and says which files it recognises, so adding a format means
+registers itself and says which files it recognizes, so adding a format means
 adding a module and importing it here.
 
 >>> handler = open_datafile('Resolve.csv', metadata=md)   # reads the file
@@ -54,7 +54,7 @@ def handler_for(filename, file_type=None):
     Raises
     ------
     ValueError
-        If file_type is not a known format, or no format recognises the file.
+        If file_type is not a known format, or no format recognizes the file.
 
     """
     registry = file_handler._registry
@@ -70,7 +70,7 @@ def handler_for(filename, file_type=None):
                     key=lambda handler: handler.priority, reverse=True)
 
     if not claims:
-        raise ValueError(f"No file handler recognises {filename}. "
+        raise ValueError(f"No file handler recognizes {filename}. "
                          f"Pass file_type to choose one of {sorted(registry)}")
 
     return claims[0]
@@ -84,7 +84,7 @@ def open_datafile(data, metadata=None, file_type=None, **kwargs):
     data : str or pathlib.Path or pandas.DataFrame or gspy.file_handlers.file_handler
         The data to ingest, as any of
 
-        * a filename, read with whichever handler recognises it
+        * a filename, read with whichever handler recognizes it
         * a DataFrame already in memory, adopted as-is
         * a handler that has already read its file, returned unchanged
 

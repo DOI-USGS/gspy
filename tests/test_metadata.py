@@ -1,6 +1,6 @@
 """Metadata: a dict subclass that reads yml/json/csv/xlsx and merges them.
 
-Bound to behaviour, not to internals. A refactor of these classes is expected,
+Bound to behavior, not to internals. A refactor of these classes is expected,
 and reading a file into a nested dict, merging two of them, and dumping one back
 out should keep working across it.
 """
@@ -139,7 +139,7 @@ class TestDump:
                {k: str(v) for k, v in flat_src.items()}
 
     def test_csv_loses_the_type_of_numeric_looking_strings(self, tmp_path):
-        """Current behaviour. The writer stringifies and the reader re-parses, so a
+        """Current behavior. The writer stringifies and the reader re-parses, so a
         deliberately quoted version or epoch comes back as a number. Matters for
         anything that later does string operations on such a value.
         """
@@ -165,7 +165,7 @@ class TestHelpers:
         assert Metadata({"a": {"b": {"c": 1}}, "d": 2}).flatten() == {"a.b.c": 1, "d": 2}
 
     def test_unflatten_splits_one_level(self):
-        """Current behaviour: the depth beyond the first dot is dropped, so this is
+        """Current behavior: the depth beyond the first dot is dropped, so this is
         not the inverse of flatten. Nothing in gspy calls it.
         """
         assert Metadata({"a.b": 1}).unflatten() == {"a": {"b": 1}}

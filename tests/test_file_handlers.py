@@ -366,7 +366,7 @@ def without_gate_times(lines):
 class TestWorkbench:
 
     def test_a_unit_in_brackets_leaves_no_trailing_underscore(self, workbench_system):
-        """ALTITUDE_[m] is ALTITUDE, in metres."""
+        """ALTITUDE_[m] is ALTITUDE, in meters."""
         read = open_datafile(WORKBENCH_MOD, metadata={}, system=workbench_system)
 
         assert "ALTITUDE_A-PRIORI_STD" in read.column_header_counts

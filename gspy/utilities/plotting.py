@@ -5,7 +5,7 @@ wraps to several lines on an axis. xarray's plot layer prefers long_name when
 both are set, with no option to reorder; the plotters import that one helper
 under their own names, so switching the order means rebinding those names.
 If a future xarray moves it, the patch quietly does nothing and the labels
-revert to xarray's own behaviour.
+revert to xarray's own behavior.
 """
 import textwrap
 

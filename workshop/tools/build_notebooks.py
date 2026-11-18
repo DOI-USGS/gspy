@@ -235,7 +235,7 @@ def build_skytem():
     nb.md("""
         Now ask yourself:
 
-        - What are the units of `Alt`? Is it metres or feet?
+        - What are the units of `Alt`? Is it meters or feet?
         - `Alt`, `Height` and `DEM` are three different vertical coordinate data. Which is
           height above ground, which is elevation above a datum, and which datum?
         - `E_Nad83` and `N_Nad83` are eastings and northings in *some* projection.
@@ -427,7 +427,7 @@ def build_skytem():
 
     nb.md("""
         Every field is `not_defined`. A CSV header gives GSPy the *names* of your
-        variables and nothing else - it cannot guess that `Alt` is in metres.
+        variables and nothing else - it cannot guess that `Alt` is in meters.
 
         Keep that in mind for section 2 of the tempest notebook, where the same call
         on an ASEG-GDF file comes back mostly filled in, because that format carries
@@ -558,10 +558,10 @@ def build_skytem():
 
         What you know:
 
-        - eastings and northings are in **metres**
-        - `DEM` is a ground elevation in metres, measured **up** from **NAVD88**
+        - eastings and northings are in **meters**
+        - `DEM` is a ground elevation in meters, measured **up** from **NAVD88**
         - `DateTime` is a date, with units **days since 1900-01-01**
-        - `Height` is instrument height above ground, in metres
+        - `Height` is instrument height above ground, in meters
         - `Base_Mag` is the base station magnetic field, in **nT**, and uses
           **-9999.99** where there is no reading
         """)
@@ -870,7 +870,7 @@ def build_skytem():
     nb.md("""
         `hm_gate_times: 32` and `lm_gate_times: 28`. The `??` from section 3 has
         been resolved by the system, and `HM_X` is now a genuine 2-D variable with a
-        labelled time axis.
+        labeled time axis.
 
         Both systems were also attached below the dataset as their own groups, which
         is where you go to read them back - `raw_data['skytem_system']`.
@@ -1222,11 +1222,11 @@ def build_skytem():
         ### Exercise 7.1
 
         Plot the depth to bedrock grid, and then make a scatter plot of the bedrock
-        picks coloured by their elevation.
+        picks colored by their elevation.
 
         *Hint: the grid variable is `bedrock_depth` in `derived_maps/maps`. For the
         scatter, GSPy adds `.gs.scatter(hue=...)` to tabular datasets - look at
-        `reopened['data']['depth_to_bedrock']` to find a variable to colour by.*
+        `reopened['data']['depth_to_bedrock']` to find a variable to color by.*
         """)
 
     nb.code(f"""
@@ -1690,7 +1690,7 @@ def build_tempest():
         ---
         ### Exercise 6.2
 
-        Two plots to finish: a scatter of the raw data coloured by transmitter
+        Two plots to finish: a scatter of the raw data colored by transmitter
         height, and the magnetic grid.
 
         *Hint: `.gs.scatter(x='x', hue=...)` for the tabular data. The grid variable

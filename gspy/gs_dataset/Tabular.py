@@ -157,7 +157,7 @@ class Tabular(Dataset):
         data : str or pandas.DataFrame or gspy.file_handlers.file_handler
             The data to ingest, as any of
 
-            * a filename, read with whichever handler recognises it
+            * a filename, read with whichever handler recognizes it
             * a DataFrame already in memory, for data that needed work before
               GSPy saw it
             * a handler that has already read its file, so a second pass over a

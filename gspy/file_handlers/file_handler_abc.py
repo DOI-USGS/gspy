@@ -118,7 +118,7 @@ class file_handler(ABC):
 
     @classmethod
     def can_read(cls, filename):
-        """Whether this handler recognises a file, on the strength of the file alone.
+        """Whether this handler recognizes a file, on the strength of the file alone.
 
         Override when the format needs more than an extension, e.g. a sidecar
         definition file or a signature on the first line.

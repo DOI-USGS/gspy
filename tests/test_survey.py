@@ -403,7 +403,7 @@ class TestRoundtrip:
         assert back.attrs["content"]
 
     def test_write_strips_survey_level_systems(self, tmp_path):
-        """Documents current behaviour, not necessarily desired.
+        """Documents current behavior, not necessarily desired.
 
         A survey whose metadata names a system carries it as a child of the survey
         itself, and ``to_netcdf`` deletes those before writing, so the written file

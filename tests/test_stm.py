@@ -227,7 +227,7 @@ class TestTimeDomainValues:
         assert transmitter["base_frequency"] == [210.0, 30.0]
 
     def test_the_loop_is_taken_as_the_file_states_it(self):
-        """SkyTEM states a single turn of one square metre carrying one amp, which is
+        """SkyTEM states a single turn of one square meter carrying one amp, which is
         a real loop scaled out of the forward model. Whether the data it is attached
         to was scaled the same way is not the .stm's to say, so the numbers are taken
         as written rather than second guessed.
@@ -323,18 +323,18 @@ class TestTheWaveform:
 class TestNormalisation:
     """``SecondaryFieldNormalisation`` is the file's own say on the matter.
 
-    GA-AEM normalises the secondary field by the primary one, which is what makes
+    GA-AEM normalizes the secondary field by the primary one, which is what makes
     the delivered numbers ppm - a different question from whether the data was
-    normalised by the transmitter moment, which the file never addresses.
+    normalized by the transmitter moment, which the file never addresses.
     """
 
-    def test_a_file_that_normalises_nothing_delivers_the_field_it_modelled(self):
+    def test_a_file_that_normalizes_nothing_delivers_the_field_it_modelled(self):
         variables = System.metadata_from_stm(SKYTEM_LM)["tdem_system"]["variables"]
 
         assert variables["output_data_type"] == "dBdt"
 
     @pytest.mark.parametrize("stated", ["ppm", "PPM", "PPMPEAKTOPEAK"])
-    def test_a_file_that_normalises_by_the_primary_field_delivers_ppm(self, stated, tmp_path):
+    def test_a_file_that_normalizes_by_the_primary_field_delivers_ppm(self, stated, tmp_path):
         system = System.metadata_from_stm(written(
             tmp_path / f"{stated}.stm",
             forward_modelling=f"\t\tSecondaryFieldNormalisation = {stated}\n",
@@ -352,7 +352,7 @@ class TestNormalisation:
 
         assert system["stm_forward_modelling_secondary_field_normalisation"] == "PPMPEAKTOPEAK"
 
-    def test_a_normalisation_gspy_does_not_know_is_left_alone(self, tmp_path):
+    def test_a_normalization_gspy_does_not_know_is_left_alone(self, tmp_path):
         """Better the output type the file modelled than a word GSPy cannot spell."""
         system = System.metadata_from_stm(written(
             tmp_path / "odd.stm",
@@ -361,7 +361,7 @@ class TestNormalisation:
 
         assert system["variables"]["output_data_type"] == "dBdt"
 
-    def test_a_frequency_domain_table_leaves_moment_normalisation_to_you(self):
+    def test_a_frequency_domain_table_leaves_moment_normalization_to_you(self):
         """Its table gives a signed moment per coil pair, not a loop to judge by."""
         variables = System.metadata_from_stm(RESOLVE)["fdem_system"]["variables"]
 
@@ -448,7 +448,7 @@ class TestNormalisedByMoment:
     means the data were divided by theirs; ppm is free of the moment altogether.
     """
 
-    def test_a_unit_loop_means_normalised(self, tmp_path):
+    def test_a_unit_loop_means_normalized(self, tmp_path):
         stm = written(tmp_path / "one.stm", transmitter=loop(turns=1, current=1, area=1))
 
         assert System.metadata_from_stm(stm)["tdem_system"]["variables"]["data_normalized"] is True
@@ -458,7 +458,7 @@ class TestNormalisedByMoment:
 
         assert System.metadata_from_stm(stm)["tdem_system"]["variables"]["data_normalized"] is False
 
-    def test_ppm_means_normalised(self, tmp_path):
+    def test_ppm_means_normalized(self, tmp_path):
         stm = written(tmp_path / "one.stm", transmitter=loop(turns=4, current=110, area=342),
                       forward_modelling="\t\tSecondaryFieldNormalisation = PPM\n")
 
@@ -483,7 +483,7 @@ class TestTheMomentAfterMerging:
 
         assert transmitter["moment"] == transmitter["peak_moment"] == pytest.approx(155 * 560)
 
-    def test_normalisation_is_still_judged_by_the_file(self):
+    def test_normalization_is_still_judged_by_the_file(self):
         """The forward model scales by the file's loop, not the one put back."""
         variables = System.metadata_from_stm(
             str(SYSTEMS / "SkytemLM.stm"), metadata=dict(variables=dict(transmitter=dict(
@@ -580,7 +580,7 @@ class TestProvenance:
 
 class TestFrequencyDomain:
 
-    def test_a_coil_pair_is_labelled_by_its_frequency_and_orientation(self):
+    def test_a_coil_pair_is_labeled_by_its_frequency_and_orientation(self):
         variables = System.metadata_from_stm(RESOLVE)["fdem_system"]["variables"]
 
         assert variables["transmitter"]["label"] == ["380Z", "1776Z", "3345X", "8171Z",

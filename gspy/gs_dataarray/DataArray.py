@@ -67,9 +67,9 @@ class DataArray:
 
         if bounds is None:
             bounds = zeros((coordinate.size, 2))
-            centre = median(diff(coordinate.values)) * 0.5
-            bounds[:, 0] = coordinate.values - centre
-            bounds[:, 1] = coordinate.values + centre
+            center = median(diff(coordinate.values)) * 0.5
+            bounds[:, 0] = coordinate.values - center
+            bounds[:, 1] = coordinate.values + center
         else:
             bounds = asarray(bounds)
             centers = coordinate.values

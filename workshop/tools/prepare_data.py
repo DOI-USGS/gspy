@@ -4,7 +4,7 @@ The workshop is meant to be handed out as a self-contained folder, so the data
 files are copied here rather than referenced in place.  They are also trimmed:
 tabular files keep every Nth record and rasters are decimated by a factor of 2.
 That keeps the whole folder around 12 MB instead of 44 MB while leaving every
-file recognisable and every gspy code path exercised.
+file recognizable and every gspy code path exercised.
 
 The completed YAML metadata files are copied into ``prepared_metadata`` and are
 deliberately kept *out* of ``data``.  The workshop opens with the premise that

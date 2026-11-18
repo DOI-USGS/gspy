@@ -14,7 +14,7 @@ dynamic = ["version", "dependencies", "urls"]
 keywords = ["netcdf", "xarray"]
 classifiers = [
     'License :: OSI Approved',
-    'License :: OSI Approved :: MIT License',
+    'License :: Public Domain',
     'Programming Language :: Python :: 3',
     'Topic :: Scientific/Engineering'
 ]
