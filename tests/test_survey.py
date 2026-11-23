@@ -25,6 +25,11 @@ RESOLVE_MD = str(DATA / "resolve" / "data" / "Resolve_data_md.yml")
 RESOLVE_MD_NO_SYSTEMS = str(DATA / "resolve" / "data" / "Resolve_data_md_nosystems.yml")
 SKYTEM_SURVEY_MD = str(DATA / "skytem_csv" / "data" / "skytem_survey.yml")
 SKYTEM_SYSTEM_MD = str(DATA / "skytem_csv" / "data" / "skytem_system.yml")
+WORKBENCH_SURVEY_MD = str(DATA / "workbench" / "survey.yml")
+WORKBENCH_MODEL_XYZ = str(DATA / "workbench" / "model" / "prod_726_729_LBv2_bky_MOD_dat.xyz")
+WORKBENCH_MODEL_MD = str(DATA / "workbench" / "model" / "models.yml")
+BEDROCK_CSV = str(DATA / "skytem_csv" / "data" / "top_dolomite_blocky_lidar.csv")
+BEDROCK_MD = str(DATA / "skytem_csv" / "data" / "bedrock_picks.yml")
 SPATIAL_REF = {"wkid": 3071, "authority": "EPSG", "vertical_crs": "NAVD88"}
 
 EXPECTED_PATHS = {
@@ -318,6 +323,37 @@ class TestSystemCouplets:
         """
         assert Tabular._couplet_labels(None) == []
         assert Tabular._couplet_labels({}) == []
+
+
+class TestAddingWithoutASystem:
+    """Adding data to a container when nothing named a system, in the call or the metadata.
+
+    Driven through ``Container.add``, where the system stops existing: it used to
+    hand its readers an empty dict for one, and a file that requires a system
+    walked past their ``is None`` guards into an attribute error.
+    """
+
+    def test_a_workbench_model_says_which_system_is_missing(self):
+        """Workbench channels are named by a system's couplets, so without one
+        the add must name what is missing.
+        """
+        md = {k: v for k, v in Metadata.read(WORKBENCH_MODEL_MD).items()
+              if "system" not in k}
+        container = Survey.from_dict(WORKBENCH_SURVEY_MD).gs.add_container(
+            "models", **dict(content="inverted models"))
+
+        with pytest.raises(ValueError, match="Need to pass a system"):
+            container.gs.add(key="inversion", data=WORKBENCH_MODEL_XYZ, metadata_file=md)
+
+    def test_a_csv_that_needs_no_system_adds_fine_without_one(self):
+        container = Survey.from_dict(SKYTEM_SURVEY_MD).gs.add_container(
+            "data", **dict(content="bedrock picks"))
+
+        leaf = container.gs.add(key="bedrock", data=BEDROCK_CSV, metadata_file=BEDROCK_MD)
+
+        assert leaf.attrs["structure"] == "tabular"
+        assert set(leaf.children) == set()
+        assert leaf.sizes["index"] == data_row_count(BEDROCK_CSV)
 
 
 class TestRoundtrip:

@@ -111,7 +111,7 @@ class workbench_handler(_workbench_names, xyz_handler, key='workbench'):
             channels in the file, so the read cannot proceed without it.
 
         """
-        if system is None:
+        if system is None or (isinstance(system, dict) and not system):
             raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
         self.metadata = {}
@@ -270,7 +270,7 @@ class workbench_model_handler(_workbench_names, xyz_handler, key='workbench_mode
             channels in the files, so the read cannot proceed without it.
 
         """
-        if system is None:
+        if system is None or (isinstance(system, dict) and not system):
             raise ValueError(f"Need to pass a system through when reading workbench data {self.filename}")
 
         self.metadata = {}

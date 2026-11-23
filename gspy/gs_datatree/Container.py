@@ -226,8 +226,10 @@ class Container:
             if isinstance(system, dict):
                 system, _ = Container.Systems(**system)
 
-        # Attach systems (datatree at this point) otherwise empty dict
-        kwargs['system'] = system
+        # Attach systems (datatree at this point) otherwise empty dict.
+        # Readers get None rather than the empty dict: {} reads as a system
+        # having been given, and guards written against None walk past it.
+        kwargs['system'] = None if isinstance(system, dict) and not system else system
 
         # No data to ingest means the variables are rasters named in the metadata.
         if data is None:
